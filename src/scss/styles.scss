@@ -1,0 +1,17 @@
+@import 'vue-select/src/scss/vue-select.scss';
+@import 'tooltip';
+
+.button-brand {
+  height: 44px;
+  padding: 0 32px;
+  color: #fff;
+  font-size: 14px;
+  background: #58a769;
+  border-color: #58a769;
+  border-radius: 100px;
+
+  &:hover {
+    background: #4d8e5b;
+    border-color: #4d8e5b;
+  }
+}

@@ -1,0 +1,5 @@
+export const CALENDAR_POINT_SIZE = 80
+
+export const CALENDAR_POINT_SIZE_WIDTH = 80
+
+export const CALENDAR_POINT_SIZE_HEIGHT = 66

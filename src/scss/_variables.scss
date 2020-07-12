@@ -1,0 +1,34 @@
+$CALENDAR_POINT_SIZE_WIDTH: 80px;
+$CALENDAR_POINT_SIZE_HEIGHT: 66px;
+
+$border-color: #ebebeb;
+$bg-color: #f9f9f9;
+
+$ui-black: #061131;
+$ui-grey: #a1a2bb;
+
+$shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+
+// Black
+$ui-black-100: #202020;
+$ui-black-90: #474747;
+$ui-black-80: #828282;
+$ui-black-60: #bdbdbd;
+$ui-black-40: #e0e0e0;
+$ui-black-20: #f2f2f2;
+$ui-black-10: #fafafa;
+$ui-black-hover-15: #474747;
+$ui-black-hover-25: #666;
+
+// Breakpoints
+$ui-mobile: 320px;
+$ui-mobile-portrait: 600px;
+$ui-tablet: 768px;
+$ui-laptop: 1024px;
+$ui-desktop: 1440px;
+$ui-desktop-large: 1920px;
+$ui-desktop-4k: 2560px;
+// todo: min/max variables
+
+// Transitions
+$ui-transition: 0.2s ease-in;

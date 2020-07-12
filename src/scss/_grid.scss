@@ -1,0 +1,77 @@
+/*
+  Setup grid for screens < tablet
+*/
+// @media (max-width: $ui-tablet - 1px) {
+//   .ui-grid {
+//     @include ui-grid($gap: 16px);
+//   }
+
+//   .ui-column {
+//     @include ui-column($gap: 16px);
+
+//     @for $i from 0 through 12 {
+//       &_#{$i} {
+//         @include ui-column-span($i, $gap: 16px);
+//       }
+//     }
+//   }
+// }
+
+/*
+  Setup grid
+*/
+
+.ui-grid {
+  @include ui-grid($gap: 24px);
+}
+
+.ui-column {
+  @include ui-column($gap: 24px);
+}
+
+@for $i from 0 through 12 {
+  .ui-column_#{$i} {
+    @include ui-column-span($i, $gap: 24px);
+  }
+}
+
+@for $i from 0 through 12 {
+  .ui-column_tablet_#{$i} {
+    @include ui-column-span($i, $gap: 24px);
+  }
+}
+
+/*
+  Utility class for screens > mobile portrait
+*/
+// @media (min-width: $ui-mobile-portrait) {
+//   @for $i from 0 through 12 {
+//     .ui-column_mobile-portrait_#{$i} {
+//       @include ui-column-span($i, $gap: 16px);
+//     }
+//   }
+// }
+
+/*
+  Utility class for screens > laptop
+*/
+@media (min-width: $ui-laptop) {
+  @for $i from 0 through 12 {
+    .ui-column_laptop_#{$i} {
+      @include ui-column-span($i, $gap: 24px);
+    }
+  }
+}
+
+/*
+  Utility class for screens > desktop
+
+  TODO: Use $ui-desktop after redesign
+*/
+@media (min-width: $ui-desktop) {
+  @for $i from 0 through 12 {
+    .ui-column_desktop_#{$i} {
+      @include ui-column-span($i, $gap: 24px);
+    }
+  }
+}

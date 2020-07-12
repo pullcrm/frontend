@@ -1,0 +1,105 @@
+// @font-face {
+//   font-display: swap;
+//   font-weight: 200;
+//   font-family: Gravity;
+//   src:
+//     url('/static/fonts/Gravity-Light.woff2') format('woff2'),
+//     url('/static/fonts/Gravity-Light.woff') format('woff');
+// }
+
+// @font-face {
+//   font-display: swap;
+//   font-weight: 400;
+//   font-family: Gravity;
+//   src:
+//     url('/static/fonts/Gravity-Regular.woff2') format('woff2'),
+//     url('/static/fonts/Gravity-Regular.woff') format('woff');
+// }
+
+// @font-face {
+//   font-display: swap;
+//   font-weight: 700;
+//   font-family: Gravity;
+//   src:
+//     url('/static/fonts/Gravity-Bold.woff2') format('woff2'),
+//     url('/static/fonts/Gravity-Bold.woff') format('woff');
+// }
+
+// @font-face {
+//   font-display: swap;
+//   font-weight: 200;
+//   font-family: MyriadPro;
+//   src:
+//     url('/static/fonts/MyriadPro-Ligth.woff2') format('woff2'),
+//     url('/static/fonts/MyriadPro-Ligth.woff') format('woff');
+// }
+
+// @font-face {
+//   font-display: swap;
+//   font-weight: 300;
+//   font-family: Roboto;
+//   src:
+//     url('/static/fonts/roboto-300.woff2') format('woff2'),
+//     url('/static/fonts/roboto-300.woff') format('woff');
+// }
+
+// Typo mixins
+@mixin ui-typo-44 {
+  font-size: 44px;
+  line-height: 72px;
+}
+
+@mixin ui-typo-36 {
+  font-size: 36px;
+  line-height: 56px;
+}
+
+@mixin ui-typo-32 {
+  font-size: 32px;
+  line-height: 48px;
+}
+
+@mixin ui-typo-28 {
+  font-size: 28px;
+  line-height: 40px;
+}
+
+@mixin ui-typo-24 {
+  font-size: 24px;
+  line-height: 40px;
+}
+
+@mixin ui-typo-22 {
+  font-size: 22px;
+  line-height: 32px;
+}
+
+@mixin ui-typo-20 {
+  font-size: 20px;
+  line-height: 32px;
+}
+
+@mixin ui-typo-18 {
+  font-size: 18px;
+  line-height: 32px;
+}
+
+@mixin ui-typo-16 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@mixin ui-typo-14 {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+@mixin ui-typo-12 {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@mixin ui-typo-8 {
+  font-size: 8px;
+  line-height: 16px;
+}

@@ -1,0 +1,92 @@
+@mixin ui-container {
+  --ui-container-padding: 16px;
+
+  width: calc(100% - 16px * 2);
+  margin-right: auto;
+  margin-left: auto;
+
+  @media (min-width: $ui-mobile-portrait) {
+    --ui-container-padding: 20px;
+
+    width: calc(100% - 20px * 2);
+  }
+
+  @media (min-width: $ui-tablet) {
+    --ui-container-padding: 44px;
+
+    width: calc(100% - 44px * 2);
+  }
+
+  @media (min-width: $ui-desktop) {
+    --ui-container-padding: 60px;
+
+    width: calc(100% - 60px * 2);
+    max-width: calc(#{$ui-desktop} - 60px * 2);
+  }
+
+  @media (min-width: $ui-desktop-large) {
+    --ui-container-padding: 60px;
+
+    width: calc(100% - 60px * 2);
+    max-width: calc(#{$ui-desktop-large} - 60px * 2);
+  }
+
+  @media (min-width: $ui-desktop-4k) {
+    --ui-container-padding: 60px;
+
+    width: calc(100% - 60px * 2);
+    max-width: calc(#{$ui-desktop-4k} - 60px * 2);
+  }
+}
+
+@mixin ui-container-narrow {
+  --ui-container-padding: 16px;
+
+  width: calc(100% - 16px * 2);
+  margin-right: auto;
+  margin-left: auto;
+
+  @media (min-width: $ui-mobile-portrait) {
+    --ui-container-padding: 20px;
+
+    width: calc(100% - 20px * 2);
+  }
+
+  @media (min-width: $ui-tablet) {
+    --ui-container-padding: 44px;
+
+    width: calc(100% - 44px * 2);
+  }
+
+  @media (min-width: $ui-laptop) {
+    width: 616px;
+  }
+
+  @media (min-width: $ui-desktop) {
+    width: 648px;
+  }
+}
+
+@mixin ui-grid($gap) {
+  display: flex;
+  flex: 1 0 auto;
+  flex-wrap: wrap;
+  margin-right: -$gap / 2;
+  margin-bottom: -$gap;
+  margin-left: -$gap / 2;
+}
+
+@mixin ui-column($gap) {
+  flex: 1;
+  margin-right: $gap / 2;
+  margin-bottom: $gap;
+  margin-left: $gap / 2;
+}
+
+@mixin ui-column-span($i, $gap) {
+  flex-basis: calc(#{$i / 12 * 100%} - #{$gap});
+  // IE 11 ignores an calc() function used in flex shorthand declarations
+  flex-grow: 0;
+  flex-shrink: 0;
+  max-width: calc(#{$i / 12 * 100%} - #{$gap});
+}
