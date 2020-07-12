@@ -1,0 +1,7 @@
+.ui-carousel-item {
+  flex: 0 0 300px; // Fallback
+  flex: 0 0 var(--ui-carousel-item-width);
+  padding-right: calc(var(--ui-carousel-item-gap) / 2);
+  padding-left: calc(var(--ui-carousel-item-gap) / 2);
+  white-space: normal;
+}

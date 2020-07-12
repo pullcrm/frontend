@@ -1,0 +1,13 @@
+.question-popup {
+  &__actions {
+    margin-top: 24px;
+
+    .ui-button {
+      width: 100%;
+    }
+
+    .ui-button + .ui-button {
+      margin-top: 16px;
+    }
+  }
+}

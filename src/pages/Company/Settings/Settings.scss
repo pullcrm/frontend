@@ -1,0 +1,21 @@
+.company-settings-page {
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  .ui-button,
+  .ui-switch {
+    margin-top: 24px;
+  }
+
+  .ui-field {
+    margin-top: 32px;
+  }
+
+  &__divider {
+    width: 100%;
+    height: 1px;
+    margin: 32px 0;
+    background: $ui-black-20;
+  }
+}

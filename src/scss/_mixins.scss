@@ -1,0 +1,67 @@
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
+  }
+}
+
+@mixin ui-shadow-16($color: #000) {
+  box-shadow: 0 8px 16px rgba($color, 0.12);
+}
+
+@mixin ui-shadow-4($color: #000, $opacity: 0.15) {
+  box-shadow: 0 2px 4px rgba($color, $opacity);
+}
+
+@mixin ui-shadow-4-inverse($color: #000, $opacity: 0.1) {
+  box-shadow: 0 -2px 4px rgba($color, 0.1);
+}
+
+@mixin ui-scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $ui-black-20;
+    background-clip: content-box;
+    border: 2px solid transparent;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $ui-green-brand;
+    background-clip: content-box;
+    border: 2px solid transparent;
+    border-radius: 100px;
+  }
+}
+
+@mixin hide-scrollbar () {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

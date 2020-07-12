@@ -1,0 +1,15 @@
+.appointment-wrap {
+  z-index: 8;
+  box-sizing: border-box;
+  padding: 4px 6px;
+
+  .appointment {
+    width: 100%;
+    height: 100%;
+  }
+
+  &._dragged {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

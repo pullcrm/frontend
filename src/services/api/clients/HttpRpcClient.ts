@@ -1,13 +1,13 @@
-import { btoa } from 'isomorphic-base64'
-import { ApiRpcError, ApiServerError } from '../errors'
+// import { btoa } from 'isomorphic-base64'
+import store from '@/store'
 
-import { IRpcClient } from '.'
+import { ApiRpcError, ApiServerError } from '../errors'
 
 import GET from './method/get'
 import POST from './method/post'
 import FORM from './method/form'
 
-import store from '@/store'
+import { IRpcClient } from '.'
 
 interface IConstructorParams {
   endpoint: HttpRpcClient['endpoint'],
@@ -22,6 +22,7 @@ export default class HttpRpcClient implements IRpcClient {
   GET: any
   POST: any
   PUT: any
+  DELETE: any
   FORM: any
   accessToken?: string
 
@@ -29,6 +30,7 @@ export default class HttpRpcClient implements IRpcClient {
     this.GET = GET
     this.POST = POST
     this.PUT = POST
+    this.DELETE = POST
     this.FORM = FORM
     this.endpoint = endpoint
     this.user = user
@@ -39,7 +41,7 @@ export default class HttpRpcClient implements IRpcClient {
     this.accessToken = token
   }
 
-  call = async (method: string, params: any, type: string = 'POST') => {
+  call = async (method: string, params: any, type = 'POST') => {
     const response = await this[type]({
       type,
       params,
@@ -60,10 +62,10 @@ export default class HttpRpcClient implements IRpcClient {
     const rpcResponse: any = await response.json()
 
     // TODO: refactor condition
-    if (!response.ok && rpcResponse.message === 'Expired token.') {
+    if (!response.ok && rpcResponse.message === 'Expired access token') {
       await store.dispatch('auth/fetchRefreshToken')
 
-      this.call(method, params, type)
+      location.reload()
     }
 
     if (rpcResponse.error || !response.ok) {
@@ -76,7 +78,7 @@ export default class HttpRpcClient implements IRpcClient {
         code,
         data: {
           code,
-          ...new Object(data)
+          ...data
         }
       })
     }
@@ -89,12 +91,12 @@ export default class HttpRpcClient implements IRpcClient {
       'Accept-Encoding': 'gzip'
     }
 
-    if (this.user) {
-      headers.Authorization = 'Basic ' + btoa(`${this.user}:${this.password}`)
-    }
+    // if (this.user) {
+    //   headers.Authorization = 'Basic ' + btoa(`${this.user}:${this.password}`)
+    // }
 
     if (this.accessToken) {
-      headers.Authorization2 = `Bearer ${this.accessToken}`
+      headers.Authorization = `Bearer ${this.accessToken}`
     }
 
     return headers

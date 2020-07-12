@@ -1,0 +1,25 @@
+.ui-button_theme_gray {
+  color: $ui-black-100;
+  background-color: $ui-black-40;
+  border: 1px solid $ui-black-40;
+
+  @media (hover: hover) {
+    &:hover {
+      @include ui-shadow-4($ui-black-hover-15);
+
+      background-color: $ui-black-60;
+      border-color: $ui-black-60;
+    }
+  }
+
+  &:active {
+    background-color: $ui-black-80;
+    border-color: $ui-black-80;
+  }
+
+  &.ui-button_disabled {
+    color: $ui-white;
+    background-color: $ui-black-40;
+    border-color: $ui-black-40;
+  }
+}

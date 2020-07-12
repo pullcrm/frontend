@@ -1,10 +1,5 @@
 {
   "compilerOptions": {
-    /*
-      "skipLibCheck": true
-      TODO: remove after fix this issue https://github.com/Akryum/v-tooltip/issues/459
-    */
-    "skipLibCheck": true,
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
@@ -17,27 +12,27 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "noImplicitAny": false,
-    "types": [
-      "webpack-env"
+    "lib": [
+      "esnext",
+      "esnext.asynciterable",
+      "dom",
+      "dom.iterable"
     ],
     "paths": {
       "@/*": [
         "src/*"
       ]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
+    "types": [
+      "webpack-env",
+      "@nuxt/types",
+      "@types/node",
+      "@types/yandex-maps"
     ]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue"
-  ],
-  "exclude": [
-    "node_modules"
   ]
 }

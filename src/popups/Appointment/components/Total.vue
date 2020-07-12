@@ -1,0 +1,163 @@
+<template>
+  <div class="appointment-total">
+    <div class="appointment-total__date">
+      <UiText size="m">
+        Дата
+      </UiText>
+
+      <UiPopover
+        size="s"
+        placement="top-right"
+      >
+        <template #default="{ open, close, isOpened }">
+          <UiText
+            tag="UiLink"
+            size="m"
+            theme="primary"
+            @click.native.prevent="isOpened ? close() : open()"
+          >
+            {{ customDate | formatDate('D MMMM') }}
+          </UiText>
+        </template>
+
+        <template #body>
+          <Calendar
+            v-model="customDate"
+            class="schedule-sidebar__calendar"
+          />
+        </template>
+      </UiPopover>
+    </div>
+
+    <div
+      class="appointment-total__date"
+    >
+      <UiText size="m">
+        Время выполнения
+      </UiText>
+
+      <UiText size="m">
+        {{ duration }}
+      </UiText>
+    </div>
+
+    <div class="appointment-total__sum">
+      <UiTitle
+        size="m"
+      >
+        Сумма
+      </UiTitle>
+
+      <UiTitle
+        class="appointment-total__price"
+        size="m"
+      >
+        <Contenteditable
+          :value="total"
+          @input="updateTotalPrice"
+        /> грн
+      </UiTitle>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+import { getDurationFromTo } from '@/utils/time'
+import { toDate } from '@/utils/date-time'
+
+import Contenteditable from '@/ui/Contenteditable.vue'
+
+import Calendar from '@/components/Calendar/Calendar.vue'
+
+@Component({
+  components: {
+    Calendar,
+    Contenteditable
+  },
+
+  props: {
+    procedures: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+
+    date: {
+      type: Object,
+      default: null
+    },
+
+    total: {
+      type: Number,
+      default: 0
+    },
+
+    startTime: {
+      type: String,
+      default: null
+    }
+  }
+})
+export default class Total extends Vue {
+  readonly date
+  readonly total
+  readonly startTime
+  readonly procedures
+
+  get customDate (): Date {
+    if (this.date) {
+      return new Date(this.date.toString())
+    }
+
+    return new Date(this.$store.state.calendar.date)
+  }
+
+  set customDate (val) {
+    this.$emit('update:date', toDate(String(val)))
+  }
+
+  get totalTime () {
+    return this.procedures
+      .reduce((sum, { duration }) => (sum + duration), 0)
+  }
+
+  get duration () {
+    if (!this.startTime || this.procedures.length === 0) {
+      return 'Укажите данные'
+    }
+
+    const { from, to } = getDurationFromTo({
+      timeStart: this.startTime,
+      totalTime: this.totalTime
+    })
+
+    return `${from} - ${to}`
+  }
+
+  updateTotalPrice (val) {
+    this.$emit('update:total', Number.parseInt(val) || 0)
+  }
+}
+</script>
+
+<style lang="scss">
+  .appointment-total {
+    margin: 16px 0;
+
+    &__sum,
+    &__date {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    &__price {
+      color: #21ab39;
+    }
+  }
+</style>

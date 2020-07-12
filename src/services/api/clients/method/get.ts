@@ -1,10 +1,16 @@
 import fetch from 'isomorphic-unfetch'
 
 export default function ({ endpoint, method, params, headers }) {
-  console.log(headers)
-  return fetch(`${endpoint}${method}`, {
-    method: "GET",
-    body: params,
+  let query = ''
+
+  if (params) {
+    query = '?' + Object.keys(params)
+      .map(key => `${key}=${params[key]}`)
+      .join('&')
+  }
+
+  return fetch(`${endpoint}${method}${query}`, {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       ...headers

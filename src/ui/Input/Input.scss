@@ -1,0 +1,113 @@
+.ui-input {
+  @include ui-typo-14;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &:focus-within {
+    .ui-input__icon {
+      color: $ui-black-100;
+    }
+  }
+
+  &__append {
+    position: absolute;
+    right: 16px;
+    order: 1;
+
+    ~ .ui-input__content {
+      input {
+        padding-right: 48px;
+      }
+    }
+  }
+
+  &__prepend {
+    position: absolute;
+    left: 16px;
+    order: 3;
+
+    ~ .ui-input__content {
+      input {
+        padding-left: 48px;
+      }
+    }
+  }
+
+  &__icon {
+    color: $ui-black-60;
+    transition: color var(--ui-transition-hover);
+  }
+
+  &__clear {
+    color: $ui-black-60;
+    cursor: pointer;
+    transition: color var(--ui-transition-hover);
+    user-select: none;
+
+    &:hover {
+      color: $ui-black-100;
+    }
+
+    &::after {
+      position: absolute;
+      top: -8px;
+      right: -16px;
+      bottom: -8px;
+      left: -4px;
+      content: '';
+    }
+  }
+
+  &__content {
+    order: 2;
+    width: 100%;
+
+    input {
+      height: 48px;
+    }
+
+    textarea {
+      min-width: 100%;
+      max-width: 100%;
+      min-height: 126px;
+      padding-top: 16px;
+      padding-bottom: 8px;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0 16px;
+    color: $ui-black-100;
+    font-size: inherit;
+    line-height: inherit;
+    background: $ui-white;
+    border: 1px solid $ui-black-60;
+    border-radius: 4px;
+    transition:
+      border var(--ui-transition-hover),
+      background-color var(--ui-transition-hover);
+    appearance: none;
+
+    @media (hover: hover) {
+      &:not(:disabled):hover {
+        border-color: $ui-black-90;
+      }
+    }
+
+    &:focus {
+      // @include ui-shadow-12;
+      border-color: $ui-black-90;
+    }
+
+    &:disabled {
+      background: $ui-black-20;
+    }
+
+    @include placeholder {
+      color: $ui-black-60;
+    }
+  }
+}

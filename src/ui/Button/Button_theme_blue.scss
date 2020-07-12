@@ -1,0 +1,26 @@
+.ui-button_theme_blue {
+  color: $ui-white;
+  background-color: $ui-blue-brand;
+  border: 1px solid $ui-blue-brand;
+
+  @media (hover: hover) {
+    &:hover {
+      @include ui-shadow-4($ui-blue-hover-15);
+
+      background-color: $ui-blue-hover-15;
+      border-color: $ui-blue-hover-15;
+    }
+  }
+
+  &:active {
+    background-color: $ui-blue-hover-25;
+    border-color: $ui-blue-hover-25;
+    box-shadow: none;
+  }
+
+  &.ui-button_disabled {
+    color: $ui-white;
+    background-color: $ui-black-40;
+    border-color: $ui-black-40;
+  }
+}

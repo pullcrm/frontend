@@ -19,7 +19,7 @@ const actions = {
       if (accessToken && refreshToken) {
         commit('SET_TOKENS', { accessToken, refreshToken })
 
-        this._vm.$apiClient.setAccessToken(accessToken)
+        this.$apiClient.setAccessToken(accessToken)
 
         await dispatch('profile/fetch', null, { root: true })
 
@@ -33,32 +33,33 @@ const actions = {
   },
 
   async saveTokens ({ commit }, { accessToken, refreshToken }) {
-    storage.removeItem(ACCESS_TOKEN)
-    storage.removeItem(REFRESH_TOKEN)
-
     storage.setItem(ACCESS_TOKEN, accessToken)
     storage.setItem(REFRESH_TOKEN, refreshToken)
 
-    this._vm.$apiClient.setAccessToken(accessToken)
+    this.$apiClient.setAccessToken(accessToken)
 
     commit('SET_TOKENS', { accessToken, refreshToken })
   },
 
-  async fetchRefreshToken ({ state, dispatch, rootGetters }) {
+  async fetchRefreshToken ({ state, dispatch, rootState }) {
     const { refreshToken } = state
 
     if (!refreshToken) return
 
-    const { id } = rootGetters['company/current']
-    const { name } = rootGetters['profile/role']
+    const { company, role, user } = rootState.approaches.current
 
-    const result = await this._vm.$api.auth.refreshToken({ refreshToken, companyId: id, role: name })
+    const result = await this.$api.auth.refreshToken({
+      role: role.name,
+      userId: user.id,
+      companyId: company.id,
+      refreshToken
+    })
 
     dispatch('saveTokens', { ...result, refreshToken })
   },
 
   async login ({ dispatch }, params) {
-    const tokens = await this._vm.$api.auth.login(params)
+    const tokens = await this.$api.auth.login(params)
 
     dispatch('saveTokens', tokens)
   },
@@ -71,7 +72,7 @@ const actions = {
   },
 
   logout ({ dispatch }) {
-    // this._vm.$api.auth.logout()
+    // this.$api.auth.logout()
 
     dispatch('reset')
 

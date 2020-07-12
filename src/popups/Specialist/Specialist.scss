@@ -1,0 +1,30 @@
+.popup-specialist {
+  width: 460px;
+
+  &__back {
+    margin-bottom: 16px;
+  }
+
+  &__header {
+    .ui-title {
+      margin-bottom: 8px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+  }
+
+  &__avatar {
+    margin: 24px 0;
+    text-align: center;
+
+    .ui-avatar {
+      p {
+        font-weight: 100;
+      }
+    }
+  }
+}

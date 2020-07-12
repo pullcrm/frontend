@@ -1,163 +1,169 @@
 <template>
-  <Layout>
-    <UiForm
-      v-show="isWriteInfoForm"
-      class="auth-registration-form"
-      title="Регистрация"
-      can-back
-      @on-back="onBack"
-      @on-submit="onSubmit"
-    >
-      <UiFormControl
-        label="Имя"
-        name="name"
-        placeholder="Введите Имя"
-        v-model="form.firstName"
-        required
-      />
-
-      <UiFormControl
-        label="Фамилия"
-        name="surname"
-        placeholder="Введите Фамилию"
-        v-model="form.lastName"
-        required
-      />
-
-      <UiFormControl
-        label="Телефон"
-        name="phone"
-        type="phone"
-        placeholder="+38 (0"
-        v-model="form.phone"
-        required
-      />
-
-      <UiFormControl
-        label="Пароль"
-        type="password"
-        name="password"
-        placeholder="Введите пароль"
-        v-model="form.password"
-        required
-      />
-
-      <div class="auth-registration-form__policy">
-        Нажимая на кнопку я соглашаюсь с <a href="#">Пользовательским соглашением</a> и <a href="#">Политикой обработки персональных данных</a>
-      </div>
-
-      <template
-        #actions
+  <div
+    class="auth-registration"
+  >
+    <div class="auth-registration__header">
+      <UiTitle
+        size="xl"
       >
-        <UiButton
-          tag="button"
-          type="submit"
-        >
-          Зарегистрировать
-        </UiButton>
-      </template>
-    </UiForm>
+        Регистрация
+      </UiTitle>
 
-    <UiForm
-      v-show="!isWriteInfoForm"
-      class="auth-registration-form"
-      title="Регистрация"
-      :sub-title="`На ваш телефон ${form.phone} был выслан СМС-код для подтверждения регистрации`"
-      can-back
-      @on-back="onBackSms"
-      @on-submit="onSubmitSms"
+      <UiText>
+        Пройдите регистрацию чтобы получить доступ к своей компонии
+      </UiText>
+    </div>
+
+    <form
+      @submit.prevent="onSubmit"
     >
-      <UiFormControl
-        label="Код подтверждения"
-        placeholder="****"
-        v-model="form.code"
-        required
+      <UiBack
+        class="auth-registration__back"
+        @click.native="onBack"
       />
 
-      <template
-        #actions
+      <UiFormValidator
+        v-slot="{ resetFieldError, getFieldError }"
+        ref="formValidator"
+        :validations="validations"
       >
-        <UiButton
-          tag="button"
-          type="submit"
+        <UiField
+          label="Имя"
         >
-          Подтвердить
-        </UiButton>
-      </template>
-    </UiForm>
-  </Layout>
+          <UiInput
+            v-model="form.firstName"
+            left-icon="edit/edit-1"
+            name="name"
+            placeholder="Введите Имя"
+            required
+          />
+        </UiField>
+
+        <UiField
+          label="Фамилия"
+        >
+          <UiInput
+            v-model="form.lastName"
+            left-icon="edit/edit-1"
+            name="surname"
+            placeholder="Введите Фамилию"
+            required
+          />
+        </UiField>
+
+        <UiField
+          label="Телефон"
+          :error="getFieldError('phone')"
+        >
+          <UiInput
+            v-model="form.phone"
+            mask="38 (###) #### ###"
+            left-icon="phone"
+            name="phone"
+            type="phone"
+            placeholder="066"
+            required
+            @input="resetFieldError('phone')"
+          />
+        </UiField>
+
+        <UiField
+          label="Пароль"
+          :error="getFieldError('password')"
+        >
+          <UiInput
+            v-model="form.password"
+            left-icon="key"
+            name="password"
+            type="password"
+            placeholder="Введите пароль"
+            required
+            @input="resetFieldError('password')"
+          />
+        </UiField>
+
+        <div class="auth-registration__policy">
+          <UiText
+            size="s"
+          >
+            Нажимая на кнопку я соглашаюсь с <a href="#">Пользовательским соглашением</a> и <a href="#">Политикой обработки персональных данных</a>
+          </UiText>
+        </div>
+
+        <div class="auth-registration__actions">
+          <UiButton
+            type="submit"
+            size="l"
+            theme="blue"
+          >
+            Зарегистрировать
+          </UiButton>
+        </div>
+      </UiFormValidator>
+    </form>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { IRegistrationUserParams } from '@/services/api/'
+import { IRegistrationUserParams } from '@/services/api'
 
-import Layout from '../Layout/Layout.vue'
-import UiForm from '../components/Form.vue'
-import UiButton from '../components/Button.vue'
-import UiFormControl from '../components/FormControl.vue'
+import UiFormValidator, { Validations } from '@/ui/FormValidator.vue'
 
 @Component({
-  components: {
-    Layout,
-    UiForm,
-    UiButton,
-    UiFormControl
-  }
 })
 export default class Home extends Vue {
-  isWriteInfoForm = true
-
   form: IRegistrationUserParams = {
     firstName: '',
     lastName: '',
     phone: '',
-    password: '',
-    code: null
+    password: ''
+  }
+
+  $refs: {
+    formValidator: UiFormValidator
+  }
+
+  get validations (): Validations {
+    return {
+      phone: {
+        rules: 'required',
+        messages: {
+          required: 'Введите номер телефона'
+        },
+        serverMessages: {
+          invalid: 'Номер телефона введен неверно'
+        }
+      },
+      password: {
+        rules: 'required',
+        messages: {
+          required: 'Введите пароль'
+        },
+        serverMessages: {
+          invalid: 'Пароль введен неверно'
+        }
+      }
+    }
   }
 
   async onSubmit () {
     try {
       await this.$api.users.confirmation({
-        phone: this.form.phone
+        phone: this.form.phone,
+        type: 'REGISTRATION'
       })
 
-      // show confirmation form
-      this.isWriteInfoForm = false
-    } catch (error) {
-      if (error) {
-        // TODO: refactor
-        // this.$buefy.toast.open({
-        //   message: 'упс'
-        // })
-      }
-    }
-  }
-
-  async onSubmitSms () {
-    try {
-      const form = {
-        ...this.form,
-        code: this.form.code
-      }
-
-      await this.$api.auth.registration(form)
-      await this.$store.dispatch('auth/login', form)
-      await this.$store.dispatch('profile/fetch')
-
-      this.$router.push({
-        name: 'companyCreate'
-      })
+      return this.confirmation()
     } catch (err) {
-      // TODO: why status (do code)
-      if (err.status === 400) {
-        // TODO: refactor
-        // this.$buefy.toast.open({
-        //   message: 'Такой пользователь уже существует'
-        // })
+      const serverErrors = [
+        err.status === 500 && { field: 'phone', error: 'invalid' }
+      ].filter(Boolean)
 
+      if (serverErrors.length > 0) {
+        this.$refs.formValidator.setServerErrors(serverErrors)
         return
       }
 
@@ -165,25 +171,50 @@ export default class Home extends Vue {
     }
   }
 
+  async confirmation () {
+    const result = await this.$store.dispatch('popup/smsConfirmation', {
+      title: 'Регистрация',
+      subTitle: `На ваш телефон ${this.form.phone} был выслан СМС-код для подтверждения регистрации`,
+      submit: this.onCreateUser
+    })
+
+    if (result) {
+      return this.$router.push({
+        name: 'companyCreate'
+      })
+    }
+  }
+
+  async onCreateUser (code) {
+    const form = {
+      ...this.form,
+      code
+    }
+
+    await this.$api.auth.registration(form)
+    await this.$store.dispatch('auth/login', form)
+    await this.$store.dispatch('profile/fetch')
+  }
+
   onBack () {
     this.$router.push({
       name: 'login'
     })
   }
-
-  onBackSms () {
-    this.isWriteInfoForm = true
-  }
 }
 </script>
 
 <style lang="scss">
-  .auth-registration-form {
+  .auth-registration {
+    width: 460px;
+
+    &__back {
+      margin-bottom: 24px;
+    }
+
     &__policy {
       margin-top: 16px;
       padding: 10px 16px;
-      font-size: 12px;
-      line-height: 17px;
       text-align: center;
       background: #f6f6f6;
       border-radius: 8px;
@@ -195,6 +226,29 @@ export default class Home extends Vue {
           text-decoration: underline;
         }
       }
+    }
+
+    &__header {
+      text-align: center;
+
+      .ui-title {
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
+    }
+
+    form {
+      margin-top: 24px;
+      padding: 24px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 0 16px rgba($ui-black-100, 0.1);
     }
   }
 </style>

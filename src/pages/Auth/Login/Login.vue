@@ -1,79 +1,130 @@
 <template>
-  <Layout>
-    <UiForm
-      class="auth-login-form"
-      title="Авторизация"
-      @on-submit="onSubmit"
-    >
-      <UiFormControl
-        label="Телефон"
-        name="phone"
-        placeholder="+38 (0"
-        v-model="phone"
-        required
-      />
-
-      <UiFormControl
-        label="Пароль"
-        type="password"
-        name="password"
-        placeholder="Введите пароль"
-        v-model="password"
-        required
-      />
-
-      <template
-        #actions
+  <div
+    class="auth-login"
+  >
+    <div class="auth-login__header">
+      <UiTitle
+        size="xl"
       >
-        <UiButton
-          tag="button"
-          type="submit"
-        >
-          Войти
-        </UiButton>
+        Авторизация
+      </UiTitle>
 
-        <UiButton
-          :to="{
-            name: 'registration'
-          }"
-          outline
-        >
-          Регистрация
-        </UiButton>
+      <UiText>
+        Войдите в систему чтобы получить доступ к своей компании
+      </UiText>
+    </div>
 
-        <UiButton
-          tag="button"
-          text
+    <form
+      @submit.prevent="onSubmit"
+    >
+      <UiFormValidator
+        v-slot="{ resetFieldError, getFieldError }"
+        ref="formValidator"
+        :validations="validations"
+      >
+        <UiField
+          label="Телефон"
+          :error="getFieldError('phone')"
         >
-          Восстановить доступ
-        </UiButton>
-      </template>
-    </UiForm>
-  </Layout>
+          <UiInput
+            v-model="phone"
+            mask="38 (###) #### ###"
+            name="phone"
+            left-icon="phone"
+            placeholder="066"
+            required
+            @input="resetFieldError('phone')"
+          />
+        </UiField>
+
+        <UiField
+          label="Пароль"
+          :error="getFieldError('password')"
+        >
+          <UiInput
+            v-model="password"
+            type="password"
+            name="password"
+            left-icon="key"
+            placeholder="Введите пароль"
+            required
+            @input="resetFieldError('password')"
+          />
+        </UiField>
+
+        <div class="auth-login__resset">
+          <UiText
+            tag="RouterLink"
+            :to="{ name: 'restore' }"
+            size="s"
+          >
+            Восстановить доступ
+          </UiText>
+        </div>
+
+        <div class="auth-login__actions">
+          <UiButton
+            type="submit"
+            size="l"
+            theme="blue"
+          >
+            Войти
+          </UiButton>
+
+          <UiButton
+            :to="{
+              name: 'registration'
+            }"
+            type="submit"
+            size="l"
+            theme="info-outlined"
+          >
+            Регистрация
+          </UiButton>
+        </div>
+      </UiFormValidator>
+    </form>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import Layout from '../Layout/Layout.vue'
-import UiForm from '../components/Form.vue'
-import UiButton from '../components/Button.vue'
-import UiFormControl from '../components/FormControl.vue'
-
-// import api from '@/api'
+import UiFormValidator, { Validations } from '@/ui/FormValidator.vue'
 
 @Component({
-  components: {
-    Layout,
-    UiForm,
-    UiButton,
-    UiFormControl
-  }
 })
-export default class Home extends Vue {
+export default class Login extends Vue {
   password = ''
   phone = ''
+
+  $refs: {
+    formValidator: UiFormValidator
+  }
+
+  get validations (): Validations {
+    return {
+      phone: {
+        rules: 'required',
+        messages: {
+          required: 'Введите номер телефона'
+        },
+        serverMessages: {
+          invalid: 'Номер телефона введен неверно'
+        }
+      },
+      password: {
+        rules: 'required',
+        messages: {
+          required: 'Введите пароль'
+        },
+        serverMessages: {
+          invalid: 'Пароль введен неверно'
+        }
+      }
+    }
+  }
 
   async onSubmit () {
     try {
@@ -91,7 +142,7 @@ export default class Home extends Vue {
         await this.$store.dispatch('auth/fetchRefreshToken')
 
         this.$router.push({
-          name: 'home'
+          name: 'dashboard'
         })
 
         return
@@ -100,61 +151,68 @@ export default class Home extends Vue {
       this.$router.push({
         name: 'companyCreate'
       })
-    } catch (error) {
-      if (error.code === 401) {
-        // TODO: refactor
-        // this.$buefy.toast.open({
-        //   message: 'Не правильный пароль или Емейл'
-        // })
+    } catch (err) {
+      const serverErrors = [
+        err.code === 401 && { field: 'password', error: 'invalid' },
+        err.status === 400 && { field: 'phone', error: 'invalid' }
+      ].filter(Boolean)
 
+      if (serverErrors.length > 0) {
+        this.$refs.formValidator.setServerErrors(serverErrors)
         return
       }
 
-      throw error
+      throw err
     }
-
-    // try {
-    //   await api.login({
-    //     url: 'http://api.pullcrm.com/public/',
-    //     project: 'pullcrm',
-    //     email: this.phone,
-    //     password: this.password
-    //   })
-
-    //   this.$router.push({
-    //     name: 'calendar'
-    //   })
-    // } catch (err) {
-    //   console.log(err)
-    // }
   }
 }
 </script>
 
 <style lang="scss">
-  .auth-login-form {
-    .ui-button {
-      &:not(:last-child) {
+  .auth-login {
+    width: 460px;
+
+    &__header {
+      text-align: center;
+
+      .ui-title {
         margin-bottom: 8px;
+        font-weight: 700;
       }
+    }
 
-      &._text {
-        @include ui-typo-12;
+    &__resset {
+      display: flex;
+      justify-content: flex-end;
+      margin: 8px 0 16px;
 
-        color: $ui-black-80;
+      .ui-text {
+        color: $ui-blue-info;
+        cursor: pointer;
 
         &:hover {
           text-decoration: underline;
         }
       }
     }
-  }
 
-  .login {
-    &__reg-link {
-      text-align: center;
-      text-decoration: underline;
-      opacity: 0.8;
+    &__actions {
+      display: flex;
+      flex-direction: column;
+
+      .ui-button {
+        &:not(:first-child) {
+          margin-top: 16px;
+        }
+      }
+    }
+
+    form {
+      margin-top: 24px;
+      padding: 24px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 0 16px rgba($ui-black-100, 0.1);
     }
   }
 </style>

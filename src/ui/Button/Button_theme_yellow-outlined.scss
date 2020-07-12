@@ -1,0 +1,24 @@
+.ui-button_theme_yellow-outlined {
+  color: $ui-black-100;
+  background-color: transparent;
+  border: 1px solid $ui-yellow-brand;
+
+  @media (hover: hover) {
+    &:hover {
+      @include ui-shadow-4($ui-black-20);
+
+      background-color: $ui-black-20;
+      border-color: $ui-black-20;
+    }
+  }
+
+  &:active {
+    background-color: $ui-black-40;
+    border-color: $ui-black-40;
+  }
+
+  &.ui-button_disabled {
+    color: $ui-black-60;
+    border-color: $ui-black-40;
+  }
+}

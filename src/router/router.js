@@ -1,23 +1,34 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import store from '../store'
+import store from '@/store'
+import widgetsRoutes from '@/widgets/routes'
 
 /* middleware */
 import auth from './middleware/auth'
 import company from './middleware/company'
 /* middleware end */
 
-import Login from '@/pages/Auth/Login/Login'
-import Registration from '@/pages/Auth/Registration/Registration'
+const dynamicPage = (importer) => () => {
+  return importer().then((mod) => mod.default || mod)
+}
 
-import CompanyCreate from '@/pages/Auth/CreateCompany/Create'
+const Login = dynamicPage(() => import('@/pages/Auth/Login/Login'))
 
-import Home from '@/pages/Home/Home'
-import Calendar from '@/pages/Calendar/Calendar'
+const Restore = dynamicPage(() => import('@/pages/Auth/Restore/Restore'))
+const Registration = dynamicPage(() => import('@/pages/Auth/Registration/Registration'))
 
-import CompanyEmployee from '@/pages/Company/Employee/Employee'
-import CompanyProcedures from '@/pages/Company/Procedures/Procedures'
+const CompanyCreate = dynamicPage(() => import('@/pages/Company/Create/Create'))
+const CompanySettings = dynamicPage(() => import('@/pages/Company/Settings/Settings'))
+
+const Dashboard = dynamicPage(() => import('@/pages/Dashboard/Dashboard'))
+const Schedule = dynamicPage(() => import('@/pages/Schedule/Schedule'))
+const TimeOff = dynamicPage(() => import('@/pages/TimeOff/TimeOff'))
+
+const Staff = dynamicPage(() => import('@/pages/Staff/Staff'))
+const Procedures = dynamicPage(() => import('@/pages/Procedures/Procedures'))
+
+const Error = dynamicPage(() => import('@/pages/Error/404'))
 
 Vue.use(Router)
 
@@ -35,17 +46,25 @@ const router = new Router({
   scrollBehavior,
 
   routes: [
-    { path: '/', name: 'home', component: Home, meta: { middleware: [auth, company] } },
+    { path: '/', redirect: '/dashboard' },
 
-    { path: '/login/', name: 'login', component: Login },
-    { path: '/registration/', name: 'registration', component: Registration },
+    { path: '/dashboard', name: 'dashboard', component: Dashboard, meta: { layout: 'Dashboard', middleware: [auth, company] } },
 
-    { path: '/company/create/', name: 'companyCreate', component: CompanyCreate, meta: { middleware: [auth] } },
+    { path: '/login/', name: 'login', component: Login, meta: { layout: 'Authorize' } },
+    { path: '/restore/', name: 'restore', component: Restore, meta: { layout: 'Authorize' } },
+    { path: '/registration/', name: 'registration', component: Registration, meta: { layout: 'Authorize' } },
 
-    { path: '/calendar/', name: 'calendar', component: Calendar, meta: { middleware: [auth, company] } },
+    { path: '/schedule/', name: 'schedule', component: Schedule, meta: { layout: 'Dashboard', sidebar: true, middleware: [auth, company] } },
+    { path: '/time-off/', name: 'timeOff', component: TimeOff, meta: { layout: 'Dashboard', middleware: [auth, company] } },
+    { path: '/employee/', name: 'staff', component: Staff, meta: { layout: 'Dashboard', middleware: [auth, company] } },
+    { path: '/procedures/', name: 'procedures', component: Procedures, meta: { layout: 'Dashboard', middleware: [auth, company] } },
 
-    { path: '/company/employee/', name: 'companyEmployee', component: CompanyEmployee, meta: { middleware: [auth, company] } },
-    { path: '/company/procedures/', name: 'CompanyProcedures', component: CompanyProcedures, meta: { middleware: [auth, company] } }
+    { path: '/company/create/', name: 'companyCreate', component: CompanyCreate, meta: { layout: 'Authorize', middleware: [auth] } },
+    { path: '/company/settings/', name: 'companySettings', component: CompanySettings, meta: { layout: 'Dashboard', middleware: [auth, company] } },
+
+    ...widgetsRoutes,
+
+    { path: '*', component: Error, meta: { layout: 'Base' } }
   ]
 })
 
@@ -55,19 +74,15 @@ router.beforeEach(async (to, from, next) => {
   }
 
   for (const middleware of to.meta.middleware) {
-    const result = await middleware({
+    await middleware({
       to,
       from,
       next,
       store
     })
-
-    if (result) {
-      return
-    }
   }
 
-  return next()
+  next()
 })
 
 export default router

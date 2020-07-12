@@ -1,0 +1,16 @@
+@mixin ui-text_size_16 {
+  @include ui-typo-16;
+
+  .ui-text__prepend {
+    margin-right: 8px;
+  }
+
+  .ui-text__append {
+    margin-left: 8px;
+  }
+
+  .ui-icon_size_inherit {
+    width: 24px;
+    height: 24px;
+  }
+}

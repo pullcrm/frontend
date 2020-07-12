@@ -14,7 +14,7 @@ export interface IUsersCreateParams {
   lastName: string
   phone: string
   password: string
-  code: number
+  code: string
 }
 
 export interface IUser {
@@ -42,7 +42,8 @@ export interface IApiRefreshToken {
 }
 
 export interface IUsersConfirmationParams {
-  phone: string
+  phone: string,
+  type: 'REGISTRATION' | 'RESET_PASSWORD'
 }
 
 export interface IUsersConfirmation {
@@ -53,35 +54,47 @@ export interface IRegistrationUserParams {
   firstName: string
   lastName: string
   phone: string
+  description?: string
+  status?: string
+  avatarId?: number
   password?: string
-  code: number
+  code?: string
+}
+
+export interface IAvatar {
+  createdAt: string
+  filename: string
+  id: number
+  mimetype: string
+  path: string
+  updatedAt: string
 }
 
 export interface IRegistrationUser {
+  approaches?: any
   id: number
   firstName: string
   lastName: string
+  email: string
   phone: string
+  avatar: IAvatar
   updatedAt: string
   createdAt: string
 }
 
-export interface IProcedure {
-  name: string
-  price: number
-  duration: number
-}
-
 export interface ICompaniesCreateParams {
-  name: string
-  cityId: number
-  categoryId: number
+  name?: string
+  cityId?: number
+  categoryId?: number
+  logoId?: number
 }
 
 export interface IProcedureParams {
+  id?: number
   name: string
   price: number
   duration: number
+  description?: string
 }
 
 export interface IProcedure {
@@ -92,6 +105,7 @@ export interface IProcedure {
   price: number
   name: string
   updatedAt: Date
+  description: string
 }
 
 export interface ICompanyInfo {
@@ -104,98 +118,251 @@ export interface ICompanyInfo {
   updatedAt: Date
 }
 
+export interface IAppointmentCreateParams {
+  employeeId: number
+  fullName?: string
+  phone?: string
+  procedures: number[]
+  date: string
+  startTime: string
+  total: number
+  description: string
+}
+
+export interface IRestoreUserParams {
+  phone: string
+  newPassword: string
+  code: string
+}
+
+export interface ISmscSendParams {
+  login: string
+  phone: string
+  message: string
+  password: string
+}
+
+export interface ITimeOffGetAllParams {
+  employeeId?: number
+  date: string
+  // startDateTime: string
+  // endDateTime: string
+}
+
+export interface ITimeOffCreateParams {
+  employeeId: number
+  startDateTime: string
+  endDateTime: string
+}
+
+export interface IAppointmentAllParams {
+  date: string
+}
+
 export const factory = (send) => ({
   auth: {
-    login(params: IAuthLoginParams) : Promise<IApiAuthLogin> {
+    login (params: IAuthLoginParams) : Promise<IApiAuthLogin> {
       return send('login', params)
     },
 
-    registration(params: IRegistrationUserParams) : Promise<IRegistrationUser> {
+    registration (params: IRegistrationUserParams) : Promise<IRegistrationUser> {
       return send('users', params)
     },
 
-    logout(): Promise<Boolean> {
+    restore (params: IRestoreUserParams) : Promise<any> {
+      return send('users/restore', params)
+    },
+
+    logout (): Promise<Boolean> {
       return send('logout', null, 'DELETE')
     },
 
-    refreshToken(params: IApiRefreshTokenParams): Promise<IApiRefreshToken> {
+    refreshToken (params: IApiRefreshTokenParams): Promise<IApiRefreshToken> {
       return send('token', params, 'PUT')
     }
   },
 
   companies: {
-    create(params: ICompaniesCreateParams) : Promise<any> {
+    byId (id: number): Promise<any> {
+      return send(`companies/${id}`, null, 'GET')
+    },
+
+    create (params: ICompaniesCreateParams) : Promise<any> {
       return send('companies', params)
     },
-    
-    all() : Promise<ICompanyInfo[]> {
+
+    update (id: number, params: ICompaniesCreateParams) : Promise<any> {
+      return send(`companies/${id}`, params, 'PUT')
+    },
+
+    all () : Promise<ICompanyInfo[]> {
       return send('companies', null, 'GET')
     }
   },
 
-  employee: {
-    create(params: IRegistrationUserParams) : Promise<IRegistrationUser> {
-      return send('companies/my/employers', params)
+  specialist: {
+    create (params: IRegistrationUserParams) : Promise<IRegistrationUser> {
+      return send('companies/my/staff', params)
     },
 
-    all(): Promise<any> {
-      return send('companies/my/employers', null, 'GET')
+    update (id: number, params: IRegistrationUserParams) : Promise<IRegistrationUser> {
+      return send(`companies/my/staff/${id}`, params, 'PUT')
+    },
+
+    all (): Promise<any> {
+      return send('companies/my/staff', null, 'GET')
     }
   },
 
   approaches: {
-    my() : Promise<any[]> {
+    my () : Promise<any[]> {
       return send('approaches', null, 'GET')
-    },
-
-    current() : Promise<any> {
-      return send('approaches/current', null, 'GET')
     }
   },
 
   procedures: {
-    create(params: IProcedureParams) : Promise<IProcedure> {
+    create (params: IProcedureParams) : Promise<IProcedure> {
       return send('procedures', params)
     },
 
-    all() : Promise<IProcedure[]> {
+    remove (id: number) : Promise<any> {
+      return send(`procedures/${id}`, {}, 'DELETE')
+    },
+
+    update (id: number, params: IProcedureParams) : Promise<IProcedure> {
+      return send(`procedures/${id}`, params, 'PUT')
+    },
+
+    all () : Promise<IProcedure[]> {
       return send('procedures', null, 'GET')
     }
   },
 
+  appointments: {
+    all (params: any) : Promise<any> {
+      return send('appointments', params, 'GET')
+    },
+
+    queue (): Promise<any> {
+      return send('appointments/queue', null, 'GET')
+    },
+
+    create (params: IAppointmentCreateParams) : Promise<any> {
+      return send('appointments', params)
+    },
+
+    update (id: number, params: IAppointmentCreateParams) : Promise<any> {
+      return send(`appointments/${id}`, params, 'PUT')
+    },
+
+    sms (id: number, params: any) : Promise<any> {
+      return send(`appointments/${id}/sms`, params, 'PUT')
+    },
+
+    remove (id: number) : Promise<any> {
+      return send(`appointments/${id}`, {}, 'DELETE')
+    },
+
+    slots (params: any) : Promise<any> {
+      return send('appointments/slots', params)
+    }
+  },
+
   users: {
-    create(params: IUsersCreateParams) : Promise<IRegistrationUser> {
+    create (params: IUsersCreateParams) : Promise<IRegistrationUser> {
       return send('users', params)
     },
 
-    confirmation(params: IUsersConfirmationParams) : Promise<IUsersConfirmation> {
+    confirmation (params: IUsersConfirmationParams) : Promise<IUsersConfirmation> {
       return send('users/confirmation', params)
     },
 
-    profile() : Promise<IRegistrationUser> {
+    profile () : Promise<IRegistrationUser> {
       return send('users/profile', null, 'GET')
     },
 
-    all(): Promise<IUser[]> {
+    all (): Promise<IUser[]> {
       return send('users', null, 'GET')
     }
   },
 
   files: {
-    create(params: any) : Promise<any> {
+    create (params: any) : Promise<any> {
       return send('files', params, 'FORM')
     }
   },
 
   cities: {
-    all() : Promise<any> {
+    all () : Promise<any> {
       return send('cities', null, 'GET')
     }
   },
 
   categories: {
-    all() : Promise<any> {
+    all () : Promise<any> {
       return send('categories', null, 'GET')
+    }
+  },
+
+  smsc: {
+    balance (params: any) : Promise<any> {
+      return send('smsc/balance', params)
+    },
+
+    send (params: ISmscSendParams) : Promise<any> {
+      return send('smsc/send', params)
+    },
+
+    remove (params: any) : Promise<any> {
+      return send('smsc/remove', params)
+    },
+
+    token (params: any) : Promise<any> {
+      return send('companies/my/sms', params)
+    },
+
+    update (params: any) : Promise<any> {
+      return send('companies/my/sms', params, 'PUT')
+    }
+  },
+
+  timeOff: {
+    all (params: ITimeOffGetAllParams): Promise<any> {
+      return send('timeoff', params, 'GET')
+    },
+
+    create (params: ITimeOffCreateParams): Promise<any> {
+      return send('timeoff', params)
+    },
+
+    update (id: number, params: ITimeOffCreateParams): Promise<any> {
+      return send(`timeoff/${id}`, params, 'PUT')
+    },
+
+    delete (id: number): Promise<any> {
+      return send(`timeoff/${id}`, {}, 'DELETE')
+    }
+  },
+
+  public: {
+    specialistsByCompanyId (params: any): Promise<any> {
+      return send('public/approaches', params, 'GET')
+    },
+
+    proceduresByCompanyId (params: any): Promise<any> {
+      return send('public/procedures', params, 'GET')
+    },
+
+    hoursSlots (params: any): Promise<any> {
+      return send('public/appointments/slots', params)
+    },
+
+    appointmentCreate (params: any): Promise<any> {
+      return send('public/appointments', params)
+    },
+
+    companyById (id: number): Promise<any> {
+      return send(`public/companies/${id}`, null, 'GET')
     }
   }
 })

@@ -1,17 +1,22 @@
-export function readFileAsync (file) {
+export function readFileAsync (file): Promise<IFile> {
   return new Promise((resolve) => {
-    let reader = new FileReader();
+    const reader = new FileReader()
 
-    reader.onload = (e) => {
-      let dataURI = e.target.result
+    reader.addEventListener('load', (e) => {
+      const dataURI = e.target.result
 
       if (dataURI) {
-        resolve({name: file.name, url: dataURI});
+        resolve({ name: file.name, url: String(dataURI) })
       }
 
       resolve()
-    };
+    })
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file)
   })
+}
+
+interface IFile {
+  name: string
+  url: string
 }

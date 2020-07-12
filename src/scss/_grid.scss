@@ -22,22 +22,23 @@
 */
 
 .ui-grid {
-  @include ui-grid($gap: 24px);
+  @include ui-grid;
+  @include ui-grid-gap(24px);
 }
 
-.ui-column {
-  @include ui-column($gap: 24px);
+.ui-grid-item {
+  @include ui-grid-item;
 }
 
 @for $i from 0 through 12 {
-  .ui-column_#{$i} {
-    @include ui-column-span($i, $gap: 24px);
+  .ui-grid-item_#{$i} {
+    @include ui-grid-item-span($i);
   }
 }
 
 @for $i from 0 through 12 {
-  .ui-column_tablet_#{$i} {
-    @include ui-column-span($i, $gap: 24px);
+  .ui-grid-item_tablet_#{$i} {
+    @include ui-grid-item-span($i);
   }
 }
 
@@ -46,8 +47,8 @@
 */
 // @media (min-width: $ui-mobile-portrait) {
 //   @for $i from 0 through 12 {
-//     .ui-column_mobile-portrait_#{$i} {
-//       @include ui-column-span($i, $gap: 16px);
+//     .ui-grid-item_mobile-portrait_#{$i} {
+//       @include ui-grid-item-span($i, $gap: 16px);
 //     }
 //   }
 // }
@@ -57,21 +58,30 @@
 */
 @media (min-width: $ui-laptop) {
   @for $i from 0 through 12 {
-    .ui-column_laptop_#{$i} {
-      @include ui-column-span($i, $gap: 24px);
+    .ui-grid-item_laptop_#{$i} {
+      @include ui-grid-item-span($i);
     }
   }
 }
 
 /*
   Utility class for screens > desktop
-
-  TODO: Use $ui-desktop after redesign
 */
 @media (min-width: $ui-desktop) {
   @for $i from 0 through 12 {
-    .ui-column_desktop_#{$i} {
-      @include ui-column-span($i, $gap: 24px);
+    .ui-grid-item_desktop_#{$i} {
+      @include ui-grid-item-span($i);
+    }
+  }
+}
+
+/*
+  Utility class for screens > desktop-large
+*/
+@media (min-width: $ui-desktop) {
+  @for $i from 0 through 12 {
+    .ui-grid-item_desktop-large_#{$i} {
+      @include ui-grid-item-span($i);
     }
   }
 }

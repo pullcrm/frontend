@@ -1,0 +1,33 @@
+@import './Text_size_12';
+@import './Text_size_14';
+@import './Text_size_16';
+
+.ui-text {
+  display: flex;
+  align-items: center;
+
+  &_size_s {
+    @include ui-text_size_12;
+  }
+
+  &_size_m {
+    @include ui-text_size_14;
+  }
+
+  &_size_l {
+    @include ui-text_size_16;
+  }
+
+  &__prepend,
+  &__append {
+    flex-shrink: 0;
+
+    .ui-icon {
+      display: block;
+    }
+  }
+
+  &__content {
+    flex: 1;
+  }
+}

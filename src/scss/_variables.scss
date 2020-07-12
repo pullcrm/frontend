@@ -1,24 +1,32 @@
-$CALENDAR_POINT_SIZE_WIDTH: 80px;
-$CALENDAR_POINT_SIZE_HEIGHT: 66px;
+$SCHEDULE_APPOINTMENT_WIDTH: 280px;
+$SCHEDULE_APPOINTMENT_HEIGHT: 30px;
 
 $border-color: #ebebeb;
-$bg-color: #f9f9f9;
-
-$ui-black: #061131;
-$ui-grey: #a1a2bb;
-
-$shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+$body-color: #f6f6f6; // old
+// $body-color: #f6f7f9;
 
 // Black
 $ui-black-100: #202020;
 $ui-black-90: #474747;
 $ui-black-80: #828282;
+$ui-black-70: #a6a6a6;
 $ui-black-60: #bdbdbd;
 $ui-black-40: #e0e0e0;
 $ui-black-20: #f2f2f2;
 $ui-black-10: #fafafa;
 $ui-black-hover-15: #474747;
 $ui-black-hover-25: #666;
+
+$ui-white: #fff;
+
+$shadow: 0 2px 4px rgba($ui-black-100, 0.15);
+
+// Ui-colors
+$ui-yellow-brand: #ffda34;
+$ui-green-brand: #4dbd71;
+$ui-blue-brand: #4876f6;
+$ui-blue-light-brand: #3c8aff;
+$ui-orange-brand: #ff7938;
 
 // Breakpoints
 $ui-mobile: 320px;
@@ -32,3 +40,40 @@ $ui-desktop-4k: 2560px;
 
 // Transitions
 $ui-transition: 0.2s ease-in;
+
+// Blue
+$ui-blue: #e8f1fd;
+$ui-blue-info: #2f80ed;
+$ui-blue-info-hover-15: #4e92ef;
+
+// Red
+$ui-red-danger: #ff5454;
+
+// Orange
+$ui-orange-warning: #fcb35a;
+$ui-orange-secondary: #ffeddc;
+
+// Rose
+$ui-rose: #fad5d5;
+
+// Blue
+// $ui-yellow: #fdecb9;
+// $ui-yellow-brand: #ffda34;
+$ui-blue-hover-15: #3a6cf8;
+$ui-blue-hover-25: #3261e3;
+
+// Yellow
+$ui-yellow: #fdecb9;
+// $ui-yellow-brand: #ffda34;
+$ui-yellow-hover-15: #f0d043;
+$ui-yellow-hover-25: #ecc413;
+$ui-yellow-dark: #fdbe3a;
+
+// Green
+$ui-green-waiting: #3bceac;
+$ui-dark-green: #9de3cb;
+$ui-dark-green-hover-15: #7bd1b3;
+$ui-dark-green-hover-25: #5eba9b;
+$ui-light-green: #d3f4dd;
+$ui-green-hover-15: #3db363;
+$ui-green-hover-25: #389f59;

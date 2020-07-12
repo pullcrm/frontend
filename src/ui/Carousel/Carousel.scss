@@ -1,0 +1,91 @@
+.ui-carousel {
+  --ui-carousel-item-gap: 24px;
+  --ui-carousel-item-count: 6;
+  --ui-carousel-item-width: calc(100% / var(--ui-carousel-item-count));
+
+  position: relative;
+  margin: 0 calc(var(--ui-carousel-item-gap) / -2);
+
+  &__inner {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    -webkit-box-flex: 1;
+    -ms-overflow-style: none; // hide scrollbar IE 10+
+    scrollbar-width: none; // hide scrollbar Firefox
+
+    // TODO: use mixin
+    &::-webkit-scrollbar {
+      display: none; // hide scrollbar Safari and Chrome
+    }
+  }
+
+  &__next {
+    top: 50%;
+    right: calc(var(--ui-carousel-item-gap) / 2);
+    transform: translate(50%, -50%);
+  }
+
+  &__prev {
+    top: 50%;
+    left: calc(var(--ui-carousel-item-gap) / 2);
+    transform: translate(-50%, -50%);
+  }
+
+  &__next,
+  &__prev {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: $ui-black-20;
+    border-radius: 50%;
+    cursor: pointer;
+    transition:
+      background var(--ui-transition-hover),
+      box-shadow var(--ui-transition-hover);
+    user-select: none;
+
+    &:hover {
+      @include ui-shadow-4($ui-black-40);
+
+      background-color: $ui-black-40;
+    }
+
+    &:active {
+      background-color: $ui-black-60;
+    }
+
+    .ui-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  @media (min-width: $ui-laptop) {
+    &__next,
+    &__prev {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @media (min-width: $ui-desktop) {
+    &__next {
+      right: 0;
+      transform: translate(100%, -50%);
+    }
+
+    &__prev {
+      left: 0;
+      transform: translate(-100%, -50%);
+    }
+  }
+}

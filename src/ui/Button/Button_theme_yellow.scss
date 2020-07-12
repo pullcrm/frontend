@@ -1,0 +1,26 @@
+.ui-button_theme_yellow {
+  color: $ui-black-100;
+  background-color: $ui-yellow-brand;
+  border: 1px solid $ui-yellow-brand;
+
+  @media (hover: hover) {
+    &:hover {
+      @include ui-shadow-4($ui-yellow-hover-15);
+
+      background-color: $ui-yellow-hover-15;
+      border-color: $ui-yellow-hover-15;
+    }
+  }
+
+  &:active {
+    background-color: $ui-yellow-hover-25;
+    border-color: $ui-yellow-hover-25;
+    box-shadow: none;
+  }
+
+  &.ui-button_disabled {
+    color: $ui-white;
+    background-color: $ui-black-40;
+    border-color: $ui-black-40;
+  }
+}

@@ -1,0 +1,114 @@
+@mixin ui-button_size_32 {
+  @include ui-typo-12;
+
+  height: 32px;
+  padding: 0 16px - 1px/* border */;
+  font-weight: 500;
+
+  .ui-button__prepend {
+    margin-right: -8px - 1px/* border */;
+    margin-left: -8px - 1px/* border */;
+
+    & + .ui-button__content {
+      margin-left: 9px + 4px;
+    }
+  }
+
+  .ui-button__append {
+    margin-right: -8px - 1px/* border */;
+    margin-left: 4px;
+  }
+}
+
+@mixin ui-button_size_48 {
+  @include ui-typo-14;
+
+  height: 48px;
+  padding: 0 24px - 1px/* border */;
+
+  .ui-button__prepend {
+    margin-right: -8px - 1px/* border */;
+    margin-left: -8px - 1px/* border */;
+
+    & + .ui-button__content {
+      margin-left: 9px + 8px;
+    }
+  }
+
+  .ui-button__append {
+    margin-right: -8px - 1px/* border */;
+    margin-left: 8px;
+  }
+}
+
+.ui-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  vertical-align: baseline;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition:
+    color var(--ui-transition-hover),
+    border-color var(--ui-transition-hover),
+    background-color var(--ui-transition-hover);
+  user-select: none;
+
+  &__content {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &_disabled {
+    pointer-events: none;
+  }
+
+  &_loading {
+    pointer-events: none;
+  }
+
+  &_size_m {
+    @include ui-button_size_32;
+  }
+
+  &_size_l {
+    @include ui-button_size_48;
+  }
+
+  &__loader {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+
+    & + .ui-button__content {
+      opacity: 0;
+    }
+  }
+
+  &__prepend,
+  &__append {
+    flex-shrink: 0;
+
+    .ui-icon {
+      display: block;
+    }
+  }
+}
+
+@import 'Button_theme_primary';
+@import 'Button_theme_primary-outlined';
+@import 'Button_theme_green';
+@import 'Button_theme_green-outlined';
+@import 'Button_theme_yellow';
+@import 'Button_theme_yellow-outlined';
+@import 'Button_theme_blue';
+@import 'Button_theme_info-outlined';
+@import 'Button_theme_danger-outlined';
+@import 'Button_theme_gray';
+@import 'Button_theme_white';

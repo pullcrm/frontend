@@ -6,7 +6,7 @@ function createState () {
 
 const actions = {
   async fetch ({ commit }) {
-    const procedures = await this._vm.$api.procedures.all()
+    const procedures = await this.$api.procedures.all()
 
     commit('SET_PROCEDURES', procedures)
   }
@@ -18,11 +18,7 @@ const mutations = {
   }
 }
 
-const getters = {
-  current (_state, _getters, rootState) {
-    return rootState.approaches.current?.company
-  }
-}
+const getters = {}
 
 export default {
   namespaced: true,

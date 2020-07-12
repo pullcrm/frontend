@@ -1,0 +1,25 @@
+.ui-button_theme_green-outlined {
+  color: $ui-green-brand;
+  background: $ui-white;
+  border: 1px solid $ui-green-brand;
+
+  @media (hover: hover) {
+    &:hover {
+      @include ui-shadow-4($ui-green-brand);
+
+      color: $ui-white;
+      background-color: $ui-green-brand;
+    }
+  }
+
+  &:active {
+    color: $ui-white;
+    background-color: $ui-green-hover-15;
+    border-color: $ui-green-hover-15;
+  }
+
+  &.ui-button_disabled {
+    color: $ui-black-60;
+    border-color: $ui-black-40;
+  }
+}

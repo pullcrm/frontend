@@ -1,18 +1,70 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div
+    id="app"
+    class="app-layout"
+  >
+    <Component
+      :is="`${layout}Layout`"
+    >
+      <RouterView />
+    </Component>
+
+    <Popups />
+
+    <Toasts />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
-@Component
+import DashboardLayout from '@/Layout/dashboard.vue'
+import AuthorizeLayout from '@/Layout/authorize.vue'
+import WidgetLayout from '@/Layout/widget.vue'
+import BaseLayout from '@/Layout/base.vue'
+
+import Popups from '@/components/Popups/Popups.vue'
+import Toasts from '@/components/Toasts/Toasts.vue'
+
+@Component({
+  components: {
+    Popups,
+    Toasts,
+    BaseLayout,
+    WidgetLayout,
+    AuthorizeLayout,
+    DashboardLayout
+  },
+
+  watch: {
+    async hasCompany (value) {
+      if (value) {
+        const hasSMSAuthorize = this.$store.getters['sms/hasSMSAuthorize']
+
+        await Promise.all([
+          this.$store.dispatch('employee/fetch'),
+          this.$store.dispatch('procedures/fetch'),
+          hasSMSAuthorize && this.$store.dispatch('sms/balance')
+        ])
+      }
+    }
+  }
+})
 export default class App extends Vue {
-  async beforeMount () {
-    // await Promise.all([
-    //   this.$store.dispatch('fetch')
-    // ])
+  get hasCompany () {
+    return this.$store.getters['company/current']
+  }
+
+  get hasProfile () {
+    return Boolean(this.$store.state.profile.profile)
+  }
+
+  get layout () {
+    if (this.$route.meta?.layout) {
+      return this.$route.meta?.layout
+    }
+
+    return 'Base'
   }
 }
 </script>
@@ -23,14 +75,13 @@ export default class App extends Vue {
   @import '@/scss/styles.scss';
 
   body {
-    min-height: 100vh;
+    color: $ui-black-100;
     font-family: Roboto, sans-serif !important;
-    background: #f8f8f8;
   }
 
   #app {
     min-height: 80vh;
-    color: #2c3e50;
+    color: $ui-black-100;
     font-family: Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

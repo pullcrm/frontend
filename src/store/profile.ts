@@ -6,7 +6,7 @@ function createState () {
 
 const actions = {
   async fetch ({ commit }) {
-    const profile = await this._vm.$api.users.profile()
+    const profile = await this.$api.users.profile()
 
     commit('SET_PROFILE', profile)
   }
@@ -19,8 +19,8 @@ const mutations = {
 }
 
 const getters = {
-  role (_state, _getters, _rootState, rootGetters) {
-    return rootGetters['approaches/current']?.role
+  role (_state, _getters, rootState) {
+    return rootState.approaches.current?.role
   }
 }
 

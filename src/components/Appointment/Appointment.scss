@@ -1,0 +1,131 @@
+.appointment {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: $SCHEDULE_APPOINTMENT_WIDTH;
+  padding: 8px 8px 8px 12px;
+  background: $ui-white;
+  // border-left-width: 4px;
+  // border-left-style: solid;
+  border-radius: 4px;
+  box-shadow: $shadow;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    border-radius: inherit;
+    content: '';
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+
+    .ui-text {
+      flex: 1;
+      color: $ui-black-100;
+    }
+  }
+
+  &__menu,
+  &__draggable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: $ui-black-90;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  &__menu {
+    color: $ui-black-90;
+    background: $ui-yellow-brand;
+  }
+
+  &__draggable {
+    color: $ui-black-80;
+    background: $ui-black-20;
+    // cursor: grabbing;
+    cursor: grab;
+  }
+
+  &__sub-title {
+    flex: 1;
+    align-items: flex-start;
+    margin: 4px 0;
+    color: $ui-black-60;
+
+    .ui-text__content {
+      white-space: pre-line;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+  }
+
+  &__info {
+    display: flex;
+    flex: 1;
+    align-items: center;
+
+    .ui-icon {
+      color: $ui-black-60;
+    }
+
+    .ui-text {
+      &:not(:first-child) {
+        margin-left: 16px;
+        color: $ui-black-90;
+      }
+    }
+  }
+
+  &.appointment_status {
+    &_IN_PROGRESS {
+      &::before {
+        background: $ui-yellow-dark;
+      }
+    }
+
+    &_COMPLETED {
+      &::before {
+        background: $ui-green-brand;
+      }
+    }
+
+    &_CANCELED {
+      &::before {
+        background: $ui-red-danger;
+      }
+    }
+  }
+
+  &._size_xs {
+    &::before {
+      width: 100%;
+    }
+
+    & > * {
+      display: none;
+    }
+  }
+
+  &._size_m {
+    .appointment__sub-title {
+      .ui-text__content {
+        display: none;
+      }
+    }
+  }
+
+  &._is-active {
+    box-shadow: 0 0 0 3px #6793ff;
+  }
+}

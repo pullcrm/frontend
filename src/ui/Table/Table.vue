@@ -4,7 +4,23 @@
   >
     <thead>
       <tr>
-        <th v-for="label in labels" :key="label.name" :style="label.style">{{ label.name }}</th>
+        <th
+          v-if="numbered"
+          align="left"
+          width="50"
+        >
+          №
+        </th>
+
+        <slot name="head">
+          <th
+            v-for="label in labels"
+            :key="label.name"
+            :style="label.style"
+          >
+            {{ label.name }}
+          </th>
+        </slot>
       </tr>
     </thead>
 
@@ -13,6 +29,12 @@
         v-for="(row, index) in data"
         :key="index"
       >
+        <td
+          v-if="numbered"
+        >
+          <strong>#{{ index + 1 }}</strong>
+        </td>
+
         <slot
           :row="row"
           :index="index"
@@ -33,15 +55,21 @@ import Component from 'vue-class-component'
       required: true
     },
 
+    numbered: {
+      type: Boolean,
+      default: false
+    },
+
     labels: {
       type: Array,
-      required: true
+      default: () => {
+        return []
+      }
     }
   }
 })
-export default class Table extends Vue {
 
-}
+export default class Table extends Vue {}
 </script>
 
 <style lang="scss">
@@ -49,31 +77,37 @@ export default class Table extends Vue {
     width: 100%;
 
     thead {
-      background: #edf4fb;
+      background: $ui-yellow;
 
       th {
         @include ui-typo-14;
 
-        padding: 8px 16px;
-        color: rgba(#000, 0.7);
+        padding: 8px;
+        color: $ui-black-90;
         vertical-align: top;
       }
     }
 
     tbody {
       td {
-        padding: 16px;
+        @include ui-typo-14;
+
+        padding: 16px 8px;
         vertical-align: middle;
       }
 
       tr {
         &:not(:last-child) {
-          border-bottom: 1px solid $border-color;
+          border-bottom: 1px solid $ui-black-20;
         }
 
         &:hover {
-          background: #fafafb;
+          background: $ui-black-10;
         }
+      }
+
+      strong {
+        font-weight: 500;
       }
     }
   }
