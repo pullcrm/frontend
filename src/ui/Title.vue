@@ -63,19 +63,43 @@ export default class Title extends Vue {
       @include ui-typo-32;
     }
 
-    @media (max-width: $ui-laptop - 1px) {
+    @include ui-desktop-only {
+      @media (max-width: $ui-laptop - 1px) {
+        &_responsive {
+          &.ui-title {
+            &_size_m {
+              @include ui-typo-20;
+            }
+
+            &_size_l {
+              @include ui-typo-24;
+            }
+
+            &_size_xl {
+              @include ui-typo-28;
+            }
+          }
+        }
+      }
+    }
+
+    @include ui-mobile-only {
       &_responsive {
         &.ui-title {
+          &_size_s {
+            @include ui-typo-14;
+          }
+
           &_size_m {
-            @include ui-typo-20;
+            @include ui-typo-16;
           }
 
           &_size_l {
-            @include ui-typo-24;
+            @include ui-typo-18;
           }
 
           &_size_xl {
-            @include ui-typo-28;
+            @include ui-typo-20;
           }
         }
       }

@@ -65,3 +65,23 @@
     display: none;
   }
 }
+
+@mixin ui-mobile-only {
+  @media (max-width: $ui-tablet - 1px) {
+    @content;
+  }
+}
+
+@mixin ui-desktop-only {
+  @media (min-width: $ui-tablet) {
+    @content;
+  }
+}
+
+@mixin ui-hover {
+  @include ui-desktop-only {
+    @media (hover: hover) {
+      @content;
+    }
+  }
+}

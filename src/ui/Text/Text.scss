@@ -30,4 +30,18 @@
   &__content {
     flex: 1;
   }
+
+  @include ui-mobile-only {
+    &_responsive {
+      &.ui-text {
+        &_size_m {
+          @include ui-text_size_12;
+        }
+
+        &_size_l {
+          @include ui-text_size_14;
+        }
+      }
+    }
+  }
 }

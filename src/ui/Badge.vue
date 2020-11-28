@@ -274,5 +274,19 @@ export default class Badge extends Vue {
         display: block;
       }
     }
+
+    @include ui-mobile-only {
+      &_responsive {
+        &.ui-badge {
+          &_size_m {
+            @include ui-badge_size_16;
+          }
+
+          &_size_l {
+            @include ui-badge_size_24;
+          }
+        }
+      }
+    }
   }
 </style>

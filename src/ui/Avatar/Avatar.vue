@@ -7,7 +7,10 @@
       v-if="hasImage"
       class="ui-avatar__image"
     >
-      <img :src="image" :alt="name">
+      <img
+        :src="image"
+        :alt="name"
+      >
     </div>
 
     <div

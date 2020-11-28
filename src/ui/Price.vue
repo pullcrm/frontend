@@ -98,38 +98,38 @@ export default class Price extends Vue {
       margin-left: 8px;
     }
 
-    // @include ui-desktop-only {
-    //   @media (max-width: $ui-laptop - 1px) {
-    //     &_responsive {
-    //       &.ui-price {
-    //         &_size_m {
-    //           @include ui-typo-22;
-    //         }
+    @include ui-desktop-only {
+      @media (max-width: $ui-laptop - 1px) {
+        &_responsive {
+          &.ui-price {
+            &_size_m {
+              @include ui-typo-22;
+            }
 
-    //         &_size_xl {
-    //           @include ui-typo-36;
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+            &_size_xl {
+              @include ui-typo-36;
+            }
+          }
+        }
+      }
+    }
 
-    // @include ui-mobile-only {
-    //   &_responsive {
-    //     &.ui-price {
-    //       &_size_s {
-    //         @include ui-typo-14;
-    //       }
+    @include ui-mobile-only {
+      &_responsive {
+        &.ui-price {
+          &_size_s {
+            @include ui-typo-14;
+          }
 
-    //       &_size_m {
-    //         @include ui-typo-20;
-    //       }
+          &_size_m {
+            @include ui-typo-20;
+          }
 
-    //       &_size_xl {
-    //         @include ui-typo-24;
-    //       }
-    //     }
-    //   }
-    // }
+          &_size_xl {
+            @include ui-typo-24;
+          }
+        }
+      }
+    }
   }
 </style>
