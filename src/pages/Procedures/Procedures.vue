@@ -23,12 +23,14 @@
         <div class="procedures-page__header">
           <UiTitle
             size="m"
+            responsive
           >
             Список услуг
           </UiTitle>
 
           <UiButton
             theme="blue"
+            responsive
             @click.native="onShowServicePopup"
           >
             Добавить услугу

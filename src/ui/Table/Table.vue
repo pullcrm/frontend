@@ -1,47 +1,49 @@
 <template>
-  <table
-    class="ui-table"
-  >
-    <thead>
-      <tr>
-        <th
-          v-if="numbered"
-          align="left"
-          width="50"
-        >
-          №
-        </th>
-
-        <slot name="head">
+  <div class="ui-table">
+    <table
+      class="ui-table__inner"
+    >
+      <thead>
+        <tr>
           <th
-            v-for="label in labels"
-            :key="label.name"
-            :style="label.style"
+            v-if="numbered"
+            align="left"
+            width="50"
           >
-            {{ label.name }}
+            №
           </th>
-        </slot>
-      </tr>
-    </thead>
 
-    <tbody>
-      <tr
-        v-for="(row, index) in data"
-        :key="index"
-      >
-        <td
-          v-if="numbered"
+          <slot name="head">
+            <th
+              v-for="label in labels"
+              :key="label.name"
+              :style="label.style"
+            >
+              {{ label.name }}
+            </th>
+          </slot>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          v-for="(row, index) in data"
+          :key="index"
         >
-          <strong>#{{ index + 1 }}</strong>
-        </td>
+          <td
+            v-if="numbered"
+          >
+            <strong>#{{ index + 1 }}</strong>
+          </td>
 
-        <slot
-          :row="row"
-          :index="index"
-        />
-      </tr>
-    </tbody>
-  </table>
+          <slot
+            :row="row"
+            :index="index"
+          />
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script lang="ts">
@@ -75,6 +77,11 @@ export default class Table extends Vue {}
 <style lang="scss">
   .ui-table {
     width: 100%;
+    overflow-x: auto;
+
+    &__inner {
+      width: 100%;
+    }
 
     thead {
       background: $ui-yellow;
@@ -84,6 +91,7 @@ export default class Table extends Vue {}
 
         padding: 8px;
         color: $ui-black-90;
+        white-space: nowrap;
         vertical-align: top;
       }
     }

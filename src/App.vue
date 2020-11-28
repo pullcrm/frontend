@@ -18,7 +18,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 
-import DashboardLayout from '@/Layout/dashboard.vue'
+import DashboardLayout from '@/Layout/Dashboard/Dashboard.vue'
 import AuthorizeLayout from '@/Layout/authorize.vue'
 import WidgetLayout from '@/Layout/widget.vue'
 import BaseLayout from '@/Layout/base.vue'

@@ -103,5 +103,11 @@ export default class Backdrop extends Vue {
         content: '';
       }
     }
+
+    @include ui-mobile-only {
+      .ui-popup {
+        margin: 0;
+      }
+    }
   }
 </style>

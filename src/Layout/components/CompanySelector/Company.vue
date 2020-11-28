@@ -1,19 +1,19 @@
 <template>
   <div
-    class="base-layout-company"
+    class="base-layout-header-company"
     :class="{'_active' : company.id === companyId }"
   >
-    <div class="base-layout-company__logo">
+    <div class="base-layout-header-company__logo">
       <UiAvatar
         :image="logo"
         :name="company.name"
-        size="m"
+        size="s"
         type="rounded"
       />
     </div>
-    <div class="base-layout-company__info">
+    <div class="base-layout-header-company__info">
       <UiText
-        class="base-layout-company__name"
+        class="base-layout-header-company__name"
         size="m"
       >
         {{ company.name }}
@@ -52,7 +52,7 @@ export default class Company extends Vue {
 </script>
 
 <style lang="scss">
-  .base-layout-company {
+  .base-layout-header-company {
     display: flex;
     align-items: center;
     width: 280px;
@@ -63,6 +63,10 @@ export default class Company extends Vue {
     border: 2px solid $ui-black-20;
     border-radius: 8px;
     cursor: pointer;
+
+    &__logo {
+      margin-right: 12px;
+    }
 
     &__name {
       font-weight: 500;

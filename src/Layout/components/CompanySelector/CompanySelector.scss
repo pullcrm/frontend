@@ -1,0 +1,21 @@
+.base-layout-header-company-selector {
+  &__title {
+    cursor: pointer;
+
+    .ui-title__content {
+      @include ellipsis(2);
+    }
+
+    .ui-title__append {
+      color: $ui-black-80;
+    }
+
+    .ui-price {
+      display: inline-flex;
+    }
+  }
+
+  .ui-button {
+    width: 100%;
+  }
+}

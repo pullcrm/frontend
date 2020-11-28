@@ -5,6 +5,7 @@
     <UiTitle
       class="company-settings-page-sms-notification__title"
       size="l"
+      responsive
     >
       SMS оповещение
     </UiTitle>
@@ -12,7 +13,10 @@
     <template
       v-if="hasSMSAuthorize"
     >
-      <UiText>
+      <UiText
+        size="m"
+        responsive
+      >
         Авторизовано в SMSC.UA
       </UiText>
 
@@ -24,6 +28,7 @@
         <template #append>
           <UiText
             size="m"
+            responsive
           >
             Отправлять смс клиенту после создания записи (по умолчанию)
           </UiText>
@@ -38,6 +43,7 @@
         <template #append>
           <UiText
             size="m"
+            responsive
           >
             Напоминать клиенту о записи (по умолчанию)
           </UiText>
@@ -61,6 +67,7 @@
       <UiButton
         theme="blue"
         :loading="isLoading"
+        responsive
         @click.native="save"
       >
         Сохранить
@@ -70,6 +77,7 @@
     <UiButton
       v-else
       theme="info-outlined"
+      responsive
       @click.native="smsPopup"
     >
       Авторизоваться в smsc

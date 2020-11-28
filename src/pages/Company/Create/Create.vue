@@ -5,11 +5,15 @@
     <div class="company-create__header">
       <UiTitle
         size="xl"
+        responsive
       >
         Создание компании
       </UiTitle>
 
-      <UiText>
+      <UiText
+        size="m"
+        responsive
+      >
         Укажите информацию о компании
       </UiText>
     </div>

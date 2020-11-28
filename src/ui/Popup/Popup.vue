@@ -9,7 +9,7 @@
       class="ui-popup__back"
       data-test="ui-popup-back"
       @click.native="$emit('back')"
-    />
+    /> -->
 
     <a
       v-if="closable"
@@ -23,7 +23,7 @@
         name="close/close-1"
         size="s"
       />
-    </a> -->
+    </a>
 
     <slot />
   </div>
@@ -81,8 +81,8 @@ export default {
 
     &__close {
       position: absolute;
-      top: 32px;
-      right: 32px;
+      top: 16px;
+      right: 16px;
       z-index: 5;
 
       /* Extend click area */
@@ -116,8 +116,9 @@ export default {
       width: 456px;
     }
 
-    @media (max-width: $ui-laptop - 1px) {
-      width: 504px;
+    @include ui-mobile-only {
+      width: 100%;
+      border-radius: 0;
     }
   }
 

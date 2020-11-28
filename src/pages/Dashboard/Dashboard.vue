@@ -1,16 +1,18 @@
 <template>
-  <UiContainer>
-    <!-- Who we are banner -->
-    <DonateBanner />
+  <div class="dashboard-page">
+    <UiContainer>
+      <!-- Who we are banner -->
+      <DonateBanner />
 
-    <Companies />
-
-    <UiPanel>
-      <pre>
-        {{ company }}
-      </pre>
-    </UiPanel>
-  </UiContainer>
+      <UiPanel
+        class="dashboard-page__panel"
+      >
+        <pre>
+          {{ company }}
+        </pre>
+      </UiPanel>
+    </UiContainer>
+  </div>
 </template>
 
 <script lang="ts">
@@ -18,11 +20,9 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import DonateBanner from './components/DonateBanner.vue'
-import Companies from './components/Companies.vue'
 
 @Component({
   components: {
-    Companies,
     DonateBanner
   }
 })
@@ -34,5 +34,9 @@ export default class Dashboard extends Vue {
 </script>
 
 <style lang="scss">
-  //
+  .dashboard-page {
+    &__panel {
+      overflow: hidden;
+    }
+  }
 </style>

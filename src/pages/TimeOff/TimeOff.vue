@@ -6,12 +6,14 @@
       <div class="time-off-page__header">
         <UiTitle
           size="m"
+          responsive
         >
           Не рабочое время
         </UiTitle>
 
         <UiButton
           theme="blue"
+          responsive
           @click.native="onAdd"
         >
           Закрыть запись

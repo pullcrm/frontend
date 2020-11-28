@@ -56,6 +56,15 @@
   }
 }
 
+@mixin ellipsis($lines) {
+  display: -webkit-box;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis; /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+}
+
 @mixin hide-scrollbar () {
   scrollbar-width: none;
   -ms-overflow-style: none;

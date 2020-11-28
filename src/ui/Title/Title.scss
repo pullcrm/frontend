@@ -1,0 +1,81 @@
+@import './Title_size_18';
+@import './Title_size_24';
+@import './Title_size_28';
+@import './Title_size_32';
+
+.ui-title {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+
+  &_size_s {
+    @include ui-title_size_18;
+  }
+
+  &_size_m {
+    @include ui-title_size_24;
+  }
+
+  &_size_l {
+    @include ui-title_size_28;
+  }
+
+  &_size_xl {
+    @include ui-title_size_32;
+  }
+
+  &__prepend,
+  &__append {
+    flex-shrink: 0;
+
+    .ui-icon {
+      display: block;
+    }
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  @include ui-desktop-only {
+    @media (max-width: $ui-laptop - 1px) {
+      &_responsive {
+        &.ui-title {
+          &_size_m {
+            @include ui-typo-20;
+          }
+
+          &_size_l {
+            @include ui-typo-24;
+          }
+
+          &_size_xl {
+            @include ui-typo-28;
+          }
+        }
+      }
+    }
+  }
+
+  @include ui-mobile-only {
+    &_responsive {
+      &.ui-title {
+        &_size_s {
+          @include ui-typo-14;
+        }
+
+        &_size_m {
+          @include ui-typo-16;
+        }
+
+        &_size_l {
+          @include ui-typo-18;
+        }
+
+        &_size_xl {
+          @include ui-typo-20;
+        }
+      }
+    }
+  }
+}

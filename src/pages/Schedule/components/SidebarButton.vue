@@ -1,0 +1,31 @@
+<template>
+  <UiButton
+    class="schedule-sidebar-button"
+    size="m"
+    theme="blue"
+    right-icon="plus/plus"
+  >
+    {{ date | formatDate('D MMMM') }}
+  </UiButton>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component({})
+export default class SidebarButton extends Vue {
+  get date () {
+    return new Date(this.$store.state.calendar.date) as Date
+  }
+}
+</script>
+
+<style lang="scss">
+  .schedule-sidebar-button {
+    position: fixed;
+    right: 16px;
+    bottom: 72px;
+    z-index: 20;
+  }
+</style>

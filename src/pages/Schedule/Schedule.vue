@@ -2,14 +2,21 @@
   <div
     class="schedule"
   >
-    <UiContainer
-      class="schedule__inner"
-    >
+    <UiContainer>
       <Sidebar
         class="schedule__sidebar"
+        :class="[
+          {'_opened': sidebarOpened}
+        ]"
       />
 
-      <Calendar>
+      <SidebarButton
+        @click.native="sidebarOpened = !sidebarOpened"
+      />
+
+      <Calendar
+        class="schedule__calendar"
+      >
         <template #table:prepend>
           <Loader />
         </template>
@@ -55,6 +62,7 @@ import Loader from './components/Calendar/Loader.vue'
 import TimeOff from './components/Calendar/TimeOff.vue'
 import Sidebar from './components/Sidebar/Sidebar.vue'
 import Calendar from './components/Calendar/Calendar.vue'
+import SidebarButton from './components/SidebarButton.vue'
 import DropPlaceholder from './components/Calendar/DropPlaceholder.vue'
 
 @Component({
@@ -65,11 +73,14 @@ import DropPlaceholder from './components/Calendar/DropPlaceholder.vue'
     Sidebar,
     Calendar,
     Appointment,
+    SidebarButton,
     AppointmentWrap,
     DropPlaceholder
   }
 })
 export default class Schedule extends Vue {
+  sidebarOpened = false
+
   get tiles () {
     return this.$store.getters['calendar/gridTiles']
   }
@@ -115,22 +126,4 @@ export default class Schedule extends Vue {
 }
 </script>
 
-<style lang="scss">
-  .schedule {
-    padding-bottom: 32px;
-
-    &__title {
-      margin-top: 8px;
-      margin-bottom: 32px;
-    }
-
-    &__sidebar {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 64px;
-      z-index: 10;
-      width: calc(#{$SCHEDULE_APPOINTMENT_WIDTH} + 26px);
-    }
-  }
-</style>
+<style lang="scss" src="./Schedule.scss"></style>

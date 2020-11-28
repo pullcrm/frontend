@@ -1,5 +1,7 @@
 .popup-specialist {
-  width: 460px;
+  form {
+    overflow: hidden;
+  }
 
   &__back {
     margin-bottom: 16px;

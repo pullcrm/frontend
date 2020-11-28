@@ -5,13 +5,15 @@
     <div class="staff-page__header">
       <UiTitle
         size="l"
+        responsive
       >
         Сотрудники
       </UiTitle>
 
       <UiButton
-        theme="blue"
         size="l"
+        theme="blue"
+        responsive
         @click.native="onSpecialist"
       >
         Добавить сотрудника
@@ -24,7 +26,8 @@
         :key="`specialist-${specialist.id}`"
         :class="[
           'ui-grid-item',
-          'ui-grid-item_4',
+          'ui-grid-item_12',
+          'ui-grid-item_tablet_6',
           'ui-grid-item_laptop_3',
           'ui-grid-item_desktop_2'
         ]"

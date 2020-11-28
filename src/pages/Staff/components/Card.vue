@@ -12,7 +12,7 @@
     <div class="staff-page-card__info">
       <UiText
         class="staff-page-card__name"
-        size="m"
+        size="s"
       >
         {{ user.firstName }} {{ user.lastName }}
       </UiText>
