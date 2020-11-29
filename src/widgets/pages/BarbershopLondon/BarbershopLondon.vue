@@ -19,6 +19,7 @@
         :procedure="procedure"
         :specialist="specialist"
         @back="onBack"
+        @update="onUpdateHeight"
         @created="onCreated"
       />
 
@@ -112,8 +113,12 @@ export default class BarbershopLondon extends Vue {
       height
     }
 
-    const event = 'updateHeight'
+    this.postMessage('updateHeight', payload)
 
+    this.postMessage('createOrder')
+  }
+
+  postMessage (event, payload = {}) {
     parent.postMessage(`pullcrm:${event}|${JSON.stringify(payload)}`, '*')
   }
 
