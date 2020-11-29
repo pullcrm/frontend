@@ -19,7 +19,6 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 import DashboardLayout from '@/Layout/Dashboard/Dashboard.vue'
-import AuthorizeLayout from '@/Layout/authorize.vue'
 import WidgetLayout from '@/Layout/widget.vue'
 import BaseLayout from '@/Layout/base.vue'
 
@@ -32,7 +31,6 @@ import Toasts from '@/components/Toasts/Toasts.vue'
     Toasts,
     BaseLayout,
     WidgetLayout,
-    AuthorizeLayout,
     DashboardLayout
   },
 

@@ -27,5 +27,10 @@ export default class SidebarButton extends Vue {
     right: 16px;
     bottom: 72px;
     z-index: 20;
+    display: none;
+
+    @media (max-width: $ui-laptop - 1px) {
+      display: flex;
+    }
   }
 </style>

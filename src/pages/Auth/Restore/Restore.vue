@@ -1,92 +1,95 @@
 <template>
-  <div
-    class="auth-restore"
-  >
-    <div class="auth-restore__header">
-      <UiTitle
-        size="xl"
-      >
-        Восстановить доступ
-      </UiTitle>
-
-      <UiText>
-        Введите номер телефона чтобы востановить доступ
-      </UiText>
-    </div>
-
-    <form
-      @submit.prevent="isValid ? submit() : confirmationPhone()"
-    >
-      <UiBack
-        class="auth-restore__back"
-        @click.native="onBack"
-      />
-
-      <UiFormValidator
-        v-slot="{ resetFieldError, getFieldError }"
-        ref="formValidator"
-        :validations="validations"
-      >
-        <UiField
-          label="Телефон"
-          :error="getFieldError('phone')"
+  <Layout class="auth-page-restore">
+    <div class="auth-page-restore__inner">
+      <div class="auth-page-restore__header">
+        <UiTitle
+          size="xl"
+          responsive
         >
-          <UiInput
-            v-model="phone"
-            mask="38 (###) #### ###"
-            name="phone"
-            left-icon="phone"
-            placeholder="066"
-            :disabled="isValid"
-            required
-            @input="resetFieldError('phone')"
-          />
-        </UiField>
+          Восстановить доступ
+        </UiTitle>
 
-        <template
-          v-if="isValid"
+        <UiText
+          size="m"
+          responsive
+        >
+          Введите номер телефона чтобы востановить доступ
+        </UiText>
+      </div>
+
+      <form
+        @submit.prevent="isValid ? submit() : confirmationPhone()"
+      >
+        <UiBack
+          class="auth-page-restore__back"
+          @click.native="onBack"
+        />
+
+        <UiFormValidator
+          v-slot="{ resetFieldError, getFieldError }"
+          ref="formValidator"
+          :validations="validations"
         >
           <UiField
-            label="Пароль"
-            :error="getFieldError('password')"
+            label="Телефон"
+            :error="getFieldError('phone')"
           >
             <UiInput
-              v-model="password"
-              left-icon="key"
-              name="password"
-              type="password"
-              placeholder="Введите пароль"
+              v-model="phone"
+              mask="38 (###) #### ###"
+              name="phone"
+              left-icon="phone"
+              placeholder="066"
+              :disabled="isValid"
               required
-              @input="resetFieldError('password')"
+              @input="resetFieldError('phone')"
             />
           </UiField>
 
-          <UiField
-            label="Код смс"
-            :error="getFieldError('code')"
+          <template
+            v-if="isValid"
           >
-            <UiInput
-              v-model="code"
-              left-icon="info"
-              placeholder="Введите код с sms"
-              required
-              @input="resetFieldError('code')"
-            />
-          </UiField>
-        </template>
+            <UiField
+              label="Пароль"
+              :error="getFieldError('password')"
+            >
+              <UiInput
+                v-model="password"
+                left-icon="key"
+                name="password"
+                type="password"
+                placeholder="Введите пароль"
+                required
+                @input="resetFieldError('password')"
+              />
+            </UiField>
 
-        <div class="auth-restore__actions">
+            <UiField
+              label="Код смс"
+              :error="getFieldError('code')"
+            >
+              <UiInput
+                v-model="code"
+                left-icon="info"
+                placeholder="Введите код с sms"
+                required
+                @input="resetFieldError('code')"
+              />
+            </UiField>
+          </template>
+
           <UiButton
+            class="auth-page-restore__button"
             type="submit"
             size="l"
             theme="blue"
           >
             {{ isValid ? 'Изменить пароль' : 'Востановить' }}
           </UiButton>
-        </div>
-      </UiFormValidator>
-    </form>
-  </div>
+        </UiFormValidator>
+      </form>
+    </div>
+  </Layout>
 </template>
 
 <script lang="ts">
@@ -95,7 +98,12 @@ import Component from 'vue-class-component'
 
 import UiFormValidator, { Validations } from '@/ui/FormValidator.vue'
 
+import Layout from '../components/Layout.vue'
+
 @Component({
+  components: {
+    Layout
+  }
 })
 export default class Restore extends Vue {
   code = ''
@@ -187,35 +195,4 @@ export default class Restore extends Vue {
 }
 </script>
 
-<style lang="scss">
-  .auth-restore {
-    width: 460px;
-
-    &__back {
-      margin-bottom: 24px;
-    }
-
-    &__header {
-      text-align: center;
-
-      .ui-title {
-        margin-bottom: 8px;
-        font-weight: 700;
-      }
-    }
-
-    &__actions {
-      display: flex;
-      flex-direction: column;
-      margin-top: 16px;
-    }
-
-    form {
-      margin-top: 24px;
-      padding: 24px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 0 16px rgba($ui-black-100, 0.1);
-    }
-  }
-</style>
+<style lang="scss" src="./Restore.scss"></style>

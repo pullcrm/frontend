@@ -14,11 +14,10 @@ const dynamicPage = (importer) => () => {
 }
 
 const Login = dynamicPage(() => import('@/pages/Auth/Login/Login'))
-
 const Restore = dynamicPage(() => import('@/pages/Auth/Restore/Restore'))
 const Registration = dynamicPage(() => import('@/pages/Auth/Registration/Registration'))
+const CompanyCreate = dynamicPage(() => import('@/pages/Auth/CompanyCreate/CompanyCreate'))
 
-const CompanyCreate = dynamicPage(() => import('@/pages/Company/Create/Create'))
 const CompanySettings = dynamicPage(() => import('@/pages/Company/Settings/Settings'))
 
 const Dashboard = dynamicPage(() => import('@/pages/Dashboard/Dashboard'))
@@ -50,16 +49,16 @@ const router = new Router({
 
     { path: '/dashboard', name: 'dashboard', component: Dashboard, meta: { layout: 'Dashboard', middleware: [auth, company] } },
 
-    { path: '/login/', name: 'login', component: Login, meta: { layout: 'Authorize' } },
-    { path: '/restore/', name: 'restore', component: Restore, meta: { layout: 'Authorize' } },
-    { path: '/registration/', name: 'registration', component: Registration, meta: { layout: 'Authorize' } },
+    { path: '/login/', name: 'login', component: Login },
+    { path: '/restore/', name: 'restore', component: Restore },
+    { path: '/registration/', name: 'registration', component: Registration },
+    { path: '/company/create/', name: 'companyCreate', component: CompanyCreate, meta: { middleware: [auth] } },
 
     { path: '/schedule/', name: 'schedule', component: Schedule, meta: { layout: 'Dashboard', sidebar: true, middleware: [auth, company] } },
     { path: '/time-off/', name: 'timeOff', component: TimeOff, meta: { layout: 'Dashboard', middleware: [auth, company] } },
     { path: '/employee/', name: 'staff', component: Staff, meta: { layout: 'Dashboard', middleware: [auth, company] } },
     { path: '/procedures/', name: 'procedures', component: Procedures, meta: { layout: 'Dashboard', middleware: [auth, company] } },
 
-    { path: '/company/create/', name: 'companyCreate', component: CompanyCreate, meta: { layout: 'Authorize', middleware: [auth] } },
     { path: '/company/settings/', name: 'companySettings', component: CompanySettings, meta: { layout: 'Dashboard', middleware: [auth, company] } },
 
     ...widgetsRoutes,
