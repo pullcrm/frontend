@@ -25,7 +25,7 @@
     />
 
     <MenuItem
-      :to="{ name: 'staff' }"
+      :to="{ name: 'specialists' }"
       icon="person/persones"
       title="Сотрудники"
     />

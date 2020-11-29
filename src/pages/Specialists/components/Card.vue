@@ -1,27 +1,27 @@
 <template>
   <UiPanel
-    class="staff-page-card"
+    class="specialists-page-card"
   >
     <UiAvatar
-      class="staff-page-card__avatar"
+      class="specialists-page-card__avatar"
       :image="avatar"
-      :name="user.firstName"
+      :name="specialist.firstName"
       size="l"
     />
 
-    <div class="staff-page-card__info">
+    <div class="specialists-page-card__info">
       <UiText
-        class="staff-page-card__name"
+        class="specialists-page-card__name"
         size="s"
       >
-        {{ user.firstName }} {{ user.lastName }}
+        {{ specialist.firstName }} {{ specialist.lastName }}
       </UiText>
 
       <UiText
-        class="staff-page-card__phone"
+        class="specialists-page-card__phone"
         size="s"
       >
-        {{ user.phone | formatPhone }}
+        {{ specialist.phone | formatPhone }}
       </UiText>
     </div>
 
@@ -41,23 +41,23 @@ import Component from 'vue-class-component'
 
 @Component({
   props: {
-    user: {
+    specialist: {
       type: Object,
       required: true
     }
   }
 })
 export default class Card extends Vue {
-  readonly user
+  readonly specialist
 
   get avatar () {
-    return this.user.avatar?.path
+    return this.specialist.avatar?.path
   }
 }
 </script>
 
 <style lang="scss">
-  .staff-page-card {
+  .specialists-page-card {
     // FIXME:
     &.ui-panel {
       display: flex;

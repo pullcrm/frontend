@@ -24,8 +24,8 @@ const Dashboard = dynamicPage(() => import('@/pages/Dashboard/Dashboard'))
 const Schedule = dynamicPage(() => import('@/pages/Schedule/Schedule'))
 const TimeOff = dynamicPage(() => import('@/pages/TimeOff/TimeOff'))
 
-const Staff = dynamicPage(() => import('@/pages/Staff/Staff'))
 const Procedures = dynamicPage(() => import('@/pages/Procedures/Procedures'))
+const Specialists = dynamicPage(() => import('@/pages/Specialists/Specialists'))
 
 const Error = dynamicPage(() => import('@/pages/Error/404'))
 
@@ -56,8 +56,8 @@ const router = new Router({
 
     { path: '/schedule/', name: 'schedule', component: Schedule, meta: { layout: 'Dashboard', sidebar: true, middleware: [auth, company] } },
     { path: '/time-off/', name: 'timeOff', component: TimeOff, meta: { layout: 'Dashboard', middleware: [auth, company] } },
-    { path: '/employee/', name: 'staff', component: Staff, meta: { layout: 'Dashboard', middleware: [auth, company] } },
     { path: '/procedures/', name: 'procedures', component: Procedures, meta: { layout: 'Dashboard', middleware: [auth, company] } },
+    { path: '/specialists/', name: 'specialists', component: Specialists, meta: { layout: 'Dashboard', middleware: [auth, company] } },
 
     { path: '/company/settings/', name: 'companySettings', component: CompanySettings, meta: { layout: 'Dashboard', middleware: [auth, company] } },
 
