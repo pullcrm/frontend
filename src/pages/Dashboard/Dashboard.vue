@@ -1,16 +1,7 @@
 <template>
   <div class="dashboard-page">
     <UiContainer>
-      <!-- Who we are banner -->
       <DonateBanner />
-
-      <UiPanel
-        class="dashboard-page__panel"
-      >
-        <pre>
-          {{ company }}
-        </pre>
-      </UiPanel>
     </UiContainer>
   </div>
 </template>
@@ -35,8 +26,6 @@ export default class Dashboard extends Vue {
 
 <style lang="scss">
   .dashboard-page {
-    &__panel {
-      overflow: hidden;
-    }
+    //
   }
 </style>
