@@ -63,6 +63,8 @@ export default {
   .ui-popup {
     @include ui-shadow-16;
 
+    --ui-popup-padding: 24px;
+
     position: relative;
     z-index: 101;
     display: inline-block;
@@ -95,7 +97,15 @@ export default {
         content: '';
       }
 
-      &:hover {
+      @include ui-hover {
+        &:hover {
+          .ui-icon {
+            color: $ui-black-100;
+          }
+        }
+      }
+
+      &:active {
         .ui-icon {
           color: $ui-black-100;
         }
@@ -112,13 +122,28 @@ export default {
       }
     }
 
-    @media (max-width: $ui-desktop - 1px) {
-      width: 456px;
+    @include ui-desktop-only {
+      @media (max-width: $ui-desktop - 1px) {
+        width: 456px;
+      }
+
+      @media (max-width: $ui-laptop - 1px) {
+        width: 504px;
+      }
     }
 
     @include ui-mobile-only {
-      width: 100%;
-      border-radius: 0;
+      width: 416px;
+
+      @media (max-width: $ui-mobile-portrait - 1px) {
+        --ui-popup-padding: 16px;
+
+        width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+        padding: 16px;
+        border-radius: 0;
+      }
     }
   }
 

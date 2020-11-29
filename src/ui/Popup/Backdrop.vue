@@ -94,7 +94,7 @@ export default class Backdrop extends Vue {
       height: 100%;
       overflow: auto;
       white-space: nowrap;
-      pointer-events: none;
+      -webkit-overflow-scrolling: touch;
 
       &::before {
         display: inline-block;
@@ -105,8 +105,10 @@ export default class Backdrop extends Vue {
     }
 
     @include ui-mobile-only {
-      .ui-popup {
-        margin: 0;
+      @media (max-width: $ui-mobile-portrait - 1px) {
+        .ui-popup {
+          margin: 0;
+        }
       }
     }
   }
