@@ -1,107 +1,109 @@
 <template>
-  <div
-    class="auth-registration"
-  >
-    <div class="auth-registration__header">
-      <UiTitle
-        size="xl"
+  <Layout class="auth-page-registration">
+    <div class="auth-page-registration__inner">
+      <div class="auth-page-registration__header">
+        <UiTitle
+          size="xl"
+          responsive
+        >
+          Регистрация
+        </UiTitle>
+
+        <UiText
+          size="m"
+          responsive
+        >
+          Пройдите регистрацию чтобы получить доступ к своей компонии
+        </UiText>
+      </div>
+
+      <form
+        @submit.prevent="onSubmit"
       >
-        Регистрация
-      </UiTitle>
+        <UiBack
+          class="auth-page-registration__back"
+          @click.native="onBack"
+        />
 
-      <UiText>
-        Пройдите регистрацию чтобы получить доступ к своей компонии
-      </UiText>
-    </div>
-
-    <form
-      @submit.prevent="onSubmit"
-    >
-      <UiBack
-        class="auth-registration__back"
-        @click.native="onBack"
-      />
-
-      <UiFormValidator
-        v-slot="{ resetFieldError, getFieldError }"
-        ref="formValidator"
-        :validations="validations"
-      >
-        <UiField
-          label="Имя"
+        <UiFormValidator
+          v-slot="{ resetFieldError, getFieldError }"
+          ref="formValidator"
+          :validations="validations"
         >
-          <UiInput
-            v-model="form.firstName"
-            left-icon="edit/edit-1"
-            name="name"
-            placeholder="Введите Имя"
-            required
-          />
-        </UiField>
+          <UiField
+            label="Имя"
+          >
+            <UiInput
+              v-model="form.firstName"
+              left-icon="edit/edit-1"
+              name="name"
+              placeholder="Введите Имя"
+              required
+            />
+          </UiField>
 
-        <UiField
-          label="Фамилия"
-        >
-          <UiInput
-            v-model="form.lastName"
-            left-icon="edit/edit-1"
-            name="surname"
-            placeholder="Введите Фамилию"
-            required
-          />
-        </UiField>
+          <UiField
+            label="Фамилия"
+          >
+            <UiInput
+              v-model="form.lastName"
+              left-icon="edit/edit-1"
+              name="surname"
+              placeholder="Введите Фамилию"
+              required
+            />
+          </UiField>
 
-        <UiField
-          label="Телефон"
-          :error="getFieldError('phone')"
-        >
-          <UiInput
-            v-model="form.phone"
-            mask="38 (###) #### ###"
-            left-icon="phone"
-            name="phone"
-            type="phone"
-            placeholder="066"
-            required
-            @input="resetFieldError('phone')"
-          />
-        </UiField>
+          <UiField
+            label="Телефон"
+            :error="getFieldError('phone')"
+          >
+            <UiInput
+              v-model="form.phone"
+              mask="38 (###) #### ###"
+              left-icon="phone"
+              name="phone"
+              type="phone"
+              placeholder="066"
+              required
+              @input="resetFieldError('phone')"
+            />
+          </UiField>
 
-        <UiField
-          label="Пароль"
-          :error="getFieldError('password')"
-        >
-          <UiInput
-            v-model="form.password"
-            left-icon="key"
-            name="password"
-            type="password"
-            placeholder="Введите пароль"
-            required
-            @input="resetFieldError('password')"
-          />
-        </UiField>
+          <UiField
+            label="Пароль"
+            :error="getFieldError('password')"
+          >
+            <UiInput
+              v-model="form.password"
+              left-icon="key"
+              name="password"
+              type="password"
+              placeholder="Введите пароль"
+              required
+              @input="resetFieldError('password')"
+            />
+          </UiField>
 
-        <div class="auth-registration__policy">
           <UiText
+            class="auth-page-registration__policy"
             size="s"
           >
             Нажимая на кнопку я соглашаюсь с <a href="#">Пользовательским соглашением</a> и <a href="#">Политикой обработки персональных данных</a>
           </UiText>
-        </div>
 
-        <div class="auth-registration__actions">
           <UiButton
+            class="auth-page-registration__button"
             type="submit"
             size="l"
             theme="blue"
           >
             Зарегистрировать
           </UiButton>
-        </div>
-      </UiFormValidator>
-    </form>
-  </div>
+        </UiFormValidator>
+      </form>
+    </div>
+  </Layout>
 </template>
 
 <script lang="ts">
@@ -112,7 +114,12 @@ import { IRegistrationUserParams } from '@/services/api'
 
 import UiFormValidator, { Validations } from '@/ui/FormValidator.vue'
 
+import Layout from '../components/Layout.vue'
+
 @Component({
+  components: {
+    Layout
+  }
 })
 export default class Home extends Vue {
   form: IRegistrationUserParams = {
@@ -204,51 +211,4 @@ export default class Home extends Vue {
 }
 </script>
 
-<style lang="scss">
-  .auth-registration {
-    width: 460px;
-
-    &__back {
-      margin-bottom: 24px;
-    }
-
-    &__policy {
-      margin-top: 16px;
-      padding: 10px 16px;
-      text-align: center;
-      background: #f6f6f6;
-      border-radius: 8px;
-
-      a {
-        color: #189eff;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-
-    &__header {
-      text-align: center;
-
-      .ui-title {
-        margin-bottom: 8px;
-        font-weight: 700;
-      }
-    }
-
-    &__actions {
-      display: flex;
-      flex-direction: column;
-      margin-top: 16px;
-    }
-
-    form {
-      margin-top: 24px;
-      padding: 24px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 0 16px rgba($ui-black-100, 0.1);
-    }
-  }
-</style>
+<style lang="scss" src="./Registration.scss"></style>

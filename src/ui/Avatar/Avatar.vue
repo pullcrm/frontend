@@ -1,13 +1,19 @@
 <template>
   <div
     class="ui-avatar"
-    :class="`_size_${size} _type_${type}`"
+    :class="[
+      `ui-avatar_size_${size}`,
+      `ui-avatar_type_${type}`
+    ]"
   >
     <div
       v-if="hasImage"
       class="ui-avatar__image"
     >
-      <img :src="image" :alt="name">
+      <img
+        :src="image"
+        :alt="name"
+      >
     </div>
 
     <div
@@ -67,82 +73,4 @@ export default class ImagePreviewCircle extends Vue {
 }
 </script>
 
-<style lang="scss">
-  .ui-avatar {
-    & > div {
-      width: 100%;
-      height: 100%;
-    }
-
-    &__image {
-      overflow: hidden;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-
-    &__letter {
-      display: flex;
-      align-items: center;
-      color: $ui-black-100;
-      background: #fff;
-      border: 1px solid #d6d6d6;
-
-      p {
-        width: 100%;
-        font-weight: 400;
-        text-align: center;
-        text-transform: uppercase;
-      }
-    }
-
-    &._type_circle {
-      .ui-avatar {
-        &__image,
-        &__letter {
-          border-radius: 50%;
-        }
-      }
-    }
-
-    &._type_rounded {
-      .ui-avatar {
-        &__image,
-        &__letter {
-          border-radius: 8px;
-        }
-      }
-    }
-
-    &._size_m {
-      @include ui-typo-14;
-
-      width: 36px;
-      height: 36px;
-    }
-
-    &._size_l {
-      @include ui-typo-16;
-
-      width: 48px;
-      height: 48px;
-    }
-
-    &._size_xl {
-      @include ui-typo-36;
-
-      width: 64px;
-      height: 64px;
-    }
-
-    &._size_xxl {
-      @include ui-typo-44;
-
-      width: 80px;
-      height: 80px;
-    }
-  }
-</style>
+<style lang="scss" src="./Avatar.scss"></style>

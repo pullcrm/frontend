@@ -147,7 +147,7 @@
       color: $ui-black-100;
     }
 
-    @media (hover: hover) {
+    @include ui-hover {
       &:hover {
         color: $ui-black-100;
       }
@@ -172,9 +172,9 @@
     }
   }
 
-  // @include ui-mobile-only {
-  //   @media (max-width: $ui-tablet - 1px) {
-  //     width: 328px;
-  //   }
-  // }
+  @include ui-mobile-only {
+    @media (max-width: $ui-tablet - 1px) {
+      width: 328px;
+    }
+  }
 }

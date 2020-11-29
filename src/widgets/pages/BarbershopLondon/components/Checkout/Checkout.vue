@@ -277,6 +277,8 @@ export default class Checkout extends Vue {
     this.workingHours = getHoursSlots(slots, {
       duration: this.procedure.duration
     })
+
+    this.$emit('update')
   }
 
   getWorkingDays () {

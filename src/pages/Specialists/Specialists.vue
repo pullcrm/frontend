@@ -1,17 +1,19 @@
 <template>
   <UiContainer
-    class="staff-page"
+    class="specialists-page"
   >
-    <div class="staff-page__header">
+    <div class="specialists-page__header">
       <UiTitle
         size="l"
+        responsive
       >
         Сотрудники
       </UiTitle>
 
       <UiButton
-        theme="blue"
         size="l"
+        theme="blue"
+        responsive
         @click.native="onSpecialist"
       >
         Добавить сотрудника
@@ -19,16 +21,17 @@
     </div>
 
     <div class="ui-grid">
-      <UserCard
-        v-for="specialist in staff"
+      <SpecialistCard
+        v-for="specialist in specialists"
         :key="`specialist-${specialist.id}`"
         :class="[
           'ui-grid-item',
-          'ui-grid-item_4',
+          'ui-grid-item_12',
+          'ui-grid-item_tablet_6',
           'ui-grid-item_laptop_3',
           'ui-grid-item_desktop_2'
         ]"
-        :user="specialist"
+        :specialist="specialist"
         @edit="onEdit(specialist)"
       />
     </div>
@@ -39,14 +42,14 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UserCard from './components/Card.vue'
+import SpecialistCard from './components/Card.vue'
 
 @Component({
   components: {
-    UserCard
+    SpecialistCard
   }
 })
-export default class Staff extends Vue {
+export default class Specialists extends Vue {
   tabActive = 'Все'
 
   readonly tableLabels = [
@@ -68,14 +71,14 @@ export default class Staff extends Vue {
     }
   ]
 
-  get staff () {
+  get specialists () {
     return this.$store.state.employee.specialists
   }
 
-  onEdit (user) {
+  onEdit (specialist) {
     this.$store.dispatch('popup/show', {
       name: 'specialist-edit',
-      props: { user }
+      props: { user: specialist }
     })
   }
 
@@ -85,4 +88,4 @@ export default class Staff extends Vue {
 }
 </script>
 
-<style lang="scss" src="./Staff.scss"></style>
+<style lang="scss" src="./Specialists.scss"></style>

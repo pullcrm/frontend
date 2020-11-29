@@ -19,7 +19,7 @@
           class="base-layout-header-profile__avatar"
           :image="avatar"
           :name="profile.firstName"
-          size="m"
+          size="s"
         />
       </div>
     </template>

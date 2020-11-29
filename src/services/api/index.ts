@@ -119,13 +119,15 @@ export interface ICompanyInfo {
 }
 
 export interface IAppointmentCreateParams {
-  employeeId: number
-  fullName?: string
-  phone?: string
-  procedures: number[]
   date: string
-  startTime: string
   total: number
+  phone?: string
+  status: string
+  isQueue?: boolean
+  fullName?: string
+  startTime: string
+  employeeId: number
+  procedures: number[]
   description: string
 }
 

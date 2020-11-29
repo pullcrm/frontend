@@ -36,22 +36,27 @@
   }
 }
 
-@for $i from 0 through 12 {
-  .ui-grid-item_tablet_#{$i} {
-    @include ui-grid-item-span($i);
+/*
+  Utility class for screens > mobile portrait
+*/
+@media (min-width: $ui-mobile-portrait) {
+  @for $i from 0 through 12 {
+    .ui-grid-item_mobile-portrait_#{$i} {
+      @include ui-grid-item-span($i);
+    }
   }
 }
 
 /*
-  Utility class for screens > mobile portrait
+  Utility class for screens > tablet portrait
 */
-// @media (min-width: $ui-mobile-portrait) {
-//   @for $i from 0 through 12 {
-//     .ui-grid-item_mobile-portrait_#{$i} {
-//       @include ui-grid-item-span($i, $gap: 16px);
-//     }
-//   }
-// }
+@media (min-width: $ui-tablet) {
+  @for $i from 0 through 12 {
+    .ui-grid-item_tablet_#{$i} {
+      @include ui-grid-item-span($i);
+    }
+  }
+}
 
 /*
   Utility class for screens > laptop
@@ -78,7 +83,7 @@
 /*
   Utility class for screens > desktop-large
 */
-@media (min-width: $ui-desktop) {
+@media (min-width: $ui-desktop-large) {
   @for $i from 0 through 12 {
     .ui-grid-item_desktop-large_#{$i} {
       @include ui-grid-item-span($i);

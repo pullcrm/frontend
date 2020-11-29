@@ -20,8 +20,8 @@ export default class UiToastText extends Vue {
   .ui-toast-text {
     @include ui-typo-16;
 
-    // @include ui-mobile-only {
-    //   @include ui-typo-14;
-    // }
+    @include ui-mobile-only {
+      @include ui-typo-14;
+    }
   }
 </style>

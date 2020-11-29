@@ -1,0 +1,16 @@
+@mixin ui-title_size_24 {
+  @include ui-typo-24;
+
+  .ui-title__prepend {
+    margin-right: 8px;
+  }
+
+  .ui-title__append {
+    margin-left: 8px;
+  }
+
+  .ui-icon_size_inherit {
+    width: 28px;
+    height: 28px;
+  }
+}

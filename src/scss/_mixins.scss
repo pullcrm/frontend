@@ -56,6 +56,15 @@
   }
 }
 
+@mixin ellipsis($lines) {
+  display: -webkit-box;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis; /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+}
+
 @mixin hide-scrollbar () {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -63,5 +72,25 @@
 
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@mixin ui-mobile-only {
+  @media (max-width: $ui-tablet - 1px) {
+    @content;
+  }
+}
+
+@mixin ui-desktop-only {
+  @media (min-width: $ui-tablet) {
+    @content;
+  }
+}
+
+@mixin ui-hover {
+  @include ui-desktop-only {
+    @media (hover: hover) {
+      @content;
+    }
   }
 }

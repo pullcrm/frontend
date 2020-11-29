@@ -1,6 +1,6 @@
 .ui-carousel {
-  --ui-carousel-item-gap: 24px;
   --ui-carousel-item-count: 6;
+  --ui-carousel-item-gap: 24px;
   --ui-carousel-item-width: calc(100% / var(--ui-carousel-item-count));
 
   position: relative;
@@ -53,10 +53,12 @@
       box-shadow var(--ui-transition-hover);
     user-select: none;
 
-    &:hover {
-      @include ui-shadow-4($ui-black-40);
+    @include ui-hover {
+      &:hover {
+        @include ui-shadow-4($ui-black-40);
 
-      background-color: $ui-black-40;
+        background-color: $ui-black-40;
+      }
     }
 
     &:active {
@@ -69,23 +71,25 @@
     }
   }
 
-  @media (min-width: $ui-laptop) {
-    &__next,
-    &__prev {
-      width: 40px;
-      height: 40px;
-    }
-  }
-
-  @media (min-width: $ui-desktop) {
-    &__next {
-      right: 0;
-      transform: translate(100%, -50%);
+  @include ui-desktop-only {
+    @media (min-width: $ui-laptop) {
+      &__next,
+      &__prev {
+        width: 40px;
+        height: 40px;
+      }
     }
 
-    &__prev {
-      left: 0;
-      transform: translate(-100%, -50%);
+    @media (min-width: $ui-desktop) {
+      &__next {
+        right: 0;
+        transform: translate(100%, -50%);
+      }
+
+      &__prev {
+        left: 0;
+        transform: translate(-100%, -50%);
+      }
     }
   }
 }

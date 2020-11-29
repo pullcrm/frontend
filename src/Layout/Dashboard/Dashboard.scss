@@ -1,0 +1,39 @@
+.dashboard-layout {
+  min-height: 100vh;
+  padding-left: 64px;
+  background: $body-color;
+
+  &._has-sidebar {
+    padding-left: calc(#{$SCHEDULE_APPOINTMENT_WIDTH} + #{64px + 26px});
+  }
+
+  &__nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 11;
+    display: flex;
+    background: #fff;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 0;
+  }
+
+  @media (max-width: $ui-laptop - 1px) {
+    padding-bottom: 80px;
+    padding-left: 0;
+
+    &._has-sidebar {
+      padding-left: 0;
+    }
+
+    &__nav {
+      top: initial;
+      right: 0;
+    }
+  }
+}

@@ -9,7 +9,7 @@
       class="schedule-calendar-header-specialist__avatar"
       :image="avatar"
       :name="specialist.firstName"
-      size="m"
+      size="s"
       type="rounded"
     />
 

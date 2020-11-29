@@ -9,7 +9,7 @@
       class="ui-popup__back"
       data-test="ui-popup-back"
       @click.native="$emit('back')"
-    />
+    /> -->
 
     <a
       v-if="closable"
@@ -23,7 +23,7 @@
         name="close/close-1"
         size="s"
       />
-    </a> -->
+    </a>
 
     <slot />
   </div>
@@ -63,6 +63,8 @@ export default {
   .ui-popup {
     @include ui-shadow-16;
 
+    --ui-popup-padding: 24px;
+
     position: relative;
     z-index: 101;
     display: inline-block;
@@ -81,8 +83,8 @@ export default {
 
     &__close {
       position: absolute;
-      top: 32px;
-      right: 32px;
+      top: 16px;
+      right: 16px;
       z-index: 5;
 
       /* Extend click area */
@@ -95,7 +97,15 @@ export default {
         content: '';
       }
 
-      &:hover {
+      @include ui-hover {
+        &:hover {
+          .ui-icon {
+            color: $ui-black-100;
+          }
+        }
+      }
+
+      &:active {
         .ui-icon {
           color: $ui-black-100;
         }
@@ -112,12 +122,28 @@ export default {
       }
     }
 
-    @media (max-width: $ui-desktop - 1px) {
-      width: 456px;
+    @include ui-desktop-only {
+      @media (max-width: $ui-desktop - 1px) {
+        width: 456px;
+      }
+
+      @media (max-width: $ui-laptop - 1px) {
+        width: 504px;
+      }
     }
 
-    @media (max-width: $ui-laptop - 1px) {
-      width: 504px;
+    @include ui-mobile-only {
+      width: 416px;
+
+      @media (max-width: $ui-mobile-portrait - 1px) {
+        --ui-popup-padding: 16px;
+
+        width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+        padding: 16px;
+        border-radius: 0;
+      }
     }
   }
 

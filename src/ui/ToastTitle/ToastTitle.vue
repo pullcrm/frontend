@@ -22,8 +22,8 @@ export default class UiToastTitle extends Vue {
 
     font-weight: bold;
 
-    // @include ui-mobile-only {
-    //   @include ui-typo-16;
-    // }
+    @include ui-mobile-only {
+      @include ui-typo-16;
+    }
   }
 </style>

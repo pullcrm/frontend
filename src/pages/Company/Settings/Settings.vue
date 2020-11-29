@@ -3,16 +3,20 @@
     class="company-settings-page"
   >
     <UiContainer>
-      <UiPanel>
+      <UiPanel
+        responsive
+      >
         <UiTitle
           class="company-settings-page__title"
           size="l"
+          responsive
         >
           Настройки компании
         </UiTitle>
 
         <FileUpload
           :image="logo"
+          responsive
           @input="onAvatar"
         >
           <template #default="{ url }">
@@ -20,6 +24,7 @@
               :image="url"
               :name="company.name"
               size="xl"
+              responsive
             />
           </template>
         </FileUpload>
@@ -36,6 +41,7 @@
 
         <UiButton
           theme="blue"
+          responsive
           @click.native="save"
         >
           Сохранить

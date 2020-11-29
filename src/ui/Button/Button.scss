@@ -99,6 +99,16 @@
       display: block;
     }
   }
+
+  @include ui-mobile-only {
+    &_responsive {
+      &.ui-button {
+        &_size_l {
+          @include ui-button_size_32;
+        }
+      }
+    }
+  }
 }
 
 @import 'Button_theme_primary';

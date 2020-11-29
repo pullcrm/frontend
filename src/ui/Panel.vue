@@ -75,12 +75,30 @@ export default class Panel extends Vue {
       padding: 32px;
     }
 
-    @media (hover: hover) {
+    @include ui-hover {
       &_clickable {
         transition: box-shadow var(--ui-transition-hover);
 
         &:hover {
           @include ui-shadow-16;
+        }
+      }
+    }
+
+    @include ui-mobile-only {
+      &_responsive {
+        &.ui-panel {
+          &_size_s {
+            --ui-panel-padding: 8px;
+
+            padding: 8px;
+          }
+
+          &_size_m {
+            --ui-panel-padding: 16px;
+
+            padding: 16px;
+          }
         }
       }
     }
