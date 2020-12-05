@@ -59,7 +59,7 @@ export default class Wrap extends Vue {
 
     return {
       gridRow: `${this.duration.from} / ${this.duration.to}`,
-      gridColumn: `employee-${this.employee.id}-start / employee-${this.employee.id}-end`
+      gridColumn: 'start / end'
     }
   }
 
@@ -107,7 +107,7 @@ export default class Wrap extends Vue {
   //   const { employeeId } = this.$store.state.drugAndDrop.dragZone
   //   const { from } = this.$store.getters['drugAndDrop/dropTimeObject']
 
-  //   this.$store.commit('calendar/SET_LOAD', true)
+  //   this.$store.commit('calendar/SET_LOADING', true)
 
   //   await this.$api.appointments.update(this.appointment.id, {
   //     ...form,

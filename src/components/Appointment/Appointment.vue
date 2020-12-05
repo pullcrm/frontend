@@ -13,7 +13,7 @@
         `_size_${sizeName}`,
         {'_is-active': isActive}
       ]"
-      @dblclick="$emit('open', appointment)"
+      @dblclick="open"
       @click="isActive = true"
     >
       <div class="appointment__header">
@@ -25,7 +25,7 @@
 
         <div
           class="appointment__menu"
-          @click="$emit('open', appointment)"
+          @click="open"
         >
           <UiIcon
             size="xs"
@@ -141,6 +141,13 @@ export default class Appointment extends Vue {
     })
 
     return `${from} - ${to}`
+  }
+
+  open () {
+    this.$store.dispatch('popup/show', {
+      name: 'appointment-edit',
+      props: { appointment: this.appointment }
+    })
   }
 
   onOutsideClick () {

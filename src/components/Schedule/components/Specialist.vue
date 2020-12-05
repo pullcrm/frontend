@@ -1,28 +1,28 @@
 <template>
   <div
-    class="schedule-calendar-header-specialist"
+    class="schedule-column-specialist"
     :class="[
       `_status_${status}`
     ]"
   >
     <UiAvatar
-      class="schedule-calendar-header-specialist__avatar"
+      class="schedule-column-specialist__avatar"
       :image="avatar"
       :name="specialist.firstName"
       size="s"
       type="rounded"
     />
 
-    <div class="schedule-calendar-header-specialist__info">
+    <div class="schedule-column-specialist__info">
       <UiText
-        class="schedule-calendar-header-specialist__name"
+        class="schedule-column-specialist__name"
         size="s"
       >
         {{ specialist.firstName }} {{ specialist.lastName }}
       </UiText>
 
       <UiText
-        class="schedule-calendar-header-specialist__total"
+        class="schedule-column-specialist__total"
         size="s"
       >
         {{ appointmentsCount }}
@@ -34,7 +34,7 @@
 
     <UiDropdownMenu
       ref="dropdownMenu"
-      placement="bottom-center"
+      placement="bottom-right"
     >
       <template #inner="{ open, close, isOpened }">
         <UiIcon
@@ -50,16 +50,16 @@
           left-icon="edit/edit-1"
           @click.native="open"
         >
-          Редактировать информацию
+          Редактировать
         </UiText>
 
         <UiText
           v-if="isClosedDay === false"
           size="m"
           left-icon="slash"
-          @click.native="closeDay"
+          @click.native="onCloseDay"
         >
-          Закрыть запись на этот день
+          Закрыть запись <br> на этот день
         </UiText>
       </UiDropdownGroup>
     </UiDropdownMenu>
@@ -73,8 +73,6 @@ import Component from 'vue-class-component'
 import UiDropdownMenu from '@/ui/DropdownMenu/DropdownMenu.vue'
 
 import { START_TIME_OF_DAY, END_TIME_OF_DAY } from '@/constants'
-
-import { isCloseDay } from '@/logics/time-offs'
 
 import { setTime } from '@/utils/date-time'
 
@@ -93,20 +91,16 @@ export default class Specialist extends Vue {
     dropdownMenu: UiDropdownMenu
   }
 
-  get timeOffs () {
-    return this.$store.state.calendar.timeOffs
-  }
-
-  get isClosedDay () {
-    return this.timeOffs.some(timeOff => isCloseDay(timeOff) && timeOff.employeeId === this.specialist.id)
+  get status () {
+    return this.specialist.approaches.status
   }
 
   get avatar () {
     return this.specialist.avatar?.path
   }
 
-  get status () {
-    return this.specialist.approaches.status
+  get isClosedDay () {
+    return this.$store.getters['calendar/isClosedDay'](this.specialist.id)
   }
 
   get appointments () {
@@ -124,14 +118,7 @@ export default class Specialist extends Vue {
       .reduce((sum, { total }) => (sum + total), 0)
   }
 
-  open () {
-    this.$store.dispatch('popup/show', {
-      name: 'specialist-edit',
-      props: { user: this.specialist }
-    })
-  }
-
-  async closeDay () {
+  async onCloseDay () {
     const date = new Date(this.$store.state.calendar.date)
 
     const endDateTime = setTime(date, END_TIME_OF_DAY).format('MM.DD.YY HH:mm')
@@ -147,17 +134,23 @@ export default class Specialist extends Vue {
 
     await this.$store.dispatch('calendar/fetchTimeOffs')
   }
+
+  open () {
+    this.$store.dispatch('popup/show', {
+      name: 'specialist-edit',
+      props: { user: this.specialist }
+    })
+  }
 }
 </script>
 
 <style lang="scss">
-  .schedule-calendar-header-specialist {
+  .schedule-column-specialist {
     display: flex;
     align-items: center;
-    width: $SCHEDULE_APPOINTMENT_WIDTH;
+    width: 100%;
     padding: 16px 8px 16px 16px;
     background: $ui-white;
-    border-right: 1px solid #e0e0e0;
 
     &._status_DASHBOARD {
       background: #fef0f0;

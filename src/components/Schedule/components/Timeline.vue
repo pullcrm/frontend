@@ -1,9 +1,9 @@
 <template>
-  <div class="schedule-calendar-timeline">
+  <div class="schedule-timeline">
     <div
       v-for="time in timeHours"
       :key="time"
-      class="schedule-calendar-timeline__item"
+      class="schedule-timeline__item"
     >
       <UiText
         size="s"
@@ -33,7 +33,7 @@ export default class Timeline extends Vue {
 </script>
 
 <style lang="scss">
-  .schedule-calendar-timeline {
+  .schedule-timeline {
     &__item {
       display: flex;
       align-items: center;

@@ -1,7 +1,7 @@
 .dashboard-layout {
   min-height: 100vh;
   padding-left: 64px;
-  background: $body-color;
+  background: $ui-gray-brand;
 
   &._has-sidebar {
     padding-left: calc(#{$SCHEDULE_APPOINTMENT_WIDTH} + #{64px + 26px});

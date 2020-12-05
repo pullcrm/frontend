@@ -1,7 +1,6 @@
 import { formatDate } from '@/utils/date-time'
 
-import { WORKING_HOURS } from '@/constants/generated'
-import { normalizeTimeOffs } from '@/logics/time-offs'
+import { normalizeTimeOffs, isCloseDay } from '@/logics/time-offs'
 
 function createState () {
   return {
@@ -10,13 +9,13 @@ function createState () {
     timeOffs: [],
     appointments: [],
 
-    isLoad: false
+    isLoading: false
   }
 }
 
 const actions = {
   async fetch ({ dispatch, commit }) {
-    commit('SET_LOAD', true)
+    commit('SET_LOADING', true)
 
     await Promise.all([
       dispatch('fetchQueue'),
@@ -24,7 +23,7 @@ const actions = {
       dispatch('fetchAppointments')
     ])
 
-    commit('SET_LOAD', false)
+    commit('SET_LOADING', false)
   },
 
   async fetchAppointments ({ state, commit }) {
@@ -73,28 +72,21 @@ const mutations = {
     state.date = date
   },
 
-  SET_LOAD (state, load) {
-    state.isLoad = load
+  SET_LOADING (state, loading) {
+    state.isLoading = loading
   }
 }
 
 const getters = {
-  gridTiles (_state, _localGetters, rootState) {
-    return rootState.employee.specialists.reduce((result, { id }) => {
-      return [...result, ...WORKING_HOURS.map(time => ({
-        employeeId: id,
-        time: time
-      }))]
-    }, [])
-  },
-
   normalizeTimeOffs (state) {
     return normalizeTimeOffs(state.timeOffs)
   },
 
-  appointmentById (state) {
-    return (id) => {
-      return state.appointments.find(item => item.id === id)
+  isClosedDay (state) {
+    return (specialistId) => {
+      return state.timeOffs.some(timeOff => {
+        return isCloseDay(timeOff) && timeOff.employeeId === specialistId
+      })
     }
   }
 }

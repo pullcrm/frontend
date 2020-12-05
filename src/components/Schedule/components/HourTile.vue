@@ -1,7 +1,10 @@
 <template>
   <div
-    class="schedule-calendar-tile"
-    :class="{'_active': isOpened}"
+    class="schedule-hour-tile"
+    :class="[
+      {'_active': isOpened},
+      {'_is-minute': isMinute}
+    ]"
     :style="gridArea"
   >
     <!-- @dragenter="dropZoneEnterHandler"
@@ -9,25 +12,25 @@
       @dragleave="dropZoneLeaveHandler"
       @drop.prevent="dropZoneDropHandler" -->
     <UiDropdownMenu
-      class="schedule-calendar-tile-popover"
+      class="schedule-hour-tile-popover"
       placement="top-center"
       @open="onOpen"
     >
       <template #inner="{ open, close }">
         <div
-          class="schedule-calendar-tile-popover"
+          class="schedule-hour-tile-popover"
           @click="isOpened ? close() : open()"
-          @dblclick="$emit('appointment', tile)"
+          @dblclick="addAppointment"
         />
       </template>
 
       <UiDropdownGroup
-        :name="`Начало: ${tile.time}`"
+        :name="`Начало: ${hour}`"
       >
         <UiText
           size="m"
           left-icon="plus/circle"
-          @click.native="$emit('appointment', tile)"
+          @click.native="addAppointment"
         >
           Добавить запись
         </UiText>
@@ -35,7 +38,7 @@
         <UiText
           size="m"
           left-icon="slash"
-          @click.native="$emit('time-off', tile)"
+          @click.native="addTimeOff"
         >
           Закрыть запись
         </UiText>
@@ -52,34 +55,58 @@ import { slugFromTime } from '@/utils/time'
 
 @Component({
   props: {
-    tile: {
-      type: Object,
+    hour: {
+      type: String,
+      required: true
+    },
+
+    specialistId: {
+      type: Number,
       required: true
     }
   }
 })
-export default class Tile extends Vue {
-  readonly tile
+export default class HourTile extends Vue {
+  readonly hour: string
+  readonly specialistId: number
 
   isOpened = false
 
-  get row () {
-    return slugFromTime(this.tile.time)
-  }
-
-  get column () {
-    return `employee-${this.tile.employeeId}`
+  get isMinute () {
+    return Number(this.hour.split(':')[1]) % 2 === 0
   }
 
   get gridArea () {
+    const row = slugFromTime(this.hour)
+
     return {
-      gridColumn: `${this.column}-start / ${this.column}-end`,
-      gridRow: `${this.row}-start / ${this.row}-end`
+      gridRow: `${row}-start / ${row}-end`,
+      gridColumn: 'start / end'
     }
   }
 
   onOpen (opened) {
     this.isOpened = opened
+  }
+
+  addAppointment () {
+    this.$store.dispatch('popup/show', {
+      name: 'appointment-new',
+      props: {
+        time: this.hour,
+        employeeId: this.specialistId
+      }
+    })
+  }
+
+  addTimeOff () {
+    this.$store.dispatch('popup/show', {
+      name: 'time-off-new',
+      props: {
+        time: this.hour,
+        employeeId: this.specialistId
+      }
+    })
   }
 
   // get dropTimeObject () {
@@ -121,9 +148,22 @@ export default class Tile extends Vue {
 </script>
 
 <style lang="scss">
-  .schedule-calendar-tile {
+  .schedule-hour-tile {
     position: relative;
     z-index: 5;
+    border-bottom: 1px solid $ui-black-40;
+
+    &._is-minute {
+      border-color: #eaeaea;
+    }
+
+    &:last-child {
+      border: none;
+    }
+
+    &._active {
+      z-index: 99;
+    }
 
     &::before {
       position: absolute;
@@ -138,10 +178,6 @@ export default class Tile extends Vue {
       content: '';
     }
 
-    &._active {
-      z-index: 99;
-    }
-
     &:hover {
       &::before {
         background-image: url('https://icons.iconarchive.com/icons/icons8/ios7/512/User-Interface-Plus-icon.png');
@@ -149,7 +185,7 @@ export default class Tile extends Vue {
     }
   }
 
-  .schedule-calendar-tile-popover {
+  .schedule-hour-tile-popover {
     width: 100%;
     height: 100%;
     cursor: pointer;

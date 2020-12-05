@@ -1,11 +1,13 @@
-.schedule-calendar {
+.schedule {
   display: flex;
+
+  &__columns {
+    display: flex;
+  }
 
   &__table {
     position: relative;
-    display: flex;
     flex: 1;
-    flex-direction: column;
     overflow-x: auto;
     border: 1px solid #e0e0e0;
   }
@@ -14,18 +16,6 @@
     flex-basis: 50px;
     margin-top: 68px;
     margin-right: 12px;
-  }
-
-  &__grid {
-    display: flex;
-    flex: 1;
-  }
-
-  &__grid-placeholder {
-    flex: 1;
-    min-width: 220px;
-    background-color: $body-color;
-    background-image: url('~@/assets/svg/disabled-time-pattern.svg');
   }
 
   @media (max-width: $ui-laptop - 1px) {

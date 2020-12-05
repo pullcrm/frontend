@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="isVisible"
     class="schedule-loader"
   >
     <UiIconLoader size="xl" />
@@ -12,11 +11,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 @Component({})
-export default class Loader extends Vue {
-  get isVisible () {
-    return this.$store.state.calendar.isLoad
-  }
-}
+export default class Loader extends Vue {}
 </script>
 
 <style lang="scss">
