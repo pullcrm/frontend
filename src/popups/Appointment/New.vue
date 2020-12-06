@@ -195,7 +195,7 @@ export default class AppointmentNew extends Vue {
       this.hasSMSAuthorize && this.$store.state.sms.settings.remindAfterCreation
     ),
     smsRemindNotify: (
-      this.hasSMSAuthorize && this.$store.state.sms.settings.remindBeforeTime
+      this.hasSMSAuthorize && this.$store.state.sms.settings.remindBefore
     )
   }
 

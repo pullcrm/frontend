@@ -1,5 +1,3 @@
-import { atob } from 'isomorphic-base64'
-
 function createState () {
   return {
     balance: null,
@@ -11,73 +9,36 @@ function createState () {
 
 const actions = {
   async updateSettings ({ state }) {
-    const { beforeTime, remindBeforeTime, remindAfterCreation } = state.settings
+    // TODO: Error
+    const { remindBeforeInMinutes, remindBefore, remindAfterCreation } = state.settings
 
-    await this.$api.smsc.update({
-      beforeTime,
-      remindBeforeTime,
-      remindAfterCreation
+    await this.$api.sms.settingUpdate({
+      remindBefore,
+      remindAfterCreation,
+      remindBeforeInMinutes
     })
   },
 
-  async balance ({ state, commit }) {
-    const { login, password } = state.settings
-
-    const { balance } = await this.$api.smsc.balance({
-      login,
-      password
-    })
+  async balance ({ commit }) {
+    const { balance } = await this.$api.sms.balance()
 
     commit('SET_BALANCE', Number(balance))
-  },
-
-  async send ({ state }, { phone, message, id, time }) {
-    try {
-      const { login, password } = state.settings
-
-      await this.$api.smsc.send({
-        id,
-        time,
-        phone,
-        login,
-        message,
-        password
-      })
-
-      return true
-    } catch {
-      return false
-    }
-  },
-
-  async remove ({ state }, { id, phone }) {
-    const { login, password } = state.settings
-
-    return this.$api.smsc.remove({
-      id,
-      phone,
-      login,
-      password
-    })
   }
 }
 
 const mutations = {
   SET_SETTINGS (state, payload) {
     const {
-      token,
-      beforeTime,
-      remindBeforeTime,
-      remindAfterCreation
+      login,
+      remindBefore,
+      remindAfterCreation,
+      remindBeforeInMinutes
     } = payload
-
-    const [login, password] = atob(token).split(':')
 
     state.settings = {
       login,
-      password,
-      beforeTime,
-      remindBeforeTime,
+      remindBeforeInMinutes: remindBeforeInMinutes,
+      remindBefore,
       remindAfterCreation
     }
   },

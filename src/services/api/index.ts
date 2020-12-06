@@ -129,6 +129,8 @@ export interface IAppointmentCreateParams {
   employeeId: number
   procedures: number[]
   description: string
+  smsRemindNotify: boolean
+  smsCreationNotify: boolean
 }
 
 export interface IRestoreUserParams {
@@ -159,6 +161,12 @@ export interface ITimeOffCreateParams {
 
 export interface IAppointmentAllParams {
   date: string
+}
+
+export interface ISmsCreateParams {
+  token?: string
+  login: string
+  password: string
 }
 
 export const factory = (send) => ({
@@ -257,10 +265,6 @@ export const factory = (send) => ({
       return send(`appointments/${id}`, params, 'PUT')
     },
 
-    sms (id: number, params: any) : Promise<any> {
-      return send(`appointments/${id}/sms`, params, 'PUT')
-    },
-
     remove (id: number) : Promise<any> {
       return send(`appointments/${id}`, {}, 'DELETE')
     },
@@ -306,28 +310,6 @@ export const factory = (send) => ({
     }
   },
 
-  smsc: {
-    balance (params: any) : Promise<any> {
-      return send('smsc/balance', params)
-    },
-
-    send (params: ISmscSendParams) : Promise<any> {
-      return send('smsc/send', params)
-    },
-
-    remove (params: any) : Promise<any> {
-      return send('smsc/remove', params)
-    },
-
-    token (params: any) : Promise<any> {
-      return send('companies/my/sms', params)
-    },
-
-    update (params: any) : Promise<any> {
-      return send('companies/my/sms', params, 'PUT')
-    }
-  },
-
   timeOff: {
     all (params: ITimeOffGetAllParams): Promise<any> {
       return send('timeoff', params, 'GET')
@@ -365,6 +347,20 @@ export const factory = (send) => ({
 
     companyById (id: number): Promise<any> {
       return send(`public/companies/${id}`, null, 'GET')
+    }
+  },
+
+  sms: {
+    settingCreate (params: ISmsCreateParams) : Promise<any> {
+      return send('sms', params)
+    },
+
+    settingUpdate (params: any) : Promise<any> {
+      return send('sms', params, 'PUT')
+    },
+
+    balance () : Promise<any> {
+      return send('sms/balance', null, 'GET')
     }
   }
 })
