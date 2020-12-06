@@ -113,10 +113,12 @@ export default class HourTile extends Vue {
       transition: $ui-transition;
     }
 
-    &:hover {
-      .schedule-hour-tile {
-        &__icon {
-          opacity: 1;
+    @include ui-hover {
+      &:hover {
+        .schedule-hour-tile {
+          &__icon {
+            opacity: 1;
+          }
         }
       }
     }
