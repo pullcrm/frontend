@@ -1,47 +1,19 @@
 <template>
-  <UiDropdownMenu
-    size="s"
-    placement="bottom-right"
-  >
-    <template #inner="{ open, close, isOpened }">
-      <div
-        class="base-layout-header-profile"
-        @click="isOpened ? close() : open()"
-      >
-        <div class="base-layout-header-profile__info">
-          Привет,
-          <div class="base-layout-header-profile__name">
-            {{ profile.firstName }}
-          </div>
-        </div>
-
-        <UiAvatar
-          class="base-layout-header-profile__avatar"
-          :image="avatar"
-          :name="profile.firstName"
-          size="s"
-        />
+  <div class="base-layout-header-profile">
+    <div class="base-layout-header-profile__info">
+      Привет,
+      <div class="base-layout-header-profile__name">
+        {{ profile.firstName }}
       </div>
-    </template>
+    </div>
 
-    <UiDropdownGroup>
-      <!-- <UiText
-        size="m"
-        left-icon="person/person"
-      >
-        Профиль
-      </UiText> -->
-
-      <UiText
-        class="base-layout-header-profile__logout"
-        size="m"
-        left-icon="log/out"
-        @click.native="logout"
-      >
-        Выйти
-      </UiText>
-    </UiDropdownGroup>
-  </UiDropdownMenu>
+    <UiAvatar
+      class="base-layout-header-profile__avatar"
+      :image="avatar"
+      :name="profile.firstName"
+      size="s"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -56,10 +28,6 @@ export default class Profile extends Vue {
 
   get avatar () {
     return this.profile.avatar?.path
-  }
-
-  logout () {
-    this.$store.dispatch('auth/logout')
   }
 }
 </script>
@@ -86,20 +54,6 @@ export default class Profile extends Vue {
 
       color: $ui-black-100;
       font-weight: bold;
-    }
-
-    &__menu {
-      .ui-text {
-        cursor: pointer;
-
-        &:not(:last-child) {
-          margin-bottom: 8px;
-        }
-      }
-    }
-
-    &__logout {
-      color: $ui-red-danger;
     }
   }
 </style>

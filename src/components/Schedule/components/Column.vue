@@ -26,10 +26,17 @@
         :key="`hour-tile-${index}`"
         :hour="hour"
         :specialist-id="specialist.id"
+        @popper="popperHourTileToggle"
+        @dblclick.native="addAppointment(hour)"
       />
 
       <!-- <DropPlaceholder /> -->
     </div>
+
+    <HourTilePopper
+      ref="hourTilePopper"
+      :specialist="specialist"
+    />
   </div>
 </template>
 
@@ -47,6 +54,7 @@ import Appointment from '@/components/Appointment/Appointment.vue'
 import TimeOff from './TimeOff.vue'
 import HourTile from './HourTile.vue'
 import Specialist from './Specialist.vue'
+import HourTilePopper from './HourTilePopper.vue'
 import DropPlaceholder from './DropPlaceholder.vue'
 
 @Component({
@@ -72,6 +80,7 @@ import DropPlaceholder from './DropPlaceholder.vue'
     HourTile,
     Specialist,
     Appointment,
+    HourTilePopper,
     DropPlaceholder
   }
 })
@@ -80,6 +89,10 @@ export default class ScheduleColumn extends Vue {
   readonly timeOffs
   readonly specialist
   readonly appointments
+
+  $refs: {
+    hourTilePopper: HourTilePopper
+  }
 
   get hours () {
     return WORKING_HOURS
@@ -95,6 +108,28 @@ export default class ScheduleColumn extends Vue {
       gridTemplateRows: this.gridTemplateRows,
       height: `${this.hourSlugs.length * SCHEDULE_APPOINTMENT_HEIGHT}px`
     }
+  }
+
+  async popperHourTileToggle ($element, hour) {
+    if (this.$refs.hourTilePopper.hour !== hour) {
+      await this.$refs.hourTilePopper.close()
+    }
+
+    const reference = $element as HTMLElement
+
+    this.$refs.hourTilePopper.hour = hour
+
+    this.$refs.hourTilePopper.toggle(reference)
+  }
+
+  addAppointment (time) {
+    this.$store.dispatch('popup/show', {
+      name: 'appointment-new',
+      props: {
+        time,
+        employeeId: this.specialist.id
+      }
+    })
   }
 }
 </script>

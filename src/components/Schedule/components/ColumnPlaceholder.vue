@@ -30,8 +30,8 @@ export default class ScheduleColumnPlaceholder extends Vue {
   .schedule-column-placeholder {
     display: flex;
     flex-direction: column;
+    width: 100%;
     min-width: $SCHEDULE_APPOINTMENT_WIDTH;
-    max-width: $SCHEDULE_APPOINTMENT_WIDTH;
 
     &__add-more {
       @include ui-shadow-4;

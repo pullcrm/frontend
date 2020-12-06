@@ -2,13 +2,6 @@
   <div
     class="ui-dropdown-group"
   >
-    <div
-      v-if="name"
-      class="ui-dropdown-group__name"
-    >
-      {{ name }}
-    </div>
-
     <slot />
   </div>
 </template>
@@ -17,14 +10,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-@Component({
-  props: {
-    name: {
-      type: String,
-      default: null
-    }
-  }
-})
+@Component({})
 export default class DropdownGroup extends Vue {
 
 }
@@ -32,15 +18,19 @@ export default class DropdownGroup extends Vue {
 
 <style lang="scss">
   .ui-dropdown-group {
-    &__name {
-      @include ui-typo-12;
+    max-width: 200px;
+    padding: 12px 0;
 
+    .ui-dropdown-list {
       margin-bottom: 8px;
-      color: $ui-black-80;
-    }
+      padding-bottom: 8px;
+      border-bottom: 1px solid $ui-black-40;
 
-    .ui-text {
-      cursor: pointer;
+      &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
     }
   }
 </style>

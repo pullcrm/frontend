@@ -32,37 +32,17 @@
       </UiText>
     </div>
 
-    <UiDropdownMenu
-      ref="dropdownMenu"
-      placement="bottom-right"
-    >
-      <template #inner="{ open, close, isOpened }">
-        <UiIcon
-          size="s"
-          name="more/vertical"
-          @click.native="isOpened ? close() : open()"
-        />
-      </template>
+    <UiIcon
+      class="schedule-column-specialist__icon"
+      size="s"
+      name="more/vertical"
+      @click.native="popperMenuOpen"
+    />
 
-      <UiDropdownGroup>
-        <UiText
-          size="m"
-          left-icon="edit/edit-1"
-          @click.native="open"
-        >
-          Редактировать
-        </UiText>
-
-        <UiText
-          v-if="isClosedDay === false"
-          size="m"
-          left-icon="slash"
-          @click.native="onCloseDay"
-        >
-          Закрыть запись <br> на этот день
-        </UiText>
-      </UiDropdownGroup>
-    </UiDropdownMenu>
+    <SpecialistPopper
+      ref="specialistPopper"
+      :specialist="specialist"
+    />
   </div>
 </template>
 
@@ -70,11 +50,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiDropdownMenu from '@/ui/DropdownMenu/DropdownMenu.vue'
-
-import { START_TIME_OF_DAY, END_TIME_OF_DAY } from '@/constants'
-
-import { setTime } from '@/utils/date-time'
+import SpecialistPopper from './SpecialistPopper.vue'
 
 @Component({
   props: {
@@ -82,13 +58,17 @@ import { setTime } from '@/utils/date-time'
       type: Object,
       required: true
     }
+  },
+
+  components: {
+    SpecialistPopper
   }
 })
 export default class Specialist extends Vue {
   readonly specialist
 
   $refs: {
-    dropdownMenu: UiDropdownMenu
+    specialistPopper: SpecialistPopper
   }
 
   get status () {
@@ -97,10 +77,6 @@ export default class Specialist extends Vue {
 
   get avatar () {
     return this.specialist.avatar?.path
-  }
-
-  get isClosedDay () {
-    return this.$store.getters['calendar/isClosedDay'](this.specialist.id)
   }
 
   get appointments () {
@@ -118,28 +94,10 @@ export default class Specialist extends Vue {
       .reduce((sum, { total }) => (sum + total), 0)
   }
 
-  async onCloseDay () {
-    const date = new Date(this.$store.state.calendar.date)
+  popperMenuOpen () {
+    const reference = this.$el.querySelector('.schedule-column-specialist__icon') as HTMLElement
 
-    const endDateTime = setTime(date, END_TIME_OF_DAY).format('MM.DD.YY HH:mm')
-    const startDateTime = setTime(date, START_TIME_OF_DAY).format('MM.DD.YY HH:mm')
-
-    await this.$api.timeOff.create({
-      employeeId: this.specialist.id,
-      endDateTime,
-      startDateTime
-    })
-
-    this.$refs.dropdownMenu.close()
-
-    await this.$store.dispatch('calendar/fetchTimeOffs')
-  }
-
-  open () {
-    this.$store.dispatch('popup/show', {
-      name: 'specialist-edit',
-      props: { user: this.specialist }
-    })
+    this.$refs.specialistPopper.toggle(reference)
   }
 }
 </script>
@@ -169,7 +127,7 @@ export default class Specialist extends Vue {
       margin: 0 8px;
     }
 
-    .ui-icon {
+    &__icon {
       cursor: pointer;
     }
   }
