@@ -17,7 +17,7 @@
 
     <UiPrice
       v-if="balance !== null"
-      size="xs"
+      size="s"
       responsive
     >
       ( {{ balance | price }} )

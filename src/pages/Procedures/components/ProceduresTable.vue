@@ -44,7 +44,7 @@
           align="center"
         >
           <UiPrice
-            size="s"
+            size="xs"
             responsive
           >
             {{ row.price | price }}
