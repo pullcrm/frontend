@@ -98,6 +98,8 @@ export default class BarbershopLondon extends Vue {
   }
 
   onCreated ({ date, startTime }) {
+    this.postMessage('createOrder')
+
     this.step = 4
 
     this.date = date
@@ -114,8 +116,6 @@ export default class BarbershopLondon extends Vue {
     }
 
     this.postMessage('updateHeight', payload)
-
-    this.postMessage('createOrder')
   }
 
   postMessage (event, payload = {}) {
