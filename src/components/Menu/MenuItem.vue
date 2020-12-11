@@ -7,10 +7,6 @@
       :name="icon"
       size="s"
     />
-
-    <div class="menu-item__tooltip">
-      {{ title }}
-    </div>
   </RouterLink>
 </template>
 
@@ -26,11 +22,6 @@ import Component from 'vue-class-component'
     },
 
     icon: {
-      type: String,
-      required: true
-    },
-
-    title: {
       type: String,
       required: true
     }
