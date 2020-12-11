@@ -19,10 +19,11 @@ const actions = {
     ])
   },
 
-  async update ({ dispatch }, payload) {
+  async update ({ dispatch, rootGetters }, payload) {
     const {
       id,
       phone,
+      startTime,
       smsIdentifier,
       smsRemindNotify
     } = payload
@@ -30,6 +31,15 @@ const actions = {
     const form = normalizeAppointmentParams(payload)
 
     await this.$api.appointments.update(id, form)
+
+    const {
+      startTime: oldStartTime,
+      smsIdentifier: oldSmsIdentifier
+    } = rootGetters['calendar/appointmentById'](id)
+
+    if (oldStartTime === startTime && smsRemindNotify === Boolean(oldSmsIdentifier)) {
+      return
+    }
 
     await Promise.all([
       smsIdentifier && dispatch('sms/remove', {
