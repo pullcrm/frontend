@@ -1,25 +1,4 @@
 .appointment {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: $SCHEDULE_APPOINTMENT_WIDTH;
-  padding: 8px 8px 8px 12px;
-  background: $ui-white;
-  // border-left-width: 4px;
-  // border-left-style: solid;
-  border-radius: 4px;
-  box-shadow: $shadow;
-
-  &::before {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 4px;
-    border-radius: inherit;
-    content: '';
-  }
-
   &__header {
     display: flex;
     align-items: center;
@@ -85,47 +64,5 @@
         color: $ui-black-90;
       }
     }
-  }
-
-  &.appointment_status {
-    &_IN_PROGRESS {
-      &::before {
-        background: $ui-yellow-dark;
-      }
-    }
-
-    &_COMPLETED {
-      &::before {
-        background: $ui-green-brand;
-      }
-    }
-
-    &_CANCELED {
-      &::before {
-        background: $ui-red-danger;
-      }
-    }
-  }
-
-  &._size_xs {
-    &::before {
-      width: 100%;
-    }
-
-    & > * {
-      display: none;
-    }
-  }
-
-  &._size_m {
-    .appointment__sub-title {
-      .ui-text__content {
-        display: none;
-      }
-    }
-  }
-
-  &._is-active {
-    box-shadow: 0 0 0 3px #6793ff;
   }
 }

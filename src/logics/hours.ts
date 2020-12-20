@@ -1,5 +1,3 @@
-import { WORKING_HOURS } from '@/constants/generated'
-
 import { pluralize } from '@/utils/pluralize'
 
 export const durations = getDurations()
@@ -7,8 +5,6 @@ export const durations = getDurations()
 export function getDurationName (time) {
   return durations.find(item => item.value === time)?.name
 }
-
-export const WORKING_HOURS_SLUG = WORKING_HOURS.map(time => `time-${time.replace(':', '-')}`)
 
 function getDurations () {
   const list = []

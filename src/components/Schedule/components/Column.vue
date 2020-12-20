@@ -22,7 +22,7 @@
       />
 
       <HourTile
-        v-for="(hour, index) in hours"
+        v-for="(hour, index) in workingHours"
         :key="`hour-tile-${index}`"
         :hour="hour"
         :specialist-id="specialist.id"
@@ -30,7 +30,9 @@
         @dblclick.native="addAppointment(hour)"
       />
 
-      <!-- <DropPlaceholder /> -->
+      <DropPlaceholder
+        :specialist-id="specialist.id"
+      />
     </div>
 
     <HourTilePopper
@@ -44,10 +46,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { WORKING_HOURS } from '@/constants/generated'
 import { SCHEDULE_APPOINTMENT_HEIGHT } from '@/constants'
-
-import { WORKING_HOURS_SLUG } from '@/logics/hours'
 
 import Appointment from '@/components/Appointment/Appointment.vue'
 
@@ -85,7 +84,6 @@ import DropPlaceholder from './DropPlaceholder.vue'
   }
 })
 export default class ScheduleColumn extends Vue {
-  readonly hourSlugs: string[] = WORKING_HOURS_SLUG
   readonly timeOffs
   readonly specialist
   readonly appointments
@@ -94,19 +92,23 @@ export default class ScheduleColumn extends Vue {
     hourTilePopper: HourTilePopper
   }
 
-  get hours () {
-    return WORKING_HOURS
+  get workingHours () {
+    return this.$time.workingHours
   }
 
   get gridTemplateRows () {
-    return this.hourSlugs.map(hour => `[${hour}-start] ${SCHEDULE_APPOINTMENT_HEIGHT}px [${hour}-end] 0`).join(' ')
+    return this.workingHours.map(hour => {
+      // TODO: Remove `time-` from grid name
+      hour = `time-${hour.replace(':', '-')}`
+
+      return `[${hour}-start] ${SCHEDULE_APPOINTMENT_HEIGHT}px [${hour}-end] 0`
+    }).join(' ')
   }
 
   get gridStyles () {
     return {
       gridTemplateColumns: '[start] 280px [end] 0',
       gridTemplateRows: this.gridTemplateRows,
-      height: `${this.hourSlugs.length * SCHEDULE_APPOINTMENT_HEIGHT}px`
     }
   }
 
@@ -118,7 +120,6 @@ export default class ScheduleColumn extends Vue {
     const reference = $element as HTMLElement
 
     this.$refs.hourTilePopper.hour = hour
-
     this.$refs.hourTilePopper.toggle(reference)
   }
 

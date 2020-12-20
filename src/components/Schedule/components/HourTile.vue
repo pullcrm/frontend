@@ -6,16 +6,16 @@
     ]"
     :style="gridArea"
     @click="openPoppover"
+    @drop.prevent="dropZoneDropHandler"
+    @dragover.prevent
+    @dragenter.prevent="dropZoneEnterHandler"
+    @dragleave.prevent="dropZoneLeaveHandler"
   >
     <UiIcon
       class="schedule-hour-tile__icon"
       size="xs"
       name="plus/plus"
     />
-    <!-- @dragenter="dropZoneEnterHandler"
-      @dragover="dropZoneOverHandler"
-      @dragleave="dropZoneLeaveHandler"
-      @drop.prevent="dropZoneDropHandler" -->
   </div>
 </template>
 
@@ -23,6 +23,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { TIME_STEP } from '@/constants'
+
+import { toDate } from '@/utils/date-time'
 import { slugFromTime } from '@/utils/time'
 
 @Component({
@@ -61,41 +64,51 @@ export default class HourTile extends Vue {
     this.$emit('popper', element, this.hour)
   }
 
-  // get dropTimeObject () {
-  //   return this.$store.getters['drugAndDrop/dropTimeObject']
-  // }
+  dropZoneEnterHandler () {
+    const steps = (this.$store.getters['drugAndDrop/totalDuration'] / TIME_STEP) - 1
+    const time = this.$time.shiftTimeDownBySteps(this.hour, steps)
 
-  // dropZoneEnterHandler (e) {
-  //   if (e.dataTransfer.types.includes('type/dragged-box')) {
-  //     this.$store.commit('drugAndDrop/SET_DRAG_ZONE', this.tile)
+    if (this.$store.getters['drugAndDrop/getSlotByTime'](time, this.specialistId) === false) {
+      return
+    }
 
-  //     e.preventDefault()
-  //   }
-  // }
+    this.$store.commit('drugAndDrop/SET_TIME', time)
+    this.$store.commit('drugAndDrop/SET_SPECIALIST_ID', this.specialistId)
 
-  // dropZoneOverHandler (e) {
-  //   if (e.dataTransfer.types.includes('type/dragged-box')) {
-  //     this.$store.commit('drugAndDrop/SET_DRAG_ZONE_OVER', true)
+    setTimeout(() => {
+      this.$store.commit('drugAndDrop/SET_OVERED', true)
+    }, 0)
+  }
 
-  //     e.preventDefault()
-  //   }
-  // }
+  dropZoneLeaveHandler (event) {
+    if (event.relatedTarget !== null) {
+      // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/relatedTarget
+      this.$store.commit('drugAndDrop/SET_OVERED', false)
+    }
+  }
 
-  // dropZoneLeaveHandler (e) {
-  //   if (
-  //     e.dataTransfer.types.includes('type/dragged-box') &&
-  //     e.relatedTarget !== null &&
-  //     e.currentTarget !== e.relatedTarget.closest('.drop-zone')
-  //   ) {
-  //     // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/relatedTarget
+  async dropZoneDropHandler () {
+    try {
+      this.$store.commit('calendar/SET_LOADING', true)
 
-  //     this.$store.commit('drugAndDrop/SET_DRAG_ZONE_OVER', false)
-  //   }
-  // }
+      const appointmentId = this.$store.state.drugAndDrop.appointmentId
+      const appointment = this.$store.getters['calendar/appointmentById'](appointmentId)
 
-  // dropZoneDropHandler () {
-  //   // this.$store.commit('drugAndDrop/SET_DRAG_ZONE_OVER', false)
-  // }
+      const { time: startTime, specialistId } = this.$store.state.drugAndDrop
+
+      await this.$store.dispatch('appointment/update', {
+        ...appointment,
+        date: toDate(appointment.date),
+        startTime,
+        specialistId,
+        smsRemindNotify: Boolean(appointment.smsIdentifier)
+      })
+
+      await this.$store.dispatch('calendar/fetch')
+    } finally {
+      this.$store.commit('calendar/SET_LOADING', false)
+    }
+  }
 }
 </script>
 

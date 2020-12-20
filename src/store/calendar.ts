@@ -78,6 +78,19 @@ const mutations = {
 }
 
 const getters = {
+  appointmentsDict (state) {
+    return state.appointments.reduce((dict, appointment) => {
+      return {
+        ...dict,
+        [appointment.id]: appointment
+      }
+    }, {} as Record<number, any>)
+  },
+
+  appointmentById: (_state, localGetters) => (appointmentId: number) => {
+    return localGetters.appointmentsDict[appointmentId]
+  },
+
   normalizeTimeOffs (state) {
     return normalizeTimeOffs(state.timeOffs)
   },

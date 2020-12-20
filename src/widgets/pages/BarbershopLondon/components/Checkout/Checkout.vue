@@ -155,8 +155,6 @@ import { companyId } from '@/widgets/pages/BarbershopLondon/constants'
 
 import { toDate } from '@/utils/date-time'
 
-import { getHoursSlots } from '@/logics/appointment'
-
 import UiTag from '@/ui/Tag/Tag.vue'
 import UiMicroText from '@/ui/MicroText.vue'
 
@@ -268,13 +266,10 @@ export default class Checkout extends Vue {
 
     const date = this.workingDays[index].format('YYYY-MM-DD')
 
-    const slots = await this.$api.public.hoursSlots({
+    this.workingHours = await this.$api.public.hoursSlots({
       date,
       companyId,
-      employeeId: this.specialist.id
-    })
-
-    this.workingHours = getHoursSlots(slots, {
+      employeeId: this.specialist.id,
       duration: this.procedure.duration
     })
 

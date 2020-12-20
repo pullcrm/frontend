@@ -22,18 +22,12 @@ export function setTime (date: Date, time: string) {
   return dayjs(date).hour(Number(hour)).minute(Number(minute)).second(0)
 }
 
-export function getTime (date: string) {
-  date = date.split('.')[0]
-
-  return dayjs(date).format('HH:mm')
-}
-
 export function toDate (date: string) {
   return dayjs(date.split('.')[0])
 }
 
-export function subtractTime (startTime, minutes) {
-  const date = setTime(new Date(), startTime)
+export function getTime (date: string) {
+  date = date.split('.')[0]
 
-  return date.subtract(Number(minutes), 'm').format('HH:mm')
+  return dayjs(date).format('HH:mm')
 }

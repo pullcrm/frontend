@@ -1,5 +1,3 @@
-import { TIME_STEP } from '@/constants'
-
 export const statusesDict = {
   IN_PROGRESS: 'В работе',
   CANCELED: 'Отменен',
@@ -18,6 +16,7 @@ export function normalizeAppointmentParams (submitParams) {
     startTime,
     procedures,
     description,
+    specialistId, // custom prop
     smsRemindNotify,
     smsCreationNotify
   } = submitParams
@@ -30,7 +29,7 @@ export function normalizeAppointmentParams (submitParams) {
     isQueue: isQueue,
     fullName: fullName,
     startTime: isQueue ? null : `${startTime}:00`,
-    employeeId: employee.id,
+    employeeId: specialistId ?? employee.id,
     procedures: procedures.map(({ id }) => id),
     description: description,
     smsRemindNotify: smsRemindNotify,
@@ -38,35 +37,21 @@ export function normalizeAppointmentParams (submitParams) {
   }
 }
 
-export function getHoursSlots (slots, { duration }) {
-  if (duration === 0) {
-    return []
+export function getAppointmentDuration (appointment) {
+  return appointment.procedures
+    .reduce((acc, { duration }) => (acc + duration), 0)
+}
+
+export function getAppointmentSubtitle (appointment) {
+  const { procedures, description } = appointment
+
+  let text = procedures
+    .map(({ name }) => name)
+    .join(', ')
+
+  if (description) {
+    text += `\nКомментарий: ${description}`
   }
 
-  const hours = []
-  const slotCount = duration / TIME_STEP
-
-  Object.keys(slots).forEach(time => {
-    let isAvailable = true
-
-    if (slots[time] === true) {
-      return
-    }
-
-    const startIndex = Object.keys(slots).indexOf(time.slice(0, 5))
-
-    for (let index = 1; index < slotCount; index++) {
-      const key = Object.keys(slots)[startIndex + index]
-
-      if (slots[key] !== false) {
-        isAvailable = false
-      }
-    }
-
-    if (isAvailable) {
-      hours.push(time)
-    }
-  })
-
-  return hours
+  return text
 }

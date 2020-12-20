@@ -269,8 +269,8 @@ export const factory = (send) => ({
       return send(`appointments/${id}`, {}, 'DELETE')
     },
 
-    slots (params: any) : Promise<any> {
-      return send('appointments/slots', params)
+    availableTime (params: any) : Promise<any> {
+      return send('appointments/available-time', params)
     }
   },
 
@@ -338,7 +338,7 @@ export const factory = (send) => ({
     },
 
     hoursSlots (params: any): Promise<any> {
-      return send('public/appointments/slots', params)
+      return send('public/appointments/available-time', params)
     },
 
     appointmentCreate (params: any): Promise<any> {

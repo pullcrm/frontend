@@ -1,63 +1,87 @@
-import { getDurationFromTo } from '@/utils/time'
-
-import { setTime } from '@/utils/date-time'
-
-import { SCHEDULE_APPOINTMENT_HEIGHT, TIME_STEP } from '@/constants'
+import { getAppointmentDuration } from '@/logics/appointment'
 
 function createState () {
   return {
-    dragElement: null,
-    dragZone: null,
-    dragZoneOver: false
+    time: null,
+    specialistId: null,
+    appointmentId: null,
+
+    isOvered: false,
+    specialistTimes: {}
   }
 }
 
-const actions = {}
+const actions = {
+  async fetchTimes ({ state, commit, rootState, rootGetters }) {
+    const appointment = rootGetters['calendar/appointmentById'](state.appointmentId)
+
+    const specialistsIds = rootState.employee.specialists.map(({ id }) => id)
+
+    const list = specialistsIds.map(specialistId => {
+      return this.$api.appointments.availableTime({
+        date: rootState.calendar.date,
+        excludeId: state.appointmentId,
+        employeeId: specialistId,
+        duration: getAppointmentDuration(appointment)
+      })
+    })
+
+    const times = await Promise.all(list) as any[]
+
+    const specialistTimes = times.reduce((acc, item, index) => {
+      return {
+        ...acc,
+        [specialistsIds[index]]: item
+      }
+    }, {})
+
+    commit('SET_AVAILABLE_SPECIALISTS_TIMES', specialistTimes)
+  }
+}
 
 const mutations = {
-  SET_DRAG_ELEMENT (state, { appointmentId, layerY, totalTime }) {
-    state.dragAppointmentId = appointmentId
-
-    state.dragElement = {
-      layerY,
-      totalTime,
-      appointmentId
-    }
+  SET_TIME (state, time) {
+    state.time = time
   },
 
-  SET_DRAG_ZONE (state, { employeeId, time }) {
-    state.dragZone = { employeeId, time }
+  SET_APPOINTMENT_ID (state, appointmentId) {
+    state.appointmentId = appointmentId
   },
 
-  SET_DRAG_ZONE_OVER (state, value) {
-    if (state.dragZoneOver !== value) {
-      state.dragZoneOver = value
-    }
+  SET_SPECIALIST_ID (state, specialistId) {
+    state.specialistId = specialistId
+  },
+
+  SET_OVERED (state, isOvered) {
+    state.isOvered = isOvered
+  },
+
+  SET_AVAILABLE_SPECIALISTS_TIMES (state, specialistTimes) {
+    state.specialistTimes = specialistTimes
   },
 
   RESET_DRAG (state) {
-    state.dragElement = null
-    state.dragZone = null
+    state.time = null
+    state.specialistId = null
+    state.appointmentId = null
+
+    state.isOvered = false
   }
 }
 
 const getters = {
-  isDragged (state) {
-    return Boolean(state.dragElement) && Boolean(state.dragZone)
+  totalDuration (state, _getters, _rootState, rootGetters): number {
+    const appointment = rootGetters['calendar/appointmentById'](state.appointmentId)
+
+    return getAppointmentDuration(appointment)
   },
 
-  dropTimeObject (state) {
-    const tilePosition = Math.round(state.dragElement.layerY / SCHEDULE_APPOINTMENT_HEIGHT)
-    let date = setTime(new Date(), state.dragZone.time)
+  getSlotByTime (state) {
+    return (time, specialistId) => {
+      const times = state.specialistTimes[specialistId] ?? []
 
-    if (tilePosition > 0) {
-      date = date.subtract(TIME_STEP * tilePosition, 'm')
+      return times.includes(time)
     }
-
-    return getDurationFromTo({
-      timeStart: date.format('HH:mm'),
-      totalTime: state.dragElement.totalTime
-    })
   }
 }
 

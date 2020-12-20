@@ -2,41 +2,73 @@
   <div
     v-if="isVisible"
     class="schedule-drop-placeholder"
-    :class="{'_active': dragZoneOver}"
+    :class="[
+      { '_overed': isOvered }
+    ]"
     :style="gridArea"
-  >
-    <div class="schedule-drop-placeholder__inner" />
-  </div>
+  />
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { getAppointmentDuration } from '@/logics/appointment'
+
 import { slugFromTime } from '@/utils/time'
 
-@Component({})
+@Component({
+  props: {
+    specialistId: {
+      type: Number,
+      required: true
+    }
+  }
+})
 export default class DropPlaceholder extends Vue {
-  get isVisible () {
-    return this.$store.getters['drugAndDrop/isDragged']
+  readonly specialistId: number
+
+  get isVisible (): boolean {
+    return this.$store.state.drugAndDrop.specialistId === this.specialistId
   }
 
-  get dragZone () {
-    return this.$store.state.drugAndDrop.dragZone
+  get isOvered () {
+    return this.$store.state.drugAndDrop.isOvered
   }
 
-  get dragZoneOver () {
-    return this.$store.state.drugAndDrop.dragZoneOver
+  get time (): string {
+    return this.$store.state.drugAndDrop.time
   }
 
-  get dropTimeObject () {
-    return this.$store.getters['drugAndDrop/dropTimeObject']
+  get appointmentId (): number {
+    return this.$store.state.drugAndDrop.appointmentId
+  }
+
+  get totalDuration (): number {
+    const appointment = this.$store.getters['calendar/appointmentById'](this.appointmentId)
+
+    return getAppointmentDuration(appointment)
+  }
+
+  get timePoints () {
+    return this.$time.getTimePoints({
+      timeStart: this.time,
+      totalTime: this.totalDuration
+    })
+  }
+
+  get fromTime () {
+    return this.timePoints[0]
+  }
+
+  get toTime () {
+    return this.timePoints[this.timePoints.length - 1]
   }
 
   get gridArea () {
     return {
-      gridColumn: `employee-${this.dragZone.employeeId}-start / employee-${this.dragZone.employeeId}-end`,
-      gridRow: `${slugFromTime(this.dropTimeObject.from)}-start / ${slugFromTime(this.dropTimeObject.to)}-start`
+      gridRow: `${slugFromTime(this.fromTime)}-start / ${slugFromTime(this.toTime)}-end`,
+      gridColumn: 'start / end'
     }
   }
 }
@@ -46,18 +78,11 @@ export default class DropPlaceholder extends Vue {
   .schedule-drop-placeholder {
     z-index: 5;
     padding: 8px;
+    border: 2px dashed $ui-blue-light-brand;
+    pointer-events: none;
 
-    &__inner {
-      height: 100%;
-      border: 2px dashed $ui-blue-light-brand;
-    }
-
-    &._active {
-      .schedule-drop-placeholder {
-        &__inner {
-          background: rgba($ui-blue-light-brand, 0.1);
-        }
-      }
+    &._overed {
+      background: rgba($ui-blue-light-brand, 0.1);
     }
   }
 </style>
