@@ -36,8 +36,18 @@
         Время выполнения
       </UiText>
 
-      <UiText size="m">
-        {{ duration }}
+      <UiText
+        v-if="!startTime || procedures.length === 0"
+        size="m"
+      >
+        Укажите данные
+      </UiText>
+
+      <UiText
+        v-else
+        size="m"
+      >
+        {{ fromTime }} - {{ toTime }}
       </UiText>
     </div>
 
@@ -65,7 +75,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { getDurationFromTo } from '@/utils/time'
 import { toDate } from '@/utils/date-time'
 
 import Contenteditable from '@/ui/Contenteditable.vue'
@@ -125,17 +134,19 @@ export default class Total extends Vue {
       .reduce((sum, { duration }) => (sum + duration), 0)
   }
 
-  get duration () {
-    if (!this.startTime || this.procedures.length === 0) {
-      return 'Укажите данные'
-    }
-
-    const { from, to } = getDurationFromTo({
+  get timePoints () {
+    return this.$time.getTimePoints({
       timeStart: this.startTime,
       totalTime: this.totalTime
     })
+  }
 
-    return `${from} - ${to}`
+  get fromTime () {
+    return this.timePoints[0]
+  }
+
+  get toTime () {
+    return this.timePoints[this.timePoints.length - 1]
   }
 
   updateTotalPrice (val) {

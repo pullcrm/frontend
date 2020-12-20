@@ -21,7 +21,7 @@ const CompanyCreate = dynamicPage(() => import('@/pages/Auth/CompanyCreate/Compa
 const CompanySettings = dynamicPage(() => import('@/pages/Company/Settings/Settings'))
 
 const Dashboard = dynamicPage(() => import('@/pages/Dashboard/Dashboard'))
-const Schedule = dynamicPage(() => import('@/pages/Schedule/Schedule'))
+const SchedulePage = dynamicPage(() => import('@/pages/SchedulePage/SchedulePage'))
 const TimeOff = dynamicPage(() => import('@/pages/TimeOff/TimeOff'))
 
 const Procedures = dynamicPage(() => import('@/pages/Procedures/Procedures'))
@@ -54,7 +54,7 @@ const router = new Router({
     { path: '/registration/', name: 'registration', component: Registration },
     { path: '/company/create/', name: 'companyCreate', component: CompanyCreate, meta: { middleware: [auth] } },
 
-    { path: '/schedule/', name: 'schedule', component: Schedule, meta: { layout: 'Dashboard', sidebar: true, middleware: [auth, company] } },
+    { path: '/schedule/', name: 'schedule', component: SchedulePage, meta: { layout: 'Dashboard', sidebar: true, middleware: [auth, company] } },
     { path: '/time-off/', name: 'timeOff', component: TimeOff, meta: { layout: 'Dashboard', middleware: [auth, company] } },
     { path: '/procedures/', name: 'procedures', component: Procedures, meta: { layout: 'Dashboard', middleware: [auth, company] } },
     { path: '/specialists/', name: 'specialists', component: Specialists, meta: { layout: 'Dashboard', middleware: [auth, company] } },

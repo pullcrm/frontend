@@ -36,9 +36,9 @@
       </UiSwitch>
 
       <UiSwitch
-        :value="settings.remindBeforeTime"
         size="m"
-        @input="onSettings('remindBeforeTime', $event)"
+        :value="settings.remindBefore"
+        @input="onSettings('remindBefore', $event)"
       >
         <template #append>
           <UiText
@@ -54,13 +54,13 @@
         label="За сколько времени напоминать о записи?"
       >
         <UiSelect
-          :value="beforeTime"
           label="name"
-          placeholder="Выбрать время"
+          :value="remindBeforeInMinutes"
           :options="durationList"
-          :clearable="false"
           required
-          @input="onSettings('beforeTime', $event.value)"
+          :clearable="false"
+          placeholder="Выбрать время"
+          @input="onSettings('remindBeforeInMinutes', $event.value)"
         />
       </UiField>
 
@@ -103,8 +103,8 @@ export default class SmsNotification extends Vue {
     return this.$store.getters['sms/hasSMSAuthorize']
   }
 
-  get beforeTime () {
-    return getDurationName(this.settings.beforeTime)
+  get remindBeforeInMinutes () {
+    return getDurationName(this.settings.remindBeforeInMinutes)
   }
 
   get durationList () {
@@ -112,12 +112,20 @@ export default class SmsNotification extends Vue {
   }
 
   async save () {
-    this.isLoading = true
+    try {
+      this.isLoading = true
 
-    await this.$store.dispatch('sms/updateSettings')
+      await this.$store.dispatch('sms/updateSettings')
 
-    this.isLoading = false
-    this.$store.dispatch('toasts/show', { title: 'Сохранено!' })
+      this.$store.dispatch('toasts/show', { title: 'Сохранено!' })
+    } catch {
+      this.$store.dispatch('toasts/show', {
+        type: 'error',
+        title: 'Что-то не так!'
+      })
+    } finally {
+      this.isLoading = false
+    }
   }
 
   onSettings (key, value) {
@@ -125,7 +133,7 @@ export default class SmsNotification extends Vue {
   }
 
   smsPopup () {
-    this.$store.dispatch('popup/show', 'smsc-auth')
+    this.$store.dispatch('popup/show', 'sms-auth')
   }
 }
 </script>

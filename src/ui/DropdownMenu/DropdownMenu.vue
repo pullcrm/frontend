@@ -27,6 +27,7 @@ import Component from 'vue-class-component'
 
 import UiPopover from '@/ui/Popover/Popover.vue'
 
+// TODO: Remove
 @Component({
   props: {
     placement: {
@@ -55,7 +56,7 @@ export default class DropdownMenu extends Vue {
       }
     }
 
-    .ui-dropdown-group {
+    .ui-dropdown-list {
       margin-right: calc(var(--ui-popover-padding) * -1);
       margin-left: calc(var(--ui-popover-padding) * -1);
       padding: 0 var(--ui-popover-padding);

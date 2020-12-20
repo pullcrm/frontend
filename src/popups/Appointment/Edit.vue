@@ -135,8 +135,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { getHoursSlots } from '@/logics/appointment'
-
 import { toDate } from '@/utils/date-time'
 
 import Tags from './components/Tags.vue'
@@ -157,19 +155,19 @@ import Total from './components/Total.vue'
 
   watch: {
     async duration () {
-      await this.fetchSlots()
+      await this.fetchAvailableTime()
 
       this.checkStartTime()
     },
 
     async specialist () {
-      await this.fetchSlots()
+      await this.fetchAvailableTime()
 
       this.checkStartTime()
     },
 
     async date () {
-      await this.fetchSlots()
+      await this.fetchAvailableTime()
 
       this.checkStartTime()
     }
@@ -216,7 +214,7 @@ export default class AppointmentEdit extends Vue {
   }
 
   mounted () {
-    this.fetchSlots()
+    this.fetchAvailableTime()
   }
 
   calculateTotal () {
@@ -255,20 +253,17 @@ export default class AppointmentEdit extends Vue {
     }
   }
 
-  async fetchSlots () {
+  async fetchAvailableTime () {
     this.workingHours = []
 
-    if (!this.form.employee?.id) {
+    if (!this.form.employee?.id || this.duration === 0) {
       return
     }
 
-    const slots = await this.$api.appointments.slots({
+    this.workingHours = await this.$api.appointments.availableTime({
       date: this.form.date.format('YYYY-MM-DD'),
       excludeId: this.form.id,
-      employeeId: this.form.employee.id
-    })
-
-    this.workingHours = getHoursSlots(slots, {
+      employeeId: this.form.employee.id,
       duration: this.duration
     })
   }

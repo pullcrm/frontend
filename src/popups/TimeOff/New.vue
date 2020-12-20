@@ -135,8 +135,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { WORKING_HOURS } from '@/constants/generated'
-
 import { setTime } from '@/utils/date-time'
 
 import Calendar from '@/components/Calendar/Calendar.vue'
@@ -182,7 +180,7 @@ export default class TimeOffNew extends Vue {
   date = new Date(this.$store.state.calendar.date)
 
   get workingHours () {
-    return WORKING_HOURS
+    return this.$time.workingHours
   }
 
   get workingHoursForTimeEnd () {

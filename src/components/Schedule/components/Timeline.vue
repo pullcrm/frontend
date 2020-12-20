@@ -1,9 +1,9 @@
 <template>
-  <div class="schedule-calendar-timeline">
+  <div class="schedule-timeline">
     <div
       v-for="time in timeHours"
       :key="time"
-      class="schedule-calendar-timeline__item"
+      class="schedule-timeline__item"
     >
       <UiText
         size="s"
@@ -18,22 +18,20 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { WORKING_HOURS } from '@/constants/generated'
-
 @Component({})
 export default class Timeline extends Vue {
-  get timeHours () {
-    return WORKING_HOURS.filter((_, index) => index % 2 === 0)
+  get workingHours () {
+    return this.$time.workingHours
   }
 
-  get columns () {
-    return WORKING_HOURS.length
+  get timeHours () {
+    return this.workingHours.filter((_, index) => index % 2 === 0)
   }
 }
 </script>
 
 <style lang="scss">
-  .schedule-calendar-timeline {
+  .schedule-timeline {
     &__item {
       display: flex;
       align-items: center;

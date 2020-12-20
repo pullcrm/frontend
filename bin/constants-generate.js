@@ -10,24 +10,15 @@ const step = process.env.VUE_APP_CALENDAR_TIME_STEP
 
 function hoursGenerate () {
   let currentTime = moment(new Date()).set({
-    hour: 10,
-    minutes: 0,
-    second: 0
-  })
-
-  const endTime = moment(new Date()).set({
-    hour: 20,
+    hour: 5,
     minutes: 0,
     second: 0
   })
 
   const hours = []
 
-  while (currentTime.unix() <= endTime.unix()) {
-    const hour = currentTime.hour()
-    const minute = currentTime.minute()
-
-    hours.push(`${hour}:${minute > 0 ? minute : '00'}`)
+  while (currentTime.format('HH:mm') !== '23:15') {
+    hours.push(currentTime.format('HH:mm'))
 
     currentTime = currentTime.add(step, 'm')
   }
@@ -37,10 +28,4 @@ function hoursGenerate () {
 
 writeFileSync('./src/constants/generated.js', `/* eslint-disable */
 export const WORKING_HOURS = ${JSON.stringify(hoursGenerate())}
-
-export const WORKING_HOURS_SLOTS = WORKING_HOURS.reduce((result, hour) => {
-  result[hour] = false
-
-  return result
-}, {})
 `)

@@ -143,8 +143,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { WORKING_HOURS } from '@/constants/generated'
-
 import { setTime, toDate } from '@/utils/date-time'
 
 import { isCloseDay } from '@/logics/time-offs'
@@ -220,7 +218,7 @@ export default class TimeOffEdit extends Vue {
   }
 
   get workingHours () {
-    return WORKING_HOURS
+    return this.$time.workingHours
   }
 
   get workingHoursForTimeEnd () {

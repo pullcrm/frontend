@@ -10,19 +10,19 @@
   }
 
   &_size_xs {
-    @include ui-typo-16;
+    @include ui-typo-14;
   }
 
   &_size_s {
-    @include ui-typo-20;
+    @include ui-typo-16;
   }
 
   &_size_m {
-    @include ui-typo-24;
+    @include ui-typo-20;
   }
 
   &_size_xl {
-    @include ui-typo-44;
+    @include ui-typo-24;
   }
 
   &__append,
@@ -51,11 +51,11 @@
     &_responsive {
       &.ui-price {
         &_size_m {
-          @include ui-typo-22;
+          @include ui-typo-18;
         }
 
         &_size_xl {
-          @include ui-typo-36;
+          @include ui-typo-22;
         }
       }
     }
@@ -64,20 +64,16 @@
   @media (max-width: $ui-tablet - 1px) {
     &_responsive {
       &.ui-price {
-        &_size_xs {
+        &_size_s {
           @include ui-typo-14;
         }
 
-        &_size_s {
-          @include ui-typo-18;
-        }
-
         &_size_m {
-          @include ui-typo-20;
+          @include ui-typo-16;
         }
 
         &_size_xl {
-          @include ui-typo-24;
+          @include ui-typo-20;
         }
       }
     }

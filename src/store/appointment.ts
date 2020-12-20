@@ -1,100 +1,23 @@
-import { normalizeAppointmentParams, creationNotifyMessage, remindNotifyMessage } from '@/logics/appointment'
-
-import { makeRandom } from '@/utils/make-random'
-import { subtractTime } from '@/utils/date-time'
+// TODO: Move to popups/Appointment/... and remove file
+import { normalizeAppointmentParams } from '@/logics/appointment'
 
 function createState () {
   return {}
 }
 
 const actions = {
-  async create ({ dispatch }, payload) {
+  async create (_, payload) {
     const form = normalizeAppointmentParams(payload)
 
-    const { id } = await this.$api.appointments.create(form)
-
-    await Promise.all([
-      payload.smsRemindNotify && dispatch('remindNotify', { ...payload, id }),
-      payload.smsCreationNotify && dispatch('creationNotify', payload)
-    ])
+    await this.$api.appointments.create(form)
   },
 
-  async update ({ dispatch, rootGetters }, payload) {
-    const {
-      id,
-      phone,
-      startTime,
-      smsIdentifier,
-      smsRemindNotify
-    } = payload
+  async update (_, payload) {
+    const { id } = payload
 
     const form = normalizeAppointmentParams(payload)
 
     await this.$api.appointments.update(id, form)
-
-    const {
-      startTime: oldStartTime,
-      smsIdentifier: oldSmsIdentifier
-    } = rootGetters['calendar/appointmentById'](id)
-
-    if (oldStartTime === startTime && smsRemindNotify === Boolean(oldSmsIdentifier)) {
-      return
-    }
-
-    await Promise.all([
-      smsIdentifier && dispatch('sms/remove', {
-        id: smsIdentifier,
-        phone
-      }, { root: true }),
-      smsIdentifier && this.$api.appointments.sms(id, { smsIdentifier: null }),
-      smsRemindNotify && dispatch('remindNotify', { ...payload, id })
-    ])
-  },
-
-  async creationNotify ({ dispatch }, payload) {
-    const { phone } = payload
-
-    const randomId = makeRandom(5)
-
-    const params = {
-      id: randomId,
-      time: '0',
-      phone,
-      message: creationNotifyMessage(payload)
-    }
-
-    const result = await dispatch('sms/send', params, { root: true })
-
-    if (result) {
-      // TODO: Add result toast
-    }
-  },
-
-  async remindNotify ({ dispatch, rootState }, payload) {
-    const { id, phone, startTime, date } = payload
-
-    const { beforeTime } = rootState.sms.settings
-
-    const time = `${date.format('DD.MM.YY')} ${subtractTime(startTime, beforeTime)}`
-    const randomId = makeRandom(5)
-
-    const params = {
-      id: randomId,
-      time,
-      phone,
-      message: remindNotifyMessage(payload, beforeTime)
-    }
-
-    const result = await dispatch('sms/send', params, { root: true })
-
-    if (!result) {
-      // TODO: Add result toast
-      return
-    }
-
-    await this.$api.appointments.sms(id, {
-      smsIdentifier: randomId
-    })
   }
 }
 

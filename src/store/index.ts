@@ -15,9 +15,14 @@ import procedures from './procedures'
 import appointment from './appointment'
 import drugAndDrop from './drug-and-drop'
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface IState {
+  //
+}
+
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+export default new Vuex.Store<IState>({
   modules: {
     sms,
     auth,
