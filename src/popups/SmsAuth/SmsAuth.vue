@@ -56,8 +56,6 @@ import Component from 'vue-class-component'
 
 import { ISmsCreateParams } from '@/services/api'
 
-import { btoa } from 'isomorphic-base64'
-
 @Component({})
 export default class ProcedureEdit extends Vue {
   form: ISmsCreateParams = {
@@ -71,10 +69,7 @@ export default class ProcedureEdit extends Vue {
     try {
       this.isLoading = true
 
-      const token = btoa(`${this.form.login}:${this.form.password}`)
-
       await this.$api.sms.settingCreate({
-        token,
         ...this.form
       })
 
