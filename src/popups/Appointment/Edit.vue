@@ -182,11 +182,15 @@ export default class AppointmentEdit extends Vue {
     ...this.appointment,
     date: toDate(this.appointment.date),
     employee: this.specialists.find(({ id }) => id === this.appointment.employee.id),
-    smsRemindNotify: Boolean(this.appointment.smsIdentifier)
+    smsRemindNotify: this.hasSmsAuthorize ? Boolean(this.appointment.smsIdentifier) : null
   }
 
   get validations () {
     return {}
+  }
+
+  get hasSmsAuthorize (): Boolean {
+    return this.$store.getters['sms/hasSmsAuthorize']
   }
 
   get specialists () {
@@ -231,8 +235,6 @@ export default class AppointmentEdit extends Vue {
   }
 
   async remove () {
-    const { smsIdentifier, phone } = this.form
-
     const result = await this.$store.dispatch('popup/askQuestion', {
       title: 'Вы действительно хотите удалить эту запись?',
       acceptButtonTitle: 'Удалить'
@@ -240,11 +242,7 @@ export default class AppointmentEdit extends Vue {
 
     if (result) {
       await Promise.all([
-        this.$api.appointments.remove(this.form.id),
-        smsIdentifier && this.$store.dispatch('sms/remove', {
-          id: smsIdentifier,
-          phone
-        })
+        this.$api.appointments.remove(this.form.id)
       ])
 
       await this.$store.dispatch('calendar/fetch')

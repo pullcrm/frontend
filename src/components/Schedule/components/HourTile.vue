@@ -45,6 +45,10 @@ export default class HourTile extends Vue {
   readonly hour: string
   readonly specialistId: number
 
+  get hasSmsAuthorize (): Boolean {
+    return this.$store.getters['sms/hasSmsAuthorize']
+  }
+
   get isMinute () {
     return Number(this.hour.split(':')[1]) % 2 === 0
   }
@@ -101,7 +105,7 @@ export default class HourTile extends Vue {
         date: toDate(appointment.date),
         startTime,
         specialistId,
-        smsRemindNotify: Boolean(appointment.smsIdentifier)
+        smsRemindNotify: this.hasSmsAuthorize ? Boolean(appointment.smsIdentifier) : null
       })
 
       await this.$store.dispatch('calendar/fetch')

@@ -18,6 +18,7 @@
         v-if="step === 3"
         :procedure="procedure"
         :specialist="specialist"
+        :company-id="companyId"
         @back="onBack"
         @update="onUpdateHeight"
         @created="onCreated"
@@ -38,7 +39,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { companyId } from '@/widgets/pages/BarbershopLondon/constants'
+import { COMPANY_ID } from '@/widgets/pages/BarbershopLondon/constants'
 
 import Order from './components/Order/Order.vue'
 import Checkout from './components/Checkout/Checkout.vue'
@@ -70,13 +71,17 @@ export default class BarbershopLondon extends Vue {
   procedures = []
   specialists = []
 
+  get companyId () {
+    return Number(this.$route.query.companyId || COMPANY_ID)
+  }
+
   async mounted () {
     const [
       procedures,
       specialists
     ] = await Promise.all([
-      this.$api.public.proceduresByCompanyId({ companyId }),
-      this.$api.public.specialistsByCompanyId({ companyId })
+      this.$api.public.proceduresByCompanyId({ companyId: this.companyId }),
+      this.$api.public.specialistsByCompanyId({ companyId: this.companyId })
     ])
 
     this.procedures = procedures

@@ -151,8 +151,6 @@ import Component from 'vue-class-component'
 
 import 'dayjs/locale/uk'
 
-import { companyId } from '@/widgets/pages/BarbershopLondon/constants'
-
 import { toDate } from '@/utils/date-time'
 
 import UiTag from '@/ui/Tag/Tag.vue'
@@ -173,10 +171,16 @@ import UiMicroText from '@/ui/MicroText.vue'
     specialist: {
       type: Object,
       required: true
+    },
+
+    companyId: {
+      type: Number,
+      required: true
     }
   }
 })
 export default class Checkout extends Vue {
+  readonly companyId: number
   readonly procedure: any
   readonly specialist: any
 
@@ -225,7 +229,7 @@ export default class Checkout extends Vue {
         employeeId: this.specialist.id,
         fullName: this.form.fullName.trim(),
         phone: this.form.phone,
-        companyId,
+        companyId: this.companyId,
         procedures: [procedureId],
         date: date?.format('YYYY-MM-DD'),
         startTime: `${this.hourSelected}:00`,
@@ -268,7 +272,7 @@ export default class Checkout extends Vue {
 
     this.workingHours = await this.$api.public.hoursSlots({
       date,
-      companyId,
+      companyId: this.companyId,
       employeeId: this.specialist.id,
       duration: this.procedure.duration
     })

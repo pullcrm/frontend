@@ -1,15 +1,12 @@
 function createState () {
   return {
     balance: null,
-    login: null,
-    password: null,
     settings: null
   }
 }
 
 const actions = {
   async updateSettings ({ state }) {
-    // TODO: Error
     const { remindBeforeInMinutes, remindBefore, remindAfterCreation } = state.settings
 
     await this.$api.sms.settingUpdate({
@@ -37,7 +34,7 @@ const mutations = {
 
     state.settings = {
       login,
-      remindBeforeInMinutes: remindBeforeInMinutes,
+      remindBeforeInMinutes,
       remindBefore,
       remindAfterCreation
     }
@@ -53,8 +50,8 @@ const mutations = {
 }
 
 const getters = {
-  hasSMSAuthorize (state) {
-    return state.settings?.login
+  hasSmsAuthorize (state) {
+    return Boolean(state.settings?.login)
   }
 }
 

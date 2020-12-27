@@ -76,8 +76,16 @@ export default class ProcedureEdit extends Vue {
       await this.$store.dispatch('company/fetch')
 
       this.$emit('close')
-    } catch {
-      // TODO: Add validation
+    } catch (err) {
+      if (err.status === 404) {
+        this.$store.dispatch('toasts/show', {
+          type: 'error',
+          title: 'Введены не верные данные'
+        })
+
+        return
+      }
+
       this.$store.dispatch('toasts/show', {
         type: 'error',
         title: 'Что-то не так!'

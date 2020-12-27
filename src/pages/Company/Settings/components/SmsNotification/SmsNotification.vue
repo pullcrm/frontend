@@ -11,7 +11,7 @@
     </UiTitle>
 
     <template
-      v-if="hasSMSAuthorize"
+      v-if="hasSmsAuthorize"
     >
       <UiText
         size="m"
@@ -89,7 +89,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { durations, getDurationName } from '@/logics/hours'
+import { DURATIONS } from '@/constants/generated'
 
 @Component({})
 export default class SmsNotification extends Vue {
@@ -99,16 +99,20 @@ export default class SmsNotification extends Vue {
     return this.$store.state.sms.settings
   }
 
-  get hasSMSAuthorize () {
-    return this.$store.getters['sms/hasSMSAuthorize']
-  }
-
-  get remindBeforeInMinutes () {
-    return getDurationName(this.settings.remindBeforeInMinutes)
+  get hasSmsAuthorize () {
+    return this.$store.getters['sms/hasSmsAuthorize']
   }
 
   get durationList () {
-    return durations
+    return DURATIONS
+  }
+
+  get remindBeforeInMinutes () {
+    const item = this.durationList.find(item => {
+      return item.value === this.settings.remindBeforeInMinutes
+    })
+
+    return item?.name
   }
 
   async save () {

@@ -190,10 +190,10 @@ export default class AppointmentNew extends Vue {
     procedures: [],
     description: '',
     smsCreationNotify: (
-      this.hasSMSAuthorize && this.$store.state.sms.settings.remindAfterCreation
+      this.hasSmsAuthorize && this.$store.state.sms.settings.remindAfterCreation
     ),
     smsRemindNotify: (
-      this.hasSMSAuthorize && this.$store.state.sms.settings.remindBefore
+      this.hasSmsAuthorize && this.$store.state.sms.settings.remindBefore
     )
   }
 
@@ -201,8 +201,8 @@ export default class AppointmentNew extends Vue {
     return {}
   }
 
-  get hasSMSAuthorize () {
-    return this.$store.getters['sms/hasSMSAuthorize']
+  get hasSmsAuthorize () {
+    return this.$store.getters['sms/hasSmsAuthorize']
   }
 
   get specialists () {
