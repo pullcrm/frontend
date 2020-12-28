@@ -16,10 +16,10 @@
       icon="calendar"
     />
 
-    <MenuItem
+    <!-- <MenuItem
       :to="{ name: 'timeOff' }"
       icon="clock"
-    />
+    /> -->
 
     <MenuItem
       :to="{ name: 'specialists' }"

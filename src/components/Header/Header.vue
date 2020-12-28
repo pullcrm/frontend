@@ -28,10 +28,10 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import Profile from '../Profile.vue'
-import ProfilePopper from '../ProfilePopper.vue'
-import CompanySelector from '../CompanySelector.vue'
-import CompanySelectorPopper from '../CompanySelectorPopper.vue'
+import Profile from './Profile.vue'
+import ProfilePopper from './ProfilePopper.vue'
+import CompanySelector from './CompanySelector.vue'
+import CompanySelectorPopper from './CompanySelectorPopper.vue'
 
 @Component({
   components: {
