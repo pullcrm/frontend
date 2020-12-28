@@ -34,9 +34,9 @@ const mutations = {
 
     state.settings = {
       login,
-      remindBeforeInMinutes,
       remindBefore,
-      remindAfterCreation
+      remindAfterCreation,
+      remindBeforeInMinutes
     }
   },
 
