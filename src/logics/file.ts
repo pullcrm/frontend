@@ -9,7 +9,7 @@ export function readFileAsync (file): Promise<IFile> {
         resolve({ name: file.name, url: String(dataURI) })
       }
 
-      resolve()
+      resolve(null)
     })
 
     reader.readAsDataURL(file)

@@ -34,7 +34,7 @@
     <div class="menu__space" />
 
     <MenuItem
-      :to="{ name: 'companySettings' }"
+      :to="{ name: 'settings' }"
       icon="settings/setting-1"
     />
   </div>
