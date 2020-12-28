@@ -40,8 +40,8 @@ import Toasts from '@/components/Toasts/Toasts.vue'
         const hasSmsAuthorize = this.$store.getters['sms/hasSmsAuthorize']
 
         await Promise.all([
-          this.$store.dispatch('employee/fetch'),
           this.$store.dispatch('procedures/fetch'),
+          this.$store.dispatch('specialists/fetch'),
           hasSmsAuthorize && this.$store.dispatch('sms/balance')
         ])
       }

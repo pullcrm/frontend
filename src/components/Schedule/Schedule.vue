@@ -52,7 +52,7 @@ export default class Schedule extends Vue {
   readonly loading: boolean
 
   get specialists () {
-    return this.$store.state.employee.specialists
+    return this.$store.state.specialists.specialists
   }
 
   get timeOffs () {

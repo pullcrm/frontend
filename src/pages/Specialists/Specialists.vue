@@ -72,7 +72,7 @@ export default class Specialists extends Vue {
   ]
 
   get specialists () {
-    return this.$store.state.employee.specialists
+    return this.$store.state.specialists.specialists
   }
 
   onEdit (specialist) {

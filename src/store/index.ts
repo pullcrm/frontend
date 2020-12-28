@@ -9,9 +9,9 @@ import toasts from './toasts'
 import company from './company'
 import profile from './profile'
 import schedule from './schedule'
-import employee from './employee'
 import approaches from './approaches'
 import procedures from './procedures'
+import specialists from './specialists'
 import drugAndDrop from './drug-and-drop'
 import appointments from './appointments'
 
@@ -32,9 +32,9 @@ export default new Vuex.Store<IState>({
     profile,
     company,
     schedule,
-    employee,
     procedures,
     approaches,
+    specialists,
     drugAndDrop,
     appointments
   },

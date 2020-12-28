@@ -236,7 +236,7 @@ export default class TimeOffEdit extends Vue {
   }
 
   get specialists () {
-    return this.$store.state.employee.specialists
+    return this.$store.state.specialists.specialists
   }
 
   async submit () {

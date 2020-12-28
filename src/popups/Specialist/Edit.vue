@@ -147,7 +147,7 @@ export default class SpecialistNew extends Vue {
     try {
       this.isLoading = true
 
-      const result = await this.$store.dispatch('employee/onUploadAvatar', this.currentFile)
+      const result = await this.$store.dispatch('specialists/onUploadAvatar', this.currentFile)
 
       await Promise.all([
         this.$api.specialist.update(this.form.id, {
@@ -158,7 +158,7 @@ export default class SpecialistNew extends Vue {
         })
       ])
 
-      await this.$store.dispatch('employee/fetch')
+      await this.$store.dispatch('specialists/fetch')
 
       this.$emit('close')
     } finally {

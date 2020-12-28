@@ -15,7 +15,7 @@ const actions = {
   async fetchTimes ({ state, commit, rootState, rootGetters }) {
     const appointment = rootGetters['appointments/appointmentById'](state.appointmentId)
 
-    const specialistsIds = rootState.employee.specialists.map(({ id }) => id)
+    const specialistsIds = rootState.specialists.specialists.map(({ id }) => id)
 
     const list = specialistsIds.map(specialistId => {
       return this.$api.appointments.availableTime({

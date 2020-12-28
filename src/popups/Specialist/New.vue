@@ -145,9 +145,7 @@ export default class SpecialistNew extends Vue {
     try {
       this.isLoading = true
 
-      this.avatar = await this.$store.dispatch(
-        'employee/onUploadAvatar', this.currentFile
-      )
+      this.avatar = await this.$store.dispatch('specialists/onUploadAvatar', this.currentFile)
 
       await this.$api.users.confirmation({
         phone: this.form.phone,
@@ -179,7 +177,7 @@ export default class SpecialistNew extends Vue {
     })
 
     if (result) {
-      await this.$store.dispatch('employee/fetch')
+      await this.$store.dispatch('specialists/fetch')
 
       this.$emit('close')
     }
