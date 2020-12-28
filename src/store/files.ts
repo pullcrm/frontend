@@ -3,7 +3,7 @@ function createState () {
 }
 
 const actions = {
-  async fetch (_, file) {
+  async create (_, file) {
     const formData = new FormData()
 
     formData.append('file', file)

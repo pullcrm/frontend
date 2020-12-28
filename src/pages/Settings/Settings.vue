@@ -81,7 +81,7 @@ export default class Settings extends Vue {
   }
 
   async onAvatar (file) {
-    const result = await this.$store.dispatch('files/fetch', file)
+    const result = await this.$store.dispatch('files/create', file)
 
     await this.$api.companies.update(this.company.id, {
       logoId: result.id

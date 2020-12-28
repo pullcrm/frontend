@@ -20,7 +20,7 @@ const actions = {
     if (!file) return
 
     try {
-      const result = await dispatch('files/fetch', file, { root: true })
+      const result = await dispatch('files/create', file, { root: true })
 
       return result
     } catch (err) {
