@@ -93,10 +93,10 @@ export default class HourTile extends Vue {
 
   async dropZoneDropHandler () {
     try {
-      this.$store.commit('calendar/SET_LOADING', true)
+      this.$store.commit('schedule/SET_LOADING', true)
 
       const appointmentId = this.$store.state.drugAndDrop.appointmentId
-      const appointment = this.$store.getters['calendar/appointmentById'](appointmentId)
+      const appointment = this.$store.getters['appointments/appointmentById'](appointmentId)
 
       const { time: startTime, specialistId } = this.$store.state.drugAndDrop
 
@@ -108,9 +108,9 @@ export default class HourTile extends Vue {
         smsRemindNotify: this.hasSmsAuthorize ? Boolean(appointment.smsIdentifier) : null
       })
 
-      await this.$store.dispatch('calendar/fetch')
+      await this.$store.dispatch('schedule/fetch')
     } finally {
-      this.$store.commit('calendar/SET_LOADING', false)
+      this.$store.commit('schedule/SET_LOADING', false)
     }
   }
 }

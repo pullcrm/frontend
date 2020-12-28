@@ -11,6 +11,12 @@ function createState () {
 }
 
 const actions = {
+  async login ({ dispatch }, params) {
+    const tokens = await this.$api.auth.login(params)
+
+    dispatch('saveTokens', tokens)
+  },
+
   async fetchToken ({ commit, dispatch }) {
     try {
       const accessToken = storage.getItem(ACCESS_TOKEN)
@@ -56,12 +62,6 @@ const actions = {
     })
 
     dispatch('saveTokens', { ...result, refreshToken })
-  },
-
-  async login ({ dispatch }, params) {
-    const tokens = await this.$api.auth.login(params)
-
-    dispatch('saveTokens', tokens)
   },
 
   reset ({ commit }) {

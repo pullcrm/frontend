@@ -13,13 +13,13 @@ function createState () {
 
 const actions = {
   async fetchTimes ({ state, commit, rootState, rootGetters }) {
-    const appointment = rootGetters['calendar/appointmentById'](state.appointmentId)
+    const appointment = rootGetters['appointments/appointmentById'](state.appointmentId)
 
     const specialistsIds = rootState.employee.specialists.map(({ id }) => id)
 
     const list = specialistsIds.map(specialistId => {
       return this.$api.appointments.availableTime({
-        date: rootState.calendar.date,
+        date: rootState.schedule.date,
         excludeId: state.appointmentId,
         employeeId: specialistId,
         duration: getAppointmentDuration(appointment)
@@ -71,7 +71,7 @@ const mutations = {
 
 const getters = {
   totalDuration (state, _getters, _rootState, rootGetters): number {
-    const appointment = rootGetters['calendar/appointmentById'](state.appointmentId)
+    const appointment = rootGetters['appointments/appointmentById'](state.appointmentId)
 
     return getAppointmentDuration(appointment)
   },

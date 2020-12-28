@@ -228,8 +228,8 @@ export default class AppointmentEdit extends Vue {
   }
 
   async submit () {
-    await this.$store.dispatch('appointment/update', this.form)
-    await this.$store.dispatch('calendar/fetch')
+    await this.$store.dispatch('appointments/update', this.form)
+    await this.$store.dispatch('schedule/fetch')
 
     this.$store.dispatch('popup/hide')
   }
@@ -245,7 +245,7 @@ export default class AppointmentEdit extends Vue {
         this.$api.appointments.remove(this.form.id)
       ])
 
-      await this.$store.dispatch('calendar/fetch')
+      await this.$store.dispatch('schedule/fetch')
 
       this.$store.dispatch('popup/hide')
     }

@@ -38,7 +38,7 @@ import Placeholder from './Placeholder.vue'
 })
 export default class Queue extends Vue {
   get queue () {
-    return this.$store.state.calendar.queue
+    return this.$store.state.appointments.queue
   }
 
   openAppointment (appointment) {

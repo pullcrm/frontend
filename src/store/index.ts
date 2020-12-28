@@ -8,12 +8,12 @@ import popup from './popup'
 import toasts from './toasts'
 import company from './company'
 import profile from './profile'
-import calendar from './calendar'
+import schedule from './schedule'
 import employee from './employee'
 import approaches from './approaches'
 import procedures from './procedures'
-import appointment from './appointment'
 import drugAndDrop from './drug-and-drop'
+import appointments from './appointments'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IState {
@@ -31,12 +31,12 @@ export default new Vuex.Store<IState>({
     toasts,
     profile,
     company,
-    calendar,
+    schedule,
     employee,
     procedures,
     approaches,
-    appointment,
-    drugAndDrop
+    drugAndDrop,
+    appointments
   },
 
   state: {},

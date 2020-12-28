@@ -80,7 +80,7 @@ export default class Specialist extends Vue {
   }
 
   get appointments () {
-    return this.$store.state.calendar.appointments
+    return this.$store.state.appointments.appointments
       .filter(({ employee }) => employee.id === this.specialist.id)
   }
 

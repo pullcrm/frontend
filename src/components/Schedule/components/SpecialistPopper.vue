@@ -62,7 +62,7 @@ export default class SpecialistPopper extends Vue {
   }
 
   get isClosedDay () {
-    return this.$store.getters['calendar/isClosedDay'](this.specialist.id)
+    return this.$store.getters['schedule/isClosedDay'](this.specialist.id)
   }
 
   toggle (reference: HTMLElement) {
@@ -84,7 +84,7 @@ export default class SpecialistPopper extends Vue {
   }
 
   async onCloseDay () {
-    const date = new Date(this.$store.state.calendar.date)
+    const date = new Date(this.$store.state.schedule.date)
 
     const endDateTime = setTime(date, END_TIME_OF_DAY).format('MM.DD.YY HH:mm')
     const startDateTime = setTime(date, START_TIME_OF_DAY).format('MM.DD.YY HH:mm')
@@ -95,7 +95,7 @@ export default class SpecialistPopper extends Vue {
       startDateTime
     })
 
-    await this.$store.dispatch('calendar/fetchTimeOffs')
+    await this.$store.dispatch('schedule/fetchTimeOffs')
 
     this.$refs.popper.popper.update()
   }

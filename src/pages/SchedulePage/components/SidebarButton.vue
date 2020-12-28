@@ -16,7 +16,7 @@ import Component from 'vue-class-component'
 @Component({})
 export default class SidebarButton extends Vue {
   get date () {
-    return new Date(this.$store.state.calendar.date) as Date
+    return new Date(this.$store.state.schedule.date) as Date
   }
 }
 </script>

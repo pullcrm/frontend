@@ -180,7 +180,7 @@ export default class AppointmentNew extends Vue {
   workingHours = []
 
   form = {
-    date: toDate(this.$store.state.calendar.date),
+    date: toDate(this.$store.state.schedule.date),
     total: 0,
     phone: '',
     isQueue: this.isQueue,
@@ -240,8 +240,8 @@ export default class AppointmentNew extends Vue {
   }
 
   async submit () {
-    await this.$store.dispatch('appointment/create', this.form)
-    await this.$store.dispatch('calendar/fetch')
+    await this.$store.dispatch('appointments/create', this.form)
+    await this.$store.dispatch('schedule/fetch')
 
     this.$store.dispatch('popup/hide')
   }

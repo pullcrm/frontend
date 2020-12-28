@@ -251,12 +251,12 @@ export default class TimeOffEdit extends Vue {
 
     this.close()
 
-    await this.$store.dispatch('calendar/fetchTimeOffs')
+    await this.$store.dispatch('schedule/fetchTimeOffs')
   }
 
   async remove () {
     await this.$api.timeOff.delete(this.form.id)
-    await this.$store.dispatch('calendar/fetchTimeOffs')
+    await this.$store.dispatch('schedule/fetchTimeOffs')
 
     this.$store.dispatch('toasts/show', { title: 'Удалено!' })
 

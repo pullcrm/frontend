@@ -10,7 +10,7 @@
       />
 
       <div class="schedule__columns">
-        <CalendarColumn
+        <ScheduleColumn
           v-for="(column, index) in columns"
           :key="`column-${index}`"
           :time-offs="column.timeOffs"
@@ -18,7 +18,7 @@
           :appointments="column.appointments"
         />
 
-        <CalendarColumnPlaceholder />
+        <ScheduleColumnPlaceholder />
       </div>
     </div>
   </div>
@@ -30,8 +30,8 @@ import Component from 'vue-class-component'
 
 import Loader from './components/Loader.vue'
 import Timeline from './components/Timeline.vue'
-import CalendarColumn from './components/Column.vue'
-import CalendarColumnPlaceholder from './components/ColumnPlaceholder.vue'
+import ScheduleColumn from './components/Column.vue'
+import ScheduleColumnPlaceholder from './components/ColumnPlaceholder.vue'
 
 @Component({
   props: {
@@ -44,11 +44,11 @@ import CalendarColumnPlaceholder from './components/ColumnPlaceholder.vue'
   components: {
     Loader,
     Timeline,
-    CalendarColumn,
-    CalendarColumnPlaceholder
+    ScheduleColumn,
+    ScheduleColumnPlaceholder
   }
 })
-export default class Calendar extends Vue {
+export default class Schedule extends Vue {
   readonly loading: boolean
 
   get specialists () {
@@ -56,11 +56,11 @@ export default class Calendar extends Vue {
   }
 
   get timeOffs () {
-    return this.$store.getters['calendar/normalizeTimeOffs']
+    return this.$store.getters['schedule/normalizeTimeOffs']
   }
 
   get appointments () {
-    return this.$store.state.calendar.appointments
+    return this.$store.state.appointments.appointments
   }
 
   get columns () {

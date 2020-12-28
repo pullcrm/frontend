@@ -83,7 +83,7 @@ import UiTableColumn from '@/ui/Table/TableColumn.vue'
 })
 export default class Table extends Vue {
   get timeOffs () {
-    return this.$store.getters['calendar/normalizeTimeOffs']
+    return this.$store.getters['schedule/normalizeTimeOffs']
   }
 
   onEdit (timeOff) {

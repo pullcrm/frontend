@@ -15,7 +15,7 @@
       />
 
       <Schedule
-        class="schedule-page__calendar"
+        class="schedule-page__schedule"
         :loading="isLoading"
       />
     </UiContainer>
@@ -42,17 +42,17 @@ export default class SchedulePage extends Vue {
   sidebarOpened = false
 
   get isLoading () {
-    return this.$store.state.calendar.isLoading
+    return this.$store.state.schedule.isLoading
   }
 
   async mounted () {
     const { date } = this.$route.query
 
     if (date) {
-      this.$store.commit('calendar/SET_DATE', date)
+      this.$store.commit('schedule/SET_DATE', date)
     }
 
-    await this.$store.dispatch('calendar/fetch')
+    await this.$store.dispatch('schedule/fetch')
   }
 }
 </script>

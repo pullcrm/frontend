@@ -177,7 +177,7 @@ export default class TimeOffNew extends Vue {
     startTime: this.time
   }
 
-  date = new Date(this.$store.state.calendar.date)
+  date = new Date(this.$store.state.schedule.date)
 
   get workingHours () {
     return this.$time.workingHours
@@ -213,7 +213,7 @@ export default class TimeOffNew extends Vue {
 
     this.close()
 
-    await this.$store.dispatch('calendar/fetchTimeOffs')
+    await this.$store.dispatch('schedule/fetchTimeOffs')
   }
 
   async close () {

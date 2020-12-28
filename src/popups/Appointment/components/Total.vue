@@ -122,7 +122,7 @@ export default class Total extends Vue {
       return new Date(this.date.toString())
     }
 
-    return new Date(this.$store.state.calendar.date)
+    return new Date(this.$store.state.schedule.date)
   }
 
   set customDate (val) {

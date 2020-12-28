@@ -43,7 +43,7 @@ import Queue from '../Queue/Queue.vue'
 })
 export default class Sidebar extends Vue {
   get date () {
-    return new Date(this.$store.state.calendar.date) as Date
+    return new Date(this.$store.state.schedule.date) as Date
   }
 
   set date (val) {
@@ -53,8 +53,8 @@ export default class Sidebar extends Vue {
       query: { date }
     })
 
-    this.$store.commit('calendar/SET_DATE', date)
-    this.$store.dispatch('calendar/fetch')
+    this.$store.commit('schedule/SET_DATE', date)
+    this.$store.dispatch('schedule/fetch')
   }
 
   addAppointment () {

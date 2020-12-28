@@ -45,7 +45,7 @@ export default class DropPlaceholder extends Vue {
   }
 
   get totalDuration (): number {
-    const appointment = this.$store.getters['calendar/appointmentById'](this.appointmentId)
+    const appointment = this.$store.getters['appointments/appointmentById'](this.appointmentId)
 
     return getAppointmentDuration(appointment)
   }

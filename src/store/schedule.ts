@@ -5,9 +5,7 @@ import { normalizeTimeOffs, isCloseDay } from '@/logics/time-offs'
 function createState () {
   return {
     date: formatDate(new Date(), 'YYYY-MM-DD'),
-    queue: [],
     timeOffs: [],
-    appointments: [],
 
     isLoading: false
   }
@@ -18,26 +16,12 @@ const actions = {
     commit('SET_LOADING', true)
 
     await Promise.all([
-      dispatch('fetchQueue'),
       dispatch('fetchTimeOffs'),
-      dispatch('fetchAppointments')
+      dispatch('appointments/fetchQueue', null, { root: true }),
+      dispatch('appointments/fetchAppointments', null, { root: true })
     ])
 
     commit('SET_LOADING', false)
-  },
-
-  async fetchAppointments ({ state, commit }) {
-    const appointments = await this.$api.appointments.all({
-      date: state.date
-    })
-
-    commit('SET_APPOINTMENTS', appointments)
-  },
-
-  async fetchQueue ({ commit }) {
-    const queue = await this.$api.appointments.queue()
-
-    commit('SET_QUEUE', queue)
   },
 
   async fetchTimeOffs ({ state, commit }) {
@@ -50,20 +34,6 @@ const actions = {
 }
 
 const mutations = {
-  SET_APPOINTMENTS (state, appointments) {
-    state.appointments = appointments.map(item => ({
-      ...item,
-      startTime: item.startTime.slice(0, 5)
-    }))
-  },
-
-  SET_QUEUE (state, queue) {
-    state.queue = queue.map(item => ({
-      ...item,
-      startTime: item.startTime?.slice(0, 5) ?? null
-    }))
-  },
-
   SET_TIME_OFFS (state, timeOffs) {
     state.timeOffs = timeOffs
   },
@@ -78,19 +48,6 @@ const mutations = {
 }
 
 const getters = {
-  appointmentsDict (state) {
-    return state.appointments.reduce((dict, appointment) => {
-      return {
-        ...dict,
-        [appointment.id]: appointment
-      }
-    }, {} as Record<number, any>)
-  },
-
-  appointmentById: (_state, localGetters) => (appointmentId: number) => {
-    return localGetters.appointmentsDict[appointmentId]
-  },
-
   normalizeTimeOffs (state) {
     return normalizeTimeOffs(state.timeOffs)
   },
