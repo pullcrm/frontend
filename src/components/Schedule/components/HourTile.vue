@@ -25,6 +25,7 @@ import Component from 'vue-class-component'
 
 import { TIME_STEP } from '@/constants'
 
+// TODO: Replace all @/utils/date-time to @/utils/daysjs
 import { toDate } from '@/utils/date-time'
 import { slugFromTime } from '@/utils/time'
 

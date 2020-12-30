@@ -4,6 +4,10 @@
       class="schedule__timeline"
     />
 
+    <ActiveTime
+      v-if="isToday"
+    />
+
     <div class="schedule__table">
       <Loader
         v-if="loading"
@@ -28,8 +32,11 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import dayjs from '@/utils/dayjs'
+
 import Loader from './components/Loader.vue'
 import Timeline from './components/Timeline.vue'
+import ActiveTime from './components/ActiveTime.vue'
 import ScheduleColumn from './components/Column.vue'
 import ScheduleColumnPlaceholder from './components/ColumnPlaceholder.vue'
 
@@ -44,12 +51,21 @@ import ScheduleColumnPlaceholder from './components/ColumnPlaceholder.vue'
   components: {
     Loader,
     Timeline,
+    ActiveTime,
     ScheduleColumn,
     ScheduleColumnPlaceholder
   }
 })
 export default class Schedule extends Vue {
   readonly loading: boolean
+
+  get date () {
+    return this.$store.state.schedule.date
+  }
+
+  get isToday () {
+    return dayjs(this.date).isToday()
+  }
 
   get specialists () {
     return this.$store.state.specialists.specialists
