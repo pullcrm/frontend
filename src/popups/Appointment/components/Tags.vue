@@ -13,7 +13,7 @@
           </UiBadge>
         </template>
 
-        <UiDropdownGroup>
+        <UiDropdownList>
           <UiText
             size="m"
             :left-icon="isQueue ? 'close/close-1' : 'edit/edit-1'"
@@ -21,10 +21,10 @@
           >
             Добавить в очередь
           </UiText>
-        </UiDropdownGroup>
+        </UiDropdownList>
 
-        <UiDropdownGroup
-          v-if="hasSMSAuthorize"
+        <UiDropdownList
+          v-if="hasSmsAuthorize"
           name="СМС сообщения"
         >
           <UiText
@@ -43,9 +43,9 @@
           >
             Сообщить о создании
           </UiText>
-        </UiDropdownGroup>
+        </UiDropdownList>
 
-        <UiDropdownGroup
+        <UiDropdownList
           v-if="isCreate === false"
           name="Статус записи"
         >
@@ -58,7 +58,7 @@
           >
             {{ value }}
           </UiText>
-        </UiDropdownGroup>
+        </UiDropdownList>
       </UiDropdownMenu>
 
       <UiBadge
@@ -134,8 +134,8 @@ export default class Tags extends Vue {
   readonly smsRemindNotify : boolean
   readonly smsCreationNotify : boolean
 
-  get hasSMSAuthorize () {
-    return this.$store.getters['sms/hasSMSAuthorize']
+  get hasSmsAuthorize () {
+    return this.$store.getters['sms/hasSmsAuthorize']
   }
 
   get hasSmsRemindNotify () {

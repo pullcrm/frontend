@@ -1,0 +1,36 @@
+.schedule {
+  position: relative;
+  display: flex;
+
+  &__columns {
+    display: flex;
+  }
+
+  &__table {
+    position: relative;
+    flex: 1;
+    overflow-x: auto;
+    border: 1px solid #e0e0e0;
+  }
+
+  &__timeline {
+    flex-basis: 50px;
+    margin-top: 68px;
+    margin-right: 12px;
+  }
+
+  @media (max-width: $ui-laptop - 1px) {
+    &__timeline {
+      position: relative;
+      z-index: 9;
+      margin-right: -50px;
+      pointer-events: none;
+    }
+
+    &__table {
+      border-right: none;
+      border-bottom: none;
+      border-left: none;
+    }
+  }
+}

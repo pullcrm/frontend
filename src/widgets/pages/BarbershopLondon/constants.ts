@@ -1,1 +1,1 @@
-export const companyId = 2
+export const COMPANY_ID = 2

@@ -1,6 +1,6 @@
 <template>
   <UiPopup
-    class="smsc-auth"
+    class="sms-auth"
     @close="$emit('close')"
   >
     <UiBack
@@ -8,7 +8,7 @@
     />
 
     <UiTitle
-      class="smsc-auth__title"
+      class="sms-auth__title"
       size="s"
     >
       SMSC авторизация
@@ -20,7 +20,7 @@
         required
       >
         <UiInput
-          v-model="login"
+          v-model="form.login"
           left-icon="edit/edit-1"
           placeholder="Введите логин"
           required
@@ -32,7 +32,7 @@
         required
       >
         <UiInput
-          v-model="password"
+          v-model="form.password"
           left-icon="edit/edit-1"
           placeholder="Введите пароль"
           required
@@ -40,8 +40,9 @@
       </UiField>
 
       <UiButton
-        theme="yellow"
         type="submit"
+        theme="yellow"
+        :loading="isLoading"
       >
         Авторизоваться в smsc
       </UiButton>
@@ -53,42 +54,51 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { btoa } from 'isomorphic-base64'
+import { ISmsCreateParams } from '@/services/api'
 
 @Component({})
 export default class ProcedureEdit extends Vue {
-  login = ''
-  password = ''
+  form: ISmsCreateParams = {
+    login: '',
+    password: ''
+  }
+
+  isLoading = false
 
   async submit () {
     try {
-      const { balance } = await this.$api.smsc.balance({
-        login: this.login,
-        password: this.password
+      this.isLoading = true
+
+      await this.$api.sms.settingCreate({
+        ...this.form
       })
 
-      this.$store.commit('sms/SET_BALANCE', Number(balance))
-
-      await this.$api.smsc.token({
-        token: btoa(`${this.login}:${this.password}`)
-      })
+      await this.$store.dispatch('company/fetch')
 
       this.$emit('close')
+    } catch (err) {
+      if (err.status === 404) {
+        this.$store.dispatch('toasts/show', {
+          type: 'error',
+          title: 'Введены не верные данные'
+        })
 
-      return this.$store.dispatch('company/fetch')
-    } catch {
-      // TODO: Add validation
+        return
+      }
+
       this.$store.dispatch('toasts/show', {
         type: 'error',
         title: 'Что-то не так!'
       })
+    } finally {
+      this.isLoading = false
     }
   }
 }
 </script>
 
 <style lang="scss">
-  .smsc-auth {
+  .sms-auth {
     &__title {
       margin-top: 8px;
       margin-bottom: 24px;

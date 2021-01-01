@@ -143,8 +143,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { WORKING_HOURS } from '@/constants/generated'
-
 import { setTime, toDate } from '@/utils/date-time'
 
 import { isCloseDay } from '@/logics/time-offs'
@@ -220,7 +218,7 @@ export default class TimeOffEdit extends Vue {
   }
 
   get workingHours () {
-    return WORKING_HOURS
+    return this.$time.workingHours
   }
 
   get workingHoursForTimeEnd () {
@@ -238,7 +236,7 @@ export default class TimeOffEdit extends Vue {
   }
 
   get specialists () {
-    return this.$store.state.employee.specialists
+    return this.$store.state.specialists.specialists
   }
 
   async submit () {
@@ -253,12 +251,12 @@ export default class TimeOffEdit extends Vue {
 
     this.close()
 
-    await this.$store.dispatch('calendar/fetchTimeOffs')
+    await this.$store.dispatch('schedule/fetchTimeOffs')
   }
 
   async remove () {
     await this.$api.timeOff.delete(this.form.id)
-    await this.$store.dispatch('calendar/fetchTimeOffs')
+    await this.$store.dispatch('schedule/fetchTimeOffs')
 
     this.$store.dispatch('toasts/show', { title: 'Удалено!' })
 

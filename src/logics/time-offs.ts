@@ -3,13 +3,13 @@ import { getTime } from '@/utils/date-time'
 import { START_TIME_OF_DAY, END_TIME_OF_DAY } from '@/constants'
 
 export function normalizeTimeOffs (timeOffs) {
-  return timeOffs.map(time => {
+  return timeOffs.map(timeOff => {
     const {
       id,
       employeeId,
       endDateTime,
       startDateTime
-    } = time
+    } = timeOff
 
     return {
       id,

@@ -135,8 +135,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { getHoursSlots } from '@/logics/appointment'
-
 import { toDate } from '@/utils/date-time'
 
 import Tags from './components/Tags.vue'
@@ -157,19 +155,19 @@ import Total from './components/Total.vue'
 
   watch: {
     async duration () {
-      await this.fetchSlots()
+      await this.fetchAvailableTime()
 
       this.checkStartTime()
     },
 
     async specialist () {
-      await this.fetchSlots()
+      await this.fetchAvailableTime()
 
       this.checkStartTime()
     },
 
     async date () {
-      await this.fetchSlots()
+      await this.fetchAvailableTime()
 
       this.checkStartTime()
     }
@@ -184,15 +182,19 @@ export default class AppointmentEdit extends Vue {
     ...this.appointment,
     date: toDate(this.appointment.date),
     employee: this.specialists.find(({ id }) => id === this.appointment.employee.id),
-    smsRemindNotify: Boolean(this.appointment.smsIdentifier)
+    smsRemindNotify: this.hasSmsAuthorize ? Boolean(this.appointment.smsIdentifier) : null
   }
 
   get validations () {
     return {}
   }
 
+  get hasSmsAuthorize (): Boolean {
+    return this.$store.getters['sms/hasSmsAuthorize']
+  }
+
   get specialists () {
-    return this.$store.state.employee.specialists
+    return this.$store.state.specialists.specialists
   }
 
   get procedures () {
@@ -216,7 +218,7 @@ export default class AppointmentEdit extends Vue {
   }
 
   mounted () {
-    this.fetchSlots()
+    this.fetchAvailableTime()
   }
 
   calculateTotal () {
@@ -226,15 +228,13 @@ export default class AppointmentEdit extends Vue {
   }
 
   async submit () {
-    await this.$store.dispatch('appointment/update', this.form)
-    await this.$store.dispatch('calendar/fetch')
+    await this.$store.dispatch('appointments/update', this.form)
+    await this.$store.dispatch('schedule/fetch')
 
     this.$store.dispatch('popup/hide')
   }
 
   async remove () {
-    const { smsIdentifier, phone } = this.form
-
     const result = await this.$store.dispatch('popup/askQuestion', {
       title: 'Вы действительно хотите удалить эту запись?',
       acceptButtonTitle: 'Удалить'
@@ -242,33 +242,26 @@ export default class AppointmentEdit extends Vue {
 
     if (result) {
       await Promise.all([
-        this.$api.appointments.remove(this.form.id),
-        smsIdentifier && this.$store.dispatch('sms/remove', {
-          id: smsIdentifier,
-          phone
-        })
+        this.$api.appointments.remove(this.form.id)
       ])
 
-      await this.$store.dispatch('calendar/fetch')
+      await this.$store.dispatch('schedule/fetch')
 
       this.$store.dispatch('popup/hide')
     }
   }
 
-  async fetchSlots () {
+  async fetchAvailableTime () {
     this.workingHours = []
 
-    if (!this.form.employee?.id) {
+    if (!this.form.employee?.id || this.duration === 0) {
       return
     }
 
-    const slots = await this.$api.appointments.slots({
+    this.workingHours = await this.$api.appointments.availableTime({
       date: this.form.date.format('YYYY-MM-DD'),
       excludeId: this.form.id,
-      employeeId: this.form.employee.id
-    })
-
-    this.workingHours = getHoursSlots(slots, {
+      employeeId: this.form.employee.id,
       duration: this.duration
     })
   }

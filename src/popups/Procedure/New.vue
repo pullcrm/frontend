@@ -88,14 +88,14 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { durations } from '@/logics/hours'
+import { DURATIONS } from '@/constants/generated'
 
 @Component({})
 export default class ProcedureNew extends Vue {
   form = {}
 
   get durationList () {
-    return durations
+    return DURATIONS
   }
 
   get validations () {

@@ -22,8 +22,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import Menu from '@/components/Menu/Menu.vue'
-
-import Header from '../components/Header/Header.vue'
+import Header from '@/components/Header/Header.vue'
 
 @Component({
   components: {

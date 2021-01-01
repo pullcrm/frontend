@@ -10,8 +10,10 @@ import './plugins/filters'
 import './plugins/click-outside.client'
 
 import ApiClient from './plugins/api'
+import TimeClient from './plugins/time'
 
 Vue.use(ApiClient)
+Vue.use(TimeClient)
 
 Vue.config.productionTip = false
 

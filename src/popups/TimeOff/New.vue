@@ -135,8 +135,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { WORKING_HOURS } from '@/constants/generated'
-
 import { setTime } from '@/utils/date-time'
 
 import Calendar from '@/components/Calendar/Calendar.vue'
@@ -179,10 +177,10 @@ export default class TimeOffNew extends Vue {
     startTime: this.time
   }
 
-  date = new Date(this.$store.state.calendar.date)
+  date = new Date(this.$store.state.schedule.date)
 
   get workingHours () {
-    return WORKING_HOURS
+    return this.$time.workingHours
   }
 
   get workingHoursForTimeEnd () {
@@ -200,7 +198,7 @@ export default class TimeOffNew extends Vue {
   }
 
   get specialists () {
-    return this.$store.state.employee.specialists
+    return this.$store.state.specialists.specialists
   }
 
   async submit () {
@@ -215,7 +213,7 @@ export default class TimeOffNew extends Vue {
 
     this.close()
 
-    await this.$store.dispatch('calendar/fetchTimeOffs')
+    await this.$store.dispatch('schedule/fetchTimeOffs')
   }
 
   async close () {

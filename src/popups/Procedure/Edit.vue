@@ -92,9 +92,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { IProcedure } from '@/services/api'
+import { DURATIONS } from '@/constants/generated'
 
-import { durations } from '@/logics/hours'
+import { IProcedure } from '@/services/api'
 
 @Component({
   props: {
@@ -113,7 +113,7 @@ export default class ProcedureEdit extends Vue {
   }
 
   get durationList () {
-    return durations
+    return DURATIONS
   }
 
   get validations () {

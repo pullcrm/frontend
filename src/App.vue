@@ -37,12 +37,12 @@ import Toasts from '@/components/Toasts/Toasts.vue'
   watch: {
     async hasCompany (value) {
       if (value) {
-        const hasSMSAuthorize = this.$store.getters['sms/hasSMSAuthorize']
+        const hasSmsAuthorize = this.$store.getters['sms/hasSmsAuthorize']
 
         await Promise.all([
-          this.$store.dispatch('employee/fetch'),
           this.$store.dispatch('procedures/fetch'),
-          hasSMSAuthorize && this.$store.dispatch('sms/balance')
+          this.$store.dispatch('specialists/fetch'),
+          hasSmsAuthorize && this.$store.dispatch('sms/balance')
         ])
       }
     }
@@ -83,9 +83,5 @@ export default class App extends Vue {
     font-family: Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    * {
-      box-sizing: border-box;
-    }
   }
 </style>

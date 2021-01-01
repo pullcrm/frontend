@@ -90,7 +90,7 @@
 
     <Popup
       v-slot="{ close, props }"
-      name="smsc-auth"
+      name="sms-auth"
     >
       <SmsAuth
         v-bind="props"
