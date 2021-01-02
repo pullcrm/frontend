@@ -1,27 +1,17 @@
 <template>
-  <div class="bs-london-widget-checkout">
-    <UiMicroText
-      class="bs-london-widget-checkout__back"
-      @click.native="$emit('back')"
-    >
-      <template #prepend>
-        <UiIcon
-          size="s"
-          name="arrow/ios/left"
-        />
-      </template>
-
-      Назад
-    </UiMicroText>
-
+  <BaseWidgetLayout
+    ref="baseWidgetLayout"
+    class="base-widget-checkout"
+    has-back
+  >
     <UiTitle
-      class="bs-london-widget-checkout__title"
+      class="base-widget-checkout__title"
       size="l"
     >
       Виберіть дату та час
     </UiTitle>
 
-    <div class="bs-london-widget-checkout__date">
+    <div class="base-widget-checkout__date">
       <UiTag
         v-for="(day, index) in days"
         :key="day"
@@ -35,7 +25,7 @@
 
     <div
       v-if="daySelectedIndex !== null"
-      class="bs-london-widget-checkout__time"
+      class="base-widget-checkout__time"
     >
       <UiBadge
         v-for="hour in workingHours"
@@ -53,7 +43,7 @@
 
       <UiText
         v-if="workingHours.length === 0"
-        class="bs-london-widget-checkout__time-unavailable"
+        class="base-widget-checkout__time-unavailable"
         size="l"
       >
         Немає доступних місць для запису!
@@ -61,13 +51,13 @@
     </div>
 
     <UiTitle
-      class="bs-london-widget-checkout__title"
+      class="base-widget-checkout__title"
       size="l"
     >
       Вкажіть свою інформацію
     </UiTitle>
 
-    <div class="bs-london-widget-checkout__info">
+    <div class="base-widget-checkout__info">
       <UiText
         size="l"
       >
@@ -83,7 +73,7 @@
       </UiText>
     </div>
 
-    <div class="bs-london-widget-checkout__form">
+    <div class="base-widget-checkout__form">
       <UiField
         label="Телефон"
         required
@@ -135,14 +125,14 @@
     </UiAlert>
 
     <UiButton
-      class="bs-london-widget-checkout__submit"
+      class="base-widget-checkout__submit"
       theme="yellow"
       :loading="isLoading"
       @click.native="submit"
     >
       Записатись
     </UiButton>
-  </div>
+  </BaseWidgetLayout>
 </template>
 
 <script lang="ts">
@@ -151,38 +141,32 @@ import Component from 'vue-class-component'
 
 import 'dayjs/locale/uk'
 
-import { toDate } from '@/utils/date-time'
+import dayjs from '@/utils/dayjs'
 
 import UiTag from '@/ui/Tag/Tag.vue'
 import UiMicroText from '@/ui/MicroText.vue'
 
+import BaseWidgetLayout from '../../components/Layout.vue'
+
 @Component({
   components: {
     UiTag,
-    UiMicroText
-  },
-
-  props: {
-    procedure: {
-      type: Object,
-      required: true
-    },
-
-    specialist: {
-      type: Object,
-      required: true
-    },
-
-    companyId: {
-      type: Number,
-      required: true
-    }
+    UiMicroText,
+    BaseWidgetLayout
   }
 })
-export default class Checkout extends Vue {
-  readonly companyId: number
-  readonly procedure: any
-  readonly specialist: any
+export default class BarbershopLondon extends Vue {
+  $refs: {
+    baseWidgetLayout: BaseWidgetLayout
+  }
+
+  get procedure () {
+    return this.$store.state.widget.order.procedure
+  }
+
+  get specialist () {
+    return this.$store.state.widget.order.specialist
+  }
 
   hasError = false
   isLoading = false
@@ -198,6 +182,10 @@ export default class Checkout extends Vue {
 
   workingDays = []
   workingHours = []
+
+  get companyId () {
+    return Number(this.$route.params.companyId)
+  }
 
   get days () {
     return this.workingDays
@@ -216,6 +204,8 @@ export default class Checkout extends Vue {
 
   mounted () {
     this.workingDays = this.getWorkingDays()
+
+    this.$refs.baseWidgetLayout.onUpdateHeight()
   }
 
   async submit () {
@@ -236,15 +226,19 @@ export default class Checkout extends Vue {
         description: this.form.description
       })
 
-      // @TODO: Send SMS
+      this.$refs.baseWidgetLayout.postMessage('createOrder')
 
-      this.$emit('created', {
-        date,
-        startTime: this.hourSelected
+      this.$store.commit('widget/SET_ORDER_BY_KEY', ['date', date])
+      this.$store.commit('widget/SET_ORDER_BY_KEY', ['startTime', this.hourSelected])
+
+      this.$router.push({
+        ...this.$route,
+        name: 'BaseWidgetOrder'
       })
     } catch (err) {
       if (err.status === 400) {
         this.hasError = true
+
         return
       }
 
@@ -277,13 +271,13 @@ export default class Checkout extends Vue {
       duration: this.procedure.duration
     })
 
-    this.$emit('update')
+    this.$refs.baseWidgetLayout.onUpdateHeight()
   }
 
   getWorkingDays () {
     const days = []
 
-    let date = toDate(new Date().toDateString()).locale('uk')
+    let date = dayjs(new Date()).locale('uk')
 
     while (days.length < 6) {
       if (date.format('d') !== '0') {
@@ -299,98 +293,88 @@ export default class Checkout extends Vue {
 </script>
 
 <style lang="scss">
-  .bs-london-widget-checkout {
-    &__title {
-      margin-bottom: 24px;
-      color: $ui-white;
-    }
+.base-widget-checkout {
+  &__title {
+    margin-bottom: 24px;
+    color: $ui-white;
+  }
 
-    &__back {
-      margin-bottom: 8px;
-      color: $ui-black-80;
+  &__submit {
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  &__date {
+    margin: 0 -4px 8px;
+
+    .ui-tag {
+      margin: 0 4px 8px;
+      color: $ui-white;
       cursor: pointer;
 
-      &:hover {
-        text-decoration: underline;
+      &._active {
+        background: $ui-green-hover-15;
       }
-    }
-
-    &__submit {
-      width: 100%;
-      margin-top: 24px;
-    }
-
-    &__date {
-      margin: 0 -4px 8px;
-
-      .ui-tag {
-        margin: 0 4px 8px;
-        color: $ui-white;
-        cursor: pointer;
-
-        &._active {
-          background: $ui-green-hover-15;
-        }
-      }
-    }
-
-    &__time {
-      margin: 0 -4px 32px;
-
-      .ui-badge {
-        margin: 0 4px 8px;
-        cursor: pointer;
-
-        &._darked {
-          background: #1e1e1e;
-        }
-
-        &._active {
-          background: $ui-yellow-brand;
-        }
-      }
-    }
-
-    &__time-unavailable {
-      color: $ui-white;
-    }
-
-    &__info {
-      margin-bottom: 16px;
-      color: $ui-black-40;
-
-      .ui-text {
-        margin-bottom: 4px;
-      }
-
-      strong {
-        font-weight: 700;
-      }
-    }
-
-    &__form {
-      .ui-field {
-        &__label {
-          position: static;
-          padding: 0;
-          color: $ui-black-70;
-          background: transparent;
-          transform: none;
-        }
-
-        input,
-        textarea {
-          color: $ui-white;
-          background: transparent;
-        }
-      }
-    }
-
-    .ui-alert {
-      margin-top: 16px;
-      color: $ui-black-100;
-      background: $ui-white;
-      border: none;
     }
   }
+
+  &__time {
+    margin: 0 -4px 32px;
+
+    .ui-badge {
+      margin: 0 4px 8px;
+      cursor: pointer;
+
+      &._darked {
+        background: #1e1e1e;
+      }
+
+      &._active {
+        background: $ui-yellow-brand;
+      }
+    }
+  }
+
+  &__time-unavailable {
+    color: $ui-white;
+  }
+
+  &__info {
+    margin-bottom: 16px;
+    color: $ui-black-40;
+
+    .ui-text {
+      margin-bottom: 4px;
+    }
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
+  &__form {
+    .ui-field {
+      &__label {
+        position: static;
+        padding: 0;
+        color: $ui-black-70;
+        background: transparent;
+        transform: none;
+      }
+
+      input,
+      textarea {
+        color: $ui-white;
+        background: transparent;
+      }
+    }
+  }
+
+  .ui-alert {
+    margin-top: 16px;
+    color: $ui-black-100;
+    background: $ui-white;
+    border: none;
+  }
+}
 </style>

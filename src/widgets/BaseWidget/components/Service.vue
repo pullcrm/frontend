@@ -1,5 +1,5 @@
 <template>
-  <div class="bs-london-widget-procedure">
+  <div class="base-widget-procedure">
     <UiTitle
       size="s"
     >
@@ -40,7 +40,7 @@ export default class Procedure extends Vue {
 </script>
 
 <style lang="scss">
-  .bs-london-widget-procedure {
+  .base-widget-procedure {
     color: $ui-white;
 
     .ui-button {
