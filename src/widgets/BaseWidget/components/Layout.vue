@@ -54,7 +54,7 @@ export default class BaswWidgetLayout extends Vue {
     parent.postMessage(`pullcrm:${event}|${JSON.stringify(payload)}`, '*')
   }
 
-  onBack () {
+  back () {
     this.$router.go(-1)
   }
 }
