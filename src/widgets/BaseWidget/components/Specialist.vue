@@ -1,14 +1,14 @@
 <template>
-  <div class="bs-london-widget-specialist">
+  <div class="base-widget-specialist">
     <UiAvatar
-      class="bs-london-widget-specialist__image"
+      class="base-widget-specialist__image"
       :image="avatar"
       :name="user.firstName"
       size="custom"
       type="circle"
     />
 
-    <div class="bs-london-widget-specialist__inner">
+    <div class="base-widget-specialist__inner">
       <UiTitle
         size="m"
       >
@@ -56,7 +56,7 @@ export default class Specialist extends Vue {
 </script>
 
 <style lang="scss">
-  .bs-london-widget-specialist {
+  .base-widget-specialist {
     display: flex;
     align-items: center;
     color: $ui-white;

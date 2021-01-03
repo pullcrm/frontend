@@ -49,7 +49,7 @@ export default class ActiveTime extends Vue {
 
     const position = ((nowHour - this.startEt) * 10) + (nowMinutes / 60 * 10)
 
-    this.time = `${nowHour}:${nowMinutes}`
+    this.time = dayjs(new Date()).format('HH:mm')
     this.position = Math.floor(position)
   }
 }

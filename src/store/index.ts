@@ -6,6 +6,7 @@ import auth from './auth'
 import files from './files'
 import popup from './popup'
 import toasts from './toasts'
+import widget from './widget'
 import company from './company'
 import profile from './profile'
 import schedule from './schedule'
@@ -29,6 +30,7 @@ export default new Vuex.Store<IState>({
     files,
     popup,
     toasts,
+    widget,
     profile,
     company,
     schedule,
