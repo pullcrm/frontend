@@ -3,7 +3,7 @@
     <div
       class="menu__logo"
     >
-      <img src="@/assets/logo.png">
+      <img src="@/assets/logos/logo-2.svg">
     </div>
 
     <MenuItem

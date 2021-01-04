@@ -62,7 +62,7 @@ export default class ActiveTime extends Vue {
   right: 0;
   bottom: 32px;
   left: 0;
-  z-index: 2;
+  z-index: 9;
   pointer-events: none;
 
   &__inner {
