@@ -51,9 +51,7 @@ import MenuItem from './MenuItem.vue'
     MenuItem
   }
 })
-export default class Menu extends Vue {
-
-}
+export default class Menu extends Vue {}
 </script>
 
 <style lang="scss" src="./Menu.scss"></style>

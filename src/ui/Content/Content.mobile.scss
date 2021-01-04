@@ -1,0 +1,21 @@
+@media (max-width: $ui-tablet - 1px) {
+  .ui-content {
+    @include ui-typo-14;
+
+    h1 {
+      @include ui-typo-20;
+    }
+
+    h2 {
+      @include ui-typo-18;
+    }
+
+    h3 {
+      @include ui-typo-16;
+    }
+
+    h4 {
+      @include ui-typo-14;
+    }
+  }
+}

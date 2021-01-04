@@ -1,9 +1,9 @@
 <template>
-  <div
-    class="company-settings-page-sms-notification"
+  <SettingsLayout
+    class="sms-settings-page"
   >
     <UiTitle
-      class="company-settings-page-sms-notification__title"
+      class="sms-settings-page__title"
       size="l"
       responsive
     >
@@ -82,7 +82,7 @@
     >
       Авторизоваться в smsc
     </UiButton>
-  </div>
+  </SettingsLayout>
 </template>
 
 <script lang="ts">
@@ -91,9 +91,19 @@ import Component from 'vue-class-component'
 
 import { DURATIONS } from '@/constants/generated'
 
-@Component({})
-export default class SmsNotification extends Vue {
+import SettingsLayout from '../components/SettingsLayout.vue'
+
+@Component({
+  components: {
+    SettingsLayout
+  }
+})
+export default class SmsSettingsPage extends Vue {
   isLoading = false
+
+  get durationList () {
+    return DURATIONS
+  }
 
   get settings () {
     return this.$store.state.sms.settings
@@ -101,10 +111,6 @@ export default class SmsNotification extends Vue {
 
   get hasSmsAuthorize () {
     return this.$store.getters['sms/hasSmsAuthorize']
-  }
-
-  get durationList () {
-    return DURATIONS
   }
 
   get remindBeforeInMinutes () {
@@ -142,4 +148,4 @@ export default class SmsNotification extends Vue {
 }
 </script>
 
-<style lang="scss" src="./SmsNotification.scss"></style>
+<style lang="scss" src="./SmsSettingsPage.scss"></style>
