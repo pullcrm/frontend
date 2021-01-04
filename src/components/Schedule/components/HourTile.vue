@@ -101,7 +101,7 @@ export default class HourTile extends Vue {
 
       const { time: startTime, specialistId } = this.$store.state.drugAndDrop
 
-      await this.$store.dispatch('appointment/update', {
+      await this.$store.dispatch('appointments/update', {
         ...appointment,
         date: toDate(appointment.date),
         startTime,

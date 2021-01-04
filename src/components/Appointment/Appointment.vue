@@ -63,7 +63,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { getAppointmentSubtitle, getAppointmentDuration } from '@/logics/appointment'
+import { TIME_STEP } from '@/constants'
+
+import { getAppointmentSubtitle, getProceduresDuration } from '@/logics/appointment'
 
 import Wrapper from './Wrapper.vue'
 
@@ -87,22 +89,17 @@ export default class Appointment extends Vue {
   }
 
   get totalTime () {
-    return getAppointmentDuration(this.appointment)
-  }
-
-  get timePoints () {
-    return this.$time.getTimePoints({
-      timeStart: this.appointment.startTime,
-      totalTime: this.totalTime
-    })
+    return getProceduresDuration(this.appointment)
   }
 
   get fromTime () {
-    return this.timePoints[0]
+    return this.appointment.startTime
   }
 
   get toTime () {
-    return this.timePoints[this.timePoints.length - 1]
+    const steps = this.totalTime / TIME_STEP
+
+    return this.$time.shiftTimeUpBySteps(this.fromTime, steps)
   }
 
   openOnPopup () {

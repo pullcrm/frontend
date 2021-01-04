@@ -23,7 +23,10 @@ const SchedulePage = dynamicPage(() => import('@/pages/SchedulePage/SchedulePage
 const Specialists = dynamicPage(() => import('@/pages/Specialists/Specialists'))
 const Procedures = dynamicPage(() => import('@/pages/Procedures/Procedures'))
 const TimeOff = dynamicPage(() => import('@/pages/TimeOff/TimeOff'))
-const Settings = dynamicPage(() => import('@/pages/Settings/Settings'))
+
+const SmsSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/SmsSettingsPage/SmsSettingsPage.vue'))
+const WidgetSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/WidgetSettingsPage/WidgetSettingsPage.vue'))
+const CompanySettingsPage = dynamicPage(() => import('@/pages/SettingsPage/CompanySettingsPage/CompanySettingsPage.vue'))
 
 const Error = dynamicPage(() => import('@/pages/Error/404'))
 
@@ -57,7 +60,10 @@ const router = new Router({
     { path: '/procedures/', name: 'procedures', component: Procedures, meta: { layout: 'Dashboard', middleware: [auth, company] } },
     { path: '/specialists/', name: 'specialists', component: Specialists, meta: { layout: 'Dashboard', middleware: [auth, company] } },
 
-    { path: '/settings/', name: 'settings', component: Settings, meta: { layout: 'Dashboard', middleware: [auth, company] } },
+    { path: '/settings/', name: 'settings', redirect: '/settings/company/' },
+    { path: '/settings/sms/', name: 'smsSettings', component: SmsSettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company] } },
+    { path: '/settings/widget/', name: 'widgetSettings', component: WidgetSettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company] } },
+    { path: '/settings/company/', name: 'companySettings', component: CompanySettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company] } },
 
     ...widgetsRoutes,
 

@@ -1,14 +1,12 @@
 <template>
   <div class="ui-tabs">
-    <div
-      v-for="tab in tabs"
-      :key="tab"
-      class="ui-tabs__item"
-      :class="{'_active' : tab === value}"
+    <UiTabLink
+      v-for="(tab, index) in tabs"
+      :key="index"
+      :tab="tab"
+      :is-active="value === tab.name"
       @click="$emit('input', tab)"
-    >
-      {{ tab }}
-    </div>
+    />
   </div>
 </template>
 
@@ -16,7 +14,13 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import UiTabLink from './TabItem.vue'
+
 @Component({
+  components: {
+    UiTabLink
+  },
+
   props: {
     value: {
       type: String,
@@ -36,30 +40,11 @@ export default class Tabs extends Vue {
 
 <style lang="scss">
   .ui-tabs {
+    @include hide-scrollbar;
+
     display: flex;
     padding-bottom: 16px;
     border-bottom: 1px solid $border-color;
-
-    &__item {
-      @include ui-typo-14;
-
-      position: relative;
-      margin-right: 24px;
-      cursor: pointer;
-
-      &._active {
-        color: #1676ee;
-
-        &::after {
-          position: absolute;
-          right: 0;
-          bottom: -17px;
-          left: 0;
-          height: 2px;
-          background: #1676ee;
-          content: '';
-        }
-      }
-    }
+    overflow-x: auto;
   }
 </style>

@@ -109,7 +109,7 @@ export default class CompanyCreate extends Vue {
   }
 
   async submit () {
-    await this.$api.companies.create({
+    const { id: companyId } = await this.$api.companies.create({
       // @ts-ignore
       name: this.company.name,
       // @ts-ignore
@@ -117,10 +117,23 @@ export default class CompanyCreate extends Vue {
       // @ts-ignore
       categoryId: this.company.category.id
     })
-    await this.$store.dispatch('approaches/fetch')
-    await this.$store.dispatch('auth/fetchRefreshToken')
 
-    this.onBack()
+    await this.onApproache(companyId)
+
+    const { href } = this.$router.resolve({
+      name: 'dashboard'
+    })
+
+    window.location.href = href
+  }
+
+  async onApproache (companyId) {
+    const approaches = await this.$api.approaches.my()
+    const approach = approaches.find(({ company }) => company.id === companyId) ?? approaches[0]
+
+    this.$store.commit('approaches/SET_CURRENT', approach)
+
+    await this.$store.dispatch('auth/fetchRefreshToken')
   }
 
   onBack () {

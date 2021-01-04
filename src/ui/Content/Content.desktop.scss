@@ -1,0 +1,41 @@
+@media (min-width: $ui-tablet) {
+  .ui-content {
+    @include ui-typo-16;
+
+    h1 {
+      @include ui-typo-28;
+    }
+
+    h2 {
+      @include ui-typo-24;
+    }
+
+    h3 {
+      @include ui-typo-20;
+    }
+
+    h4 {
+      @include ui-typo-18;
+    }
+
+    @media (min-width: $ui-laptop) {
+      @include ui-typo-16;
+
+      h1 {
+        @include ui-typo-32;
+      }
+
+      h2 {
+        @include ui-typo-28;
+      }
+
+      h3 {
+        @include ui-typo-24;
+      }
+
+      h4 {
+        @include ui-typo-18;
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { getAppointmentDuration } from '@/logics/appointment'
+import { getProceduresDuration } from '@/logics/appointment'
 
 function createState () {
   return {
@@ -22,7 +22,7 @@ const actions = {
         date: rootState.schedule.date,
         excludeId: state.appointmentId,
         employeeId: specialistId,
-        duration: getAppointmentDuration(appointment)
+        duration: getProceduresDuration(appointment)
       })
     })
 
@@ -73,7 +73,7 @@ const getters = {
   totalDuration (state, _getters, _rootState, rootGetters): number {
     const appointment = rootGetters['appointments/appointmentById'](state.appointmentId)
 
-    return getAppointmentDuration(appointment)
+    return getProceduresDuration(appointment)
   },
 
   getSlotByTime (state) {
