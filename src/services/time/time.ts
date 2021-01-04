@@ -27,6 +27,16 @@ export default class Time {
     return this.workingHours[timeIndex]
   }
 
+  shiftTimeUpBySteps (time, steps) {
+    let timeIndex = this.workingHours.indexOf(time) + steps
+
+    while (!this.workingHours[timeIndex]) {
+      timeIndex -= 1
+    }
+
+    return this.workingHours[timeIndex]
+  }
+
   getTimePoints ({ timeStart, totalTime }) {
     const fromIndex = this.workingHours.indexOf(timeStart)
 

@@ -29,7 +29,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { getAppointmentDuration } from '@/logics/appointment'
+import { getProceduresDuration } from '@/logics/appointment'
 
 import { slugFromTime } from '@/utils/time'
 
@@ -47,7 +47,7 @@ export default class Appointment extends Vue {
   isActive = false
 
   get totalTime () {
-    return getAppointmentDuration(this.appointment)
+    return getProceduresDuration(this.appointment)
   }
 
   get timePoints () {

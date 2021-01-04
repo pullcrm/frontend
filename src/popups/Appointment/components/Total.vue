@@ -75,6 +75,10 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { TIME_STEP } from '@/constants'
+
+import { getProceduresDuration } from '@/logics/appointment'
+
 import { toDate } from '@/utils/date-time'
 
 import Contenteditable from '@/ui/Contenteditable.vue'
@@ -130,23 +134,17 @@ export default class Total extends Vue {
   }
 
   get totalTime () {
-    return this.procedures
-      .reduce((sum, { duration }) => (sum + duration), 0)
-  }
-
-  get timePoints () {
-    return this.$time.getTimePoints({
-      timeStart: this.startTime,
-      totalTime: this.totalTime
-    })
+    return getProceduresDuration({ procedures: this.procedures })
   }
 
   get fromTime () {
-    return this.timePoints[0]
+    return this.startTime
   }
 
   get toTime () {
-    return this.timePoints[this.timePoints.length - 1]
+    const steps = this.totalTime / TIME_STEP
+
+    return this.$time.shiftTimeUpBySteps(this.fromTime, steps)
   }
 
   updateTotalPrice (val) {
