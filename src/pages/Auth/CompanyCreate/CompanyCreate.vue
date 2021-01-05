@@ -120,7 +120,7 @@ export default class CompanyCreate extends Vue {
       categoryId: this.company.category.id
     })
 
-    await this.onApproache(companyId)
+    await this.onCompany(companyId)
 
     const { href } = this.$router.resolve({
       name: 'dashboard'
@@ -129,7 +129,7 @@ export default class CompanyCreate extends Vue {
     window.location.href = href
   }
 
-  async onApproache (companyId) {
+  async onCompany (companyId) {
     const companies = await this.$api.profile.companies()
 
     const companyInfo = companies.find(({ company }) => company.id === companyId)

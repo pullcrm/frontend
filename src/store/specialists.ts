@@ -25,7 +25,7 @@ const actions = {
       return result
     } catch (err) {
       if (err.status === 400) {
-        dispatch('toasts/show', {
+        await dispatch('toasts/show', {
           type: 'error',
           title: 'У файла большой размер, к загрузке доступны файлы меньше 500Кб'
         }, { root: true })

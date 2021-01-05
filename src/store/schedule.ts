@@ -17,8 +17,8 @@ const actions = {
 
     await Promise.all([
       dispatch('fetchTimeOffs'),
-      dispatch('appointments/fetchQueue', null, { root: true }),
-      dispatch('appointments/fetchAppointments', null, { root: true })
+      dispatch('appointments/fetch', null, { root: true }),
+      dispatch('appointments/fetchQueue', null, { root: true })
     ])
 
     commit('SET_LOADING', false)

@@ -16,7 +16,7 @@ const actions = {
   async login ({ dispatch }, params) {
     const tokens = await this.$api.auth.login(params)
 
-    dispatch('saveTokens', tokens)
+    await dispatch('saveTokens', tokens)
   },
 
   async fetchToken ({ commit, dispatch }) {
@@ -32,7 +32,7 @@ const actions = {
         return accessToken
       }
     } catch {
-      dispatch('reset')
+      await dispatch('reset')
 
       location.reload()
     }
@@ -50,13 +50,13 @@ const actions = {
       refreshToken
     })
 
-    dispatch('saveTokens', { ...result, refreshToken })
+    await dispatch('saveTokens', { ...result, refreshToken })
   },
 
   async onRefreshToken ({ state, dispatch, rootState }) {
     const { role, company, profile } = rootState.company
 
-    dispatch('fetchCompanyToken', {
+    await dispatch('fetchCompanyToken', {
       role,
       company,
       profile
@@ -79,10 +79,10 @@ const actions = {
     commit('SET_TOKENS', { accessToken: null, refreshToken: null })
   },
 
-  logout ({ dispatch }) {
+  async logout ({ dispatch }) {
     // this.$api.auth.logout()
 
-    dispatch('reset')
+    await dispatch('reset')
 
     location.reload()
   }
