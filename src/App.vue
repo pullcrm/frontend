@@ -53,10 +53,6 @@ export default class App extends Vue {
     return this.$store.getters['company/current']
   }
 
-  get hasProfile () {
-    return Boolean(this.$store.state.profile.profile)
-  }
-
   get layout () {
     if (this.$route.meta?.layout) {
       return this.$route.meta?.layout

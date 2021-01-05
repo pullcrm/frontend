@@ -23,7 +23,7 @@ import Component from 'vue-class-component'
 @Component({})
 export default class Profile extends Vue {
   get profile () {
-    return this.$store.state.profile.profile
+    return this.$store.state.company.profile
   }
 
   get avatar () {

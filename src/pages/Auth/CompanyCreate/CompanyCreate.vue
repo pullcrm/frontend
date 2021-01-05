@@ -81,6 +81,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { normalizeCompanyInfo } from '@/logics/companies'
+
 import Layout from '@/pages/Auth/components/Layout.vue'
 
 @Component({
@@ -95,7 +97,7 @@ export default class CompanyCreate extends Vue {
   categories = []
 
   get hasProfile () {
-    return Boolean(this.$store.state.profile.profile)
+    return Boolean(this.$store.state.company.profile)
   }
 
   async beforeMount () {
@@ -128,12 +130,11 @@ export default class CompanyCreate extends Vue {
   }
 
   async onApproache (companyId) {
-    const approaches = await this.$api.specialists.my()
-    const approach = approaches.find(({ company }) => company.id === companyId) ?? approaches[0]
+    const companies = await this.$api.profile.companies()
 
-    this.$store.commit('approaches/SET_CURRENT', approach)
+    const companyInfo = companies.find(({ company }) => company.id === companyId)
 
-    await this.$store.dispatch('auth/fetchRefreshToken')
+    await this.$store.dispatch('auth/fetchCompanyToken', normalizeCompanyInfo(companyInfo))
   }
 
   onBack () {

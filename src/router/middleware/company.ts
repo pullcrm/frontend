@@ -1,6 +1,6 @@
 export default async function company ({ from, next, store }) {
   if (!store.getters['company/current']) {
-    await store.dispatch('approaches/fetch')
+    await store.dispatch('companies/fetch')
   }
 
   if (!store.getters['company/current']) {

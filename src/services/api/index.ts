@@ -205,8 +205,18 @@ export const factory = (send) => ({
       return send(`companies/${id}`, params, 'PUT')
     },
 
-    all () : Promise<ICompanyInfo[]> {
-      return send('companies', null, 'GET')
+    // all () : Promise<ICompanyInfo[]> {
+    //   return send('companies', null, 'GET')
+    // }
+  },
+
+  profile: {
+    get () : Promise<IRegistrationUser> {
+      return send('users/profile', null, 'GET')
+    },
+
+    companies () : Promise<any[]> {
+      return send('specialists', null, 'GET')
     }
   },
 
@@ -224,9 +234,13 @@ export const factory = (send) => ({
     }
   },
 
-  specialists: {
-    my () : Promise<any[]> {
-      return send('specialists', null, 'GET')
+  users: {
+    create (params: IUsersCreateParams) : Promise<IRegistrationUser> {
+      return send('users', params)
+    },
+
+    confirmation (params: IUsersConfirmationParams) : Promise<IUsersConfirmation> {
+      return send('users/confirmation', params)
     }
   },
 
@@ -271,24 +285,6 @@ export const factory = (send) => ({
 
     availableTime (params: any) : Promise<any> {
       return send('appointments/available-time', params)
-    }
-  },
-
-  users: {
-    create (params: IUsersCreateParams) : Promise<IRegistrationUser> {
-      return send('users', params)
-    },
-
-    confirmation (params: IUsersConfirmationParams) : Promise<IUsersConfirmation> {
-      return send('users/confirmation', params)
-    },
-
-    profile () : Promise<IRegistrationUser> {
-      return send('users/profile', null, 'GET')
-    },
-
-    all (): Promise<IUser[]> {
-      return send('users', null, 'GET')
     }
   },
 

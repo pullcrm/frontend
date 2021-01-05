@@ -141,13 +141,10 @@ export default class Login extends Vue {
         password: this.password
       })
 
-      await Promise.all([
-        this.$store.dispatch('approaches/fetch'),
-        this.$store.dispatch('profile/fetch')
-      ])
+      await this.$store.dispatch('companies/fetch')
 
       if (this.$store.getters['company/current']) {
-        await this.$store.dispatch('auth/fetchRefreshToken')
+        await this.$store.dispatch('auth/onRefreshToken')
 
         this.$router.push({
           name: 'dashboard'
