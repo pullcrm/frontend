@@ -11,7 +11,7 @@
     </UiTitle>
 
     <template
-      v-if="hasSmsAuthorize"
+      v-if="isSMSAuthorize"
     >
       <UiText
         size="m"
@@ -107,8 +107,8 @@ export default class SmsSettingsPage extends Vue {
     return DURATIONS
   }
 
-  get hasSmsAuthorize () {
-    return this.$store.getters['sms/hasSmsAuthorize']
+  get isSMSAuthorize () {
+    return this.$store.getters['sms/isAuthorize']
   }
 
   get remindBeforeInMinutes () {

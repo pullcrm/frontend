@@ -37,12 +37,12 @@ import Toasts from '@/components/Toasts/Toasts.vue'
   watch: {
     async hasCompany (value) {
       if (value) {
-        const hasSmsAuthorize = this.$store.getters['sms/hasSmsAuthorize']
+        const isSMSAuthorize = this.$store.getters['sms/isAuthorize']
 
         await Promise.all([
           this.$store.dispatch('procedures/fetch'),
           this.$store.dispatch('specialists/fetch'),
-          hasSmsAuthorize && this.$store.dispatch('sms/balance')
+          isSMSAuthorize && this.$store.dispatch('sms/balance')
         ])
       }
     }

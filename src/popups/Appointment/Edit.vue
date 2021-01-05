@@ -182,15 +182,15 @@ export default class AppointmentEdit extends Vue {
     ...this.appointment,
     date: toDate(this.appointment.date),
     employee: this.specialists.find(({ id }) => id === this.appointment.employee.id),
-    smsRemindNotify: this.hasSmsAuthorize ? Boolean(this.appointment.smsIdentifier) : null
+    smsRemindNotify: this.isSMSAuthorize ? Boolean(this.appointment.smsIdentifier) : null
   }
 
   get validations () {
     return {}
   }
 
-  get hasSmsAuthorize (): Boolean {
-    return this.$store.getters['sms/hasSmsAuthorize']
+  get isSMSAuthorize (): Boolean {
+    return this.$store.getters['sms/isAuthorize']
   }
 
   get specialists () {

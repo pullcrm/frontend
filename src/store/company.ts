@@ -2,9 +2,7 @@ function createState () {
   return {
     role: null,
     company: null,
-    profile: null,
-
-    companies: [],
+    profile: null
   }
 }
 

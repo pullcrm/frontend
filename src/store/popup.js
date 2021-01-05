@@ -34,7 +34,7 @@ const actions = {
   },
 
   smsConfirmed ({ state, commit }, result) {
-    if (!state.smsConfirmation) throw new Error('Question was not found')
+    if (!state.smsConfirmation) throw new Error('SMS confirmation was not found')
 
     state.smsConfirmation.resolve(result)
 

@@ -24,7 +24,7 @@
         </UiDropdownList>
 
         <UiDropdownList
-          v-if="hasSmsAuthorize"
+          v-if="isSMSAuthorize"
           name="СМС сообщения"
         >
           <UiText
@@ -134,8 +134,8 @@ export default class Tags extends Vue {
   readonly smsRemindNotify : boolean
   readonly smsCreationNotify : boolean
 
-  get hasSmsAuthorize () {
-    return this.$store.getters['sms/hasSmsAuthorize']
+  get isSMSAuthorize () {
+    return this.$store.getters['sms/isAuthorize']
   }
 
   get hasSmsRemindNotify () {

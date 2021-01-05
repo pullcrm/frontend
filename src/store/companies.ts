@@ -18,9 +18,9 @@ const actions = {
   },
 
   async save ({ commit, rootGetters }, companies) {
-    const companyId = rootGetters['auth/companyId']
-
     let companyInfo = companies[0]
+
+    const companyId = rootGetters['auth/companyId']
 
     if (companyId) {
       companyInfo = companies.find(({ company }) => company.id === companyId)

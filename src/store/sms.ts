@@ -19,7 +19,7 @@ const mutations = {
 }
 
 const getters = {
-  hasSmsAuthorize (_state, getters) {
+  isAuthorize (_state, getters) {
     return Boolean(getters.settings)
   },
 
