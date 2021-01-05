@@ -83,8 +83,6 @@ const actions = {
     // this.$api.auth.logout()
 
     await dispatch('reset')
-
-    location.reload()
   }
 }
 

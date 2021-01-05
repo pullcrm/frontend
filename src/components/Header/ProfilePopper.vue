@@ -40,8 +40,14 @@ export default class ProfilePopper extends Vue {
     popper: Popper
   }
 
-  logout () {
-    this.$store.dispatch('auth/logout')
+  async logout () {
+    await this.$store.dispatch('auth/logout')
+
+    const { href } = this.$router.resolve({
+      name: 'login'
+    })
+
+    window.location.href = href
   }
 
   toggle (reference: HTMLElement) {
