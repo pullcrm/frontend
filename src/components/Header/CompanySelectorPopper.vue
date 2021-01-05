@@ -11,10 +11,10 @@
       class="base-layout-header-company-selector-popper__inner"
     >
       <Company
-        v-for="approach in approaches"
-        :key="approach.id"
-        :company="approach.company"
-        @click.native="onApproach(approach)"
+        v-for="company in companies"
+        :key="company.id"
+        :company="company.company"
+        @click.native="onCompany(company)"
       />
 
       <UiButton
@@ -52,14 +52,12 @@ export default class CompanySelectorPoppper extends Vue {
     popper: Popper
   }
 
-  get approaches () {
-    return this.$store.state.approaches.approaches
+  get companies () {
+    return this.$store.state.companies.companies
   }
 
-  async onApproach (approach) {
-    this.$store.commit('approaches/SET_CURRENT', approach)
-
-    await this.$store.dispatch('auth/fetchRefreshToken')
+  async onCompany (companyInfo) {
+    await this.$store.dispatch('auth/fetchCompanyToken', companyInfo)
 
     location.reload()
   }

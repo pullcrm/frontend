@@ -71,7 +71,7 @@ export interface IAvatar {
 }
 
 export interface IRegistrationUser {
-  approaches?: any
+  specialists?: any
   id: number
   firstName: string
   lastName: string
@@ -205,8 +205,18 @@ export const factory = (send) => ({
       return send(`companies/${id}`, params, 'PUT')
     },
 
-    all () : Promise<ICompanyInfo[]> {
-      return send('companies', null, 'GET')
+    // all () : Promise<ICompanyInfo[]> {
+    //   return send('companies', null, 'GET')
+    // }
+  },
+
+  profile: {
+    get () : Promise<IRegistrationUser> {
+      return send('users/profile', null, 'GET')
+    },
+
+    companies () : Promise<any[]> {
+      return send('specialists', null, 'GET')
     }
   },
 
@@ -224,9 +234,13 @@ export const factory = (send) => ({
     }
   },
 
-  approaches: {
-    my () : Promise<any[]> {
-      return send('approaches', null, 'GET')
+  users: {
+    create (params: IUsersCreateParams) : Promise<IRegistrationUser> {
+      return send('users', params)
+    },
+
+    confirmation (params: IUsersConfirmationParams) : Promise<IUsersConfirmation> {
+      return send('users/confirmation', params)
     }
   },
 
@@ -274,24 +288,6 @@ export const factory = (send) => ({
     }
   },
 
-  users: {
-    create (params: IUsersCreateParams) : Promise<IRegistrationUser> {
-      return send('users', params)
-    },
-
-    confirmation (params: IUsersConfirmationParams) : Promise<IUsersConfirmation> {
-      return send('users/confirmation', params)
-    },
-
-    profile () : Promise<IRegistrationUser> {
-      return send('users/profile', null, 'GET')
-    },
-
-    all (): Promise<IUser[]> {
-      return send('users', null, 'GET')
-    }
-  },
-
   files: {
     create (params: any) : Promise<any> {
       return send('files', params, 'FORM')
@@ -330,7 +326,7 @@ export const factory = (send) => ({
 
   public: {
     specialistsByCompanyId (params: any): Promise<any> {
-      return send('public/approaches', params, 'GET')
+      return send('public/specialists', params, 'GET')
     },
 
     proceduresByCompanyId (params: any): Promise<any> {

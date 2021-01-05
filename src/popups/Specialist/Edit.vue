@@ -117,7 +117,7 @@ export default class SpecialistNew extends Vue {
   readonly user: IRegistrationUser
 
   form: IRegistrationUser = this.user
-  description = this.user.approaches.description
+  description = this.user.specialists.description
 
   isLoading = false
   currentFile: File
@@ -132,7 +132,7 @@ export default class SpecialistNew extends Vue {
   }
 
   get currentStatus () {
-    return this.user.approaches.status
+    return this.user.specialists.status
   }
 
   get statusList () {

@@ -37,12 +37,12 @@ import Toasts from '@/components/Toasts/Toasts.vue'
   watch: {
     async hasCompany (value) {
       if (value) {
-        const hasSmsAuthorize = this.$store.getters['sms/hasSmsAuthorize']
+        const isSMSAuthorize = this.$store.getters['sms/isAuthorize']
 
         await Promise.all([
           this.$store.dispatch('procedures/fetch'),
           this.$store.dispatch('specialists/fetch'),
-          hasSmsAuthorize && this.$store.dispatch('sms/balance')
+          isSMSAuthorize && this.$store.dispatch('sms/balance')
         ])
       }
     }
@@ -51,10 +51,6 @@ import Toasts from '@/components/Toasts/Toasts.vue'
 export default class App extends Vue {
   get hasCompany () {
     return this.$store.getters['company/current']
-  }
-
-  get hasProfile () {
-    return Boolean(this.$store.state.profile.profile)
   }
 
   get layout () {

@@ -1,7 +1,7 @@
 <template>
   <div
     class="base-layout-header-company"
-    :class="{'_active' : company.id === companyId }"
+    :class="{'_active' : company.id === currentCompany.id }"
   >
     <div class="base-layout-header-company__logo">
       <UiAvatar
@@ -41,12 +41,12 @@ import Component from 'vue-class-component'
 export default class Company extends Vue {
   readonly company
 
-  get companyId () {
-    return this.$store.getters['company/current']?.id
+  get logo () {
+    return this.company.logo?.path
   }
 
-  get logo () {
-    return this.company?.logo?.path
+  get currentCompany () {
+    return this.$store.getters['company/current']
   }
 }
 </script>

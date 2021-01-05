@@ -69,7 +69,7 @@ export default class Settings extends Vue {
   }
 
   get logo () {
-    return this.company?.logo?.path
+    return this.company.logo?.path
   }
 
   async onAvatar (file) {

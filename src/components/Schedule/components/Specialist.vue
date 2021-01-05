@@ -72,7 +72,7 @@ export default class Specialist extends Vue {
   }
 
   get status () {
-    return this.specialist.approaches.status
+    return this.specialist.specialists.status
   }
 
   get avatar () {

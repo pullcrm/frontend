@@ -8,9 +8,8 @@ import popup from './popup'
 import toasts from './toasts'
 import widget from './widget'
 import company from './company'
-import profile from './profile'
 import schedule from './schedule'
-import approaches from './approaches'
+import companies from './companies'
 import procedures from './procedures'
 import specialists from './specialists'
 import drugAndDrop from './drug-and-drop'
@@ -31,11 +30,10 @@ export default new Vuex.Store<IState>({
     popup,
     toasts,
     widget,
-    profile,
     company,
     schedule,
+    companies,
     procedures,
-    approaches,
     specialists,
     drugAndDrop,
     appointments

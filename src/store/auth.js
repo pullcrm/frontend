@@ -1,3 +1,5 @@
+import jwtDecode from 'jwt-decode'
+
 import storage from '@/utils/data-storage'
 
 const ACCESS_TOKEN = 'ACCESS_TOKEN_PULL_CRM'
@@ -14,7 +16,7 @@ const actions = {
   async login ({ dispatch }, params) {
     const tokens = await this.$api.auth.login(params)
 
-    dispatch('saveTokens', tokens)
+    await dispatch('saveTokens', tokens)
   },
 
   async fetchToken ({ commit, dispatch }) {
@@ -27,15 +29,38 @@ const actions = {
 
         this.$apiClient.setAccessToken(accessToken)
 
-        await dispatch('profile/fetch', null, { root: true })
-
         return accessToken
       }
     } catch {
-      dispatch('reset')
+      await dispatch('reset')
 
       location.reload()
     }
+  },
+
+  async fetchCompanyToken ({ state, dispatch }, companyInfo) {
+    const refreshToken = state.refreshToken
+
+    const { role, company, profile } = companyInfo
+
+    const result = await this.$api.auth.refreshToken({
+      role: role.name,
+      userId: profile.id,
+      companyId: company.id,
+      refreshToken
+    })
+
+    await dispatch('saveTokens', { ...result, refreshToken })
+  },
+
+  async onRefreshToken ({ state, dispatch, rootState }) {
+    const { role, company, profile } = rootState.company
+
+    await dispatch('fetchCompanyToken', {
+      role,
+      company,
+      profile
+    })
   },
 
   async saveTokens ({ commit }, { accessToken, refreshToken }) {
@@ -47,23 +72,6 @@ const actions = {
     commit('SET_TOKENS', { accessToken, refreshToken })
   },
 
-  async fetchRefreshToken ({ state, dispatch, rootState }) {
-    const { refreshToken } = state
-
-    if (!refreshToken) return
-
-    const { company, role, user } = rootState.approaches.current
-
-    const result = await this.$api.auth.refreshToken({
-      role: role.name,
-      userId: user.id,
-      companyId: company.id,
-      refreshToken
-    })
-
-    dispatch('saveTokens', { ...result, refreshToken })
-  },
-
   reset ({ commit }) {
     storage.removeItem(ACCESS_TOKEN)
     storage.removeItem(REFRESH_TOKEN)
@@ -71,12 +79,10 @@ const actions = {
     commit('SET_TOKENS', { accessToken: null, refreshToken: null })
   },
 
-  logout ({ dispatch }) {
+  async logout ({ dispatch }) {
     // this.$api.auth.logout()
 
-    dispatch('reset')
-
-    location.reload()
+    await dispatch('reset')
   }
 }
 
@@ -90,6 +96,12 @@ const mutations = {
 const getters = {
   hasToken (state) {
     return Boolean(state.accessToken)
+  },
+
+  companyId (state) {
+    const { companyId } = jwtDecode(state.accessToken)
+
+    return companyId
   }
 }
 

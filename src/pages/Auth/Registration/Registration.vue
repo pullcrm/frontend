@@ -200,7 +200,6 @@ export default class Home extends Vue {
 
     await this.$api.auth.registration(form)
     await this.$store.dispatch('auth/login', form)
-    await this.$store.dispatch('profile/fetch')
   }
 
   onBack () {

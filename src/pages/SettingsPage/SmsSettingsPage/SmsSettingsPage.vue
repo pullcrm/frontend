@@ -11,7 +11,7 @@
     </UiTitle>
 
     <template
-      v-if="hasSmsAuthorize"
+      v-if="isSMSAuthorize"
     >
       <UiText
         size="m"
@@ -101,16 +101,14 @@ import SettingsLayout from '../components/SettingsLayout.vue'
 export default class SmsSettingsPage extends Vue {
   isLoading = false
 
+  settings = this.$store.getters['sms/settings']
+
   get durationList () {
     return DURATIONS
   }
 
-  get settings () {
-    return this.$store.state.sms.settings
-  }
-
-  get hasSmsAuthorize () {
-    return this.$store.getters['sms/hasSmsAuthorize']
+  get isSMSAuthorize () {
+    return this.$store.getters['sms/isAuthorize']
   }
 
   get remindBeforeInMinutes () {
@@ -125,7 +123,17 @@ export default class SmsSettingsPage extends Vue {
     try {
       this.isLoading = true
 
-      await this.$store.dispatch('sms/updateSettings')
+      const {
+        remindBefore,
+        remindAfterCreation,
+        remindBeforeInMinutes
+      } = this.settings
+
+      await this.$api.sms.settingUpdate({
+        remindBefore,
+        remindAfterCreation,
+        remindBeforeInMinutes
+      })
 
       this.$store.dispatch('toasts/show', { title: 'Сохранено!' })
     } catch {
@@ -139,7 +147,7 @@ export default class SmsSettingsPage extends Vue {
   }
 
   onSettings (key, value) {
-    this.$store.commit('sms/SET_SETTING_BY_KEY', { key, value })
+    this.settings[key] = value
   }
 
   smsPopup () {
