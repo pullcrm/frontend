@@ -128,7 +128,7 @@ export default class CompanyCreate extends Vue {
   }
 
   async onApproache (companyId) {
-    const approaches = await this.$api.approaches.my()
+    const approaches = await this.$api.specialists.my()
     const approach = approaches.find(({ company }) => company.id === companyId) ?? approaches[0]
 
     this.$store.commit('approaches/SET_CURRENT', approach)

@@ -90,6 +90,12 @@ const mutations = {
 const getters = {
   hasToken (state) {
     return Boolean(state.accessToken)
+  },
+
+  companyId (state) {
+    const { companyId } = jwtDecode(rootState.auth.accessToken)
+
+    return companyId
   }
 }
 

@@ -71,7 +71,7 @@ export interface IAvatar {
 }
 
 export interface IRegistrationUser {
-  approaches?: any
+  specialists?: any
   id: number
   firstName: string
   lastName: string
@@ -224,9 +224,9 @@ export const factory = (send) => ({
     }
   },
 
-  approaches: {
+  specialists: {
     my () : Promise<any[]> {
-      return send('approaches', null, 'GET')
+      return send('specialists', null, 'GET')
     }
   },
 
@@ -330,7 +330,7 @@ export const factory = (send) => ({
 
   public: {
     specialistsByCompanyId (params: any): Promise<any> {
-      return send('public/approaches', params, 'GET')
+      return send('public/specialists', params, 'GET')
     },
 
     proceduresByCompanyId (params: any): Promise<any> {

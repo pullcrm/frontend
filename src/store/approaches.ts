@@ -1,5 +1,3 @@
-import jwtDecode from 'jwt-decode'
-
 function createState () {
   return {
     approaches: [],
@@ -8,14 +6,14 @@ function createState () {
 }
 
 const actions = {
-  async fetch ({ commit, dispatch, rootState }) {
-    const approaches = await this.$api.approaches.my()
+  async fetch ({ commit, dispatch, rootGetters }) {
+    const approaches = await this.$api.specialists.my()
 
     if (approaches.length === 0) {
       return
     }
 
-    const { companyId } = jwtDecode(rootState.auth.accessToken)
+    const companyId = rootGetters['auth/rootGetters']
 
     const current = approaches.find(({ company }) => company.id === companyId) ?? approaches[0]
 
