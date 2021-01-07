@@ -1,9 +1,13 @@
 export default async function company ({ from, next, store }) {
-  if (!store.getters['company/current']) {
-    await store.dispatch('companies/fetch')
+  if (store.getters['company/current']) {
+    return
   }
 
-  if (!store.getters['company/current']) {
+  const companies = await store.dispatch('companies/fetch')
+
+  if (companies.length === 0) {
     return next({ name: 'companyCreate', query: { from } })
   }
+
+  await store.dispatch('companies/selectCompany')
 }

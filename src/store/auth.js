@@ -54,13 +54,18 @@ const actions = {
   },
 
   async onRefreshToken ({ state, dispatch, rootState }) {
-    const { role, company, profile } = rootState.company
+    const refreshToken = state.refreshToken
 
-    await dispatch('fetchCompanyToken', {
+    const { role, companyId, userId } = jwtDecode(state.accessToken)
+
+    const result = await this.$api.auth.refreshToken({
       role,
-      company,
-      profile
+      userId,
+      companyId,
+      refreshToken
     })
+
+    await dispatch('saveTokens', { ...result, refreshToken })
   },
 
   async saveTokens ({ commit }, { accessToken, refreshToken }) {

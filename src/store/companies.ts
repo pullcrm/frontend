@@ -7,27 +7,25 @@ function createState () {
 }
 
 const actions = {
-  async fetch ({ dispatch }) {
+  async fetch ({ commit }) {
     const companies = await this.$api.profile.companies()
 
-    if (companies.length === 0) {
-      return
-    }
+    commit('SET_COMPANIES', companies.map(item => normalizeCompanyInfo(item)))
 
-    await dispatch('save', companies.map(item => normalizeCompanyInfo(item)))
+    return companies
   },
 
-  async save ({ commit, rootGetters }, companies) {
-    let companyInfo = companies[0]
-
+  async selectCompany ({ state, commit, rootGetters, dispatch }) {
     const companyId = rootGetters['auth/companyId']
+    const companies = state.companies
 
-    if (companyId) {
-      companyInfo = companies.find(({ company }) => company.id === companyId)
-    }
+    const companyInfo = (
+      companyId && companies.find(({ company }) => company.id === companyId
+    )) ?? companies[0]
 
-    commit('SET_COMPANIES', companies)
     commit('company/SET_COMPANY_INFO', companyInfo, { root: true })
+
+    await dispatch('auth/fetchCompanyToken', companyInfo, { root: true })
   }
 }
 
