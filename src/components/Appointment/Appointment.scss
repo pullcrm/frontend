@@ -1,52 +1,21 @@
 .appointment {
-  &__header {
+  &__client {
     display: flex;
     align-items: center;
-
-    .ui-text {
-      flex: 1;
-      color: $ui-black-100;
-    }
-  }
-
-  &__menu,
-  &__draggable {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    color: $ui-black-90;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  &__menu {
-    color: $ui-black-90;
-    background: $ui-yellow-brand;
-  }
-
-  &__draggable {
-    color: $ui-black-80;
-    background: $ui-black-20;
-    // cursor: grabbing;
-    cursor: grab;
+    // font-weight: bold;
   }
 
   &__sub-title {
+    @include ellipsis(2);
+
     flex: 1;
     align-items: flex-start;
     margin: 4px 0;
-    color: $ui-black-60;
+    opacity: 0.6;
 
     .ui-text__content {
       white-space: pre-line;
     }
-  }
-
-  &__footer {
-    display: flex;
-    align-items: center;
   }
 
   &__info {
@@ -55,13 +24,15 @@
     align-items: center;
 
     .ui-icon {
-      color: $ui-black-60;
+      color: inherit;
+      opacity: 0.6;
     }
 
     .ui-text {
-      &:not(:first-child) {
-        margin-left: 16px;
-        color: $ui-black-90;
+      margin-left: 16px;
+
+      &:first-child {
+        margin-left: 0;
       }
     }
   }

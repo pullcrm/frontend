@@ -4,23 +4,12 @@
     :appointment="appointment"
     @open="openOnPopup"
   >
-    <div class="appointment__header">
-      <UiText
-        size="m"
-      >
-        {{ appointment.fullName }}
-      </UiText>
-
-      <div
-        class="appointment__menu"
-        @click="openOnPopup"
-      >
-        <UiIcon
-          size="xs"
-          name="more/vertical"
-        />
-      </div>
-    </div>
+    <UiText
+      class="appointment__client"
+      size="m"
+    >
+      {{ appointment.fullName }}
+    </UiText>
 
     <UiText
       class="appointment__sub-title"
@@ -29,32 +18,21 @@
       {{ subTitle }}
     </UiText>
 
-    <div class="appointment__footer">
-      <div class="appointment__info">
-        <UiText
-          v-if="appointment.startTime"
-          size="s"
-          left-icon="timer"
-        >
-          {{ fromTime }} - {{ toTime }}
-        </UiText>
-
-        <UiText
-          size="s"
-          left-icon="wallet"
-        >
-          {{ appointment.total | price }}
-        </UiText>
-      </div>
-
-      <div
-        class="appointment__draggable"
+    <div class="appointment__info">
+      <UiText
+        v-if="appointment.startTime"
+        size="s"
+        left-icon="timer"
       >
-        <UiIcon
-          size="xs"
-          name="move"
-        />
-      </div>
+        {{ fromTime }} - {{ toTime }}
+      </UiText>
+
+      <UiText
+        size="s"
+        left-icon="wallet"
+      >
+        {{ appointment.total | price }}
+      </UiText>
     </div>
   </Wrapper>
 </template>

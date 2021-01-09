@@ -142,7 +142,7 @@ export default class HourTile extends Vue {
     }
 
     &._is-minute {
-      border-color: #eaeaea;
+      border-color: $ui-black-30;
     }
 
     &:last-child {

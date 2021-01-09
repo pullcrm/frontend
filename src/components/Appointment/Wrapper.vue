@@ -3,7 +3,7 @@
     class="appointment-wrapper"
     :class="[
       `_size_${sizeName}`,
-      `_status_${appointment.status}`,
+      `_status_${status}`,
       {'_is-active': isActive}
     ]"
     :style="gridArea"
@@ -46,6 +46,18 @@ export default class Appointment extends Vue {
 
   isActive = false
 
+  get status () {
+    if (this.appointment.id === 101) {
+      return 'WIDGET_COMPLETED'
+    }
+
+    if (this.appointment.id === 105) {
+      return 'WIDGET'
+    }
+
+    return this.appointment.status
+  }
+
   get totalTime () {
     return getProceduresDuration(this.appointment)
   }
@@ -84,18 +96,18 @@ export default class Appointment extends Vue {
   }
 
   dragStart (event) {
-    const height = this.$el.clientHeight
-    const width = this.$el.clientWidth
+    // const height = this.$el.clientHeight
+    // const width = this.$el.clientWidth
 
     // TODO: Refactor
-    const isDraggableY = event.layerY > height - 8 - 6 - 24 && event.layerY < height - 8 - 4
-    const isDraggableX = event.layerX > width - 10 - 6 - 24 && event.layerX < width - 8 - 6
+    // const isDraggableY = event.layerY > height - 8 - 6 - 24 && event.layerY < height - 8 - 4
+    // const isDraggableX = event.layerX > width - 10 - 6 - 24 && event.layerX < width - 8 - 6
 
-    if (!isDraggableY || !isDraggableX) {
-      event.preventDefault()
+    // if (!isDraggableY || !isDraggableX) {
+    //   event.preventDefault()
 
-      return
-    }
+    //   return
+    // }
 
     event.dataTransfer.effectsAllowed = 'move'
     event.dataTransfer.dropEffect = 'move'
@@ -127,24 +139,58 @@ export default class Appointment extends Vue {
   &._status {
     &_IN_PROGRESS {
       .appointment-wrapper__inner {
+        background: #fff;
+        color: #272727;
+
         &::before {
-          background: $ui-yellow-dark;
+          background: #fdbe3a;
+        }
+      }
+    }
+
+    &_WIDGET {
+      .appointment-wrapper__inner {
+        background: #fff;
+        color: #282828;
+
+        &::before {
+          background: #705BCF;
         }
       }
     }
 
     &_COMPLETED {
       .appointment-wrapper__inner {
+        background: #31a073;
+        color: #fff;
+
         &::before {
-          background: $ui-green-brand;
+          display: none;
+          // background: #31a073;
+        }
+      }
+    }
+
+    &_WIDGET_COMPLETED {
+      .appointment-wrapper__inner {
+        background: #705BCF;
+        color: #fff;
+
+        &::before {
+          display: none;
+          // background: #705BCF;
         }
       }
     }
 
     &_CANCELED {
       .appointment-wrapper__inner {
+        background: #eb404d;
+        color: #fff;
+
         &::before {
-          background: $ui-red-danger;
+          // background: #dd2c39;
+          display: none;
         }
       }
     }
@@ -177,14 +223,17 @@ export default class Appointment extends Vue {
   }
 
   &__inner {
+    @include ui-shadow-4;
+
     position: relative;
     display: flex;
     flex-direction: column;
     width: $SCHEDULE_APPOINTMENT_WIDTH;
     padding: 8px 8px 8px 12px;
     background: $ui-white;
-    border-radius: 4px;
-    box-shadow: $shadow;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    // box-shadow: $shadow;
 
     &::before {
       position: absolute;
@@ -192,7 +241,6 @@ export default class Appointment extends Vue {
       bottom: 0;
       left: 0;
       width: 4px;
-      border-radius: inherit;
       content: '';
     }
   }

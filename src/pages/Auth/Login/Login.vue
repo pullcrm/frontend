@@ -141,20 +141,18 @@ export default class Login extends Vue {
         password: this.password
       })
 
-      await this.$store.dispatch('companies/fetch')
+      const companies = await this.$store.dispatch('companies/fetch')
 
-      if (this.$store.getters['company/current']) {
-        await this.$store.dispatch('auth/onRefreshToken')
-
+      if (companies.length === 0) {
         this.$router.push({
-          name: 'dashboard'
+          name: 'companyCreate'
         })
-
-        return
       }
 
+      await this.$store.dispatch('companies/selectCompany')
+
       this.$router.push({
-        name: 'companyCreate'
+        name: 'dashboard'
       })
     } catch (err) {
       const serverErrors = [
