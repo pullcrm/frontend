@@ -2,7 +2,7 @@ import { normalizeCompanyInfo } from '@/logics/companies'
 
 function createState () {
   return {
-    companies: [],
+    companies: []
   }
 }
 
@@ -21,7 +21,7 @@ const actions = {
 
     const companyInfo = (
       companyId && companies.find(({ company }) => company.id === companyId
-    )) ?? companies[0]
+      )) ?? companies[0]
 
     commit('company/SET_COMPANY_INFO', companyInfo, { root: true })
 

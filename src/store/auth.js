@@ -53,19 +53,29 @@ const actions = {
     await dispatch('saveTokens', { ...result, refreshToken })
   },
 
-  async onRefreshToken ({ state, dispatch, rootState }) {
-    const refreshToken = state.refreshToken
+  async onRefreshToken ({ state, dispatch }) {
+    try {
+      const refreshToken = state.refreshToken
 
-    const { role, companyId, userId } = jwtDecode(state.accessToken)
+      const { role, companyId, userId } = jwtDecode(state.accessToken)
 
-    const result = await this.$api.auth.refreshToken({
-      role,
-      userId,
-      companyId,
-      refreshToken
-    })
+      const result = await this.$api.auth.refreshToken({
+        role,
+        userId,
+        companyId,
+        refreshToken
+      })
 
-    await dispatch('saveTokens', { ...result, refreshToken })
+      await dispatch('saveTokens', { ...result, refreshToken })
+    } catch (err) {
+      if (err.status === 403) {
+        await dispatch('reset')
+
+        location.reload()
+      }
+
+      throw err
+    }
   },
 
   async saveTokens ({ commit }, { accessToken, refreshToken }) {
