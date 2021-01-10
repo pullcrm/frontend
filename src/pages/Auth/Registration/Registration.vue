@@ -35,7 +35,7 @@
           >
             <UiInput
               v-model="form.firstName"
-              left-icon="edit/edit-1"
+              left-icon="pencil-fill"
               name="name"
               placeholder="Введите Имя"
               required
@@ -47,7 +47,7 @@
           >
             <UiInput
               v-model="form.lastName"
-              left-icon="edit/edit-1"
+              left-icon="pencil-fill"
               name="surname"
               placeholder="Введите Фамилию"
               required
@@ -61,7 +61,7 @@
             <UiInput
               v-model="form.phone"
               mask="38 (###) #### ###"
-              left-icon="phone"
+              left-icon="phone-fill"
               name="phone"
               type="phone"
               placeholder="066"
@@ -76,7 +76,7 @@
           >
             <UiInput
               v-model="form.password"
-              left-icon="key"
+              left-icon="key-fill"
               name="password"
               type="password"
               placeholder="Введите пароль"

@@ -23,7 +23,7 @@
       >
         <slot name="control:next">
           <UiIcon
-            name="arrow/ios/right"
+            name="arrow-right-fill"
             inline
           />
         </slot>
@@ -38,7 +38,7 @@
       >
         <slot name="control:prev">
           <UiIcon
-            name="arrow/ios/left"
+            name="arrow-left-fill"
             inline
           />
         </slot>

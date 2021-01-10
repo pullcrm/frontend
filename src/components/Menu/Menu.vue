@@ -8,34 +8,34 @@
 
     <MenuItem
       :to="{ name: 'dashboard' }"
-      icon="home"
+      icon="house-fill"
     />
 
     <MenuItem
       :to="{ name: 'schedule' }"
-      icon="calendar"
+      icon="calendar-fill"
     />
 
     <!-- <MenuItem
       :to="{ name: 'timeOff' }"
-      icon="clock"
+      icon="clock-fill"
     /> -->
 
     <MenuItem
       :to="{ name: 'specialists' }"
-      icon="person/persones"
+      icon="users-fill"
     />
 
     <MenuItem
       :to="{ name: 'procedures' }"
-      icon="list"
+      icon="list-bullets-fill"
     />
 
     <div class="menu__space" />
 
     <MenuItem
       :to="{ name: 'settings' }"
-      icon="settings/setting-1"
+      icon="gear-fill"
     />
   </div>
 </template>

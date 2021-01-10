@@ -14,7 +14,7 @@
     <UiIcon
       class="schedule-hour-tile__icon"
       size="xs"
-      name="plus/plus"
+      name="plus-fill"
     />
   </div>
 </template>

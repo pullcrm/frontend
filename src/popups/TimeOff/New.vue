@@ -26,7 +26,7 @@
           <UiInput
             v-model="form.name"
             required
-            left-icon="edit/edit-1"
+            left-icon="pencil-fill"
             placeholder="Введите описание"
             @input="resetFieldError('name')"
           />
@@ -59,7 +59,7 @@
               <UiInput
                 :value="date | formatDate('D MMMM')"
                 readonly
-                left-icon="edit/edit-1"
+                left-icon="pencil-fill"
               />
             </UiField>
           </template>

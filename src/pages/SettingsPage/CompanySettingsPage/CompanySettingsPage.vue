@@ -30,7 +30,7 @@
     >
       <UiInput
         v-model="companyName"
-        left-icon="edit/edit-1"
+        left-icon="pencil-fill"
         placeholder="Введите название"
       />
     </UiField>

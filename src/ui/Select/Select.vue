@@ -30,7 +30,7 @@
     >
       <UiIcon
         class="ui-select__clear"
-        :name="hasClear ? 'close/close-1' : 'arrow/ios/down'"
+        :name="hasClear ? 'x-fill' : 'caret-down-fill'"
         size="s"
       />
     </span>
@@ -62,7 +62,7 @@
 
             <UiIcon
               size="custom"
-              name="close/close-1"
+              name="x-fill"
               @click.native="deselect(option)"
             />
           </div>

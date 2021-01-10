@@ -110,7 +110,7 @@
     </div>
 
     <UiAlert
-      left-icon="alert/circle"
+      left-icon="warning-circle-fill"
       theme="info"
     >
       Ми нагадаємо вам про запис за годину до початку
@@ -118,7 +118,7 @@
 
     <UiAlert
       v-if="hasError"
-      left-icon="alert/circle"
+      left-icon="warning-circle-fill"
       theme="error"
     >
       Вказана не вся інформація, перевірте, будь ласка, форму!

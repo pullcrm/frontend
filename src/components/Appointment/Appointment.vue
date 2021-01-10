@@ -18,18 +18,20 @@
       {{ subTitle }}
     </UiText>
 
+    <!-- timer-fill -->
     <div class="appointment__info">
       <UiText
         v-if="appointment.startTime"
         size="s"
-        left-icon="timer"
+        left-icon="clock-clockwise-fill"
       >
         {{ fromTime }} - {{ toTime }}
       </UiText>
 
+      <!-- money-fill -->
       <UiText
         size="s"
-        left-icon="wallet"
+        left-icon="credit-card-fill"
       >
         {{ appointment.total | price }}
       </UiText>

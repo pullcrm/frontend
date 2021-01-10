@@ -10,7 +10,7 @@
       <UiDropdownList>
         <UiDropdownItem
           size="m"
-          left-icon="edit/edit-1"
+          left-icon="pencil-fill"
           @click.native="openPopup"
         >
           Редактировать
@@ -19,7 +19,7 @@
         <UiDropdownItem
           v-if="isClosedDay === false"
           size="m"
-          left-icon="slash"
+          left-icon="prohibit-fill"
           @click.native="onCloseDay"
         >
           Закрыть запись на этот день

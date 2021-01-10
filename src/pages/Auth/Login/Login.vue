@@ -33,7 +33,7 @@
               v-model="phone"
               mask="38 (###) #### ###"
               name="phone"
-              left-icon="phone"
+              left-icon="phone-fill"
               placeholder="066"
               required
               @input="resetFieldError('phone')"
@@ -48,7 +48,7 @@
               v-model="password"
               type="password"
               name="password"
-              left-icon="key"
+              left-icon="key-fill"
               placeholder="Введите пароль"
               required
               @input="resetFieldError('password')"

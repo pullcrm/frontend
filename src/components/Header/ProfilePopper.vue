@@ -11,7 +11,7 @@
         <UiDropdownItem
           class="base-layout-header-profile-popper__logout"
           size="m"
-          left-icon="log/out"
+          left-icon="sign-out-fill"
           @click.native="logout"
         >
           Выйти

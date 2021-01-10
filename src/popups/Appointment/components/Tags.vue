@@ -6,7 +6,7 @@
           <UiBadge
             size="m"
             clickable
-            right-icon="plus/plus"
+            right-icon="plus-fill"
             @click.native="isOpened ? close() : open()"
           >
             Еще
@@ -16,7 +16,7 @@
         <UiDropdownList>
           <UiText
             size="m"
-            :left-icon="isQueue ? 'close/close-1' : 'edit/edit-1'"
+            :left-icon="isQueue ? 'x-fill' : 'pencil-fill'"
             @click.native="isQueue = !isQueue"
           >
             Добавить в очередь
@@ -29,7 +29,7 @@
         >
           <UiText
             size="m"
-            :left-icon="hasSmsRemindNotify ? 'close/close-1' : 'edit/edit-1'"
+            :left-icon="hasSmsRemindNotify ? 'x-fill' : 'pencil-fill'"
             @click.native="hasSmsRemindNotify = !hasSmsRemindNotify"
           >
             Напомнить за время
@@ -38,7 +38,7 @@
           <UiText
             v-if="isCreate"
             size="m"
-            :left-icon="hasSmsCreationNotify ? 'close/close-1' : 'edit/edit-1'"
+            :left-icon="hasSmsCreationNotify ? 'x-fill' : 'pencil-fill'"
             @click.native="hasSmsCreationNotify = !hasSmsCreationNotify"
           >
             Сообщить о создании
@@ -53,7 +53,7 @@
             v-for="{ key, value } in statuses"
             :key="key"
             size="m"
-            :left-icon="key === status ? 'close/close-1' : 'edit/edit-1'"
+            :left-icon="key === status ? 'x-fill' : 'pencil-fill'"
             @click.native="onStatus(key)"
           >
             {{ value }}
@@ -65,7 +65,7 @@
         v-if="isQueue"
         size="m"
         clickable
-        right-icon="close/close-1"
+        right-icon="x-fill"
         @click.native="isQueue = false"
       >
         Добавлено в очередь
@@ -75,7 +75,7 @@
         v-if="hasSmsRemindNotify"
         size="m"
         clickable
-        right-icon="close/close-1"
+        right-icon="x-fill"
         @click.native="hasSmsRemindNotify = false"
       >
         Напомнить о записи
@@ -85,7 +85,7 @@
         v-if="isCreate && hasSmsCreationNotify"
         size="m"
         clickable
-        right-icon="close/close-1"
+        right-icon="x-fill"
         @click.native="hasSmsCreationNotify = false"
       >
         Отправить sms после создания

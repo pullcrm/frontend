@@ -25,7 +25,7 @@
         >
           <UiInput
             v-model="form.name"
-            left-icon="edit/edit-1"
+            left-icon="pencil-fill"
             placeholder="Введите название"
             @input="resetFieldError('name')"
           />
@@ -37,7 +37,7 @@
           <UiInput
             v-model="form.price"
             type="number"
-            left-icon="edit/edit-1"
+            left-icon="pencil-fill"
             placeholder="Укажите цену"
             @input="resetFieldError('price')"
           />
@@ -50,7 +50,7 @@
             v-model="form.duration"
             label="name"
             :options="durationList"
-            left-icon="edit/edit-1"
+            left-icon="pencil-fill"
             placeholder="Выбрать время"
             @input="resetFieldError('duration')"
           />

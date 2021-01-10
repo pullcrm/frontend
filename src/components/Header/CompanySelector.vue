@@ -25,7 +25,7 @@
 
     <template #append>
       <UiIcon
-        name="arrow/chevron/down"
+        name="caret-down-fill"
         size="s"
       />
     </template>

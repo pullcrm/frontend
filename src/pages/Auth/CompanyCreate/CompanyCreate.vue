@@ -32,7 +32,7 @@
         >
           <UiInput
             v-model="company.name"
-            left-icon="edit/edit-1"
+            left-icon="pencil-fill"
             placeholder="Ваша компания"
             required
           />

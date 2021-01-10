@@ -6,7 +6,7 @@
   >
     <template #prepend>
       <UiIcon
-        name="arrow/ios/left"
+        name="arrow-left-fill"
         size="xs"
       />
     </template>

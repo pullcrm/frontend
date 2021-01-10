@@ -11,7 +11,7 @@
       class="schedule-sidebar__add-appointment"
       size="l"
       theme="blue"
-      right-icon="plus/plus"
+      right-icon="plus-fill"
       @click.native="addAppointment"
     >
       Добавить запись

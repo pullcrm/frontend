@@ -24,13 +24,7 @@ function walkIcons (dir) {
     .forEach((file) => {
       const filePath = path.join(dir, file)
 
-      const stat = fs.statSync(filePath)
-
-      if (stat.isFile()) {
-        replaceIcon(filePath)
-      } else {
-        walkIcons(filePath)
-      }
+      replaceIcon(filePath)
     })
 }
 
