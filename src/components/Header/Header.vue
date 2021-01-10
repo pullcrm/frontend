@@ -8,17 +8,8 @@
         @click.native.prevent="popperCompanySelectorToggle"
       />
 
-      <Profile
-        class="base-layout-header__profile"
-        @click.native.prevent="popperProfileToggle"
-      />
-
       <CompanySelectorPopper
         ref="companySelectorPopper"
-      />
-
-      <ProfilePopper
-        ref="profilePopper"
       />
     </div>
   </UiContainer>
@@ -28,22 +19,17 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import Profile from './Profile.vue'
-import ProfilePopper from './ProfilePopper.vue'
 import CompanySelector from './CompanySelector.vue'
 import CompanySelectorPopper from './CompanySelectorPopper.vue'
 
 @Component({
   components: {
-    Profile,
-    ProfilePopper,
     CompanySelector,
     CompanySelectorPopper
   }
 })
 export default class DashboardHeader extends Vue {
   $refs: {
-    profilePopper: ProfilePopper
     companySelectorPopper: CompanySelectorPopper
   }
 
@@ -51,12 +37,6 @@ export default class DashboardHeader extends Vue {
     const reference = this.$el.querySelector('.base-layout-header-company-selector__avatar') as HTMLElement
 
     this.$refs.companySelectorPopper.toggle(reference)
-  }
-
-  popperProfileToggle () {
-    const reference = this.$el.querySelector('.base-layout-header-profile__avatar') as HTMLElement
-
-    this.$refs.profilePopper.toggle(reference)
   }
 }
 </script>

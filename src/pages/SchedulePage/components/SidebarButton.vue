@@ -3,7 +3,6 @@
     class="schedule-sidebar-button"
     size="m"
     theme="blue"
-    right-icon="plus-fill"
   >
     {{ date | formatDate('D MMMM') }}
   </UiButton>

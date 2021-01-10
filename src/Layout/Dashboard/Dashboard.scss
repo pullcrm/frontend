@@ -1,10 +1,10 @@
 .dashboard-layout {
   min-height: 100vh;
-  padding-left: 64px;
+  padding-left: $ui-menu-desktop-width;
   background: $ui-gray-brand;
 
   &._has-sidebar {
-    padding-left: calc(#{$SCHEDULE_APPOINTMENT_WIDTH} + #{64px + 26px});
+    padding-left: calc(#{$SCHEDULE_APPOINTMENT_WIDTH} + #{$ui-menu-desktop-width + 26px});
   }
 
   &__nav {
@@ -12,7 +12,7 @@
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 11;
+    z-index: 13;
     display: flex;
     background: #fff;
   }

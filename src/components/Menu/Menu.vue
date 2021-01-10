@@ -31,11 +31,23 @@
       icon="list-bullets-fill"
     />
 
-    <div class="menu__space" />
-
     <MenuItem
       :to="{ name: 'settings' }"
       icon="gear-fill"
+    />
+
+    <div class="menu__space" />
+
+    <UiAvatar
+      class="menu__avatar"
+      :image="avatar"
+      :name="profile.firstName"
+      size="s"
+      @click.native.prevent="popperProfileToggle"
+    />
+
+    <ProfilePopper
+      ref="profilePopper"
     />
   </div>
 </template>
@@ -45,13 +57,33 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import MenuItem from './MenuItem.vue'
+import ProfilePopper from './ProfilePopper.vue'
 
 @Component({
   components: {
-    MenuItem
+    MenuItem,
+    ProfilePopper
   }
 })
-export default class Menu extends Vue {}
+export default class Menu extends Vue {
+  $refs: {
+    profilePopper: ProfilePopper
+  }
+
+  get profile () {
+    return this.$store.state.company.profile
+  }
+
+  get avatar () {
+    return this.profile.avatar?.path
+  }
+
+  popperProfileToggle () {
+    const reference = this.$el.querySelector('.menu__avatar') as HTMLElement
+
+    this.$refs.profilePopper.toggle(reference)
+  }
+}
 </script>
 
 <style lang="scss" src="./Menu.scss"></style>
