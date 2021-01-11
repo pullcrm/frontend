@@ -12,7 +12,7 @@ const actions = {
 
     const company = await this.$api.companies.byId(companyId)
 
-    commit('SET_COMPANY', company)
+    commit('SET_COMPANY', company, { root: true })
   }
 }
 
@@ -29,7 +29,6 @@ const mutations = {
     state.company = company
   }
 }
-
 
 const getters = {
   current (state, _getters) {
