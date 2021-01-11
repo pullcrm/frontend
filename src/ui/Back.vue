@@ -11,7 +11,7 @@
       />
     </template>
 
-    назад
+    Назад
   </UiText>
 </template>
 
