@@ -55,7 +55,7 @@ const getters = {
   isClosedDay (state) {
     return (specialistId) => {
       return state.timeOffs.some(timeOff => {
-        return isCloseDay(timeOff) && timeOff.employeeId === specialistId
+        return isCloseDay(timeOff) && timeOff.specialistId === specialistId
       })
     }
   }

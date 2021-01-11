@@ -128,7 +128,7 @@ export default class ScheduleColumn extends Vue {
       name: 'appointment-new',
       props: {
         time,
-        employeeId: this.specialist.id
+        specialistId: this.specialist.id
       }
     })
   }

@@ -8,7 +8,7 @@
     <UiAvatar
       class="schedule-column-specialist__avatar"
       :image="avatar"
-      :name="specialist.firstName"
+      :name="user.firstName"
       size="s"
       type="rounded"
     />
@@ -18,7 +18,7 @@
         class="schedule-column-specialist__name"
         size="s"
       >
-        {{ specialist.firstName }} {{ specialist.lastName }}
+        {{ user.firstName }} {{ user.lastName }}
       </UiText>
 
       <UiText
@@ -72,16 +72,20 @@ export default class Specialist extends Vue {
   }
 
   get status () {
-    return this.specialist.specialists.status
+    return this.specialist.status
+  }
+
+  get user () {
+    return this.specialist.user
   }
 
   get avatar () {
-    return this.specialist.avatar?.path
+    return this.user.avatar?.path
   }
 
   get appointments () {
     return this.$store.state.appointments.appointments
-      .filter(({ employee }) => employee.id === this.specialist.id)
+      .filter(({ specialist }) => specialist.id === this.specialist.id)
   }
 
   get appointmentsCount () {

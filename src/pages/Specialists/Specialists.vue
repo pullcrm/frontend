@@ -78,7 +78,7 @@ export default class Specialists extends Vue {
   onEdit (specialist) {
     this.$store.dispatch('popup/show', {
       name: 'specialist-edit',
-      props: { user: specialist }
+      props: { specialist }
     })
   }
 

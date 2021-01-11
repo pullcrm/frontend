@@ -52,13 +52,13 @@
           label="Сотрудник"
         >
           <UiSelect
-            v-model="form.employee"
+            v-model="form.specialist"
             :options="specialists"
             label="fullName"
             placeholder="Выбрать исполнителя"
             :clearable="false"
             required
-            @input="resetFieldError('employee')"
+            @input="resetFieldError('specialist')"
           />
         </UiField>
 
@@ -181,7 +181,7 @@ export default class AppointmentEdit extends Vue {
   form = {
     ...this.appointment,
     date: toDate(this.appointment.date),
-    employee: this.specialists.find(({ id }) => id === this.appointment.employee.id),
+    specialist: this.specialists.find(({ id }) => id === this.appointment.specialist.id),
     smsRemindNotify: this.isSMSAuthorize ? Boolean(this.appointment.smsIdentifier) : null
   }
 
@@ -206,7 +206,7 @@ export default class AppointmentEdit extends Vue {
   }
 
   get specialist () {
-    return this.form.employee
+    return this.form.specialist
   }
 
   get duration () {
@@ -254,14 +254,14 @@ export default class AppointmentEdit extends Vue {
   async fetchAvailableTime () {
     this.workingHours = []
 
-    if (!this.form.employee?.id || this.duration === 0) {
+    if (!this.form.specialist?.id || this.duration === 0) {
       return
     }
 
     this.workingHours = await this.$api.appointments.availableTime({
       date: this.form.date.format('YYYY-MM-DD'),
       excludeId: this.form.id,
-      employeeId: this.form.employee.id,
+      specialistId: this.form.specialist.id,
       duration: this.duration
     })
   }

@@ -21,7 +21,7 @@ const actions = {
       return this.$api.appointments.availableTime({
         date: rootState.schedule.date,
         excludeId: state.appointmentId,
-        employeeId: specialistId,
+        specialistId: specialistId,
         duration: getProceduresDuration(appointment)
       })
     })

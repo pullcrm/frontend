@@ -10,7 +10,7 @@ const actions = {
 
     specialists = specialists.map(item => ({
       ...item,
-      fullName: `${item.firstName} ${item.lastName}`
+      fullName: `${item.user.firstName} ${item.user.lastName}`
     }))
 
     commit('SET_SPECIALISTS', specialists)

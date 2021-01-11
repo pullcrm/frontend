@@ -126,7 +126,7 @@ export interface IAppointmentCreateParams {
   isQueue?: boolean
   fullName?: string
   startTime: string
-  employeeId: number
+  specialistId: number
   procedures: number[]
   description: string
   smsRemindNotify: boolean
@@ -147,14 +147,14 @@ export interface ISmscSendParams {
 }
 
 export interface ITimeOffGetAllParams {
-  employeeId?: number
+  specialistId?: number
   date: string
   // startDateTime: string
   // endDateTime: string
 }
 
 export interface ITimeOffCreateParams {
-  employeeId: number
+  specialistId: number
   startDateTime: string
   endDateTime: string
 }
@@ -222,15 +222,15 @@ export const factory = (send) => ({
 
   specialist: {
     create (params: IRegistrationUserParams) : Promise<IRegistrationUser> {
-      return send('companies/my/staff', params)
+      return send('companies/my/specialists', params)
     },
 
     update (id: number, params: IRegistrationUserParams) : Promise<IRegistrationUser> {
-      return send(`companies/my/staff/${id}`, params, 'PUT')
+      return send(`companies/my/specialists/${id}`, params, 'PUT')
     },
 
     all (): Promise<any> {
-      return send('companies/my/staff', null, 'GET')
+      return send('companies/my/specialists', null, 'GET')
     }
   },
 

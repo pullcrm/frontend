@@ -11,9 +11,9 @@ export function normalizeAppointmentParams (submitParams) {
     phone,
     status,
     isQueue,
-    employee,
     fullName,
     startTime,
+    specialist,
     procedures,
     description,
     specialistId, // custom prop
@@ -29,9 +29,9 @@ export function normalizeAppointmentParams (submitParams) {
     isQueue: isQueue,
     fullName: fullName,
     startTime: isQueue ? null : `${startTime}:00`,
-    employeeId: specialistId ?? employee.id,
     procedures: procedures.map(({ id }) => id),
     description: description,
+    specialistId: specialistId ?? specialist.id,
     smsRemindNotify: smsRemindNotify,
     smsCreationNotify: smsCreationNotify
   }

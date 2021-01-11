@@ -36,13 +36,13 @@
           label="Сотрудник"
         >
           <UiSelect
-            v-model="form.employee"
+            v-model="form.specialist"
             :options="specialists"
             label="fullName"
             placeholder="Выбрать сотрудника"
             :clearable="false"
             required
-            @input="resetFieldError('employee')"
+            @input="resetFieldError('specialist')"
           />
         </UiField>
 
@@ -145,7 +145,7 @@ import Calendar from '@/components/Calendar/Calendar.vue'
   },
 
   props: {
-    employeeId: {
+    specialistId: {
       type: Number,
       default: null
     },
@@ -167,14 +167,14 @@ import Calendar from '@/components/Calendar/Calendar.vue'
 })
 export default class TimeOffNew extends Vue {
   readonly time?: string
-  readonly employeeId?: number
+  readonly specialistId?: number
 
   isCloseDay = false
 
   form = {
     endTime: null,
-    employee: this.employeeId && this.specialists.find(({ id }) => id === this.employeeId),
-    startTime: this.time
+    startTime: this.time,
+    specialist: this.specialistId && this.specialists.find(({ id }) => id === this.specialistId)
   }
 
   date = new Date(this.$store.state.schedule.date)
@@ -206,7 +206,7 @@ export default class TimeOffNew extends Vue {
     const startDateTime = setTime(this.date, this.form.startTime).format('MM.DD.YY HH:mm')
 
     await this.$api.timeOff.create({
-      employeeId: this.form.employee.id,
+      specialistId: this.form.specialist.id,
       endDateTime,
       startDateTime
     })

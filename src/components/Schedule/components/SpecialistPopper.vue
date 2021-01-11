@@ -90,7 +90,7 @@ export default class SpecialistPopper extends Vue {
     const startDateTime = setTime(date, START_TIME_OF_DAY).format('MM.DD.YY HH:mm')
 
     await this.$api.timeOff.create({
-      employeeId: this.specialist.id,
+      specialistId: this.specialist.id,
       endDateTime,
       startDateTime
     })

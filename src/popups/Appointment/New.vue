@@ -52,13 +52,13 @@
           label="Сотрудник"
         >
           <UiSelect
-            v-model="form.employee"
+            v-model="form.specialist"
             :options="specialists"
             label="fullName"
             placeholder="Выбрать исполнителя"
             :clearable="false"
             required
-            @input="resetFieldError('employee')"
+            @input="resetFieldError('specialist')"
           />
         </UiField>
 
@@ -136,7 +136,7 @@ import Total from './components/Total.vue'
   },
 
   props: {
-    employeeId: {
+    specialistId: {
       type: Number,
       default: null
     },
@@ -175,7 +175,7 @@ import Total from './components/Total.vue'
 export default class AppointmentNew extends Vue {
   readonly time?: string
   readonly isQueue?: boolean
-  readonly employeeId?: number
+  readonly specialistId?: number
 
   workingHours = []
 
@@ -185,8 +185,8 @@ export default class AppointmentNew extends Vue {
     phone: '',
     isQueue: this.isQueue,
     fullName: '',
-    employee: this.employeeId && this.specialists.find(({ id }) => id === this.employeeId),
     startTime: this.time,
+    specialist: this.specialistId && this.specialists.find(({ id }) => id === this.specialistId),
     procedures: [],
     description: '',
     smsCreationNotify: this.$store.getters['sms/settings']?.remindAfterCreation,
@@ -210,7 +210,7 @@ export default class AppointmentNew extends Vue {
   }
 
   get specialist () {
-    return this.form.employee
+    return this.form.specialist
   }
 
   get duration () {
@@ -241,13 +241,13 @@ export default class AppointmentNew extends Vue {
   async fetchAvailableTime () {
     this.workingHours = []
 
-    if (!this.form.employee?.id || this.duration === 0) {
+    if (!this.form.specialist?.id || this.duration === 0) {
       return
     }
 
     this.workingHours = await this.$api.appointments.availableTime({
       date: this.form.date.format('YYYY-MM-DD'),
-      employeeId: this.form.employee.id,
+      specialistId: this.form.specialist.id,
       duration: this.duration
     })
   }

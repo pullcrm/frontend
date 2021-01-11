@@ -80,12 +80,12 @@ export default class Schedule extends Vue {
   }
 
   get columns () {
-    return this.specialists.map(specialist => {
-      const appointments = this.appointments.filter(({ employee }) => {
-        return employee.id === specialist.id
+    return this.specialists.map((specialist) => {
+      const appointments = this.appointments.filter(item => {
+        return item.specialist.id === specialist.id
       })
 
-      const timeOffs = this.timeOffs.filter(({ employeeId }) => employeeId === specialist.id)
+      const timeOffs = this.timeOffs.filter(({ specialistId }) => specialistId === specialist.id)
 
       return {
         timeOffs,

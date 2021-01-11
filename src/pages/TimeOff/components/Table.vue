@@ -32,7 +32,7 @@
 
       <template #default="{ row }">
         <UiTableColumn>
-          {{ row.employeeId }}
+          {{ row.specialistId }}
         </UiTableColumn>
 
         <UiTableColumn>

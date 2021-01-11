@@ -216,7 +216,7 @@ export default class BarbershopLondon extends Vue {
       const procedureId = this.procedure.id
 
       await this.$api.public.appointmentCreate({
-        employeeId: this.specialist.id,
+        specialistId: this.specialist.id,
         fullName: this.form.fullName.trim(),
         phone: this.form.phone,
         companyId: this.companyId,
@@ -267,7 +267,7 @@ export default class BarbershopLondon extends Vue {
     this.workingHours = await this.$api.public.hoursSlots({
       date,
       companyId: this.companyId,
-      employeeId: this.specialist.id,
+      specialistId: this.specialist.id,
       duration: this.procedure.duration
     })
 

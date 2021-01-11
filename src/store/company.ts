@@ -12,7 +12,7 @@ const actions = {
 
     const company = await this.$api.companies.byId(companyId)
 
-    commit('SET_COMPANY', company, { root: true })
+    commit('SET_COMPANY', company)
   }
 }
 

@@ -62,7 +62,7 @@ export default class HourTilePoppover extends Vue {
       name: 'appointment-new',
       props: {
         time: this.hour,
-        employeeId: this.specialist.id
+        specialistId: this.specialist.id
       }
     })
   }
@@ -72,7 +72,7 @@ export default class HourTilePoppover extends Vue {
       name: 'time-off-new',
       props: {
         time: this.hour,
-        employeeId: this.specialist.id
+        specialistId: this.specialist.id
       }
     })
   }
