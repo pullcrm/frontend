@@ -108,7 +108,7 @@ export default class ScheduleColumn extends Vue {
   get gridStyles () {
     return {
       gridTemplateColumns: '[start] 280px [end] 0',
-      gridTemplateRows: this.gridTemplateRows,
+      gridTemplateRows: this.gridTemplateRows
     }
   }
 

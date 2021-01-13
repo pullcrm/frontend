@@ -64,9 +64,9 @@ export default class BarbershopLondon extends Vue {
 
 <style lang="scss">
 .base-widget-specialists {
-    &__title {
-      margin-bottom: 24px;
-      color: $ui-white;
-    }
+  &__title {
+    margin-bottom: 24px;
+    color: $ui-white;
   }
+}
 </style>

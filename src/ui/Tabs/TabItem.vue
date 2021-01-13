@@ -44,8 +44,8 @@ export default class TabItem extends Vue {
 
   position: relative;
   margin-right: 24px;
-  cursor: pointer;
   white-space: nowrap;
+  cursor: pointer;
 
   &__active,
   &.router-link-active {

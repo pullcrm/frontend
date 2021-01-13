@@ -6,7 +6,7 @@
       v-if="image"
       class="ui-placeholder__image"
     >
-      <img :src="image" alt="">
+      <img :src="image">
     </div>
 
     <div class="ui-placeholder__title">

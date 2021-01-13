@@ -203,7 +203,7 @@ export const factory = (send) => ({
 
     update (id: number, params: ICompaniesCreateParams) : Promise<any> {
       return send(`companies/${id}`, params, 'PUT')
-    },
+    }
 
     // all () : Promise<ICompanyInfo[]> {
     //   return send('companies', null, 'GET')

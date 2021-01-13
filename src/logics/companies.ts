@@ -16,6 +16,6 @@ export function normalizeCompanyInfo (payload) {
       status,
       description,
       specialistId: id
-    },
+    }
   }
 }
