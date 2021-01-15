@@ -1,4 +1,8 @@
 export default async function company ({ from, next, store }) {
+  if (!store.state.auth.accessToken) {
+    return
+  }
+
   if (store.getters['company/current']) {
     return
   }

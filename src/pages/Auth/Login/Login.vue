@@ -142,6 +142,7 @@ export default class Login extends Vue {
       })
 
       await this.$store.dispatch('companies/fetch')
+      await this.$store.dispatch('companies/selectCompany')
 
       if (this.$store.getters['company/current']) {
         await this.$store.dispatch('auth/onRefreshToken')

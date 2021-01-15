@@ -37,18 +37,28 @@ const actions = {
   },
 
   async fetchCompanyToken ({ state, dispatch }, companyInfo) {
-    const refreshToken = state.refreshToken
+    try {
+      const refreshToken = state.refreshToken
 
-    const { role, company, profile } = companyInfo
+      const { role, company, profile } = companyInfo
 
-    const result = await this.$api.auth.refreshToken({
-      role: role.name,
-      userId: profile.id,
-      companyId: company.id,
-      refreshToken
-    })
+      const result = await this.$api.auth.refreshToken({
+        role: role.name,
+        userId: profile.id,
+        companyId: company.id,
+        refreshToken
+      })
 
-    await dispatch('saveTokens', { ...result, refreshToken })
+      await dispatch('saveTokens', { ...result, refreshToken })
+    } catch (err) {
+      if (err.status === 403) {
+        await dispatch('reset')
+
+        location.reload()
+      }
+
+      throw err
+    }
   },
 
   async onRefreshToken ({ state, dispatch }) {
