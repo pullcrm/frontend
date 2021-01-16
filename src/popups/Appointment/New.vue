@@ -113,6 +113,7 @@
         type="submit"
         size="l"
         theme="blue"
+        :loading="isLoading"
       >
         Добавить запись
       </UiButton>
@@ -177,6 +178,7 @@ export default class AppointmentNew extends Vue {
   readonly isQueue?: boolean
   readonly specialistId?: number
 
+  isLoading = false
   workingHours = []
 
   form = {
@@ -232,10 +234,16 @@ export default class AppointmentNew extends Vue {
   }
 
   async submit () {
-    await this.$store.dispatch('appointments/create', this.form)
-    await this.$store.dispatch('schedule/fetch')
+    try {
+      this.isLoading = true
 
-    this.$store.dispatch('popup/hide')
+      await this.$store.dispatch('appointments/create', this.form)
+      await this.$store.dispatch('schedule/fetch')
+
+      this.$store.dispatch('popup/hide')
+    } finally {
+      this.isLoading = false
+    }
   }
 
   async fetchAvailableTime () {

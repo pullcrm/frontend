@@ -80,7 +80,7 @@ function pluralize (number, one, two, five) {
   return five
 }
 
-writeFileSync('./src/constants/generated.js', `/* eslint-disable */
+writeFileSync('./src/constants/generated.ts', `/* eslint-disable */
 export const WORKING_HOURS = ${JSON.stringify(hoursGenerate())}
 
 export const DURATIONS = ${JSON.stringify(durationGenerate())}

@@ -115,6 +115,7 @@
           type="submit"
           size="l"
           theme="blue"
+          :loading="isLoadingSubmit"
         >
           Сохранить
         </UiButton>
@@ -122,6 +123,7 @@
         <UiButton
           size="l"
           theme="danger-outlined"
+          :loading="isLoadingRemove"
           @click.native="remove"
         >
           Удалить
@@ -177,6 +179,8 @@ export default class AppointmentEdit extends Vue {
   readonly appointment
 
   workingHours = []
+  isLoadingSubmit = false
+  isLoadingRemove = false
 
   form = {
     ...this.appointment,
@@ -228,26 +232,38 @@ export default class AppointmentEdit extends Vue {
   }
 
   async submit () {
-    await this.$store.dispatch('appointments/update', this.form)
-    await this.$store.dispatch('schedule/fetch')
+    try {
+      this.isLoadingSubmit = true
 
-    this.$store.dispatch('popup/hide')
-  }
-
-  async remove () {
-    const result = await this.$store.dispatch('popup/askQuestion', {
-      title: 'Вы действительно хотите удалить эту запись?',
-      acceptButtonTitle: 'Удалить'
-    })
-
-    if (result) {
-      await Promise.all([
-        this.$api.appointments.remove(this.form.id)
-      ])
-
+      await this.$store.dispatch('appointments/update', this.form)
       await this.$store.dispatch('schedule/fetch')
 
       this.$store.dispatch('popup/hide')
+    } finally {
+      this.isLoadingSubmit = false
+    }
+  }
+
+  async remove () {
+    try {
+      this.isLoadingRemove = true
+
+      const result = await this.$store.dispatch('popup/askQuestion', {
+        title: 'Вы действительно хотите удалить эту запись?',
+        acceptButtonTitle: 'Удалить'
+      })
+
+      if (result) {
+        await Promise.all([
+          this.$api.appointments.remove(this.form.id)
+        ])
+
+        await this.$store.dispatch('schedule/fetch')
+
+        this.$store.dispatch('popup/hide')
+      }
+    } finally {
+      this.isLoadingRemove = false
     }
   }
 

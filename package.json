@@ -11,8 +11,8 @@
     "lint:css": "stylelint 'src/**/*.{vue,scss,css}'",
     "lint:css:fix": "stylelint 'src/**/*.{vue,scss,css}' --fix",
     "lint": "yarn lint:js && yarn lint:css",
-    "figma:export-icons": "node ./bin/export-icons.js",
-    "constants:generate": "node ./bin/constants-generate.js"
+    "figma:export-icons": "node ./bin/export-icons.ts",
+    "constants:generate": "node ./bin/constants-generate.ts"
   },
   "dependencies": {
     "@popperjs/core": "^2.5.4",
