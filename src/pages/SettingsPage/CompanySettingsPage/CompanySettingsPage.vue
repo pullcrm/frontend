@@ -29,9 +29,36 @@
       label="Название компании"
     >
       <UiInput
-        v-model="companyName"
-        left-icon="edit/edit-1"
+        v-model="company.name"
         placeholder="Введите название"
+      />
+    </UiField>
+
+    <UiField
+      label="Город"
+      required
+    >
+      <UiSelect
+        v-model="company.city"
+        label="name"
+        required
+        :options="cities"
+        :clearable="false"
+        placeholder="Выбрать город"
+      />
+    </UiField>
+
+    <UiField
+      label="Какой у вас бизнес?"
+      required
+    >
+      <UiSelect
+        v-model="company.category"
+        label="name"
+        required
+        :options="categories"
+        :clearable="false"
+        placeholder="Выбрать категорию"
       />
     </UiField>
 
@@ -62,14 +89,26 @@ import SettingsLayout from '../components/SettingsLayout.vue'
 })
 export default class Settings extends Vue {
   isLoading = false
-  companyName = this.company.name
 
-  get company () {
-    return this.$store.getters['company/current']
-  }
+  company = this.$store.getters['company/current']
+
+  cities = []
+  categories = []
+
+  companyName!: string
 
   get logo () {
     return this.company.logo?.path
+  }
+
+  async beforeMount () {
+    const [categories, cities] = await Promise.all([
+      this.$api.categories.all(),
+      this.$api.cities.all()
+    ])
+
+    this.cities = cities
+    this.categories = categories
   }
 
   async onAvatar (file) {
@@ -87,8 +126,12 @@ export default class Settings extends Vue {
       this.isLoading = true
 
       await this.$api.companies.update(this.company.id, {
-        name: this.companyName
+        name: this.company.name,
+        cityId: this.company.city.id,
+        categoryId: this.company.category.id
       })
+
+      this.$store.dispatch('toasts/show', { title: 'Сохранено!' })
 
       await this.$store.dispatch('company/fetch')
     } finally {
