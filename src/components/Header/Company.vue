@@ -77,7 +77,7 @@ export default class Company extends Vue {
     }
 
     &._active {
-      border: 2px solid $ui-blue-light-brand;
+      border: 2px solid $ui-brand-blue;
     }
   }
 </style>

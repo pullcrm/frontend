@@ -69,7 +69,7 @@ export default {
     }
 
     &_theme_action {
-      color: $ui-green-brand;
+      color: $ui-brand-green;
 
       &:active {
         color: $ui-green-hover-15;
