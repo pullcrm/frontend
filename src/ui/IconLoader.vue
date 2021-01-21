@@ -1,7 +1,7 @@
 <template>
   <UiIcon
     class="ui-icon-loader"
-    name="loader"
+    name="solid/loader-fill"
     v-bind="$attrs"
   />
 </template>

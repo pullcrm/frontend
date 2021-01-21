@@ -21,7 +21,7 @@
       >
         <UiInput
           v-model="form.login"
-          left-icon="edit/edit-1"
+          left-icon="outlined/pencil"
           placeholder="Введите логин"
           required
         />
@@ -33,7 +33,7 @@
       >
         <UiInput
           v-model="form.password"
-          left-icon="edit/edit-1"
+          left-icon="outlined/pencil"
           placeholder="Введите пароль"
           required
         />

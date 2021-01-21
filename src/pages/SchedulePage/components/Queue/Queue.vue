@@ -3,7 +3,7 @@
     <!-- добавить сортировку в выпадающем меню -->
     <UiText
       class="schedule-queue__title"
-      right-icon="more/vertical"
+      right-icon="outlined/dots-three-vertical"
       size="m"
     >
       Очередь

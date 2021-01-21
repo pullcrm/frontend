@@ -20,7 +20,7 @@
       @click.prevent="onClose"
     >
       <UiIcon
-        name="close/close-1"
+        name="outlined/x"
         size="s"
       />
     </a>

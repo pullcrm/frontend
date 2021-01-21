@@ -8,7 +8,7 @@
     >
       <UiText
         size="l"
-        left-icon="plus/square"
+        left-icon="outlined/plus"
       >
         Добавить в очередь
       </UiText>

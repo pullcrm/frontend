@@ -1,19 +1,18 @@
 <template>
   <div class="menu">
-    <div
+    <img
       class="menu__logo"
+      src="@/assets/logos/logo.svg"
     >
-      <img src="@/assets/logos/pullcrm-logo.svg">
-    </div>
 
     <MenuItem
       :to="{ name: 'dashboard' }"
-      icon="home"
+      icon="solid/house-fill"
     />
 
     <MenuItem
       :to="{ name: 'schedule' }"
-      icon="calendar"
+      icon="solid/calendar-fill"
     />
 
     <!-- <MenuItem
@@ -23,19 +22,19 @@
 
     <MenuItem
       :to="{ name: 'specialists' }"
-      icon="person/persones"
+      icon="solid/users-fill"
     />
 
     <MenuItem
       :to="{ name: 'procedures' }"
-      icon="list"
+      icon="solid/list"
     />
 
     <div class="menu__space" />
 
     <MenuItem
       :to="{ name: 'settings' }"
-      icon="settings/setting-1"
+      icon="solid/gear-fill"
     />
   </div>
 </template>

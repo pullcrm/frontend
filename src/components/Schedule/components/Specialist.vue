@@ -35,7 +35,7 @@
     <UiIcon
       class="schedule-column-specialist__icon"
       size="s"
-      name="more/vertical"
+      name="outlined/dots-three-vertical"
       @click.native="popperMenuOpen"
     />
 

@@ -72,8 +72,9 @@
             mask="38 (###) #### ###"
             name="phone"
             type="phone"
-            placeholder="066"
             required
+            left-icon="outlined/phone"
+            placeholder="066"
             @input="resetFieldError('phone')"
           />
         </UiField>

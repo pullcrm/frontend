@@ -38,7 +38,7 @@
       >
         <slot name="control:prev">
           <UiIcon
-            name="arrow/ios/left"
+            name="outlined/arrow-left"
             inline
           />
         </slot>

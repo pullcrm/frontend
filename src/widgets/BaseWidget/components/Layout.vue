@@ -9,7 +9,7 @@
         <template #prepend>
           <UiIcon
             size="s"
-            name="arrow/ios/left"
+            name="outlined/arrow-left"
           />
         </template>
 

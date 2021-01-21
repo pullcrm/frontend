@@ -10,7 +10,7 @@
       <UiDropdownList :name="`Начало: ${hour}`">
         <UiDropdownItem
           size="m"
-          left-icon="plus/circle"
+          left-icon="outlined/plus-circle"
           @click.native="addAppointment"
         >
           Добавить запись
@@ -18,7 +18,7 @@
 
         <UiDropdownItem
           size="m"
-          left-icon="slash"
+          left-icon="outlined/prohibit"
           @click.native="addTimeOff"
         >
           Закрыть запись

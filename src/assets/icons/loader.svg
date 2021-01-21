@@ -1,4 +1,0 @@
-<svg  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" id="__THIS_ID_NEEDS_FOR_UI_ICON_COMPONENT__">
-<path opacity="0.16" fill-rule="evenodd" clip-rule="evenodd" d="M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="#202020" style="fill: var(--ui-icon-primary-color);"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M19.3752 17.2549C19.7868 17.6232 19.8218 18.2554 19.4535 18.6669C17.6238 20.7112 14.9618 22 12 22C11.4477 22 11 21.5523 11 21C11 20.4477 11.4477 20 12 20C14.3692 20 16.4969 18.9714 17.9632 17.3331C18.3315 16.9216 18.9637 16.8865 19.3752 17.2549Z" fill="#202020" style="fill: var(--ui-icon-primary-color);"/>
-</svg>
