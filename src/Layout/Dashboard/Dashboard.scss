@@ -24,7 +24,7 @@
   }
 
   @media (max-width: $ui-laptop - 1px) {
-    padding-bottom: 80px;
+    padding-bottom: calc(#{$ui-menu-desktop-width} + var(--safe-area-inset-bottom));
     padding-left: 0;
 
     &._has-sidebar {

@@ -69,6 +69,8 @@ export default class App extends Vue {
   @import '@/scss/styles.scss';
 
   body {
+    --safe-area-inset-bottom: env(safe-area-inset-bottom);
+
     color: $ui-black-100;
     font-family: Roboto, sans-serif !important;
   }

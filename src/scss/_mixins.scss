@@ -65,6 +65,19 @@
   -webkit-line-clamp: $lines;
 }
 
+@mixin ui-safe-bottom($bottom: 0) {
+  position: fixed;
+  bottom: $bottom;
+
+  @if $bottom == 0 {
+    bottom: var(--safe-area-inset-bottom);
+  }
+
+  @if $bottom != 0 {
+    bottom: calc(#{$bottom} + var(--safe-area-inset-bottom));
+  }
+}
+
 @mixin hide-scrollbar () {
   scrollbar-width: none;
   -ms-overflow-style: none;

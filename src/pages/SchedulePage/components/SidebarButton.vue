@@ -23,9 +23,10 @@ export default class SidebarButton extends Vue {
 
 <style lang="scss">
   .schedule-sidebar-button {
+    @include ui-safe-bottom(72px);
+
     position: fixed;
     right: 16px;
-    bottom: 72px;
     z-index: 20;
     display: none;
 
