@@ -32,6 +32,7 @@ export default class UiDropdownItem extends Vue {
 
 <style lang="scss">
   .ui-dropdown-item {
+    max-width: 200px;
     cursor: pointer;
   }
 </style>

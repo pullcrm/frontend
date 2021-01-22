@@ -1,0 +1,42 @@
+@mixin ui-popover_bottom {
+  .ui-popover__arrow {
+    top: auto;
+    right: auto;
+    bottom: -12px - 1px/* space */;
+    left: calc(50% - 6px);
+    border-top: none;
+    border-right: 6px solid transparent;
+    border-bottom: 8px solid var(--popover-theme-color);
+    border-left: 6px solid transparent;
+  }
+}
+
+@mixin ui-popover_bottom_start {
+  .ui-popover__body {
+    top: auto;
+    right: auto;
+    bottom: -12px;
+    left: 0;
+    transform: translateY(100%);
+  }
+}
+
+@mixin ui-popover_bottom_middle {
+  .ui-popover__body {
+    top: auto;
+    right: auto;
+    bottom: -12px;
+    left: 50%;
+    transform: translate(-50%, 100%);
+  }
+}
+
+@mixin ui-popover_bottom_end {
+  .ui-popover__body {
+    top: auto;
+    right: 0;
+    bottom: -12px;
+    left: auto;
+    transform: translateY(100%);
+  }
+}

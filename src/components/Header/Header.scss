@@ -7,7 +7,13 @@
   }
 
   &__profile,
-  &__company-selector {
+  &__selector {
     margin: 0 8px;
+  }
+
+  &__companies {
+    .ui-button {
+      width: 100%;
+    }
   }
 }

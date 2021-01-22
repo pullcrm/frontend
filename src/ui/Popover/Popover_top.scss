@@ -1,0 +1,42 @@
+@mixin ui-popover_top {
+  .ui-popover__arrow {
+    top: -12px - 1px/* space */;
+    right: auto;
+    bottom: auto;
+    left: calc(50% - 6px);
+    border-top: 8px solid var(--popover-theme-color);
+    border-right: 6px solid transparent;
+    border-bottom: none;
+    border-left: 6px solid transparent;
+  }
+}
+
+@mixin ui-popover_top_start {
+  .ui-popover__body {
+    top: -12px;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@mixin ui-popover_top_middle {
+  .ui-popover__body {
+    top: -12px;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    transform: translate(-50%, -100%);
+  }
+}
+
+@mixin ui-popover_top_end {
+  .ui-popover__body {
+    top: -12px;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    transform: translateY(-100%);
+  }
+}

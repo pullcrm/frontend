@@ -15,7 +15,6 @@
     "constants:generate": "node ./bin/constants-generate.ts"
   },
   "dependencies": {
-    "@popperjs/core": "^2.5.4",
     "animated-scroll-to": "^2.0.10",
     "core-js": "^3.6.4",
     "dayjs": "^1.8.32",

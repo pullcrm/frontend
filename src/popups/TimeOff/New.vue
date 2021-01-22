@@ -48,13 +48,13 @@
 
         <UiPopover
           class="time-off-new-popup__popover"
-          size="s"
+          size="m"
           placement="top-center"
         >
-          <template #default="{ open, close, isOpened }">
+          <template #default="{ toggle }">
             <UiField
               label="Дата"
-              @click.native.prevent="isOpened ? close() : open()"
+              @click.native.prevent="toggle"
             >
               <UiInput
                 :value="date | formatDate('D MMMM')"

@@ -17,6 +17,10 @@
     cursor: pointer;
   }
 
+  &__logout {
+    color: $ui-red-danger;
+  }
+
   &__space {
     flex: 1;
   }

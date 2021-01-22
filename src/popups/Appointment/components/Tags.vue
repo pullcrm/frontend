@@ -1,55 +1,57 @@
 <template>
   <div class="appointment-tags">
     <div class="appointment-tags__inner">
-      <UiDropdownMenu>
-        <template #inner="{ open, close, isOpened }">
+      <UiDropdownMenu
+        placement="bottom_start"
+      >
+        <template #inner="{ toggle }">
           <UiBadge
             size="m"
             clickable
             right-icon="outlined/plus"
-            @click.native="isOpened ? close() : open()"
+            @click.native="toggle"
           >
             Еще
           </UiBadge>
         </template>
 
         <UiDropdownList>
-          <UiText
+          <UiDropdownItem
             size="m"
             :left-icon="isQueue ? 'outlined/x' : 'outlined/pencil'"
             @click.native="isQueue = !isQueue"
           >
             Добавить в очередь
-          </UiText>
+          </UiDropdownItem>
         </UiDropdownList>
 
         <UiDropdownList
           v-if="isSMSAuthorize"
           name="СМС сообщения"
         >
-          <UiText
+          <UiDropdownItem
             size="m"
             :left-icon="hasSmsRemindNotify ? 'outlined/x' : 'outlined/pencil'"
             @click.native="hasSmsRemindNotify = !hasSmsRemindNotify"
           >
             Напомнить за время
-          </UiText>
+          </UiDropdownItem>
 
-          <UiText
+          <UiDropdownItem
             v-if="isCreate"
             size="m"
             :left-icon="hasSmsCreationNotify ? 'outlined/x' : 'outlined/pencil'"
             @click.native="hasSmsCreationNotify = !hasSmsCreationNotify"
           >
             Сообщить о создании
-          </UiText>
+          </UiDropdownItem>
         </UiDropdownList>
 
         <UiDropdownList
           v-if="isCreate === false"
           name="Статус записи"
         >
-          <UiText
+          <UiDropdownItem
             v-for="{ key, value } in statuses"
             :key="key"
             size="m"
@@ -57,7 +59,7 @@
             @click.native="onStatus(key)"
           >
             {{ value }}
-          </UiText>
+          </UiDropdownItem>
         </UiDropdownList>
       </UiDropdownMenu>
 

@@ -1,22 +1,49 @@
 <template>
-  <div
+  <UiDropdownMenu
     class="schedule-hour-tile"
     :class="[
       {'_is-minute': isMinute}
     ]"
     :style="gridArea"
-    @click="openPoppover"
-    @drop.prevent="dropZoneDropHandler"
-    @dragover.prevent
-    @dragenter.prevent="dropZoneEnterHandler"
-    @dragleave.prevent="dropZoneLeaveHandler"
+    placement="bottom"
+    size="m"
   >
-    <UiIcon
-      class="schedule-hour-tile__icon"
-      size="xs"
-      name="outlined/plus"
-    />
-  </div>
+    <template #inner="{ toggle }">
+      <div
+        class="schedule-hour-tile__inner"
+        @click="toggle"
+        @dblclick="addAppointment"
+        @drop.prevent="dropZoneDropHandler"
+        @dragover.prevent
+        @dragenter.prevent="dropZoneEnterHandler"
+        @dragleave.prevent="dropZoneLeaveHandler"
+      >
+        <UiIcon
+          class="schedule-hour-tile__icon"
+          size="xs"
+          name="outlined/plus"
+        />
+      </div>
+    </template>
+
+    <UiDropdownList :name="`Начало: ${hour}`">
+      <UiDropdownItem
+        size="m"
+        left-icon="outlined/plus-circle"
+        @click.native="addAppointment"
+      >
+        Добавить запись
+      </UiDropdownItem>
+
+      <UiDropdownItem
+        size="m"
+        left-icon="outlined/prohibit"
+        @click.native="addTimeOff"
+      >
+        Закрыть запись
+      </UiDropdownItem>
+    </UiDropdownList>
+  </UiDropdownMenu>
 </template>
 
 <script lang="ts">
@@ -63,10 +90,24 @@ export default class HourTile extends Vue {
     }
   }
 
-  openPoppover () {
-    const element = this.$el.querySelector('.schedule-hour-tile__icon')
+  addAppointment () {
+    this.$store.dispatch('popup/show', {
+      name: 'appointment-new',
+      props: {
+        time: this.hour,
+        specialistId: this.specialistId
+      }
+    })
+  }
 
-    this.$emit('popper', element, this.hour)
+  addTimeOff () {
+    this.$store.dispatch('popup/show', {
+      name: 'time-off-new',
+      props: {
+        time: this.hour,
+        specialistId: this.specialistId
+      }
+    })
   }
 
   dropZoneEnterHandler () {
@@ -123,7 +164,15 @@ export default class HourTile extends Vue {
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid $ui-black-40;
-    cursor: pointer;
+
+    &__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
 
     &__icon {
       color: $ui-black-100;
@@ -147,6 +196,24 @@ export default class HourTile extends Vue {
 
     &:last-child {
       border: none;
+    }
+
+    &.ui-popover_top {
+      .ui-popover {
+        &__body,
+        &__arrow {
+          top: 0;
+        }
+      }
+    }
+
+    &.ui-popover_bottom {
+      .ui-popover {
+        &__body,
+        &__arrow {
+          bottom: 0;
+        }
+      }
     }
   }
 </style>

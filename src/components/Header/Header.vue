@@ -3,14 +3,38 @@
     class="base-layout-header"
   >
     <div class="base-layout-header__inner">
-      <CompanySelector
-        class="base-layout-header__company-selector"
-        @click.native.prevent="popperCompanySelectorToggle"
-      />
+      <UiPopover
+        size="m"
+        placement="bottom"
+      >
+        <template #default="{ toggle }">
+          <CompanySelector
+            class="base-layout-header__selector"
+            @click.native="toggle"
+          />
+        </template>
 
-      <CompanySelectorPopper
-        ref="companySelectorPopper"
-      />
+        <template #body>
+          <div class="base-layout-header__companies">
+            <Company
+              v-for="company in companies"
+              :key="company.id"
+              :company="company.company"
+              @click.native="onCompany(company)"
+            />
+
+            <UiButton
+              :to="{
+                name: 'companyCreate'
+              }"
+              size="l"
+              theme="blue"
+            >
+              Добавить компанию
+            </UiButton>
+          </div>
+        </template>
+      </UiPopover>
     </div>
   </UiContainer>
 </template>
@@ -19,24 +43,24 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import Company from './Company.vue'
 import CompanySelector from './CompanySelector.vue'
-import CompanySelectorPopper from './CompanySelectorPopper.vue'
 
 @Component({
   components: {
-    CompanySelector,
-    CompanySelectorPopper
+    Company,
+    CompanySelector
   }
 })
 export default class DashboardHeader extends Vue {
-  $refs: {
-    companySelectorPopper: CompanySelectorPopper
+  get companies () {
+    return this.$store.state.companies.companies
   }
 
-  popperCompanySelectorToggle () {
-    const reference = this.$el.querySelector('.base-layout-header-company-selector__avatar') as HTMLElement
+  async onCompany (companyInfo) {
+    await this.$store.dispatch('auth/fetchCompanyToken', companyInfo)
 
-    this.$refs.companySelectorPopper.toggle(reference)
+    location.reload()
   }
 }
 </script>

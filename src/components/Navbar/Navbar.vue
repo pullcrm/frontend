@@ -37,17 +37,30 @@
 
     <div class="navbar__space" />
 
-    <UiAvatar
-      class="navbar__avatar"
-      :image="avatar"
-      :name="profile.firstName"
-      size="s"
-      @click.native="popperProfileToggle"
-    />
+    <UiDropdownMenu
+      placement="right"
+    >
+      <template #inner="{ toggle }">
+        <UiAvatar
+          class="navbar__avatar"
+          :image="avatar"
+          :name="profile.firstName"
+          size="s"
+          @click.native="toggle"
+        />
+      </template>
 
-    <ProfilePopper
-      ref="profilePopper"
-    />
+      <UiDropdownList>
+        <UiDropdownItem
+          class="navbar__logout"
+          size="m"
+          left-icon="outlined/sign-out"
+          @click.native="logout"
+        >
+          Выйти
+        </UiDropdownItem>
+      </UiDropdownList>
+    </UiDropdownMenu>
   </div>
 </template>
 
@@ -56,19 +69,13 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import NavbarItem from './NavbarItem.vue'
-import ProfilePopper from './ProfilePopper.vue'
 
 @Component({
   components: {
-    NavbarItem,
-    ProfilePopper
+    NavbarItem
   }
 })
 export default class Navbar extends Vue {
-  $refs: {
-    profilePopper: ProfilePopper
-  }
-
   get profile () {
     return this.$store.state.company.profile
   }
@@ -77,10 +84,14 @@ export default class Navbar extends Vue {
     return this.profile.avatar?.path
   }
 
-  popperProfileToggle () {
-    const reference = this.$el.querySelector('.navbar__avatar') as HTMLElement
+  async logout () {
+    await this.$store.dispatch('auth/logout')
 
-    this.$refs.profilePopper.toggle(reference)
+    const { href } = this.$router.resolve({
+      name: 'login'
+    })
+
+    window.location.href = href
   }
 }
 </script>
