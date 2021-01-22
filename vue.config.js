@@ -14,7 +14,8 @@ module.exports = {
     manifestOptions: {
       name: 'Pullcrm - система управления клиентами',
       short_name: 'Pullcrm',
-      display: 'standalone'
+      display: 'standalone',
+      background_color: '#ffffff'
     }
   },
 

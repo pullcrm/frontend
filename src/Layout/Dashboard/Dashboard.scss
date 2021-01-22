@@ -24,6 +24,7 @@
   }
 
   @media (max-width: $ui-laptop - 1px) {
+    padding-bottom: $ui-menu-desktop-width;
     padding-bottom: calc(#{$ui-menu-desktop-width} + var(--safe-area-inset-bottom));
     padding-left: 0;
 

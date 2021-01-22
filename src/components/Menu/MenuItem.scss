@@ -12,7 +12,9 @@
     color: $ui-brand-blue;
   }
 
-  &:hover {
-    background-color: $ui-black-20;
+  @include ui-hover {
+    &:hover {
+      background-color: $ui-black-20;
+    }
   }
 }
