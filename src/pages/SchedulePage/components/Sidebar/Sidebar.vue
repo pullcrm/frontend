@@ -76,14 +76,15 @@ export default class Sidebar extends Vue {
 
     &__add-appointment {
       width: 100%;
+      min-height: 48px;
     }
 
     &__queqe {
-      min-height: 400px;
+      flex: 1;
     }
 
     &__divider {
-      height: 1px;
+      min-height: 1px;
       margin: 16px 0;
       background: rgba(#8f92a1, 0.2);
     }
