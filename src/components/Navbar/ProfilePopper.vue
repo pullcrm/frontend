@@ -3,7 +3,7 @@
     v-if="isOpened"
     ref="popper"
     :reference="reference"
-    placement="bottom-end"
+    placement="right"
     @close="close"
   >
     <UiDropdownGroup>

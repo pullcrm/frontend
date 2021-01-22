@@ -5,14 +5,16 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    left: $ui-menu-desktop-width;
-    z-index: 19;
+    left: $ui-navbar-desktop-width;
+    z-index: 12;
     width: calc(#{$SCHEDULE_APPOINTMENT_WIDTH} + 26px);
   }
 
   @media (max-width: $ui-laptop - 1px) {
     .schedule-page {
       &__sidebar {
+        @include ui-safe-bottom($ui-navbar-desktop-width);
+
         left: 0;
         display: none;
 

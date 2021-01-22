@@ -103,7 +103,7 @@ export default class SpecialistPopper extends Vue {
   openPopup () {
     this.$store.dispatch('popup/show', {
       name: 'specialist-edit',
-      props: { user: this.specialist }
+      props: { specialist: this.specialist }
     })
   }
 }

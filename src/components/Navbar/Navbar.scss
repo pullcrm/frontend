@@ -1,10 +1,10 @@
-.menu {
+.navbar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: $ui-menu-desktop-width;
+  width: $ui-navbar-desktop-width;
   height: 100%;
-  padding: 16px 0;
+  padding: 24px 0;
   box-shadow: 1px 0 0 $ui-black-20;
 
   &__logo {
@@ -13,11 +13,15 @@
     margin-bottom: 16px;
   }
 
+  &__avatar {
+    cursor: pointer;
+  }
+
   &__space {
     flex: 1;
   }
 
-  .menu-item {
+  .navbar-item {
     margin-bottom: 16px;
   }
 
@@ -27,8 +31,8 @@
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
-    height: $ui-menu-desktop-width;
-    height: calc(#{$ui-menu-desktop-width} + var(--safe-area-inset-bottom));
+    height: $ui-navbar-desktop-width;
+    height: calc(#{$ui-navbar-desktop-width} + var(--safe-area-inset-bottom));
     padding: 0 8px;
     padding-bottom: var(--safe-area-inset-bottom);
 
@@ -37,7 +41,7 @@
       display: none;
     }
 
-    .menu-item {
+    .navbar-item {
       margin: 0 4px;
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <RouterLink
-    class="menu-item"
+    class="navbar-item"
     :to="to"
   >
     <UiIcon
@@ -27,9 +27,9 @@ import Component from 'vue-class-component'
     }
   }
 })
-export default class MenuItem extends Vue {
+export default class NavbarItem extends Vue {
 
 }
 </script>
 
-<style lang="scss" src="./MenuItem.scss"></style>
+<style lang="scss" src="./NavbarItem.scss"></style>

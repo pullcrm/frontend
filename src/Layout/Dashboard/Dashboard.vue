@@ -5,8 +5,8 @@
       {'_has-sidebar': hasSidebar}
     ]"
   >
-    <div class="dashboard-layout__nav">
-      <Menu />
+    <div class="dashboard-layout__navbar">
+      <Navbar />
     </div>
 
     <div class="dashboard-layout__container">
@@ -21,12 +21,12 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import Menu from '@/components/Menu/Menu.vue'
+import Navbar from '@/components/Navbar/Navbar.vue'
 import Header from '@/components/Header/Header.vue'
 
 @Component({
   components: {
-    Menu,
+    Navbar,
     Header
   }
 })

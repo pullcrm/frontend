@@ -80,19 +80,21 @@ export default class Schedule extends Vue {
   }
 
   get columns () {
-    return this.specialists.map((specialist) => {
-      const appointments = this.appointments.filter(item => {
-        return item.specialist.id === specialist.id
+    return this.specialists
+      .filter(({ status }) => status !== 'HIDE' /* @TODO: Refactor */)
+      .map(specialist => {
+        const appointments = this.appointments.filter(item => {
+          return item.specialist.id === specialist.id
+        })
+
+        const timeOffs = this.timeOffs.filter(({ specialistId }) => specialistId === specialist.id)
+
+        return {
+          timeOffs,
+          specialist,
+          appointments
+        }
       })
-
-      const timeOffs = this.timeOffs.filter(({ specialistId }) => specialistId === specialist.id)
-
-      return {
-        timeOffs,
-        specialist,
-        appointments
-      }
-    })
   }
 }
 </script>
