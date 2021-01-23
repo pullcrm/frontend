@@ -36,6 +36,11 @@ export default class SettingsLayout extends Vue {
         to: { name: 'companySettings' }
       },
 
+      // {
+      //   name: 'Время работы',
+      //   to: { name: 'smsSettings' }
+      // },
+
       {
         name: 'SMS оповещение',
         to: { name: 'smsSettings' }

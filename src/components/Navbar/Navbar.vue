@@ -17,7 +17,7 @@
 
     <!-- <NavbarItem
       :to="{ name: 'timeOff' }"
-      icon="clock"
+      icon="solid/clock-fill"
     /> -->
 
     <NavbarItem

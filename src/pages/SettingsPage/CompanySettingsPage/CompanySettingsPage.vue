@@ -81,6 +81,19 @@
         />
       </UiField>
 
+      <UiField
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12'
+        ]"
+        label="Адрес"
+      >
+        <UiInput
+          value=""
+          placeholder="Введите адрес"
+        />
+      </UiField>
+
       <UiTitle
         :class="[
           'ui-grid-item',
@@ -89,7 +102,7 @@
         size="s"
         responsive
       >
-        Контакты
+        Дополнительная информация
       </UiTitle>
 
       <UiField

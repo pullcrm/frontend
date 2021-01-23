@@ -110,7 +110,7 @@ export default class ScheduleColumn extends Vue {
     &__specialist {
       @include ui-shadow-4;
 
-      height: 68px;
+      height: 60px;
       border-bottom: 1px solid $ui-black-40;
     }
 
