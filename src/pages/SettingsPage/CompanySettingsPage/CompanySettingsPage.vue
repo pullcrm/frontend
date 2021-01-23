@@ -10,66 +10,184 @@
       Настройки компании
     </UiTitle>
 
-    <FileUpload
-      :image="logo"
-      responsive
-      @input="onAvatar"
-    >
-      <template #default="{ url }">
-        <UiAvatar
-          :image="url"
-          :name="company.name"
-          size="xl"
-          responsive
+    <div class="ui-grid">
+      <FileUpload
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12'
+        ]"
+        :image="logo"
+        responsive
+        @input="onAvatar"
+      >
+        <template #default="{ url }">
+          <UiAvatar
+            :image="url"
+            :name="company.name"
+            size="xl"
+            responsive
+          />
+        </template>
+      </FileUpload>
+
+      <UiField
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12'
+        ]"
+        label="Название компании"
+      >
+        <UiInput
+          v-model="company.name"
+          placeholder="Введите название"
         />
-      </template>
-    </FileUpload>
+      </UiField>
 
-    <UiField
-      label="Название компании"
-    >
-      <UiInput
-        v-model="company.name"
-        placeholder="Введите название"
-      />
-    </UiField>
-
-    <UiField
-      label="Город"
-      required
-    >
-      <UiSelect
-        v-model="company.city"
-        label="name"
+      <UiField
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12',
+          'ui-grid-item_tablet_6'
+        ]"
+        label="Город"
         required
-        :options="cities"
-        :clearable="false"
-        placeholder="Выбрать город"
-      />
-    </UiField>
+      >
+        <UiSelect
+          v-model="company.city"
+          label="name"
+          required
+          :options="cities"
+          :clearable="false"
+          placeholder="Выбрать город"
+        />
+      </UiField>
 
-    <UiField
-      label="Какой у вас бизнес?"
-      required
-    >
-      <UiSelect
-        v-model="company.category"
-        label="name"
+      <UiField
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12',
+          'ui-grid-item_tablet_6'
+        ]"
+        label="Категория"
         required
-        :options="categories"
-        :clearable="false"
-        placeholder="Выбрать категорию"
-      />
-    </UiField>
+      >
+        <UiSelect
+          v-model="company.category"
+          label="name"
+          required
+          :options="categories"
+          :clearable="false"
+          placeholder="Выбрать категорию"
+        />
+      </UiField>
 
-    <UiButton
-      theme="blue"
-      :loading="isLoading"
-      responsive
-      @click.native="save"
-    >
-      Сохранить
-    </UiButton>
+      <UiTitle
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12'
+        ]"
+        size="s"
+        responsive
+      >
+        Контакты
+      </UiTitle>
+
+      <UiField
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12'
+        ]"
+        label="Телефон"
+      >
+        <UiInput
+          value=""
+          placeholder="066"
+        />
+      </UiField>
+
+      <UiField
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12',
+          'ui-grid-item_tablet_6'
+        ]"
+        label="Viber"
+      >
+        <UiInput
+          value=""
+          placeholder="Viber"
+        />
+      </UiField>
+
+      <UiField
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12',
+          'ui-grid-item_tablet_6'
+        ]"
+        label="Telegram"
+      >
+        <UiInput
+          value=""
+          placeholder="Telegram"
+        />
+      </UiField>
+
+      <UiField
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12',
+          'ui-grid-item_tablet_6'
+        ]"
+        label="Instagram"
+      >
+        <UiInput
+          value=""
+          placeholder="Instagram"
+        />
+      </UiField>
+
+      <UiField
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12',
+          'ui-grid-item_tablet_6'
+        ]"
+        label="Facebook"
+      >
+        <UiInput
+          value=""
+          placeholder="Facebook"
+        />
+      </UiField>
+
+      <UiField
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12'
+        ]"
+        label="О компании"
+      >
+        <UiInput
+          tag="textarea"
+          value=""
+          placeholder="Введите текст"
+        />
+      </UiField>
+
+      <UiButton
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12'
+        ]"
+        theme="blue"
+        :loading="isLoading"
+        responsive
+        @click.native="save"
+      >
+        Сохранить
+      </UiButton>
+    </div>
   </SettingsLayout>
 </template>
 

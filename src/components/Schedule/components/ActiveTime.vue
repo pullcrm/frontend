@@ -91,7 +91,7 @@ export default class ActiveTime extends Vue {
 
       position: absolute;
       top: 50%;
-      right: calc(100% + 8px);
+      right: calc(100% + 4px);
       color: inherit;
       font-weight: 700;
       transform: translateY(-50%);

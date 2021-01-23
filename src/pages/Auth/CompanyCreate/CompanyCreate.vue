@@ -52,7 +52,7 @@
         </UiField>
 
         <UiField
-          label="Какой у вас бизнес?"
+          label="Категория"
           required
         >
           <UiSelect

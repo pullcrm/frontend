@@ -7,7 +7,7 @@
     &:hover {
       .ui-switch__input:not(:disabled) {
         &:checked ~ .ui-switch__check {
-          background: $ui-green-hover-15;
+          background: $ui-blue-hover-15;
         }
       }
     }
@@ -45,7 +45,7 @@
     display: none;
 
     &:checked ~ .ui-switch__check {
-      background-color: $ui-brand-green;
+      background-color: $ui-brand-blue;
 
       &::before {
         transform: translateX(100%);

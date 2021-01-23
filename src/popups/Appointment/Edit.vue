@@ -310,5 +310,9 @@ export default class AppointmentEdit extends Vue {
         margin-top: 16px;
       }
     }
+
+    .ui-field + .ui-field {
+      margin-top: 24px;
+    }
   }
 </style>

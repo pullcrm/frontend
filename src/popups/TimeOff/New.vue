@@ -240,5 +240,9 @@ export default class TimeOffNew extends Vue {
     &__popover {
       margin: 24px 0;
     }
+
+    .ui-field + .ui-field {
+      margin-top: 24px;
+    }
   }
 </style>

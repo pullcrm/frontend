@@ -32,11 +32,13 @@ export default class Timeline extends Vue {
 
 <style lang="scss">
   .schedule-timeline {
+    flex-basis: 36px;
+
     &__item {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 50px;
+      width: 100%;
       height: $SCHEDULE_APPOINTMENT_HEIGHT;
       color: $ui-black-100;
 

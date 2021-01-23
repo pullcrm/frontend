@@ -13,65 +13,87 @@
     <template
       v-if="isSMSAuthorize"
     >
-      <UiText
-        size="m"
-        responsive
-      >
-        Авторизовано в SMSC.UA
-      </UiText>
+      <div class="ui-grid">
+        <UiText
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+          size="m"
+          responsive
+        >
+          Авторизовано в SMSC.UA
+        </UiText>
 
-      <UiSwitch
-        :value="settings.remindAfterCreation"
-        size="m"
-        @input="onSettings('remindAfterCreation', $event)"
-      >
-        <template #append>
-          <UiText
-            size="m"
-            responsive
-          >
-            Отправлять смс клиенту после создания записи (по умолчанию)
-          </UiText>
-        </template>
-      </UiSwitch>
+        <UiSwitch
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+          :value="settings.remindAfterCreation"
+          size="m"
+          @input="onSettings('remindAfterCreation', $event)"
+        >
+          <template #append>
+            <UiText
+              size="m"
+              responsive
+            >
+              Отправлять смс клиенту после создания записи (по умолчанию)
+            </UiText>
+          </template>
+        </UiSwitch>
 
-      <UiSwitch
-        size="m"
-        :value="settings.remindBefore"
-        @input="onSettings('remindBefore', $event)"
-      >
-        <template #append>
-          <UiText
-            size="m"
-            responsive
-          >
-            Напоминать клиенту о записи (по умолчанию)
-          </UiText>
-        </template>
-      </UiSwitch>
+        <UiSwitch
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+          size="m"
+          :value="settings.remindBefore"
+          @input="onSettings('remindBefore', $event)"
+        >
+          <template #append>
+            <UiText
+              size="m"
+              responsive
+            >
+              Напоминать клиенту о записи (по умолчанию)
+            </UiText>
+          </template>
+        </UiSwitch>
 
-      <UiField
-        label="За сколько времени напоминать о записи?"
-      >
-        <UiSelect
-          label="name"
-          :value="remindBeforeInMinutes"
-          :options="durationList"
-          required
-          :clearable="false"
-          placeholder="Выбрать время"
-          @input="onSettings('remindBeforeInMinutes', $event.value)"
-        />
-      </UiField>
+        <UiField
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+          label="За сколько времени напоминать о записи?"
+        >
+          <UiSelect
+            label="name"
+            :value="remindBeforeInMinutes"
+            :options="durationList"
+            required
+            :clearable="false"
+            placeholder="Выбрать время"
+            @input="onSettings('remindBeforeInMinutes', $event.value)"
+          />
+        </UiField>
 
-      <UiButton
-        theme="blue"
-        :loading="isLoading"
-        responsive
-        @click.native="save"
-      >
-        Сохранить
-      </UiButton>
+        <UiButton
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+          theme="blue"
+          :loading="isLoading"
+          responsive
+          @click.native="save"
+        >
+          Сохранить
+        </UiButton>
+      </div>
     </template>
 
     <UiButton

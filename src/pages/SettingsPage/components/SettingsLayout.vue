@@ -5,7 +5,9 @@
         class="settings-page-layout__tabs"
         :tabs="tabs"
       />
+    </UiContainer>
 
+    <UiContainer narrow>
       <UiPanel
         responsive
       >

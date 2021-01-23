@@ -139,5 +139,9 @@ export default class ProcedureNew extends Vue {
         width: 100%;
       }
     }
+
+    .ui-field + .ui-field {
+      margin-top: 24px;
+    }
   }
 </style>
