@@ -1,4 +1,4 @@
-.ui-button_theme_green {
+@mixin ui-button_theme_green {
   color: $ui-white;
   background-color: $ui-brand-green;
   border: 1px solid $ui-brand-green;

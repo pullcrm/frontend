@@ -21,10 +21,7 @@
         </template>
 
         <template #body>
-          <Calendar
-            v-model="customDate"
-            class="schedule-sidebar__calendar"
-          />
+          <Calendar v-model="customDate" />
         </template>
       </UiPopover>
     </div>

@@ -2,14 +2,6 @@
   <SettingsLayout
     class="company-settings-page"
   >
-    <UiTitle
-      class="company-settings-page__title"
-      size="l"
-      responsive
-    >
-      Настройки компании
-    </UiTitle>
-
     <div class="ui-grid">
       <FileUpload
         :class="[

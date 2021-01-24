@@ -1,11 +1,10 @@
 .dashboard-layout {
+  display: flex;
+  align-items: flex-start;
   min-height: 100vh;
+  padding-bottom: 24px;
   padding-left: $ui-navbar-desktop-width;
   background: $ui-gray-brand;
-
-  &._has-sidebar {
-    padding-left: calc(#{$SCHEDULE_APPOINTMENT_WIDTH} + #{$ui-navbar-desktop-width + 26px});
-  }
 
   &__navbar {
     position: fixed;
@@ -13,24 +12,16 @@
     bottom: 0;
     left: 0;
     z-index: 13;
-    display: flex;
-    background: #fff;
   }
 
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    padding: 24px 0;
+  &__container {
+    flex: 1;
   }
 
   @media (max-width: $ui-laptop - 1px) {
     padding-bottom: #{$ui-navbar-desktop-width + 16px};
     padding-bottom: calc(#{$ui-navbar-desktop-width + 16px} + var(--safe-area-inset-bottom));
     padding-left: 0;
-
-    &._has-sidebar {
-      padding-left: 0;
-    }
 
     &__navbar {
       top: initial;

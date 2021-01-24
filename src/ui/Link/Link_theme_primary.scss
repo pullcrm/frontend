@@ -1,0 +1,13 @@
+@mixin ui-link_theme_primary {
+  color: $ui-black-100;
+
+  &:active {
+    color: $ui-black-hover-15;
+  }
+
+  @include ui-hover {
+    &:hover {
+      color: $ui-black-hover-15;
+    }
+  }
+}

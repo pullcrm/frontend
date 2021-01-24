@@ -7,7 +7,7 @@ function replaceIcon (filePath) {
   const newIcon = icon
     .replace(new RegExp('width="24" height="24"', 'g'), '')
     .replace(new RegExp('fill="white"/>', 'g'), 'fill="white" style="fill: var(--ui-icon-secondary-color);"/>')
-    .replace(new RegExp('fill="#1D1F21"/>', 'g'), 'fill="#1D1F21" style="fill: var(--ui-icon-primary-color);"/>')
+    .replace(new RegExp('fill="#1D1D21"/>', 'g'), 'fill="#1D1D21" style="fill: var(--ui-icon-primary-color);"/>')
     .replace(new RegExp('xmlns="http://www.w3.org/2000/svg">', 'g'), 'xmlns="http://www.w3.org/2000/svg" id="__THIS_ID_NEEDS_FOR_UI_ICON_COMPONENT__">')
 
   fs.writeFileSync(filePath, newIcon, 'utf8')

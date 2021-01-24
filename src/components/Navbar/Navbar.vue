@@ -45,7 +45,7 @@
           class="navbar__avatar"
           :image="avatar"
           :name="profile.firstName"
-          size="s"
+          size="m"
           @click.native="toggle"
         />
       </template>

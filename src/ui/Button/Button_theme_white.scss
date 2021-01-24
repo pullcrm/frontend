@@ -1,4 +1,4 @@
-.ui-button_theme_white {
+@mixin ui-button_theme_white {
   color: $ui-black-100;
   background-color: $ui-white;
   border: 1px solid $ui-white;

@@ -1,17 +1,8 @@
 <template>
-  <div
-    class="schedule-page"
-  >
+  <div class="schedule-page">
     <UiContainer>
-      <Sidebar
-        class="schedule-page__sidebar"
-        :class="[
-          {'_opened': sidebarOpened}
-        ]"
-      />
-
-      <SidebarButton
-        @click.native="sidebarOpened = !sidebarOpened"
+      <Header
+        class="schedule-page__header"
       />
 
       <Schedule
@@ -19,6 +10,13 @@
         :loading="isLoading"
       />
     </UiContainer>
+
+    <Portal
+      v-if="isQueueOpened"
+      to="sidebar"
+    >
+      <Queue />
+    </Portal>
   </div>
 </template>
 
@@ -28,18 +26,20 @@ import Component from 'vue-class-component'
 
 import Schedule from '@/components/Schedule/Schedule.vue'
 
-import Sidebar from './components/Sidebar/Sidebar.vue'
-import SidebarButton from './components/SidebarButton.vue'
+import Queue from './components/Queue.vue'
+import Header from './components/Header.vue'
 
 @Component({
   components: {
-    Schedule,
-    Sidebar,
-    SidebarButton
+    Queue,
+    Header,
+    Schedule
   }
 })
 export default class SchedulePage extends Vue {
-  sidebarOpened = false
+  get isQueueOpened (): boolean {
+    return this.$store.state.schedule.isQueueOpened
+  }
 
   get isLoading () {
     return this.$store.state.schedule.isLoading

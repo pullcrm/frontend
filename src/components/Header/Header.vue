@@ -1,66 +1,74 @@
 <template>
-  <UiContainer
-    class="base-layout-header"
-  >
-    <div class="base-layout-header__inner">
-      <UiPopover
-        size="m"
-        placement="bottom"
-      >
-        <template #default="{ toggle }">
-          <CompanySelector
-            class="base-layout-header__selector"
-            @click.native="toggle"
-          />
-        </template>
+  <div class="base-layout-header">
+    <UiContainer>
+      <div class="base-layout-header__inner">
+        <PortalTarget
+          class="base-layout-header__left"
+          name="header-left"
+        />
 
-        <template #body>
-          <div class="base-layout-header__companies">
-            <Company
-              v-for="company in companies"
-              :key="company.id"
-              :company="company.company"
-              @click.native="onCompany(company)"
-            />
+        <div class="base-layout-header__right">
+          <UiText
+            tag="UiLink"
+            size="m"
+            theme="primary"
+            left-icon="outlined/question"
+            responsive
+          >
+            Вопросы / ответы
+          </UiText>
 
-            <UiButton
-              :to="{
-                name: 'companyCreate'
-              }"
-              size="l"
-              theme="blue"
+          <UiText
+            tag="UiLink"
+            size="m"
+            theme="primary"
+            left-icon="outlined/link"
+            responsive
+          >
+            Персональная страница
+          </UiText>
+
+          <UiText
+            v-if="balance !== null"
+            size="m"
+            left-icon="outlined/chat-text"
+            responsive
+          >
+            <UiPrice
+              size="xs"
+              responsive
             >
-              Добавить компанию
-            </UiButton>
-          </div>
-        </template>
-      </UiPopover>
-    </div>
-  </UiContainer>
+              {{ balance | price }}
+            </UiPrice>
+          </UiText>
+
+          <UiAvatar
+            :image="logo"
+            :name="company.name"
+            size="m"
+          />
+        </div>
+      </div>
+    </UiContainer>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import Company from './Company.vue'
-import CompanySelector from './CompanySelector.vue'
-
-@Component({
-  components: {
-    Company,
-    CompanySelector
-  }
-})
+@Component({})
 export default class DashboardHeader extends Vue {
-  get companies () {
-    return this.$store.state.companies.companies
+  get company () {
+    return this.$store.getters['company/current']
   }
 
-  async onCompany (companyInfo) {
-    await this.$store.dispatch('auth/fetchCompanyToken', companyInfo)
+  get logo () {
+    return this.company?.logo?.path
+  }
 
-    location.reload()
+  get balance () {
+    return this.$store.state.sms.balance
   }
 }
 </script>

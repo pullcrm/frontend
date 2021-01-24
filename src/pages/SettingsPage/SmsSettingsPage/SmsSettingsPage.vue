@@ -2,28 +2,20 @@
   <SettingsLayout
     class="sms-settings-page"
   >
-    <UiTitle
-      class="sms-settings-page__title"
-      size="l"
-      responsive
-    >
-      SMS оповещение
-    </UiTitle>
-
     <template
       v-if="isSMSAuthorize"
     >
       <div class="ui-grid">
-        <UiText
+        <UiTitle
           :class="[
             'ui-grid-item',
             'ui-grid-item_12'
           ]"
-          size="m"
+          size="s"
           responsive
         >
           Авторизовано в SMSC.UA
-        </UiText>
+        </UiTitle>
 
         <UiSwitch
           :class="[

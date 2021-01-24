@@ -9,7 +9,7 @@
       class="schedule-column-specialist__avatar"
       :image="avatar"
       :name="user.firstName"
-      size="s"
+      size="m"
       type="rounded"
     />
 

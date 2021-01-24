@@ -55,7 +55,7 @@ const router = new Router({
     { path: '/registration/', name: 'registration', component: Registration },
     { path: '/company/create/', name: 'companyCreate', component: CompanyCreate, meta: { middleware: [auth] } },
 
-    { path: '/schedule/', name: 'schedule', component: SchedulePage, meta: { layout: 'Dashboard', sidebar: true, middleware: [auth, company] } },
+    { path: '/schedule/', name: 'schedule', component: SchedulePage, meta: { layout: 'Dashboard', middleware: [auth, company] } },
     { path: '/time-off/', name: 'timeOff', component: TimeOff, meta: { layout: 'Dashboard', middleware: [auth, company] } },
     { path: '/procedures/', name: 'procedures', component: Procedures, meta: { layout: 'Dashboard', middleware: [auth, company] } },
     { path: '/specialists/', name: 'specialists', component: Specialists, meta: { layout: 'Dashboard', middleware: [auth, company] } },

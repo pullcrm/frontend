@@ -1,0 +1,45 @@
+.schedule-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__tomorrow {
+    padding: 0 8px;
+  }
+
+  &__calendar {
+    text-transform: capitalize;
+
+    .ui-button__append {
+      .ui-icon {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
+  &__left {
+    display: flex;
+    padding-left: 32px;
+
+    .ui-button {
+      margin-right: 8px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__right {
+    display: flex;
+
+    .ui-button {
+      margin-right: 16px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

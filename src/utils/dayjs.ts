@@ -15,5 +15,6 @@ export default dayjs
 declare module 'dayjs' {
   interface Dayjs {
     isToday(): boolean
+    isTomorrow(): boolean
   }
 }

@@ -7,7 +7,8 @@ function createState () {
     date: formatDate(new Date(), 'YYYY-MM-DD'),
     timeOffs: [],
 
-    isLoading: false
+    isLoading: false,
+    isQueueOpened: false
   }
 }
 
@@ -44,6 +45,10 @@ const mutations = {
 
   SET_LOADING (state, loading) {
     state.isLoading = loading
+  },
+
+  SET_QUEUE_OPEN (state, isOpened) {
+    state.isQueueOpened = isOpened
   }
 }
 

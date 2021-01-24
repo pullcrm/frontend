@@ -1,19 +1,21 @@
 .base-layout-header {
+  padding: 24px 0;
+  background: $ui-gray-brand;
+
   &__inner {
     display: flex;
     justify-content: space-between;
-    margin: 0 -8px;
-    padding: 24px 0;
   }
 
-  &__profile,
-  &__selector {
-    margin: 0 8px;
-  }
+  &__right {
+    display: flex;
 
-  &__companies {
-    .ui-button {
-      width: 100%;
+    & > .ui-text {
+      margin-right: 16px;
+
+      .ui-icon {
+        color: $ui-black-80;
+      }
     }
   }
 }

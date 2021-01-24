@@ -65,10 +65,7 @@
           </template>
 
           <template #body>
-            <Calendar
-              v-model="date"
-              class="schedule-sidebar__calendar"
-            />
+            <Calendar v-model="date" />
           </template>
         </UiPopover>
 

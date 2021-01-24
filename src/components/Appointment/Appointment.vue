@@ -41,7 +41,7 @@
 
         <UiText
           size="s"
-          left-icon="outlined/money"
+          left-icon="outlined/wallet"
         >
           {{ appointment.total | price }}
         </UiText>
