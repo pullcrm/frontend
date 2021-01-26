@@ -84,6 +84,7 @@ export default class Company extends Vue {
     justify-content: center;
     height: 180px;
     cursor: pointer;
+    transition: border-color $ui-transition;
 
     &__avatar {
       display: flex;
@@ -118,8 +119,12 @@ export default class Company extends Vue {
       }
     }
 
+    &:hover {
+      border-color: $ui-brand-blue;
+    }
+
     &._active {
-      border: 1px solid $ui-brand-blue;
+      border-color: $ui-brand-blue;
       box-shadow: 0 0 0 1px $ui-brand-blue;
     }
   }

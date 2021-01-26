@@ -8,7 +8,10 @@
       v-if="isToday"
     />
 
-    <div class="schedule__table">
+    <div
+      ref="inner"
+      class="schedule__inner"
+    >
       <Loader
         v-if="loading"
       />
@@ -54,10 +57,22 @@ import ScheduleColumnPlaceholder from './components/ColumnPlaceholder.vue'
     ActiveTime,
     ScheduleColumn,
     ScheduleColumnPlaceholder
+  },
+
+  provide () {
+    return {
+      getUiTooltipContainer: () => {
+        return this.$refs.inner
+      }
+    }
   }
 })
 export default class Schedule extends Vue {
   readonly loading: boolean
+
+  $refs: {
+    inner: HTMLElement
+  }
 
   get date () {
     return this.$store.state.schedule.date

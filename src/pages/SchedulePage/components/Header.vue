@@ -35,6 +35,21 @@
     </div>
 
     <div class="schedule-page-header__right">
+      <UiText
+        v-if="balance !== null"
+        class="schedule-page-header__balance"
+        size="m"
+        left-icon="outlined/chat-text"
+        responsive
+      >
+        <UiPrice
+          size="xs"
+          responsive
+        >
+          {{ balance | price }}
+        </UiPrice>
+      </UiText>
+
       <UiButton
         size="m"
         theme="blue"
@@ -49,7 +64,7 @@
         theme="info-outlined"
         @click.native="toggleQueue"
       >
-        {{ queueButtonText }}
+        Очередь ({{ queue.length }})
       </UiButton>
     </div>
   </div>
@@ -69,6 +84,10 @@ import Calendar from '@/components/Calendar/Calendar.vue'
   }
 })
 export default class Header extends Vue {
+  get balance () {
+    return this.$store.state.sms.balance
+  }
+
   get date () {
     return new Date(this.$store.state.schedule.date) as Date
   }
@@ -94,16 +113,6 @@ export default class Header extends Vue {
 
   get isQueueOpened (): boolean {
     return this.$store.state.schedule.isQueueOpened
-  }
-
-  get queueButtonText () {
-    let text = this.isQueueOpened ? 'Скрыть очередь' : 'Показать очередь'
-
-    if (this.queue.length > 0) {
-      text += ` (${this.queue.length})`
-    }
-
-    return text
   }
 
   setDateTomorrow () {

@@ -5,8 +5,6 @@
     />
 
     <div class="dashboard-layout__container">
-      <Header />
-
       <slot />
     </div>
 
@@ -22,12 +20,10 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import Navbar from '@/components/Navbar/Navbar.vue'
-import Header from '@/components/Header/Header.vue'
 
 @Component({
   components: {
-    Navbar,
-    Header
+    Navbar
   }
 })
 export default class DashboardLayout extends Vue {}
