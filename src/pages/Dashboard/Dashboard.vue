@@ -63,6 +63,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import dayjs from '@/utils/dayjs'
+
 import Company from './components/Company.vue'
 import DonateBanner from './components/DonateBanner.vue'
 import CompanyButton from './components/CompanyButton.vue'
@@ -77,25 +79,38 @@ import AnalyticPanel from './components/AnalyticPanel.vue'
   }
 })
 export default class Dashboard extends Vue {
+  analytics = []
+
   get companies () {
     return this.$store.state.companies.companies
   }
 
-  get analytics () {
-    return [
-      {
-        name: 'Доход за сегодня',
-        value: 520
-      },
-      {
-        name: 'Доход за текущий месяц',
-        value: 5880
-      },
-      {
-        name: 'Средний чек за месяц',
-        value: 230
-      }
-    ]
+  async mounted () {
+    await this.fetchAnalyticsSimple()
+  }
+
+  async fetchAnalyticsSimple () {
+    const date = dayjs()
+
+    const [day, month] = await Promise.all([
+      this.$store.dispatch('analytics/fetchForDay', date),
+      this.$store.dispatch('analytics/fetchForMonth', date)
+    ])
+
+    this.analytics.push({
+      name: 'Доход за сегодня',
+      value: day.total
+    })
+
+    this.analytics.push({
+      name: 'Доход за текущий месяц',
+      value: month.total
+    })
+
+    this.analytics.push({
+      name: 'Средний чек за месяц',
+      value: month.average
+    })
   }
 
   async onCompany (companyInfo) {

@@ -7,8 +7,8 @@
       <Tags
         class="appointment-new__tags"
         :queue.sync="form.isQueue"
-        :sms-remind-notify.sync="form.smsRemindNotify"
-        :sms-creation-notify.sync="form.smsCreationNotify"
+        :has-remind-sms.sync="form.hasRemindSMS"
+        :has-creation-sms.sync="form.hasCreationSMS"
         is-create
       />
 
@@ -191,8 +191,8 @@ export default class AppointmentNew extends Vue {
     specialist: this.specialistId && this.specialists.find(({ id }) => id === this.specialistId),
     procedures: [],
     description: '',
-    smsCreationNotify: this.$store.getters['sms/settings']?.remindAfterCreation,
-    smsRemindNotify: this.$store.getters['sms/settings']?.remindBefore
+    hasRemindSMS: this.$store.getters['sms/settings']?.hasRemindSMS,
+    hasCreationSMS: this.$store.getters['sms/settings']?.hasCreationSMS
   }
 
   get validations () {

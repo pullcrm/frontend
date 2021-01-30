@@ -60,7 +60,10 @@ import { ISmsCreateParams } from '@/services/api'
 export default class ProcedureEdit extends Vue {
   form: ISmsCreateParams = {
     login: '',
-    password: ''
+    password: '',
+    hasRemindSMS: false,
+    hasCreationSMS: false,
+    remindSMSMinutes: 60
   }
 
   isLoading = false
@@ -69,9 +72,7 @@ export default class ProcedureEdit extends Vue {
     try {
       this.isLoading = true
 
-      await this.$api.sms.settingCreate({
-        ...this.form
-      })
+      await this.$api.sms.settingCreate(this.form)
 
       await this.$store.dispatch('company/fetch')
 

@@ -8,7 +8,7 @@
         class="appointment-edit__tags"
         :queue.sync="form.isQueue"
         :status.sync="form.status"
-        :sms-remind-notify.sync="form.smsRemindNotify"
+        :has-remind-sms.sync="form.hasRemindSMS"
       />
 
       <UiTitle
@@ -186,7 +186,7 @@ export default class AppointmentEdit extends Vue {
     ...this.appointment,
     date: toDate(this.appointment.date),
     specialist: this.specialists.find(({ id }) => id === this.appointment.specialist.id),
-    smsRemindNotify: this.isSMSAuthorize ? Boolean(this.appointment.smsIdentifier) : null
+    hasRemindSMS: this.isSMSAuthorize ? Boolean(this.appointment.smsIdentifier) : null
   }
 
   get validations () {

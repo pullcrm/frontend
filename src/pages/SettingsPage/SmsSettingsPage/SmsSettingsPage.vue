@@ -22,9 +22,9 @@
             'ui-grid-item',
             'ui-grid-item_12'
           ]"
-          :value="settings.remindAfterCreation"
+          :value="settings.hasCreationSMS"
           size="m"
-          @input="onSettings('remindAfterCreation', $event)"
+          @input="onSettings('hasCreationSMS', $event)"
         >
           <template #append>
             <UiText
@@ -42,8 +42,8 @@
             'ui-grid-item_12'
           ]"
           size="m"
-          :value="settings.remindBefore"
-          @input="onSettings('remindBefore', $event)"
+          :value="settings.hasRemindSMS"
+          @input="onSettings('hasRemindSMS', $event)"
         >
           <template #append>
             <UiText
@@ -64,12 +64,12 @@
         >
           <UiSelect
             label="name"
-            :value="remindBeforeInMinutes"
+            :value="remindSMSMinutes"
             :options="durationList"
             required
             :clearable="false"
             placeholder="Выбрать время"
-            @input="onSettings('remindBeforeInMinutes', $event.value)"
+            @input="onSettings('remindSMSMinutes', $event.value)"
           />
         </UiField>
 
@@ -125,9 +125,9 @@ export default class SmsSettingsPage extends Vue {
     return this.$store.getters['sms/isAuthorize']
   }
 
-  get remindBeforeInMinutes () {
+  get remindSMSMinutes () {
     const item = this.durationList.find(item => {
-      return item.value === this.settings.remindBeforeInMinutes
+      return item.value === this.settings.remindSMSMinutes
     })
 
     return item?.name
@@ -138,15 +138,15 @@ export default class SmsSettingsPage extends Vue {
       this.isLoading = true
 
       const {
-        remindBefore,
-        remindAfterCreation,
-        remindBeforeInMinutes
+        hasRemindSMS,
+        hasCreationSMS,
+        remindSMSMinutes
       } = this.settings
 
       await this.$api.sms.settingUpdate({
-        remindBefore,
-        remindAfterCreation,
-        remindBeforeInMinutes
+        hasRemindSMS,
+        hasCreationSMS,
+        remindSMSMinutes
       })
 
       this.$store.dispatch('toasts/show', { title: 'Сохранено!' })

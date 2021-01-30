@@ -52,7 +52,7 @@ import Component from 'vue-class-component'
 
 import { TIME_STEP } from '@/constants'
 
-// TODO: Replace all @/utils/date-time to @/utils/daysjs
+// TODO: Replace all @/utils/date-time to @/utils/dayjs
 import { toDate } from '@/utils/date-time'
 import { slugFromTime } from '@/utils/time'
 
@@ -147,7 +147,7 @@ export default class HourTile extends Vue {
         date: toDate(appointment.date),
         startTime,
         specialistId,
-        smsRemindNotify: this.isSMSAuthorize ? Boolean(appointment.smsIdentifier) : null
+        hasRemindSMS: this.isSMSAuthorize ? Boolean(appointment.smsIdentifier) : null
       })
 
       await this.$store.dispatch('schedule/fetch')

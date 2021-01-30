@@ -129,8 +129,8 @@ export interface IAppointmentCreateParams {
   specialistId: number
   procedures: number[]
   description: string
-  smsRemindNotify: boolean
-  smsCreationNotify: boolean
+  hasRemindSMS: boolean
+  hasCreationSMS: boolean
 }
 
 export interface IRestoreUserParams {
@@ -164,9 +164,16 @@ export interface IAppointmentAllParams {
 }
 
 export interface ISmsCreateParams {
-  token?: string
   login: string
   password: string
+  hasCreationSMS: boolean
+  hasRemindSMS: boolean
+  remindSMSMinutes: number
+}
+
+export interface IAnalyticsSimpleParams {
+  startDate: string
+  endDate: string
 }
 
 export const factory = (send) => ({
@@ -346,13 +353,23 @@ export const factory = (send) => ({
     }
   },
 
+  analytics: {
+    simple (params: IAnalyticsSimpleParams): Promise<any> {
+      return send('companies/my/stats', params, 'GET')
+    }
+  },
+
   sms: {
     settingCreate (params: ISmsCreateParams) : Promise<any> {
-      return send('sms', params)
+      return send('companies/my/settings', params)
     },
 
     settingUpdate (params: any) : Promise<any> {
-      return send('sms', params, 'PUT')
+      return send('companies/my/settings', params, 'PUT')
+    },
+
+    settingRemove (params: any) : Promise<any> {
+      return send('companies/my/settings', params, 'DELETE')
     },
 
     balance () : Promise<any> {

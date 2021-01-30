@@ -17,8 +17,8 @@ export function normalizeAppointmentParams (submitParams) {
     procedures,
     description,
     specialistId, // custom prop
-    smsRemindNotify,
-    smsCreationNotify
+    hasRemindSMS,
+    hasCreationSMS
   } = submitParams
 
   return {
@@ -32,8 +32,8 @@ export function normalizeAppointmentParams (submitParams) {
     procedures: procedures.map(({ id }) => id),
     description: description,
     specialistId: specialistId ?? specialist.id,
-    smsRemindNotify: smsRemindNotify,
-    smsCreationNotify: smsCreationNotify
+    hasRemindSMS: hasRemindSMS,
+    hasCreationSMS: hasCreationSMS
   }
 }
 

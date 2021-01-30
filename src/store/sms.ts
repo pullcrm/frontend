@@ -24,7 +24,7 @@ const getters = {
   },
 
   settings (_state, _getters, rootState) {
-    return rootState.company.company.sms_configuration
+    return rootState.company.company.company_setting
   }
 }
 
