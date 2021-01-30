@@ -10,6 +10,7 @@ import widget from './widget'
 import company from './company'
 import schedule from './schedule'
 import companies from './companies'
+import analytics from './analytics'
 import procedures from './procedures'
 import specialists from './specialists'
 import drugAndDrop from './drug-and-drop'
@@ -33,6 +34,7 @@ export default new Vuex.Store<IState>({
     company,
     schedule,
     companies,
+    analytics,
     procedures,
     specialists,
     drugAndDrop,
@@ -41,9 +43,9 @@ export default new Vuex.Store<IState>({
 
   state: {},
 
-  mutations: {},
-
   actions: {},
+
+  mutations: {},
 
   getters: {}
 })

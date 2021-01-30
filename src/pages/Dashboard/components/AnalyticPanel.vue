@@ -29,7 +29,7 @@ import Component from 'vue-class-component'
     },
 
     value: {
-      type: Number,
+      type: [Number, String],
       required: true
     }
   }
