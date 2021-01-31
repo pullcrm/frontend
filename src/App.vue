@@ -66,19 +66,21 @@ export default class App extends Vue {
 <style lang="scss">
   @import '@/scss/_reset.scss';
   @import '@/scss/_grid.scss';
+  @import '@/scss/_fonts.scss';
   @import '@/scss/styles.scss';
 
   body {
     --safe-area-inset-bottom: env(safe-area-inset-bottom, 0);
 
     color: $ui-black-100;
-    font-family: Roboto, sans-serif !important;
+    font-family: Inter, sans-serif !important;
   }
 
   #app {
     min-height: 80vh;
     color: $ui-black-100;
-    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    font-family: Inter, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;

@@ -6,9 +6,9 @@
     responsive
   >
     <UiText
-      size="l"
-      strong
+      size="m"
       responsive
+      right-icon="outlined/plus"
     >
       Добавить компанию
     </UiText>

@@ -76,7 +76,7 @@ export default class Card extends Vue {
 
     &__name {
       margin-bottom: 4px;
-      font-weight: 500;
+      font-weight: bold;
     }
 
     &__phone {
