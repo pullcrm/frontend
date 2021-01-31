@@ -55,9 +55,8 @@ export default class Toasts extends Vue {
   }
 
   .toasts {
-    @include ui-safe-bottom(24px);
-
     position: fixed;
+    top: 24px;
     right: 24px;
     z-index: 100;
 

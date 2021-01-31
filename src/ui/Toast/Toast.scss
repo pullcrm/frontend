@@ -4,177 +4,54 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 384px;
-  padding: 16px;
+  padding: 10px 16px;
+  color: $ui-black-100;
   background: $ui-white;
   border-radius: 10px;
 
-  &_closable {
-    padding-right: 56px;
-  }
-
   &_theme_success {
-    padding-left: 20px;
-
-    .ui-toast__vertical {
-      &::before {
-        background-color: $ui-brand-green;
-      }
-    }
-
-    .ui-toast__icon {
-      background-color: $ui-light-green;
-
-      .ui-icon {
-        color: $ui-brand-green;
-      }
+    .ui-icon {
+      color: $ui-brand-green;
     }
   }
 
   &_theme_error {
-    padding-left: 20px;
-
-    .ui-toast__vertical {
-      &::before {
-        background-color: $ui-red-danger;
-      }
-    }
-
-    .ui-toast__icon {
-      background-color: $ui-rose;
-
-      .ui-icon {
-        color: $ui-red-danger;
-      }
+    .ui-icon {
+      color: $ui-red-danger;
     }
   }
 
   &_theme_info {
-    padding-left: 20px;
-
-    .ui-toast__vertical {
-      &::before {
-        background-color: $ui-blue-info;
-      }
-    }
-
-    .ui-toast__icon {
-      background-color: $ui-blue;
-
-      .ui-icon {
-        color: $ui-blue-info;
-      }
+    .ui-icon {
+      color: $ui-blue-info;
     }
   }
 
   &_theme_warning {
-    padding-left: 20px;
-
-    .ui-toast__vertical {
-      &::before {
-        background-color: $ui-orange-warning;
-      }
-    }
-
-    .ui-toast__icon {
-      background-color: $ui-orange-secondary;
-
-      .ui-icon {
-        color: $ui-orange-warning;
-      }
-    }
-  }
-
-  &__vertical {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 16px;
-    overflow: hidden;
-    border-radius: inherit;
-
-    &::before {
-      display: block;
-      width: 4px;
-      height: 100%;
-      content: '';
+    .ui-icon {
+      color: $ui-orange-warning;
     }
   }
 
   &__prepend {
     flex-shrink: 0;
-    margin-right: 16px;
+    margin-right: 8px;
+    margin-left: -4px;
   }
 
   &__append {
     flex-shrink: 0;
-    margin-left: 16px;
+    margin-left: 8px;
   }
 
   &__content {
     flex: 1;
+    white-space: nowrap;
   }
 
-  &__icon {
-    margin: -4px 0;
-    padding: 4px;
-    border-radius: 50%;
-  }
-
-  &__title {
-    + .ui-toast__text {
-      margin-top: 8px;
-    }
-  }
-
-  &__text {
-    a {
-      color: $ui-brand-green;
-    }
-  }
-
-  &__close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    z-index: 5;
-    color: $ui-black-60;
-    cursor: pointer;
-    transition: color var(--ui-transition-hover);
-
-    &:active {
-      color: $ui-black-100;
-    }
-
-    @include ui-hover {
-      &:hover {
-        color: $ui-black-100;
-      }
-    }
-
-    /* Extend click area */
-    &::before {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      bottom: -8px;
-      left: -8px;
-      content: '';
-    }
-
-    .ui-icon {
-      vertical-align: middle;
-    }
-
-    + .ui-popup-title {
-      padding-right: 40px;
-    }
-  }
-
-  @include ui-mobile-only {
-    @media (max-width: $ui-tablet - 1px) {
-      width: 328px;
-    }
-  }
+  // @include ui-mobile-only {
+  //   @media (max-width: $ui-tablet - 1px) {
+  //     width: 328px;
+  //   }
+  // }
 }
