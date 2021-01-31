@@ -42,6 +42,10 @@
     box-shadow: 0 0 16px rgba($ui-black-100, 0.1);
   }
 
+  .ui-field + .ui-field {
+    margin-top: 24px;
+  }
+
   @include ui-mobile-only {
     width: 100%;
 

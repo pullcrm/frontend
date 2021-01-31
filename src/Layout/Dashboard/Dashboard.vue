@@ -4,7 +4,10 @@
       class="dashboard-layout__navbar"
     />
 
-    <div class="dashboard-layout__container">
+    <div
+      class="dashboard-layout__container"
+      :class="{'_has-sidebar': hasSidebar}"
+    >
       <slot />
     </div>
 
@@ -26,7 +29,11 @@ import Navbar from '@/components/Navbar/Navbar.vue'
     Navbar
   }
 })
-export default class DashboardLayout extends Vue {}
+export default class DashboardLayout extends Vue {
+  get hasSidebar () {
+    return this.$store.state.schedule.isQueueOpened
+  }
+}
 </script>
 
 <style lang="scss" src="./Dashboard.scss"></style>

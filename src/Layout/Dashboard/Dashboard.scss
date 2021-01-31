@@ -18,6 +18,15 @@
     width: 100%;
   }
 
+  // @FIXME:
+  @media (min-width: $ui-laptop) {
+    &__container {
+      &._has-sidebar {
+        width: calc(100% - 296px);
+      }
+    }
+  }
+
   @media (max-width: $ui-laptop - 1px) {
     padding-bottom: #{$ui-navbar-desktop-width + 16px};
     padding-bottom: calc(#{$ui-navbar-desktop-width + 16px} + var(--safe-area-inset-bottom));
