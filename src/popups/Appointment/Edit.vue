@@ -8,7 +8,7 @@
         class="appointment-edit__tags"
         :queue.sync="form.isQueue"
         :status.sync="form.status"
-        :sms-remind-notify.sync="form.smsRemindNotify"
+        :has-remind-sms.sync="form.hasRemindSMS"
       />
 
       <UiTitle
@@ -52,13 +52,13 @@
           label="Сотрудник"
         >
           <UiSelect
-            v-model="form.employee"
+            v-model="form.specialist"
             :options="specialists"
             label="fullName"
             placeholder="Выбрать исполнителя"
             :clearable="false"
             required
-            @input="resetFieldError('employee')"
+            @input="resetFieldError('specialist')"
           />
         </UiField>
 
@@ -115,6 +115,7 @@
           type="submit"
           size="l"
           theme="blue"
+          :loading="isLoadingSubmit"
         >
           Сохранить
         </UiButton>
@@ -122,6 +123,7 @@
         <UiButton
           size="l"
           theme="danger-outlined"
+          :loading="isLoadingRemove"
           @click.native="remove"
         >
           Удалить
@@ -177,20 +179,22 @@ export default class AppointmentEdit extends Vue {
   readonly appointment
 
   workingHours = []
+  isLoadingSubmit = false
+  isLoadingRemove = false
 
   form = {
     ...this.appointment,
     date: toDate(this.appointment.date),
-    employee: this.specialists.find(({ id }) => id === this.appointment.employee.id),
-    smsRemindNotify: this.hasSmsAuthorize ? Boolean(this.appointment.smsIdentifier) : null
+    specialist: this.specialists.find(({ id }) => id === this.appointment.specialist.id),
+    hasRemindSMS: this.isSMSAuthorize ? Boolean(this.appointment.smsIdentifier) : null
   }
 
   get validations () {
     return {}
   }
 
-  get hasSmsAuthorize (): Boolean {
-    return this.$store.getters['sms/hasSmsAuthorize']
+  get isSMSAuthorize (): Boolean {
+    return this.$store.getters['sms/isAuthorize']
   }
 
   get specialists () {
@@ -206,7 +210,7 @@ export default class AppointmentEdit extends Vue {
   }
 
   get specialist () {
-    return this.form.employee
+    return this.form.specialist
   }
 
   get duration () {
@@ -228,40 +232,52 @@ export default class AppointmentEdit extends Vue {
   }
 
   async submit () {
-    await this.$store.dispatch('appointments/update', this.form)
-    await this.$store.dispatch('schedule/fetch')
+    try {
+      this.isLoadingSubmit = true
 
-    this.$store.dispatch('popup/hide')
-  }
-
-  async remove () {
-    const result = await this.$store.dispatch('popup/askQuestion', {
-      title: 'Вы действительно хотите удалить эту запись?',
-      acceptButtonTitle: 'Удалить'
-    })
-
-    if (result) {
-      await Promise.all([
-        this.$api.appointments.remove(this.form.id)
-      ])
-
+      await this.$store.dispatch('appointments/update', this.form)
       await this.$store.dispatch('schedule/fetch')
 
       this.$store.dispatch('popup/hide')
+    } finally {
+      this.isLoadingSubmit = false
+    }
+  }
+
+  async remove () {
+    try {
+      this.isLoadingRemove = true
+
+      const result = await this.$store.dispatch('popup/askQuestion', {
+        title: 'Вы действительно хотите удалить эту запись?',
+        acceptButtonTitle: 'Удалить'
+      })
+
+      if (result) {
+        await Promise.all([
+          this.$api.appointments.remove(this.form.id)
+        ])
+
+        await this.$store.dispatch('schedule/fetch')
+
+        this.$store.dispatch('popup/hide')
+      }
+    } finally {
+      this.isLoadingRemove = false
     }
   }
 
   async fetchAvailableTime () {
     this.workingHours = []
 
-    if (!this.form.employee?.id || this.duration === 0) {
+    if (!this.form.specialist?.id || this.duration === 0) {
       return
     }
 
     this.workingHours = await this.$api.appointments.availableTime({
       date: this.form.date.format('YYYY-MM-DD'),
       excludeId: this.form.id,
-      employeeId: this.form.employee.id,
+      specialistId: this.form.specialist.id,
       duration: this.duration
     })
   }
@@ -293,6 +309,10 @@ export default class AppointmentEdit extends Vue {
       .ui-button {
         margin-top: 16px;
       }
+    }
+
+    .ui-field + .ui-field {
+      margin-top: 24px;
     }
   }
 </style>

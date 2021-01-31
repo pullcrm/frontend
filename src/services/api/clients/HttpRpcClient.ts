@@ -63,7 +63,7 @@ export default class HttpRpcClient implements IRpcClient {
 
     // TODO: refactor condition
     if (rpcResponse.message === 'Expired access token') {
-      await store.dispatch('auth/fetchRefreshToken')
+      await store.dispatch('auth/onRefreshToken')
 
       location.reload()
     }

@@ -10,7 +10,7 @@ const actions = {
 
     specialists = specialists.map(item => ({
       ...item,
-      fullName: `${item.firstName} ${item.lastName}`
+      fullName: `${item.user.firstName} ${item.user.lastName}`
     }))
 
     commit('SET_SPECIALISTS', specialists)
@@ -25,7 +25,7 @@ const actions = {
       return result
     } catch (err) {
       if (err.status === 400) {
-        dispatch('toasts/show', {
+        await dispatch('toasts/show', {
           type: 'error',
           title: 'У файла большой размер, к загрузке доступны файлы меньше 500Кб'
         }, { root: true })

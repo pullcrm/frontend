@@ -110,7 +110,8 @@
     </div>
 
     <UiAlert
-      left-icon="alert/circle"
+      v-if="hasRemindSms"
+      left-icon="outlined/warning-circle"
       theme="info"
     >
       Ми нагадаємо вам про запис за годину до початку
@@ -118,7 +119,7 @@
 
     <UiAlert
       v-if="hasError"
-      left-icon="alert/circle"
+      left-icon="outlined/warning-octagon"
       theme="error"
     >
       Вказана не вся інформація, перевірте, будь ласка, форму!
@@ -160,12 +161,24 @@ export default class BarbershopLondon extends Vue {
     baseWidgetLayout: BaseWidgetLayout
   }
 
+  get company () {
+    return this.$store.state.widget.company
+  }
+
   get procedure () {
     return this.$store.state.widget.order.procedure
   }
 
   get specialist () {
     return this.$store.state.widget.order.specialist
+  }
+
+  get hasRemindSms () {
+    return this.company.company_setting?.hasRemindSMS
+  }
+
+  get hasCreationSms () {
+    return this.company.company_setting?.hasCreationSMS
   }
 
   hasError = false
@@ -216,14 +229,16 @@ export default class BarbershopLondon extends Vue {
       const procedureId = this.procedure.id
 
       await this.$api.public.appointmentCreate({
-        employeeId: this.specialist.id,
+        specialistId: this.specialist.id,
         fullName: this.form.fullName.trim(),
         phone: this.form.phone,
         companyId: this.companyId,
         procedures: [procedureId],
         date: date?.format('YYYY-MM-DD'),
         startTime: `${this.hourSelected}:00`,
-        description: this.form.description
+        description: this.form.description,
+        hasRemindSMS: this.hasRemindSms,
+        hasCreationSMS: this.hasCreationSms
       })
 
       this.$refs.baseWidgetLayout.postMessage('createOrder')
@@ -267,7 +282,7 @@ export default class BarbershopLondon extends Vue {
     this.workingHours = await this.$api.public.hoursSlots({
       date,
       companyId: this.companyId,
-      employeeId: this.specialist.id,
+      specialistId: this.specialist.id,
       duration: this.procedure.duration
     })
 

@@ -1,4 +1,4 @@
-.ui-button_theme_yellow {
+@mixin ui-button_theme_yellow {
   color: $ui-black-100;
   background-color: $ui-yellow-brand;
   border: 1px solid $ui-yellow-brand;

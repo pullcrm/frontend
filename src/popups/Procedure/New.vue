@@ -26,7 +26,7 @@
           <UiInput
             v-model="form.name"
             required
-            left-icon="edit/edit-1"
+            left-icon="outlined/pencil"
             placeholder="Введите название"
             @input="resetFieldError('name')"
           />
@@ -39,7 +39,7 @@
             v-model="form.price"
             type="number"
             required
-            left-icon="edit/edit-1"
+            left-icon="outlined/pencil"
             placeholder="Укажите цену"
             @input="resetFieldError('price')"
           />
@@ -53,7 +53,7 @@
             label="name"
             required
             :options="durationList"
-            left-icon="edit/edit-1"
+            left-icon="outlined/pencil"
             placeholder="Выбрать время"
             @input="resetFieldError('duration')"
           />
@@ -138,6 +138,10 @@ export default class ProcedureNew extends Vue {
       .ui-button {
         width: 100%;
       }
+    }
+
+    .ui-field + .ui-field {
+      margin-top: 24px;
     }
   }
 </style>

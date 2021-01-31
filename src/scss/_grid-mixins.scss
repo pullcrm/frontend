@@ -71,6 +71,7 @@
   display: flex;
   flex: 1 0 auto;
   flex-wrap: wrap;
+  align-items: flex-start;
   margin-right: calc(var(--ui-grid-gap) / -2);
   margin-bottom: calc(var(--ui-grid-gap) * -1);
   margin-left: calc(var(--ui-grid-gap) / -2);

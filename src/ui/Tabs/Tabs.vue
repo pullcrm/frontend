@@ -44,7 +44,8 @@ export default class Tabs extends Vue {
 
     display: flex;
     padding-bottom: 16px;
-    border-bottom: 1px solid $border-color;
     overflow-x: auto;
+    overflow-y: hidden;
+    border-bottom: 1px solid $border-color;
   }
 </style>

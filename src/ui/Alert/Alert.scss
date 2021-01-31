@@ -9,7 +9,7 @@
   &_theme_success {
     .ui-alert__vertical {
       &::before {
-        background-color: $ui-green-brand;
+        background-color: $ui-brand-green;
       }
     }
 
@@ -17,7 +17,7 @@
       background-color: $ui-light-green;
 
       .ui-icon {
-        color: $ui-green-brand;
+        color: $ui-brand-green;
       }
     }
   }

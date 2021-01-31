@@ -4,6 +4,7 @@
     class="ui-text"
     :class="[
       `ui-text_size_${size}`,
+      { 'ui-text_strong': strong },
       { 'ui-text_responsive': responsive }
     ]"
     v-bind="$attrs"
@@ -75,6 +76,11 @@ import UiIcon from '../Icon.vue'
       default: 'div'
     },
 
+    strong: {
+      type: Boolean,
+      default: false
+    },
+
     responsive: {
       type: Boolean,
       default: false
@@ -100,6 +106,7 @@ export default class UiText extends Vue {
     | 'm'
     | 'l'
 
+  readonly strong: boolean
   readonly leftIcon?: string
   readonly rightIcon?: string
   readonly responsive: boolean

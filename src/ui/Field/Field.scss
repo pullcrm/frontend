@@ -24,7 +24,7 @@
   &_success {
     .ui-input .ui-input__content input,
     .ui-textarea .ui-textarea__content textarea {
-      border-color: $ui-green-brand;
+      border-color: $ui-brand-green;
     }
   }
 
@@ -61,10 +61,6 @@
 
   &__success {
     margin-top: 8px;
-    color: $ui-green-brand;
-  }
-
-  & + .ui-field {
-    margin-top: 24px;
+    color: $ui-brand-green;
   }
 }

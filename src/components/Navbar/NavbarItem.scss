@@ -1,0 +1,20 @@
+.navbar-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: $ui-black-50;
+  border-radius: 8px;
+
+  &.router-link-active {
+    color: $ui-brand-blue;
+  }
+
+  @include ui-hover {
+    &:hover {
+      background-color: $ui-black-20;
+    }
+  }
+}

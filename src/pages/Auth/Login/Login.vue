@@ -33,7 +33,7 @@
               v-model="phone"
               mask="38 (###) #### ###"
               name="phone"
-              left-icon="phone"
+              left-icon="outlined/phone"
               placeholder="066"
               required
               @input="resetFieldError('phone')"
@@ -48,7 +48,7 @@
               v-model="password"
               type="password"
               name="password"
-              left-icon="key"
+              left-icon="outlined/key"
               placeholder="Введите пароль"
               required
               @input="resetFieldError('password')"
@@ -141,13 +141,11 @@ export default class Login extends Vue {
         password: this.password
       })
 
-      await Promise.all([
-        this.$store.dispatch('approaches/fetch'),
-        this.$store.dispatch('profile/fetch')
-      ])
+      await this.$store.dispatch('companies/fetch')
+      await this.$store.dispatch('companies/selectCompany')
 
       if (this.$store.getters['company/current']) {
-        await this.$store.dispatch('auth/fetchRefreshToken')
+        await this.$store.dispatch('auth/onRefreshToken')
 
         this.$router.push({
           name: 'dashboard'

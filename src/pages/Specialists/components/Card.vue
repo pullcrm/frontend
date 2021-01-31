@@ -5,7 +5,7 @@
     <UiAvatar
       class="specialists-page-card__avatar"
       :image="avatar"
-      :name="specialist.firstName"
+      :name="user.firstName"
       size="l"
     />
 
@@ -14,14 +14,14 @@
         class="specialists-page-card__name"
         size="s"
       >
-        {{ specialist.firstName }} {{ specialist.lastName }}
+        {{ user.firstName }} {{ user.lastName }}
       </UiText>
 
       <UiText
         class="specialists-page-card__phone"
         size="s"
       >
-        {{ specialist.phone | formatPhone }}
+        {{ user.phone | formatPhone }}
       </UiText>
     </div>
 
@@ -50,8 +50,12 @@ import Component from 'vue-class-component'
 export default class Card extends Vue {
   readonly specialist
 
+  get user () {
+    return this.specialist.user
+  }
+
   get avatar () {
-    return this.specialist.avatar?.path
+    return this.user.avatar?.path
   }
 }
 </script>

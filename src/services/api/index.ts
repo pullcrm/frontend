@@ -71,7 +71,7 @@ export interface IAvatar {
 }
 
 export interface IRegistrationUser {
-  approaches?: any
+  specialists?: any
   id: number
   firstName: string
   lastName: string
@@ -126,11 +126,11 @@ export interface IAppointmentCreateParams {
   isQueue?: boolean
   fullName?: string
   startTime: string
-  employeeId: number
+  specialistId: number
   procedures: number[]
   description: string
-  smsRemindNotify: boolean
-  smsCreationNotify: boolean
+  hasRemindSMS: boolean
+  hasCreationSMS: boolean
 }
 
 export interface IRestoreUserParams {
@@ -147,14 +147,14 @@ export interface ISmscSendParams {
 }
 
 export interface ITimeOffGetAllParams {
-  employeeId?: number
+  specialistId?: number
   date: string
   // startDateTime: string
   // endDateTime: string
 }
 
 export interface ITimeOffCreateParams {
-  employeeId: number
+  specialistId: number
   startDateTime: string
   endDateTime: string
 }
@@ -164,9 +164,16 @@ export interface IAppointmentAllParams {
 }
 
 export interface ISmsCreateParams {
-  token?: string
   login: string
   password: string
+  hasCreationSMS: boolean
+  hasRemindSMS: boolean
+  remindSMSMinutes: number
+}
+
+export interface IAnalyticsSimpleParams {
+  startDate: string
+  endDate: string
 }
 
 export const factory = (send) => ({
@@ -203,30 +210,44 @@ export const factory = (send) => ({
 
     update (id: number, params: ICompaniesCreateParams) : Promise<any> {
       return send(`companies/${id}`, params, 'PUT')
+    }
+
+    // all () : Promise<ICompanyInfo[]> {
+    //   return send('companies', null, 'GET')
+    // }
+  },
+
+  profile: {
+    get () : Promise<IRegistrationUser> {
+      return send('users/profile', null, 'GET')
     },
 
-    all () : Promise<ICompanyInfo[]> {
-      return send('companies', null, 'GET')
+    companies () : Promise<any[]> {
+      return send('specialists', null, 'GET')
     }
   },
 
   specialist: {
     create (params: IRegistrationUserParams) : Promise<IRegistrationUser> {
-      return send('companies/my/staff', params)
+      return send('companies/my/specialists', params)
     },
 
     update (id: number, params: IRegistrationUserParams) : Promise<IRegistrationUser> {
-      return send(`companies/my/staff/${id}`, params, 'PUT')
+      return send(`companies/my/specialists/${id}`, params, 'PUT')
     },
 
     all (): Promise<any> {
-      return send('companies/my/staff', null, 'GET')
+      return send('companies/my/specialists', null, 'GET')
     }
   },
 
-  approaches: {
-    my () : Promise<any[]> {
-      return send('approaches', null, 'GET')
+  users: {
+    create (params: IUsersCreateParams) : Promise<IRegistrationUser> {
+      return send('users', params)
+    },
+
+    confirmation (params: IUsersConfirmationParams) : Promise<IUsersConfirmation> {
+      return send('users/confirmation', params)
     }
   },
 
@@ -274,24 +295,6 @@ export const factory = (send) => ({
     }
   },
 
-  users: {
-    create (params: IUsersCreateParams) : Promise<IRegistrationUser> {
-      return send('users', params)
-    },
-
-    confirmation (params: IUsersConfirmationParams) : Promise<IUsersConfirmation> {
-      return send('users/confirmation', params)
-    },
-
-    profile () : Promise<IRegistrationUser> {
-      return send('users/profile', null, 'GET')
-    },
-
-    all (): Promise<IUser[]> {
-      return send('users', null, 'GET')
-    }
-  },
-
   files: {
     create (params: any) : Promise<any> {
       return send('files', params, 'FORM')
@@ -330,7 +333,7 @@ export const factory = (send) => ({
 
   public: {
     specialistsByCompanyId (params: any): Promise<any> {
-      return send('public/approaches', params, 'GET')
+      return send('public/specialists', params, 'GET')
     },
 
     proceduresByCompanyId (params: any): Promise<any> {
@@ -350,13 +353,23 @@ export const factory = (send) => ({
     }
   },
 
+  analytics: {
+    simple (params: IAnalyticsSimpleParams): Promise<any> {
+      return send('companies/my/stats', params, 'GET')
+    }
+  },
+
   sms: {
     settingCreate (params: ISmsCreateParams) : Promise<any> {
-      return send('sms', params)
+      return send('companies/my/settings', params)
     },
 
     settingUpdate (params: any) : Promise<any> {
-      return send('sms', params, 'PUT')
+      return send('companies/my/settings', params, 'PUT')
+    },
+
+    settingRemove (params: any) : Promise<any> {
+      return send('companies/my/settings', params, 'DELETE')
     },
 
     balance () : Promise<any> {

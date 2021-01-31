@@ -6,25 +6,22 @@
       </UiText>
 
       <UiPopover
-        size="s"
-        placement="top-right"
+        size="m"
+        placement="top_end"
       >
-        <template #default="{ open, close, isOpened }">
+        <template #default="{ toggle }">
           <UiText
             tag="UiLink"
             size="m"
             theme="primary"
-            @click.native.prevent="isOpened ? close() : open()"
+            @click.native.prevent="toggle"
           >
             {{ customDate | formatDate('D MMMM') }}
           </UiText>
         </template>
 
         <template #body>
-          <Calendar
-            v-model="customDate"
-            class="schedule-sidebar__calendar"
-          />
+          <Calendar v-model="customDate" />
         </template>
       </UiPopover>
     </div>

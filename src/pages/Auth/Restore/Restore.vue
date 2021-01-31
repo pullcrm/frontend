@@ -38,7 +38,7 @@
               v-model="phone"
               mask="38 (###) #### ###"
               name="phone"
-              left-icon="phone"
+              left-icon="outlined/phone"
               placeholder="066"
               :disabled="isValid"
               required
@@ -55,7 +55,7 @@
             >
               <UiInput
                 v-model="password"
-                left-icon="key"
+                left-icon="outlined/key"
                 name="password"
                 type="password"
                 placeholder="Введите пароль"
@@ -70,7 +70,7 @@
             >
               <UiInput
                 v-model="code"
-                left-icon="info"
+                left-icon="outlined/chat-centered-text"
                 placeholder="Введите код с sms"
                 required
                 @input="resetFieldError('code')"

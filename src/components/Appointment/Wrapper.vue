@@ -3,7 +3,7 @@
     class="appointment-wrapper"
     :class="[
       `_size_${sizeName}`,
-      `_status_${appointment.status}`,
+      `_status_${status}`,
       {'_is-active': isActive}
     ]"
     :style="gridArea"
@@ -29,6 +29,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { SOURCE_WIDGET } from '@/constants'
+
 import { getProceduresDuration } from '@/logics/appointment'
 
 import { slugFromTime } from '@/utils/time'
@@ -45,6 +47,17 @@ export default class Appointment extends Vue {
   readonly appointment
 
   isActive = false
+
+  get status () {
+    // @TODO: Refactor
+    const { status, source } = this.appointment
+
+    if (source === SOURCE_WIDGET && status === 'IN_PROGRESS') {
+      return 'IN_PROGRESS_WIDGET'
+    }
+
+    return status
+  }
 
   get totalTime () {
     return getProceduresDuration(this.appointment)
@@ -136,7 +149,7 @@ export default class Appointment extends Vue {
     &_COMPLETED {
       .appointment-wrapper__inner {
         &::before {
-          background: $ui-green-brand;
+          background: $ui-brand-green;
         }
       }
     }
@@ -145,6 +158,14 @@ export default class Appointment extends Vue {
       .appointment-wrapper__inner {
         &::before {
           background: $ui-red-danger;
+        }
+      }
+    }
+
+    &_IN_PROGRESS_WIDGET {
+      .appointment-wrapper__inner {
+        &::before {
+          background: #705bcf;
         }
       }
     }
@@ -177,6 +198,8 @@ export default class Appointment extends Vue {
   }
 
   &__inner {
+    @include ui-shadow-4;
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -184,7 +207,6 @@ export default class Appointment extends Vue {
     padding: 8px 8px 8px 12px;
     background: $ui-white;
     border-radius: 4px;
-    box-shadow: $shadow;
 
     &::before {
       position: absolute;

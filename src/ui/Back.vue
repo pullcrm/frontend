@@ -6,12 +6,12 @@
   >
     <template #prepend>
       <UiIcon
-        name="arrow/ios/left"
+        name="outlined/arrow-left"
         size="xs"
       />
     </template>
 
-    назад
+    Назад
   </UiText>
 </template>
 

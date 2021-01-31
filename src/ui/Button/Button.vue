@@ -125,7 +125,7 @@ import UiIconLoader from '@/ui/IconLoader.vue'
 })
 export default class Button extends Vue {
   readonly tag: string
-  readonly size: 'm' | 'l'
+  readonly size: 's' | 'm' | 'l'
   readonly theme:
     | 'primary'
     | 'primary-outlined'
@@ -138,6 +138,7 @@ export default class Button extends Vue {
     | 'danger-outlined'
     | 'gray'
     | 'white'
+    | 'transparent'
 
   readonly disabled: boolean
   readonly leftIcon?: string

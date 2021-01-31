@@ -21,7 +21,7 @@
       >
         <UiInput
           v-model="form.login"
-          left-icon="edit/edit-1"
+          left-icon="outlined/pencil"
           placeholder="Введите логин"
           required
         />
@@ -33,7 +33,7 @@
       >
         <UiInput
           v-model="form.password"
-          left-icon="edit/edit-1"
+          left-icon="outlined/pencil"
           placeholder="Введите пароль"
           required
         />
@@ -60,7 +60,10 @@ import { ISmsCreateParams } from '@/services/api'
 export default class ProcedureEdit extends Vue {
   form: ISmsCreateParams = {
     login: '',
-    password: ''
+    password: '',
+    hasRemindSMS: false,
+    hasCreationSMS: false,
+    remindSMSMinutes: 60
   }
 
   isLoading = false
@@ -69,9 +72,7 @@ export default class ProcedureEdit extends Vue {
     try {
       this.isLoading = true
 
-      await this.$api.sms.settingCreate({
-        ...this.form
-      })
+      await this.$api.sms.settingCreate(this.form)
 
       await this.$store.dispatch('company/fetch')
 
@@ -106,6 +107,10 @@ export default class ProcedureEdit extends Vue {
 
     .ui-button {
       width: 100%;
+      margin-top: 24px;
+    }
+
+    .ui-field + .ui-field {
       margin-top: 24px;
     }
   }

@@ -10,7 +10,7 @@
 </style>
 
 <div class="pullcrm-pro-widget-iframe">
-  <iframe src="https://pullcrm.com/base/{ companyId }/"></iframe>
+  <iframe src="https://pullcrm.com/widgets/base/{ companyId }/"></iframe>
 </div>
 
 <script>

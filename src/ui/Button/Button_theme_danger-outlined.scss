@@ -1,4 +1,4 @@
-.ui-button_theme_danger-outlined {
+@mixin ui-button_theme_danger-outlined {
   color: $ui-red-danger;
   background-color: $ui-white;
   border: 1px solid $ui-black-40;

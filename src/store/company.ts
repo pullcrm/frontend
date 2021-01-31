@@ -1,38 +1,42 @@
 function createState () {
   return {
-    company: null
+    role: null,
+    company: null,
+    profile: null
   }
 }
 
 const actions = {
-  async fetch ({ state, dispatch }) {
-    const company = await this.$api.companies.byId(state.company.id)
+  async fetch ({ getters, commit }) {
+    const companyId = getters.companyId
 
-    dispatch('save', company)
-  },
+    const company = await this.$api.companies.byId(companyId)
 
-  save ({ commit }, company) {
     commit('SET_COMPANY', company)
-
-    if (company.sms_configuration) {
-      commit('sms/SET_SETTINGS', company.sms_configuration, { root: true })
-    }
   }
 }
 
 const mutations = {
+  SET_COMPANY_INFO (state, companyInfo) {
+    const { role, company, profile } = companyInfo
+
+    state.role = role
+    state.company = company
+    state.profile = profile
+  },
+
   SET_COMPANY (state, company) {
     state.company = company
   }
 }
 
 const getters = {
-  current (state) {
+  current (state, _getters) {
     return state.company
   },
 
-  id (state) {
-    return state.company?.id
+  companyId (state) {
+    return state.company.id
   }
 }
 

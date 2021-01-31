@@ -45,7 +45,7 @@ export default class UiIcon extends Vue {
     | 'inherit'
 
   get icon () {
-    return require(`@/assets/icons/${this.name}.svg`)
+    return require(`@/assets/ui-icons/${this.name}.svg`)
   }
 }
 </script>

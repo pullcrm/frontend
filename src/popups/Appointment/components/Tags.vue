@@ -1,63 +1,65 @@
 <template>
   <div class="appointment-tags">
     <div class="appointment-tags__inner">
-      <UiDropdownMenu>
-        <template #inner="{ open, close, isOpened }">
+      <UiDropdownMenu
+        placement="bottom_start"
+      >
+        <template #inner="{ toggle }">
           <UiBadge
             size="m"
             clickable
-            right-icon="plus/plus"
-            @click.native="isOpened ? close() : open()"
+            right-icon="outlined/plus"
+            @click.native="toggle"
           >
             Еще
           </UiBadge>
         </template>
 
         <UiDropdownList>
-          <UiText
+          <UiDropdownItem
             size="m"
-            :left-icon="isQueue ? 'close/close-1' : 'edit/edit-1'"
+            :left-icon="isQueue ? 'outlined/x' : 'outlined/pencil'"
             @click.native="isQueue = !isQueue"
           >
             Добавить в очередь
-          </UiText>
+          </UiDropdownItem>
         </UiDropdownList>
 
         <UiDropdownList
-          v-if="hasSmsAuthorize"
+          v-if="isSMSAuthorize"
           name="СМС сообщения"
         >
-          <UiText
+          <UiDropdownItem
             size="m"
-            :left-icon="hasSmsRemindNotify ? 'close/close-1' : 'edit/edit-1'"
-            @click.native="hasSmsRemindNotify = !hasSmsRemindNotify"
+            :left-icon="hasRemindSMSNotify ? 'outlined/x' : 'outlined/pencil'"
+            @click.native="hasRemindSMSNotify = !hasRemindSMSNotify"
           >
             Напомнить за время
-          </UiText>
+          </UiDropdownItem>
 
-          <UiText
+          <UiDropdownItem
             v-if="isCreate"
             size="m"
-            :left-icon="hasSmsCreationNotify ? 'close/close-1' : 'edit/edit-1'"
-            @click.native="hasSmsCreationNotify = !hasSmsCreationNotify"
+            :left-icon="hasCreationSMSNotify ? 'outlined/x' : 'outlined/pencil'"
+            @click.native="hasCreationSMSNotify = !hasCreationSMSNotify"
           >
             Сообщить о создании
-          </UiText>
+          </UiDropdownItem>
         </UiDropdownList>
 
         <UiDropdownList
           v-if="isCreate === false"
           name="Статус записи"
         >
-          <UiText
+          <UiDropdownItem
             v-for="{ key, value } in statuses"
             :key="key"
             size="m"
-            :left-icon="key === status ? 'close/close-1' : 'edit/edit-1'"
+            :left-icon="key === status ? 'outlined/x' : 'outlined/pencil'"
             @click.native="onStatus(key)"
           >
             {{ value }}
-          </UiText>
+          </UiDropdownItem>
         </UiDropdownList>
       </UiDropdownMenu>
 
@@ -65,28 +67,28 @@
         v-if="isQueue"
         size="m"
         clickable
-        right-icon="close/close-1"
+        right-icon="outlined/x"
         @click.native="isQueue = false"
       >
         Добавлено в очередь
       </UiBadge>
 
       <UiBadge
-        v-if="hasSmsRemindNotify"
+        v-if="hasRemindSMSNotify"
         size="m"
         clickable
-        right-icon="close/close-1"
-        @click.native="hasSmsRemindNotify = false"
+        right-icon="outlined/x"
+        @click.native="hasRemindSMSNotify = false"
       >
         Напомнить о записи
       </UiBadge>
 
       <UiBadge
-        v-if="isCreate && hasSmsCreationNotify"
+        v-if="isCreate && hasCreationSMSNotify"
         size="m"
         clickable
-        right-icon="close/close-1"
-        @click.native="hasSmsCreationNotify = false"
+        right-icon="outlined/x"
+        @click.native="hasCreationSMSNotify = false"
       >
         Отправить sms после создания
       </UiBadge>
@@ -107,12 +109,12 @@ import { statusesDict } from '@/logics/appointment'
       default: false
     },
 
-    smsRemindNotify: {
+    hasRemindSms: {
       type: Boolean,
       default: false
     },
 
-    smsCreationNotify: {
+    hasCreationSms: {
       type: Boolean,
       default: false
     },
@@ -131,27 +133,27 @@ import { statusesDict } from '@/logics/appointment'
 export default class Tags extends Vue {
   readonly queue: boolean
   readonly status?: string
-  readonly smsRemindNotify : boolean
-  readonly smsCreationNotify : boolean
+  readonly hasRemindSms : boolean
+  readonly hasCreationSms : boolean
 
-  get hasSmsAuthorize () {
-    return this.$store.getters['sms/hasSmsAuthorize']
+  get isSMSAuthorize () {
+    return this.$store.getters['sms/isAuthorize']
   }
 
-  get hasSmsRemindNotify () {
-    return this.smsRemindNotify
+  get hasRemindSMSNotify () {
+    return this.hasRemindSms
   }
 
-  set hasSmsRemindNotify (value) {
-    this.$emit('update:smsRemindNotify', value)
+  set hasRemindSMSNotify (value) {
+    this.$emit('update:hasRemindSms', value)
   }
 
-  get hasSmsCreationNotify () {
-    return this.smsCreationNotify
+  get hasCreationSMSNotify () {
+    return this.hasCreationSms
   }
 
-  set hasSmsCreationNotify (value) {
-    this.$emit('update:smsCreationNotify', value)
+  set hasCreationSMSNotify (value) {
+    this.$emit('update:hasCreationSms', value)
   }
 
   get isQueue () {

@@ -8,6 +8,7 @@
 function createState () {
   return {
     order: {},
+    company: null,
     procedures: [],
     specialists: []
   }
@@ -15,17 +16,23 @@ function createState () {
 
 const actions = {
   async fetch ({ commit }, companyId) {
-    const [procedures, specialists] = await Promise.all([
+    const [company, procedures, specialists] = await Promise.all([
+      this.$api.public.companyById(companyId),
       this.$api.public.proceduresByCompanyId({ companyId }),
       this.$api.public.specialistsByCompanyId({ companyId })
     ])
 
+    commit('SET_COMPANY', company)
     commit('SET_PROCEDURES', procedures)
     commit('SET_SPECIALISTS', specialists)
   }
 }
 
 const mutations = {
+  SET_COMPANY (state, company) {
+    state.company = company
+  },
+
   SET_PROCEDURES (state, procedures) {
     state.procedures = procedures
   },

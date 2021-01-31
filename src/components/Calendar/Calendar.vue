@@ -76,7 +76,7 @@ export default class Calendar extends Vue {
     }
 
     .vc-day-layer .vc-highlight {
-      background: $ui-green-brand;
+      background: $ui-brand-green;
     }
 
     .is-today {

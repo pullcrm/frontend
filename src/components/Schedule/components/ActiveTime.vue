@@ -62,7 +62,7 @@ export default class ActiveTime extends Vue {
   right: 0;
   bottom: 32px;
   left: 0;
-  z-index: 2;
+  z-index: 11;
   pointer-events: none;
 
   &__inner {
@@ -75,7 +75,6 @@ export default class ActiveTime extends Vue {
     background: #ff958e;
 
     &::before {
-      content: '';
       position: absolute;
       bottom: -2px;
       left: 0;
@@ -84,18 +83,19 @@ export default class ActiveTime extends Vue {
       height: 5px;
       background: #ef4137;
       border-radius: 50%;
+      content: '';
     }
 
     &::after {
       @include ui-typo-12;
 
-      content: attr(data-time);
       position: absolute;
       top: 50%;
-      right: calc(100% + 8px);
-      font-weight: 700;
+      right: calc(100% + 4px);
       color: inherit;
+      font-weight: 700;
       transform: translateY(-50%);
+      content: attr(data-time);
     }
   }
 }

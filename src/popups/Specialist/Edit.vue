@@ -59,7 +59,7 @@
         label="Статус"
       >
         <UiSelect
-          v-model="status"
+          v-model="form.status"
           :options="statusList"
           label="value"
           placeholder="Выбрать статус"
@@ -70,7 +70,7 @@
         label="Описание"
       >
         <UiInput
-          v-model="description"
+          v-model="form.description"
           name="description"
           placeholder="Добавьте описание"
           tag="textarea"
@@ -95,11 +95,17 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { IRegistrationUser } from '@/services/api'
-
 import { statuses } from '@/logics/specialist'
 
 import FileUpload from '@/components/FileUpload/FileUpload.vue'
+
+interface ISpecialistEditParams {
+  id?: number
+  firstName?: string
+  lastName?: string
+  description?: string
+  status?: Record<string, any>
+}
 
 @Component({
   components: {
@@ -107,40 +113,53 @@ import FileUpload from '@/components/FileUpload/FileUpload.vue'
   },
 
   props: {
-    user: {
+    specialist: {
       type: Object,
       required: true
     }
   }
 })
 export default class SpecialistNew extends Vue {
-  readonly user: IRegistrationUser
+  readonly specialist
 
-  form: IRegistrationUser = this.user
-  description = this.user.approaches.description
+  form: ISpecialistEditParams = {}
 
   isLoading = false
   currentFile: File
 
-  status = {
-    ...statuses[this.currentStatus],
-    key: this.currentStatus
+  constructor () {
+    super()
+
+    const {
+      user,
+      status: currentStatus,
+      description
+    } = this.specialist
+
+    const status = {
+      ...statuses[currentStatus],
+      key: currentStatus
+    }
+
+    this.form = {
+      id: user.id,
+      status,
+      lastName: user.lastName,
+      firstName: user.firstName,
+      description
+    }
+  }
+
+  get user () {
+    return this.specialist.user
   }
 
   get image () {
     return this.user.avatar?.path
   }
 
-  get currentStatus () {
-    return this.user.approaches.status
-  }
-
   get statusList () {
     return Object.keys(statuses).map(key => ({ key, ...statuses[key] }))
-  }
-
-  async fileSelect (file) {
-    this.currentFile = file
   }
 
   async onSubmit () {
@@ -150,11 +169,11 @@ export default class SpecialistNew extends Vue {
       const result = await this.$store.dispatch('specialists/onUploadAvatar', this.currentFile)
 
       await Promise.all([
+        // @ts-ignore
         this.$api.specialist.update(this.form.id, {
           ...this.form,
-          avatarId: result?.id,
-          status: this.status.key,
-          description: this.description
+          status: this.form.status.key,
+          avatarId: result?.id
         })
       ])
 
@@ -164,6 +183,10 @@ export default class SpecialistNew extends Vue {
     } finally {
       this.isLoading = false
     }
+  }
+
+  async fileSelect (file) {
+    this.currentFile = file
   }
 }
 </script>

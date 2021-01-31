@@ -1,11 +1,19 @@
 <template>
   <div class="settings-page-layout">
     <UiContainer>
+      <UiTitle
+        class="settings-page-layout__title"
+      >
+        Настройки компании
+      </UiTitle>
+
       <UiTabs
         class="settings-page-layout__tabs"
         :tabs="tabs"
       />
+    </UiContainer>
 
+    <UiContainer narrow>
       <UiPanel
         responsive
       >
@@ -30,9 +38,14 @@ export default class SettingsLayout extends Vue {
   get tabs () {
     return [
       {
-        name: 'Настройки компании',
+        name: 'Информация',
         to: { name: 'companySettings' }
       },
+
+      // {
+      //   name: 'Время работы',
+      //   to: { name: 'smsSettings' }
+      // },
 
       {
         name: 'SMS оповещение',
@@ -50,6 +63,10 @@ export default class SettingsLayout extends Vue {
 
 <style lang="scss">
 .settings-page-layout {
+  &__title {
+    margin-bottom: 24px;
+  }
+
   &__tabs {
     margin-bottom: 24px;
   }

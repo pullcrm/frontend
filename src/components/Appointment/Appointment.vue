@@ -17,7 +17,7 @@
       >
         <UiIcon
           size="xs"
-          name="more/vertical"
+          name="outlined/dots-three-vertical"
         />
       </div>
     </div>
@@ -34,14 +34,14 @@
         <UiText
           v-if="appointment.startTime"
           size="s"
-          left-icon="timer"
+          left-icon="outlined/clock"
         >
           {{ fromTime }} - {{ toTime }}
         </UiText>
 
         <UiText
           size="s"
-          left-icon="wallet"
+          left-icon="outlined/wallet"
         >
           {{ appointment.total | price }}
         </UiText>
@@ -52,7 +52,7 @@
       >
         <UiIcon
           size="xs"
-          name="move"
+          name="outlined/hand-grabbing"
         />
       </div>
     </div>

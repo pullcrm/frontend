@@ -7,7 +7,8 @@ function createState () {
     date: formatDate(new Date(), 'YYYY-MM-DD'),
     timeOffs: [],
 
-    isLoading: false
+    isLoading: false,
+    isQueueOpened: false
   }
 }
 
@@ -17,8 +18,8 @@ const actions = {
 
     await Promise.all([
       dispatch('fetchTimeOffs'),
-      dispatch('appointments/fetchQueue', null, { root: true }),
-      dispatch('appointments/fetchAppointments', null, { root: true })
+      dispatch('appointments/fetch', null, { root: true }),
+      dispatch('appointments/fetchQueue', null, { root: true })
     ])
 
     commit('SET_LOADING', false)
@@ -44,6 +45,10 @@ const mutations = {
 
   SET_LOADING (state, loading) {
     state.isLoading = loading
+  },
+
+  SET_QUEUE_OPEN (state, isOpened) {
+    state.isQueueOpened = isOpened
   }
 }
 
@@ -55,7 +60,7 @@ const getters = {
   isClosedDay (state) {
     return (specialistId) => {
       return state.timeOffs.some(timeOff => {
-        return isCloseDay(timeOff) && timeOff.employeeId === specialistId
+        return isCloseDay(timeOff) && timeOff.specialistId === specialistId
       })
     }
   }

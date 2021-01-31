@@ -33,7 +33,7 @@
     </div>
 
     <UiAlert
-      left-icon="alert/circle"
+      left-icon="outlined/warning-circle"
       theme="info"
     >
       Ми нагадаємо вам про запис за годину до початку

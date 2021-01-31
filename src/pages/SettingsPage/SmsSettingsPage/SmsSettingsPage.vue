@@ -2,76 +2,90 @@
   <SettingsLayout
     class="sms-settings-page"
   >
-    <UiTitle
-      class="sms-settings-page__title"
-      size="l"
-      responsive
-    >
-      SMS оповещение
-    </UiTitle>
-
     <template
-      v-if="hasSmsAuthorize"
+      v-if="isSMSAuthorize"
     >
-      <UiText
-        size="m"
-        responsive
-      >
-        Авторизовано в SMSC.UA
-      </UiText>
+      <div class="ui-grid">
+        <UiTitle
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+          size="s"
+          responsive
+        >
+          Авторизовано в SMSC.UA
+        </UiTitle>
 
-      <UiSwitch
-        :value="settings.remindAfterCreation"
-        size="m"
-        @input="onSettings('remindAfterCreation', $event)"
-      >
-        <template #append>
-          <UiText
-            size="m"
-            responsive
-          >
-            Отправлять смс клиенту после создания записи (по умолчанию)
-          </UiText>
-        </template>
-      </UiSwitch>
+        <UiSwitch
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+          :value="settings.hasCreationSMS"
+          size="m"
+          @input="onSettings('hasCreationSMS', $event)"
+        >
+          <template #append>
+            <UiText
+              size="m"
+              responsive
+            >
+              Отправлять смс клиенту после создания записи (по умолчанию)
+            </UiText>
+          </template>
+        </UiSwitch>
 
-      <UiSwitch
-        size="m"
-        :value="settings.remindBefore"
-        @input="onSettings('remindBefore', $event)"
-      >
-        <template #append>
-          <UiText
-            size="m"
-            responsive
-          >
-            Напоминать клиенту о записи (по умолчанию)
-          </UiText>
-        </template>
-      </UiSwitch>
+        <UiSwitch
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+          size="m"
+          :value="settings.hasRemindSMS"
+          @input="onSettings('hasRemindSMS', $event)"
+        >
+          <template #append>
+            <UiText
+              size="m"
+              responsive
+            >
+              Напоминать клиенту о записи (по умолчанию)
+            </UiText>
+          </template>
+        </UiSwitch>
 
-      <UiField
-        label="За сколько времени напоминать о записи?"
-      >
-        <UiSelect
-          label="name"
-          :value="remindBeforeInMinutes"
-          :options="durationList"
-          required
-          :clearable="false"
-          placeholder="Выбрать время"
-          @input="onSettings('remindBeforeInMinutes', $event.value)"
-        />
-      </UiField>
+        <UiField
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+          label="За сколько времени напоминать о записи?"
+        >
+          <UiSelect
+            label="name"
+            :value="remindSMSMinutes"
+            :options="durationList"
+            required
+            :clearable="false"
+            placeholder="Выбрать время"
+            @input="onSettings('remindSMSMinutes', $event.value)"
+          />
+        </UiField>
 
-      <UiButton
-        theme="blue"
-        :loading="isLoading"
-        responsive
-        @click.native="save"
-      >
-        Сохранить
-      </UiButton>
+        <UiButton
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+          theme="blue"
+          :loading="isLoading"
+          responsive
+          @click.native="save"
+        >
+          Сохранить
+        </UiButton>
+      </div>
     </template>
 
     <UiButton
@@ -101,21 +115,19 @@ import SettingsLayout from '../components/SettingsLayout.vue'
 export default class SmsSettingsPage extends Vue {
   isLoading = false
 
+  settings = this.$store.getters['sms/settings']
+
   get durationList () {
     return DURATIONS
   }
 
-  get settings () {
-    return this.$store.state.sms.settings
+  get isSMSAuthorize () {
+    return this.$store.getters['sms/isAuthorize']
   }
 
-  get hasSmsAuthorize () {
-    return this.$store.getters['sms/hasSmsAuthorize']
-  }
-
-  get remindBeforeInMinutes () {
+  get remindSMSMinutes () {
     const item = this.durationList.find(item => {
-      return item.value === this.settings.remindBeforeInMinutes
+      return item.value === this.settings.remindSMSMinutes
     })
 
     return item?.name
@@ -125,7 +137,17 @@ export default class SmsSettingsPage extends Vue {
     try {
       this.isLoading = true
 
-      await this.$store.dispatch('sms/updateSettings')
+      const {
+        hasRemindSMS,
+        hasCreationSMS,
+        remindSMSMinutes
+      } = this.settings
+
+      await this.$api.sms.settingUpdate({
+        hasRemindSMS,
+        hasCreationSMS,
+        remindSMSMinutes
+      })
 
       this.$store.dispatch('toasts/show', { title: 'Сохранено!' })
     } catch {
@@ -139,7 +161,7 @@ export default class SmsSettingsPage extends Vue {
   }
 
   onSettings (key, value) {
-    this.$store.commit('sms/SET_SETTING_BY_KEY', { key, value })
+    this.settings[key] = value
   }
 
   smsPopup () {

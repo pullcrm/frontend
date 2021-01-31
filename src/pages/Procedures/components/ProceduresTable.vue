@@ -62,7 +62,7 @@
         >
           <UiButton
             theme="info-outlined"
-            left-icon="edit/edit-1"
+            left-icon="outlined/pencil"
             size="m"
             @click.native="onEdit(row)"
           >

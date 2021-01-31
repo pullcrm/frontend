@@ -1,0 +1,18 @@
+@mixin ui-button_theme_transparent {
+  color: $ui-black-100;
+  background-color: transparent;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: $ui-black-20;
+    }
+  }
+
+  &:active {
+    background-color: $ui-black-20;
+  }
+
+  &.ui-button_disabled {
+    color: $ui-black-60;
+  }
+}

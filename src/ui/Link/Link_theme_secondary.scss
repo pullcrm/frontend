@@ -1,0 +1,13 @@
+@mixin ui-link_theme_secondary {
+  color: $ui-blue-info;
+
+  &:active {
+    color: $ui-blue-hover-15;
+  }
+
+  @include ui-hover {
+    &:hover {
+      color: $ui-blue-hover-15;
+    }
+  }
+}

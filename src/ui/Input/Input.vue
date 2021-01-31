@@ -29,7 +29,7 @@
     >
       <UiIcon
         class="ui-input__clear"
-        name="close/close-1"
+        name="outlined/x"
         size="s"
       />
     </span>

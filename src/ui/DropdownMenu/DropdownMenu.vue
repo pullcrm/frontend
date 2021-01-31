@@ -2,14 +2,14 @@
   <UiPopover
     ref="popover"
     class="ui-dropdown-menu"
-    size="xs"
+    :size="size"
     :placement="placement"
     @open="$emit('open', $event)"
   >
-    <template #default="{ open, close, isOpened }">
+    <template #default="{ open, close, isOpened, toggle }">
       <slot
         name="inner"
-        v-bind="{ open, close, isOpened }"
+        v-bind="{ open, close, isOpened, toggle }"
       />
     </template>
 
@@ -32,7 +32,12 @@ import UiPopover from '@/ui/Popover/Popover.vue'
   props: {
     placement: {
       type: String,
-      default: 'bottom-left'
+      default: 'bottom'
+    },
+
+    size: {
+      type: String,
+      default: 'm'
     }
   }
 })
@@ -57,13 +62,14 @@ export default class DropdownMenu extends Vue {
     }
 
     .ui-dropdown-list {
+      position: relative;
       margin-right: calc(var(--ui-popover-padding) * -1);
       margin-left: calc(var(--ui-popover-padding) * -1);
       padding: 0 var(--ui-popover-padding);
 
       &:not(:last-child) {
-        margin-bottom: 10px;
-        padding-bottom: 10px;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
         border-bottom: 1px solid $ui-black-40;
       }
 
@@ -71,7 +77,7 @@ export default class DropdownMenu extends Vue {
         white-space: nowrap;
 
         &:not(:last-child) {
-          margin-bottom: 10px;
+          margin-bottom: 8px;
         }
       }
     }

@@ -37,12 +37,12 @@ import Toasts from '@/components/Toasts/Toasts.vue'
   watch: {
     async hasCompany (value) {
       if (value) {
-        const hasSmsAuthorize = this.$store.getters['sms/hasSmsAuthorize']
+        const isSMSAuthorize = this.$store.getters['sms/isAuthorize']
 
         await Promise.all([
           this.$store.dispatch('procedures/fetch'),
           this.$store.dispatch('specialists/fetch'),
-          hasSmsAuthorize && this.$store.dispatch('sms/balance')
+          isSMSAuthorize && this.$store.dispatch('sms/balance')
         ])
       }
     }
@@ -51,10 +51,6 @@ import Toasts from '@/components/Toasts/Toasts.vue'
 export default class App extends Vue {
   get hasCompany () {
     return this.$store.getters['company/current']
-  }
-
-  get hasProfile () {
-    return Boolean(this.$store.state.profile.profile)
   }
 
   get layout () {
@@ -73,6 +69,8 @@ export default class App extends Vue {
   @import '@/scss/styles.scss';
 
   body {
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0);
+
     color: $ui-black-100;
     font-family: Roboto, sans-serif !important;
   }
@@ -83,5 +81,6 @@ export default class App extends Vue {
     font-family: Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
   }
 </style>

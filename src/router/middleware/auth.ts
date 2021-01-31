@@ -4,6 +4,6 @@ export default async function auth ({ from, next, store }) {
   }
 
   if (!store.state.auth.accessToken) {
-    return next({ name: 'login', query: { from } })
+    next({ name: 'login', query: { from } })
   }
 }

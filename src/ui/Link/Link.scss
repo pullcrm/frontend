@@ -1,0 +1,28 @@
+@import './Link_theme_action';
+@import './Link_theme_primary';
+@import './Link_theme_secondary';
+
+.ui-link {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: baseline;
+  cursor: pointer;
+  transition: color var(--ui-transition-hover);
+  user-select: none;
+
+  &_theme_primary {
+    @include ui-link_theme_primary;
+  }
+
+  &_theme_secondary {
+    @include ui-link_theme_secondary;
+  }
+
+  &_theme_action {
+    @include ui-link_theme_action;
+  }
+
+  &_underlined {
+    text-decoration: underline;
+  }
+}

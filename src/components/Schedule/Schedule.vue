@@ -8,7 +8,10 @@
       v-if="isToday"
     />
 
-    <div class="schedule__table">
+    <div
+      ref="inner"
+      class="schedule__inner"
+    >
       <Loader
         v-if="loading"
       />
@@ -54,10 +57,22 @@ import ScheduleColumnPlaceholder from './components/ColumnPlaceholder.vue'
     ActiveTime,
     ScheduleColumn,
     ScheduleColumnPlaceholder
+  },
+
+  provide () {
+    return {
+      getUiTooltipContainer: () => {
+        return this.$refs.inner
+      }
+    }
   }
 })
 export default class Schedule extends Vue {
   readonly loading: boolean
+
+  $refs: {
+    inner: HTMLElement
+  }
 
   get date () {
     return this.$store.state.schedule.date
@@ -80,19 +95,21 @@ export default class Schedule extends Vue {
   }
 
   get columns () {
-    return this.specialists.map(specialist => {
-      const appointments = this.appointments.filter(({ employee }) => {
-        return employee.id === specialist.id
+    return this.specialists
+      .filter(({ status }) => status !== 'HIDE' /* @TODO: Refactor */)
+      .map(specialist => {
+        const appointments = this.appointments.filter(item => {
+          return item.specialist.id === specialist.id
+        })
+
+        const timeOffs = this.timeOffs.filter(({ specialistId }) => specialistId === specialist.id)
+
+        return {
+          timeOffs,
+          specialist,
+          appointments
+        }
       })
-
-      const timeOffs = this.timeOffs.filter(({ employeeId }) => employeeId === specialist.id)
-
-      return {
-        timeOffs,
-        specialist,
-        appointments
-      }
-    })
   }
 }
 </script>

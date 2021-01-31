@@ -5,6 +5,20 @@ module.exports = {
     allowedHosts: ['localhost']
   },
 
+  pwa: {
+    name: 'Pullcrm',
+    themeColor: '#4876f6',
+    workboxPluginMode: 'GenerateSW',
+    appleMobileWebAppCapable: 'yes',
+    assetsVersion: '0.1',
+    manifestOptions: {
+      name: 'Pullcrm - система управления клиентами',
+      short_name: 'Pullcrm',
+      display: 'standalone',
+      background_color: '#ffffff'
+    }
+  },
+
   css: {
     loaderOptions: {
       scss: {

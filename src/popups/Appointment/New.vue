@@ -7,8 +7,8 @@
       <Tags
         class="appointment-new__tags"
         :queue.sync="form.isQueue"
-        :sms-remind-notify.sync="form.smsRemindNotify"
-        :sms-creation-notify.sync="form.smsCreationNotify"
+        :has-remind-sms.sync="form.hasRemindSMS"
+        :has-creation-sms.sync="form.hasCreationSMS"
         is-create
       />
 
@@ -52,13 +52,13 @@
           label="Сотрудник"
         >
           <UiSelect
-            v-model="form.employee"
+            v-model="form.specialist"
             :options="specialists"
             label="fullName"
             placeholder="Выбрать исполнителя"
             :clearable="false"
             required
-            @input="resetFieldError('employee')"
+            @input="resetFieldError('specialist')"
           />
         </UiField>
 
@@ -113,6 +113,7 @@
         type="submit"
         size="l"
         theme="blue"
+        :loading="isLoading"
       >
         Добавить запись
       </UiButton>
@@ -136,7 +137,7 @@ import Total from './components/Total.vue'
   },
 
   props: {
-    employeeId: {
+    specialistId: {
       type: Number,
       default: null
     },
@@ -175,8 +176,9 @@ import Total from './components/Total.vue'
 export default class AppointmentNew extends Vue {
   readonly time?: string
   readonly isQueue?: boolean
-  readonly employeeId?: number
+  readonly specialistId?: number
 
+  isLoading = false
   workingHours = []
 
   form = {
@@ -185,24 +187,16 @@ export default class AppointmentNew extends Vue {
     phone: '',
     isQueue: this.isQueue,
     fullName: '',
-    employee: this.employeeId && this.specialists.find(({ id }) => id === this.employeeId),
     startTime: this.time,
+    specialist: this.specialistId && this.specialists.find(({ id }) => id === this.specialistId),
     procedures: [],
     description: '',
-    smsCreationNotify: (
-      this.hasSmsAuthorize && this.$store.state.sms.settings.remindAfterCreation
-    ),
-    smsRemindNotify: (
-      this.hasSmsAuthorize && this.$store.state.sms.settings.remindBefore
-    )
+    hasRemindSMS: this.$store.getters['sms/settings']?.hasRemindSMS,
+    hasCreationSMS: this.$store.getters['sms/settings']?.hasCreationSMS
   }
 
   get validations () {
     return {}
-  }
-
-  get hasSmsAuthorize () {
-    return this.$store.getters['sms/hasSmsAuthorize']
   }
 
   get specialists () {
@@ -218,7 +212,7 @@ export default class AppointmentNew extends Vue {
   }
 
   get specialist () {
-    return this.form.employee
+    return this.form.specialist
   }
 
   get duration () {
@@ -240,22 +234,28 @@ export default class AppointmentNew extends Vue {
   }
 
   async submit () {
-    await this.$store.dispatch('appointments/create', this.form)
-    await this.$store.dispatch('schedule/fetch')
+    try {
+      this.isLoading = true
 
-    this.$store.dispatch('popup/hide')
+      await this.$store.dispatch('appointments/create', this.form)
+      await this.$store.dispatch('schedule/fetch')
+
+      this.$store.dispatch('popup/hide')
+    } finally {
+      this.isLoading = false
+    }
   }
 
   async fetchAvailableTime () {
     this.workingHours = []
 
-    if (!this.form.employee?.id || this.duration === 0) {
+    if (!this.form.specialist?.id || this.duration === 0) {
       return
     }
 
     this.workingHours = await this.$api.appointments.availableTime({
       date: this.form.date.format('YYYY-MM-DD'),
-      employeeId: this.form.employee.id,
+      specialistId: this.form.specialist.id,
       duration: this.duration
     })
   }
@@ -283,6 +283,10 @@ export default class AppointmentNew extends Vue {
     &__button {
       width: 100%;
       margin-top: 16px;
+    }
+
+    .ui-field + .ui-field {
+      margin-top: 24px;
     }
   }
 </style>

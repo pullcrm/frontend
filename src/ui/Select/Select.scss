@@ -188,6 +188,8 @@
   }
 
   .vs__dropdown-menu {
+    @include ui-shadow-4;
+
     position: absolute;
     top: 100%;
     left: 0;
@@ -196,7 +198,6 @@
     max-height: 300px;
     overflow-y: auto;
     background: #fff;
-    box-shadow: $shadow;
   }
 
   .vs__dropdown-option {

@@ -8,7 +8,7 @@ function createState () {
 }
 
 const actions = {
-  async fetchAppointments ({ rootState, commit }) {
+  async fetch ({ rootState, commit }) {
     const appointments = await this.$api.appointments.all({
       date: rootState.schedule.date
     })
@@ -39,6 +39,7 @@ const actions = {
 
 const mutations = {
   SET_APPOINTMENTS (state, appointments) {
+    // TODO: Fix startTime on api
     state.appointments = appointments.map(item => ({
       ...item,
       startTime: item.startTime.slice(0, 5)
@@ -46,6 +47,7 @@ const mutations = {
   },
 
   SET_QUEUE (state, queue) {
+    // TODO: Fix startTime on api
     state.queue = queue.map(item => ({
       ...item,
       startTime: item.startTime?.slice(0, 5) ?? null

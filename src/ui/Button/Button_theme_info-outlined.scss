@@ -1,4 +1,4 @@
-.ui-button_theme_info-outlined {
+@mixin ui-button_theme_info-outlined {
   color: $ui-blue-info;
   background-color: $ui-white;
   border: 1px solid $ui-black-40;

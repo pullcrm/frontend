@@ -7,7 +7,7 @@
  */
 
 function formatMoney (value: any) {
-  const formattedValue = Number.parseFloat(value)
+  const formattedValue = Number.parseFloat(value || 0)
     .toFixed(2)
     .replace('.00', '')
     .replace('.', ',')

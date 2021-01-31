@@ -26,7 +26,7 @@
           <UiInput
             v-model="form.name"
             required
-            left-icon="edit/edit-1"
+            left-icon="outlined/pencil"
             placeholder="Введите описание"
             @input="resetFieldError('name')"
           />
@@ -36,39 +36,36 @@
           label="Сотрудник"
         >
           <UiSelect
-            v-model="form.employee"
+            v-model="form.specialist"
             :options="specialists"
             label="fullName"
             placeholder="Выбрать сотрудника"
             :clearable="false"
             required
-            @input="resetFieldError('employee')"
+            @input="resetFieldError('specialist')"
           />
         </UiField>
 
         <UiPopover
           class="time-off-edit-popup__popover"
-          size="s"
+          size="m"
           placement="top-center"
         >
-          <template #default="{ open, close, isOpened }">
+          <template #default="{ toggle }">
             <UiField
               label="Дата"
-              @click.native.prevent="isOpened ? close() : open()"
+              @click.native.prevent="toggle"
             >
               <UiInput
                 :value="date | formatDate('D MMMM')"
                 readonly
-                left-icon="edit/edit-1"
+                left-icon="outlined/pencil"
               />
             </UiField>
           </template>
 
           <template #body>
-            <Calendar
-              v-model="date"
-              class="schedule-sidebar__calendar"
-            />
+            <Calendar v-model="date" />
           </template>
         </UiPopover>
 
@@ -160,7 +157,7 @@ import Calendar from '@/components/Calendar/Calendar.vue'
       required: true
     },
 
-    employeeId: {
+    specialistId: {
       type: Number,
       default: null
     },
@@ -188,7 +185,7 @@ export default class TimeOffEdit extends Vue {
   form = {
     id: null,
     endTime: null,
-    employee: null,
+    specialist: null,
     startTime: null
   }
 
@@ -201,8 +198,8 @@ export default class TimeOffEdit extends Vue {
       id,
       endTime,
       startTime,
-      employeeId,
       endDateTime,
+      specialistId,
       startDateTime
     } = this.timeOff
 
@@ -212,7 +209,7 @@ export default class TimeOffEdit extends Vue {
 
     this.date = toDate(startDateTime).toDate()
 
-    this.form.employee = this.specialists.find(({ id }) => id === employeeId)
+    this.form.specialist = this.specialists.find(({ id }) => id === specialistId)
 
     this.isCloseDay = isCloseDay({ startDateTime, endDateTime })
   }
@@ -244,7 +241,7 @@ export default class TimeOffEdit extends Vue {
     const startDateTime = setTime(this.date, this.form.startTime).format('MM.DD.YY HH:mm')
 
     await this.$api.timeOff.update(this.form.id, {
-      employeeId: this.form.employee.id,
+      specialistId: this.form.specialist.id,
       endDateTime,
       startDateTime
     })
@@ -290,6 +287,10 @@ export default class TimeOffEdit extends Vue {
 
     &__popover {
       margin: 24px 0;
+    }
+
+    .ui-field + .ui-field {
+      margin-top: 24px;
     }
   }
 </style>

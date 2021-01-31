@@ -6,14 +6,14 @@ export function normalizeTimeOffs (timeOffs) {
   return timeOffs.map(timeOff => {
     const {
       id,
-      employeeId,
+      specialistId,
       endDateTime,
       startDateTime
     } = timeOff
 
     return {
       id,
-      employeeId,
+      specialistId,
       endTime: getTime(endDateTime),
       startTime: getTime(startDateTime),
       endDateTime,

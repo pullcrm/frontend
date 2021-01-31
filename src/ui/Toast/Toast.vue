@@ -59,7 +59,7 @@
       @click="onClose"
     >
       <UiIcon
-        name="close/close-1"
+        name="outlined/x"
         size="s"
       />
     </div>
