@@ -153,7 +153,7 @@ export default class Specialist extends Vue {
     }
 
     &__name {
-      font-weight: 500;
+      font-weight: bold;
     }
 
     &__total {
