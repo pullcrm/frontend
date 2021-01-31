@@ -70,7 +70,7 @@
             >
               <UiInput
                 v-model="code"
-                left-icon="info"
+                left-icon="outlined/chat-centered-text"
                 placeholder="Введите код с sms"
                 required
                 @input="resetFieldError('code')"
