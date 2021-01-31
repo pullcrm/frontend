@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: space-between;
 
+  &__today,
   &__tomorrow {
     padding: 0 8px;
   }
@@ -20,7 +21,6 @@
 
   &__left {
     display: flex;
-    padding-left: 32px;
 
     .ui-button {
       margin-right: 8px;
@@ -36,6 +36,24 @@
 
     .ui-button {
       margin-left: 16px;
+    }
+  }
+
+  @media (min-width: $ui-laptop) {
+    &__left {
+      padding-left: 32px;
+    }
+  }
+
+  @media (max-width: $ui-laptop - 1px) {
+    &__today,
+    &__tomorrow {
+      display: none;
+    }
+
+    &__add,
+    &__balance {
+      display: none;
     }
   }
 }

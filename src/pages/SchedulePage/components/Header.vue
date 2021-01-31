@@ -24,13 +24,23 @@
       </UiPopover>
 
       <UiButton
+        v-if="isToday"
         class="schedule-page-header__tomorrow"
-        :class="{'_active': isTomorrow}"
         size="m"
         theme="transparent"
         @click.native="setDateTomorrow"
       >
         Завтра
+      </UiButton>
+
+      <UiButton
+        v-else
+        class="schedule-page-header__today"
+        size="m"
+        theme="transparent"
+        @click.native="date = new Date()"
+      >
+        Сегодня
       </UiButton>
     </div>
 
@@ -51,6 +61,7 @@
       </UiText>
 
       <UiButton
+        class="schedule-page-header__add"
         size="m"
         theme="blue"
         right-icon="outlined/plus"
@@ -101,6 +112,10 @@ export default class Header extends Vue {
 
     this.$store.commit('schedule/SET_DATE', date)
     this.$store.dispatch('schedule/fetch')
+  }
+
+  get isToday () {
+    return dayjs(this.date).isToday()
   }
 
   get isTomorrow () {

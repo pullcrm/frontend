@@ -18,7 +18,7 @@ const Restore = dynamicPage(() => import('@/pages/Auth/Restore/Restore.vue'))
 const Registration = dynamicPage(() => import('@/pages/Auth/Registration/Registration.vue'))
 const CompanyCreate = dynamicPage(() => import('@/pages/Auth/CompanyCreate/CompanyCreate.vue'))
 
-const Dashboard = dynamicPage(() => import('@/pages/Dashboard/Dashboard.vue'))
+const DashboardPage = dynamicPage(() => import('@/pages/DashboardPage/DashboardPage.vue'))
 const SchedulePage = dynamicPage(() => import('@/pages/SchedulePage/SchedulePage.vue'))
 const Specialists = dynamicPage(() => import('@/pages/Specialists/Specialists.vue'))
 const Procedures = dynamicPage(() => import('@/pages/Procedures/Procedures.vue'))
@@ -48,7 +48,7 @@ const router = new Router({
   routes: [
     { path: '/', redirect: '/dashboard' },
 
-    { path: '/dashboard', name: 'dashboard', component: Dashboard, meta: { layout: 'Dashboard', middleware: [auth, company] } },
+    { path: '/dashboard', name: 'dashboard', component: DashboardPage, meta: { layout: 'Dashboard', middleware: [auth, company] } },
 
     { path: '/login/', name: 'login', component: Login },
     { path: '/restore/', name: 'restore', component: Restore },

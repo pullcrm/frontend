@@ -30,7 +30,7 @@ import Component from 'vue-class-component'
 
     value: {
       type: [Number, String],
-      required: true
+      default: 0
     }
   }
 })

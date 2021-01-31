@@ -1,5 +1,15 @@
 <template>
   <div class="schedule-page-queue">
+    <div
+      class="schedule-page-queue__backdrop"
+      @click="closeQueue"
+    >
+      <UiIcon
+        name="outlined/x"
+        size="s"
+      />
+    </div>
+
     <div class="schedule-page-queue__inner">
       <Appointment
         v-for="appointment in queue"
@@ -40,6 +50,10 @@ export default class Queue extends Vue {
     return this.$store.state.appointments.queue
   }
 
+  closeQueue () {
+    this.$store.commit('schedule/SET_QUEUE_OPEN', false)
+  }
+
   addAppointment () {
     this.$store.dispatch('popup/show', {
       name: 'appointment-new',
@@ -60,6 +74,7 @@ export default class Queue extends Vue {
 
 <style lang="scss">
   .schedule-page-queue {
+    z-index: 13;
     width: #{$SCHEDULE_APPOINTMENT_WIDTH + 8px};
 
     &__inner {
@@ -69,11 +84,25 @@ export default class Queue extends Vue {
       top: 0;
       right: 0;
       bottom: 0;
-      width: inherit;
+      z-index: inherit;
+      width: #{$SCHEDULE_APPOINTMENT_WIDTH + 8px};
       padding: 16px 4px;
       overflow-y: auto;
       background-color: $ui-white;
       box-shadow: -1px 0 0 $ui-black-20;
+    }
+
+    &__backdrop {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: inherit;
+      display: none;
+      padding: 8px;
+      color: $ui-black-10;
+      background: rgba(#000, 0.6);
     }
 
     &__action {
@@ -85,6 +114,14 @@ export default class Queue extends Vue {
       border: 1px dashed $ui-black-40;
       border-radius: 4px;
       cursor: pointer;
+    }
+
+    @media (max-width: $ui-laptop - 1px) {
+      width: 0;
+
+      &__backdrop {
+        display: block;
+      }
     }
   }
 </style>
