@@ -20,7 +20,7 @@
       >
         <UiIcon
           class="schedule-hour-tile__icon"
-          size="xs"
+          size="xxs"
           name="outlined/plus"
         />
       </div>

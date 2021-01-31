@@ -16,7 +16,7 @@
           <UiAvatar
             :image="url"
             :name="company.name"
-            size="xl"
+            size="l"
             responsive
           />
         </template>

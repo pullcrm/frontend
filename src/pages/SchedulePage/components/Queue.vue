@@ -75,7 +75,7 @@ export default class Queue extends Vue {
 <style lang="scss">
   .schedule-page-queue {
     z-index: 13;
-    width: #{$SCHEDULE_APPOINTMENT_WIDTH + 8px};
+    width: #{$SCHEDULE_ROW_WIDTH + 8px};
 
     &__inner {
       @include hide-scrollbar;
@@ -85,7 +85,7 @@ export default class Queue extends Vue {
       right: 0;
       bottom: 0;
       z-index: inherit;
-      width: #{$SCHEDULE_APPOINTMENT_WIDTH + 8px};
+      width: #{$SCHEDULE_ROW_WIDTH + 8px};
       padding: 16px 4px;
       overflow-y: auto;
       background-color: $ui-white;

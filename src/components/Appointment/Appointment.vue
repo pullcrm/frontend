@@ -16,7 +16,7 @@
         @click="openOnPopup"
       >
         <UiIcon
-          size="xs"
+          size="xxs"
           name="outlined/dots-three-vertical"
         />
       </div>
@@ -51,7 +51,7 @@
         class="appointment__draggable"
       >
         <UiIcon
-          size="xs"
+          size="xxs"
           name="outlined/hand-grabbing"
         />
       </div>

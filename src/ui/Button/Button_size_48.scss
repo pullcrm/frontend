@@ -3,6 +3,7 @@
 
   height: 48px;
   padding: 0 24px - 1px/* border */;
+  border-radius: 12px;
 
   .ui-button__prepend {
     margin-right: 8px;
@@ -12,5 +13,10 @@
   .ui-button__append {
     margin-right: -8px - 1px/* border */;
     margin-left: 8px;
+  }
+
+  .ui-button__icon {
+    width: 20px;
+    height: 20px;
   }
 }

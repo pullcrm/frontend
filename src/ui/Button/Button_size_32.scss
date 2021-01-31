@@ -2,16 +2,22 @@
   @include ui-typo-12;
 
   height: 32px;
-  padding: 0 16px - 1px/* border */;
+  padding: 0 12px - 1px/* border */;
   font-weight: bold;
+  border-radius: 8px;
 
   .ui-button__prepend {
     margin-right: 4px;
-    margin-left: -8px - 1px/* border */;
+    margin-left: -4px - 1px/* border */;
   }
 
   .ui-button__append {
-    margin-right: -8px - 1px/* border */;
+    margin-right: -4px - 1px/* border */;
     margin-left: 4px;
+  }
+
+  .ui-button__icon {
+    width: 16px;
+    height: 16px;
   }
 }

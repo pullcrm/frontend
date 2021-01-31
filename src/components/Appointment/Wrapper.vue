@@ -203,7 +203,7 @@ export default class Appointment extends Vue {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: $SCHEDULE_APPOINTMENT_WIDTH;
+    width: $SCHEDULE_ROW_WIDTH;
     padding: 8px 8px 8px 12px;
     background: $ui-white;
     border-radius: 4px;
