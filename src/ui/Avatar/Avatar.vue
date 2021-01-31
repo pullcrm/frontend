@@ -17,6 +17,16 @@
     </div>
 
     <div
+      v-else-if="upload"
+      class="ui-avatar__icon"
+    >
+      <UiIcon
+        name="outlined/plus"
+        size="custom"
+      />
+    </div>
+
+    <div
       v-else
       class="ui-avatar__letter"
     >
@@ -38,7 +48,7 @@ import Component from 'vue-class-component'
 
     name: {
       type: String,
-      required: true
+      default: undefined
     },
 
     type: {
@@ -49,13 +59,19 @@ import Component from 'vue-class-component'
     size: {
       type: String,
       default: 'm'
+    },
+
+    upload: {
+      type: Boolean,
+      default: false
     }
   }
 })
 export default class ImagePreviewCircle extends Vue {
+  readonly upload: boolean
   readonly type: 'circle' | 'rounded'
   readonly image: string
-  readonly name: string
+  readonly name?: string | undefined
   readonly size:
     | 'm'
     | 'l'
@@ -68,7 +84,13 @@ export default class ImagePreviewCircle extends Vue {
   }
 
   get firstLetter () {
-    return this.name[0]
+    const words = this.name.split(' ')
+
+    if (words.length > 1) {
+      return `${words[0][0]}${words[1][0]}`
+    }
+
+    return `${words[0][0]}${words[0][1]}`
   }
 }
 </script>

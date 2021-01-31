@@ -27,8 +27,8 @@
         <template #default="{ url }">
           <UiAvatar
             :image="url"
-            name="+"
-            size="xxl"
+            size="l"
+            upload
           />
         </template>
       </FileUpload>

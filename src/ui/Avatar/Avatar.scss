@@ -1,57 +1,66 @@
+// @TODO: Refactor component
+@mixin ui-avatar_size_s {
+  @include ui-typo-12;
+
+  width: 36px;
+  height: 36px;
+
+  .ui-avatar {
+    &__icon,
+    &__image,
+    &__letter {
+      border-radius: 12px;
+
+      .ui-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
+
+@mixin ui-avatar_size_m {
+  @include ui-typo-14;
+
+  width: 48px;
+  height: 48px;
+
+  .ui-avatar {
+    &__image,
+    &__letter,
+    &__icon {
+      border-radius: 16px;
+
+      .ui-icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+@mixin ui-avatar_size_l {
+  @include ui-typo-24;
+
+  width: 80px;
+  height: 80px;
+  font-weight: bold;
+
+  .ui-avatar {
+    &__icon,
+    &__image,
+    &__letter {
+      border-radius: 20px;
+
+      .ui-icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}
+
 .ui-avatar {
-  @mixin ui-avatar_circle {
-    .ui-avatar {
-      &__image,
-      &__letter {
-        border-radius: 50%;
-      }
-    }
-  }
-
-  @mixin ui-avatar_rounded {
-    .ui-avatar {
-      &__image,
-      &__letter {
-        border-radius: 8px;
-      }
-    }
-  }
-
-  @mixin ui-avatar_size_s {
-    @include ui-typo-14;
-
-    width: 24px;
-    height: 24px;
-  }
-
-  @mixin ui-avatar_size_m {
-    @include ui-typo-16;
-
-    width: 36px;
-    height: 36px;
-  }
-
-  @mixin ui-avatar_size_l {
-    @include ui-typo-24;
-
-    width: 48px;
-    height: 48px;
-  }
-
-  @mixin ui-avatar_size_xl {
-    @include ui-typo-36;
-
-    width: 64px;
-    height: 64px;
-  }
-
-  @mixin ui-avatar_size_xxl {
-    @include ui-typo-44;
-
-    width: 80px;
-    height: 80px;
-  }
-
   & > div {
     width: 100%;
     height: 100%;
@@ -67,27 +76,20 @@
     }
   }
 
+  &__icon,
   &__letter {
     display: flex;
     align-items: center;
+    justify-content: center;
     color: $ui-black-100;
     background: #fff;
     border: 1px solid #d6d6d6;
 
     p {
       width: 100%;
-      font-weight: 400;
       text-align: center;
       text-transform: uppercase;
     }
-  }
-
-  &_type_circle {
-    @include ui-avatar_circle;
-  }
-
-  &_type_rounded {
-    @include ui-avatar_rounded;
   }
 
   &_size_s {
@@ -102,14 +104,6 @@
     @include ui-avatar_size_l;
   }
 
-  &_size_xl {
-    @include ui-avatar_size_xl;
-  }
-
-  &_size_xxl {
-    @include ui-avatar_size_xxl;
-  }
-
   @include ui-mobile-only {
     &_responsive {
       &.ui-avatar {
@@ -119,14 +113,6 @@
 
         &_size_l {
           @include ui-avatar_size_m;
-        }
-
-        &_size_xl {
-          @include ui-avatar_size_l;
-        }
-
-        &_size_xxl {
-          @include ui-avatar_size_xl;
         }
       }
     }

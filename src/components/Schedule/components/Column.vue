@@ -103,8 +103,8 @@ export default class ScheduleColumn extends Vue {
 
 <style lang="scss">
   .schedule-column {
-    min-width: #{$SCHEDULE_APPOINTMENT_WIDTH + 1px};
-    max-width: #{$SCHEDULE_APPOINTMENT_WIDTH + 1px};
+    min-width: #{$SCHEDULE_ROW_WIDTH + 1px};
+    max-width: #{$SCHEDULE_ROW_WIDTH + 1px};
     border-right: 1px solid $ui-black-40;
 
     &__specialist {
@@ -116,8 +116,8 @@ export default class ScheduleColumn extends Vue {
 
     &__grid {
       display: grid;
-      grid-auto-rows: $SCHEDULE_APPOINTMENT_WIDTH;
-      grid-template-columns: [start] 0 [end] $SCHEDULE_APPOINTMENT_WIDTH;
+      grid-auto-rows: $SCHEDULE_ROW_WIDTH;
+      grid-template-columns: [start] 0 [end] $SCHEDULE_ROW_WIDTH;
       user-select: none;
     }
   }

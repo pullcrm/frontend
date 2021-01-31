@@ -1,0 +1,29 @@
+@mixin ui-icon_size_xxs {
+  width: 16px;
+  height: 16px;
+}
+
+@mixin ui-icon_size_xs {
+  width: 20px;
+  height: 20px;
+}
+
+@mixin ui-icon_size_s {
+  width: 24px;
+  height: 24px;
+}
+
+@mixin ui-icon_size_m {
+  width: 32px;
+  height: 32px;
+}
+
+@mixin ui-icon_size_xl {
+  width: 48px;
+  height: 48px;
+}
+
+@mixin ui-icon_size_xxl {
+  width: 64px;
+  height: 64px;
+}

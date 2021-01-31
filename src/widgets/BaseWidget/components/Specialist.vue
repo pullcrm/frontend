@@ -5,7 +5,6 @@
       :image="avatar"
       :name="user.firstName"
       size="custom"
-      type="circle"
     />
 
     <div class="base-widget-specialist__inner">
@@ -67,6 +66,13 @@ export default class Specialist extends Vue {
       flex-basis: 200px;
       width: 200px;
       height: 200px;
+
+      .ui-avatar {
+        &__image,
+        &__letter {
+          border-radius: 50%;
+        }
+      }
     }
 
     &__inner {

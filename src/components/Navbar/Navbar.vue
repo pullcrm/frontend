@@ -43,9 +43,9 @@
       <template #inner="{ toggle }">
         <UiAvatar
           class="navbar__avatar"
+          size="s"
           :image="avatar"
           :name="profile.firstName"
-          size="m"
           @click.native="toggle"
         />
       </template>

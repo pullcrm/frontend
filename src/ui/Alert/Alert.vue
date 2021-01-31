@@ -38,7 +38,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import UiText from '../Text/Text.vue'
-import UiIcon from '../Icon.vue'
+import UiIcon from '../Icon/Icon.vue'
 
 @Component({
   components: {

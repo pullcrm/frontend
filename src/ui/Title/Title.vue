@@ -50,7 +50,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiIcon from '../Icon.vue'
+import UiIcon from '../Icon/Icon.vue'
 
 @Component({
   inheritAttrs: false,

@@ -9,8 +9,7 @@
       <UiAvatar
         :image="logo"
         :name="company.name"
-        size="l"
-        type="rounded"
+        size="m"
       />
 
       <UiIcon
