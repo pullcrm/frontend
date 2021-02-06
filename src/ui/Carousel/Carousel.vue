@@ -23,7 +23,7 @@
       >
         <slot name="control:next">
           <UiIcon
-            name="arrow/ios/right"
+            name="outlined/arrow-right"
             inline
           />
         </slot>

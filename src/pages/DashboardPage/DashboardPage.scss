@@ -1,0 +1,11 @@
+.dashboard-page {
+  &__section {
+    margin-bottom: 24px;
+  }
+
+  @media (min-width: $ui-tablet) {
+    &__section {
+      margin-bottom: 32px;
+    }
+  }
+}

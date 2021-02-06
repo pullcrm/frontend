@@ -10,7 +10,7 @@
         <UiTitle
           size="s"
         >
-          {{ value | price }}
+          {{ value }}
         </UiTitle>
       </template>
     </UiText>
