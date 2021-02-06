@@ -1,64 +1,20 @@
-<template>
-  <Component
-    :is="tag"
-    class="ui-text"
-    :class="[
-      `ui-text_size_${size}`,
-      { 'ui-text_strong': strong },
-      { 'ui-text_responsive': responsive }
-    ]"
-    v-bind="$attrs"
-  >
-    <span
-      v-if="leftIcon"
-      class="ui-text__prepend"
-    >
-      <UiIcon
-        :name="leftIcon"
-        size="inherit"
-      />
-    </span>
-    <span
-      v-else-if="$slots.prepend"
-      class="ui-text__prepend"
-    >
-      <slot name="prepend" />
-    </span>
-
-    <div class="ui-text__content">
-      <slot>{{ text }}</slot>
-    </div>
-
-    <span
-      v-if="rightIcon"
-      class="ui-text__append"
-    >
-      <UiIcon
-        :name="rightIcon"
-        size="inherit"
-      />
-    </span>
-    <span
-      v-else-if="$slots.append"
-      class="ui-text__append"
-    >
-      <slot name="append" />
-    </span>
-  </Component>
-</template>
-
 <script lang="ts">
 import Vue from 'vue'
-import Component from 'vue-class-component'
 
 import UiIcon from '../Icon/Icon.vue'
 
-@Component({
-  inheritAttrs: false,
+export default Vue.extend({
+  // @ts-ignore
+  functional: true,
 
-  components: {
-    UiIcon
-  },
+  /*
+    This line will fix the vue template compiler bug that prevents correct normalization of vnodes
+
+    Bug case: the text of `createElement('div', 'some text')` will not be converted to the text vnode because the vnode normalization doesn't work
+
+    https://github.com/vuejs/vue/blob/8a800867fe61e5aa642e1e3da91bb890d07312f7/src/core/vdom/create-functional-component.js#L44
+  */
+  _compiled: false,
 
   props: {
     text: {
@@ -95,22 +51,73 @@ import UiIcon from '../Icon/Icon.vue'
       type: String,
       default: undefined
     }
+  },
+
+  render (createElement, { props, data, slots }) {
+    /* Prepend */
+    let prepend: Vue.VNode = null
+    if (props.leftIcon) {
+      prepend = createElement('div', { class: 'ui-text__prepend' }, [
+        createElement(UiIcon, {
+          props: {
+            name: props.leftIcon,
+            size: 'inherit'
+          }
+        })
+      ])
+    } else if (slots().prepend) {
+      prepend = createElement('div', { class: 'ui-text__prepend' },
+        slots().prepend
+      )
+    }
+
+    /* Append */
+    let append: Vue.VNode = null
+    if (props.rightIcon) {
+      append = createElement('div', { class: 'ui-text__append' }, [
+        createElement(UiIcon, {
+          props: {
+            name: props.rightIcon,
+            size: 'inherit'
+          }
+        })
+      ])
+    } else if (slots().append) {
+      append = createElement('div', { class: 'ui-text__append' },
+        slots().append
+      )
+    }
+
+    /* Content */
+    let content = slots().default ?? props.text
+    if (append || prepend) {
+      content = createElement('div', { class: 'ui-text__content' }, content)
+    }
+
+    if (props.tag !== 'RouterLink') {
+      data.on = data.nativeOn
+      data.nativeOn = undefined
+    }
+
+    return createElement(props.tag, {
+      ...data,
+      attrs: data.attrs,
+      class: [
+        'ui-text',
+        `ui-text_size_${props.size}`,
+        { 'ui-text_strong': props.strong },
+        { 'ui-text_responsive': props.responsive },
+        { 'ui-text_has-append': Boolean(append) },
+        { 'ui-text_has-prepend': Boolean(prepend) },
+        data.class
+      ]
+    }, [
+      prepend,
+      content,
+      append
+    ].filter(Boolean))
   }
 })
-export default class UiText extends Vue {
-  readonly tag: string
-  readonly text: string
-  readonly size:
-    | 'xs'
-    | 's'
-    | 'm'
-    | 'l'
-
-  readonly strong: boolean
-  readonly leftIcon?: string
-  readonly rightIcon?: string
-  readonly responsive: boolean
-}
 </script>
 
 <style lang="scss" src="./Text.scss"></style>
