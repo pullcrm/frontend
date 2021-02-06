@@ -3,8 +3,13 @@
 @import './Text_size_16';
 
 .ui-text {
-  display: flex;
-  align-items: center;
+  display: block;
+
+  &_has-append,
+  &_has-prepend {
+    display: flex;
+    align-items: center;
+  }
 
   &_strong {
     font-weight: bold;
@@ -35,7 +40,7 @@
     flex: 1;
   }
 
-  @include ui-mobile-only {
+  @media (max-width: $ui-tablet - 1px) {
     &_responsive {
       &.ui-text {
         &_size_m {
