@@ -68,10 +68,15 @@ jobs:
           steps.cache-yarn-cache.outputs.cache-hit != 'true' ||
           steps.cache-node-modules.outputs.cache-hit != 'true'
       
-      - name: Build project
+      - name: Build the project
         run: yarn build
+      
+      - name: Create the release folder on the server
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'mkdir /var/www/pullcrm.dev/frontend/release-${{ github.sha }}'
         
-      - run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'mkdir /var/www/pullcrm.dev/frontend/release-${GITHUB_SHA}'
-      - run: scp ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.dev/frontend/release-${GITHUB_SHA}' ./dist
-      - run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'ln -s /var/www/pullcrm.dev/frontend/release-${GITHUB_SHA} /var/www/pullcrm.dev/frontend/release'
+      - name: Upload the dist folder to the server
+        run: scp ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.dev/frontend/release-${{ github.sha }}' ./dist
+        
+      - name: Link the release folder on the server
+      - run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'ln -s /var/www/pullcrm.dev/frontend/release-${{ github.sha }} /var/www/pullcrm.dev/frontend/release'
       
