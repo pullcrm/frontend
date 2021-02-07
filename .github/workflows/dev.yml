@@ -26,7 +26,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        
+      
+      - name: Create SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          name: id_rsa # optional
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }} 
+               
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
