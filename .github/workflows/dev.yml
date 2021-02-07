@@ -79,6 +79,9 @@ jobs:
       - name: Upload the dist folder to the server
         run: rsync -r ./dist ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.dev/frontend/release-${{ github.sha }}'
         
+      - name: Remove link the previous release folder on the server
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.dev/frontend/release'
+        
       - name: Link the release folder on the server
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'ln -sf /var/www/pullcrm.dev/frontend/release-${{ github.sha }} /var/www/pullcrm.dev/frontend/release'
       
