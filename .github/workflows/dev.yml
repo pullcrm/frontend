@@ -19,6 +19,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env:
+      VUE_APP_RPC_URL: https://pullcrm.dev/api/
     
     strategy:
       matrix:
@@ -67,8 +69,6 @@ jobs:
         if: |
           steps.cache-yarn-cache.outputs.cache-hit != 'true' ||
           steps.cache-node-modules.outputs.cache-hit != 'true'
-        env:
-          VUE_APP_RPC_URL: https://pullcrm.dev/api/
       
       - name: Build the project
         run: yarn build
