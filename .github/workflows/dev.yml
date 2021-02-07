@@ -70,14 +70,12 @@ jobs:
       
       - name: Build the project
         run: yarn build
-      
-      - run: ls -la
-      
+    
       - name: Create the release folder on the server
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'mkdir /var/www/pullcrm.dev/frontend/release-${{ github.sha }}'
         
       - name: Upload the dist folder to the server
-        run: scp -r ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.dev/frontend/release-${{ github.sha }}' ./dist
+        run: scp -r ./dist ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.dev/frontend/release-${{ github.sha }}'
         
       - name: Link the release folder on the server
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'ln -sf /var/www/pullcrm.dev/frontend/release-${{ github.sha }} /var/www/pullcrm.dev/frontend/release'
