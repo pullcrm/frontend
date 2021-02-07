@@ -67,11 +67,11 @@ jobs:
         if: |
           steps.cache-yarn-cache.outputs.cache-hit != 'true' ||
           steps.cache-node-modules.outputs.cache-hit != 'true'
+        env:
+          VUE_APP_RPC_URL: https://pullcrm.dev/api/
       
       - name: Build the project
         run: yarn build
-        env:
-          VUE_APP_RPC_URL: https://pullcrm.dev/api/
     
       - name: Create the release folder on the server
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'mkdir /var/www/pullcrm.dev/frontend/release-${{ github.sha }}'
