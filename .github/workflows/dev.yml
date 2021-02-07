@@ -33,7 +33,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       
       - name: Yarn CLI
-      - uses: CultureHQ/actions-yarn@v1.0.1
+        uses: CultureHQ/actions-yarn@v1.0.1
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
