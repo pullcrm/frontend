@@ -63,6 +63,9 @@ jobs:
       
       - name: Build project
         run: yarn build
+      
+      - name: Release folder
+        run: echo "release-${GITHUB_SHA}"
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
 #       - name: Get Time
