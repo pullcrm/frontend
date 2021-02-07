@@ -65,5 +65,7 @@ jobs:
         run: yarn build
         
       - name: Copying files to the server
-        run: scp ./dist ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/var/www/pullcrm.dev/frontend/release-$GITHUB_SHA
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'mkdir /var/www/pullcrm.dev/frontend/release-$GITHUB_SHA'
+      - run: scp ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/var/www/pullcrm.dev/frontend/release-$GITHUB_SHA ./dist
+      - run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'ln -s /var/www/pullcrm.dev/frontend/release-$GITHUB_SHA /var/www/pullcrm.dev/frontend/release'
       
