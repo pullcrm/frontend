@@ -2,7 +2,7 @@
   <div
     v-click-outside="{
       handler: close,
-      isActive: isOpened
+      isActive: closedOutside && isOpened
     }"
     class="ui-popover"
     :class="[
@@ -88,6 +88,11 @@ import { computePlacement, Placement } from '@/utils/placement'
     text: {
       type: String,
       default: undefined
+    },
+
+    closedOutside: {
+      type: Boolean,
+      default: true
     }
   }
 })
@@ -106,6 +111,7 @@ export default class Popover extends Vue {
     | 'custom'
 
   readonly placement!: Placement
+  readonly closedOutside! : Boolean
 
   isOpened = false
   computedPlacement: Placement

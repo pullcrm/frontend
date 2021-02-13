@@ -1,49 +1,27 @@
 <template>
-  <UiDropdownMenu
+  <div
     class="schedule-hour-tile"
     :class="[
       {'_is-minute': isMinute}
     ]"
     :style="gridArea"
-    placement="bottom"
-    size="m"
+    @click="openMenu"
+    @dblclick="addAppointment"
+    @drop.prevent="dropZoneDropHandler"
+    @dragover.prevent
+    @dragenter.prevent="dropZoneEnterHandler"
+    @dragleave.prevent="dropZoneLeaveHandler"
   >
-    <template #inner="{ toggle }">
-      <div
-        class="schedule-hour-tile__inner"
-        @click="toggle"
-        @dblclick="addAppointment"
-        @drop.prevent="dropZoneDropHandler"
-        @dragover.prevent
-        @dragenter.prevent="dropZoneEnterHandler"
-        @dragleave.prevent="dropZoneLeaveHandler"
-      >
-        <UiIcon
-          class="schedule-hour-tile__icon"
-          size="xxs"
-          name="outlined/plus"
-        />
-      </div>
-    </template>
-
-    <UiDropdownList :name="`Начало: ${hour}`">
-      <UiDropdownItem
-        size="m"
-        left-icon="outlined/plus-circle"
-        @click.native="addAppointment"
-      >
-        Добавить запись
-      </UiDropdownItem>
-
-      <UiDropdownItem
-        size="m"
-        left-icon="outlined/prohibit"
-        @click.native="addTimeOff"
-      >
-        Закрыть запись
-      </UiDropdownItem>
-    </UiDropdownList>
-  </UiDropdownMenu>
+    <div
+      ref="icon"
+      class="schedule-hour-tile__icon"
+    >
+      <UiIcon
+        size="xxs"
+        name="outlined/plus"
+      />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -56,7 +34,11 @@ import { TIME_STEP } from '@/constants'
 import { toDate } from '@/utils/date-time'
 import { slugFromTime } from '@/utils/time'
 
+import PopperMenu from '@/components/PopperMenu/PopperMenu.vue'
+
 @Component({
+  inject: ['getPopperMenu'],
+
   props: {
     hour: {
       type: String,
@@ -73,6 +55,12 @@ export default class HourTile extends Vue {
   readonly hour: string
   readonly specialistId: number
 
+  readonly getPopperMenu!: () => PopperMenu
+
+  $refs: {
+    icon: HTMLElement
+  }
+
   get isSMSAuthorize (): Boolean {
     return this.$store.getters['sms/isAuthorize']
   }
@@ -88,6 +76,34 @@ export default class HourTile extends Vue {
       gridRow: `${row}-start / ${row}-end`,
       gridColumn: 'start / end'
     }
+  }
+
+  openMenu () {
+    const popperMenu = this.getPopperMenu()
+
+    if (popperMenu.reference === this.$refs.icon) {
+      return
+    }
+
+    const addAppointment = {
+      name: 'Добавить запись',
+      icon: 'outlined/plus-circle',
+      click: this.addAppointment
+    }
+
+    const addTimeOff = {
+      name: 'Закрыть запись',
+      icon: 'outlined/prohibit',
+      click: this.addTimeOff
+    }
+
+    popperMenu.open(this.$refs.icon, {
+      options: [{
+        name: `Начало: ${this.hour}`,
+        items: [addAppointment, addTimeOff]
+      }],
+      placement: 'right'
+    })
   }
 
   addAppointment () {
@@ -163,16 +179,10 @@ export default class HourTile extends Vue {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100%;
     border-bottom: 1px solid $ui-black-40;
-
-    &__inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
-    }
+    cursor: pointer;
 
     &__icon {
       color: $ui-black-100;
@@ -196,24 +206,6 @@ export default class HourTile extends Vue {
 
     &:last-child {
       border: none;
-    }
-
-    &.ui-popover_top {
-      .ui-popover {
-        &__body,
-        &__arrow {
-          top: 0;
-        }
-      }
-    }
-
-    &.ui-popover_bottom {
-      .ui-popover {
-        &__body,
-        &__arrow {
-          bottom: 0;
-        }
-      }
     }
   }
 </style>

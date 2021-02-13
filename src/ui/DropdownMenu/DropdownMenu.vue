@@ -2,9 +2,7 @@
   <UiPopover
     ref="popover"
     class="ui-dropdown-menu"
-    :size="size"
-    :placement="placement"
-    @open="$emit('open', $event)"
+    v-bind="$attrs"
   >
     <template #default="{ open, close, isOpened, toggle }">
       <slot
@@ -29,21 +27,15 @@ import UiPopover from '@/ui/Popover/Popover.vue'
 
 // TODO: Remove
 @Component({
-  props: {
-    placement: {
-      type: String,
-      default: 'bottom'
-    },
-
-    size: {
-      type: String,
-      default: 'm'
-    }
-  }
+  inheritAttrs: true
 })
 export default class DropdownMenu extends Vue {
   $refs: {
     popover: UiPopover
+  }
+
+  open () {
+    this.$refs.popover.open()
   }
 
   close () {
@@ -54,31 +46,15 @@ export default class DropdownMenu extends Vue {
 
 <style lang="scss">
   .ui-dropdown-menu {
-    .ui-badge {
-      .ui-icon {
-        width: 16px;
-        height: 16px;
-      }
-    }
-
     .ui-dropdown-list {
-      position: relative;
-      margin-right: calc(var(--ui-popover-padding) * -1);
-      margin-left: calc(var(--ui-popover-padding) * -1);
-      padding: 0 var(--ui-popover-padding);
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid $ui-black-40;
 
-      &:not(:last-child) {
-        margin-bottom: 12px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid $ui-black-40;
-      }
-
-      .ui-text {
-        white-space: nowrap;
-
-        &:not(:last-child) {
-          margin-bottom: 8px;
-        }
+      &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
       }
     }
   }
