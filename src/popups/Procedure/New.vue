@@ -50,7 +50,7 @@
         >
           <UiSelect
             v-model="form.duration"
-            label="name"
+            label-key="name"
             required
             :options="durationList"
             left-icon="outlined/pencil"
@@ -141,7 +141,7 @@ export default class ProcedureNew extends Vue {
     }
 
     .ui-field + .ui-field {
-      margin-top: 24px;
+      margin-top: 20px;
     }
   }
 </style>

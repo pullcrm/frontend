@@ -1,4 +1,4 @@
-.ui-select {
+.ui-input-autocomplete {
   position: relative;
 
   &__not-found {
@@ -19,7 +19,6 @@
     z-index: 8;
     width: 100%;
     min-width: 256px;
-    max-height: 200px;
     padding: 0 4px;
     overflow-y: auto;
     background-color: $ui-white;

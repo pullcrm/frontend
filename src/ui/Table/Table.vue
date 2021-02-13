@@ -115,7 +115,7 @@ export default class Table extends Vue {}
       }
 
       strong {
-        font-weight: bold;
+        font-weight: 500;
       }
     }
   }

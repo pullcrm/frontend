@@ -145,7 +145,7 @@ import 'dayjs/locale/uk'
 import dayjs from '@/utils/dayjs'
 
 import UiTag from '@/ui/Tag/Tag.vue'
-import UiMicroText from '@/ui/MicroText.vue'
+import UiMicroText from '@/ui/MicroText/MicroText.vue'
 
 import BaseWidgetLayout from '../../components/Layout.vue'
 
@@ -338,13 +338,28 @@ export default class BarbershopLondon extends Vue {
 
     .ui-badge {
       margin: 0 4px 8px;
+      color: $ui-black-90;
+      background: $ui-black-20;
       cursor: pointer;
+
+      &.ui-badge_clickable {
+        @media (hover: hover) {
+          &:hover {
+            background: $ui-black-40;
+          }
+        }
+
+        &:active {
+          background: $ui-black-40;
+        }
+      }
 
       &._darked {
         background: #1e1e1e;
       }
 
       &._active {
+        color: $ui-black-100;
         background: $ui-yellow-brand;
       }
     }

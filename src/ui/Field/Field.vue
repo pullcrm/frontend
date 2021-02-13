@@ -1,5 +1,6 @@
 <template>
-  <label
+  <Component
+    :is="tag"
     class="ui-field"
     :class="{
       'ui-field_error': hasError,
@@ -44,14 +45,14 @@
     >
       {{ success }}
     </UiMicroText>
-  </label>
+  </Component>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiMicroText from '@/ui/MicroText.vue'
+import UiMicroText from '@/ui/MicroText/MicroText.vue'
 
 @Component({
   components: {
@@ -82,6 +83,11 @@ import UiMicroText from '@/ui/MicroText.vue'
     required: {
       type: Boolean,
       default: false
+    },
+
+    tag: {
+      type: String,
+      default: 'label'
     }
   }
 })

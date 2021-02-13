@@ -2,7 +2,6 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  margin-top: 8px;
 
   &_required {
     .ui-field__label {
@@ -15,16 +14,32 @@
   }
 
   &_error {
+    .ui-input__icon {
+      color: $ui-red-danger !important;
+    }
+
     .ui-input .ui-input__content input,
     .ui-textarea .ui-textarea__content textarea {
       border-color: $ui-red-danger;
+
+      &:focus {
+        box-shadow: 0 0 0 1px $ui-red-danger;
+      }
     }
   }
 
   &_success {
+    .ui-input__icon {
+      color: $ui-brand-green !important;
+    }
+
     .ui-input .ui-input__content input,
     .ui-textarea .ui-textarea__content textarea {
       border-color: $ui-brand-green;
+
+      &:focus {
+        box-shadow: 0 0 0 1px $ui-brand-green;
+      }
     }
   }
 
@@ -33,18 +48,9 @@
   }
 
   &__label {
-    @include ui-typo-12;
+    @include ui-typo-14;
 
-    position: absolute;
-    top: 0;
-    left: 8px;
-    z-index: 2;
-    flex: 1;
     margin-bottom: 4px;
-    padding: 0 8px;
-    color: $ui-black-90;
-    background: $ui-white;
-    transform: translateY(-50%);
   }
 
   &__hint {
@@ -55,12 +61,12 @@
   }
 
   &__error {
-    margin-top: 8px;
+    margin-top: 4px;
     color: $ui-red-danger;
   }
 
   &__success {
-    margin-top: 8px;
+    margin-top: 4px;
     color: $ui-brand-green;
   }
 }

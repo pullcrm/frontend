@@ -38,7 +38,7 @@
           <UiSelect
             v-model="form.specialist"
             :options="specialists"
-            label="fullName"
+            label-key="fullName"
             placeholder="Выбрать сотрудника"
             :clearable="false"
             required
@@ -92,7 +92,6 @@
           >
             <UiSelect
               v-model="form.startTime"
-              label=""
               :options="workingHours"
               required
               placeholder="Выбрать время начала"
@@ -105,7 +104,6 @@
           >
             <UiSelect
               v-model="form.endTime"
-              label=""
               :options="workingHoursForTimeEnd"
               required
               placeholder="Выбрать время конца"
@@ -239,7 +237,7 @@ export default class TimeOffNew extends Vue {
     }
 
     .ui-field + .ui-field {
-      margin-top: 24px;
+      margin-top: 20px;
     }
   }
 </style>

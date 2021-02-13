@@ -61,7 +61,7 @@
         <UiSelect
           v-model="form.status"
           :options="statusList"
-          label="value"
+          label-key="value"
           placeholder="Выбрать статус"
         />
       </UiField>

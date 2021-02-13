@@ -1,0 +1,55 @@
+.ui-micro-text {
+  display: block;
+  font-weight: 500;
+  text-transform: uppercase;
+
+  &_has-append,
+  &_has-prepend {
+    display: flex;
+    align-items: center;
+  }
+
+  &_size_s {
+    @include ui-typo-12;
+  }
+
+  &_size_m {
+    @include ui-typo-14;
+  }
+
+  &__prepend,
+  &__append {
+    flex-shrink: 0;
+
+    .ui-icon {
+      display: block;
+
+      &_size_inherit {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  &__prepend {
+    margin-right: 4px;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__append {
+    margin-left: 4px;
+  }
+
+  @media (max-width: $ui-laptop - 1px) {
+    &_responsive {
+      &.ui-micro-text {
+        &_size_m {
+          @include ui-typo-12;
+        }
+      }
+    }
+  }
+}
