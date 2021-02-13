@@ -1,8 +1,7 @@
 <template>
   <UiText
     class="ui-dropdown-item"
-    :size="size"
-    :left-icon="leftIcon"
+    v-bind="$attrs"
   >
     <slot />
   </UiText>
@@ -13,26 +12,13 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 @Component({
-  props: {
-    size: {
-      type: String,
-      default: 'm'
-    },
-
-    leftIcon: {
-      type: String,
-      default: null
-    }
-  }
+  inheritAttrs: true
 })
-export default class UiDropdownItem extends Vue {
-
-}
+export default class UiDropdownItem extends Vue {}
 </script>
 
 <style lang="scss">
   .ui-dropdown-item {
-    max-width: 200px;
     cursor: pointer;
   }
 </style>

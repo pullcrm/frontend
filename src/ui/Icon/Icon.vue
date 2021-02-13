@@ -17,6 +17,7 @@
 </template>
 
 <script lang="ts">
+// TODO: Make functional
 import Vue from 'vue'
 import Component from 'vue-class-component'
 

@@ -2,12 +2,13 @@
   <div
     class="ui-dropdown-list"
   >
-    <div
+    <UiText
       v-if="name"
       class="ui-dropdown-list__name"
+      size="s"
     >
       {{ name }}
-    </div>
+    </UiText>
 
     <div class="ui-dropdown-list__inner">
       <slot />
@@ -27,19 +28,18 @@ import Component from 'vue-class-component'
     }
   }
 })
-export default class DropdownList extends Vue {
-
-}
+export default class DropdownList extends Vue {}
 </script>
 
 <style lang="scss">
   .ui-dropdown-list {
-    padding: 0 12px;
-    color: $ui-black-100;
+    width: max-content;
+    max-width: 207px;
+    margin-right: calc(var(--ui-popover-padding) * -1);
+    margin-left: calc(var(--ui-popover-padding) * -1);
+    padding: 0 var(--ui-popover-padding);
 
     &__name {
-      @include ui-typo-12;
-
       margin-bottom: 8px;
       color: $ui-black-80;
     }

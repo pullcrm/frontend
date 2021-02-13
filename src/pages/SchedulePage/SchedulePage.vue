@@ -1,21 +1,6 @@
 <template>
   <div class="schedule-page">
     <UiContainer>
-      <div class="ui-grid">
-        <AnalyticPanel
-          v-for="(analytic, index) in analytics"
-          :key="`analytic-${index}`"
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12',
-            'ui-grid-item_tablet_6',
-            'ui-grid-item_laptop_4'
-          ]"
-          :name="analytic.name"
-          :value="analytic.value"
-        />
-      </div>
-
       <Header
         class="schedule-page__header"
       />
@@ -39,10 +24,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { formatMoney } from '@/utils/money'
-
 import Schedule from '@/components/Schedule/Schedule.vue'
-import AnalyticPanel from '@/components/AnalyticPanel/AnalyticPanel.vue'
 
 import Queue from './components/Queue.vue'
 import Header from './components/Header.vue'
@@ -51,8 +33,7 @@ import Header from './components/Header.vue'
   components: {
     Queue,
     Header,
-    Schedule,
-    AnalyticPanel
+    Schedule
   }
 })
 export default class SchedulePage extends Vue {
@@ -62,43 +43,6 @@ export default class SchedulePage extends Vue {
 
   get isLoading () {
     return this.$store.state.schedule.isLoading
-  }
-
-  get appointments () {
-    return this.$store.state.appointments.appointments
-  }
-
-  get appointmentsCount (): number {
-    return this.appointments.length
-  }
-
-  get expectedTotal () {
-    return this.appointments
-      .filter(({ status }) => status !== 'CANCELED')
-      .reduce((sum, { total }) => (sum + total), 0)
-  }
-
-  get total () {
-    return this.appointments
-      .filter(({ status }) => status === 'COMPLETED')
-      .reduce((sum, { total }) => (sum + total), 0)
-  }
-
-  get analytics () {
-    return [
-      {
-        name: 'Количество записей',
-        value: this.appointmentsCount
-      },
-      {
-        name: 'Ожидаемый доход за день',
-        value: formatMoney(this.expectedTotal)
-      },
-      {
-        name: 'Доход за день',
-        value: formatMoney(this.total)
-      }
-    ]
   }
 
   async mounted () {
