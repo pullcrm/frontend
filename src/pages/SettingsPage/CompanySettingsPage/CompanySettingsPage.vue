@@ -46,7 +46,7 @@
       >
         <UiSelect
           v-model="company.city"
-          label="name"
+          label-key="name"
           required
           :options="cities"
           :clearable="false"
@@ -65,7 +65,7 @@
       >
         <UiSelect
           v-model="company.category"
-          label="name"
+          label-key="name"
           required
           :options="categories"
           :clearable="false"

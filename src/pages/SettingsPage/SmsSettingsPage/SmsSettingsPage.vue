@@ -63,7 +63,7 @@
           label="За сколько времени напоминать о записи?"
         >
           <UiSelect
-            label="name"
+            label-key="name"
             :value="remindSMSMinutes"
             :options="durationList"
             required

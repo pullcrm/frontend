@@ -48,7 +48,7 @@
         >
           <UiSelect
             v-model="form.duration"
-            label="name"
+            label-key="name"
             :options="durationList"
             left-icon="outlined/pencil"
             placeholder="Выбрать время"
@@ -171,7 +171,7 @@ export default class ProcedureEdit extends Vue {
     }
 
     .ui-field + .ui-field {
-      margin-top: 24px;
+      margin-top: 20px;
     }
   }
 </style>

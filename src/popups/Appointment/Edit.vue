@@ -54,7 +54,7 @@
           <UiSelect
             v-model="form.specialist"
             :options="specialists"
-            label="fullName"
+            label-key="fullName"
             placeholder="Выбрать исполнителя"
             :clearable="false"
             required
@@ -68,7 +68,7 @@
           <UiSelect
             v-model="form.procedures"
             :options="procedures"
-            label="name"
+            label-key="name"
             placeholder="Выбрать услуги"
             multiple
             required
@@ -82,7 +82,6 @@
         >
           <UiSelect
             v-model="form.startTime"
-            label=""
             :options="workingHours"
             placeholder="Выбрать время"
             @input="resetFieldError('timeStart')"
@@ -312,7 +311,7 @@ export default class AppointmentEdit extends Vue {
     }
 
     .ui-field + .ui-field {
-      margin-top: 24px;
+      margin-top: 20px;
     }
   }
 </style>

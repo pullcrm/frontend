@@ -5,8 +5,8 @@
       isActive: isFocused,
       events: isTouchDevice ? ['touchstart'] : ['mousedown']
     }"
-    class="ui-select"
-    data-test="ui-select"
+    class="ui-input-autocomplete"
+    data-test="ui-input-autocomplete"
   >
     <slot
       name="input"
@@ -15,7 +15,7 @@
       <UiInput
         ref="input"
         v-model="query"
-        data-test="ui-select-input"
+        data-test="ui-input-autocomplete-input"
         clearable
         :loading="isLoading"
         v-bind="$attrs"
@@ -29,27 +29,36 @@
 
     <div
       v-show="isOpened"
-      class="ui-select__body"
-      data-test="ui-select-body"
+      class="ui-input-autocomplete__body"
+      data-test="ui-input-autocomplete-body"
     >
       <UiText
         v-if="isNotFound"
         size="m"
-        class="ui-select__not-found"
-        data-test="ui-select-not-found"
+        class="ui-input-autocomplete__not-found"
+        data-test="ui-input-autocomplete-not-found"
       >
         <slot name="not-found">
           Не найдено
         </slot>
       </UiText>
 
-      <div class="ui-select__items">
+      <UiMicroText
+        v-if="isQueryEmpty && hasHistory"
+        size="s"
+        class="ui-input-autocomplete__history"
+        data-test="ui-input-autocomplete-history"
+      >
+        Предыдущие запросы
+      </UiMicroText>
+
+      <div class="ui-input-autocomplete__items">
         <UiInputAutocompleteItem
           v-for="(item, index) in visibleItems"
           :key="index"
           ref="items"
           :icon="item.icon"
-          :title="getTitle(item)"
+          :title="item.itemTitle || item.title"
           :sub-title="item.itemSubTitle"
           :active="activeItemIndex === index"
           @click.native="onSelectItem(item)"
@@ -71,6 +80,13 @@ import UiInput from '../Input/Input.vue'
 import UiMicroText from '../MicroText/MicroText.vue'
 import UiInputAutocompleteItem from '../InputAutocompleteItem/InputAutocompleteItem.vue'
 
+export interface IItem {
+  title: string,
+  icon?: string,
+  subTitle?: string,
+  isPrefix?: boolean
+}
+
 @Component({
   inheritAttrs: false,
 
@@ -82,8 +98,8 @@ import UiInputAutocompleteItem from '../InputAutocompleteItem/InputAutocompleteI
   },
 
   props: {
-    options: {
-      type: Array,
+    load: {
+      type: Function,
       required: true
     },
 
@@ -91,14 +107,19 @@ import UiInputAutocompleteItem from '../InputAutocompleteItem/InputAutocompleteI
       required: true
     },
 
-    required: {
+    allowEmptyValue: {
       type: Boolean,
-      default: false
+      default: true
     },
 
-    labelKey: {
+    historyKey: {
       type: String,
-      default: ''
+      default: null
+    },
+
+    historySize: {
+      type: Number,
+      default: 10
     }
   },
 
@@ -117,20 +138,23 @@ import UiInputAutocompleteItem from '../InputAutocompleteItem/InputAutocompleteI
 
     value: {
       immediate: true,
-      handler (value: any) {
-        this.query = (value && this.getTitle(value)) ?? ''
+      handler (value: IItem) {
+        this.query = value?.title ?? ''
       }
     }
   }
 })
-export default class UiSelect extends Vue {
-  readonly value?: any
-  readonly options: any[]
-  readonly labelKey: string
-  readonly required: boolean
+export default class InputAutocomplete extends Vue {
+  readonly name?: string
+  readonly value?: IItem
+  readonly allowEmptyValue: boolean
+  readonly historyKey?: string
+  readonly historySize: number
+  readonly load: (query: string) => Promise<IItem[]>
 
   query = ''
-  items: any[] = []
+  items: IItem[] = []
+  history: IItem[] = []
 
   isLoading = false
   isFocused = false
@@ -147,11 +171,26 @@ export default class UiSelect extends Vue {
     this.onLoad = debounce(this.onLoad, 200)
   }
 
+  mounted () {
+    if (this.historyKey) {
+      this.fetchHistory()
+    }
+  }
+
+  beforeDestroy () {
+    // @ts-ignore
+    this.onLoad.cancel()
+  }
+
   get isTouchDevice () {
     return isTouchDevice()
   }
 
   get visibleItems () {
+    if (this.isQueryEmpty && this.hasHistory) {
+      return this.history
+    }
+
     return this.items
   }
 
@@ -159,8 +198,15 @@ export default class UiSelect extends Vue {
     return this.visibleItems.length > 0
   }
 
+  get hasHistory () {
+    return this.history.length > 0
+  }
+
   get isQueryEqualsValue () {
-    return (this.value && this.getTitle(this.value)) === this.query
+    return (
+      this.value?.title === this.query &&
+      this.value?.isPrefix !== true
+    )
   }
 
   get isQueryEmpty () {
@@ -197,14 +243,6 @@ export default class UiSelect extends Vue {
     }
 
     return true
-  }
-
-  getTitle (item) {
-    if (typeof item === 'object') {
-      return item[this.labelKey]
-    }
-
-    return item
   }
 
   /**
@@ -260,7 +298,7 @@ export default class UiSelect extends Vue {
   /**
    * Handle select an item
    */
-  onSelectItem (item: any) {
+  onSelectItem (item: IItem) {
     this.select(item)
 
     this.isFocused = false
@@ -294,7 +332,7 @@ export default class UiSelect extends Vue {
       return
     }
 
-    if (this.isQueryEmpty && !this.required) {
+    if (this.isQueryEmpty && this.allowEmptyValue) {
       this.select(null)
     }
   }
@@ -309,7 +347,7 @@ export default class UiSelect extends Vue {
       return
     }
 
-    if (this.isQueryEmpty && !this.required) {
+    if (this.isQueryEmpty && this.allowEmptyValue) {
       this.select(null)
       return
     }
@@ -324,10 +362,7 @@ export default class UiSelect extends Vue {
     try {
       this.isLoading = true
 
-      this.items = this.options
-        .filter(item => {
-          return this.getTitle(item).toLowerCase().includes(this.query.toLowerCase())
-        })
+      this.items = await this.load(this.query)
     } finally {
       this.isLoading = false
     }
@@ -336,14 +371,14 @@ export default class UiSelect extends Vue {
   /**
    * Check if an item equals the value
    */
-  isItemEqualsValue (item: any) {
-    return this.value && this.getTitle(this.value) === this.getTitle(item)
+  isItemEqualsValue (item: IItem) {
+    return this.value?.title === item.title
   }
 
   /**
    * Select an item
    */
-  select (item: any | null) {
+  select (item: IItem | null) {
     if (item === null) {
       this.query = ''
       this.$emit('input', null)
@@ -351,11 +386,15 @@ export default class UiSelect extends Vue {
     }
 
     if (this.isItemEqualsValue(item)) {
-      this.query = (this.value && this.getTitle(this.value)) ?? ''
+      this.query = this.value?.title ?? ''
       return
     }
 
     this.$emit('input', item)
+
+    if (this.historyKey) {
+      this.saveToHistory(item)
+    }
   }
 
   /**
@@ -383,7 +422,27 @@ export default class UiSelect extends Vue {
       })
     }
   }
+
+  /**
+   * Fetch the history from the local storage
+   */
+  fetchHistory () {
+    this.history = JSON.parse(this.$localStorage.getItem(this.historyKey) || '[]')
+  }
+
+  /**
+   * Save an item to the history
+   */
+  saveToHistory (item: IItem) {
+    this.history = this.history
+      .filter(({ title }) => item.title !== title)
+      .slice(0, this.historySize - 1)
+
+    this.history.unshift(item)
+
+    this.$localStorage.setItem(this.historyKey, JSON.stringify(this.history))
+  }
 }
 </script>
 
-<style lang="scss" src="./Select.scss" />
+<style lang="scss" src="./InputAutocomplete.scss" />

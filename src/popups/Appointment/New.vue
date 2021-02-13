@@ -53,26 +53,27 @@
         >
           <UiSelect
             v-model="form.specialist"
-            :options="specialists"
-            label="fullName"
-            placeholder="Выбрать исполнителя"
-            :clearable="false"
             required
+            :options="specialists"
+            label-key="fullName"
+            placeholder="Выбрать исполнителя"
             @input="resetFieldError('specialist')"
           />
         </UiField>
 
         <UiField
+          tag="div"
           label="Список услуг"
         >
-          <UiSelect
+          <UiMultiSelect
             v-model="form.procedures"
             :options="procedures"
-            label="name"
+            label-key="name"
             placeholder="Выбрать услуги"
-            multiple
-            required
-            @input="resetFieldError('procedures'), calculateTotal()"
+            @input="
+              calculateTotal(),
+              resetFieldError('procedures')
+            "
           />
         </UiField>
 
@@ -82,7 +83,7 @@
         >
           <UiSelect
             v-model="form.startTime"
-            label=""
+            required
             :options="workingHours"
             placeholder="Выбрать время начала"
             @input="resetFieldError('timeStart')"
@@ -286,7 +287,7 @@ export default class AppointmentNew extends Vue {
     }
 
     .ui-field + .ui-field {
-      margin-top: 24px;
+      margin-top: 20px;
     }
   }
 </style>

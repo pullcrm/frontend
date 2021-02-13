@@ -24,6 +24,8 @@ Vue.component('UiAlert', require('@/ui/Alert/Alert.vue').default)
 
 Vue.component('UiAvatar', require('@/ui/Avatar/Avatar.vue').default)
 Vue.component('UiSelect', require('@/ui/Select/Select.vue').default)
+Vue.component('UiMultiSelect', require('@/ui/MultiSelect/MultiSelect.vue').default)
+Vue.component('UiInputAutocomplete', require('@/ui/InputAutocomplete/InputAutocomplete.vue').default)
 Vue.component('UiDropdownMenu', require('@/ui/DropdownMenu/DropdownMenu.vue').default)
 Vue.component('UiDropdownList', require('@/ui/DropdownMenu/DropdownList.vue').default)
 Vue.component('UiDropdownItem', require('@/ui/DropdownMenu/DropdownItem.vue').default)

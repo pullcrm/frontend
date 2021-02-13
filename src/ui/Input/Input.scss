@@ -7,30 +7,30 @@
 
   &:focus-within {
     .ui-input__icon {
-      color: $ui-black-100;
+      color: $ui-brand-blue;
     }
   }
 
   &__append {
     position: absolute;
-    right: 16px;
+    right: 12px;
     order: 1;
 
     ~ .ui-input__content {
       input {
-        padding-right: 48px;
+        padding-right: 40px;
       }
     }
   }
 
   &__prepend {
     position: absolute;
-    left: 16px;
+    left: 12px;
     order: 3;
 
     ~ .ui-input__content {
       input {
-        padding-left: 48px;
+        padding-left: 40px;
       }
     }
   }
@@ -65,7 +65,7 @@
     width: 100%;
 
     input {
-      height: 48px;
+      height: 44px;
     }
 
     textarea {
@@ -84,26 +84,29 @@
     font-size: inherit;
     line-height: inherit;
     background: $ui-white;
-    border: 1px solid $ui-black-60;
-    border-radius: 4px;
+    border: 1px solid $ui-black-40;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba($ui-white, 0);
     transition:
       border var(--ui-transition-hover),
+      box-shadow var(--ui-transition-hover),
       background-color var(--ui-transition-hover);
     appearance: none;
+    caret-color: $ui-brand-blue;
 
     @media (hover: hover) {
       &:not(:disabled):hover {
-        border-color: $ui-black-90;
+        border-color: $ui-brand-blue;
       }
     }
 
     &:focus {
-      // @include ui-shadow-12;
-      border-color: $ui-black-90;
+      border-color: $ui-brand-blue;
+      box-shadow: 0 0 0 1px $ui-brand-blue;
     }
 
     &:disabled {
-      background: $ui-black-20;
+      background: $ui-black-10;
     }
 
     @include placeholder {

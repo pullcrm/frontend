@@ -97,7 +97,7 @@ export default class App extends Vue {
   #app {
     min-height: 80vh;
     color: $ui-black-100;
-    font-weight: 500;
+    font-weight: 400;
     font-family: Inter, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

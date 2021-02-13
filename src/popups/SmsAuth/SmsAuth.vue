@@ -111,7 +111,7 @@ export default class ProcedureEdit extends Vue {
     }
 
     .ui-field + .ui-field {
-      margin-top: 24px;
+      margin-top: 20px;
     }
   }
 </style>

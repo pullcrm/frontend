@@ -44,10 +44,10 @@
         >
           <UiSelect
             v-model="company.city"
-            label="name"
-            placeholder="Выбрать город"
-            :options="cities"
             required
+            :options="cities"
+            label-key="name"
+            placeholder="Выбрать город"
           />
         </UiField>
 
@@ -57,7 +57,7 @@
         >
           <UiSelect
             v-model="company.category"
-            label="name"
+            label-key="name"
             placeholder="Выбрать категорию"
             :options="categories"
             required

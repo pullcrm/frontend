@@ -6,7 +6,7 @@
 .ui-title {
   display: flex;
   align-items: center;
-  font-weight: bold;
+  font-weight: 600;
 
   &_size_s {
     @include ui-title_size_18;
