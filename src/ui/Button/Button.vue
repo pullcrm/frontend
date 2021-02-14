@@ -70,15 +70,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiIcon from '@/ui/Icon/Icon.vue'
-import UiIconLoader from '@/ui/IconLoader.vue'
-
 @Component({
-  components: {
-    UiIcon,
-    UiIconLoader
-  },
-
   inheritAttrs: false,
 
   props: {
