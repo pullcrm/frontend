@@ -18,6 +18,7 @@
         data-test="ui-select-input"
         clearable
         :loading="isLoading"
+        :right-icon="isOpened ? 'outlined/caret-up' : 'outlined/caret-down'"
         v-bind="$attrs"
         @focus="onFocus"
         @clear="onClear"
@@ -109,8 +110,6 @@ import UiInputAutocompleteItem from '../InputAutocompleteItem/InputAutocompleteI
 
     query () {
       if (this.isQueryEqualsValue) return
-
-      this.isLoading = true
 
       this.onLoad()
     },
@@ -252,7 +251,6 @@ export default class UiSelect extends Vue {
     }
 
     this.isFocused = true
-    this.isLoading = true
 
     this.onLoad()
   }
