@@ -65,7 +65,7 @@ import Component from 'vue-class-component'
 
 import { TIME_STEP } from '@/constants'
 
-import { getAppointmentSubtitle, getProceduresDuration } from '@/logics/appointment'
+import { getProceduresDuration } from '@/logics/appointment'
 
 import Wrapper from './Wrapper.vue'
 
@@ -85,7 +85,8 @@ export default class Appointment extends Vue {
   readonly appointment
 
   get subTitle () {
-    return getAppointmentSubtitle(this.appointment)
+    return '1234'
+    // return getAppointmentSubtitle(this.appointment)
   }
 
   get totalTime () {
