@@ -65,12 +65,11 @@
         <UiField
           label="Список услуг"
         >
-          <UiSelect
+          <UiMultiSelect
             v-model="form.procedures"
             :options="procedures"
             label-key="name"
             placeholder="Выбрать услуги"
-            multiple
             required
             @input="resetFieldError('procedures'), calculateTotal()"
           />

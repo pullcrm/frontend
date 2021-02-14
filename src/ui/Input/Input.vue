@@ -7,7 +7,7 @@
       class="ui-input__prepend"
     >
       <UiIcon
-        class="ui-input__icon"
+        class="ui-input__left-icon"
         :name="leftIcon"
         size="s"
       />
@@ -38,7 +38,7 @@
       class="ui-input__append"
     >
       <UiIcon
-        class="ui-input__icon"
+        class="ui-input__right-icon"
         :name="rightIcon"
         size="s"
       />

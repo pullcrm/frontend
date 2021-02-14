@@ -49,7 +49,6 @@
           label-key="name"
           required
           :options="cities"
-          :clearable="false"
           placeholder="Выбрать город"
         />
       </UiField>

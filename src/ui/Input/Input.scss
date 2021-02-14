@@ -6,7 +6,7 @@
   align-items: center;
 
   &:focus-within {
-    .ui-input__icon {
+    .ui-input__left-icon {
       color: $ui-brand-blue;
     }
   }
@@ -35,7 +35,8 @@
     }
   }
 
-  &__icon {
+  &__left-icon,
+  &__right-icon {
     color: $ui-black-60;
     transition: color var(--ui-transition-hover);
   }
