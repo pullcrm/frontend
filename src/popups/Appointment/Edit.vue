@@ -63,6 +63,7 @@
         </UiField>
 
         <UiField
+          tag="div"
           label="Список услуг"
         >
           <UiMultiSelect
