@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "dev": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --modern",
+    "build": "vue-cli-service build --modern",
+    "dev": "vue-cli-service serve --modern",
     "lint:js": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
     "lint:js:fix": "eslint --fix --ext .js,.ts,.vue --ignore-path .gitignore .",
     "lint:css": "stylelint 'src/**/*.{vue,scss,css}'",
