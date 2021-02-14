@@ -39,15 +39,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiIcon from '../Icon/Icon.vue'
-import UiText from '../Text/Text.vue'
-
 @Component({
-  components: {
-    UiIcon,
-    UiText
-  },
-
   props: {
     icon: {
       type: String,

@@ -75,7 +75,6 @@ import Component from 'vue-class-component'
 import { debounce } from '@/utils/debounce'
 import { isTouchDevice } from '@/utils/device'
 
-import UiIcon from '../Icon/Icon.vue'
 import UiInput from '../Input/Input.vue'
 import UiMicroText from '../MicroText/MicroText.vue'
 import UiInputAutocompleteItem from '../InputAutocompleteItem/InputAutocompleteItem.vue'
@@ -91,8 +90,6 @@ export interface IItem {
   inheritAttrs: false,
 
   components: {
-    UiIcon,
-    UiInput,
     UiMicroText,
     UiInputAutocompleteItem
   },

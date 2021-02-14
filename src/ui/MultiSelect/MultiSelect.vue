@@ -29,8 +29,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiSelect from '../Select/Select.vue'
-
 @Component({
   inheritAttrs: false,
 
@@ -44,10 +42,6 @@ import UiSelect from '../Select/Select.vue'
       type: String,
       default: ''
     }
-  },
-
-  components: {
-    UiSelect
   }
 })
 export default class UiMultiSelect extends Vue {

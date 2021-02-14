@@ -50,14 +50,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiIcon from '../Icon/Icon.vue'
-
 @Component({
   inheritAttrs: false,
-
-  components: {
-    UiIcon
-  },
 
   props: {
     size: {
