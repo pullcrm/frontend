@@ -44,32 +44,36 @@ export default class Toasts extends Vue {
 <style lang="scss">
   @keyframes toast {
     from {
-      transform: translateX(120%);
+      transform: translateY(150%);
       opacity: 0;
     }
 
     to {
-      transform: translateX(0);
+      transform: translateY(0);
       opacity: 1;
     }
   }
 
   .toasts {
     position: fixed;
-    top: 24px;
-    right: 24px;
+    right: 0;
+    bottom: 40px;
+    left: 0;
     z-index: 100;
+    pointer-events: none;
 
     > span {
       display: flex;
       flex-direction: column;
+      align-items: center;
     }
 
     .toast {
-      margin-top: 16px;
+      margin-top: 12px;
+      pointer-events: all;
 
       &.toast-enter {
-        transform: translateX(120%);
+        transform: translateX(150%);
         opacity: 0;
       }
 
