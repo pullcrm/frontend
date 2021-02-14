@@ -37,7 +37,7 @@
       <template #inner="{ toggle }">
         <UiIcon
           class="schedule-column-specialist__icon"
-          size="s"
+          size="m"
           name="outlined/dots-three-vertical"
           @click.native="toggle"
         />

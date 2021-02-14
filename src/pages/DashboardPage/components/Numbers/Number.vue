@@ -10,7 +10,7 @@
     <div class="dashboard-page-number__icon">
       <UiIcon
         :name="icon"
-        size="s"
+        size="m"
       />
     </div>
 

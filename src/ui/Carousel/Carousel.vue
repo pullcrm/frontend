@@ -24,6 +24,7 @@
         <slot name="control:next">
           <UiIcon
             name="outlined/arrow-right"
+            size="m"
             inline
           />
         </slot>
@@ -39,6 +40,7 @@
         <slot name="control:prev">
           <UiIcon
             name="outlined/arrow-left"
+            size="m"
             inline
           />
         </slot>
