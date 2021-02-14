@@ -28,7 +28,7 @@
           <UiAvatar
             :image="url"
             size="l"
-            upload
+            icon="outlined/plus"
           />
         </template>
       </FileUpload>

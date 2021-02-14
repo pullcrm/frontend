@@ -2,8 +2,7 @@
   <div
     class="ui-avatar"
     :class="[
-      `ui-avatar_size_${size}`,
-      `ui-avatar_type_${type}`
+      `ui-avatar_size_${size}`
     ]"
   >
     <div
@@ -17,11 +16,11 @@
     </div>
 
     <div
-      v-else-if="upload"
+      v-else-if="icon"
       class="ui-avatar__icon"
     >
       <UiIcon
-        name="outlined/plus"
+        :name="icon"
         size="custom"
       />
     </div>
@@ -30,7 +29,7 @@
       v-else
       class="ui-avatar__letter"
     >
-      <p>{{ firstLetter }}</p>
+      <p>{{ letter }}</p>
     </div>
   </div>
 </template>
@@ -46,44 +45,37 @@ import Component from 'vue-class-component'
       default: undefined
     },
 
+    icon: {
+      type: String,
+      default: ''
+    },
+
     name: {
       type: String,
       default: undefined
     },
 
-    type: {
-      type: String,
-      default: 'rounded'
-    },
-
     size: {
       type: String,
       default: 'm'
-    },
-
-    upload: {
-      type: Boolean,
-      default: false
     }
   }
 })
 export default class ImagePreviewCircle extends Vue {
-  readonly upload: boolean
-  readonly type: 'circle' | 'rounded'
+  readonly icon: string
   readonly image: string
   readonly name?: string | undefined
   readonly size:
+    | 's'
     | 'm'
     | 'l'
-    | 'xl'
-    | 'xxl'
     | 'custom'
 
   get hasImage () {
     return Boolean(this.image)
   }
 
-  get firstLetter () {
+  get letter () {
     const words = this.name.split(' ')
 
     if (words.length > 1) {

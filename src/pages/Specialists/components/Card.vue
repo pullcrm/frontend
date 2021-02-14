@@ -5,7 +5,7 @@
     <UiAvatar
       class="specialists-page-card__avatar"
       :image="avatar"
-      :name="user.firstName"
+      :name="specialist.fullName"
       size="l"
     />
 
@@ -14,7 +14,7 @@
         class="specialists-page-card__name"
         size="s"
       >
-        {{ user.firstName }} {{ user.lastName }}
+        {{ specialist.fullName }}
       </UiText>
 
       <UiText
