@@ -16,7 +16,7 @@
     >
       <UiIcon
         :name="leftIcon"
-        size="xxs"
+        size="xs"
       />
     </div>
     <div
@@ -31,7 +31,7 @@
         <UiIcon
           v-if="icon"
           :name="icon"
-          size="xxs"
+          size="xs"
         />
       </slot>
     </div>
@@ -42,7 +42,7 @@
     >
       <UiIcon
         :name="rightIcon"
-        size="xxs"
+        size="xs"
       />
     </div>
     <div

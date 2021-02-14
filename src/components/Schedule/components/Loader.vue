@@ -2,7 +2,9 @@
   <div
     class="schedule-loader"
   >
-    <UiIconLoader size="xl" />
+    <UiIconLoader
+      size="l"
+    />
   </div>
 </template>
 

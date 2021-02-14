@@ -7,7 +7,7 @@
     <div>
       <UiIcon
         v-if="icon"
-        size="s"
+        size="m"
         :name="icon"
         class="ui-input-autocomplete-item__icon"
         data-test="ui-input-autocomplete-item-icon"

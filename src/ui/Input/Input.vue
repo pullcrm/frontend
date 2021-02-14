@@ -9,7 +9,7 @@
       <UiIcon
         class="ui-input__icon"
         :name="leftIcon"
-        size="xs"
+        size="s"
       />
     </span>
 
@@ -19,7 +19,7 @@
     >
       <UiIconLoader
         class="ui-input__loader"
-        size="xs"
+        size="s"
       />
     </span>
     <span
@@ -30,7 +30,7 @@
       <UiIcon
         class="ui-input__clear"
         name="outlined/x"
-        size="xs"
+        size="s"
       />
     </span>
     <span
@@ -40,7 +40,7 @@
       <UiIcon
         class="ui-input__icon"
         :name="rightIcon"
-        size="xs"
+        size="s"
       />
     </span>
 
