@@ -5,7 +5,7 @@
   >
     <UiIcon
       :name="icon"
-      size="m"
+      size="custom"
     />
   </RouterLink>
 </template>
