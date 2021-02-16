@@ -21,7 +21,7 @@ Vue.component('UiSwitch', require('@/ui/Switch/Switch.vue').default)
 Vue.component('UiBadge', require('@/ui/Badge.vue').default)
 Vue.component('UiPrice', require('@/ui/Price/Price.vue').default)
 Vue.component('UiAlert', require('@/ui/Alert/Alert.vue').default)
-
+Vue.component('UiTabs', require('@/ui/Tabs/Tabs.vue').default)
 Vue.component('UiAvatar', require('@/ui/Avatar/Avatar.vue').default)
 Vue.component('UiSelect', require('@/ui/Select/Select.vue').default)
 Vue.component('UiMultiSelect', require('@/ui/MultiSelect/MultiSelect.vue').default)

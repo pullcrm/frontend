@@ -27,13 +27,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiTabs from '@/ui/Tabs/Tabs.vue'
-
-@Component({
-  components: {
-    UiTabs
-  }
-})
+@Component({})
 export default class SettingsLayout extends Vue {
   get tabs () {
     return [
