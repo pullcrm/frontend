@@ -17,6 +17,13 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { RawLocation } from 'vue-router/types/router'
+
+export interface ITab {
+  name: string
+  to?: RawLocation
+}
+
 @Component({
   inheritAttrs: false,
 
@@ -33,33 +40,25 @@ import Component from 'vue-class-component'
   }
 })
 export default class TabItem extends Vue {
-  readonly tab
+  readonly tab: ITab
   readonly isActive: boolean
 }
 </script>
 
 <style lang="scss">
 .ui-tabs-item {
-  @include ui-typo-14;
+  @include ui-typo-16;
 
-  position: relative;
-  margin-right: 24px;
+  padding: 4px 16px;
+  color: $ui-black-80;
   white-space: nowrap;
+  border-radius: 50px;
   cursor: pointer;
 
   &__active,
   &.router-link-active {
-    color: #1676ee;
-
-    &::after {
-      position: absolute;
-      right: 0;
-      bottom: -17px;
-      left: 0;
-      height: 2px;
-      background: #1676ee;
-      content: '';
-    }
+    color: $ui-black-100;
+    background: $ui-black-20;
   }
 }
 </style>
