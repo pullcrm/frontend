@@ -49,7 +49,7 @@ export default class Panel extends Vue {
     display: block;
     background: #fff;
     border: 1px solid $ui-black-20;
-    border-radius: 8px;
+    border-radius: 16px;
 
     &_size_xs {
       --ui-panel-padding: 8px;
