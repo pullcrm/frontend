@@ -1,26 +1,10 @@
 <template>
-  <UiPopup
-    class="popup-specialist"
-    @close="$emit('close')"
-  >
-    <UiBack
-      class="popup-specialist__back"
-      @click.native="$emit('close')"
-    />
-
-    <div class="popup-specialist__header">
-      <UiTitle
-        size="s"
-      >
-        Обновить данные
-      </UiTitle>
-    </div>
-
+  <div class="specialist-about-page">
     <form
       @submit.prevent="onSubmit"
     >
       <FileUpload
-        class="popup-specialist__avatar"
+        class="specialist-about-page__avatar"
         :image="image"
         @input="fileSelect"
       >
@@ -77,7 +61,7 @@
         />
       </UiField>
 
-      <div class="popup-specialist__actions">
+      <div class="specialist-about-page__actions">
         <UiButton
           size="l"
           type="submit"
@@ -88,7 +72,7 @@
         </UiButton>
       </div>
     </form>
-  </UiPopup>
+  </div>
 </template>
 
 <script lang="ts">
@@ -119,7 +103,7 @@ interface ISpecialistEditParams {
     }
   }
 })
-export default class SpecialistNew extends Vue {
+export default class SpecialistAboutPage extends Vue {
   readonly specialist
 
   form: ISpecialistEditParams = {}
@@ -191,4 +175,27 @@ export default class SpecialistNew extends Vue {
 }
 </script>
 
-<style lang="scss" src="./Specialist.scss"></style>
+<style lang="scss">
+  .specialist-about-page {
+    &__actions {
+      display: flex;
+      flex-direction: column;
+      margin-top: 24px;
+    }
+
+    &__avatar {
+      margin: 24px 0;
+      text-align: center;
+
+      .ui-avatar {
+        p {
+          font-weight: 100;
+        }
+      }
+    }
+
+    .ui-field + .ui-field {
+      margin-top: 20px;
+    }
+  }
+</style>

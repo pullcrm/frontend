@@ -101,10 +101,10 @@ export default class Card extends Vue {
   }
 
   async open () {
-    await this.$store.dispatch('popup/show', {
-      name: 'specialist-edit',
-      props: {
-        specialist: this.specialist
+    this.$router.push({
+      name: 'specialistAbout',
+      params: {
+        specialistId: this.specialist.id
       }
     })
   }
