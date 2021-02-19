@@ -10,16 +10,6 @@
         @close="close"
       />
     </Popup>
-
-    <Popup
-      v-slot="{ close, props }"
-      name="specialist-edit"
-    >
-      <SpecialistEdit
-        v-bind="props"
-        @close="close"
-      />
-    </Popup>
     <!-- Specialist end -->
 
     <!-- Procedure -->
@@ -145,11 +135,6 @@ const SpecialistNew = () => import(
   '@/popups/Specialist/New.vue'
 )
 
-const SpecialistEdit = () => import(
-  /* webpackChunkName: "popups" */
-  '@/popups/Specialist/Edit.vue'
-)
-
 const ProcedureNew = () => import(
   /* webpackChunkName: "popups" */
   '@/popups/Procedure/New.vue'
@@ -192,7 +177,6 @@ const QuestionPopup = () => import(
     TimeOffNew,
     TimeOffEdit,
     SpecialistNew,
-    SpecialistEdit,
     ProcedureNew,
     ProcedureEdit,
     QuestionPopup,
