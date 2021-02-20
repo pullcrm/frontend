@@ -19,19 +19,6 @@
     <form
       @submit.prevent="onSubmit"
     >
-      <FileUpload
-        class="popup-specialist__avatar"
-        @input="fileSelect"
-      >
-        <template #default="{ url }">
-          <UiAvatar
-            :image="url"
-            size="l"
-            icon="outlined/plus"
-          />
-        </template>
-      </FileUpload>
-
       <UiFormValidator
         v-slot="{ resetFieldError, getFieldError }"
         ref="formValidator"
@@ -116,9 +103,7 @@ export default class SpecialistNew extends Vue {
     phone: ''
   }
 
-  avatar = null
   isLoading = false
-  currentFile: File
 
   $refs: {
     formValidator: UiFormValidator
@@ -138,15 +123,9 @@ export default class SpecialistNew extends Vue {
     }
   }
 
-  fileSelect (file) {
-    this.currentFile = file
-  }
-
   async onSubmit () {
     try {
       this.isLoading = true
-
-      this.avatar = await this.$store.dispatch('specialists/onUploadAvatar', this.currentFile)
 
       await this.$api.users.confirmation({
         phone: this.form.phone,
@@ -187,7 +166,6 @@ export default class SpecialistNew extends Vue {
   async onCreateUser (code) {
     return this.$api.specialist.create({
       ...this.form,
-      avatarId: this.avatar?.id,
       code
     })
   }

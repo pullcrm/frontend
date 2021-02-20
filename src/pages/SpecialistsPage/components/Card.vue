@@ -102,7 +102,7 @@ export default class Card extends Vue {
 
   async open () {
     this.$router.push({
-      name: 'specialistAbout',
+      name: 'specialistInfo',
       params: {
         specialistId: this.specialist.id
       }
