@@ -1,14 +1,14 @@
 export const statuses = {
   ALL: {
     id: 1,
-    value: 'Работает'
+    value: 'На всех платформах'
   },
   DASHBOARD: {
     id: 2,
-    value: 'Скрыт'
+    value: 'Только в админ панеле'
   },
   HIDE: {
     id: 3,
-    value: 'Не работает'
+    value: 'Не доступен'
   }
 }

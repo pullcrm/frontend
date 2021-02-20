@@ -1,11 +1,15 @@
 .specialist-page {
-  padding: 24px 0;
+  padding: 24px 0 40px;
 
   &__back {
     margin-bottom: 16px;
   }
 
   &__title {
+    margin-bottom: 24px;
+  }
+
+  &__tabs {
     margin-bottom: 24px;
   }
 }

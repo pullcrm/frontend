@@ -26,7 +26,7 @@ const Procedures = dynamicPage(() => import('@/pages/Procedures/Procedures.vue')
 const TimeOff = dynamicPage(() => import('@/pages/TimeOff/TimeOff.vue'))
 
 const SpecialistPage = dynamicPage(() => import('@/pages/SpecialistPage/SpecialistPage.vue'))
-const SpecialistAboutPage = dynamicPage(() => import('@/pages/SpecialistPage/SpecialistAboutPage.vue'))
+const SpecialistInfoPage = dynamicPage(() => import('@/pages/SpecialistPage/SpecialistInfoPage.vue'))
 
 const SmsSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/SmsSettingsPage/SmsSettingsPage.vue'))
 const WidgetSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/WidgetSettingsPage/WidgetSettingsPage.vue'))
@@ -71,9 +71,9 @@ const router = new Router({
       children: [
         {
           meta: { middleware: [auth, company, roleRedirect] },
-          path: 'about',
-          name: 'specialistAbout',
-          component: SpecialistAboutPage
+          path: 'info',
+          name: 'specialistInfo',
+          component: SpecialistInfoPage
         }
       ]
     },
