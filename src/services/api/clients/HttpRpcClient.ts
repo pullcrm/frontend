@@ -1,7 +1,7 @@
 // import { btoa } from 'isomorphic-base64'
 import store from '@/store'
 
-import { ApiRpcError, ApiServerError } from '../errors'
+import { ApiRpcError } from '../errors'
 
 import GET from './method/get'
 import POST from './method/post'
@@ -50,15 +50,6 @@ export default class HttpRpcClient implements IRpcClient {
       headers: this.headers
     })
 
-    // TODO: remove check 401 status
-    if (!response.ok && response.status !== 401) {
-      throw new ApiServerError({
-        method,
-        params,
-        status: response.status
-      })
-    }
-
     const rpcResponse: any = await response.json()
 
     // TODO: refactor condition
@@ -69,17 +60,14 @@ export default class HttpRpcClient implements IRpcClient {
     }
 
     if (rpcResponse.error || !response.ok) {
-      const code = rpcResponse?.error?.code ?? response.status
+      const code = rpcResponse?.error?.code ?? rpcResponse.status
       const data = rpcResponse?.error?.data ?? rpcResponse
 
       throw new ApiRpcError({
         method,
         params,
         code,
-        data: {
-          code,
-          ...data
-        }
+        data
       })
     }
 
