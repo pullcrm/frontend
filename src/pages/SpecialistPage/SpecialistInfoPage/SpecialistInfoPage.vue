@@ -12,6 +12,7 @@
     >
       <UiField
         label="Имя"
+        required
       >
         <UiInput
           v-model="form.firstName"
@@ -23,6 +24,7 @@
 
       <UiField
         label="Фамилия"
+        required
       >
         <UiInput
           v-model="form.lastName"
@@ -79,6 +81,7 @@
 
       <UiField
         label="Доступность для записи"
+        required
       >
         <UiSelect
           v-model="form.status"
