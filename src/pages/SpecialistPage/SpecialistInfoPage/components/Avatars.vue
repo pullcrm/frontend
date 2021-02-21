@@ -72,6 +72,15 @@ export default class Avatars extends Vue {
   async uploadAvatar (file) {
     if (!file) return
 
+    if (this.avatars.length > 5) {
+      this.$store.dispatch('toasts/show', {
+        type: 'error',
+        title: 'Превишен лимин загрузки аватаров!'
+      })
+
+      return
+    }
+
     const formData = new FormData()
 
     formData.append('file', file)
@@ -98,7 +107,11 @@ export default class Avatars extends Vue {
 
 <style lang="scss">
   .specialist-about-page-avatars {
+    @include hide-scrollbar;
+
     display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
 
     &__image {
       margin-right: 16px;

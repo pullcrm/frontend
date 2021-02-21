@@ -116,7 +116,7 @@
           <UiButton
             type="submit"
             size="l"
-            theme="yellow"
+            theme="blue"
           >
             Сохранить
           </UiButton>

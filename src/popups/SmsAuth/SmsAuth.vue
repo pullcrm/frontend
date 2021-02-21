@@ -41,7 +41,7 @@
 
       <UiButton
         type="submit"
-        theme="yellow"
+        theme="blue"
         :loading="isLoading"
       >
         Авторизоваться в smsc

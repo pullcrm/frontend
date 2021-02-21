@@ -18,6 +18,7 @@
       <UiTabs
         class="specialist-page__tabs"
         :tabs="tabs"
+        @input="onTab"
       />
 
       <RouterView
@@ -36,43 +37,29 @@ export default class SpecialistPage extends Vue {
   get tabs () {
     return [
       {
-        name: 'Общее',
-        to: 'specialistInfo'
+        name: 'Информация',
+        to: {
+          ...this.$route,
+          name: 'specialistInfo'
+        }
       },
 
       {
         name: 'Журнал записей',
-        to: 'dashboard'
-      },
-
-      {
-        name: 'Примеры работ',
-        to: 'dashboard'
-      },
-
-      {
-        name: 'Услуги',
-        to: 'dashboard'
-      },
-
-      {
-        name: 'Зарплата',
-        to: 'dashboard'
-      },
-
-      {
-        name: 'Удалить профиль',
-        to: 'dashboard'
-      }
-    ].map(item => {
-      return {
-        ...item,
         to: {
           ...this.$route,
-          name: item.to
+          name: 'specialistAppointments'
         }
+      },
+
+      this.isMyProfile && {
+        name: 'Выйти'
       }
-    })
+    ].filter(Boolean)
+  }
+
+  get isMyProfile () {
+    return this.specialistId === this.profile.specialistId
   }
 
   get specialists () {
@@ -95,8 +82,31 @@ export default class SpecialistPage extends Vue {
     return true
   }
 
-  onBack () {
-    this.$router.go(-1)
+  async onTab (tab) {
+    if (tab.name === 'Выйти') {
+      await this.logout()
+    }
+  }
+
+  async logout () {
+    const result = await this.$store.dispatch('popup/askQuestion', {
+      title: 'Вы действительно хотите завершить сеанс?',
+      acceptButtonTitle: 'Выйти'
+    })
+
+    if (result) {
+      await this.$store.dispatch('auth/logout')
+
+      const { href } = this.$router.resolve({
+        name: 'login'
+      })
+
+      window.location.href = href
+    }
+  }
+
+  async onBack () {
+    await this.$router.push({ name: 'specialists' })
   }
 }
 </script>

@@ -44,7 +44,7 @@
           class="popup-sms-confirmation__button"
           type="submit"
           size="l"
-          theme="yellow"
+          theme="blue"
         >
           Подтвердить
         </UiButton>

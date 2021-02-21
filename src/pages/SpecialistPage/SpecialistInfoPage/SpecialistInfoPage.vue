@@ -229,24 +229,4 @@ export default class SpecialistInfoPage extends Vue {
 }
 </script>
 
-<style lang="scss">
-  .specialist-info-page {
-    &__avatars {
-      margin-bottom: 20px;
-    }
-
-    &__created-at {
-      margin-top: 20px;
-    }
-
-    &__actions {
-      display: flex;
-      flex-direction: column;
-      margin-top: 24px;
-    }
-
-    .ui-field + .ui-field {
-      margin-top: 20px;
-    }
-  }
-</style>
+<style lang="scss" src="./SpecialistInfoPage.scss"></style>

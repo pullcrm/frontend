@@ -125,7 +125,6 @@ export default class Button extends Vue {
   readonly size: 's' | 'm' | 'l'
   readonly theme:
     | 'primary'
-    | 'primary-outlined'
     | 'green'
     | 'green-outlined'
     | 'yellow'

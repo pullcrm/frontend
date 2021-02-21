@@ -1,0 +1,13 @@
+.specialist-appointments-page {
+  &__schedule {
+    position: relative;
+    display: flex;
+    margin-top: 16px;
+  }
+
+  &__column {
+    flex-basis: calc(100% - 36px/* timeline width */ - 8px/* margin-left */);
+    margin-left: 8px;
+    border: 1px solid #eaeaef;
+  }
+}
