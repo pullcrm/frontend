@@ -12,13 +12,13 @@ o<template>
 
     <div class="question-popup__actions">
       <UiButton
-        theme="yellow"
+        theme="blue"
         @click.native="$emit('ok')"
         v-text="acceptButtonTitle"
       />
 
       <UiButton
-        theme="primary-outlined"
+        theme="info-outlined"
         @click.native="$emit('cancel')"
         v-text="cancelButtonTitle"
       />

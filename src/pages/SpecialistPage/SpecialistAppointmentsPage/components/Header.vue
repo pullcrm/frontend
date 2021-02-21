@@ -1,13 +1,13 @@
 <template>
-  <div class="schedule-page-header">
-    <div class="schedule-page-header__left">
+  <div class="specialist-appointments-page-header">
+    <div class="specialist-appointments-page-header__left">
       <UiPopover
         size="m"
         placement="bottom_start"
       >
         <template #default="{ toggle }">
           <UiButton
-            class="schedule-page-header__calendar"
+            class="specialist-appointments-page-header__calendar"
             size="m"
             theme="transparent"
             left-icon="outlined/calendar"
@@ -25,7 +25,7 @@
 
       <UiButton
         v-if="isToday"
-        class="schedule-page-header__tomorrow"
+        class="specialist-appointments-page-header__tomorrow"
         size="m"
         theme="transparent"
         @click.native="setDateTomorrow"
@@ -35,7 +35,7 @@
 
       <UiButton
         v-else
-        class="schedule-page-header__today"
+        class="specialist-appointments-page-header__today"
         size="m"
         theme="transparent"
         @click.native="date = new Date()"
@@ -44,39 +44,11 @@
       </UiButton>
     </div>
 
-    <div class="schedule-page-header__right">
-      <UiText
-        v-if="balance !== null"
-        class="schedule-page-header__balance"
-        size="m"
-        left-icon="outlined/chat-text"
-        responsive
-      >
-        <UiPrice
-          size="xs"
-          responsive
-        >
-          {{ balance | price }}
-        </UiPrice>
-      </UiText>
-
-      <UiButton
-        class="schedule-page-header__add"
-        size="m"
-        theme="blue"
-        right-icon="outlined/plus"
-        @click.native="addAppointment"
-      >
-        Добавить запись
-      </UiButton>
-
-      <UiButton
-        size="m"
-        theme="info-outlined"
-        @click.native="toggleQueue"
-      >
-        Очередь ({{ queue.length }})
-      </UiButton>
+    <div class="specialist-appointments-page-header__right">
+      {{ appointmentsCount }}
+      {{ appointmentsCount | pluralize('клиент', 'клиента', 'клиентов') }}
+      <span> - </span>
+      {{ money | price }}
     </div>
   </div>
 </template>
@@ -92,12 +64,15 @@ import Calendar from '@/components/Calendar/Calendar.vue'
 @Component({
   components: {
     Calendar
+  },
+
+  props: {
+    appointments: Array,
+    default: () => []
   }
 })
 export default class Header extends Vue {
-  get balance () {
-    return this.$store.state.sms.balance
-  }
+  readonly appointments
 
   get date () {
     return new Date(this.$store.state.schedule.date) as Date
@@ -105,10 +80,6 @@ export default class Header extends Vue {
 
   set date (val) {
     const date = dayjs(val).format('YYYY-MM-DD')
-
-    this.$router.replace({
-      query: { date }
-    })
 
     this.$store.commit('schedule/SET_DATE', date)
     this.$store.dispatch('schedule/fetch')
@@ -118,26 +89,58 @@ export default class Header extends Vue {
     return dayjs(this.date).isToday()
   }
 
-  get queue () {
-    return this.$store.state.appointments.queue
+  get appointmentsCount () {
+    return this.appointments.length
   }
 
-  get isQueueOpened (): boolean {
-    return this.$store.state.schedule.isQueueOpened
+  get money () {
+    return this.appointments
+      .filter(({ status }) => status === 'COMPLETED')
+      .reduce((sum, { total }) => (sum + total), 0)
   }
 
   setDateTomorrow () {
     this.date = dayjs(new Date()).add(1, 'day').toDate()
   }
-
-  addAppointment () {
-    this.$store.dispatch('popup/show', 'appointment-new')
-  }
-
-  toggleQueue () {
-    this.$store.commit('schedule/SET_QUEUE_OPEN', !this.isQueueOpened)
-  }
 }
 </script>
 
-<style lang="scss" src="./Header.scss"></style>
+<style lang="scss">
+  .specialist-appointments-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__right {
+      color: $ui-black-60;
+    }
+
+    &__left {
+      display: flex;
+
+      .ui-button {
+        margin-right: 8px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    &__today,
+    &__tomorrow {
+      padding: 0 8px;
+    }
+
+    &__calendar {
+      text-transform: capitalize;
+
+      .ui-button__append {
+        .ui-icon {
+          width: 12px;
+          height: 12px;
+        }
+      }
+    }
+  }
+</style>

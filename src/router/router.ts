@@ -26,7 +26,8 @@ const Procedures = dynamicPage(() => import('@/pages/Procedures/Procedures.vue')
 const TimeOff = dynamicPage(() => import('@/pages/TimeOff/TimeOff.vue'))
 
 const SpecialistPage = dynamicPage(() => import('@/pages/SpecialistPage/SpecialistPage.vue'))
-const SpecialistInfoPage = dynamicPage(() => import('@/pages/SpecialistPage/SpecialistInfoPage.vue'))
+const SpecialistInfoPage = dynamicPage(() => import('@/pages/SpecialistPage/SpecialistInfoPage/SpecialistInfoPage.vue'))
+const SpecialistAppointmentsPage = dynamicPage(() => import('@/pages/SpecialistPage/SpecialistAppointmentsPage/SpecialistAppointmentsPage.vue'))
 
 const SmsSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/SmsSettingsPage/SmsSettingsPage.vue'))
 const WidgetSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/WidgetSettingsPage/WidgetSettingsPage.vue'))
@@ -74,6 +75,13 @@ const router = new Router({
           path: 'info',
           name: 'specialistInfo',
           component: SpecialistInfoPage
+        },
+
+        {
+          meta: { middleware: [auth, company, roleRedirect] },
+          path: 'appointments',
+          name: 'specialistAppointments',
+          component: SpecialistAppointmentsPage
         }
       ]
     },

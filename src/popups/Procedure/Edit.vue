@@ -71,7 +71,7 @@
           <UiButton
             type="submit"
             size="l"
-            theme="yellow"
+            theme="blue"
           >
             Редактировать услугу
           </UiButton>

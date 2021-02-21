@@ -20,10 +20,18 @@
         <ScheduleColumn
           v-for="(column, index) in columns"
           :key="`column-${index}`"
+          class="schedule__column"
           :time-offs="column.timeOffs"
           :specialist="column.specialist"
           :appointments="column.appointments"
-        />
+        >
+          <template #append>
+            <Specialist
+              class="schedule__specialist"
+              :specialist="column.specialist"
+            />
+          </template>
+        </ScheduleColumn>
 
         <ScheduleColumnPlaceholder />
       </div>
@@ -39,6 +47,7 @@ import dayjs from '@/utils/dayjs'
 
 import Loader from './components/Loader.vue'
 import Timeline from './components/Timeline.vue'
+import Specialist from './components/Specialist.vue'
 import ActiveTime from './components/ActiveTime.vue'
 import ScheduleColumn from './components/Column.vue'
 import ScheduleColumnPlaceholder from './components/ColumnPlaceholder.vue'
@@ -54,6 +63,7 @@ import ScheduleColumnPlaceholder from './components/ColumnPlaceholder.vue'
   components: {
     Loader,
     Timeline,
+    Specialist,
     ActiveTime,
     ScheduleColumn,
     ScheduleColumnPlaceholder

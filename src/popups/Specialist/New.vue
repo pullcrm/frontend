@@ -70,7 +70,7 @@
           <UiButton
             size="l"
             type="submit"
-            theme="yellow"
+            theme="blue"
             :loading="isLoading"
           >
             Добавить сотрудника

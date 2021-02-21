@@ -1,0 +1,19 @@
+.specialist-info-page {
+  &__avatars {
+    margin-bottom: 20px;
+  }
+
+  &__created-at {
+    margin-top: 20px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+  }
+
+  .ui-field + .ui-field {
+    margin-top: 20px;
+  }
+}

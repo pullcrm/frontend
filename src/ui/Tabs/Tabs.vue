@@ -5,7 +5,7 @@
       :key="index"
       :tab="tab"
       :is-active="value === tab.name"
-      @click="$emit('input', tab)"
+      @click.native="$emit('input', tab)"
     />
   </div>
 </template>
