@@ -92,16 +92,16 @@
         :created-at="specialist.createdAt"
       />
 
-      <div class="specialist-info-page__actions">
-        <UiButton
-          size="l"
-          type="submit"
-          theme="blue"
-          :loading="isLoading"
-        >
-          Сохранить
-        </UiButton>
-      </div>
+      <UiButton
+        id="submit-button"
+        class="specialist-info-page__button"
+        size="l"
+        type="submit"
+        theme="blue"
+        :loading="isLoading"
+      >
+        Сохранить
+      </UiButton>
     </form>
   </div>
 </template>
