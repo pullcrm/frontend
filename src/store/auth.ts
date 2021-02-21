@@ -51,7 +51,7 @@ const actions = {
 
       await dispatch('saveTokens', { ...result, refreshToken })
     } catch (err) {
-      if (err.status === 403) {
+      if (err.data.status === 403) {
         await dispatch('reset')
 
         location.reload()
@@ -76,7 +76,7 @@ const actions = {
 
       await dispatch('saveTokens', { ...result, refreshToken })
     } catch (err) {
-      if (err.status === 403) {
+      if (err.data.status === 403) {
         await dispatch('reset')
 
         location.reload()
