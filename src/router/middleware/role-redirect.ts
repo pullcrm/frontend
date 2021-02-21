@@ -7,7 +7,7 @@ export default async function roleRedirect ({ to, next, store }) {
   if (role.name === SPECIALIST) {
     if (
       /\/specialist\//.test(to.path) &&
-      to.params.specialistId === specialistId
+      Number(to.params.specialistId) === specialistId
     ) return
 
     next({
