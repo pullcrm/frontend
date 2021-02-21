@@ -16,19 +16,3 @@ export class ApiRpcError extends Error {
     this.data = data
   }
 }
-
-export class ApiServerError extends Error {
-  method: string
-  params: object
-  status: number
-
-  constructor ({ method, params, status }) {
-    super()
-
-    this.name = 'ApiServerError'
-    this.message = `Method "${method}" returned status ${status}.`
-    this.method = method
-    this.params = params
-    this.status = status
-  }
-}

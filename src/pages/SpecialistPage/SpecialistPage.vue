@@ -32,6 +32,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { SPECIALIST } from '@/constants/roles'
+
 @Component({})
 export default class SpecialistPage extends Vue {
   get tabs () {
@@ -58,6 +60,10 @@ export default class SpecialistPage extends Vue {
     ].filter(Boolean)
   }
 
+  get role () {
+    return this.$store.state.company.role
+  }
+
   get isMyProfile () {
     return this.specialistId === this.profile.specialistId
   }
@@ -79,7 +85,7 @@ export default class SpecialistPage extends Vue {
   }
 
   get hasBack () {
-    return true
+    return this.role.name !== SPECIALIST
   }
 
   async onTab (tab) {

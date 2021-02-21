@@ -206,6 +206,11 @@ export default class SpecialistInfoPage extends Vue {
       this.$store.dispatch('toasts/show', { title: 'Сохранено!' })
 
       await this.refresh()
+    } catch (err) {
+      this.$store.dispatch('toasts/show', {
+        title: `Ошибка: ${err.data.message}`,
+        type: 'error'
+      })
     } finally {
       this.isLoading = false
     }
