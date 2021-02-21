@@ -251,7 +251,7 @@ export default class BarbershopLondon extends Vue {
         name: 'BaseWidgetOrder'
       })
     } catch (err) {
-      if (err.status === 400) {
+      if (err.data.status === 400) {
         this.hasError = true
 
         return

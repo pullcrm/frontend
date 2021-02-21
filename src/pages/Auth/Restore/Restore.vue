@@ -153,7 +153,7 @@ export default class Restore extends Vue {
       this.onBack()
     } catch (err) {
       const serverErrors = [
-        err.status === 403 && { field: 'code', error: 'invalid' }
+        err.data.status === 403 && { field: 'code', error: 'invalid' }
       ].filter(Boolean)
 
       if (serverErrors.length > 0) {
@@ -175,7 +175,7 @@ export default class Restore extends Vue {
       this.isValid = true
     } catch (err) {
       const serverErrors = [
-        err.status === 404 && { field: 'phone', error: 'invalid' }
+        err.data.status === 404 && { field: 'phone', error: 'invalid' }
       ].filter(Boolean)
 
       if (serverErrors.length > 0) {

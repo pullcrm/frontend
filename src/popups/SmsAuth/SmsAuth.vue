@@ -78,7 +78,7 @@ export default class ProcedureEdit extends Vue {
 
       this.$emit('close')
     } catch (err) {
-      if (err.status === 404) {
+      if (err.data.status === 404) {
         this.$store.dispatch('toasts/show', {
           type: 'error',
           title: 'Введены не верные данные'
