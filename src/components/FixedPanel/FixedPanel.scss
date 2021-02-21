@@ -1,0 +1,12 @@
+.fixed-panel {
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity var(--ui-transition),
+    visibility var(--ui-transition);
+
+  &._visible {
+    visibility: visible;
+    opacity: 1;
+  }
+}
