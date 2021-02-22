@@ -23,7 +23,10 @@
             :key="`items-${item.name}`"
             size="m"
             :left-icon="item.icon"
-            @click.native="item.click"
+            @click.native="
+              item.click(),
+              onClosable && close()
+            "
           >
             {{ item.name }}
           </UiDropdownItem>
@@ -54,6 +57,11 @@ import UiPopover from '@/ui/Popover/Popover.vue'
     placement: {
       type: String,
       default: 'bottom'
+    },
+
+    onClosable: {
+      type: Boolean,
+      default: true
     }
   }
 })
@@ -61,6 +69,7 @@ export default class PopperMenuItem extends Vue {
   readonly styles!: Record<string, string>
   readonly options!: any[]
   readonly placement!: string
+  readonly onClosable!: boolean
 
   $refs: {
     popover: UiPopover
@@ -87,7 +96,7 @@ export default class PopperMenuItem extends Vue {
 <style lang="scss">
   .popover-menu-inner {
     position: fixed;
-    z-index: 99;
+    z-index: 101;
     display: flex;
     pointer-events: none;
 

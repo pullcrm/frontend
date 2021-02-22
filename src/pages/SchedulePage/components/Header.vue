@@ -131,7 +131,12 @@ export default class Header extends Vue {
   }
 
   addAppointment () {
-    this.$store.dispatch('popup/show', 'appointment-new')
+    this.$store.dispatch('popup/show', {
+      name: 'appointment',
+      props: {
+        type: 'new'
+      }
+    })
   }
 
   toggleQueue () {

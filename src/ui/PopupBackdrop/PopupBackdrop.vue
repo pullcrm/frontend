@@ -104,10 +104,10 @@ export default class Backdrop extends Vue {
       }
     }
 
-    @include ui-mobile-only {
+    @media (max-width: $ui-tablet - 1px) {
       @media (max-width: $ui-mobile-portrait - 1px) {
         .ui-popup {
-          margin: 0;
+          margin: 16px;
         }
       }
     }

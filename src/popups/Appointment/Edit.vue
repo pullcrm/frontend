@@ -1,95 +1,50 @@
 <template>
-  <UiPopup
-    class="appointment-edit"
-    @close="$emit('close')"
-  >
+  <div class="appointment-popup">
+    <AppointmentHeader
+      class="appointment-popup__header"
+      type="edit"
+      :status="form.status"
+      :is-queue.sync="form.isQueue"
+    />
+
     <form @submit.prevent="submit">
-      <Tags
-        class="appointment-edit__tags"
-        :queue.sync="form.isQueue"
-        :status.sync="form.status"
-        :has-remind-sms.sync="form.hasRemindSMS"
-      />
-
-      <UiTitle
-        class="appointment-edit__title"
-        size="s"
-      >
-        Редактировать запись
-      </UiTitle>
-
       <UiFormValidator
         v-slot="{ resetFieldError }"
         ref="formValidator"
-        class="appointment-edit-fields"
         :validations="validations"
       >
-        <UiField
-          label="Телефон"
-        >
-          <UiInput
-            v-model="form.phone"
-            mask="38 (###) #### ###"
-            placeholder="Введите ваш номер телефона"
-            required
-            disabled
-            @input="resetFieldError('name')"
-          />
-        </UiField>
+        <AppointmentClientSimple
+          v-model="form.fullName"
+        />
 
-        <UiField
-          label="Имя и фамилия"
-        >
-          <UiInput
-            v-model="form.fullName"
-            placeholder="Василь Петрович"
-            required
-            @input="resetFieldError('name')"
-          />
-        </UiField>
+        <AppointmentSpecialistSelect
+          class="appointment-popup__specialist"
+          :options="specialists"
+          :specialist.sync="form.specialist"
+          @resetFieldError="resetFieldError"
+        />
 
-        <UiField
-          label="Сотрудник"
-        >
-          <UiSelect
-            v-model="form.specialist"
-            :options="specialists"
-            label-key="fullName"
-            placeholder="Выбрать исполнителя"
-            :clearable="false"
-            required
-            @input="resetFieldError('specialist')"
-          />
-        </UiField>
+        <AppointmentProceduresSelect
+          class="appointment-popup__procedures"
+          :total.sync="form.total"
+          :options="procedures"
+          :procedures.sync="form.procedures"
+          @resetFieldError="resetFieldError"
+        />
 
-        <UiField
-          tag="div"
-          label="Список услуг"
-        >
-          <UiMultiSelect
-            v-model="form.procedures"
-            :options="procedures"
-            label-key="name"
-            placeholder="Выбрать услуги"
-            required
-            @input="resetFieldError('procedures'), calculateTotal()"
-          />
-        </UiField>
-
-        <UiField
+        <AppointmentDateTime
           v-if="form.isQueue === false"
-          label="Время начала"
-        >
-          <UiSelect
-            v-model="form.startTime"
-            :options="workingHours"
-            placeholder="Выбрать время"
-            @input="resetFieldError('timeStart')"
-          />
-        </UiField>
+          class="appointment-popup__date-time"
+          :date.sync="form.date"
+          :duration="duration"
+          :start-at.sync="form.startTime"
+          :working-hours="workingHours"
+          @resetFieldError="resetFieldError"
+        />
 
         <UiField
-          label="Дополнительная информация"
+          class="appointment-popup__comment"
+          label="Комментарий"
         >
           <UiInput
             v-model="form.description"
@@ -98,23 +53,29 @@
             @input="resetFieldError('description')"
           />
         </UiField>
+
+        <AppointmentNotify
+          v-if="isSmsAuthorize"
+          class="appointment-popup__notify"
+          type="edit"
+          :has-remind-sms.sync="form.hasRemindSMS"
+          :has-creation-sms.sync="form.hasCreationSMS"
+        />
+
+        <AppointmentAdditionalSettings
+          class="appointment-popup__additional-settings"
+          type="edit"
+          :source.sync="form.source"
+          :status.sync="form.status"
+        />
       </UiFormValidator>
 
-      <Total
-        :date.sync="form.date"
-        :total.sync="form.total"
-        :start-time.sync="form.startTime"
-        :procedures="form.procedures || []"
-      />
-
-      <div
-        class="appointment-edit__actions"
-      >
+      <div class="appointment-popup__actions">
         <UiButton
           type="submit"
           size="l"
           theme="blue"
-          :loading="isLoadingSubmit"
+          :loading="isLoading"
         >
           Сохранить
         </UiButton>
@@ -122,29 +83,41 @@
         <UiButton
           size="l"
           theme="danger-outlined"
-          :loading="isLoadingRemove"
+          :loading="isLoading"
           @click.native="remove"
         >
           Удалить
         </UiButton>
       </div>
     </form>
-  </UiPopup>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { getProceduresDuration } from '@/logics/appointment'
+
 import { toDate } from '@/utils/date-time'
 
-import Tags from './components/Tags.vue'
-import Total from './components/Total.vue'
+import AppointmentHeader from './components/Header.vue'
+import AppointmentNotify from './components/Notify.vue'
+import AppointmentDateTime from './components/DateTime.vue'
+import AppointmentClientSimple from './components/ClientSimple.vue'
+import AppointmentSpecialistSelect from './components/SpecialistSelect.vue'
+import AppointmentProceduresSelect from './components/ProceduresSelect.vue'
+import AppointmentAdditionalSettings from './components/AdditionalSettings.vue'
 
 @Component({
   components: {
-    Tags,
-    Total
+    AppointmentHeader,
+    AppointmentNotify,
+    AppointmentDateTime,
+    AppointmentClientSimple,
+    AppointmentSpecialistSelect,
+    AppointmentProceduresSelect,
+    AppointmentAdditionalSettings
   },
 
   props: {
@@ -177,23 +150,22 @@ import Total from './components/Total.vue'
 export default class AppointmentEdit extends Vue {
   readonly appointment
 
+  isLoading = false
   workingHours = []
-  isLoadingSubmit = false
-  isLoadingRemove = false
 
   form = {
     ...this.appointment,
     date: toDate(this.appointment.date),
     specialist: this.specialists.find(({ id }) => id === this.appointment.specialist.id),
-    hasRemindSMS: this.isSMSAuthorize ? Boolean(this.appointment.smsIdentifier) : null
+    hasRemindSMS: this.isSmsAuthorize ? Boolean(this.appointment.smsIdentifier) : null
+  }
+
+  get isSmsAuthorize (): Boolean {
+    return this.$store.getters['sms/isAuthorize']
   }
 
   get validations () {
     return {}
-  }
-
-  get isSMSAuthorize (): Boolean {
-    return this.$store.getters['sms/isAuthorize']
   }
 
   get specialists () {
@@ -215,37 +187,29 @@ export default class AppointmentEdit extends Vue {
   get duration () {
     const procedures = this.form.procedures || []
 
-    return procedures.reduce((result, procedure) => {
-      return result + procedure.duration
-    }, 0)
+    return getProceduresDuration({ procedures })
   }
 
   mounted () {
     this.fetchAvailableTime()
   }
 
-  calculateTotal () {
-    const procedures = this.form.procedures || []
-
-    this.form.total = procedures.reduce((sum, { price }) => (sum + price), 0) ?? 0
-  }
-
   async submit () {
     try {
-      this.isLoadingSubmit = true
+      this.isLoading = true
 
       await this.$store.dispatch('appointments/update', this.form)
       await this.$store.dispatch('schedule/fetch')
 
       this.$store.dispatch('popup/hide')
     } finally {
-      this.isLoadingSubmit = false
+      this.isLoading = false
     }
   }
 
   async remove () {
     try {
-      this.isLoadingRemove = true
+      this.isLoading = true
 
       const result = await this.$store.dispatch('popup/askQuestion', {
         title: 'Вы действительно хотите удалить эту запись?',
@@ -253,16 +217,13 @@ export default class AppointmentEdit extends Vue {
       })
 
       if (result) {
-        await Promise.all([
-          this.$api.appointments.remove(this.form.id)
-        ])
-
+        await this.$api.appointments.remove(this.form.id)
         await this.$store.dispatch('schedule/fetch')
 
         this.$store.dispatch('popup/hide')
       }
     } finally {
-      this.isLoadingRemove = false
+      this.isLoading = false
     }
   }
 
@@ -290,28 +251,3 @@ export default class AppointmentEdit extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-  .appointment-edit {
-    &__tags {
-      margin-bottom: 16px;
-    }
-
-    &__title {
-      margin-bottom: 24px;
-    }
-
-    &__actions {
-      display: flex;
-      flex-direction: column;
-
-      .ui-button {
-        margin-top: 16px;
-      }
-    }
-
-    .ui-field + .ui-field {
-      margin-top: 20px;
-    }
-  }
-</style>

@@ -4,6 +4,7 @@
     :styles="styles"
     :options="options"
     :placement="placement"
+    :on-closable="onClosable"
     @close="close"
   />
 </template>
@@ -17,6 +18,7 @@ import PopperMenuInner from './PopperMenuInner.vue'
 interface IPopperMenuOpenParams {
   options: IPopperMenuOpenOption[]
   placement?: string
+  onClosable?: boolean
 }
 
 interface IPopperMenuOpenOption {
@@ -26,7 +28,7 @@ interface IPopperMenuOpenOption {
 
 interface IPopperMenuOpenOptionItem {
   name: string
-  icon: string
+  icon?: string
   click?: Function
 }
 
@@ -39,6 +41,7 @@ export default class PopperMenu extends Vue {
   options: any[] = []
   reference: HTMLElement | null = null
   placement = 'bottom'
+  onClosable = true
 
   get isOpened () {
     return Boolean(this.reference)
@@ -58,11 +61,12 @@ export default class PopperMenu extends Vue {
   async open (reference: HTMLElement, params: IPopperMenuOpenParams) {
     await new Promise(requestAnimationFrame)
 
-    const { options, placement = 'bottom' } = params
+    const { options, placement = 'bottom', onClosable = true } = params
 
     this.options = options
     this.reference = reference
     this.placement = placement
+    this.onClosable = onClosable
   }
 
   close () {

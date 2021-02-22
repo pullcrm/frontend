@@ -37,24 +37,13 @@
     <!-- Appointment -->
     <Popup
       v-slot="{ close, props }"
-      name="appointment-new"
+      name="appointment"
     >
-      <AppointmentNew
+      <Appointment
         v-bind="props"
         @close="close"
       />
     </Popup>
-
-    <Popup
-      v-slot="{ close, props }"
-      name="appointment-edit"
-    >
-      <AppointmentEdit
-        v-bind="props"
-        @close="close"
-      />
-    </Popup>
-    <!-- Appointment end -->
 
     <!-- TimeOff -->
     <Popup
@@ -116,18 +105,13 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiPopupBackdrop from '@/ui/Popup/Backdrop.vue'
+import UiPopupBackdrop from '@/ui/PopupBackdrop/PopupBackdrop.vue'
 
 import Popup from './Popup.vue'
 
-const AppointmentNew = () => import(
+const Appointment = () => import(
   /* webpackChunkName: "popups" */
-  '@/popups/Appointment/New.vue'
-)
-
-const AppointmentEdit = () => import(
-  /* webpackChunkName: "popups" */
-  '@/popups/Appointment/Edit.vue'
+  '@/popups/Appointment/Appointment.vue'
 )
 
 const SpecialistNew = () => import(
@@ -175,13 +159,12 @@ const QuestionPopup = () => import(
     Popup,
     SmsAuth,
     TimeOffNew,
+    Appointment,
     TimeOffEdit,
     SpecialistNew,
     ProcedureNew,
     ProcedureEdit,
     QuestionPopup,
-    AppointmentNew,
-    AppointmentEdit,
     SmsConfirmation,
     UiPopupBackdrop
   },

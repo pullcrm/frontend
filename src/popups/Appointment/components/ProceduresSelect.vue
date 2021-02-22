@@ -1,0 +1,158 @@
+<template>
+  <div class="appointment-popup-procedures-select">
+    <UiTitle
+      class="appointment-popup-procedures-select__title"
+      size="s"
+      responsive
+    >
+      Услуги
+    </UiTitle>
+
+    <UiText
+      class="appointment-popup-procedures-select__sub-title"
+      size="m"
+      responsive
+    >
+      Выбрано:
+
+      <strong>
+        {{ count }}
+      </strong>
+
+      / Сумма:
+
+      <UiPopover
+        class="appointment-popup-procedures-select__price-popover"
+        size="s"
+        placement="bottom"
+      >
+        <template #default="{ toggle }">
+          <div
+            class="appointment-popup-procedures-select__price"
+            @click.prevent="toggle"
+          >
+            {{ total | price }}
+          </div>
+        </template>
+
+        <template #body>
+          <UiField>
+            <UiInput
+              :value="customTotal || total"
+              type="number"
+              placeholder="Цена"
+              @input="onCustomPrice"
+            />
+          </UiField>
+        </template>
+      </UiPopover>
+    </UiText>
+
+    <UiField tag="div">
+      <UiMultiSelect
+        :value="procedures"
+        :options="options"
+        label-key="name"
+        placeholder="Выбрать услуги"
+        @input="
+          $emit('resetFieldError', 'procedures')
+          onInput($event)
+        "
+      />
+    </UiField>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component({
+  props: {
+    total: {
+      type: Number,
+      required: true
+    },
+
+    options: {
+      type: Array,
+      default: () => []
+    },
+
+    procedures: {
+      type: Array,
+      default: () => []
+    }
+  }
+})
+export default class ProceduresSelect extends Vue {
+  readonly total!: number
+  readonly options
+  readonly procedures
+
+  customTotal = null
+
+  get count () {
+    return this.procedures.length
+  }
+
+  onInput (procedures) {
+    this.$emit('update:procedures', procedures)
+
+    if (this.customTotal) return
+
+    const total = procedures.reduce((sum, { price }) => (sum + price), 0) ?? 0
+
+    this.$emit('update:total', total)
+  }
+
+  onCustomPrice (price) {
+    this.customTotal = Number(price)
+
+    this.$emit('update:total', Number(price))
+  }
+}
+</script>
+
+<style lang="scss">
+  .appointment-popup-procedures-select {
+    padding: 16px;
+    background: $ui-black-10;
+    border-radius: 10px;
+
+    &__title {
+      margin-bottom: 12px;
+    }
+
+    &__sub-title {
+      margin-bottom: 12px;
+      color: $ui-black-80;
+
+      strong {
+        color: $ui-black-100;
+        font-weight: 600;
+      }
+    }
+
+    &__price {
+      display: inline-block;
+      color: $ui-black-100;
+      font-weight: 600;
+      cursor: pointer;
+
+      @include ui-hover {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &__price-popover {
+      display: inline-block;
+
+      .ui-field {
+        width: 80px;
+      }
+    }
+  }
+</style>

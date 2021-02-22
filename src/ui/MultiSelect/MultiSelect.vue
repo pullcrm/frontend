@@ -61,7 +61,7 @@ export default class UiMultiSelect extends Vue {
   }
 
   remove (index) {
-    this.$emit('input', [...this.value.splice(index + 1, 1)])
+    this.$emit('input', this.value.filter((_, i) => index !== i))
   }
 }
 </script>

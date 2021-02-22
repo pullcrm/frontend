@@ -56,8 +56,9 @@ export default class Queue extends Vue {
 
   addAppointment () {
     this.$store.dispatch('popup/show', {
-      name: 'appointment-new',
+      name: 'appointment',
       props: {
+        type: 'new',
         isQueue: true
       }
     })
@@ -65,8 +66,11 @@ export default class Queue extends Vue {
 
   openAppointment (appointment) {
     this.$store.dispatch('popup/show', {
-      name: 'appointment-edit',
-      props: { appointment }
+      name: 'appointment',
+      props: {
+        type: 'edit',
+        appointment
+      }
     })
   }
 }

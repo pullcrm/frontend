@@ -104,8 +104,11 @@ export default class Appointment extends Vue {
 
   openOnPopup () {
     this.$store.dispatch('popup/show', {
-      name: 'appointment-edit',
-      props: { appointment: this.appointment }
+      name: 'appointment',
+      props: {
+        type: 'edit',
+        appointment: this.appointment
+      }
     })
   }
 }

@@ -69,6 +69,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { COMPLETED } from '@/constants/appointment'
 import { START_TIME_OF_DAY, END_TIME_OF_DAY } from '@/constants'
 
 import { setTime } from '@/utils/date-time'
@@ -111,7 +112,7 @@ export default class Specialist extends Vue {
 
   get money () {
     return this.appointments
-      .filter(({ status }) => status === 'COMPLETED')
+      .filter(({ status }) => status === COMPLETED)
       .reduce((sum, { total }) => (sum + total), 0)
   }
 
