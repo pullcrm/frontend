@@ -12,11 +12,6 @@
     color: $ui-brand-blue;
   }
 
-  .ui-icon {
-    width: 28px;
-    height: 28px;
-  }
-
   @include ui-hover {
     &:hover {
       background-color: $ui-black-20;
