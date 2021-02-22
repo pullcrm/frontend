@@ -16,7 +16,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiPopupBackdrop from '@/ui/Popup/Backdrop.vue'
+import UiPopupBackdrop from '@/ui/PopupBackdrop/PopupBackdrop.vue'
 
 @Component({
   inheritAttrs: false,

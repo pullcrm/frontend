@@ -4,6 +4,11 @@ export const statusesDict = {
   COMPLETED: 'Выполнен'
 }
 
+export const sourcesDict = {
+  ADMIN_PANEL: 'Админ панель',
+  WIDGET: 'Виджет'
+}
+
 export function normalizeAppointmentParams (submitParams) {
   const {
     date,

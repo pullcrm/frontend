@@ -108,8 +108,9 @@ export default class HourTile extends Vue {
 
   addAppointment () {
     this.$store.dispatch('popup/show', {
-      name: 'appointment-new',
+      name: 'appointment',
       props: {
+        type: 'new',
         time: this.hour,
         specialistId: this.specialistId
       }

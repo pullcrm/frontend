@@ -1,15 +1,18 @@
 <template>
   <div
     class="ui-popup"
+    :class="{
+      'ui-popup_full-page': fullPage
+    }"
     data-test="ui-popup"
     @keydown.esc="onClose"
   >
-    <!-- <UiBack
+    <UiBack
       v-if="back"
       class="ui-popup__back"
       data-test="ui-popup-back"
       @click.native="$emit('back')"
-    /> -->
+    />
 
     <a
       v-if="closable"
@@ -32,6 +35,11 @@
 <script>
 export default {
   props: {
+    fullPage: {
+      type: Boolean,
+      default: false
+    },
+
     closable: {
       type: Boolean,
       default: true
@@ -77,6 +85,13 @@ export default {
     border-radius: 8px;
     pointer-events: all;
 
+    &.ui-popup_full-page {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      border-radius: 0;
+    }
+
     &__back {
       margin-bottom: 16px;
     }
@@ -116,33 +131,29 @@ export default {
         vertical-align: middle;
         transition: color var(--ui-transition-hover);
       }
-
-      + .ui-popup-title {
-        padding-right: 40px;
-      }
     }
 
-    @include ui-desktop-only {
-      @media (max-width: $ui-desktop - 1px) {
-        width: 456px;
-      }
-
-      @media (max-width: $ui-laptop - 1px) {
-        width: 504px;
-      }
+    @media (max-width: $ui-desktop - 1px) {
+      width: 456px;
     }
 
-    @include ui-mobile-only {
+    @media (max-width: $ui-laptop - 1px) {
+      width: 504px;
+    }
+
+    @media (max-width: $ui-tablet - 1px) {
       width: 416px;
 
       @media (max-width: $ui-mobile-portrait - 1px) {
         --ui-popup-padding: 16px;
 
-        width: 100%;
-        max-width: 100%;
-        min-height: 100%;
-        padding: 16px;
-        border-radius: 0;
+        width: 328px;
+        padding: 12px;
+
+        &__close {
+          top: 12px;
+          right: 12px;
+        }
       }
     }
   }

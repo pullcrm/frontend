@@ -30,6 +30,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import { SOURCE_WIDGET } from '@/constants'
+import { IN_PROGRESS } from '@/constants/appointment'
 
 import { getProceduresDuration } from '@/logics/appointment'
 
@@ -52,7 +53,7 @@ export default class Appointment extends Vue {
     // @TODO: Refactor
     const { status, source } = this.appointment
 
-    if (source === SOURCE_WIDGET && status === 'IN_PROGRESS') {
+    if (source === SOURCE_WIDGET && status === IN_PROGRESS) {
       return 'IN_PROGRESS_WIDGET'
     }
 

@@ -1,0 +1,33 @@
+.appointment-popup {
+  &__back {
+    margin-bottom: 16px;
+  }
+
+  &__header {
+    margin-bottom: 24px;
+  }
+
+  &__notify,
+  &__comment,
+  &__date-time,
+  &__specialist,
+  &__procedures,
+  &__additional-settings {
+    margin-top: 20px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+
+    .ui-button {
+      width: 100%;
+      margin-top: 16px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}

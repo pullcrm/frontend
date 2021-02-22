@@ -1,5 +1,5 @@
 @import 'Button_size_32';
-@import 'Button_size_40';
+@import 'Button_size_44';
 @import 'Button_size_48';
 @import 'Button_theme_green';
 @import 'Button_theme_green-outlined';
@@ -49,7 +49,7 @@
   }
 
   &_size_m {
-    @include ui-button_size_40;
+    @include ui-button_size_44;
   }
 
   &_size_l {

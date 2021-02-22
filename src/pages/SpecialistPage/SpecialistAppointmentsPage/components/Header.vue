@@ -57,6 +57,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { COMPLETED } from '@/constants/appointment'
+
 import dayjs from '@/utils/dayjs'
 
 import Calendar from '@/components/Calendar/Calendar.vue'
@@ -95,7 +97,7 @@ export default class Header extends Vue {
 
   get money () {
     return this.appointments
-      .filter(({ status }) => status === 'COMPLETED')
+      .filter(({ status }) => status === COMPLETED)
       .reduce((sum, { total }) => (sum + total), 0)
   }
 
