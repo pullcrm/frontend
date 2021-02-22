@@ -16,14 +16,14 @@
 
     <div class="dashboard-page-number__text">
       <UiText
-        size="l"
+        size="m"
         responsive
       >
         {{ name }}
       </UiText>
 
       <UiTitle
-        size="m"
+        size="s"
         responsive
       >
         {{ value | price }}
