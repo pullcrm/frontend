@@ -18,6 +18,7 @@
         data-test="ui-select-input"
         clearable
         :loading="isLoading"
+        :required="required"
         :right-icon="isOpened ? 'outlined/caret-up' : 'outlined/caret-down'"
         v-bind="$attrs"
         @focus="onFocus"

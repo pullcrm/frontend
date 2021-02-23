@@ -131,10 +131,12 @@ export default class Specialist extends Vue {
     await this.$store.dispatch('schedule/fetchTimeOffs')
   }
 
-  openPopup () {
-    this.$store.dispatch('popup/show', {
-      name: 'specialist-edit',
-      props: { specialist: this.specialist }
+  async openPopup () {
+    await this.$router.push({
+      name: 'specialistInfo',
+      params: {
+        specialistId: this.specialist.id
+      }
     })
   }
 }
