@@ -48,6 +48,8 @@
   }
 
   &__specialization {
+    @include ellipsis(1);
+
     color: $ui-black-80;
   }
 

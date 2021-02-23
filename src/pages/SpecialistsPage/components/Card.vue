@@ -40,10 +40,11 @@
     </UiText>
 
     <UiText
+      v-if="specialist.specialization"
       class="specialists-page-card__specialization"
       size="m"
     >
-      Специалист по укладке волос
+      {{ specialist.specialization }}
     </UiText>
 
     <UiText
