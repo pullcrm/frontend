@@ -77,7 +77,7 @@
       >
         <UiButton
           type="submit"
-          size="l"
+          size="m"
           theme="blue"
           :loading="isLoading"
         >
@@ -93,7 +93,7 @@
         <UiContainer narrow>
           <UiButton
             type="submit"
-            size="l"
+            size="m"
             theme="blue"
             :loading="isLoading"
           >

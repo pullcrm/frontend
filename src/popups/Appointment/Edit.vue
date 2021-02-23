@@ -77,7 +77,7 @@
       >
         <UiButton
           type="submit"
-          size="l"
+          size="m"
           theme="blue"
           :loading="isLoading"
         >
@@ -85,7 +85,7 @@
         </UiButton>
 
         <UiButton
-          size="l"
+          size="m"
           theme="danger-outlined"
           :loading="isLoading"
           @click.native="remove"
@@ -102,7 +102,7 @@
         <UiContainer narrow>
           <UiButton
             type="submit"
-            size="l"
+            size="m"
             theme="blue"
             :loading="isLoading"
           >
