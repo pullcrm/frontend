@@ -174,7 +174,6 @@ export default class SpecialistInfoPage extends Vue {
     }
 
     this.form = {
-      id: user.id,
       email: user.email,
       status,
       lastName: user.lastName,
@@ -182,6 +181,10 @@ export default class SpecialistInfoPage extends Vue {
       description,
       specialization
     }
+  }
+
+  get specialistId () {
+    return Number(this.$route.params.specialistId)
   }
 
   get user () {
@@ -201,7 +204,7 @@ export default class SpecialistInfoPage extends Vue {
       this.isLoading = true
 
       // @ts-ignore
-      await this.$api.specialist.update(this.form.id, {
+      await this.$api.specialist.update(this.specialistId, {
         ...this.form,
         status: this.form.status.key
       })

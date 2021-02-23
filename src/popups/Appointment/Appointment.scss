@@ -30,4 +30,24 @@
       }
     }
   }
+
+  &__fixed-button {
+    @include ui-shadow-4-inverse;
+
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 12px 0;
+    padding-bottom: calc(12px + var(--safe-area-inset-bottom));
+    background: $ui-white;
+
+    .ui-button {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: $ui-mobile-portrait - 1px) {
+    padding: 24px 0;
+  }
 }

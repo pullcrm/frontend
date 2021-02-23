@@ -8,25 +8,51 @@
       Клиент
     </UiTitle>
 
-    <div class="appointment-popup-client-simple__inner">
-      <UiField>
+    <div class="ui-grid">
+      <UiField
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12',
+          'ui-grid-item_tablet_6'
+        ]"
+      >
         <UiInput
-          :value="value"
-          placeholder="Введите имя или номер телефона"
+          :value="name"
+          required
+          placeholder="Введите имя"
           @input="
-            $emit('input', $event)
+            $emit('update:name', $event)
             $emit('resetFieldError', 'name')
           "
         />
       </UiField>
 
-      <UiButton
+      <UiField
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12',
+          'ui-grid-item_tablet_6'
+        ]"
+      >
+        <UiInput
+          mask="38 (###) #### ###"
+          :value="phone"
+          required
+          placeholder="Введите номер телефона"
+          @input="
+            $emit('update:phone', $event)
+            $emit('resetFieldError', 'phone')
+          "
+        />
+      </UiField>
+
+      <!-- <UiButton
         size="m"
         theme="yellow"
         right-icon="outlined/caret-down"
       >
         Быстрая запись
-      </UiButton>
+      </UiButton> -->
     </div>
   </div>
 </template>
@@ -37,14 +63,20 @@ import Component from 'vue-class-component'
 
 @Component({
   props: {
-    value: {
+    name: {
+      type: String,
+      default: ''
+    },
+
+    phone: {
       type: String,
       default: ''
     }
   }
 })
 export default class ClientSimple extends Vue {
-  readonly value!: string
+  readonly name!: string
+  readonly phone!: string
 }
 </script>
 
@@ -52,15 +84,6 @@ export default class ClientSimple extends Vue {
   .appointment-popup-client-simple {
     &__title {
       margin-bottom: 12px;
-    }
-
-    &__inner {
-      display: flex;
-
-      .ui-field {
-        width: 100%;
-        margin-right: 16px;
-      }
     }
   }
 </style>

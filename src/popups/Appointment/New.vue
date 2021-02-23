@@ -1,5 +1,5 @@
 <template>
-  <div class="appointment-popup">
+  <div class="appointment-popup__inner">
     <AppointmentHeader
       class="appointment-popup__header"
       type="new"
@@ -14,7 +14,8 @@
         :validations="validations"
       >
         <AppointmentClientSimple
-          v-model="form.fullName"
+          :name.sync="form.fullName"
+          :phone.sync="form.phone"
         />
 
         <AppointmentSpecialistSelect
@@ -70,7 +71,10 @@
         />
       </UiFormValidator>
 
-      <div class="appointment-popup__actions">
+      <div
+        id="popup-actions"
+        class="appointment-popup__actions"
+      >
         <UiButton
           type="submit"
           size="l"
@@ -80,6 +84,23 @@
           Добавить запись
         </UiButton>
       </div>
+
+      <FixedPanel
+        :treshold="0.25"
+        show-when-invisible="#popup-actions"
+        class="appointment-popup__fixed-button"
+      >
+        <UiContainer narrow>
+          <UiButton
+            type="submit"
+            size="l"
+            theme="blue"
+            :loading="isLoading"
+          >
+            Добавить запись
+          </UiButton>
+        </UiContainer>
+      </FixedPanel>
     </form>
   </div>
 </template>
@@ -95,6 +116,8 @@ import { getProceduresDuration } from '@/logics/appointment'
 
 import { toDate } from '@/utils/date-time'
 
+import FixedPanel from '@/components/FixedPanel/FixedPanel.vue'
+
 import AppointmentHeader from './components/Header.vue'
 import AppointmentNotify from './components/Notify.vue'
 import AppointmentDateTime from './components/DateTime.vue'
@@ -105,6 +128,7 @@ import AppointmentAdditionalSettings from './components/AdditionalSettings.vue'
 
 @Component({
   components: {
+    FixedPanel,
     AppointmentHeader,
     AppointmentNotify,
     AppointmentDateTime,
@@ -162,7 +186,7 @@ export default class AppointmentNew extends Vue {
   form = {
     date: toDate(this.$store.state.schedule.date),
     total: 0,
-    phone: '0',
+    phone: '',
     source: SOURCE_DASHBOARD,
     status: IN_PROGRESS,
     isQueue: this.isQueue,
@@ -210,6 +234,12 @@ export default class AppointmentNew extends Vue {
   }
 
   async submit () {
+    const isValid = await this.validate()
+
+    if (!isValid) {
+      return
+    }
+
     try {
       this.isLoading = true
 
@@ -242,6 +272,21 @@ export default class AppointmentNew extends Vue {
     if (startTimeIndex === -1) {
       this.form.startTime = null
     }
+  }
+
+  async validate () {
+    const { procedures } = this.form
+
+    if (procedures.length === 0) {
+      await this.$store.dispatch('toasts/show', {
+        type: 'error',
+        title: 'Нужно выбрать услуги'
+      })
+
+      return false
+    }
+
+    return true
   }
 }
 </script>

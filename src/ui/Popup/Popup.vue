@@ -145,7 +145,7 @@ export default {
       width: 416px;
 
       @media (max-width: $ui-mobile-portrait - 1px) {
-        --ui-popup-padding: 16px;
+        --ui-popup-padding: 12px;
 
         width: 328px;
         padding: 12px;
