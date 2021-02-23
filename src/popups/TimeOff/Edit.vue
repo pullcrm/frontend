@@ -49,7 +49,7 @@
         <UiPopover
           class="time-off-edit-popup__popover"
           size="m"
-          placement="top-center"
+          placement="bottom_start"
         >
           <template #default="{ toggle }">
             <UiField
@@ -65,7 +65,7 @@
           </template>
 
           <template #body>
-            <Calendar v-model="date" />
+            <UiCalendar v-model="date" />
           </template>
         </UiPopover>
 
@@ -142,11 +142,11 @@ import { setTime, toDate } from '@/utils/date-time'
 
 import { isCloseDay } from '@/logics/time-offs'
 
-import Calendar from '@/components/Calendar/Calendar.vue'
+import UiCalendar from '@/ui/Calendar/Calendar.vue'
 
 @Component({
   components: {
-    Calendar
+    UiCalendar
   },
 
   props: {

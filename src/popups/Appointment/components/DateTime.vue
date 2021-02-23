@@ -2,7 +2,6 @@
   <div class="appointment-popup-date-time">
     <div class="appointment-popup-date-time__inner  ui-grid">
       <UiPopover
-        class="appointment-popup-date-time__date"
         :class="[
           'ui-grid-item',
           'ui-grid-item_12',
@@ -18,14 +17,14 @@
           >
             <UiInput
               :value="customDate | formatDate('D MMMM YYYY')"
-              disabled
+              readonly
               left-icon="outlined/calendar-blank"
             />
           </UiField>
         </template>
 
         <template #body>
-          <Calendar v-model="customDate" />
+          <UiCalendar v-model="customDate" />
         </template>
       </UiPopover>
 
@@ -60,7 +59,7 @@
       >
         <UiInput
           :value="duration | minutesToTime"
-          disabled
+          readonly
           placeholder="00:00"
           left-icon="outlined/clock-afternoon"
         />
@@ -84,11 +83,13 @@ import Component from 'vue-class-component'
 
 import { TIME_STEP } from '@/constants'
 
-import Calendar from '@/components/Calendar/Calendar.vue'
+import dayjs from '@/utils/dayjs'
+
+import UiCalendar from '@/ui/Calendar/Calendar.vue'
 
 @Component({
   components: {
-    Calendar
+    UiCalendar
   },
 
   props: {
@@ -128,7 +129,7 @@ export default class DateTime extends Vue {
   }
 
   set customDate (date) {
-    this.$emit('update:date', date)
+    this.$emit('update:date', dayjs(date))
   }
 
   get toTime () {
@@ -141,24 +142,14 @@ export default class DateTime extends Vue {
 
 <style lang="scss">
   .appointment-popup-date-time {
-    &__date {
-      .ui-input__input {
-        &:disabled {
-          background: $ui-white;
-        }
-      }
-    }
-
-    .ui-input__input {
-      &:disabled {
-        color: $ui-black-100;
-      }
-    }
-
     &__time-end {
       margin-top: 8px;
       color: $ui-black-60;
       text-align: right;
+    }
+
+    .ui-select__body {
+      min-width: auto;
     }
   }
 </style>

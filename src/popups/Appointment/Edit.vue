@@ -120,7 +120,7 @@ import Component from 'vue-class-component'
 
 import { getProceduresDuration } from '@/logics/appointment'
 
-import { toDate } from '@/utils/date-time'
+import dayjs from '@/utils/dayjs'
 
 import FixedPanel from '@/components/FixedPanel/FixedPanel.vue'
 
@@ -179,7 +179,7 @@ export default class AppointmentEdit extends Vue {
 
   form = {
     ...this.appointment,
-    date: toDate(this.appointment.date),
+    date: dayjs(this.appointment.date),
     specialist: this.specialists.find(({ id }) => id === this.appointment.specialist.id),
     hasRemindSMS: this.isSmsAuthorize ? Boolean(this.appointment.smsIdentifier) : null
   }
