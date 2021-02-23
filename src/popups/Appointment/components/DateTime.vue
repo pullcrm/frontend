@@ -149,6 +149,12 @@ export default class DateTime extends Vue {
       }
     }
 
+    .ui-input__input {
+      &:disabled {
+        color: $ui-black-100;
+      }
+    }
+
     &__time-end {
       margin-top: 8px;
       color: $ui-black-60;
