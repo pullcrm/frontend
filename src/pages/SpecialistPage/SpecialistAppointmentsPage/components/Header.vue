@@ -19,7 +19,7 @@
         </template>
 
         <template #body>
-          <Calendar v-model="date" />
+          <UiCalendar v-model="date" />
         </template>
       </UiPopover>
 
@@ -61,11 +61,11 @@ import { COMPLETED } from '@/constants/appointment'
 
 import dayjs from '@/utils/dayjs'
 
-import Calendar from '@/components/Calendar/Calendar.vue'
+import UiCalendar from '@/ui/Calendar/Calendar.vue'
 
 @Component({
   components: {
-    Calendar
+    UiCalendar
   },
 
   props: {

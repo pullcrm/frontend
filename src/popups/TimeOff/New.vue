@@ -49,7 +49,7 @@
         <UiPopover
           class="time-off-new-popup__popover"
           size="m"
-          placement="top-center"
+          placement="bottom_start"
         >
           <template #default="{ toggle }">
             <UiField
@@ -59,13 +59,13 @@
               <UiInput
                 :value="date | formatDate('D MMMM')"
                 readonly
-                left-icon="outlined/pencil"
+                left-icon="outlined/calendar-blank"
               />
             </UiField>
           </template>
 
           <template #body>
-            <Calendar v-model="date" />
+            <UiCalendar v-model="date" />
           </template>
         </UiPopover>
 
@@ -132,11 +132,11 @@ import Component from 'vue-class-component'
 
 import { setTime } from '@/utils/date-time'
 
-import Calendar from '@/components/Calendar/Calendar.vue'
+import UiCalendar from '@/ui/Calendar/Calendar.vue'
 
 @Component({
   components: {
-    Calendar
+    UiCalendar
   },
 
   props: {

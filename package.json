@@ -25,7 +25,6 @@
     "lodash": "^4.17.20",
     "portal-vue": "^2.1.7",
     "register-service-worker": "^1.7.1",
-    "v-calendar": "^1.0.8",
     "v-click-outside": "^3.0.1",
     "vee-validate": "^3.3.8",
     "vue": "^2.6.11",
