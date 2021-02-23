@@ -16,12 +16,12 @@
       </UiNotificationBadge>
 
       <div class="specialists-page-header__right">
-        <UiInput
+        <!-- <UiInput
           class="specialists-page-header__search"
           value=""
           left-icon="outlined/magnifying-glass"
           placeholder="Поиск по имени или телефону"
-        />
+        /> -->
 
         <UiButton
           size="m"
@@ -35,10 +35,10 @@
       </div>
     </div>
 
-    <UiTabs
+    <!-- <UiTabs
       class="specialists-page__tabs"
       :tabs="tabs"
-    />
+    /> -->
 
     <div class="ui-grid">
       <SpecialistCard
