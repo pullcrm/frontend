@@ -48,7 +48,7 @@
       </UiPopover>
     </UiText>
 
-    <UiField tag="div">
+    <UiField>
       <UiMultiSelect
         :value="procedures"
         :options="options"

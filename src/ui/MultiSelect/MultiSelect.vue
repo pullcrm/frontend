@@ -3,6 +3,7 @@
     class="ui-multi-select"
   >
     <UiSelect
+      ref="select"
       :value="null"
       :label-key="labelKey"
       v-bind="$attrs"
@@ -17,7 +18,7 @@
         size="m"
         clickable
         right-icon="outlined/x"
-        @click.native="remove(index)"
+        @click.native.prevent="remove(index)"
       >
         {{ badge[labelKey] }}
       </UiBadge>
@@ -28,6 +29,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+
+import UiSelect from '../Select/Select.vue'
 
 @Component({
   inheritAttrs: false,
@@ -48,10 +51,16 @@ export default class UiMultiSelect extends Vue {
   readonly value: any[]
   readonly labelKey: string
 
+  $refs: {
+    select: UiSelect
+  }
+
   onInput (item) {
     if (!item) {
       return
     }
+
+    this.$refs.select.query = ''
 
     if (this.value.some(val => val[this.labelKey] === item[this.labelKey])) {
       return

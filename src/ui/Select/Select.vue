@@ -54,7 +54,7 @@
           :title="getTitle(item)"
           :sub-title="item.itemSubTitle"
           :active="activeItemIndex === index"
-          @click.native="onSelectItem(item)"
+          @click.native.prevent="onSelectItem(item)"
         />
       </div>
     </div>
@@ -65,7 +65,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { debounce } from '@/utils/debounce'
 import { isTouchDevice } from '@/utils/device'
 
 import UiInput from '../Input/Input.vue'
@@ -106,12 +105,6 @@ import UiInputAutocompleteItem from '../InputAutocompleteItem/InputAutocompleteI
       this.activeItemIndex = 0
     },
 
-    query () {
-      if (this.isQueryEqualsValue) return
-
-      this.onLoad()
-    },
-
     value: {
       immediate: true,
       handler (value: any) {
@@ -127,7 +120,6 @@ export default class UiSelect extends Vue {
   readonly required: boolean
 
   query = ''
-  items: any[] = []
 
   isLoading = false
   isFocused = false
@@ -138,10 +130,9 @@ export default class UiSelect extends Vue {
     items: UiInputAutocompleteItem[]
   }
 
-  constructor () {
-    super()
-
-    this.onLoad = debounce(this.onLoad, 200)
+  get items () {
+    return this.options
+      .filter(item => this.getTitle(item).toLowerCase().includes(this.query.toLowerCase()))
   }
 
   get isTouchDevice () {
@@ -149,7 +140,7 @@ export default class UiSelect extends Vue {
   }
 
   get visibleItems () {
-    return this.items
+    return this.isQueryEqualsValue ? this.options : this.items
   }
 
   get hasVisibleItems () {
@@ -177,9 +168,9 @@ export default class UiSelect extends Vue {
       return false
     }
 
-    if (this.isQueryEqualsValue) {
-      return false
-    }
+    // if (this.isQueryEqualsValue) {
+    //   return false
+    // }
 
     if (this.hasVisibleItems) {
       return true
@@ -249,8 +240,6 @@ export default class UiSelect extends Vue {
     }
 
     this.isFocused = true
-
-    this.onLoad()
   }
 
   /**
@@ -259,7 +248,7 @@ export default class UiSelect extends Vue {
   onSelectItem (item: any) {
     this.select(item)
 
-    this.isFocused = false
+    this.blur()
   }
 
   /**
@@ -267,7 +256,6 @@ export default class UiSelect extends Vue {
    */
   onClear () {
     this.query = ''
-    this.items = []
 
     this.focus()
   }
@@ -287,6 +275,8 @@ export default class UiSelect extends Vue {
       const item = this.visibleItems[this.activeItemIndex]
 
       this.select(item)
+
+      this.blur()
       return
     }
 
@@ -311,22 +301,6 @@ export default class UiSelect extends Vue {
     }
 
     this.select(this.value)
-  }
-
-  /**
-   * Load items
-   */
-  async onLoad () {
-    try {
-      this.isLoading = true
-
-      this.items = this.options
-        .filter(item => {
-          return this.getTitle(item).toLowerCase().includes(this.query.toLowerCase())
-        })
-    } finally {
-      this.isLoading = false
-    }
   }
 
   /**
@@ -363,6 +337,16 @@ export default class UiSelect extends Vue {
     if (input) {
       input.focus()
     }
+  }
+
+  blur () {
+    const input = this.$el.querySelector('input') as HTMLElement
+
+    if (input) {
+      input.blur()
+    }
+
+    this.isFocused = false
   }
 
   /**

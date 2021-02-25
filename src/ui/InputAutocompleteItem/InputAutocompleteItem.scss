@@ -1,6 +1,6 @@
 @mixin ui-input-autocomplete-item_active {
   > div {
-    background: $ui-black-20;
+    background: $ui-black-10;
 
     .ui-input-autocomplete-item__icon,
     .ui-input-autocomplete-item__title,
@@ -21,7 +21,8 @@
     padding-bottom: 4px;
   }
 
-  &:active {
+  &:active,
+  &_active {
     @include ui-input-autocomplete-item_active;
   }
 
