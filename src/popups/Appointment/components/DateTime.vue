@@ -60,6 +60,7 @@
         <UiInput
           :value="duration | minutesToTime"
           readonly
+          disabled
           placeholder="00:00"
           left-icon="outlined/clock-afternoon"
         />
