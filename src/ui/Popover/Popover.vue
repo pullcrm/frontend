@@ -29,7 +29,10 @@
         ref="body"
         class="ui-popover__body"
       >
-        <slot name="body">
+        <slot
+          name="body"
+          :close="close"
+        >
           <UiText
             size="m"
             responsive

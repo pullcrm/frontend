@@ -1,21 +1,55 @@
 <template>
   <div class="appointment-popup-header">
-    <UiTitle
-      size="l"
-      responsive
+    <UiPopover
+      ref="popover"
+      size="m"
+      placement="bottom"
     >
-      {{ type === 'new' ? 'Новая запись' : 'Редактировать'}}
-    </UiTitle>
+      <template #default="{ toggle }">
+        <UiTitle
+          class="appointment-popup-header__title"
+          size="l"
+          responsive
+          @click.native="toggle"
+        >
+          <template #prepend>
+            <UiIcon
+              name="solid/flag"
+              size="l"
+            />
+          </template>
+
+          {{ type === 'new' ? 'Новая запись' : 'Редактировать' }}
+        </UiTitle>
+      </template>
+
+      <template #body="{ close }">
+        <UiDropdownList>
+          <UiDropdownItem
+            size="m"
+            @click.native="close(), $emit('update:isQueue', false)"
+          >
+            Запись календаря
+          </UiDropdownItem>
+
+          <UiDropdownItem
+            size="m"
+            @click.native="close(), $emit('update:isQueue', true)"
+          >
+            Очередь
+          </UiDropdownItem>
+        </UiDropdownList>
+      </template>
+    </UiPopover>
 
     <UiText
       v-if="isStatusVisible"
-      ref="reference"
+      class="appointment-popup-header__status"
       tag="a"
       href="#"
       size="l"
       right-icon="outlined/caret-down"
       responsive
-      @click.native.prevent="onStatusMenu"
     >
       {{ isQueue ? 'Очередь' : 'Запись календаря' }}
     </UiText>
@@ -28,11 +62,7 @@ import Component from 'vue-class-component'
 
 import { COMPLETED } from '@/constants/appointment'
 
-import PopperMenu from '@/components/PopperMenu/PopperMenu.vue'
-
 @Component({
-  inject: ['getPopperMenu'],
-
   props: {
     type: {
       type: String,
@@ -55,38 +85,8 @@ export default class Header extends Vue {
   readonly status!: string
   readonly isQueue!: boolean
 
-  readonly getPopperMenu!: () => PopperMenu
-
-  $refs: {
-    reference: HTMLElement
-  }
-
   get isStatusVisible () {
     return this.status !== COMPLETED
-  }
-
-  onStatusMenu () {
-    const popperMenu = this.getPopperMenu()
-
-    if (popperMenu.reference === this.$refs.reference) {
-      return
-    }
-
-    const appointment = {
-      name: 'Запись календаря',
-      click: () => this.$emit('update:isQueue', false)
-    }
-
-    const queue = {
-      name: 'Очередь',
-      click: () => this.$emit('update:isQueue', true)
-    }
-
-    popperMenu.open(this.$refs.reference, {
-      options: [{
-        items: [appointment, queue]
-      }]
-    })
   }
 }
 </script>
@@ -97,7 +97,7 @@ export default class Header extends Vue {
     align-items: center;
     justify-content: space-between;
 
-    .ui-text {
+    &__status {
       color: $ui-brand-blue;
     }
   }
