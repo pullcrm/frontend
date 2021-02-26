@@ -58,7 +58,45 @@
           $emit('resetFieldError', 'procedures')
           onInput($event)
         "
-      />
+      >
+        <template #badge="{ item, title, remove }">
+          <UiPopover
+            class="appointment-popup-procedures-select__procedure"
+            size="s"
+            theme="dark"
+            placement="top"
+            @click.native.prevent
+          >
+            <template #default="{ toggle }">
+              <UiBadge
+                :key="title"
+                class="ui-multi-select__badge"
+                size="m"
+                clickable
+                @click.native.prevent="toggle"
+              >
+                {{ title }}
+
+                <template #append>
+                  <UiIcon
+                    name="outlined/x"
+                    size="xs"
+                    @click.native.prevent.stop="remove"
+                  />
+                </template>
+              </UiBadge>
+            </template>
+
+            <template #body>
+              <UiText
+                class="appointment-popup-procedures-select__procedure-text"
+              >
+                {{ item.duration | minutesToTime }} - {{ item.price | price }}
+              </UiText>
+            </template>
+          </UiPopover>
+        </template>
+      </UiMultiSelect>
     </UiField>
   </div>
 </template>
@@ -145,6 +183,14 @@ export default class ProceduresSelect extends Vue {
           text-decoration: underline;
         }
       }
+    }
+
+    &__procedure {
+      display: inline-flex;
+    }
+
+    &__procedure-text {
+      white-space: nowrap;
     }
 
     &__price-popover {

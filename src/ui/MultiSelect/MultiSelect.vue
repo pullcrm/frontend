@@ -11,17 +11,27 @@
     />
 
     <div class="ui-multi-select__badges">
-      <UiBadge
+      <template
         v-for="(badge, index) in value"
-        :key="badge[labelKey]"
-        class="ui-multi-select__badge"
-        size="m"
-        clickable
-        right-icon="outlined/x"
-        @click.native.prevent="remove(index)"
       >
-        {{ badge[labelKey] }}
-      </UiBadge>
+        <slot
+          name="badge"
+          :item="badge"
+          :title="badge[labelKey]"
+          :remove="() => remove(index)"
+        >
+          <UiBadge
+            :key="badge[labelKey]"
+            class="ui-multi-select__badge"
+            size="m"
+            clickable
+            right-icon="outlined/x"
+            @click.native.prevent="remove(index)"
+          >
+            {{ badge[labelKey] }}
+          </UiBadge>
+        </slot>
+      </template>
     </div>
   </div>
 </template>
