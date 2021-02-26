@@ -14,13 +14,11 @@
     >
       <template #body>
         <UiDropdownList
-          v-for="(list, index) in options"
-          :key="`list-${index}`"
-          :name="list.name"
+          :name="name"
         >
           <UiText
-            v-for="item in list.items"
-            :key="`items-${item.name}`"
+            v-for="item in options"
+            :key="item.name"
             tag="a"
             href="#"
             size="m"
@@ -46,6 +44,11 @@ import UiPopover from '@/ui/Popover/Popover.vue'
 
 @Component({
   props: {
+    name: {
+      type: String,
+      default: null
+    },
+
     styles: {
       type: Object,
       required: true

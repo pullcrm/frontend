@@ -98,10 +98,11 @@ export default class HourTile extends Vue {
     }
 
     popperMenu.open(this.$refs.icon, {
-      options: [{
-        name: `Начало: ${this.hour}`,
-        items: [addAppointment, addTimeOff]
-      }],
+      name: `Начало: ${this.hour}`,
+      options: [
+        addAppointment,
+        addTimeOff
+      ],
       placement: 'right'
     })
   }
