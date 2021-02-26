@@ -16,5 +16,6 @@ export default class ScheduleColumnPlaceholder extends Vue {}
     background-color: $ui-gray-brand;
     background-image: url('~@/assets/svg/disabled-time-pattern.svg');
     background-position: bottom right;
+    box-shadow: inset 1px 0 0 $ui-black-40;
   }
 </style>

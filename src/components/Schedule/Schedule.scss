@@ -7,10 +7,14 @@
   }
 
   &__column {
-    min-width: #{$SCHEDULE_ROW_WIDTH + 1px} /* 1px border */;
     width: 100%;
+    min-width: #{$SCHEDULE_ROW_WIDTH + 1px} /* 1px border */;
     max-width: 500px;
-    border-right: 1px solid $ui-black-40;
+    border-left: 1px solid $ui-black-40;
+
+    &:first-child {
+      border-left: none;
+    }
   }
 
   &__inner {
