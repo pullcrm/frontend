@@ -12,7 +12,7 @@ export default class ScheduleColumnPlaceholder extends Vue {}
 
 <style lang="scss">
   .schedule-column-placeholder {
-    width: 100%;
+    flex: 1;
     background-color: $ui-gray-brand;
     background-image: url('~@/assets/svg/disabled-time-pattern.svg');
     background-position: bottom right;
