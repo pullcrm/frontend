@@ -1,6 +1,10 @@
 import { SPECIALIST } from '@/constants/roles'
 
 export default async function roleRedirect ({ to, next, store }) {
+  if (!store.state.auth.accessToken) {
+    return
+  }
+
   const role = store.state.company.role
   const { specialistId } = store.state.company.profile
 
