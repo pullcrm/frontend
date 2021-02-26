@@ -18,18 +18,20 @@
           :key="`list-${index}`"
           :name="list.name"
         >
-          <UiDropdownItem
+          <UiText
             v-for="item in list.items"
             :key="`items-${item.name}`"
+            tag="a"
+            href="#"
             size="m"
             :left-icon="item.icon"
-            @click.native="
+            @click.native.prevent="
               item.click(),
               onClosable && close()
             "
           >
             {{ item.name }}
-          </UiDropdownItem>
+          </UiText>
         </UiDropdownList>
       </template>
     </UiPopover>

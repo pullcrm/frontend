@@ -44,22 +44,26 @@
       </template>
 
       <UiDropdownList>
-        <UiDropdownItem
+        <UiText
+          tag="a"
+          href="#"
           size="m"
           left-icon="outlined/pencil"
-          @click.native="openPopup"
+          @click.native.prevent="openPopup"
         >
           Редактировать
-        </UiDropdownItem>
+        </UiText>
 
-        <UiDropdownItem
+        <UiText
           v-if="isClosedDay === false"
+          tag="a"
+          href="#"
           size="m"
           left-icon="outlined/prohibit"
-          @click.native="onCloseDay"
+          @click.native.prevent="onCloseDay"
         >
           Закрыть запись <br> на этот день
-        </UiDropdownItem>
+        </UiText>
       </UiDropdownList>
     </UiDropdownMenu>
   </div>

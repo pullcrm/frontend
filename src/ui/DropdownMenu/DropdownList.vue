@@ -45,7 +45,7 @@ export default class DropdownList extends Vue {}
     }
 
     &__inner {
-      .ui-dropdown-item {
+      & > .ui-text {
         margin-bottom: 8px;
 
         &:last-child {
