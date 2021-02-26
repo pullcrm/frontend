@@ -25,7 +25,7 @@
         @clear="onClear"
         @keydown.up="onArrowUp"
         @keydown.down="onArrowDown"
-        @keydown.enter="onEnter"
+        @keydown.enter.prevent="onEnter"
       />
     </slot>
 
@@ -263,13 +263,10 @@ export default class UiSelect extends Vue {
   /**
    * Handle enter
    */
-  onEnter (event: Event) {
-    if (this.isQueryEqualsValue) {
-      return
-    }
-
-    // Prevent form submiting
-    event.preventDefault()
+  onEnter () {
+    // if (this.isQueryEqualsValue) {
+    //   return
+    // }
 
     if (this.hasVisibleItems) {
       const item = this.visibleItems[this.activeItemIndex]
