@@ -3,7 +3,7 @@
     <UiPopover
       ref="popover"
       size="m"
-      placement="bottom"
+      placement="bottom_start"
     >
       <template #default="{ toggle }">
         <UiTitle
@@ -12,47 +12,68 @@
           responsive
           @click.native="toggle"
         >
-          <template #prepend>
-            <UiIcon
-              name="solid/flag"
-              size="l"
-            />
-          </template>
-
-          {{ type === 'new' ? 'Новая запись' : 'Редактировать' }}
+          {{ title }}
         </UiTitle>
       </template>
 
       <template #body="{ close }">
         <UiDropdownList>
-          <UiDropdownItem
-            size="m"
-            @click.native="close(), $emit('update:isQueue', false)"
+          <UiText
+            tag="a"
+            href="#"
+            :left-icon="isQueue ? 'outlined/minus' : 'outlined/check'"
+            @click.native.prevent="close(), $emit('update:isQueue', false)"
           >
-            Запись календаря
-          </UiDropdownItem>
+            Календарь
+          </UiText>
 
-          <UiDropdownItem
-            size="m"
-            @click.native="close(), $emit('update:isQueue', true)"
+          <UiText
+            tag="a"
+            href="#"
+            :left-icon="!isQueue ? 'outlined/minus' : 'outlined/check'"
+            @click.native.prevent="close(), $emit('update:isQueue', true)"
           >
             Очередь
-          </UiDropdownItem>
+          </UiText>
         </UiDropdownList>
       </template>
     </UiPopover>
 
-    <UiText
-      v-if="isStatusVisible"
-      class="appointment-popup-header__status"
-      tag="a"
-      href="#"
-      size="l"
-      right-icon="outlined/caret-down"
-      responsive
+    <UiPopover
+      ref="popover"
+      size="m"
+      placement="bottom_end"
     >
-      {{ isQueue ? 'Очередь' : 'Запись календаря' }}
-    </UiText>
+      <template #default="{ toggle }">
+        <UiText
+          class="appointment-popup-header__status"
+          tag="a"
+          href="#"
+          size="l"
+          right-icon="outlined/caret-down"
+          responsive
+          @click.native="toggle"
+        >
+          {{ activeStatus }}
+        </UiText>
+      </template>
+
+      <template #body="{ close }">
+        <UiDropdownList>
+          <UiText
+            v-for="item in statuses"
+            :key="item.value"
+            tag="a"
+            href="#"
+            size="m"
+            :left-icon="item.value === status ? 'outlined/check' : 'outlined/minus'"
+            @click.native.prevent="close(), $emit('update:status', item.value)"
+          >
+            {{ item.name }}
+          </UiText>
+        </UiDropdownList>
+      </template>
+    </UiPopover>
   </div>
 </template>
 
@@ -60,11 +81,13 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { COMPLETED } from '@/constants/appointment'
+import { statusesDict } from '@/logics/appointment'
+
+import { IN_PROGRESS, COMPLETED, CANCELED } from '@/constants/appointment'
 
 @Component({
   props: {
-    type: {
+    title: {
       type: String,
       required: true
     },
@@ -81,12 +104,20 @@ import { COMPLETED } from '@/constants/appointment'
   }
 })
 export default class Header extends Vue {
-  readonly type!: 'new' | 'edit'
+  readonly title!: string
   readonly status!: string
   readonly isQueue!: boolean
 
-  get isStatusVisible () {
-    return this.status !== COMPLETED
+  get activeStatus () {
+    return statusesDict[this.status]
+  }
+
+  get statuses () {
+    return [COMPLETED, CANCELED, IN_PROGRESS]
+      .map(value => ({
+        name: statusesDict[value],
+        value
+      }))
   }
 }
 </script>

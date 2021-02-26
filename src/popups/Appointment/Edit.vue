@@ -2,8 +2,8 @@
   <div class="appointment-popup__inner">
     <AppointmentHeader
       class="appointment-popup__header"
-      type="edit"
-      :status="form.status"
+      title="Редактировать"
+      :status.sync="form.status"
       :is-queue.sync="form.isQueue"
     />
 
@@ -67,7 +67,6 @@
           class="appointment-popup__additional-settings"
           type="edit"
           :source.sync="form.source"
-          :status.sync="form.status"
         />
       </UiFormValidator>
 

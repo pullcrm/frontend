@@ -1,7 +1,7 @@
 export const statusesDict = {
-  IN_PROGRESS: 'Новый',
-  CANCELED: 'Отменен',
-  COMPLETED: 'Выполнен'
+  IN_PROGRESS: 'В работе',
+  CANCELED: 'Отменено',
+  COMPLETED: 'Выполнено'
 }
 
 export const sourcesDict = {
