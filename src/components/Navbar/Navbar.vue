@@ -31,6 +31,11 @@
     />
 
     <NavbarItem
+      :to="{ name: 'analyticsAppointments' }"
+      icon="solid/chart-bar-fill"
+    />
+
+    <NavbarItem
       :to="{ name: 'settings' }"
       icon="solid/gear-fill"
     />

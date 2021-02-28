@@ -33,6 +33,9 @@ const SmsSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/SmsSettin
 const WidgetSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/WidgetSettingsPage/WidgetSettingsPage.vue'))
 const CompanySettingsPage = dynamicPage(() => import('@/pages/SettingsPage/CompanySettingsPage/CompanySettingsPage.vue'))
 
+const AnalyticsAppointmentsPage = dynamicPage(() => import('@/pages/AnalyticsPage/Appointments/Appointments.vue'))
+const AnalyticsFinancePage = dynamicPage(() => import('@/pages/AnalyticsPage/Finance/Finance.vue'))
+
 const Error = dynamicPage(() => import('@/pages/Error/404.vue'))
 
 Vue.use(Router)
@@ -44,6 +47,22 @@ function scrollBehavior (_to, _from, savedPosition) {
     return { x: 0, y: 0 }
   }
 }
+
+const specialistPages = [
+  {
+    meta: { middleware: [auth, company, roleRedirect] },
+    path: 'info',
+    name: 'specialistInfo',
+    component: SpecialistInfoPage
+  },
+
+  {
+    meta: { middleware: [auth, company, roleRedirect] },
+    path: 'appointments',
+    name: 'specialistAppointments',
+    component: SpecialistAppointmentsPage
+  }
+]
 
 const router = new Router({
   mode: 'history',
@@ -65,31 +84,15 @@ const router = new Router({
     { path: '/procedures/', name: 'procedures', component: Procedures, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
     { path: '/specialists/', name: 'specialists', component: SpecialistsPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
 
-    {
-      path: '/specialist/:specialistId',
-      name: 'specialist',
-      component: SpecialistPage,
-      children: [
-        {
-          meta: { middleware: [auth, company, roleRedirect] },
-          path: 'info',
-          name: 'specialistInfo',
-          component: SpecialistInfoPage
-        },
-
-        {
-          meta: { middleware: [auth, company, roleRedirect] },
-          path: 'appointments',
-          name: 'specialistAppointments',
-          component: SpecialistAppointmentsPage
-        }
-      ]
-    },
+    { path: '/specialist/:specialistId', name: 'specialist', component: SpecialistPage, children: specialistPages },
 
     { path: '/settings/', name: 'settings', redirect: '/settings/company/' },
     { path: '/settings/sms/', name: 'smsSettings', component: SmsSettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
     { path: '/settings/widget/', name: 'widgetSettings', component: WidgetSettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
     { path: '/settings/company/', name: 'companySettings', component: CompanySettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
+
+    { path: '/analytics/appointments/', name: 'analyticsAppointments', component: AnalyticsAppointmentsPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
+    { path: '/analytics/finance/', name: 'analyticsFinance', component: AnalyticsFinancePage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
 
     ...widgetsRoutes,
 

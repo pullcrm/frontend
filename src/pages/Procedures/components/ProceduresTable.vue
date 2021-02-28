@@ -1,77 +1,50 @@
 <template>
-  <div
+  <UiTable
     class="procedures-page-table"
+    :data="list"
+    numbered
   >
-    <UiTable
-      :data="list"
-      numbered
-    >
-      <template #head>
-        <th
-          align="left"
-        >
-          Название
-        </th>
-        <th
-          align="left"
-        >
-          Описание
-        </th>
-        <th>Цена</th>
-        <th>Длительность</th>
-        <th
-          width="140"
-          align="right"
-        >
-          Изменить
-        </th>
-      </template>
+    <template #default="{ row }">
+      <UiTableColumn
+        name="Название"
+        align="left"
+      >
+        {{ row.name }}
+      </UiTableColumn>
 
-      <template #default="{ row }">
-        <UiTableColumn>
-          {{ row.name }}
-        </UiTableColumn>
-
-        <UiTableColumn>
-          <UiText
-            size="s"
-          >
-            {{ row.description }}
-          </UiText>
-        </UiTableColumn>
-
-        <UiTableColumn
-          align="center"
+      <UiTableColumn name="Описание">
+        <UiText
+          size="s"
         >
-          <UiPrice
-            size="xs"
-            responsive
-          >
-            {{ row.price | price }}
-          </UiPrice>
-        </UiTableColumn>
+          {{ row.description }}
+        </UiText>
+      </UiTableColumn>
 
-        <UiTableColumn
-          align="center"
+      <UiTableColumn name="Цена">
+        <UiPrice
+          size="xs"
+          responsive
         >
-          {{ getDurationName(row.duration) }}
-        </UiTableColumn>
+          {{ row.price | price }}
+        </UiPrice>
+      </UiTableColumn>
 
-        <UiTableColumn
-          align="right"
+      <UiTableColumn name="Длительность">
+        {{ getDurationName(row.duration) }}
+      </UiTableColumn>
+
+      <UiTableColumn name="Изменить">
+        <UiButton
+          theme="info-outlined"
+          left-icon="outlined/pencil"
+          size="s"
+          @click.native="onEdit(row)"
         >
-          <UiButton
-            theme="info-outlined"
-            left-icon="outlined/pencil"
-            size="m"
-            @click.native="onEdit(row)"
-          >
-            Открыть
-          </UiButton>
-        </UiTableColumn>
-      </template>
-    </UiTable>
-  </div>
+          Открыть
+        </UiButton>
+      </UiTableColumn>
+    </template>
+  </UiTable>
 </template>
 
 <script lang="ts">
@@ -113,9 +86,3 @@ export default class ProceduresTable extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-  .procedures-page-table {
-    margin-top: 24px;
-  }
-</style>

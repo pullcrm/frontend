@@ -1,0 +1,99 @@
+.product-prices-history-chart {
+  svg {
+    display: block;
+    width: 100%;
+    height: 340px;
+
+    * {
+      vector-effect: non-scaling-stroke;
+    }
+  }
+
+  &__inner {
+    position: relative;
+    margin: 24px;
+  }
+
+  &__points {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+  }
+
+  &__curve {
+    fill: none;
+    stroke: $ui-brand-blue;
+    stroke-width: 2;
+
+    // &[data-price1='0'],
+    // &[data-price2='0'] {
+    //   stroke: $ui-black-80;
+    //   stroke-dasharray: 5;
+    // }
+  }
+
+  &__point {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: $ui-white;
+    border: 2px solid $ui-brand-blue;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+
+    &._active {
+      z-index: 10;
+      background: $ui-brand-blue;
+    }
+
+    // &[data-price='0'] {
+    //   border-color: $ui-black-80;
+
+    //   &._active {
+    //     background: $ui-black-80;
+    //   }
+    // }
+
+    .ui-tooltip__body {
+      white-space: nowrap;
+
+      strong {
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__point-zone {
+    position: absolute;
+    top: -24px;
+    bottom: -24px;
+    width: 50px;
+    transform: translate(-50%, 0);
+  }
+}
+
+@include ui-mobile-only {
+  .product-prices-history-chart {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    overflow: auto;
+
+    svg {
+      width: 576px;
+    }
+
+    &__inner {
+      display: inline-block;
+      margin: 24px 56px 24px 48px;
+    }
+
+    &__point-zone {
+      width: 40px;
+    }
+  }
+}

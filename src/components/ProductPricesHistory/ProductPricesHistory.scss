@@ -1,0 +1,42 @@
+.product-prices-history {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+
+  &__chart {
+    flex: 1;
+    border-bottom: 1px solid $ui-black-40;
+    // border-left: 1px solid $ui-black-40;
+  }
+
+  &__range {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 36px;
+    margin-top: -1px;
+    margin-bottom: -1px;
+    padding: 24px 8px;
+    text-align: center;
+
+    .ui-price {
+      &:first-child:last-child {
+        margin: auto 0;
+      }
+    }
+  }
+}
+
+@include ui-mobile-only {
+  .product-prices-history {
+    &__range {
+      padding-right: 16px;
+    }
+
+    &__chart {
+      margin-right: calc(-1 * var(--ui-container-padding));
+      padding-right: var(--ui-container-padding);
+    }
+  }
+}

@@ -16,7 +16,7 @@
         ref="input"
         v-model="query"
         data-test="ui-select-input"
-        clearable
+        :clearable="clearable"
         :loading="isLoading"
         :required="required"
         :right-icon="isOpened ? 'outlined/caret-up' : 'outlined/caret-down'"
@@ -97,6 +97,11 @@ import UiInputAutocompleteItem from '../InputAutocompleteItem/InputAutocompleteI
     labelKey: {
       type: String,
       default: ''
+    },
+
+    clearable: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -118,6 +123,7 @@ export default class UiSelect extends Vue {
   readonly options: any[]
   readonly labelKey: string
   readonly required: boolean
+  readonly clearable!: boolean
 
   query = ''
 
