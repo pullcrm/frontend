@@ -1,0 +1,31 @@
+.dashboard-page-companies {
+  &__title {
+    margin-bottom: 8px;
+  }
+
+  &__carousel {
+    .ui-carousel__inner {
+      margin: -8px 0;
+      padding: 8px 0;
+    }
+
+    @include ui-desktop-only {
+      --ui-carousel-item-gap: 16px;
+      --ui-carousel-item-count: 3;
+
+      @media (min-width: $ui-desktop) {
+        --ui-carousel-item-gap: 24px;
+        --ui-carousel-item-count: 4;
+      }
+    }
+
+    @include ui-mobile-only {
+      --ui-carousel-item-width: 280px;
+      --ui-carousel-item-gap: 16px;
+
+      .ui-carousel__controls {
+        display: none;
+      }
+    }
+  }
+}

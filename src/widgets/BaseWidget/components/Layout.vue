@@ -8,7 +8,7 @@
       >
         <template #prepend>
           <UiIcon
-            size="s"
+            size="m"
             name="outlined/arrow-left"
           />
         </template>
@@ -25,7 +25,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiMicroText from '@/ui/MicroText.vue'
+import UiMicroText from '@/ui/MicroText/MicroText.vue'
 
 @Component({
   components: {

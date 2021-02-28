@@ -19,8 +19,9 @@
       class="ui-button__prepend"
     >
       <UiIcon
+        class="ui-button__icon"
+        size="custom"
         :name="leftIcon"
-        :size="iconSize"
       />
     </span>
     <span
@@ -34,7 +35,10 @@
       v-if="loading"
       class="ui-button__loader"
     >
-      <UiIconLoader size="s" />
+      <UiIconLoader
+        class="ui-button__icon"
+        size="custom"
+      />
     </span>
     <span
       v-if="$slots.default"
@@ -48,8 +52,9 @@
       class="ui-button__append"
     >
       <UiIcon
+        class="ui-button__icon"
+        size="custom"
         :name="rightIcon"
-        :size="iconSize"
       />
     </span>
     <span
@@ -65,15 +70,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiIcon from '@/ui/Icon.vue'
-import UiIconLoader from '@/ui/IconLoader.vue'
-
 @Component({
-  components: {
-    UiIcon,
-    UiIconLoader
-  },
-
   inheritAttrs: false,
 
   props: {
@@ -128,7 +125,6 @@ export default class Button extends Vue {
   readonly size: 's' | 'm' | 'l'
   readonly theme:
     | 'primary'
-    | 'primary-outlined'
     | 'green'
     | 'green-outlined'
     | 'yellow'
@@ -144,8 +140,6 @@ export default class Button extends Vue {
   readonly leftIcon?: string
   readonly rightIcon?: string
   readonly responsive: boolean
-
-  iconSize = this.size === 'l' ? 's' : 'xs'
 }
 </script>
 

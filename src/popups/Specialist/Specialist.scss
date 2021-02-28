@@ -1,8 +1,4 @@
 .popup-specialist {
-  form {
-    overflow: hidden;
-  }
-
   &__back {
     margin-bottom: 16px;
   }
@@ -19,18 +15,7 @@
     margin-top: 24px;
   }
 
-  &__avatar {
-    margin: 24px 0;
-    text-align: center;
-
-    .ui-avatar {
-      p {
-        font-weight: 100;
-      }
-    }
-  }
-
   .ui-field + .ui-field {
-    margin-top: 24px;
+    margin-top: 20px;
   }
 }

@@ -7,6 +7,7 @@ import widgetsRoutes from '@/widgets/routes'
 /* middleware */
 import auth from './middleware/auth'
 import company from './middleware/company'
+import roleRedirect from './middleware/role-redirect'
 /* middleware end */
 
 const dynamicPage = (importer) => () => {
@@ -20,9 +21,13 @@ const CompanyCreate = dynamicPage(() => import('@/pages/Auth/CompanyCreate/Compa
 
 const DashboardPage = dynamicPage(() => import('@/pages/DashboardPage/DashboardPage.vue'))
 const SchedulePage = dynamicPage(() => import('@/pages/SchedulePage/SchedulePage.vue'))
-const Specialists = dynamicPage(() => import('@/pages/Specialists/Specialists.vue'))
+const SpecialistsPage = dynamicPage(() => import('@/pages/SpecialistsPage/SpecialistsPage.vue'))
 const Procedures = dynamicPage(() => import('@/pages/Procedures/Procedures.vue'))
 const TimeOff = dynamicPage(() => import('@/pages/TimeOff/TimeOff.vue'))
+
+const SpecialistPage = dynamicPage(() => import('@/pages/SpecialistPage/SpecialistPage.vue'))
+const SpecialistInfoPage = dynamicPage(() => import('@/pages/SpecialistPage/SpecialistInfoPage/SpecialistInfoPage.vue'))
+const SpecialistAppointmentsPage = dynamicPage(() => import('@/pages/SpecialistPage/SpecialistAppointmentsPage/SpecialistAppointmentsPage.vue'))
 
 const SmsSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/SmsSettingsPage/SmsSettingsPage.vue'))
 const WidgetSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/WidgetSettingsPage/WidgetSettingsPage.vue'))
@@ -48,22 +53,43 @@ const router = new Router({
   routes: [
     { path: '/', redirect: '/dashboard' },
 
-    { path: '/dashboard', name: 'dashboard', component: DashboardPage, meta: { layout: 'Dashboard', middleware: [auth, company] } },
+    { path: '/dashboard', name: 'dashboard', component: DashboardPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
 
     { path: '/login/', name: 'login', component: Login },
     { path: '/restore/', name: 'restore', component: Restore },
     { path: '/registration/', name: 'registration', component: Registration },
     { path: '/company/create/', name: 'companyCreate', component: CompanyCreate, meta: { middleware: [auth] } },
 
-    { path: '/schedule/', name: 'schedule', component: SchedulePage, meta: { layout: 'Dashboard', middleware: [auth, company] } },
-    { path: '/time-off/', name: 'timeOff', component: TimeOff, meta: { layout: 'Dashboard', middleware: [auth, company] } },
-    { path: '/procedures/', name: 'procedures', component: Procedures, meta: { layout: 'Dashboard', middleware: [auth, company] } },
-    { path: '/specialists/', name: 'specialists', component: Specialists, meta: { layout: 'Dashboard', middleware: [auth, company] } },
+    { path: '/schedule/', name: 'schedule', component: SchedulePage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
+    { path: '/time-off/', name: 'timeOff', component: TimeOff, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
+    { path: '/procedures/', name: 'procedures', component: Procedures, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
+    { path: '/specialists/', name: 'specialists', component: SpecialistsPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
+
+    {
+      path: '/specialist/:specialistId',
+      name: 'specialist',
+      component: SpecialistPage,
+      children: [
+        {
+          meta: { middleware: [auth, company, roleRedirect] },
+          path: 'info',
+          name: 'specialistInfo',
+          component: SpecialistInfoPage
+        },
+
+        {
+          meta: { middleware: [auth, company, roleRedirect] },
+          path: 'appointments',
+          name: 'specialistAppointments',
+          component: SpecialistAppointmentsPage
+        }
+      ]
+    },
 
     { path: '/settings/', name: 'settings', redirect: '/settings/company/' },
-    { path: '/settings/sms/', name: 'smsSettings', component: SmsSettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company] } },
-    { path: '/settings/widget/', name: 'widgetSettings', component: WidgetSettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company] } },
-    { path: '/settings/company/', name: 'companySettings', component: CompanySettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company] } },
+    { path: '/settings/sms/', name: 'smsSettings', component: SmsSettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
+    { path: '/settings/widget/', name: 'widgetSettings', component: WidgetSettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
+    { path: '/settings/company/', name: 'companySettings', component: CompanySettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
 
     ...widgetsRoutes,
 
@@ -72,17 +98,14 @@ const router = new Router({
 })
 
 router.beforeEach(async (to, from, next) => {
+  const context = { to, from, next, store }
+
   if (!to.meta.middleware) {
     return next()
   }
 
   for (const middleware of to.meta.middleware) {
-    await middleware({
-      to,
-      from,
-      next,
-      store
-    })
+    await middleware(context)
   }
 
   next()

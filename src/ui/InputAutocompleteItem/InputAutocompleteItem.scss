@@ -1,0 +1,64 @@
+@mixin ui-input-autocomplete-item_active {
+  > div {
+    background: $ui-black-10;
+
+    .ui-input-autocomplete-item__icon,
+    .ui-input-autocomplete-item__title,
+    .ui-input-autocomplete-item__sub-title {
+      color: $ui-black-100;
+    }
+  }
+}
+
+.ui-input-autocomplete-item {
+  padding: 2px 0;
+
+  &:first-child {
+    padding-top: 4px;
+  }
+
+  &:last-child {
+    padding-bottom: 4px;
+  }
+
+  &:active,
+  &_active {
+    @include ui-input-autocomplete-item_active;
+  }
+
+  @include ui-hover {
+    &:hover,
+    .ui-input-autocomplete__items:not(:hover) &_active {
+      @include ui-input-autocomplete-item_active;
+    }
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background var(--ui-transition-hover);
+  }
+
+  &__inner {
+    flex: 1;
+  }
+
+  &__icon {
+    margin-right: 8px;
+    color: $ui-black-60;
+    transition: color var(--ui-transition-hover);
+  }
+
+  &__title {
+    transition: color var(--ui-transition-hover);
+  }
+
+  &__sub-title {
+    margin-top: 4px;
+    color: $ui-black-80;
+    transition: color var(--ui-transition-hover);
+  }
+}

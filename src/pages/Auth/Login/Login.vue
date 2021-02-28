@@ -13,7 +13,7 @@
           size="m"
           responsive
         >
-          Войдите в систему чтобы получить доступ к своей компании
+          Войдите в систему, чтобы получить доступ к своей компании
         </UiText>
       </div>
 
@@ -159,8 +159,7 @@ export default class Login extends Vue {
       })
     } catch (err) {
       const serverErrors = [
-        err.code === 401 && { field: 'password', error: 'invalid' },
-        err.status === 400 && { field: 'phone', error: 'invalid' }
+        err.data.status === 400 && { field: 'password', error: 'invalid' }
       ].filter(Boolean)
 
       if (serverErrors.length > 0) {

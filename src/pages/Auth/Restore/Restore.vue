@@ -13,7 +13,7 @@
           size="m"
           responsive
         >
-          Введите номер телефона чтобы востановить доступ
+          Введите номер телефона, чтобы восстановить доступ
         </UiText>
       </div>
 
@@ -84,7 +84,7 @@
             size="l"
             theme="blue"
           >
-            {{ isValid ? 'Изменить пароль' : 'Востановить' }}
+            {{ isValid ? 'Изменить пароль' : 'Восстановить' }}
           </UiButton>
         </UiFormValidator>
       </form>
@@ -153,7 +153,7 @@ export default class Restore extends Vue {
       this.onBack()
     } catch (err) {
       const serverErrors = [
-        err.status === 403 && { field: 'code', error: 'invalid' }
+        err.data.status === 403 && { field: 'code', error: 'invalid' }
       ].filter(Boolean)
 
       if (serverErrors.length > 0) {
@@ -175,7 +175,7 @@ export default class Restore extends Vue {
       this.isValid = true
     } catch (err) {
       const serverErrors = [
-        err.status === 404 && { field: 'phone', error: 'invalid' }
+        err.data.status === 404 && { field: 'phone', error: 'invalid' }
       ].filter(Boolean)
 
       if (serverErrors.length > 0) {

@@ -43,22 +43,24 @@
       <template #inner="{ toggle }">
         <UiAvatar
           class="navbar__avatar"
+          size="s"
           :image="avatar"
           :name="profile.firstName"
-          size="m"
           @click.native="toggle"
         />
       </template>
 
       <UiDropdownList>
-        <UiDropdownItem
+        <UiText
+          tag="a"
+          href="#"
           class="navbar__logout"
           size="m"
           left-icon="outlined/sign-out"
-          @click.native="logout"
+          @click.native.prevent="logout"
         >
           Выйти
-        </UiDropdownItem>
+        </UiText>
       </UiDropdownList>
     </UiDropdownMenu>
   </div>

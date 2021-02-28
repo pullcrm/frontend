@@ -145,7 +145,7 @@ import 'dayjs/locale/uk'
 import dayjs from '@/utils/dayjs'
 
 import UiTag from '@/ui/Tag/Tag.vue'
-import UiMicroText from '@/ui/MicroText.vue'
+import UiMicroText from '@/ui/MicroText/MicroText.vue'
 
 import BaseWidgetLayout from '../../components/Layout.vue'
 
@@ -251,7 +251,7 @@ export default class BarbershopLondon extends Vue {
         name: 'BaseWidgetOrder'
       })
     } catch (err) {
-      if (err.status === 400) {
+      if (err.data.status === 400) {
         this.hasError = true
 
         return
@@ -338,13 +338,28 @@ export default class BarbershopLondon extends Vue {
 
     .ui-badge {
       margin: 0 4px 8px;
+      color: $ui-black-90;
+      background: $ui-black-20;
       cursor: pointer;
+
+      &.ui-badge_clickable {
+        @media (hover: hover) {
+          &:hover {
+            background: $ui-black-40;
+          }
+        }
+
+        &:active {
+          background: $ui-black-40;
+        }
+      }
 
       &._darked {
         background: #1e1e1e;
       }
 
       &._active {
+        color: $ui-black-100;
         background: $ui-yellow-brand;
       }
     }
@@ -370,17 +385,17 @@ export default class BarbershopLondon extends Vue {
   &__form {
     .ui-field {
       &__label {
-        position: static;
-        padding: 0;
-        color: $ui-black-70;
-        background: transparent;
-        transform: none;
+        color: $ui-black-60;
       }
 
       input,
       textarea {
         color: $ui-white;
         background: transparent;
+      }
+
+      & + .ui-field {
+        margin-top: 24px;
       }
     }
   }

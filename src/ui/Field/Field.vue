@@ -51,7 +51,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiMicroText from '@/ui/MicroText.vue'
+import UiMicroText from '@/ui/MicroText/MicroText.vue'
 
 @Component({
   components: {

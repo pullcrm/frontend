@@ -1,9 +1,6 @@
 <template>
   <div class="schedule-column">
-    <Specialist
-      class="schedule-column__specialist"
-      :specialist="specialist"
-    />
+    <slot name="append" />
 
     <div
       class="schedule-column__grid"
@@ -45,7 +42,6 @@ import Appointment from '@/components/Appointment/Appointment.vue'
 
 import TimeOff from './TimeOff.vue'
 import HourTile from './HourTile.vue'
-import Specialist from './Specialist.vue'
 import DropPlaceholder from './DropPlaceholder.vue'
 
 @Component({
@@ -69,7 +65,6 @@ import DropPlaceholder from './DropPlaceholder.vue'
   components: {
     TimeOff,
     HourTile,
-    Specialist,
     Appointment,
     DropPlaceholder
   }
@@ -94,7 +89,7 @@ export default class ScheduleColumn extends Vue {
 
   get gridStyles () {
     return {
-      gridTemplateColumns: '[start] 280px [end] 0',
+      gridTemplateColumns: '[start] 100% [end] 0',
       gridTemplateRows: this.gridTemplateRows
     }
   }
@@ -103,21 +98,8 @@ export default class ScheduleColumn extends Vue {
 
 <style lang="scss">
   .schedule-column {
-    min-width: #{$SCHEDULE_APPOINTMENT_WIDTH + 1px};
-    max-width: #{$SCHEDULE_APPOINTMENT_WIDTH + 1px};
-    border-right: 1px solid $ui-black-40;
-
-    &__specialist {
-      @include ui-shadow-4;
-
-      height: 60px;
-      border-bottom: 1px solid $ui-black-40;
-    }
-
     &__grid {
       display: grid;
-      grid-auto-rows: $SCHEDULE_APPOINTMENT_WIDTH;
-      grid-template-columns: [start] 0 [end] $SCHEDULE_APPOINTMENT_WIDTH;
       user-select: none;
     }
   }

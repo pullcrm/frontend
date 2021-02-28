@@ -12,6 +12,10 @@
     <Popups />
 
     <Toasts />
+
+    <PopperMenu
+      ref="popperMenu"
+    />
   </div>
 </template>
 
@@ -24,12 +28,14 @@ import BaseLayout from '@/Layout/base.vue'
 
 import Popups from '@/components/Popups/Popups.vue'
 import Toasts from '@/components/Toasts/Toasts.vue'
+import PopperMenu from '@/components/PopperMenu/PopperMenu.vue'
 
 @Component({
   components: {
     Popups,
     Toasts,
     BaseLayout,
+    PopperMenu,
     WidgetLayout,
     DashboardLayout
   },
@@ -46,9 +52,21 @@ import Toasts from '@/components/Toasts/Toasts.vue'
         ])
       }
     }
+  },
+
+  provide () {
+    return {
+      getPopperMenu: () => {
+        return this.$refs.popperMenu
+      }
+    }
   }
 })
 export default class App extends Vue {
+  $refs: {
+    popperMenu: PopperMenu
+  }
+
   get hasCompany () {
     return this.$store.getters['company/current']
   }
@@ -66,19 +84,21 @@ export default class App extends Vue {
 <style lang="scss">
   @import '@/scss/_reset.scss';
   @import '@/scss/_grid.scss';
+  @import '@/scss/_fonts.scss';
   @import '@/scss/styles.scss';
 
   body {
     --safe-area-inset-bottom: env(safe-area-inset-bottom, 0);
 
     color: $ui-black-100;
-    font-family: Roboto, sans-serif !important;
+    font-family: Inter, sans-serif !important;
   }
 
   #app {
     min-height: 80vh;
     color: $ui-black-100;
-    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-family: Inter, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;

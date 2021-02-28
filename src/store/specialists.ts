@@ -16,15 +16,11 @@ const actions = {
     commit('SET_SPECIALISTS', specialists)
   },
 
-  async onUploadAvatar ({ dispatch }, file) {
-    if (!file) return
-
+  async onUploadAvatar ({ dispatch }, form) {
     try {
-      const result = await dispatch('files/create', file, { root: true })
-
-      return result
+      return await this.$api.files.create(form)
     } catch (err) {
-      if (err.status === 400) {
+      if (err.data.status === 400) {
         await dispatch('toasts/show', {
           type: 'error',
           title: 'У файла большой размер, к загрузке доступны файлы меньше 500Кб'

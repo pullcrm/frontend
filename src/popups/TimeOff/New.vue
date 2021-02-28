@@ -38,7 +38,7 @@
           <UiSelect
             v-model="form.specialist"
             :options="specialists"
-            label="fullName"
+            label-key="fullName"
             placeholder="Выбрать сотрудника"
             :clearable="false"
             required
@@ -49,7 +49,7 @@
         <UiPopover
           class="time-off-new-popup__popover"
           size="m"
-          placement="top-center"
+          placement="bottom_start"
         >
           <template #default="{ toggle }">
             <UiField
@@ -59,13 +59,13 @@
               <UiInput
                 :value="date | formatDate('D MMMM')"
                 readonly
-                left-icon="outlined/pencil"
+                left-icon="outlined/calendar-blank"
               />
             </UiField>
           </template>
 
           <template #body>
-            <Calendar v-model="date" />
+            <UiCalendar v-model="date" />
           </template>
         </UiPopover>
 
@@ -92,7 +92,6 @@
           >
             <UiSelect
               v-model="form.startTime"
-              label=""
               :options="workingHours"
               required
               placeholder="Выбрать время начала"
@@ -105,7 +104,6 @@
           >
             <UiSelect
               v-model="form.endTime"
-              label=""
               :options="workingHoursForTimeEnd"
               required
               placeholder="Выбрать время конца"
@@ -118,7 +116,7 @@
           <UiButton
             type="submit"
             size="l"
-            theme="yellow"
+            theme="blue"
           >
             Добавить
           </UiButton>
@@ -134,11 +132,11 @@ import Component from 'vue-class-component'
 
 import { setTime } from '@/utils/date-time'
 
-import Calendar from '@/components/Calendar/Calendar.vue'
+import UiCalendar from '@/ui/Calendar/Calendar.vue'
 
 @Component({
   components: {
-    Calendar
+    UiCalendar
   },
 
   props: {
@@ -239,7 +237,7 @@ export default class TimeOffNew extends Vue {
     }
 
     .ui-field + .ui-field {
-      margin-top: 24px;
+      margin-top: 20px;
     }
   }
 </style>

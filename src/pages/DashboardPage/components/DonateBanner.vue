@@ -25,12 +25,6 @@
       >
         Помочь проекту
       </UiButton>
-
-      <!-- <UiButton
-        theme="gray"
-      >
-        Что это, и как это будет выглядеть
-      </UiButton> -->
     </div>
   </UiPanel>
 </template>

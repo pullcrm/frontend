@@ -1,7 +1,12 @@
 export const statusesDict = {
   IN_PROGRESS: 'В работе',
-  CANCELED: 'Отменен',
-  COMPLETED: 'Выполнен'
+  CANCELED: 'Отменено',
+  COMPLETED: 'Выполнено'
+}
+
+export const sourcesDict = {
+  ADMIN_PANEL: 'Админ панель',
+  WIDGET: 'Виджет'
 }
 
 export function normalizeAppointmentParams (submitParams) {

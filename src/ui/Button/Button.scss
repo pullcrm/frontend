@@ -1,8 +1,6 @@
 @import 'Button_size_32';
-@import 'Button_size_40';
+@import 'Button_size_44';
 @import 'Button_size_48';
-@import 'Button_theme_primary';
-@import 'Button_theme_primary-outlined';
 @import 'Button_theme_green';
 @import 'Button_theme_green-outlined';
 @import 'Button_theme_yellow';
@@ -10,8 +8,6 @@
 @import 'Button_theme_blue';
 @import 'Button_theme_info-outlined';
 @import 'Button_theme_danger-outlined';
-@import 'Button_theme_gray';
-@import 'Button_theme_white';
 @import 'Button_theme_transparent';
 
 .ui-button {
@@ -22,7 +18,6 @@
   vertical-align: baseline;
   background-color: transparent;
   border: 1px solid transparent;
-  border-radius: 8px;
   cursor: pointer;
   transition:
     color var(--ui-transition-hover),
@@ -54,7 +49,7 @@
   }
 
   &_size_m {
-    @include ui-button_size_40;
+    @include ui-button_size_44;
   }
 
   &_size_l {
@@ -69,10 +64,6 @@
     @include ui-button_theme_danger-outlined;
   }
 
-  &_theme_gray {
-    @include ui-button_theme_gray;
-  }
-
   &_theme_green {
     @include ui-button_theme_green;
   }
@@ -83,14 +74,6 @@
 
   &_theme_info-outlined {
     @include ui-button_theme_info-outlined;
-  }
-
-  &_theme_primary {
-    @include ui-button_theme_primary;
-  }
-
-  &_theme_white {
-    @include ui-button_theme_white;
   }
 
   &_theme_transparent {

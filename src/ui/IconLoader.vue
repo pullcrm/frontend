@@ -7,13 +7,7 @@
 </template>
 
 <script>
-import UiIcon from './Icon.vue'
-
 export default {
-  components: {
-    UiIcon
-  },
-
   inheritAttrs: false
 }
 </script>

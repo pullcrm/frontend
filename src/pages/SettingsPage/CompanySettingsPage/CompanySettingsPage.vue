@@ -16,7 +16,7 @@
           <UiAvatar
             :image="url"
             :name="company.name"
-            size="xl"
+            size="l"
             responsive
           />
         </template>
@@ -46,10 +46,9 @@
       >
         <UiSelect
           v-model="company.city"
-          label="name"
+          label-key="name"
           required
           :options="cities"
-          :clearable="false"
           placeholder="Выбрать город"
         />
       </UiField>
@@ -65,7 +64,7 @@
       >
         <UiSelect
           v-model="company.category"
-          label="name"
+          label-key="name"
           required
           :options="categories"
           :clearable="false"
@@ -235,7 +234,14 @@ export default class Settings extends Vue {
   }
 
   async onAvatar (file) {
-    const result = await this.$store.dispatch('files/create', file)
+    const userId = this.$store.state.company.profile.id
+
+    const formData = new FormData()
+
+    formData.append('file', file)
+    formData.append('userId', userId)
+
+    const result = await this.$api.files.create(formData)
 
     await this.$api.companies.update(this.company.id, {
       logoId: result.id

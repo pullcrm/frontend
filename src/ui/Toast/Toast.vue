@@ -2,23 +2,18 @@
   <div
     class="ui-toast"
     :class="[
-      `ui-toast_theme_${theme}`,
-      { 'ui-toast_closable': closable }
+      `ui-toast_theme_${theme}`
     ]"
     data-test="ui-toast"
   >
-    <div class="ui-toast__vertical" />
-
     <div
       v-if="leftIcon"
       class="ui-toast__prepend"
     >
-      <div class="ui-toast__icon">
-        <UiIcon
-          :name="leftIcon"
-          size="s"
-        />
-      </div>
+      <UiIcon
+        :name="leftIcon"
+        size="m"
+      />
     </div>
     <div
       v-else-if="$slots.prepend"
@@ -29,19 +24,12 @@
 
     <div class="ui-toast__content">
       <slot>
-        <UiToastTitle
-          v-if="title"
-          class="ui-toast__title"
+        <UiText
+          size="l"
+          responsive
         >
-          <span v-html="title" />
-        </UiToastTitle>
-
-        <UiToastText
-          v-if="text"
-          class="ui-toast__text"
-        >
-          <span v-html="text" />
-        </UiToastText>
+          {{ title }}
+        </UiText>
       </slot>
     </div>
 
@@ -51,18 +39,6 @@
     >
       <slot name="append" />
     </div>
-
-    <div
-      v-if="closable"
-      class="ui-toast__close"
-      data-test="ui-toast-close"
-      @click="onClose"
-    >
-      <UiIcon
-        name="outlined/x"
-        size="s"
-      />
-    </div>
   </div>
 </template>
 
@@ -70,15 +46,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiToastText from '../ToastText/ToastText.vue'
-import UiToastTitle from '../ToastTitle/ToastTitle.vue'
-
 @Component({
-  components: {
-    UiToastText,
-    UiToastTitle
-  },
-
   props: {
     theme: {
       type: String,
@@ -100,11 +68,6 @@ import UiToastTitle from '../ToastTitle/ToastTitle.vue'
       default: undefined
     },
 
-    closable: {
-      type: Boolean,
-      default: true
-    },
-
     leftIcon: {
       type: String,
       default: undefined
@@ -121,7 +84,6 @@ export default class UiToast extends Vue {
   readonly text?: string
   readonly title?: string
   readonly timeout?: number
-  readonly closable: boolean
   readonly leftIcon?: string
 
   mounted () {

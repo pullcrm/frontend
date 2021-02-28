@@ -2,8 +2,7 @@
   <div
     class="ui-avatar"
     :class="[
-      `ui-avatar_size_${size}`,
-      `ui-avatar_type_${type}`
+      `ui-avatar_size_${size}`
     ]"
   >
     <div
@@ -17,10 +16,20 @@
     </div>
 
     <div
+      v-else-if="icon"
+      class="ui-avatar__icon"
+    >
+      <UiIcon
+        :name="icon"
+        size="custom"
+      />
+    </div>
+
+    <div
       v-else
       class="ui-avatar__letter"
     >
-      <p>{{ firstLetter }}</p>
+      <p>{{ letter }}</p>
     </div>
   </div>
 </template>
@@ -36,14 +45,14 @@ import Component from 'vue-class-component'
       default: undefined
     },
 
-    name: {
+    icon: {
       type: String,
-      required: true
+      default: ''
     },
 
-    type: {
+    name: {
       type: String,
-      default: 'rounded'
+      default: undefined
     },
 
     size: {
@@ -53,22 +62,27 @@ import Component from 'vue-class-component'
   }
 })
 export default class ImagePreviewCircle extends Vue {
-  readonly type: 'circle' | 'rounded'
+  readonly icon: string
   readonly image: string
-  readonly name: string
+  readonly name?: string | undefined
   readonly size:
+    | 's'
     | 'm'
     | 'l'
-    | 'xl'
-    | 'xxl'
     | 'custom'
 
   get hasImage () {
     return Boolean(this.image)
   }
 
-  get firstLetter () {
-    return this.name[0]
+  get letter () {
+    const words = this.name.split(' ')
+
+    if (words.length > 1) {
+      return `${words[0][0]}${words[1][0]}`
+    }
+
+    return `${words[0][0]}${words[0][1]}`
   }
 }
 </script>

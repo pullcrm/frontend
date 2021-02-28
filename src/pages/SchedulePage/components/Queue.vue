@@ -6,7 +6,7 @@
     >
       <UiIcon
         name="outlined/x"
-        size="s"
+        size="m"
       />
     </div>
 
@@ -56,8 +56,9 @@ export default class Queue extends Vue {
 
   addAppointment () {
     this.$store.dispatch('popup/show', {
-      name: 'appointment-new',
+      name: 'appointment',
       props: {
+        type: 'new',
         isQueue: true
       }
     })
@@ -65,8 +66,11 @@ export default class Queue extends Vue {
 
   openAppointment (appointment) {
     this.$store.dispatch('popup/show', {
-      name: 'appointment-edit',
-      props: { appointment }
+      name: 'appointment',
+      props: {
+        type: 'edit',
+        appointment
+      }
     })
   }
 }
@@ -75,7 +79,7 @@ export default class Queue extends Vue {
 <style lang="scss">
   .schedule-page-queue {
     z-index: 13;
-    width: #{$SCHEDULE_APPOINTMENT_WIDTH + 8px};
+    width: #{$SCHEDULE_ROW_WIDTH + 8px};
 
     &__inner {
       @include hide-scrollbar;
@@ -85,7 +89,7 @@ export default class Queue extends Vue {
       right: 0;
       bottom: 0;
       z-index: inherit;
-      width: #{$SCHEDULE_APPOINTMENT_WIDTH + 8px};
+      width: #{$SCHEDULE_ROW_WIDTH + 8px};
       padding: 16px 4px;
       overflow-y: auto;
       background-color: $ui-white;

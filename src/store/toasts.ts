@@ -1,4 +1,5 @@
 import { generateId } from '@/utils/generate-id'
+import { getIconByType } from '@/utils/icon-by-type'
 
 function createState () {
   return {
@@ -13,10 +14,10 @@ const actions = {
         id: generateId(),
         type,
         props: {
-          text: payload.text,
           title: payload.title,
           theme: type,
-          timeout
+          timeout,
+          leftIcon: getIconByType(type)
         }
       }
 

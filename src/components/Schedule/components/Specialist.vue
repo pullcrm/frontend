@@ -9,8 +9,7 @@
       class="schedule-column-specialist__avatar"
       :image="avatar"
       :name="user.firstName"
-      size="m"
-      type="rounded"
+      size="s"
     />
 
     <div class="schedule-column-specialist__info">
@@ -38,29 +37,33 @@
       <template #inner="{ toggle }">
         <UiIcon
           class="schedule-column-specialist__icon"
-          size="s"
+          size="m"
           name="outlined/dots-three-vertical"
           @click.native="toggle"
         />
       </template>
 
       <UiDropdownList>
-        <UiDropdownItem
+        <UiText
+          tag="a"
+          href="#"
           size="m"
           left-icon="outlined/pencil"
-          @click.native="openPopup"
+          @click.native.prevent="openPopup"
         >
           Редактировать
-        </UiDropdownItem>
+        </UiText>
 
-        <UiDropdownItem
+        <UiText
           v-if="isClosedDay === false"
+          tag="a"
+          href="#"
           size="m"
           left-icon="outlined/prohibit"
-          @click.native="onCloseDay"
+          @click.native.prevent="onCloseDay"
         >
           Закрыть запись <br> на этот день
-        </UiDropdownItem>
+        </UiText>
       </UiDropdownList>
     </UiDropdownMenu>
   </div>
@@ -70,6 +73,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { COMPLETED } from '@/constants/appointment'
 import { START_TIME_OF_DAY, END_TIME_OF_DAY } from '@/constants'
 
 import { setTime } from '@/utils/date-time'
@@ -112,7 +116,7 @@ export default class Specialist extends Vue {
 
   get money () {
     return this.appointments
-      .filter(({ status }) => status === 'COMPLETED')
+      .filter(({ status }) => status === COMPLETED)
       .reduce((sum, { total }) => (sum + total), 0)
   }
 
@@ -131,10 +135,12 @@ export default class Specialist extends Vue {
     await this.$store.dispatch('schedule/fetchTimeOffs')
   }
 
-  openPopup () {
-    this.$store.dispatch('popup/show', {
-      name: 'specialist-edit',
-      props: { specialist: this.specialist }
+  async openPopup () {
+    await this.$router.push({
+      name: 'specialistInfo',
+      params: {
+        specialistId: this.specialist.id
+      }
     })
   }
 }

@@ -41,7 +41,7 @@
 
       <UiButton
         type="submit"
-        theme="yellow"
+        theme="blue"
         :loading="isLoading"
       >
         Авторизоваться в smsc
@@ -78,7 +78,7 @@ export default class ProcedureEdit extends Vue {
 
       this.$emit('close')
     } catch (err) {
-      if (err.status === 404) {
+      if (err.data.status === 404) {
         this.$store.dispatch('toasts/show', {
           type: 'error',
           title: 'Введены не верные данные'
@@ -111,7 +111,7 @@ export default class ProcedureEdit extends Vue {
     }
 
     .ui-field + .ui-field {
-      margin-top: 24px;
+      margin-top: 20px;
     }
   }
 </style>

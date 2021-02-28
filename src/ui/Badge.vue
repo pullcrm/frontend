@@ -16,7 +16,7 @@
     >
       <UiIcon
         :name="leftIcon"
-        size="inherit"
+        size="xs"
       />
     </div>
     <div
@@ -31,7 +31,7 @@
         <UiIcon
           v-if="icon"
           :name="icon"
-          size="inherit"
+          size="xs"
         />
       </slot>
     </div>
@@ -42,7 +42,7 @@
     >
       <UiIcon
         :name="rightIcon"
-        size="inherit"
+        size="xs"
       />
     </div>
     <div
@@ -128,7 +128,7 @@ export default class Badge extends Vue {
 
     height: 16px;
     padding: 0 6px;
-    font-weight: bold;
+    font-weight: 500;
     text-transform: uppercase;
 
     .ui-badge__prepend {
@@ -159,7 +159,7 @@ export default class Badge extends Vue {
 
     height: 24px;
     padding: 0 8px;
-    font-weight: bold;
+    font-weight: 500;
     text-transform: uppercase;
 
     .ui-badge__prepend {
@@ -190,7 +190,7 @@ export default class Badge extends Vue {
 
     height: 32px;
     padding: 0 16px;
-    font-weight: bold;
+    font-weight: 500;
     text-transform: uppercase;
 
     .ui-badge__prepend {
@@ -220,7 +220,7 @@ export default class Badge extends Vue {
     display: inline-flex;
     align-items: center;
     vertical-align: baseline;
-    border-radius: 100px;
+    border-radius: 6px;
 
     &_clickable {
       cursor: pointer;
@@ -228,18 +228,18 @@ export default class Badge extends Vue {
     }
 
     &_theme_primary {
-      color: $ui-black-90;
-      background: $ui-black-20;
+      color: $ui-white;
+      background: $ui-brand-blue;
 
       &.ui-badge_clickable {
         @media (hover: hover) {
           &:hover {
-            background: $ui-black-40;
+            background: $ui-blue-hover-15;
           }
         }
 
         &:active {
-          background: $ui-black-40;
+          background: $ui-blue-hover-15;
         }
       }
     }

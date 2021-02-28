@@ -13,7 +13,7 @@
           size="m"
           responsive
         >
-          Пройдите регистрацию чтобы получить доступ к своей компонии
+          Пройдите регистрацию, чтобы получить доступ к своей компании
         </UiText>
       </div>
 
@@ -89,7 +89,7 @@
             class="auth-page-registration__policy"
             size="s"
           >
-            Нажимая на кнопку я соглашаюсь с <a href="#">Пользовательским соглашением</a> и <a href="#">Политикой обработки персональных данных</a>
+            Нажимая на кнопку, я соглашаюсь с <a href="#">Пользовательским соглашением</a> и <a href="#">Политикой обработки персональных данных</a>
           </UiText>
 
           <UiButton
@@ -166,7 +166,7 @@ export default class Home extends Vue {
       return this.confirmation()
     } catch (err) {
       const serverErrors = [
-        err.status === 500 && { field: 'phone', error: 'invalid' }
+        err.data.status === 500 && { field: 'phone', error: 'invalid' }
       ].filter(Boolean)
 
       if (serverErrors.length > 0) {

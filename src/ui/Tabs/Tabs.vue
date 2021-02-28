@@ -5,7 +5,7 @@
       :key="index"
       :tab="tab"
       :is-active="value === tab.name"
-      @click="$emit('input', tab)"
+      @click.native="$emit('input', tab)"
     />
   </div>
 </template>
@@ -14,7 +14,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiTabLink from './TabItem.vue'
+import UiTabLink, { ITab } from './TabItem.vue'
 
 @Component({
   components: {
@@ -34,7 +34,7 @@ import UiTabLink from './TabItem.vue'
   }
 })
 export default class Tabs extends Vue {
-  readonly tabs: string[]
+  readonly tabs: ITab[]
 }
 </script>
 
@@ -43,9 +43,7 @@ export default class Tabs extends Vue {
     @include hide-scrollbar;
 
     display: flex;
-    padding-bottom: 16px;
     overflow-x: auto;
     overflow-y: hidden;
-    border-bottom: 1px solid $border-color;
   }
 </style>

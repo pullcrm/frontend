@@ -1,0 +1,27 @@
+.specialists-page {
+  &__tabs {
+    margin-bottom: 24px;
+  }
+}
+
+.specialists-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+
+  &__right {
+    display: flex;
+  }
+
+  &__search {
+    min-width: 265px;
+    margin-right: 24px;
+  }
+
+  @media (max-width: $ui-tablet - 1px) {
+    &__right {
+      display: none;
+    }
+  }
+}

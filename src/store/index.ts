@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 
 import sms from './sms'
 import auth from './auth'
-import files from './files'
 import popup from './popup'
 import toasts from './toasts'
 import widget from './widget'
@@ -27,7 +26,6 @@ export default new Vuex.Store<IState>({
   modules: {
     sms,
     auth,
-    files,
     popup,
     toasts,
     widget,

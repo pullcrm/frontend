@@ -19,7 +19,7 @@
         </template>
 
         <template #body>
-          <Calendar v-model="date" />
+          <UiCalendar v-model="date" />
         </template>
       </UiPopover>
 
@@ -87,11 +87,11 @@ import Component from 'vue-class-component'
 
 import dayjs from '@/utils/dayjs'
 
-import Calendar from '@/components/Calendar/Calendar.vue'
+import UiCalendar from '@/ui/Calendar/Calendar.vue'
 
 @Component({
   components: {
-    Calendar
+    UiCalendar
   }
 })
 export default class Header extends Vue {
@@ -118,10 +118,6 @@ export default class Header extends Vue {
     return dayjs(this.date).isToday()
   }
 
-  get isTomorrow () {
-    return dayjs(this.date).isTomorrow()
-  }
-
   get queue () {
     return this.$store.state.appointments.queue
   }
@@ -131,13 +127,16 @@ export default class Header extends Vue {
   }
 
   setDateTomorrow () {
-    if (this.isTomorrow) return
-
     this.date = dayjs(new Date()).add(1, 'day').toDate()
   }
 
   addAppointment () {
-    this.$store.dispatch('popup/show', 'appointment-new')
+    this.$store.dispatch('popup/show', {
+      name: 'appointment',
+      props: {
+        type: 'new'
+      }
+    })
   }
 
   toggleQueue () {

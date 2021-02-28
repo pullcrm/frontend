@@ -1,0 +1,59 @@
+@mixin grid-day {
+  display: flex;
+  flex-basis: calc(#{100% / 7} - var(--ui-grid-gap));
+  flex-grow: 0;
+  // IE 11 ignores an calc() function used in flex shorthand declarations
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  max-width: calc(#{100% / 7} - var(--ui-grid-gap));
+  height: 24px;
+  margin-right: calc(var(--ui-grid-gap) / 2);
+  margin-bottom: calc(var(--ui-grid-gap) + 4px);
+  margin-left: calc(var(--ui-grid-gap) / 2);
+}
+
+.ui-calendar {
+  width: 224px;
+
+  &__days-of-month {
+    @include ui-grid-gap(8px);
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  &__month,
+  &__days-of-week {
+    margin-bottom: 8px;
+  }
+}
+
+.ui-calendar-placeholder-day {
+  @include grid-day;
+}
+
+.ui-calendar-day {
+  @include grid-day;
+
+  color: $ui-black-100;
+  background-color: rgba($ui-black-10, 0);
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $ui-black-20;
+  }
+
+  &._is-today {
+    background-color: $ui-black-20;
+  }
+
+  &._is-active {
+    color: $ui-white;
+    background-color: $ui-brand-blue;
+  }
+}

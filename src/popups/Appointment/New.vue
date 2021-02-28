@@ -1,96 +1,51 @@
 <template>
-  <UiPopup
-    class="appointment-new"
-    @close="$emit('close')"
-  >
+  <div class="appointment-popup__inner">
+    <AppointmentHeader
+      class="appointment-popup__header"
+      title="Новая запись"
+      :status.sync="form.status"
+      :is-queue.sync="form.isQueue"
+    />
+
     <form @submit.prevent="submit">
-      <Tags
-        class="appointment-new__tags"
-        :queue.sync="form.isQueue"
-        :has-remind-sms.sync="form.hasRemindSMS"
-        :has-creation-sms.sync="form.hasCreationSMS"
-        is-create
-      />
-
-      <UiTitle
-        class="appointment-new__title"
-        size="s"
-      >
-        Добавить запись
-      </UiTitle>
-
       <UiFormValidator
         v-slot="{ resetFieldError }"
         ref="formValidator"
-        class="appointment-new-fields"
         :validations="validations"
       >
-        <UiField
-          label="Телефон"
-        >
-          <UiInput
-            v-model="form.phone"
-            mask="38 (###) #### ###"
-            placeholder="Введите ваш номер телефона"
-            required
-            @input="resetFieldError('name')"
-          />
-        </UiField>
+        <AppointmentClientSimple
+          :name.sync="form.fullName"
+          :phone.sync="form.phone"
+        />
 
-        <UiField
-          label="Имя и фамилия"
-        >
-          <UiInput
-            v-model="form.fullName"
-            placeholder="Василь Петрович"
-            required
-            @input="resetFieldError('name')"
-          />
-        </UiField>
+        <AppointmentSpecialistSelect
+          class="appointment-popup__specialist"
+          :options="specialists"
+          :specialist.sync="form.specialist"
+          @resetFieldError="resetFieldError"
+        />
 
-        <UiField
-          label="Сотрудник"
-        >
-          <UiSelect
-            v-model="form.specialist"
-            :options="specialists"
-            label="fullName"
-            placeholder="Выбрать исполнителя"
-            :clearable="false"
-            required
-            @input="resetFieldError('specialist')"
-          />
-        </UiField>
+        <AppointmentProceduresSelect
+          class="appointment-popup__procedures"
+          :total.sync="form.total"
+          :options="procedures"
+          :procedures.sync="form.procedures"
+          @resetFieldError="resetFieldError"
+        />
 
-        <UiField
-          label="Список услуг"
-        >
-          <UiSelect
-            v-model="form.procedures"
-            :options="procedures"
-            label="name"
-            placeholder="Выбрать услуги"
-            multiple
-            required
-            @input="resetFieldError('procedures'), calculateTotal()"
-          />
-        </UiField>
-
-        <UiField
+        <AppointmentDateTime
           v-if="form.isQueue === false"
-          label="Время начала"
-        >
-          <UiSelect
-            v-model="form.startTime"
-            label=""
-            :options="workingHours"
-            placeholder="Выбрать время начала"
-            @input="resetFieldError('timeStart')"
-          />
-        </UiField>
+          class="appointment-popup__date-time"
+          :date.sync="form.date"
+          :duration="duration"
+          :start-at.sync="form.startTime"
+          :working-hours="workingHours"
+          @resetFieldError="resetFieldError"
+        />
 
         <UiField
-          label="Дополнительная информация"
+          class="appointment-popup__comment"
+          label="Комментарий"
         >
           <UiInput
             v-model="form.description"
@@ -99,41 +54,87 @@
             @input="resetFieldError('description')"
           />
         </UiField>
+
+        <AppointmentNotify
+          v-if="isSmsAuthorize"
+          class="appointment-popup__notify"
+          type="new"
+          :has-remind-sms.sync="form.hasRemindSMS"
+          :has-creation-sms.sync="form.hasCreationSMS"
+        />
+
+        <AppointmentAdditionalSettings
+          class="appointment-popup__additional-settings"
+          type="new"
+          :source.sync="form.source"
+        />
       </UiFormValidator>
 
-      <Total
-        :date.sync="form.date"
-        :total.sync="form.total"
-        :start-time.sync="form.startTime"
-        :procedures="form.procedures || []"
-      />
-
-      <UiButton
-        class="appointment-new__button"
-        type="submit"
-        size="l"
-        theme="blue"
-        :loading="isLoading"
+      <div
+        id="popup-actions"
+        class="appointment-popup__actions"
       >
-        Добавить запись
-      </UiButton>
+        <UiButton
+          type="submit"
+          size="m"
+          theme="blue"
+          :loading="isLoading"
+        >
+          Добавить запись
+        </UiButton>
+      </div>
+
+      <FixedPanel
+        :treshold="0.25"
+        show-when-invisible="#popup-actions"
+        class="appointment-popup__fixed-button"
+      >
+        <UiContainer narrow>
+          <UiButton
+            type="submit"
+            size="m"
+            theme="blue"
+            :loading="isLoading"
+          >
+            Добавить запись
+          </UiButton>
+        </UiContainer>
+      </FixedPanel>
     </form>
-  </UiPopup>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { SOURCE_DASHBOARD } from '@/constants'
+import { IN_PROGRESS } from '@/constants/appointment'
+
+import { getProceduresDuration } from '@/logics/appointment'
+
 import { toDate } from '@/utils/date-time'
 
-import Tags from './components/Tags.vue'
-import Total from './components/Total.vue'
+import FixedPanel from '@/components/FixedPanel/FixedPanel.vue'
+
+import AppointmentHeader from './components/Header.vue'
+import AppointmentNotify from './components/Notify.vue'
+import AppointmentDateTime from './components/DateTime.vue'
+import AppointmentClientSimple from './components/ClientSimple.vue'
+import AppointmentSpecialistSelect from './components/SpecialistSelect.vue'
+import AppointmentProceduresSelect from './components/ProceduresSelect.vue'
+import AppointmentAdditionalSettings from './components/AdditionalSettings.vue'
 
 @Component({
   components: {
-    Tags,
-    Total
+    FixedPanel,
+    AppointmentHeader,
+    AppointmentNotify,
+    AppointmentDateTime,
+    AppointmentClientSimple,
+    AppointmentSpecialistSelect,
+    AppointmentProceduresSelect,
+    AppointmentAdditionalSettings
   },
 
   props: {
@@ -185,6 +186,8 @@ export default class AppointmentNew extends Vue {
     date: toDate(this.$store.state.schedule.date),
     total: 0,
     phone: '',
+    source: SOURCE_DASHBOARD,
+    status: IN_PROGRESS,
     isQueue: this.isQueue,
     fullName: '',
     startTime: this.time,
@@ -193,6 +196,10 @@ export default class AppointmentNew extends Vue {
     description: '',
     hasRemindSMS: this.$store.getters['sms/settings']?.hasRemindSMS,
     hasCreationSMS: this.$store.getters['sms/settings']?.hasCreationSMS
+  }
+
+  get isSmsAuthorize () {
+    return this.$store.getters['sms/isAuthorize']
   }
 
   get validations () {
@@ -218,22 +225,20 @@ export default class AppointmentNew extends Vue {
   get duration () {
     const procedures = this.form.procedures || []
 
-    return procedures.reduce((result, procedure) => {
-      return result + procedure.duration
-    }, 0)
+    return getProceduresDuration({ procedures })
   }
 
   mounted () {
     this.fetchAvailableTime()
   }
 
-  calculateTotal () {
-    const procedures = this.form.procedures || []
-
-    this.form.total = procedures.reduce((sum, { price }) => (sum + price), 0) ?? 0
-  }
-
   async submit () {
+    const isValid = await this.validate()
+
+    if (!isValid) {
+      return
+    }
+
     try {
       this.isLoading = true
 
@@ -267,26 +272,20 @@ export default class AppointmentNew extends Vue {
       this.form.startTime = null
     }
   }
+
+  async validate () {
+    const { procedures } = this.form
+
+    if (procedures.length === 0) {
+      await this.$store.dispatch('toasts/show', {
+        type: 'error',
+        title: 'Нужно выбрать услуги'
+      })
+
+      return false
+    }
+
+    return true
+  }
 }
 </script>
-
-<style lang="scss">
-  .appointment-new {
-    &__tags {
-      margin-bottom: 16px;
-    }
-
-    &__title {
-      margin-bottom: 24px;
-    }
-
-    &__button {
-      width: 100%;
-      margin-top: 16px;
-    }
-
-    .ui-field + .ui-field {
-      margin-top: 24px;
-    }
-  }
-</style>

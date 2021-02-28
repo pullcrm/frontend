@@ -38,7 +38,7 @@
           <UiSelect
             v-model="form.specialist"
             :options="specialists"
-            label="fullName"
+            label-key="fullName"
             placeholder="Выбрать сотрудника"
             :clearable="false"
             required
@@ -49,7 +49,7 @@
         <UiPopover
           class="time-off-edit-popup__popover"
           size="m"
-          placement="top-center"
+          placement="bottom_start"
         >
           <template #default="{ toggle }">
             <UiField
@@ -65,7 +65,7 @@
           </template>
 
           <template #body>
-            <Calendar v-model="date" />
+            <UiCalendar v-model="date" />
           </template>
         </UiPopover>
 
@@ -92,7 +92,6 @@
           >
             <UiSelect
               v-model="form.startTime"
-              label=""
               :options="workingHours"
               required
               placeholder="Выбрать время начала"
@@ -105,7 +104,6 @@
           >
             <UiSelect
               v-model="form.endTime"
-              label=""
               :options="workingHoursForTimeEnd"
               required
               placeholder="Выбрать время конца"
@@ -118,7 +116,7 @@
           <UiButton
             type="submit"
             size="l"
-            theme="yellow"
+            theme="blue"
           >
             Сохранить
           </UiButton>
@@ -144,11 +142,11 @@ import { setTime, toDate } from '@/utils/date-time'
 
 import { isCloseDay } from '@/logics/time-offs'
 
-import Calendar from '@/components/Calendar/Calendar.vue'
+import UiCalendar from '@/ui/Calendar/Calendar.vue'
 
 @Component({
   components: {
-    Calendar
+    UiCalendar
   },
 
   props: {
@@ -290,7 +288,7 @@ export default class TimeOffEdit extends Vue {
     }
 
     .ui-field + .ui-field {
-      margin-top: 24px;
+      margin-top: 20px;
     }
   }
 </style>

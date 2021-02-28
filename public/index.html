@@ -5,12 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 
+    <title>Онлайн запись клиентов - pullcrm</title>
+
+    <link rel="canonical" href="https://pullcrm.com/">
+    <link rel="manifest" href="/manifest.json">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Pullcrm">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="apple-mobile-web-app-title" content="Pullcrm">
+    <link rel="icon" sizes="192x192" href="/img/icons/android-chrome-192x192.png">
+    <link rel="apple-touch-icon" href="/img/icons/android-chrome-192x192.png">
+    <meta name="msapplication-TileImage" content="/img/icons/msapplication-icon-144x144">
+    <meta name="msapplication-TileColor" content="#333">
+    <meta name="theme-color" content="#333">
+
+    <link rel="icon" href="/img/icons/android-chrome-512x512.png" sizes="512x512">
+    <link rel="icon" href="/img/icons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" href="/img/icons/msapplication-icon-144x144.png" sizes="144x144">
+    <link rel="icon" href="/img/icons/android-launchericon-96-96.png" sizes="96x96">
+    <link rel="icon" href="/img/icons/android-maskableicon-96-96.png" sizes="96x96">
+    <link rel="icon" href="/img/icons/android-launchericon-72-72.png" sizes="72x72">
+    <link rel="icon" href="/img/icons/android-maskableicon-72-72.png" sizes="72x72">
+    <link rel="icon" href="/img/icons/android-launchericon-48-48.png" sizes="48x48">
+    <link rel="icon" href="/img/icons/android-maskableicon-48-48.png" sizes="48x48">
+
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <!-- <link rel="apple-touch-startup-image" href="<%= BASE_URL %>static/logo.png"> -->
 
-    <link rel="icon" href="<%= BASE_URL %>static/logo-big.svg">
-
-    <title>Онлайн запись клиентов - pullcrm</title>
   </head>
   <body>
     <noscript>
@@ -19,4 +42,17 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js', { scope: '/' })
+        // .then(function (registration) {
+        //   console.log('Service Worker Registered');
+        // });
+
+      // navigator.serviceWorker.ready.then(function (registration) {
+      //   console.log('Service Worker Ready');
+      // });
+    }
+  </script>
 </html>

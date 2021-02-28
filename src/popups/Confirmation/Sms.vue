@@ -44,7 +44,7 @@
           class="popup-sms-confirmation__button"
           type="submit"
           size="l"
-          theme="yellow"
+          theme="blue"
         >
           Подтвердить
         </UiButton>
@@ -109,7 +109,7 @@ export default class SmsConfirmation extends Vue {
       this.$store.commit('popup/SET_SMS_CONFIRMATION', null)
     } catch (err) {
       const serverErrors = [
-        err.status === 403 && { field: 'code', error: 'invalid' }
+        err.data.status === 403 && { field: 'code', error: 'invalid' }
       ].filter(Boolean)
 
       if (serverErrors.length > 0) {

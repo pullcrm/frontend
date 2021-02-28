@@ -6,6 +6,17 @@
     display: flex;
   }
 
+  &__column {
+    width: 100%;
+    min-width: #{$SCHEDULE_ROW_WIDTH + 1px} /* 1px border */;
+    max-width: 500px;
+    border-left: 1px solid $ui-black-40;
+
+    &:first-child {
+      border-left: none;
+    }
+  }
+
   &__inner {
     position: relative;
     flex: 1;
@@ -16,6 +27,13 @@
   &__timeline {
     margin-top: 60px;
     margin-right: 8px;
+  }
+
+  &__specialist {
+    @include ui-shadow-4;
+
+    height: 60px;
+    border-bottom: 1px solid $ui-black-40;
   }
 
   @media (max-width: $ui-laptop - 1px) {

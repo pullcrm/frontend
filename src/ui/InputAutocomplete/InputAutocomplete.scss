@@ -1,0 +1,27 @@
+.ui-input-autocomplete {
+  position: relative;
+
+  &__not-found {
+    padding: 12px;
+  }
+
+  &__history {
+    padding: 12px 12px 8px;
+    color: $ui-black-80;
+  }
+
+  &__body {
+    @include ui-shadow-16;
+    @include ui-scrollbar;
+
+    position: absolute;
+    top: calc(100% + 8px);
+    z-index: 8;
+    width: 100%;
+    min-width: 256px;
+    padding: 0 4px;
+    overflow-y: auto;
+    background-color: $ui-white;
+    border-radius: 10px;
+  }
+}

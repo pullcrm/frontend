@@ -39,11 +39,11 @@ export default class Timeline extends Vue {
       align-items: center;
       justify-content: center;
       width: 100%;
-      height: $SCHEDULE_APPOINTMENT_HEIGHT;
+      height: $SCHEDULE_ROW_HEIGHT;
       color: $ui-black-100;
 
       &:not(:last-child) {
-        margin-bottom: $SCHEDULE_APPOINTMENT_HEIGHT;
+        margin-bottom: $SCHEDULE_ROW_HEIGHT;
       }
     }
   }

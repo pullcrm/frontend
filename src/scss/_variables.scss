@@ -1,5 +1,5 @@
-$SCHEDULE_APPOINTMENT_WIDTH: 280px;
-$SCHEDULE_APPOINTMENT_HEIGHT: 30px;
+$SCHEDULE_ROW_WIDTH: 280px;
+$SCHEDULE_ROW_HEIGHT: 30px;
 
 $ui-navbar-desktop-width: 56px;
 
@@ -10,21 +10,17 @@ $ui-gray-brand: #f8f8fb;
 $ui-brand-blue: #3c8aff;
 $ui-brand-green: #4dbd71;
 
-$ui-orange-brand: #ff7938; // ?
-
 $ui-white: #fff;
 
 // Black
 $ui-black-100: #1d1d21;
-$ui-black-90: #3b4045;
-$ui-black-80: #69767c;
-$ui-black-70: #a6a6a6; //?
-$ui-black-60: #949ea3;
-$ui-black-50: #b5bcc0;
-$ui-black-40: #dbdee0;
-$ui-black-30: #e8e9f6;
-$ui-black-20: #eaedef;
-$ui-black-10: #f9fafa;
+$ui-black-90: #3b3b45;
+$ui-black-80: #6f6f76;
+$ui-black-60: #9797a0;
+$ui-black-50: #b6b6bf;
+$ui-black-40: #dbdbe0;
+$ui-black-20: #eaeaef;
+$ui-black-10: #f8f8fb;
 $ui-black-hover-15: #474747;
 $ui-black-hover-25: #666;
 

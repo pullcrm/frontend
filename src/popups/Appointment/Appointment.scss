@@ -1,0 +1,53 @@
+.appointment-popup {
+  &__back {
+    margin-bottom: 16px;
+  }
+
+  &__header {
+    margin-bottom: 24px;
+  }
+
+  &__notify,
+  &__comment,
+  &__date-time,
+  &__specialist,
+  &__procedures,
+  &__additional-settings {
+    margin-top: 20px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+
+    .ui-button {
+      width: 100%;
+      margin-top: 16px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &__fixed-button {
+    @include ui-shadow-4-inverse;
+
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 12px 0;
+    padding-bottom: calc(12px + var(--safe-area-inset-bottom));
+    background: $ui-white;
+
+    .ui-button {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: $ui-mobile-portrait - 1px) {
+    padding: 24px 0;
+  }
+}
