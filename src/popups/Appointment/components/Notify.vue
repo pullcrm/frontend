@@ -38,7 +38,7 @@
             size="m"
             responsive
           >
-            Напомнить о записи за 45 мин до начала
+            Напомнить о записи за {{ remindTime | minutesToTime }} до начала
           </UiText>
         </template>
       </UiSwitch>
@@ -72,6 +72,12 @@ export default class Notify extends Vue {
   readonly type!: string
   readonly hasRemindSms!: boolean
   readonly hasCreationSms!: boolean
+
+  settings = this.$store.getters['sms/settings']
+
+  get remindTime () {
+    return this.settings.remindSMSMinutes
+  }
 }
 </script>
 
