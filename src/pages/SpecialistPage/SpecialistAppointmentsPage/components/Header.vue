@@ -144,5 +144,11 @@ export default class Header extends Vue {
         }
       }
     }
+
+    @include ui-mobile-only {
+      &__tomorrow {
+        display: none;
+      }
+    }
   }
 </style>
