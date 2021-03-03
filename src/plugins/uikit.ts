@@ -29,3 +29,4 @@ Vue.component('UiMultiSelect', require('@/ui/MultiSelect/MultiSelect.vue').defau
 Vue.component('UiInputAutocomplete', require('@/ui/InputAutocomplete/InputAutocomplete.vue').default)
 Vue.component('UiDropdownMenu', require('@/ui/DropdownMenu/DropdownMenu.vue').default)
 Vue.component('UiDropdownList', require('@/ui/DropdownMenu/DropdownList.vue').default)
+Vue.component('UiCalendar', require('@/ui/Calendar/Calendar.vue').default)

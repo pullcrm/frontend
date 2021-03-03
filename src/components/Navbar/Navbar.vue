@@ -30,10 +30,10 @@
       icon="solid/list"
     />
 
-    <NavbarItem
-      :to="{ name: 'analyticsAppointments' }"
+    <!-- <NavbarItem
+      :to="{ name: 'analytics' }"
       icon="solid/chart-bar-fill"
-    />
+    /> -->
 
     <NavbarItem
       :to="{ name: 'settings' }"
@@ -45,13 +45,12 @@
     <UiDropdownMenu
       placement="right"
     >
-      <template #inner="{ toggle }">
+      <template #inner>
         <UiAvatar
           class="navbar__avatar"
           size="s"
           :image="avatar"
           :name="profile.firstName"
-          @click.native="toggle"
         />
       </template>
 

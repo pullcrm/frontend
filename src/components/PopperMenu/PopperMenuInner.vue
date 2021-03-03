@@ -10,7 +10,7 @@
       ref="popover"
       size="m"
       :placement="placement"
-      :closed-outside="false"
+      :clickable="false"
     >
       <template #body>
         <UiDropdownList

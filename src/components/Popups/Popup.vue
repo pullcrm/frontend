@@ -52,10 +52,24 @@ export default class Popup extends Vue {
     return this.$store.state.popup.activeProps
   }
 
+  mounted () {
+    window.addEventListener('keyup', this.keyPress, { passive: true })
+
+    this.$once('hook:beforeDestroy', () => {
+      window.removeEventListener('keyup', this.keyPress)
+    })
+  }
+
   onClose () {
     this.$store.dispatch('popup/hide', this.name)
 
     this.$emit('close')
+  }
+
+  keyPress ({ key }) {
+    if (this.isVisible && (key === 'Escape' || key === 'Esc')) {
+      this.onClose()
+    }
   }
 }
 </script>

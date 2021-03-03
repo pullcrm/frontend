@@ -74,9 +74,3 @@ export default class Numbers extends Vue {
   ]
 }
 </script>
-
-<style lang="scss">
-  .analytics-page-appointments-numbers {
-
-  }
-</style>

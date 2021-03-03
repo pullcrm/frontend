@@ -91,6 +91,7 @@ const router = new Router({
     { path: '/settings/widget/', name: 'widgetSettings', component: WidgetSettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
     { path: '/settings/company/', name: 'companySettings', component: CompanySettingsPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
 
+    { path: '/analytics/', name: 'analytics', redirect: '/analytics/appointments/' },
     { path: '/analytics/appointments/', name: 'analyticsAppointments', component: AnalyticsAppointmentsPage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
     { path: '/analytics/finance/', name: 'analyticsFinance', component: AnalyticsFinancePage, meta: { layout: 'Dashboard', middleware: [auth, company, roleRedirect] } },
 

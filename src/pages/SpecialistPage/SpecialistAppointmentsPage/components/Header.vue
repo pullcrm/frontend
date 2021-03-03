@@ -5,18 +5,15 @@
         size="m"
         placement="bottom_start"
       >
-        <template #default="{ toggle }">
-          <UiButton
-            class="specialist-appointments-page-header__calendar"
-            size="m"
-            theme="transparent"
-            left-icon="outlined/calendar"
-            right-icon="solid/caret-down-fill"
-            @click.native.prevent="toggle"
-          >
-            {{ date | formatDate('D MMMM, dd') }}
-          </UiButton>
-        </template>
+        <UiButton
+          class="specialist-appointments-page-header__calendar"
+          size="m"
+          theme="transparent"
+          left-icon="outlined/calendar"
+          right-icon="solid/caret-down-fill"
+        >
+          {{ date | formatDate('D MMMM, dd') }}
+        </UiButton>
 
         <template #body>
           <UiCalendar v-model="date" />
@@ -61,13 +58,7 @@ import { COMPLETED } from '@/constants/appointment'
 
 import dayjs from '@/utils/dayjs'
 
-import UiCalendar from '@/ui/Calendar/Calendar.vue'
-
 @Component({
-  components: {
-    UiCalendar
-  },
-
   props: {
     appointments: Array,
     default: () => []

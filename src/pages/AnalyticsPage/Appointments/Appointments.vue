@@ -3,21 +3,30 @@
     class="analytics-page-appointments"
   >
     <div class="analytics-page-appointments__header">
-      <UiText
+      <UiPopover
         size="m"
-        left-icon="outlined/calendar"
-        right-icon="outlined/caret-down"
+        placement="bottom_start"
       >
-        1 фев – 28 фев 2021
-      </UiText>
+        <UiText
+          size="m"
+          left-icon="outlined/calendar"
+          right-icon="outlined/caret-down"
+        >
+          {{ date[0] | formatDate('D') }} - {{ date[1] | formatDate('D MMMM YYYY') }}
+        </UiText>
+
+        <template #body>
+          <UiCalendar v-model="date" />
+        </template>
+      </UiPopover>
     </div>
 
     <Numbers
       class="analytics-page-appointments__numbers"
     />
 
-    <ProductPricesHistory
-      :prices-history="pricesHistory"
+    <LineChart
+      :appointments-list="appointmentsList"
     />
   </AnalyticsLayout>
 </template>
@@ -26,35 +35,50 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import ProductPricesHistory from '@/components/ProductPricesHistory/ProductPricesHistory.vue'
-
 import AnalyticsLayout from '../components/Layout.vue'
 
 import Numbers from './components/Numbers.vue'
+import LineChart from './components/LineChart.vue'
 
 @Component({
   components: {
     Numbers,
-    AnalyticsLayout,
-    ProductPricesHistory
+    LineChart,
+    AnalyticsLayout
   }
 })
 export default class Appointments extends Vue {
-  pricesHistory = []
+  appointmentsList = []
+
+  dateFrom = new Date()
+  dateTo = new Date()
 
   constructor () {
     super()
 
+    // this.appointmentsList = JSON.parse(this.$localStorage.getItem('pricesHistory') || '[]')
+
     let index = 1
 
-    while (index < 30) {
-      this.pricesHistory.push({
-        label: `${index} февраля`,
-        total: index === 5 ? 0 : (Math.random() * 1000).toFixed(0)
+    while (index <= 30) {
+      this.appointmentsList.push({
+        label: `${index}`,
+        total: (Math.random() * 100).toFixed(0)
       })
 
       index++
     }
+
+    // this.$localStorage.setItem('pricesHistory', JSON.stringify(this.appointmentsList))
+  }
+
+  get date () {
+    return [this.dateFrom, this.dateTo]
+  }
+
+  set date (val) {
+    this.dateFrom = val[0]
+    this.dateTo = val[1]
   }
 }
 </script>

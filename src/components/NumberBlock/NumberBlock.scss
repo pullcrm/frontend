@@ -52,7 +52,7 @@
     }
 
     &_purple {
-      @include number-block-color(#705BCF);
+      @include number-block-color($ui-brand-purple);
     }
   }
 }
