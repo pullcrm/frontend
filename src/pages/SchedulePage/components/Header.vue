@@ -5,18 +5,15 @@
         size="m"
         placement="bottom_start"
       >
-        <template #default="{ toggle }">
-          <UiButton
-            class="schedule-page-header__calendar"
-            size="m"
-            theme="transparent"
-            left-icon="outlined/calendar"
-            right-icon="solid/caret-down-fill"
-            @click.native.prevent="toggle"
-          >
-            {{ date | formatDate('D MMMM, dd') }}
-          </UiButton>
-        </template>
+        <UiButton
+          class="schedule-page-header__calendar"
+          size="m"
+          theme="transparent"
+          left-icon="outlined/calendar"
+          right-icon="solid/caret-down-fill"
+        >
+          {{ date | formatDate('D MMMM, dd') }}
+        </UiButton>
 
         <template #body>
           <UiCalendar v-model="date" />
@@ -87,13 +84,7 @@ import Component from 'vue-class-component'
 
 import dayjs from '@/utils/dayjs'
 
-import UiCalendar from '@/ui/Calendar/Calendar.vue'
-
-@Component({
-  components: {
-    UiCalendar
-  }
-})
+@Component({})
 export default class Header extends Vue {
   get balance () {
     return this.$store.state.sms.balance

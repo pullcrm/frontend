@@ -5,16 +5,13 @@
       size="m"
       placement="bottom_start"
     >
-      <template #default="{ toggle }">
-        <UiTitle
-          class="appointment-popup-header__title"
-          size="l"
-          responsive
-          @click.native="toggle"
-        >
-          {{ title }}
-        </UiTitle>
-      </template>
+      <UiTitle
+        class="appointment-popup-header__title"
+        size="l"
+        responsive
+      >
+        {{ title }}
+      </UiTitle>
 
       <template #body="{ close }">
         <UiDropdownList>
@@ -44,19 +41,16 @@
       size="m"
       placement="bottom_end"
     >
-      <template #default="{ toggle }">
-        <UiText
-          class="appointment-popup-header__status"
-          tag="a"
-          href="#"
-          size="l"
-          right-icon="outlined/caret-down"
-          responsive
-          @click.native="toggle"
-        >
-          {{ activeStatus }}
-        </UiText>
-      </template>
+      <UiText
+        class="appointment-popup-header__status"
+        tag="a"
+        href="#"
+        size="l"
+        right-icon="outlined/caret-down"
+        responsive
+      >
+        {{ activeStatus }}
+      </UiText>
 
       <template #body="{ close }">
         <UiDropdownList>

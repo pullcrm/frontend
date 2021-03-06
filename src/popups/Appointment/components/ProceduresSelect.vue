@@ -26,14 +26,9 @@
         size="s"
         placement="bottom"
       >
-        <template #default="{ toggle }">
-          <div
-            class="appointment-popup-procedures-select__price"
-            @click.prevent="toggle"
-          >
-            {{ total | price }}
-          </div>
-        </template>
+        <div class="appointment-popup-procedures-select__price">
+          {{ total | price }}
+        </div>
 
         <template #body>
           <UiField>
@@ -67,25 +62,22 @@
             placement="top"
             @click.native.prevent
           >
-            <template #default="{ toggle }">
-              <UiBadge
-                :key="title"
-                class="ui-multi-select__badge"
-                size="m"
-                clickable
-                @click.native.prevent="toggle"
-              >
-                {{ title }}
+            <UiBadge
+              :key="title"
+              class="ui-multi-select__badge"
+              size="m"
+              clickable
+            >
+              {{ title }}
 
-                <template #append>
-                  <UiIcon
-                    name="outlined/x"
-                    size="xs"
-                    @click.native.prevent.stop="remove"
-                  />
-                </template>
-              </UiBadge>
-            </template>
+              <template #append>
+                <UiIcon
+                  name="outlined/x"
+                  size="xs"
+                  @click.native.prevent.stop="remove"
+                />
+              </template>
+            </UiBadge>
 
             <template #body>
               <UiText

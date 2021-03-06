@@ -1,7 +1,25 @@
 <template>
   <UiContainer>
+    <div class="procedures-page__header">
+      <UiTitle
+        size="m"
+        responsive
+      >
+        Список услуг
+      </UiTitle>
+
+      <UiButton
+        theme="blue"
+        responsive
+        @click.native="onShowServicePopup"
+      >
+        Добавить услугу
+      </UiButton>
+    </div>
+
     <UiPanel
       class="procedures-page"
+      size="s"
     >
       <UiPlaceholder
         v-if="isEmpty"
@@ -20,23 +38,6 @@
       <template
         v-else
       >
-        <div class="procedures-page__header">
-          <UiTitle
-            size="m"
-            responsive
-          >
-            Список услуг
-          </UiTitle>
-
-          <UiButton
-            theme="blue"
-            responsive
-            @click.native="onShowServicePopup"
-          >
-            Добавить услугу
-          </UiButton>
-        </div>
-
         <ProceduresTable
           :list="list"
         />

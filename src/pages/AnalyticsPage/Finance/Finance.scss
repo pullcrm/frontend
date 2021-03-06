@@ -1,0 +1,15 @@
+.analytics-page-finance {
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+
+    .ui-field {
+      margin-left: 24px;
+    }
+  }
+
+  &__numbers {
+    margin-bottom: 24px;
+  }
+}

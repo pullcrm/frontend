@@ -34,12 +34,11 @@
     <UiDropdownMenu
       placement="bottom_end"
     >
-      <template #inner="{ toggle }">
+      <template #inner>
         <UiIcon
           class="schedule-column-specialist__icon"
           size="m"
           name="outlined/dots-three-vertical"
-          @click.native="toggle"
         />
       </template>
 

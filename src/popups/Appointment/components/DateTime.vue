@@ -10,18 +10,13 @@
         size="m"
         placement="bottom_start"
       >
-        <template #default="{ toggle }">
-          <UiField
-            label="Дата"
-            @click.native.prevent="toggle"
-          >
-            <UiInput
-              :value="customDate | formatDate('D MMMM YYYY')"
-              readonly
-              left-icon="outlined/calendar-blank"
-            />
-          </UiField>
-        </template>
+        <UiField label="Дата">
+          <UiInput
+            :value="customDate | formatDate('D MMMM YYYY')"
+            readonly
+            left-icon="outlined/calendar-blank"
+          />
+        </UiField>
 
         <template #body>
           <UiCalendar v-model="customDate" />
@@ -86,13 +81,7 @@ import { TIME_STEP } from '@/constants'
 
 import dayjs from '@/utils/dayjs'
 
-import UiCalendar from '@/ui/Calendar/Calendar.vue'
-
 @Component({
-  components: {
-    UiCalendar
-  },
-
   props: {
     date: {
       type: Object,

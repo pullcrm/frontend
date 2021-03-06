@@ -1,0 +1,133 @@
+.chart {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  padding-bottom: 40px;
+  padding-left: 40px;
+
+  &__inner {
+    & > svg {
+      position: relative;
+      z-index: 2;
+      display: block;
+      width: 100%;
+      height: 420px;
+
+      * {
+        vector-effect: non-scaling-stroke;
+      }
+    }
+  }
+
+  &__inner {
+    position: relative;
+    flex: 1;
+  }
+
+  &__value-line {
+    @include ui-typo-14;
+
+    position: absolute;
+    right: 0;
+    left: 0;
+    color: $ui-black-60;
+
+    &::after {
+      position: absolute;
+      top: 0;
+      left: -40px;
+      width: 40px;
+      transform: translate(0, -50%);
+      text-align: center;
+      content: attr(data-label);
+    }
+
+    &::before {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 1px;
+      background: $ui-black-20;
+      content: '';
+    }
+  }
+
+  &__points {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+  }
+
+  &__curve {
+    fill: none;
+    stroke: $ui-brand-blue;
+    stroke-width: 2;
+  }
+
+  &__point {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: $ui-brand-blue;
+    border: 2px solid $ui-brand-blue;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+
+    &._active {
+      z-index: 10;
+      background: $ui-brand-blue;
+    }
+
+    .ui-text {
+      white-space: nowrap;
+
+      strong {
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__point-zone {
+    position: absolute;
+    top: -24px;
+    bottom: -36px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 50px;
+    transform: translate(-50%, 0);
+
+    .ui-text {
+      color: $ui-black-60;
+    }
+  }
+}
+
+@include ui-mobile-only {
+  .chart {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    overflow: auto;
+
+    &__inner {
+      & > svg {
+        width: 576px;
+      }
+    }
+
+    &__inner {
+      display: inline-block;
+      margin: 24px 56px 24px 48px;
+    }
+
+    &__point-zone {
+      width: 40px;
+    }
+  }
+}

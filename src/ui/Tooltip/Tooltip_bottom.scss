@@ -1,0 +1,42 @@
+@mixin ui-tooltip_bottom {
+  .ui-tooltip__arrow {
+    top: auto;
+    right: auto;
+    bottom: -12px - 1px/* space */;
+    left: calc(50% - 6px);
+    border-top: none;
+    border-right: 6px solid transparent;
+    border-bottom: 8px solid $ui-black-100;
+    border-left: 6px solid transparent;
+  }
+}
+
+@mixin ui-tooltip_bottom_start {
+  .ui-tooltip__body {
+    top: auto;
+    right: auto;
+    bottom: -12px;
+    left: -12px;
+    transform: translateY(100%);
+  }
+}
+
+@mixin ui-tooltip_bottom_middle {
+  .ui-tooltip__body {
+    top: auto;
+    right: auto;
+    bottom: -12px;
+    left: 50%;
+    transform: translate(-50%, 100%);
+  }
+}
+
+@mixin ui-tooltip_bottom_end {
+  .ui-tooltip__body {
+    top: auto;
+    right: -12px;
+    bottom: -12px;
+    left: auto;
+    transform: translateY(100%);
+  }
+}

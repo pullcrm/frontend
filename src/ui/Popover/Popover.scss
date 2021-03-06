@@ -3,10 +3,24 @@
 @import './Popover_bottom';
 @import './Popover_left';
 
+@keyframes popover-fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 @mixin ui-popover-opened {
   .ui-popover__body,
   .ui-popover__arrow {
     visibility: visible;
+    opacity: 0;
+    animation-name: popover-fade;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
   }
 }
 

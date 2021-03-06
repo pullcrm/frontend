@@ -1,0 +1,148 @@
+@import './Tooltip_top';
+@import './Tooltip_right';
+@import './Tooltip_bottom';
+@import './Tooltip_left';
+
+@keyframes tooltip-fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@mixin ui-tooltip-opened {
+  .ui-tooltip__body,
+  .ui-tooltip__arrow {
+    display: block;
+    opacity: 0;
+    animation-name: tooltip-fade;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+  }
+}
+
+.ui-tooltip {
+  position: relative;
+
+  &_opened {
+    @include ui-tooltip-opened;
+  }
+
+  &_theme_dark {
+    .ui-tooltip__body {
+      color: $ui-white;
+      background: $ui-black-100;
+    }
+  }
+
+  &__body {
+    @include ui-shadow-16;
+
+    position: absolute;
+    z-index: 15;
+    display: none;
+    padding: 12px 16px;
+    border-radius: 12px;
+  }
+
+  &__arrow {
+    position: absolute;
+    z-index: 14;
+    display: none;
+  }
+
+  /**
+   *       Tooltip
+   *         ↓
+   *     ----------
+   *    | Element |
+   *    ----------
+  **/
+
+  &_top {
+    @include ui-tooltip_top;
+
+    &_start {
+      @include ui-tooltip_top_start;
+    }
+
+    &_middle {
+      @include ui-tooltip_top_middle;
+    }
+
+    &_end {
+      @include ui-tooltip_top_end;
+    }
+  }
+
+  /**
+   *     ----------
+   *    | Element | ← Tooltip
+   *    ----------
+   */
+
+  &_right {
+    @include ui-tooltip_right;
+
+    &_start {
+      @include ui-tooltip_right_start;
+    }
+
+    &_middle {
+      @include ui-tooltip_right_middle;
+    }
+
+    &_end {
+      @include ui-tooltip_right_end;
+    }
+  }
+
+  /**
+   *     ----------
+   *    | Element |
+   *    ----------
+   *        ↑
+   *     Tooltip
+   */
+
+  &_bottom {
+    @include ui-tooltip_bottom;
+
+    &_start {
+      @include ui-tooltip_bottom_start;
+    }
+
+    &_middle {
+      @include ui-tooltip_bottom_middle;
+    }
+
+    &_end {
+      @include ui-tooltip_bottom_end;
+    }
+  }
+
+  /**
+   *            ----------
+   * Tooltip → | Element |
+   *           ----------
+   */
+
+  &_left {
+    @include ui-tooltip_left;
+
+    &_start {
+      @include ui-tooltip_left_start;
+    }
+
+    &_middle {
+      @include ui-tooltip_left_middle;
+    }
+
+    &_end {
+      @include ui-tooltip_left_end;
+    }
+  }
+}
