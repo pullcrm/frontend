@@ -21,7 +21,7 @@
         @submit.prevent="submit"
       >
         <UiBack
-          v-if="hasProfile"
+          v-if="hasPositions"
           class="auth-page-company-create__back"
           @click.native="onBack"
         />
@@ -69,6 +69,7 @@
           type="submit"
           size="l"
           theme="blue"
+          :loading="isLoading"
         >
           Продолжить
         </UiButton>
@@ -80,8 +81,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-
-import { normalizeCompanyInfo } from '@/logics/companies'
 
 import Layout from '@/pages/Auth/components/Layout.vue'
 
@@ -96,8 +95,10 @@ export default class CompanyCreate extends Vue {
   cities = []
   categories = []
 
-  get hasProfile () {
-    return Boolean(this.$store.state.company.profile)
+  isLoading = false
+
+  get hasPositions () {
+    return this.$store.getters['position/hasPositions']
   }
 
   async beforeMount () {
@@ -111,34 +112,40 @@ export default class CompanyCreate extends Vue {
   }
 
   async submit () {
-    const { id: companyId } = await this.$api.companies.create({
-      // @ts-ignore
-      name: this.company.name,
-      // @ts-ignore
-      cityId: this.company.city.id,
-      // @ts-ignore
-      categoryId: this.company.category.id
-    })
+    try {
+      this.isLoading = true
 
-    await this.onCompany(companyId)
+      const { id: companyId } = await this.$api.companies.create({
+        // @ts-ignore
+        name: this.company.name,
+        // @ts-ignore
+        cityId: this.company.city.id,
+        // @ts-ignore
+        categoryId: this.company.category.id
+      })
 
-    const { href } = this.$router.resolve({
-      name: 'dashboard'
-    })
+      await this.onCompany(companyId)
 
-    window.location.href = href
+      const { href } = this.$router.resolve({
+        name: 'dashboard'
+      })
+
+      window.location.href = href
+    } finally {
+      this.isLoading = false
+    }
   }
 
   async onCompany (companyId) {
-    const companies = await this.$api.profile.companies()
+    await this.$store.dispatch('profile')
 
-    const companyInfo = companies.find(({ company }) => company.id === companyId)
+    const position = this.$store.getters['position/positionsDict'][companyId]
 
-    await this.$store.dispatch('auth/fetchCompanyToken', normalizeCompanyInfo(companyInfo))
+    await this.$store.dispatch('auth/refreshTokenByPosition', position)
   }
 
-  onBack () {
-    this.$router.push({
+  async onBack () {
+    await this.$router.push({
       name: 'dashboard'
     })
   }

@@ -41,7 +41,7 @@ import PopperMenu from '@/components/PopperMenu/PopperMenu.vue'
   },
 
   watch: {
-    async hasCompany (value) {
+    async hasPosition (value) {
       if (value) {
         const isSMSAuthorize = this.$store.getters['sms/isAuthorize']
 
@@ -67,8 +67,8 @@ export default class App extends Vue {
     popperMenu: PopperMenu
   }
 
-  get hasCompany () {
-    return this.$store.getters['company/current']
+  get hasPosition () {
+    return Boolean(this.$store.state.position.current)
   }
 
   get layout () {

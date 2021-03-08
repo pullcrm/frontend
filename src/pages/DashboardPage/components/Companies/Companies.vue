@@ -12,12 +12,12 @@
       class="dashboard-page-companies__carousel"
     >
       <UiCarouselItem
-        v-for="company in companies"
-        :key="`company-${company.company.id}`"
+        v-for="position in positions"
+        :key="`company-${position.company.id}`"
       >
         <Company
-          :company="company.company"
-          @click.native="onCompany(company)"
+          :position="position"
+          @click.native="onPosition(position)"
         />
       </UiCarouselItem>
 
@@ -42,12 +42,12 @@ import CompanyButton from './CompanyButton.vue'
   }
 })
 export default class Companies extends Vue {
-  get companies () {
-    return this.$store.state.companies.companies
+  get positions () {
+    return this.$store.state.position.positions
   }
 
-  async onCompany (companyInfo) {
-    await this.$store.dispatch('auth/fetchCompanyToken', companyInfo)
+  async onPosition (position) {
+    await this.$store.dispatch('auth/refreshTokenByPosition', position)
 
     location.reload()
   }

@@ -19,7 +19,11 @@ const actions = {
     const [company, procedures, specialists] = await Promise.all([
       this.$api.public.companyById(companyId),
       this.$api.public.proceduresByCompanyId({ companyId }),
-      this.$api.public.specialistsByCompanyId({ companyId })
+      this.$api.public.specialistsByCompanyId({
+        sort: 'rate',
+        order: 'asc',
+        companyId
+      })
     ])
 
     commit('SET_COMPANY', company)

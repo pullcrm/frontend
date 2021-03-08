@@ -220,24 +220,24 @@ export const factory = (send) => ({
   profile: {
     get () : Promise<IRegistrationUser> {
       return send('users/profile', null, 'GET')
-    },
-
-    companies () : Promise<any[]> {
-      return send('specialists', null, 'GET')
     }
   },
 
   specialist: {
     create (params: IRegistrationUserParams) : Promise<IRegistrationUser> {
-      return send('companies/my/specialists', params)
+      return send('specialists', params)
     },
 
     update (id: number, params: IRegistrationUserParams) : Promise<IRegistrationUser> {
-      return send(`companies/my/specialists/${id}`, params, 'PUT')
+      return send(`specialists/${id}`, params, 'PUT')
     },
 
-    all (): Promise<any> {
-      return send('companies/my/specialists', null, 'GET')
+    all (params: any): Promise<any> {
+      return send('specialists', params, 'GET')
+    },
+
+    bulk (params: any) {
+      return send('specialists/bulk', params, 'PUT')
     }
   },
 
@@ -302,6 +302,10 @@ export const factory = (send) => ({
 
     create (params: any) : Promise<any> {
       return send('files', params, 'FORM')
+    },
+
+    remove (id: number) {
+      return send(`files/${id}`, {}, 'DELETE')
     }
   },
 

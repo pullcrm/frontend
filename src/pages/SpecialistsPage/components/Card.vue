@@ -13,12 +13,15 @@
       />
     </a>
 
-    <!-- <div class="specialists-page-card__hand">
+    <div
+      id="hand"
+      class="specialists-page-card__hand"
+    >
       <UiIcon
         name="outlined/hand-grabbing"
         size="m"
       />
-    </div> -->
+    </div>
 
     <UiIndicator
       class="specialists-page-card__avatar"

@@ -26,8 +26,6 @@ const actions = {
         commit('SET_TOKENS', { accessToken, refreshToken })
 
         this.$apiClient.setAccessToken(accessToken)
-
-        return accessToken
       }
     } catch {
       await dispatch('reset')
@@ -36,21 +34,22 @@ const actions = {
     }
   },
 
-  async fetchCompanyToken ({ state, dispatch }, companyInfo) {
+  async refreshTokenByPosition ({ state, rootState, dispatch }, position) {
     try {
       const refreshToken = state.refreshToken
 
-      const { role, company, profile } = companyInfo
+      const { role, company } = position
 
       const result = await this.$api.auth.refreshToken({
         role: role.name,
-        userId: profile.id,
+        userId: rootState.profile.id,
         companyId: company.id,
         refreshToken
       })
 
       await dispatch('saveTokens', { ...result, refreshToken })
     } catch (err) {
+      console.log(err)
       if (err.data.status === 403) {
         await dispatch('reset')
 
@@ -61,7 +60,7 @@ const actions = {
     }
   },
 
-  async onRefreshToken ({ state, dispatch }) {
+  async refreshToken ({ state, dispatch }) {
     try {
       const refreshToken = state.refreshToken
 
@@ -96,7 +95,6 @@ const actions = {
   },
 
   reset ({ commit }) {
-    console.log(this.$localStorage)
     this.$localStorage.removeItem(ACCESS_TOKEN)
     this.$localStorage.removeItem(REFRESH_TOKEN)
 

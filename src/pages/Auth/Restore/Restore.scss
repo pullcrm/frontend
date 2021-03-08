@@ -27,6 +27,14 @@
     background: #fff;
     border-radius: 16px;
     box-shadow: 0 0 16px rgba($ui-black-100, 0.1);
+
+    .ui-field {
+      margin-bottom: 16px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   @include ui-mobile-only {

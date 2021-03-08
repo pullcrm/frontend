@@ -23,8 +23,8 @@ const getters = {
     return Boolean(getters.settings)
   },
 
-  settings (_state, _getters, rootState) {
-    return rootState.company.company.company_setting
+  settings (_state, _getters, _rootState, rootGetters) {
+    return rootGetters['position/company'].company_setting
   }
 }
 

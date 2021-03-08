@@ -212,7 +212,7 @@ import SettingsLayout from '../components/SettingsLayout.vue'
 export default class Settings extends Vue {
   isLoading = false
 
-  company = this.$store.getters['company/current']
+  company = this.$store.getters['position/company']
 
   cities = []
   categories = []
@@ -234,7 +234,7 @@ export default class Settings extends Vue {
   }
 
   async onAvatar (file) {
-    const userId = this.$store.state.company.profile.id
+    const userId = this.$store.state.profile.id
 
     const formData = new FormData()
 
@@ -247,7 +247,8 @@ export default class Settings extends Vue {
       logoId: result.id
     })
 
-    return this.$store.dispatch('company/fetch')
+    // TODO: Replace to fetch company info
+    return await this.$store.dispatch('profile')
   }
 
   async save () {
@@ -262,7 +263,8 @@ export default class Settings extends Vue {
 
       this.$store.dispatch('toasts/show', { title: 'Сохранено!' })
 
-      await this.$store.dispatch('company/fetch')
+      // TODO: Replace to fetch company info
+      await this.$store.dispatch('profile')
     } finally {
       this.isLoading = false
     }
