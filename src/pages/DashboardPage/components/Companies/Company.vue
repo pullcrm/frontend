@@ -53,25 +53,29 @@ import Component from 'vue-class-component'
 
 @Component({
   props: {
-    company: {
+    position: {
       type: Object,
       required: true
     }
   }
 })
 export default class Company extends Vue {
-  readonly company
+  readonly position
+
+  get company () {
+    return this.position.company
+  }
 
   get logo () {
     return this.company.logo?.path
   }
 
-  get currentCompany () {
-    return this.$store.getters['company/current']
+  get companyId () {
+    return this.$store.getters['position/companyId']
   }
 
   get isCurrentCompany () {
-    return this.company.id === this.currentCompany.id
+    return this.company.id === this.companyId
   }
 }
 </script>

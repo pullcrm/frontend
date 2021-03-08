@@ -74,9 +74,7 @@ export default class ProcedureEdit extends Vue {
 
       await this.$api.sms.settingCreate(this.form)
 
-      await this.$store.dispatch('company/fetch')
-
-      this.$emit('close')
+      window.location.reload()
     } catch (err) {
       if (err.data.status === 404) {
         this.$store.dispatch('toasts/show', {

@@ -83,7 +83,7 @@ import NavbarItem from './NavbarItem.vue'
 })
 export default class Navbar extends Vue {
   get profile () {
-    return this.$store.state.company.profile
+    return this.$store.state.profile
   }
 
   get avatar () {

@@ -1,5 +1,7 @@
 <template>
-  <UiPopup>
+  <UiPopup
+    :closable="false"
+  >
     <div class="popup-sms-confirmation">
       <UiBack
         @click.native="$emit('cancel')"

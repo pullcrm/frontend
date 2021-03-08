@@ -5,8 +5,8 @@ export default async function roleRedirect ({ to, next, store }) {
     return
   }
 
-  const role = store.state.company.role
-  const { specialistId } = store.state.company.profile
+  const role = store.getters['position/role']
+  const specialistId = store.getters['position/currentId']
 
   if (role.name === SPECIALIST) {
     if (

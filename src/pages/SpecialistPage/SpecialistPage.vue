@@ -1,5 +1,8 @@
 <template>
-  <div class="specialist-page">
+  <div
+    v-if="specialist"
+    class="specialist-page"
+  >
     <UiContainer narrow>
       <UiBack
         v-if="hasBack"
@@ -61,11 +64,15 @@ export default class SpecialistPage extends Vue {
   }
 
   get role () {
-    return this.$store.state.company.role
+    return this.$store.getters['position/role']
+  }
+
+  get positionId () {
+    return this.$store.getters['position/currentId']
   }
 
   get isMyProfile () {
-    return this.specialistId === this.profile.specialistId
+    return this.specialistId === this.positionId
   }
 
   get specialists () {
@@ -81,7 +88,7 @@ export default class SpecialistPage extends Vue {
   }
 
   get profile () {
-    return this.$store.state.company.profile
+    return this.$store.state.profile
   }
 
   get hasBack () {
