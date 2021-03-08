@@ -56,6 +56,8 @@ export default class SortableItem extends Vue {
     event.dataTransfer.dropEffect = 'move'
     event.dataTransfer.setData('text/plain', null)
 
+    event.dataTransfer.setDragImage(new Image(), 0, 0)
+
     list.draggingElement = this.$el
     list.draggingElementIndex = [...this.$el.parentElement.children].indexOf(this.$el)
   }

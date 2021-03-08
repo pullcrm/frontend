@@ -52,7 +52,3 @@ export default class SortableList extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-  //
-</style>
