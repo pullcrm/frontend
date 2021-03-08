@@ -40,19 +40,28 @@
       :tabs="tabs"
     /> -->
 
-    <div class="ui-grid">
-      <SpecialistCard
-        v-for="specialist in specialists"
-        :key="`specialist-${specialist.id}`"
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12',
-          'ui-grid-item_tablet_6',
-          'ui-grid-item_laptop_3'
-        ]"
-        :specialist="specialist"
-      />
-    </div>
+    <SortableList
+      class="ui-grid"
+      :items="specialists"
+      @update="onSort"
+    >
+      <template #default="{ item }">
+        <SortableItem
+          :key="`specialist-${item.id}`"
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12',
+            'ui-grid-item_tablet_6',
+            'ui-grid-item_laptop_3'
+          ]"
+          handle-selector="#hand"
+        >
+          <SpecialistCard
+            :specialist="item"
+          />
+        </SortableItem>
+      </template>
+    </SortableList>
   </UiContainer>
 </template>
 
@@ -62,10 +71,15 @@ import Component from 'vue-class-component'
 
 import UiNotificationBadge from '@/ui/NotificationBadge.vue'
 
+import SortableList from '@/components/SortableList/SortableList.vue'
+import SortableItem from '@/components/SortableList/SortableItem.vue'
+
 import SpecialistCard from './components/Card.vue'
 
 @Component({
   components: {
+    SortableList,
+    SortableItem,
     SpecialistCard,
     UiNotificationBadge
   }
@@ -105,6 +119,18 @@ export default class Specialists extends Vue {
 
   async add () {
     await this.$store.dispatch('popup/show', 'specialist-new')
+  }
+
+  async onSort (items) {
+    const specialists = items.map(({ id }, index) => {
+      return {
+        id,
+        rate: index
+      }
+    })
+
+    await this.$api.specialist.bulk(specialists)
+    await this.$store.dispatch('specialists/fetch')
   }
 }
 </script>

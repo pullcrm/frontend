@@ -232,8 +232,12 @@ export const factory = (send) => ({
       return send(`specialists/${id}`, params, 'PUT')
     },
 
-    all (): Promise<any> {
-      return send('specialists', null, 'GET')
+    all (params: any): Promise<any> {
+      return send('specialists', params, 'GET')
+    },
+
+    bulk (params: any) {
+      return send('specialists/bulk', params, 'PUT')
     }
   },
 
