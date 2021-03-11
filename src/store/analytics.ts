@@ -1,4 +1,22 @@
+function createState () {
+  return {
+    financeStats: [],
+    appointmentsStats: null
+  }
+}
+
 const actions = {
+  async fetchAppointmentsStats ({ commit }, { startDate, endDate }) {
+    const result = await this.$api.analytics.calendar({
+      startDate,
+      endDate
+    })
+
+    console.log(result)
+
+    commit('SET_APPOINTMENTS_STATS', result)
+  },
+
   async fetchForMonth (_, date) {
     const daysInMonth = date.daysInMonth()
 
@@ -16,7 +34,22 @@ const actions = {
   }
 }
 
+const mutations = {
+  SET_APPOINTMENTS_STATS (state, appointmentsStats) {
+    state.appointmentsStats = appointmentsStats
+  }
+}
+
+const getters = {
+  appointmentsList (state) {
+    return state.appointmentsStats.appointments
+  }
+}
+
 export default {
   namespaced: true,
-  actions
+  state: createState,
+  actions,
+  getters,
+  mutations
 }

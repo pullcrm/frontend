@@ -162,11 +162,11 @@ export default class ValuesChart {
     const subtracting = this.maxAvailableLine - this.minAvailableLine
 
     if (subtracting <= 10) {
-      return 4
+      return 3
     }
 
     if (subtracting <= 20) {
-      return 5
+      return 4
     }
 
     return 10

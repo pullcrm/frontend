@@ -30,10 +30,10 @@
       icon="solid/list"
     />
 
-    <!-- <NavbarItem
+    <NavbarItem
       :to="{ name: 'analytics' }"
       icon="solid/chart-bar-fill"
-    /> -->
+    />
 
     <NavbarItem
       :to="{ name: 'settings' }"

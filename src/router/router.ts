@@ -33,7 +33,7 @@ const SmsSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/SmsSettin
 const WidgetSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/WidgetSettingsPage/WidgetSettingsPage.vue'))
 const CompanySettingsPage = dynamicPage(() => import('@/pages/SettingsPage/CompanySettingsPage/CompanySettingsPage.vue'))
 
-const AnalyticsAppointmentsPage = dynamicPage(() => import('@/pages/AnalyticsPage/Appointments/Appointments.vue'))
+const AnalyticsAppointmentsPage = dynamicPage(() => import('@/pages/AnalyticsPage/AppointmentsPage/AppointmentsPage.vue'))
 const AnalyticsFinancePage = dynamicPage(() => import('@/pages/AnalyticsPage/Finance/Finance.vue'))
 
 const Error = dynamicPage(() => import('@/pages/Error/404.vue'))

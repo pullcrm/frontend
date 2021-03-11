@@ -1,11 +1,11 @@
 <template>
-  <div class="analytics-page-appointments-line-chart">
+  <div class="analytics-appointments-page-line-chart">
     <Chart
       :chart="chart"
-      class="analytics-page-appointments-line-chart__chart"
+      class="analytics-appointments-page-line-chart__chart"
     >
       <template #point="{ point }">
-        <div class="analytics-page-appointments-line-chart__point">
+        <div class="analytics-appointments-page-line-chart__point">
           <UiText
             class="_blue"
             size="m"
@@ -28,7 +28,7 @@
             Выполнено
 
             <template #append>
-              {{ point.value }}
+              {{ point.info.completed }}
             </template>
           </UiText>
 
@@ -41,7 +41,7 @@
             Офлайн
 
             <template #append>
-              {{ point.value }}
+              {{ point.info.offline }}
             </template>
           </UiText>
 
@@ -54,7 +54,7 @@
             Онлайн
 
             <template #append>
-              {{ point.value }}
+              {{ point.info.online }}
             </template>
           </UiText>
         </div>
@@ -66,6 +66,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+
+import dayjs from '@/utils/dayjs'
 
 import LineChart from '@/services/line-chart'
 
@@ -103,8 +105,8 @@ export default class AppointmentLineChart extends Vue {
   get list () {
     return this.appointmentsList.map((item) => {
       return {
-        value: item.total,
-        label: item.label,
+        value: item.amount,
+        label: dayjs(item.step).format('DD'),
         info: item
       }
     })
@@ -112,4 +114,4 @@ export default class AppointmentLineChart extends Vue {
 }
 </script>
 
-<style lang="scss" scr="./LineChart.scss"></style>
+<style lang="scss" src="./LineChart.scss"></style>

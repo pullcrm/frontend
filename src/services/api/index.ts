@@ -176,6 +176,17 @@ export interface IAnalyticsSimpleParams {
   endDate: string
 }
 
+export interface IAnalyticsCalendarParams {
+  startDate: string,
+  endDate: string
+}
+
+export interface IAnalyticsFinanceParams {
+  startDate: string,
+  endDate: string,
+  specialistId?: number
+}
+
 export const factory = (send) => ({
   auth: {
     login (params: IAuthLoginParams) : Promise<IApiAuthLogin> {
@@ -364,6 +375,14 @@ export const factory = (send) => ({
   analytics: {
     simple (params: IAnalyticsSimpleParams): Promise<any> {
       return send('companies/my/stats', params, 'GET')
+    },
+
+    calendar (params: IAnalyticsCalendarParams): Promise<any> {
+      return send('analytics/calendar', params, 'GET')
+    },
+
+    finance (params: IAnalyticsFinanceParams): Promise<any> {
+      return send('analytics/finance', params, 'GET')
     }
   },
 
