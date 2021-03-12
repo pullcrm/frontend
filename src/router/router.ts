@@ -34,7 +34,7 @@ const WidgetSettingsPage = dynamicPage(() => import('@/pages/SettingsPage/Widget
 const CompanySettingsPage = dynamicPage(() => import('@/pages/SettingsPage/CompanySettingsPage/CompanySettingsPage.vue'))
 
 const AnalyticsAppointmentsPage = dynamicPage(() => import('@/pages/AnalyticsPage/AppointmentsPage/AppointmentsPage.vue'))
-const AnalyticsFinancePage = dynamicPage(() => import('@/pages/AnalyticsPage/Finance/Finance.vue'))
+const AnalyticsFinancePage = dynamicPage(() => import('@/pages/AnalyticsPage/FinancePage/FinancePage.vue'))
 
 const Error = dynamicPage(() => import('@/pages/Error/404.vue'))
 

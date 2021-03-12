@@ -15,3 +15,19 @@ export function normalizeAppointmentsStats (stats) {
     appointments: appointments.reverse()
   }
 }
+
+export function normalizeAnalyticsStats (stats) {
+  const {
+    avg,
+    count,
+    income,
+    procedures
+  } = stats
+
+  return {
+    total: count,
+    income,
+    average: avg,
+    procedures
+  }
+}

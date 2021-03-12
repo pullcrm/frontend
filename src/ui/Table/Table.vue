@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-show="data.length > 0"
-    class="ui-table"
-  >
+  <div class="ui-table">
     <table
       class="ui-table__inner"
     >

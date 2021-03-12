@@ -1,10 +1,11 @@
 <template>
   <UiPanel
-    class="analytics-page-finance-table"
+    v-if="list.length > 0"
+    class="analytics-finance-page-table"
     size="s"
   >
     <UiTable
-      :data="data"
+      :data="list"
       numbered
     >
       <template #default="{ row }">
@@ -40,7 +41,7 @@
             size="m"
             responsive
           >
-            15
+            {{ row.amount }}
           </UiText>
         </UiTableColumn>
 
@@ -52,7 +53,7 @@
             size="m"
             responsive
           >
-            15
+            {{ row.online }}
           </UiText>
         </UiTableColumn>
 
@@ -64,7 +65,7 @@
             size="m"
             responsive
           >
-            0
+            {{ row.offline }}
           </UiText>
         </UiTableColumn>
 
@@ -76,7 +77,7 @@
             size="m"
             responsive
           >
-            7 500 грн
+            {{ row.income | price }}
           </UiText>
         </UiTableColumn>
       </template>
@@ -95,17 +96,16 @@ import UiTableColumn from '@/ui/Table/TableColumn.vue'
   components: {
     UiTable,
     UiTableColumn
-  },
-
-  props: {
-    data: {
-      type: Array,
-      required: true
-    }
   }
 })
-export default class Table extends Vue {
-  readonly data!: any[]
+export default class FinanceTable extends Vue {
+  get financeStats () {
+    return this.$store.state.analytics.financeStats
+  }
+
+  get list () {
+    return this.financeStats.procedures
+  }
 }
 </script>
 

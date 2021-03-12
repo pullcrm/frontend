@@ -5,6 +5,7 @@ export default function ({ endpoint, method, params, headers }) {
 
   if (params) {
     query = '?' + Object.keys(params)
+      .filter(key => params[key])
       .map(key => `${key}=${params[key]}`)
       .join('&')
   }
