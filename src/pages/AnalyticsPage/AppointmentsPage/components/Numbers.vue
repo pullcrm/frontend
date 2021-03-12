@@ -10,7 +10,7 @@
         ]"
         theme="blue"
         icon="solid/list"
-        info="test"
+        info="Включая невыполненные и отмененные"
       >
         <UiText
           size="m"
@@ -36,7 +36,7 @@
         ]"
         theme="green"
         icon="solid/check-circle-fill"
-        info="test"
+        info="Только оплаченные"
       >
         <UiText
           size="m"
@@ -62,7 +62,7 @@
         ]"
         theme="yellow"
         icon="solid/device-mobile-camera-fill"
-        info="test"
+        info="Созданные менеджером через админку"
       >
         <UiText
           size="m"
@@ -88,7 +88,7 @@
         ]"
         theme="purple"
         icon="outlined/globe"
-        info="test"
+        info="Сделанные через виджет"
       >
         <UiText
           size="m"
@@ -125,7 +125,7 @@ export default class Numbers extends Vue {
   }
 
   get total () {
-    return this.appointmentsStats.count
+    return this.appointmentsStats.total
   }
 
   get completed () {

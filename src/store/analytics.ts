@@ -1,3 +1,5 @@
+import { normalizeAppointmentsStats } from '@/logics/analytics'
+
 function createState () {
   return {
     financeStats: [],
@@ -7,14 +9,12 @@ function createState () {
 
 const actions = {
   async fetchAppointmentsStats ({ commit }, { startDate, endDate }) {
-    const result = await this.$api.analytics.calendar({
+    const stats = await this.$api.analytics.calendar({
       startDate,
       endDate
     })
 
-    console.log(result)
-
-    commit('SET_APPOINTMENTS_STATS', result)
+    commit('SET_APPOINTMENTS_STATS', normalizeAppointmentsStats(stats))
   },
 
   async fetchForMonth (_, date) {
