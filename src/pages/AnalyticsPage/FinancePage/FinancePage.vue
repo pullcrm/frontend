@@ -96,7 +96,7 @@ export default class FinancePage extends Vue {
   }
 
   async fetch () {
-    await store.dispatch('analytics/fetchFinanceStats', {
+    await this.$store.dispatch('analytics/fetchFinanceStats', {
       startDate: dayjs(this.startDate).format('YYYY-MM-DD'),
       endDate: dayjs(this.endDate).format('YYYY-MM-DD'),
       specialistId: this.specialist?.id

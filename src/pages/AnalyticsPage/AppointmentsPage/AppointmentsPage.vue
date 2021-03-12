@@ -17,7 +17,7 @@
 
         <template #body>
           <UiCalendar
-            :value="[startDate, endDate]"
+            v-model="dates"
             @input="fetch"
           />
         </template>
@@ -65,14 +65,20 @@ import LineChart from './components/LineChart.vue'
     })
 
     next((vm: AppointmentsPage) => {
-      vm.startDate = startDate.toDate()
-      vm.endDate = endDate.toDate()
+      vm.dates = [startDate.toDate(), endDate.toDate()]
     })
   }
 })
 export default class AppointmentsPage extends Vue {
-  startDate = new Date()
-  endDate = new Date()
+  dates = [new Date(), new Date()]
+
+  get startDate () {
+    return this.dates[0]
+  }
+
+  get endDate () {
+    return this.dates[1]
+  }
 
   get appointmentsList () {
     return this.$store.getters['analytics/appointmentsList']
@@ -82,13 +88,10 @@ export default class AppointmentsPage extends Vue {
     return this.appointmentsList.map(item => item.step).join('')
   }
 
-  async fetch ([startDate, endDate]) {
-    this.startDate = startDate
-    this.endDate = endDate
-
-    await store.dispatch('analytics/fetchAppointmentsStats', {
-      startDate: dayjs(startDate).format('YYYY-MM-DD'),
-      endDate: dayjs(endDate).format('YYYY-MM-DD')
+  async fetch () {
+    await this.$store.dispatch('analytics/fetchAppointmentsStats', {
+      startDate: dayjs(this.startDate).format('YYYY-MM-DD'),
+      endDate: dayjs(this.endDate).format('YYYY-MM-DD')
     })
   }
 }
