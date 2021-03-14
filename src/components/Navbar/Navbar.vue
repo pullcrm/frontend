@@ -1,72 +1,12 @@
 <template>
   <div class="navbar">
-    <img
-      class="navbar__logo"
-      src="@/assets/logos/logo.svg"
-    >
-
-    <NavbarItem
-      :to="{ name: 'dashboard' }"
-      icon="solid/house-fill"
+    <NavbarDesktop
+      class="navbar__desktop"
     />
 
-    <NavbarItem
-      :to="{ name: 'schedule' }"
-      icon="solid/calendar-fill"
+    <NavbarMobile
+      class="navbar__mobile"
     />
-
-    <!-- <NavbarItem
-      :to="{ name: 'timeOff' }"
-      icon="solid/clock-fill"
-    /> -->
-
-    <NavbarItem
-      :to="{ name: 'specialists' }"
-      icon="solid/users-fill"
-    />
-
-    <NavbarItem
-      :to="{ name: 'procedures' }"
-      icon="solid/list"
-    />
-
-    <NavbarItem
-      :to="{ name: 'analytics' }"
-      icon="solid/chart-bar-fill"
-    />
-
-    <NavbarItem
-      :to="{ name: 'settings' }"
-      icon="solid/gear-fill"
-    />
-
-    <div class="navbar__space" />
-
-    <UiDropdownMenu
-      placement="right"
-    >
-      <template #inner>
-        <UiAvatar
-          class="navbar__avatar"
-          size="s"
-          :image="avatar"
-          :name="profile.firstName"
-        />
-      </template>
-
-      <UiDropdownList>
-        <UiText
-          tag="a"
-          href="#"
-          class="navbar__logout"
-          size="m"
-          left-icon="outlined/sign-out"
-          @click.native.prevent="logout"
-        >
-          Выйти
-        </UiText>
-      </UiDropdownList>
-    </UiDropdownMenu>
   </div>
 </template>
 
@@ -74,32 +14,30 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import NavbarItem from './NavbarItem.vue'
+import NavbarMobile from './Navbar.mobile.vue'
+import NavbarDesktop from './Navbar.desktop.vue'
 
 @Component({
   components: {
-    NavbarItem
+    NavbarMobile,
+    NavbarDesktop
   }
 })
-export default class Navbar extends Vue {
-  get profile () {
-    return this.$store.state.profile
-  }
-
-  get avatar () {
-    return this.profile.avatar?.path
-  }
-
-  async logout () {
-    await this.$store.dispatch('auth/logout')
-
-    const { href } = this.$router.resolve({
-      name: 'login'
-    })
-
-    window.location.href = href
-  }
-}
+export default class Navbar extends Vue {}
 </script>
 
-<style lang="scss" src="./Navbar.scss"></style>
+<style lang="scss">
+  .navbar {
+    @media (max-width: $ui-laptop - 1px) {
+      &__desktop {
+        display: none;
+      }
+    }
+
+    @media (min-width: $ui-laptop) {
+      &__mobile {
+        display: none;
+      }
+    }
+  }
+</style>

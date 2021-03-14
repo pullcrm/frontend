@@ -49,6 +49,14 @@
     }
   }
 
+  &_size_l {
+    .ui-popover__body {
+      --ui-popover-padding: 24px;
+
+      padding: 24px;
+    }
+  }
+
   &_size_m {
     .ui-popover__body {
       --ui-popover-padding: 16px;

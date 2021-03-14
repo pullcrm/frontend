@@ -14,7 +14,9 @@
     ]"
     @click.prevent="clickable && toggle()"
   >
-    <slot />
+    <slot
+      :is-opened="isOpened"
+    />
 
     <div class="ui-popover__arrow" />
 
@@ -107,7 +109,9 @@ export default class Popover extends Vue {
     | 'custom'
 
   readonly size!:
+    | 's'
     | 'm'
+    | 'l'
     | 'custom'
 
   readonly placement!: Placement

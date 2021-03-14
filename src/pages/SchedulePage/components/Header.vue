@@ -121,12 +121,10 @@ export default class Header extends Vue {
     this.date = dayjs(new Date()).add(1, 'day').toDate()
   }
 
-  addAppointment () {
-    this.$store.dispatch('popup/show', {
+  async addAppointment () {
+    await this.$store.dispatch('popup/show', {
       name: 'appointment',
-      props: {
-        type: 'new'
-      }
+      props: { type: 'new' }
     })
   }
 
