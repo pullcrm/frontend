@@ -1,3 +1,7 @@
+function sortAppointments (a, b) {
+  return new Date(a.step).getTime() - new Date(b.step).getTime()
+}
+
 export function normalizeAppointmentsStats (stats) {
   const {
     count,
@@ -12,7 +16,7 @@ export function normalizeAppointmentsStats (stats) {
     online,
     offline,
     completed,
-    appointments: appointments.reverse()
+    appointments: appointments.sort(sortAppointments)
   }
 }
 

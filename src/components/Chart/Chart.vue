@@ -28,28 +28,37 @@
         />
       </svg>
 
-      <div class="chart__points">
-        <div
-          v-for="(point, index) in chart.points"
-          :key="`point-zone-${index}`"
-          :style="{ left: `${100 * point.x / chart.width}%` }"
-          class="chart__point-zone"
-          @click="setActivePointIndex(index)"
-          @mouseover="setActivePointIndex(index)"
+      <div
+        v-for="(point, index) in chart.points"
+        :key="`point-zone-${index}`"
+        :style="{ left: `${100 * point.x / chart.width}%` }"
+        class="chart__point-zone"
+        @click="setActivePointIndex(index)"
+        @mouseover="setActivePointIndex(index)"
+      >
+        <UiText
+          size="m"
+          responsive
         >
-          <UiText
-            size="m"
-            responsive
-          >
-            {{ point.label }}
-          </UiText>
-        </div>
+          {{ point.label }}
+        </UiText>
+      </div>
 
+      <div
+        v-for="(point, index) in chart.points"
+        :key="`point-${index}`"
+        class="chart__point"
+        :style="{
+          left: `${100 * point.x / chart.width}%`,
+          top: `${100 * point.y / chart.height}%`
+        }"
+      />
+
+      <div class="chart__popovers">
         <UiPopover
           v-for="(point, index) in chart.points"
           :key="`point-${index}`"
-          class="chart__point"
-          :class="{ _active: isActivePointIndex(index) }"
+          class="chart__popover"
           :style="{
             left: `${100 * point.x / chart.width}%`,
             top: `${100 * point.y / chart.height}%`
@@ -64,17 +73,7 @@
             <slot
               name="point"
               :point="point"
-            >
-              <UiText>
-                <strong>
-                  {{ point.value }}
-                </strong>
-
-                <template v-if="point.valueDifference !== 0">
-                  ({{ point.valueDifference }})
-                </template>
-              </UiText>
-            </slot>
+            />
           </template>
         </UiPopover>
       </div>
@@ -99,7 +98,7 @@ import LineChart from '@/services/line-chart'
   provide () {
     return {
       getUiTooltipContainer: () => {
-        return this.$el
+        return this.$el.querySelector('.chart__inner')
       }
     }
   }

@@ -12,4 +12,16 @@
   &__numbers {
     margin-bottom: 24px;
   }
+
+  @include ui-mobile-only {
+    &__header {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .ui-field {
+        margin-top: 16px;
+        margin-left: 0;
+      }
+    }
+  }
 }

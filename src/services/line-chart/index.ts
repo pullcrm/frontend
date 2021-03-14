@@ -11,7 +11,7 @@ export default class ValuesChart {
   values: IValuesChartValue[] = []
   options: IValuesChartOptions
 
-  paddingX = 12
+  paddingX = 24
   paddingY = 0
 
   private _points:
