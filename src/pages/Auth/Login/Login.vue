@@ -141,22 +141,19 @@ export default class Login extends Vue {
         password: this.password
       })
 
-      await this.$store.dispatch('companies/fetch')
-      await this.$store.dispatch('companies/selectCompany')
+      await this.$store.dispatch('profile')
 
-      if (this.$store.getters['company/current']) {
-        await this.$store.dispatch('auth/onRefreshToken')
+      if (this.$store.getters['position/hasPositions']) {
+        const position = this.$store.state.position.positions[0]
 
-        this.$router.push({
-          name: 'dashboard'
-        })
+        await this.$store.dispatch('auth/refreshTokenByPosition', position)
+
+        this.$router.push({ name: 'dashboard' })
 
         return
       }
 
-      this.$router.push({
-        name: 'companyCreate'
-      })
+      await this.$router.push({ name: 'companyCreate' })
     } catch (err) {
       const serverErrors = [
         err.data.status === 400 && { field: 'password', error: 'invalid' }

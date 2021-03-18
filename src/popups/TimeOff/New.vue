@@ -51,18 +51,13 @@
           size="m"
           placement="bottom_start"
         >
-          <template #default="{ toggle }">
-            <UiField
-              label="Дата"
-              @click.native.prevent="toggle"
-            >
-              <UiInput
-                :value="date | formatDate('D MMMM')"
-                readonly
-                left-icon="outlined/calendar-blank"
-              />
-            </UiField>
-          </template>
+          <UiField label="Дата">
+            <UiInput
+              :value="date | formatDate('D MMMM')"
+              readonly
+              left-icon="outlined/calendar-blank"
+            />
+          </UiField>
 
           <template #body>
             <UiCalendar v-model="date" />
@@ -132,13 +127,7 @@ import Component from 'vue-class-component'
 
 import { setTime } from '@/utils/date-time'
 
-import UiCalendar from '@/ui/Calendar/Calendar.vue'
-
 @Component({
-  components: {
-    UiCalendar
-  },
-
   props: {
     specialistId: {
       type: Number,

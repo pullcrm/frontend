@@ -176,6 +176,17 @@ export interface IAnalyticsSimpleParams {
   endDate: string
 }
 
+export interface IAnalyticsCalendarParams {
+  startDate: string,
+  endDate: string
+}
+
+export interface IAnalyticsFinanceParams {
+  startDate: string,
+  endDate: string,
+  specialistId?: number
+}
+
 export const factory = (send) => ({
   auth: {
     login (params: IAuthLoginParams) : Promise<IApiAuthLogin> {
@@ -220,24 +231,24 @@ export const factory = (send) => ({
   profile: {
     get () : Promise<IRegistrationUser> {
       return send('users/profile', null, 'GET')
-    },
-
-    companies () : Promise<any[]> {
-      return send('specialists', null, 'GET')
     }
   },
 
   specialist: {
     create (params: IRegistrationUserParams) : Promise<IRegistrationUser> {
-      return send('companies/my/specialists', params)
+      return send('specialists', params)
     },
 
     update (id: number, params: IRegistrationUserParams) : Promise<IRegistrationUser> {
-      return send(`companies/my/specialists/${id}`, params, 'PUT')
+      return send(`specialists/${id}`, params, 'PUT')
     },
 
-    all (): Promise<any> {
-      return send('companies/my/specialists', null, 'GET')
+    all (params: any): Promise<any> {
+      return send('specialists', params, 'GET')
+    },
+
+    bulk (params: any) {
+      return send('specialists/bulk', params, 'PUT')
     }
   },
 
@@ -302,6 +313,10 @@ export const factory = (send) => ({
 
     create (params: any) : Promise<any> {
       return send('files', params, 'FORM')
+    },
+
+    remove (id: number) {
+      return send(`files/${id}`, {}, 'DELETE')
     }
   },
 
@@ -360,6 +375,14 @@ export const factory = (send) => ({
   analytics: {
     simple (params: IAnalyticsSimpleParams): Promise<any> {
       return send('companies/my/stats', params, 'GET')
+    },
+
+    calendar (params: IAnalyticsCalendarParams): Promise<any> {
+      return send('analytics/calendar', params, 'GET')
+    },
+
+    finance (params: IAnalyticsFinanceParams): Promise<any> {
+      return send('analytics/finance', params, 'GET')
     }
   },
 

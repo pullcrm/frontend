@@ -1,35 +1,21 @@
 <template>
   <div class="ui-calendar">
     <Month
-      v-model="openDate"
+      v-model="dateOpened"
       class="ui-calendar__month"
+      @input="resetDateFocused"
     />
 
     <DaysOfWeek
       class="ui-calendar__days-of-week"
     />
 
-    <div class="ui-calendar__days-of-month">
-      <div
-        v-for="day in prependDays"
-        :key="`prepend-${day}`"
-        class="ui-calendar-placeholder-day"
-      />
-
-      <UiText
-        v-for="day in daysInMonth"
-        :key="day"
-        class="ui-calendar-day"
-        :class="[
-          {'_is-today': isToday(day)},
-          {'_is-active': isActive(day)}
-        ]"
-        size="m"
-        @click.native="onSelect(day)"
-      >
-        {{ day }}
-      </UiText>
-    </div>
+    <CalendarTable
+      :range="isRange"
+      :date-opened="dateOpened"
+      :date-selected="dateSelected"
+      @select="select"
+    />
   </div>
 </template>
 
@@ -41,62 +27,73 @@ import dayjs from '@/utils/dayjs'
 
 import Month from './Month.vue'
 import DaysOfWeek from './DaysOfWeek.vue'
+import CalendarTable from './CalendarTable.vue'
 
 @Component({
   components: {
     Month,
-    DaysOfWeek
+    DaysOfWeek,
+    CalendarTable
   },
 
   props: {
     value: {
-      type: Date,
+      type: [Date, Array],
       required: true
     }
   }
 })
 export default class Calendar extends Vue {
-  readonly value: Date
+  readonly value: Date | Date[]
 
-  openDate = dayjs(this.value)
-  currentDate = dayjs(new Date())
+  dateOpened
 
-  get date () {
-    return dayjs(this.value)
+  dateFocused = []
+
+  constructor () {
+    super()
+
+    if (Array.isArray(this.value)) {
+      this.dateOpened = dayjs(this.value[0])
+    } else {
+      this.dateOpened = dayjs(this.value)
+    }
   }
 
-  get daysInMonth () {
-    return this.openDate.daysInMonth()
+  get isRange () {
+    return Array.isArray(this.value)
   }
 
-  get prependDays () {
-    let day = this.openDate.date(1).day()
-
-    if (day === 0) {
-      day = 7
+  get dateSelected () {
+    if (this.dateFocused.length > 0) {
+      return this.dateFocused.map(date => dayjs(date))
     }
 
-    return day - 1
-  }
-
-  isToday (day) {
-    if (this.currentDate.format('YYYY-MM') !== this.openDate.format('YYYY-MM')) {
-      return false
+    if (Array.isArray(this.value)) {
+      return this.value.map(date => dayjs(date))
     }
 
-    return this.currentDate.date() === day
+    return [dayjs(this.value)]
   }
 
-  isActive (day) {
-    if (this.openDate.format('YYYY-MM') !== this.date.format('YYYY-MM')) {
-      return false
+  resetDateFocused () {
+    this.dateFocused = []
+  }
+
+  select (value) {
+    if (this.isRange) {
+      this.dateFocused.push(value)
+
+      if (this.dateFocused.length === 2) {
+        this.$emit('input', this.dateFocused.sort((a, b) => a - b))
+
+        this.dateFocused = []
+      }
+
+      return
     }
 
-    return this.date.date() === day
-  }
-
-  onSelect (day) {
-    this.$emit('input', this.openDate.date(day).toDate())
+    this.$emit('input', value)
   }
 }
 </script>

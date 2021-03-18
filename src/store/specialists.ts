@@ -6,7 +6,10 @@ function createState () {
 
 const actions = {
   async fetch ({ commit }) {
-    let specialists = await this.$api.specialist.all()
+    let specialists = await this.$api.specialist.all({
+      sort: 'rate',
+      order: 'asc'
+    })
 
     specialists = specialists.map(item => ({
       ...item,

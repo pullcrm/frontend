@@ -166,7 +166,7 @@ export default class Appointment extends Vue {
     &_IN_PROGRESS_WIDGET {
       .appointment-wrapper__inner {
         &::before {
-          background: #705bcf;
+          background: $ui-brand-purple;
         }
       }
     }

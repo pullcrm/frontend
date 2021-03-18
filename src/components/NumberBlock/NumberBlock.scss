@@ -1,0 +1,58 @@
+@mixin number-block-color ($color) {
+  .number-block__icon {
+    background-color: $color;
+  }
+}
+
+.number-block {
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    margin-right: 16px;
+    color: #fff;
+    border-radius: 12px;
+  }
+
+  &__text {
+    flex: 1;
+
+    .ui-text {
+      @include ellipsis(1);
+
+      color: $ui-black-60;
+    }
+  }
+
+  &__info {
+    margin-left: 8px;
+
+    .ui-icon {
+      color: $ui-brand-blue;
+    }
+  }
+
+  &._theme {
+    &_blue {
+      @include number-block-color($ui-brand-blue);
+    }
+
+    &_green {
+      @include number-block-color($ui-brand-green);
+    }
+
+    &_yellow {
+      @include number-block-color($ui-yellow-dark);
+    }
+
+    &_purple {
+      @include number-block-color($ui-brand-purple);
+    }
+  }
+}

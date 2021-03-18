@@ -1,0 +1,47 @@
+.analytics-appointments-page-line-chart {
+  &__point {
+    .ui-text {
+      margin-bottom: 8px;
+
+      &__prepend {
+        .ui-icon {
+          width: 8px;
+          height: 8px;
+        }
+      }
+
+      &__content {
+        width: 100px;
+        color: $ui-black-50;
+      }
+
+      &._blue {
+        .ui-icon {
+          color: $ui-brand-blue;
+        }
+      }
+
+      &._green {
+        .ui-icon {
+          color: $ui-brand-green;
+        }
+      }
+
+      &._orange {
+        .ui-icon {
+          color: $ui-brand-orange;
+        }
+      }
+
+      &._purple {
+        .ui-icon {
+          color: $ui-brand-purple;
+        }
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

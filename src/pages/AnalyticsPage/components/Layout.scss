@@ -1,0 +1,15 @@
+.analytics-page-layout {
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__tabs {
+    margin-bottom: 36px;
+  }
+
+  @include ui-mobile-only {
+    &__tabs {
+      margin-bottom: 24px;
+    }
+  }
+}

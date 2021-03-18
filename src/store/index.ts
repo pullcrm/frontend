@@ -6,18 +6,16 @@ import auth from './auth'
 import popup from './popup'
 import toasts from './toasts'
 import widget from './widget'
-import company from './company'
 import schedule from './schedule'
-import companies from './companies'
+import position from './position'
 import analytics from './analytics'
 import procedures from './procedures'
 import specialists from './specialists'
 import drugAndDrop from './drug-and-drop'
 import appointments from './appointments'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IState {
-  //
+  profile: any | null
 }
 
 Vue.use(Vuex)
@@ -29,9 +27,8 @@ export default new Vuex.Store<IState>({
     popup,
     toasts,
     widget,
-    company,
     schedule,
-    companies,
+    position,
     analytics,
     procedures,
     specialists,
@@ -39,11 +36,24 @@ export default new Vuex.Store<IState>({
     appointments
   },
 
-  state: {},
+  state: {
+    profile: null
+  },
 
-  actions: {},
+  actions: {
+    async profile ({ commit }) {
+      const { specialists: positions, ...profile } = await this.$api.profile.get()
 
-  mutations: {},
+      commit('SET_PROFILE', profile)
+      commit('position/SET_POSITIONS', positions, { root: true })
+    }
+  },
+
+  mutations: {
+    SET_PROFILE (state, profile) {
+      state.profile = profile
+    }
+  },
 
   getters: {}
 })

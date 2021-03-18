@@ -1,5 +1,6 @@
 <template>
-  <RouterLink
+  <Component
+    :is="to ? 'RouterLink' : 'div'"
     class="navbar-item"
     :to="to"
   >
@@ -7,7 +8,11 @@
       :name="icon"
       size="m"
     />
-  </RouterLink>
+
+    <span class="navbar-item__name">
+      {{ name }}
+    </span>
+  </Component>
 </template>
 
 <script lang="ts">
@@ -18,10 +23,15 @@ import Component from 'vue-class-component'
   props: {
     to: {
       type: [Object, String],
-      required: true
+      default: null
     },
 
     icon: {
+      type: String,
+      required: true
+    },
+
+    name: {
       type: String,
       required: true
     }

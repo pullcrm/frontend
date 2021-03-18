@@ -12,7 +12,7 @@
     </UiTitle>
 
     <div class="ui-grid">
-      <NumberItem
+      <NumberBlock
         v-for="(item, index) in numbers"
         :key="`item-${index}`"
         :class="[
@@ -22,7 +22,21 @@
           'ui-grid-item_laptop_4'
         ]"
         v-bind="item"
-      />
+      >
+        <UiText
+          size="m"
+          responsive
+        >
+          {{ item.name }}
+        </UiText>
+
+        <UiTitle
+          size="s"
+          responsive
+        >
+          {{ item.total | price }}
+        </UiTitle>
+      </NumberBlock>
     </div>
   </div>
 </template>
@@ -33,11 +47,11 @@ import Component from 'vue-class-component'
 
 import dayjs from '@/utils/dayjs'
 
-import NumberItem from './Number.vue'
+import NumberBlock from '@/components/NumberBlock/NumberBlock.vue'
 
 @Component({
   components: {
-    NumberItem
+    NumberBlock
   }
 })
 export default class Numbers extends Vue {
@@ -57,21 +71,21 @@ export default class Numbers extends Vue {
 
     this.numbers.push({
       name: 'Доход за сегодня',
-      value: day.total,
+      total: day.total,
       theme: 'blue',
       icon: 'solid/sun-horizon-fill'
     })
 
     this.numbers.push({
       name: 'Доход за текущий месяц',
-      value: month.total,
+      total: month.total,
       theme: 'green',
       icon: 'solid/calendar-fill'
     })
 
     this.numbers.push({
       name: 'Средний чек за месяц',
-      value: month.average,
+      total: month.average,
       theme: 'yellow',
       icon: 'solid/receipt-fill'
     })

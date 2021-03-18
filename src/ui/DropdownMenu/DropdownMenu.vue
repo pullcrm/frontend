@@ -4,12 +4,7 @@
     class="ui-dropdown-menu"
     v-bind="$attrs"
   >
-    <template #default="{ open, close, isOpened, toggle }">
-      <slot
-        name="inner"
-        v-bind="{ open, close, isOpened, toggle }"
-      />
-    </template>
+    <slot name="inner" />
 
     <template #body="{ close }">
       <div class="ui-dropdown-menu__popover">

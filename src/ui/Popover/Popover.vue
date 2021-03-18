@@ -2,7 +2,7 @@
   <div
     v-click-outside="{
       handler: close,
-      isActive: closedOutside && isOpened
+      isActive: clickable && isOpened
     }"
     class="ui-popover"
     :class="[
@@ -12,36 +12,31 @@
       `ui-popover_${computedPlacement}`,
       { 'ui-popover_opened': isOpened }
     ]"
-    @mouseover="hover && !isTouchDevice && open()"
-    @mouseout="hover && !isTouchDevice && close()"
+    @click.prevent="clickable && toggle()"
   >
     <slot
-      :open="open"
-      :close="close"
-      :toggle="toggle"
       :is-opened="isOpened"
     />
 
-    <template v-if="enabled">
-      <div class="ui-popover__arrow" />
+    <div class="ui-popover__arrow" />
 
-      <div
-        ref="body"
-        class="ui-popover__body"
+    <div
+      ref="body"
+      class="ui-popover__body"
+      @click.stop
+    >
+      <slot
+        name="body"
+        :close="close"
       >
-        <slot
-          name="body"
-          :close="close"
+        <UiText
+          size="m"
+          responsive
         >
-          <UiText
-            size="m"
-            responsive
-          >
-            {{ text }}
-          </UiText>
-        </slot>
-      </div>
-    </template>
+          {{ text }}
+        </UiText>
+      </slot>
+    </div>
   </div>
 </template>
 
@@ -49,7 +44,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { isTouchDevice } from '@/utils/device'
 import { computePlacement, Placement } from '@/utils/placement'
 
 @Component({
@@ -78,12 +72,7 @@ import { computePlacement, Placement } from '@/utils/placement'
       default: 'right_middle'
     },
 
-    enabled: {
-      type: Boolean,
-      default: true
-    },
-
-    hover: {
+    opened: {
       type: Boolean,
       default: false
     },
@@ -93,16 +82,26 @@ import { computePlacement, Placement } from '@/utils/placement'
       default: undefined
     },
 
-    closedOutside: {
+    clickable: {
       type: Boolean,
       default: true
+    }
+  },
+
+  watch: {
+    opened: {
+      handler (opened) {
+        opened
+          ? this.open()
+          : this.close()
+      }
     }
   }
 })
 export default class Popover extends Vue {
   readonly getContainer!: () => HTMLElement
 
-  readonly hover!: boolean
+  readonly opened!: boolean
   readonly text?: string
   readonly theme!:
     | 'dark'
@@ -110,11 +109,13 @@ export default class Popover extends Vue {
     | 'custom'
 
   readonly size!:
+    | 's'
     | 'm'
+    | 'l'
     | 'custom'
 
   readonly placement!: Placement
-  readonly closedOutside! : Boolean
+  readonly clickable! : Boolean
 
   isOpened = false
   computedPlacement: Placement
@@ -127,10 +128,6 @@ export default class Popover extends Vue {
     super()
 
     this.computedPlacement = this.placement
-  }
-
-  get isTouchDevice () {
-    return isTouchDevice()
   }
 
   open () {

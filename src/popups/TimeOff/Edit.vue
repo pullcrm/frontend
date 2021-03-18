@@ -51,18 +51,13 @@
           size="m"
           placement="bottom_start"
         >
-          <template #default="{ toggle }">
-            <UiField
-              label="Дата"
-              @click.native.prevent="toggle"
-            >
-              <UiInput
-                :value="date | formatDate('D MMMM')"
-                readonly
-                left-icon="outlined/pencil"
-              />
-            </UiField>
-          </template>
+          <UiField label="Дата">
+            <UiInput
+              :value="date | formatDate('D MMMM')"
+              readonly
+              left-icon="outlined/pencil"
+            />
+          </UiField>
 
           <template #body>
             <UiCalendar v-model="date" />
@@ -142,13 +137,7 @@ import { setTime, toDate } from '@/utils/date-time'
 
 import { isCloseDay } from '@/logics/time-offs'
 
-import UiCalendar from '@/ui/Calendar/Calendar.vue'
-
 @Component({
-  components: {
-    UiCalendar
-  },
-
   props: {
     timeOff: {
       type: Object,

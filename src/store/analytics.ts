@@ -1,4 +1,32 @@
+import { normalizeAppointmentsStats, normalizeAnalyticsStats } from '@/logics/analytics'
+
+function createState () {
+  return {
+    financeStats: null,
+    appointmentsStats: null
+  }
+}
+
 const actions = {
+  async fetchAppointmentsStats ({ commit }, { startDate, endDate }) {
+    const stats = await this.$api.analytics.calendar({
+      startDate,
+      endDate
+    })
+
+    commit('SET_APPOINTMENTS_STATS', normalizeAppointmentsStats(stats))
+  },
+
+  async fetchFinanceStats ({ commit }, { startDate, endDate, specialistId }) {
+    const stats = await this.$api.analytics.finance({
+      endDate,
+      startDate,
+      specialistId
+    })
+
+    commit('SET_FINANCE_STATS', normalizeAnalyticsStats(stats))
+  },
+
   async fetchForMonth (_, date) {
     const daysInMonth = date.daysInMonth()
 
@@ -16,7 +44,26 @@ const actions = {
   }
 }
 
+const mutations = {
+  SET_APPOINTMENTS_STATS (state, appointmentsStats) {
+    state.appointmentsStats = appointmentsStats
+  },
+
+  SET_FINANCE_STATS (state, financeStats) {
+    state.financeStats = financeStats
+  }
+}
+
+const getters = {
+  appointmentsList (state) {
+    return state.appointmentsStats.appointments
+  }
+}
+
 export default {
   namespaced: true,
-  actions
+  state: createState,
+  actions,
+  getters,
+  mutations
 }

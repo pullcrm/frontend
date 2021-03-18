@@ -1,17 +1,15 @@
-export default async function company ({ from, next, store }) {
+export default async function company ({ next, store }) {
   if (!store.state.auth.accessToken) {
     return
   }
 
-  if (store.getters['company/current']) {
+  if (store.state.position.current) {
     return
   }
 
-  const companies = await store.dispatch('companies/fetch')
-
-  if (companies.length === 0) {
-    return next({ name: 'companyCreate', query: { from } })
+  if (store.getters['position/hasPositions'] === false) {
+    return next({ name: 'companyCreate' })
   }
 
-  await store.dispatch('companies/selectCompany')
+  await store.dispatch('position/fetch')
 }

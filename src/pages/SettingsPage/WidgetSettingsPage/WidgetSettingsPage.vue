@@ -42,12 +42,8 @@ import code from './code.txt'
   }
 })
 export default class WidgetSettingsPage extends Vue {
-  get company () {
-    return this.$store.getters['company/current']
-  }
-
   get companyId () {
-    return this.company.id
+    return this.$store.getters['position/companyId']
   }
 
   get htmlCode () {

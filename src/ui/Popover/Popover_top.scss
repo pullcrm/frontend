@@ -16,7 +16,7 @@
     top: -12px;
     right: auto;
     bottom: auto;
-    left: 0;
+    left: -12px;
     transform: translateY(-100%);
   }
 }
@@ -34,7 +34,7 @@
 @mixin ui-popover_top_end {
   .ui-popover__body {
     top: -12px;
-    right: 0;
+    right: -12px;
     bottom: auto;
     left: auto;
     transform: translateY(-100%);
