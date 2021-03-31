@@ -41,11 +41,21 @@ export default new Vuex.Store<IState>({
   },
 
   actions: {
-    async profile ({ commit }) {
-      const { specialists: positions, ...profile } = await this.$api.profile.get()
+    async profile ({ dispatch, commit }) {
+      try {
+        const { specialists: positions, ...profile } = await this.$api.profile.get()
 
-      commit('SET_PROFILE', profile)
-      commit('position/SET_POSITIONS', positions, { root: true })
+        commit('SET_PROFILE', profile)
+        commit('position/SET_POSITIONS', positions, { root: true })
+      } catch (err) {
+        if (err.code) {
+          await dispatch('auth/reset', null, { root: true })
+
+          location.reload()
+        }
+
+        throw err
+      }
     }
   },
 
