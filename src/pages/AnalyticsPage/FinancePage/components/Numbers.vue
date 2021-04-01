@@ -1,7 +1,7 @@
 <template>
   <div class="analytics-finance-page-numbers">
     <div class="ui-grid">
-      <NumberBlock
+      <InfoPanel
         :class="[
           'ui-grid-item',
           'ui-grid-item_12',
@@ -24,9 +24,9 @@
         >
           {{ total }}
         </UiTitle>
-      </NumberBlock>
+      </InfoPanel>
 
-      <NumberBlock
+      <InfoPanel
         :class="[
           'ui-grid-item',
           'ui-grid-item_12',
@@ -49,9 +49,9 @@
         >
           {{ income | price }}
         </UiTitle>
-      </NumberBlock>
+      </InfoPanel>
 
-      <NumberBlock
+      <InfoPanel
         :class="[
           'ui-grid-item',
           'ui-grid-item_12',
@@ -74,7 +74,7 @@
         >
           {{ average | price }}
         </UiTitle>
-      </NumberBlock>
+      </InfoPanel>
     </div>
   </div>
 </template>
@@ -83,11 +83,11 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import NumberBlock from '@/components/NumberBlock/NumberBlock.vue'
+import InfoPanel from '@/components/InfoPanel/InfoPanel.vue'
 
 @Component({
   components: {
-    NumberBlock
+    InfoPanel
   }
 })
 export default class Numbers extends Vue {

@@ -12,7 +12,7 @@
     </UiTitle>
 
     <div class="ui-grid">
-      <NumberBlock
+      <InfoPanel
         v-for="(item, index) in numbers"
         :key="`item-${index}`"
         :class="[
@@ -36,7 +36,7 @@
         >
           {{ item.total | price }}
         </UiTitle>
-      </NumberBlock>
+      </InfoPanel>
     </div>
   </div>
 </template>
@@ -47,11 +47,11 @@ import Component from 'vue-class-component'
 
 import dayjs from '@/utils/dayjs'
 
-import NumberBlock from '@/components/NumberBlock/NumberBlock.vue'
+import InfoPanel from '@/components/InfoPanel/InfoPanel.vue'
 
 @Component({
   components: {
-    NumberBlock
+    InfoPanel
   }
 })
 export default class Numbers extends Vue {

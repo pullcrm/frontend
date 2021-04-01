@@ -1,26 +1,26 @@
 <template>
   <UiPanel
-    class="number-block"
+    class="info-panel"
     :class="[
       `_theme_${theme}`
     ]"
     size="m"
     responsive
   >
-    <div class="number-block__icon">
+    <div class="info-panel__icon">
       <UiIcon
         :name="icon"
         size="m"
       />
     </div>
 
-    <div class="number-block__text">
+    <div class="info-panel__text">
       <slot />
     </div>
 
     <UiTooltip
       v-if="info"
-      class="number-block__info"
+      class="info-panel__info"
       placement="top"
       :text="info"
     >
@@ -54,7 +54,7 @@ import Component from 'vue-class-component'
     }
   }
 })
-export default class NumberBlock extends Vue {
+export default class InfoPanel extends Vue {
   readonly icon! : string
   readonly theme!:
   | 'blue'
@@ -66,4 +66,4 @@ export default class NumberBlock extends Vue {
 }
 </script>
 
-<style lang="scss" src="./NumberBlock.scss"></style>
+<style lang="scss" src="./InfoPanel.scss"></style>

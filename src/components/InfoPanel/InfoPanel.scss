@@ -1,10 +1,10 @@
-@mixin number-block-color ($color) {
-  .number-block__icon {
+@mixin info-panel-color ($color) {
+  .info-panel__icon {
     background-color: $color;
   }
 }
 
-.number-block {
+.info-panel {
   display: flex;
   align-items: center;
 
@@ -40,19 +40,19 @@
 
   &._theme {
     &_blue {
-      @include number-block-color($ui-brand-blue);
+      @include info-panel-color($ui-brand-blue);
     }
 
     &_green {
-      @include number-block-color($ui-brand-green);
+      @include info-panel-color($ui-brand-green);
     }
 
     &_yellow {
-      @include number-block-color($ui-yellow-dark);
+      @include info-panel-color($ui-yellow-dark);
     }
 
     &_purple {
-      @include number-block-color($ui-brand-purple);
+      @include info-panel-color($ui-brand-purple);
     }
   }
 }
