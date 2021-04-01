@@ -23,6 +23,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import store from '@/store'
+
 import Specialist from '../../components/Specialist.vue'
 import BaseWidgetLayout from '../../components/Layout.vue'
 
@@ -30,6 +32,14 @@ import BaseWidgetLayout from '../../components/Layout.vue'
   components: {
     Specialist,
     BaseWidgetLayout
+  },
+
+  async beforeRouteEnter (to, _from, next) {
+    const companyId = to.params.companyId
+
+    await store.dispatch('widget/fetch', companyId)
+
+    next()
   }
 })
 export default class BarbershopLondon extends Vue {
@@ -37,16 +47,25 @@ export default class BarbershopLondon extends Vue {
     baseWidgetLayout: BaseWidgetLayout
   }
 
-  get companyId (): string {
-    return this.$route.params.companyId
-  }
-
   get specialists () {
     return this.$store.state.widget.specialists
   }
 
   async mounted () {
-    await this.$store.dispatch('widget/fetch', this.companyId)
+    const specialistId = Number(this.$route.query.specialistId)
+
+    const specialist = this.$store.getters['widget/specialistsById'](specialistId)
+
+    if (specialist) {
+      await this.$router.replace({
+        query: {
+          ...this.$route.query,
+          specialistId: null
+        }
+      })
+
+      this.onSelect(specialist)
+    }
 
     this.$refs.baseWidgetLayout.onUpdateHeight()
   }

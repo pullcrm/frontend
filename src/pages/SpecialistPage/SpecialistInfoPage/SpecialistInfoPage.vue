@@ -95,6 +95,17 @@
         :created-at="specialist.createdAt"
       />
 
+      <UiLink
+        tag="UiText"
+        size="l"
+        theme="action"
+        left-icon="outlined/link"
+        class="specialist-info-page__widget"
+        @click.native.prevent="copyPersonalLink"
+      >
+        Персональная ссылка на страницу записи
+      </UiLink>
+
       <UiButton
         id="submit-button"
         class="specialist-info-page__button"
@@ -116,6 +127,8 @@ import Component from 'vue-class-component'
 import { AVATAR } from '@/constants/files'
 
 import { statuses } from '@/logics/specialist'
+
+import { copyText } from '@/utils/clipboard'
 
 import Avatars from './components/Avatars.vue'
 import CreatedAt from './components/CreatedAt.vue'
@@ -145,7 +158,7 @@ interface ISpecialistEditParams {
 
   beforeRouteEnter (_to, _from, next) {
     next(async (vm: SpecialistInfoPage) => {
-      vm.fetchAvatars()
+      await vm.fetchAvatars()
     })
   }
 })
@@ -181,6 +194,10 @@ export default class SpecialistInfoPage extends Vue {
       description,
       specialization
     }
+  }
+
+  get companyId () {
+    return this.$store.getters['position/companyId']
   }
 
   get specialistId () {
@@ -236,6 +253,16 @@ export default class SpecialistInfoPage extends Vue {
     })
 
     this.avatars = result
+  }
+
+  async copyPersonalLink () {
+    const link = `https://pullcrm.com/widgets/base/${this.companyId}/?specialistId=${this.specialistId}`
+
+    copyText(link)
+
+    await this.$store.dispatch('toasts/show', {
+      title: 'Ссылка скопирована!'
+    })
   }
 }
 </script>

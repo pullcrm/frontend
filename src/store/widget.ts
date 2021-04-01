@@ -50,7 +50,20 @@ const mutations = {
   }
 }
 
-const getters = {}
+const getters = {
+  specialistsDict (state) {
+    return state.specialists.reduce((dict, item) => {
+      return {
+        ...dict,
+        [item.id]: item
+      }
+    }, {})
+  },
+
+  specialistsById: (_state, localGetters) => (specialistId) => {
+    return localGetters.specialistsDict[specialistId]
+  }
+}
 
 export default {
   namespaced: true,

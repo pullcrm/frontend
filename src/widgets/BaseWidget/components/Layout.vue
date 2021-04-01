@@ -39,7 +39,7 @@ import UiMicroText from '@/ui/MicroText/MicroText.vue'
     }
   }
 })
-export default class BaswWidgetLayout extends Vue {
+export default class BaseWidgetLayout extends Vue {
   readonly hasBack: boolean
 
   async onUpdateHeight () {
