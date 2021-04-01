@@ -49,7 +49,7 @@
           label="Длительность"
         >
           <UiSelect
-            v-model="form.duration"
+            v-model="duration"
             label-key="name"
             required
             :options="durationList"
@@ -88,14 +88,31 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { DURATIONS } from '@/constants/generated'
+import { PROCEDURE_DURATIONS } from '@/constants/time'
+
+import { minutesToTime } from '@/utils/time'
 
 @Component({})
 export default class ProcedureNew extends Vue {
-  form = {}
+  form = {
+    duration: null
+  }
+
+  get duration () {
+    return minutesToTime(this.form.duration)
+  }
+
+  set duration ($event: any) {
+    this.form.duration = $event.value
+  }
 
   get durationList () {
-    return DURATIONS
+    return PROCEDURE_DURATIONS.map(minutes => {
+      return {
+        name: minutesToTime(minutes),
+        value: minutes
+      }
+    })
   }
 
   get validations () {
@@ -109,7 +126,7 @@ export default class ProcedureNew extends Vue {
       // @ts-ignore
       price: Number(this.form.price),
       // @ts-ignore
-      duration: this.form.duration.value,
+      duration: this.form.duration,
       // @ts-ignore
       description: this.form.description
     })

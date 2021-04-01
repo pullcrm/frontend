@@ -30,7 +30,7 @@
       </UiTableColumn>
 
       <UiTableColumn name="Длительность">
-        {{ getDurationName(row.duration) }}
+        {{ row.duration | minutesToTime }}
       </UiTableColumn>
 
       <UiTableColumn name="Изменить">
@@ -51,8 +51,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { DURATIONS } from '@/constants/generated'
-
 import UiTable from '@/ui/Table/Table.vue'
 import UiTableColumn from '@/ui/Table/TableColumn.vue'
 
@@ -70,19 +68,11 @@ import UiTableColumn from '@/ui/Table/TableColumn.vue'
   }
 })
 export default class ProceduresTable extends Vue {
-  get durationList () {
-    return DURATIONS
-  }
-
-  onEdit (procedure) {
-    this.$store.dispatch('popup/show', {
+  async onEdit (procedure) {
+    await this.$store.dispatch('popup/show', {
       name: 'procedure-edit',
       props: { procedure }
     })
-  }
-
-  getDurationName (time) {
-    return this.durationList.find(item => item.value === time)?.name
   }
 }
 </script>

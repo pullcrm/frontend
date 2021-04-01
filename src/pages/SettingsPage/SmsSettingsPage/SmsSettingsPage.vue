@@ -64,7 +64,7 @@
         >
           <UiSelect
             label-key="name"
-            :value="remindSMSMinutes"
+            :value="remindTime | minutesToTime"
             :options="durationList"
             required
             :clearable="false"
@@ -103,7 +103,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { DURATIONS } from '@/constants/generated'
+import { SMS_REMIND_DURATIONS } from '@/constants/time'
+
+import { minutesToTime } from '@/utils/time'
 
 import SettingsLayout from '../components/SettingsLayout.vue'
 
@@ -117,20 +119,16 @@ export default class SmsSettingsPage extends Vue {
 
   settings = this.$store.getters['sms/settings']
 
+  get remindTime () {
+    return this.settings.remindSMSMinutes
+  }
+
   get durationList () {
-    return DURATIONS
+    return SMS_REMIND_DURATIONS.map(minutes => minutesToTime(minutes))
   }
 
   get isSMSAuthorize () {
     return this.$store.getters['sms/isAuthorize']
-  }
-
-  get remindSMSMinutes () {
-    const item = this.durationList.find(item => {
-      return item.value === this.settings.remindSMSMinutes
-    })
-
-    return item?.name
   }
 
   async save () {

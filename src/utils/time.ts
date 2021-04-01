@@ -6,7 +6,7 @@ export function slugFromTime (time) {
 }
 
 export function minutesToTime (minutes: number) {
-  const date = dayjs().hour(0).minute(0).minute(minutes)
+  const date = dayjs().hour(0).minute(minutes)
 
   const hour = date.hour()
   const minute = date.minute()
@@ -14,7 +14,11 @@ export function minutesToTime (minutes: number) {
   let str = ''
 
   if (hour > 0) {
-    str += `${hour} ${pluralize(hour, 'час', 'часа', 'часов')} `
+    str += `${hour} ${pluralize(hour, 'час', 'часа', 'часов')}`
+  }
+
+  if (str) {
+    str += ' '
   }
 
   if (minute > 0) {

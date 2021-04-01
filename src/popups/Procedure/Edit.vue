@@ -47,7 +47,7 @@
           label="Длительность"
         >
           <UiSelect
-            v-model="form.duration"
+            v-model="duration"
             label-key="name"
             :options="durationList"
             left-icon="outlined/pencil"
@@ -92,7 +92,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { DURATIONS } from '@/constants/generated'
+import { PROCEDURE_DURATIONS } from '@/constants/time'
+
+import { minutesToTime } from '@/utils/time'
 
 import { IProcedure } from '@/services/api'
 
@@ -107,13 +109,23 @@ import { IProcedure } from '@/services/api'
 export default class ProcedureEdit extends Vue {
   readonly procedure: IProcedure
 
-  form = {
-    ...this.procedure,
-    duration: this.durationList.find(({ value }) => value === this.procedure.duration)
+  form = this.procedure
+
+  get duration () {
+    return minutesToTime(this.form.duration)
+  }
+
+  set duration ($event: any) {
+    this.form.duration = $event.value
   }
 
   get durationList () {
-    return DURATIONS
+    return PROCEDURE_DURATIONS.map(minutes => {
+      return {
+        name: minutesToTime(minutes),
+        value: minutes
+      }
+    })
   }
 
   get validations () {
@@ -124,7 +136,7 @@ export default class ProcedureEdit extends Vue {
     await this.$api.procedures.update(this.form.id, {
       name: this.form.name,
       price: Number(this.form.price),
-      duration: this.form.duration.value,
+      duration: this.form.duration,
       description: this.form.description
     })
 
