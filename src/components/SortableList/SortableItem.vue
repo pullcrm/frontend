@@ -98,9 +98,3 @@ export default class SortableItem extends Vue {
   }
 }
 </script>
-
-<style lang="scss">
-  .sortable-item {
-    //
-  }
-</style>
