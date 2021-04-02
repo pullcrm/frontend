@@ -1,20 +1,32 @@
-import { WORKING_HOURS } from '@/constants/generated'
 import { TIME_STEP } from '@/constants'
+
+import { setTime } from '@/utils/date-time'
+
+function getWorkingHours (open, close) {
+  const hours = []
+
+  let from = setTime(new Date(), open)
+
+  do {
+    hours.push(from.format('HH:mm'))
+
+    from = from.add(15, 'm')
+  } while (from.format('HH:mm') !== close)
+
+  return [...hours, close]
+}
 
 export default class Time {
   open: string
   close: string
 
-  workingHours: string[]
-
   constructor ({ open, close }) {
     this.open = open
     this.close = close
+  }
 
-    const fromIndex = WORKING_HOURS.indexOf(open)
-    const toIndex = WORKING_HOURS.indexOf(close)
-
-    this.workingHours = WORKING_HOURS.slice(fromIndex, toIndex + 1)
+  get workingHours () {
+    return getWorkingHours(this.open, this.close)
   }
 
   shiftTimeDownBySteps (time, steps) {

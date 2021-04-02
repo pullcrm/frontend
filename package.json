@@ -11,8 +11,7 @@
     "lint:css": "stylelint 'src/**/*.{vue,scss,css}'",
     "lint:css:fix": "stylelint 'src/**/*.{vue,scss,css}' --fix",
     "lint": "yarn lint:js && yarn lint:css",
-    "figma:export-icons": "node ./bin/export-icons.ts",
-    "constants:generate": "node ./bin/constants-generate.ts"
+    "figma:export-icons": "node ./bin/export-icons.ts"
   },
   "dependencies": {
     "animated-scroll-to": "^2.0.10",
