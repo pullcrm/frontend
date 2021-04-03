@@ -1,0 +1,77 @@
+@import './grid-mixins';
+@import './typo-mixins';
+@import './shadow-mixins';
+
+@mixin ui-scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $ui-black-20;
+    background-clip: content-box;
+    border: 2px solid transparent;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $ui-brand-blue;
+    background-clip: content-box;
+    border: 2px solid transparent;
+    border-radius: 100px;
+  }
+}
+
+@mixin ellipsis($lines) {
+  display: -webkit-box;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis; /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+}
+
+@mixin ui-safe-bottom($bottom: 0) {
+  position: fixed;
+  bottom: $bottom;
+
+  @if $bottom == 0 {
+    bottom: var(--safe-area-inset-bottom);
+  }
+
+  @if $bottom != 0 {
+    bottom: calc(#{$bottom} + var(--safe-area-inset-bottom));
+  }
+}
+
+@mixin hide-scrollbar () {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin ui-mobile-only {
+  @media (max-width: $ui-tablet - 1px) {
+    @content;
+  }
+}
+
+@mixin ui-desktop-only {
+  @media (min-width: $ui-tablet) {
+    @content;
+  }
+}
+
+@mixin ui-hover {
+  @include ui-desktop-only {
+    @media (hover: hover) {
+      @content;
+    }
+  }
+}

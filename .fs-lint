@@ -1,0 +1,17 @@
+{
+  "rules": [
+    {
+      "files": [
+        "client/components/**/*.vue",
+        "client/views/**/*.vue",
+      ],
+      "naming": "UpperCamelCase",
+      "level": "error"
+    },
+    {
+      "files": "client/scss/**/*.scss",
+      "naming": "lowercase-dash",
+      "level": "error"
+    }
+  ]
+}
