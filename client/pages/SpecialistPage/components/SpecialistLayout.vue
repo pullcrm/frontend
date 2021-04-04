@@ -15,10 +15,10 @@
         {{ specialist.fullName }}
       </UiTitle>
 
-      <UiTabs
-        class="specialist-page-layout__tabs"
-        :tabs="tabs"
-        @input="onTab"
+      <UiNavigation
+        class="specialist-page-layout__navigation"
+        :navigation="navigation"
+        @input="onNavigation"
       />
 
       <slot />
@@ -34,7 +34,7 @@ import { SPECIALIST } from '~/constants/roles'
 
 @Component({})
 export default class SpecialistLayout extends Vue {
-  get tabs () {
+  get navigation () {
     return [
       {
         name: 'Информация',
@@ -82,8 +82,8 @@ export default class SpecialistLayout extends Vue {
     return this.role.name !== SPECIALIST
   }
 
-  async onTab (tab) {
-    if (tab.name === 'Выйти') {
+  async onNavigation (item) {
+    if (item.name === 'Выйти') {
       await this.logout()
     }
   }

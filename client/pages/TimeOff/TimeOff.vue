@@ -32,6 +32,8 @@ import Component from 'vue-class-component'
 import TimeOffTable from './components/Table.vue'
 
 @Component({
+  layout: 'dashboard',
+
   components: {
     TimeOffTable
   }

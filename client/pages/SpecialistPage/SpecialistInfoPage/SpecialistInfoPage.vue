@@ -138,8 +138,6 @@ import CreatedAt from './components/CreatedAt.vue'
 import { AVATAR } from '~/constants/files'
 
 @Component({
-  layout: 'empty',
-
   components: {
     Avatars,
     CreatedAt,

@@ -85,8 +85,6 @@ import Component from 'vue-class-component'
 import Layout from '~/pages/Auth/components/Layout.vue'
 
 @Component({
-  layout: 'empty',
-
   components: {
     Layout
   }

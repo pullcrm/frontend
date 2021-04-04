@@ -9,9 +9,14 @@
       >
         <UiText
           size="m"
-          left-icon="outlined/calendar"
           right-icon="outlined/caret-down"
         >
+          <template #prepend>
+            <UiIcon
+              size="s"
+              name="outlined/calendar"
+            />
+          </template>
           {{ startDate | formatDate('D') }} - {{ endDate | formatDate('D MMMM YYYY') }}
         </UiText>
 
@@ -47,6 +52,8 @@ import Numbers from './components/Numbers.vue'
 import LineChart from './components/LineChart.vue'
 
 @Component({
+  layout: 'dashboard',
+
   components: {
     Numbers,
     LineChart,

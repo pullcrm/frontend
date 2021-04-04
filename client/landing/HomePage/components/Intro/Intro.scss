@@ -1,0 +1,32 @@
+.landing-home-page-intro {
+  &__logo {
+    display: block;
+    width: 88px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  &__sub-title {
+    margin-top: 16px;
+    color: $ui-black-60;
+    text-align: center;
+  }
+
+  &__form {
+    margin-top: 20px;
+
+    .ui-form-validator {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__phone {
+    width: 260px;
+    margin-right: 12px;
+  }
+}

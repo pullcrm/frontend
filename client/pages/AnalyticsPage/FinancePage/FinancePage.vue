@@ -9,9 +9,14 @@
       >
         <UiText
           size="m"
-          left-icon="outlined/calendar"
           right-icon="outlined/caret-down"
         >
+          <template #prepend>
+            <UiIcon
+              size="s"
+              name="outlined/calendar"
+            />
+          </template>
           {{ startDate | formatDate('D') }} - {{ endDate | formatDate('D MMMM YYYY') }}
         </UiText>
 
@@ -57,6 +62,8 @@ import Numbers from './components/Numbers.vue'
 import FinanceTable from './components/Table.vue'
 
 @Component({
+  layout: 'dashboard',
+
   components: {
     Numbers,
     FinanceTable,

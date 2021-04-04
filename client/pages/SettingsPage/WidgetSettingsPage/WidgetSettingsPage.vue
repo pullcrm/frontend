@@ -36,6 +36,8 @@ import SettingsLayout from '../components/SettingsLayout.vue'
 // import code from './code.txt'
 
 @Component({
+  layout: 'dashboard',
+
   components: {
     UiContent,
     SettingsLayout

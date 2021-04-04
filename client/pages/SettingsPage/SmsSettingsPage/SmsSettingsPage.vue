@@ -110,6 +110,8 @@ import SettingsLayout from '../components/SettingsLayout.vue'
 import { SMS_REMIND_DURATIONS } from '~/constants/time'
 
 @Component({
+  layout: 'dashboard',
+
   components: {
     SettingsLayout
   }

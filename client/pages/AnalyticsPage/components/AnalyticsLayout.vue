@@ -9,9 +9,9 @@
         Аналитика
       </UiTitle>
 
-      <UiTabs
-        class="analytics-page-layout__tabs"
-        :tabs="tabs"
+      <UiNavigation
+        class="analytics-page-layout__navigation"
+        :navigation="navigation"
       />
 
       <slot />
@@ -25,7 +25,7 @@ import Component from 'vue-class-component'
 
 @Component({})
 export default class AnalyticsLayout extends Vue {
-  get tabs () {
+  get navigation () {
     return [
       {
         name: 'Календарь',

@@ -1,15 +1,15 @@
 <template>
   <Component
-    :is="tab.to ? 'RouterLink' : 'a'"
+    :is="item.to ? 'RouterLink' : 'a'"
     href="#"
-    class="ui-tabs-item"
+    class="ui-navigation-item"
     :class="{
-      'ui-tabs-item__active' : isActive
+      'ui-navigation-item__active' : isActive
     }"
-    v-bind="tab"
-    @click.prevent="$emit('input', tab)"
+    v-bind="item"
+    @click.prevent="$emit('input', item)"
   >
-    {{ tab.name }}
+    {{ item.name }}
   </Component>
 </template>
 
@@ -19,7 +19,7 @@ import Component from 'vue-class-component'
 
 import { RawLocation } from 'vue-router/types/router'
 
-export interface ITab {
+export interface IItem {
   name: string,
   to?: RawLocation
 }
@@ -28,7 +28,7 @@ export interface ITab {
   inheritAttrs: false,
 
   props: {
-    tab: {
+    item: {
       type: Object,
       required: true
     },
@@ -39,14 +39,14 @@ export interface ITab {
     }
   }
 })
-export default class TabItem extends Vue {
-  readonly tab: ITab
+export default class NavigationItem extends Vue {
+  readonly item: IItem
   readonly isActive: boolean
 }
 </script>
 
 <style lang="scss">
-.ui-tabs-item {
+.ui-navigation-item {
   @include ui-typo-16;
 
   padding: 4px 16px;

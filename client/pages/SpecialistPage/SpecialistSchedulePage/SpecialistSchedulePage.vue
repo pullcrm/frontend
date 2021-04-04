@@ -41,8 +41,6 @@ import SpecialistLayout from '../components/SpecialistLayout.vue'
 import Header from './components/Header.vue'
 
 @Component({
-  layout: 'empty',
-
   components: {
     Header,
     ScheduleLoader,

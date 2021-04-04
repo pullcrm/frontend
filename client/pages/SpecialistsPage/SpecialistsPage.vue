@@ -77,6 +77,8 @@ import SortableItem from '~/components/SortableList/SortableItem.vue'
 import SpecialistCard from './components/Card.vue'
 
 @Component({
+  layout: 'dashboard',
+
   components: {
     SortableList,
     SortableItem,

@@ -117,8 +117,6 @@ import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
 import Layout from '../components/Layout.vue'
 
 @Component({
-  layout: 'empty',
-
   components: {
     Layout
   }

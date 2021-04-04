@@ -1,0 +1,44 @@
+.landing-header {
+  background: $ui-white;
+  border-bottom: 1px solid $ui-black-20;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: calc(56px - 1px/* border-bottom*/);
+  }
+
+  &__logo {
+    flex: 1;
+
+    img {
+      width: 32px;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &__actions {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+
+    .ui-icon {
+      color: $ui-black-80;
+    }
+  }
+
+  &__actions-divider {
+    min-width: 1px;
+    height: 16px;
+    margin: 0 16px;
+    background: $ui-black-40;
+  }
+}

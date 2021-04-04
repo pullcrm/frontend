@@ -1,0 +1,12 @@
+.ui-tab-button-list {
+  display: inline-flex;
+  justify-content: center;
+
+  .ui-tab-button {
+    margin-right: 32px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

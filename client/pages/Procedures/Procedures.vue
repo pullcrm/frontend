@@ -53,6 +53,8 @@ import Component from 'vue-class-component'
 import ProceduresTable from './components/ProceduresTable.vue'
 
 @Component({
+  layout: 'dashboard',
+
   components: {
     ProceduresTable
   }

@@ -204,6 +204,8 @@ import FileUpload from '~/components/FileUpload/FileUpload.vue'
 import SettingsLayout from '../components/SettingsLayout.vue'
 
 @Component({
+  layout: 'dashboard',
+
   components: {
     FileUpload,
     SettingsLayout

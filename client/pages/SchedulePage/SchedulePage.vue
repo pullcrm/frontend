@@ -30,6 +30,8 @@ import Queue from './components/Queue.vue'
 import Header from './components/Header.vue'
 
 @Component({
+  layout: 'dashboard',
+
   components: {
     Queue,
     Header,

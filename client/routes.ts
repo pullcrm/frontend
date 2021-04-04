@@ -4,6 +4,8 @@ import { lazyComponent } from '~/utils/lazy-component'
 
 import widgetsRoutes from '~/widgets/routes'
 
+const Landing = lazyComponent(() => import('~/landing/HomePage/HomePage.vue'))
+
 const Login = lazyComponent(() => import('~/pages/Auth/Login/Login.vue'))
 const Restore = lazyComponent(() => import('~/pages/Auth/Restore/Restore.vue'))
 const Registration = lazyComponent(() => import('~/pages/Auth/Registration/Registration.vue'))
@@ -31,26 +33,28 @@ const routes: RouteConfig[] = [
   // Widgets
   ...widgetsRoutes,
 
-  { path: '/dashboard/', name: 'dashboard', component: DashboardPage, meta: { layout: 'Dashboard' } },
+  { path: '/', name: 'landing', component: Landing, meta: { public: true } },
+
+  { path: '/dashboard/', name: 'dashboard', component: DashboardPage },
 
   { path: '/company/create/', name: 'companyCreate', component: CompanyCreate },
 
-  { path: '/schedule/', name: 'schedule', component: SchedulePage, meta: { layout: 'Dashboard' } },
-  { path: '/time-off/', name: 'timeOff', component: TimeOff, meta: { layout: 'Dashboard' } },
-  { path: '/procedures/', name: 'procedures', component: Procedures, meta: { layout: 'Dashboard' } },
-  { path: '/specialists/', name: 'specialists', component: SpecialistsPage, meta: { layout: 'Dashboard' } },
+  { path: '/schedule/', name: 'schedule', component: SchedulePage },
+  { path: '/time-off/', name: 'timeOff', component: TimeOff },
+  { path: '/procedures/', name: 'procedures', component: Procedures },
+  { path: '/specialists/', name: 'specialists', component: SpecialistsPage },
 
   { path: '/specialist/:slug/info/', name: 'specialistInfo', component: SpecialistInfoPage },
   { path: '/specialist/:slug/schedule/', name: 'specialistSchedule', component: SpecialistSchedulePage },
 
   { path: '/settings/', name: 'settings', redirect: '/settings/company/' },
-  { path: '/settings/sms/', name: 'smsSettings', component: SmsSettingsPage, meta: { layout: 'Dashboard' } },
-  { path: '/settings/widget/', name: 'widgetSettings', component: WidgetSettingsPage, meta: { layout: 'Dashboard' } },
-  { path: '/settings/company/', name: 'companySettings', component: CompanySettingsPage, meta: { layout: 'Dashboard' } },
+  { path: '/settings/sms/', name: 'smsSettings', component: SmsSettingsPage },
+  { path: '/settings/widget/', name: 'widgetSettings', component: WidgetSettingsPage },
+  { path: '/settings/company/', name: 'companySettings', component: CompanySettingsPage },
 
   { path: '/analytics/', name: 'analytics', redirect: '/analytics/appointments/' },
-  { path: '/analytics/appointments/', name: 'analyticsAppointments', component: AnalyticsAppointmentsPage, meta: { layout: 'Dashboard' } },
-  { path: '/analytics/finance/', name: 'analyticsFinance', component: AnalyticsFinancePage, meta: { layout: 'Dashboard' } },
+  { path: '/analytics/appointments/', name: 'analyticsAppointments', component: AnalyticsAppointmentsPage },
+  { path: '/analytics/finance/', name: 'analyticsFinance', component: AnalyticsFinancePage },
 
   { path: '/login/', name: 'login', component: Login, meta: { public: true } },
   { path: '/restore/', name: 'restore', component: Restore, meta: { public: true } },

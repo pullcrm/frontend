@@ -7,9 +7,9 @@
         Настройки компании
       </UiTitle>
 
-      <UiTabs
-        class="settings-page-layout__tabs"
-        :tabs="tabs"
+      <UiNavigation
+        class="settings-page-layout__navigation"
+        :navigation="navigation"
       />
     </UiContainer>
 
@@ -29,7 +29,7 @@ import Component from 'vue-class-component'
 
 @Component({})
 export default class SettingsLayout extends Vue {
-  get tabs () {
+  get navigation () {
     return [
       {
         name: 'Информация',
@@ -61,7 +61,7 @@ export default class SettingsLayout extends Vue {
     margin-bottom: 24px;
   }
 
-  &__tabs {
+  &__navigation {
     margin-bottom: 24px;
   }
 }

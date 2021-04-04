@@ -32,6 +32,8 @@ import Companies from './components/Companies/Companies.vue'
 import DonateBanner from './components/DonateBanner.vue'
 
 @Component({
+  layout: 'dashboard',
+
   components: {
     Numbers,
     Companies,
