@@ -1,7 +1,7 @@
 @mixin ui-button_theme_blue {
   color: $ui-white;
-  background-color: $ui-brand-blue;
-  border: 1px solid $ui-brand-blue;
+  background-color: $ui-blue-brand;
+  border: 1px solid $ui-blue-brand;
 
   @media (hover: hover) {
     &:hover {

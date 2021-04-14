@@ -1,5 +1,3 @@
-import { validate as veeValidate } from 'vee-validate'
-
 export type FieldClientRules =
   | string
   | Record<string, any>
@@ -34,7 +32,12 @@ export type FieldsValidations = Record<string, IFieldValidation>
 /**
  * Validate fields on the client side using `vee-validate` package
  */
-export async function validate (fields: Fields, validations: FieldsValidations) {
+export async function validateFields (fields: Fields, validations: FieldsValidations) {
+  const { validate: veeValidate } = await import(
+    /* webpackChunkName: 'vee-validate' */
+    './validate-fields.vee-validate'
+  )
+
   const errors: IFieldClientError[] = []
 
   for (const [field, { rules, messages }] of Object.entries(validations)) {

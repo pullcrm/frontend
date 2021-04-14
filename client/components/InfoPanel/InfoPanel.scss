@@ -24,7 +24,7 @@
     flex: 1;
 
     .ui-text {
-      @include ellipsis(1);
+      @include ui-truncate;
 
       color: $ui-black-60;
     }
@@ -34,17 +34,17 @@
     margin-left: 8px;
 
     .ui-icon {
-      color: $ui-brand-blue;
+      color: $ui-blue-brand;
     }
   }
 
   &._theme {
     &_blue {
-      @include info-panel-color($ui-brand-blue);
+      @include info-panel-color($ui-blue-brand);
     }
 
     &_green {
-      @include info-panel-color($ui-brand-green);
+      @include info-panel-color($ui-green-brand);
     }
 
     &_yellow {
@@ -52,7 +52,7 @@
     }
 
     &_purple {
-      @include info-panel-color($ui-brand-widget);
+      @include info-panel-color($ui-widget-brand);
     }
   }
 }

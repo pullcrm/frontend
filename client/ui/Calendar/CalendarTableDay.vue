@@ -134,7 +134,7 @@ export default class CalendarTableDay extends Vue {
 
     &._is-active {
       color: $ui-white;
-      background-color: $ui-brand-blue;
+      background-color: $ui-blue-brand;
     }
 
     &._is-focus {

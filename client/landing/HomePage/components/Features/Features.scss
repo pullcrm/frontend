@@ -9,19 +9,18 @@
 
   &__tabs {
     .ui-tab-button-list {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 32px;
+      margin: 0 -16px 32px;
+      padding: 0 16px;
 
       [data-key='schedule'] {
         .ui-icon {
-          color: $ui-brand-blue;
+          color: $ui-blue-brand;
         }
       }
 
       [data-key='appointment'] {
         .ui-icon {
-          color: $ui-brand-widget;
+          color: $ui-widget-brand;
         }
       }
 

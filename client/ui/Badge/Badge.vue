@@ -2,7 +2,6 @@
 import Vue from 'vue'
 
 import UiIcon from '../Icon/Icon.vue'
-import UiIconLoader from '../IconLoader.vue'
 
 export default Vue.extend({
   // @ts-ignore
@@ -17,20 +16,29 @@ export default Vue.extend({
   */
   _compiled: false,
 
+  components: {
+    UiIcon
+  },
+
   props: {
     tag: {
       type: String,
-      default: 'button'
-    },
-
-    type: {
-      type: String,
-      default: 'button'
+      default: 'div'
     },
 
     theme: {
       type: String,
       default: 'primary'
+    },
+
+    size: {
+      type: String,
+      default: 'm'
+    },
+
+    icon: {
+      type: String,
+      default: undefined
     },
 
     leftIcon: {
@@ -43,17 +51,7 @@ export default Vue.extend({
       default: undefined
     },
 
-    size: {
-      type: String,
-      default: 'l'
-    },
-
-    loading: {
-      type: Boolean,
-      default: false
-    },
-
-    disabled: {
+    clickable: {
       type: Boolean,
       default: false
     },
@@ -66,25 +64,15 @@ export default Vue.extend({
 
   render (createElement, { props, data, slots }) {
     function createAppend (children) {
-      return createElement('span', { class: 'ui-button__append' }, children)
+      return createElement('div', { class: 'ui-badge__append' }, children)
     }
 
     function createPrepend (children) {
-      return createElement('span', { class: 'ui-button__prepend' }, children)
+      return createElement('div', { class: 'ui-badge__prepend' }, children)
     }
 
     function createContent (children) {
-      return createElement('span', { class: 'ui-button__content' }, children)
-    }
-
-    function createLoader () {
-      return createElement('span', { class: 'ui-button__loader' }, [
-        createElement(UiIconLoader, {
-          props: {
-            size: 's'
-          }
-        })
-      ])
+      return createElement('div', { class: 'ui-badge__content' }, children)
     }
 
     /* Prepend */
@@ -94,7 +82,7 @@ export default Vue.extend({
         createElement(UiIcon, {
           props: {
             name: props.leftIcon,
-            size: 's'
+            size: 'inherit'
           }
         })
       ])
@@ -111,7 +99,7 @@ export default Vue.extend({
         createElement(UiIcon, {
           props: {
             name: props.rightIcon,
-            size: 's'
+            size: 'inherit'
           }
         })
       ])
@@ -121,63 +109,56 @@ export default Vue.extend({
       )
     }
 
-    /* Loader */
-    let loader = null
-    if (props.loading) {
-      loader = createLoader()
-    }
-
     /* Content */
     let content
-    if (
-      !loader &&
-      !append &&
-      !prepend &&
-      slots().default?.every((node) => node.text)
-    ) {
-      // OPTIMIZATION:
-      // Simplify `content` if there are only text nodes to decrease a number of DOM elements
-      content = slots().default
+    if (props.icon) {
+      content = createContent([
+        createElement(UiIcon, {
+          props: {
+            name: props.icon,
+            size: 'inherit'
+          }
+        })
+      ])
     } else if (slots().default) {
       content = createContent(
         slots().default
       )
     }
 
-    const tag = data.attrs?.to
-      ? 'RouterLink'
-      : props.tag
+    if (
+      !append &&
+      !prepend &&
+      !props.icon &&
+      slots().default?.every((node) => node.text)
+    ) {
+      // OPTIMIZATION:
+      // Simplify `content` if there are only text nodes to decrease a number of DOM elements
+      content = slots().default
+    }
 
-    if (tag !== 'RouterLink') {
+    if (props.tag !== 'RouterLink') {
       data.on = data.nativeOn
       data.nativeOn = undefined
     }
 
-    return createElement(tag, {
+    return createElement(props.tag, {
       ...data,
-      attrs: {
-        ...data.attrs,
-        type: tag === 'button' ? props.type : undefined
-      },
       class: [
-        'ui-button',
-        `ui-button_size_${props.size}`,
-        `ui-button_theme_${props.theme}`,
-        {
-          'ui-button_loading': props.loading,
-          'ui-button_disabled': props.disabled,
-          'ui-button_responsive': props.responsive
-        },
+        'ui-badge',
+        `ui-badge_size_${props.size}`,
+        `ui-badge_theme_${props.theme}`,
+        { 'ui-badge_clickable': props.clickable },
+        { 'ui-badge_responsive': props.responsive },
         data.class
       ]
     }, [
-      content,
       prepend,
-      append,
-      loader
+      content,
+      append
     ].filter(Boolean))
   }
 })
 </script>
 
-<style lang="scss" src="./Button.scss" />
+<style lang="scss" src="./Badge.scss"></style>

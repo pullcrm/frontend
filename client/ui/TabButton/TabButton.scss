@@ -7,7 +7,7 @@
     bottom: 0;
     left: 0;
     height: 2px;
-    background: $ui-brand-blue;
+    background: $ui-blue-brand;
     content: '';
   }
 }
@@ -15,6 +15,7 @@
 .ui-tab-button {
   padding: 12px 0;
   color: $ui-black-100;
+  white-space: nowrap;
 
   &:hover,
   &_active {

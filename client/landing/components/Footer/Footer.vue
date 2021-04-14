@@ -4,10 +4,9 @@
       <div class="landing-footer__inner">
         <UiText
           size="m"
-          responsive
           class="landing-footer__about"
         >
-          <strong>Pullcrm</strong> — удобный инстурмент <br> автоматизации записи для вашей компании
+          <strong>Pullcrm</strong> — удобный инструмент <br> автоматизации записи для вашей компании
         </UiText>
 
         <div class="landing-footer__links">
@@ -15,21 +14,26 @@
             tag="RouterLink"
             to="/faq/"
             size="m"
-            responsive
           >
             FAQ
           </UiText>
 
           <UiText
             tag="a"
-            href="#"
+            href="https://t.me/pullcrm"
             target="_blank"
             size="m"
-            left-icon="solid/twitter-logo-fill"
-            responsive
-            class="_twitter"
           >
-            Twitter
+            <template #prepend>
+              <img
+                src="~assets/images/t_logo.svg"
+                width="18px"
+                height="18px"
+                alt="telegram"
+              >
+            </template>
+
+            Telegram
           </UiText>
         </div>
       </div>

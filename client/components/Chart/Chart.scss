@@ -54,7 +54,7 @@
 
   &__curve {
     fill: none;
-    stroke: $ui-brand-blue;
+    stroke: $ui-blue-brand;
     stroke-width: 2;
   }
 
@@ -62,7 +62,7 @@
     position: absolute;
     width: 8px;
     height: 8px;
-    background: $ui-brand-blue;
+    background: $ui-blue-brand;
     border-radius: 50%;
     transform: translate(-50%, -50%);
   }

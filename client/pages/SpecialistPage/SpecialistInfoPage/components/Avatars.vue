@@ -120,16 +120,16 @@ export default class Avatars extends Vue {
       padding: 3px;
       border: 1px solid $ui-white;
       border-radius: 24px;
-      box-shadow: inset 0 0 0 1px rgba($ui-brand-blue, 0);
+      box-shadow: inset 0 0 0 1px rgba($ui-blue-brand, 0);
       transition: border-color var(--ui-transition-hover);
 
       &:hover {
-        border-color: $ui-brand-blue;
+        border-color: $ui-blue-brand;
       }
 
       &._active {
-        border-color: $ui-brand-blue;
-        box-shadow: inset 0 0 0 1px $ui-brand-blue;
+        border-color: $ui-blue-brand;
+        box-shadow: inset 0 0 0 1px $ui-blue-brand;
       }
     }
   }

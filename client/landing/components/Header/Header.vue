@@ -29,7 +29,7 @@
             size="m"
             strong
             left-icon="outlined/sign-in"
-            responsive
+            class="landing-header__login"
           >
             Войти
           </UiText>
@@ -41,7 +41,7 @@
             to="/registration/"
             size="m"
             strong
-            responsive
+            class="landing-header__registration"
           >
             Регистрация
           </UiText>

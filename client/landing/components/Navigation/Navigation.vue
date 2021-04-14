@@ -5,7 +5,6 @@
       to="/"
       size="m"
       strong
-      responsive
     >
       Главная
     </UiText>
@@ -15,22 +14,27 @@
       to="/faq/"
       size="m"
       strong
-      responsive
     >
       FAQ
     </UiText>
 
     <UiText
       tag="a"
-      href="#"
+      href="https://t.me/pullcrm"
       target="_blank"
       size="m"
       strong
-      left-icon="solid/twitter-logo-fill"
-      responsive
-      class="_twitter"
     >
-      Twitter
+      <template #prepend>
+        <img
+          src="~assets/images/t_logo.svg"
+          width="18px"
+          height="18px"
+          alt="telegram"
+        >
+      </template>
+
+      Telegram
     </UiText>
   </div>
 </template>

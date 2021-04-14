@@ -49,7 +49,7 @@ export default class CreatedAt extends Vue {
     border-radius: 8px;
 
     .ui-icon {
-      color: $ui-brand-blue;
+      color: $ui-blue-brand;
     }
 
     &__text {

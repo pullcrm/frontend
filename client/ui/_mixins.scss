@@ -17,20 +17,29 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: $ui-brand-blue;
+    background-color: $ui-blue-brand;
     background-clip: content-box;
     border: 2px solid transparent;
     border-radius: 100px;
   }
 }
 
-@mixin ellipsis($lines) {
-  display: -webkit-box;
-  overflow: hidden;
-  white-space: normal;
-  text-overflow: ellipsis; /* autoprefixer: ignore next */
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: $lines;
+@mixin ui-truncate($lines: '') {
+  @if $lines != '' {
+    display: block;
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis; /* autoprefixer: ignore next */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;
+  }
+
+  @if $lines == '' {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 @mixin ui-safe-bottom($bottom: 0) {

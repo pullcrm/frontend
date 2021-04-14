@@ -48,13 +48,13 @@ export default class Indicator extends Vue {
 
     &_green {
       &::after {
-        background: $ui-brand-green;
+        background: $ui-green-brand;
       }
     }
 
     &_blue {
       &::after {
-        background: $ui-brand-blue;
+        background: $ui-blue-brand;
       }
     }
 

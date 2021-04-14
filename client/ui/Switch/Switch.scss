@@ -45,7 +45,7 @@
     display: none;
 
     &:checked ~ .ui-switch__check {
-      background-color: $ui-brand-blue;
+      background-color: $ui-blue-brand;
 
       &::before {
         transform: translateX(100%);

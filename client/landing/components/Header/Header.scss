@@ -10,6 +10,7 @@
   }
 
   &__logo {
+    display: none;
     flex: 1;
 
     img {
@@ -20,8 +21,11 @@
   &__nav {
     display: flex;
     flex: 1;
-    justify-content: center;
     height: 100%;
+  }
+
+  &__registration {
+    display: none;
   }
 
   &__actions {
@@ -35,10 +39,24 @@
     }
   }
 
-  &__actions-divider {
-    min-width: 1px;
-    height: 16px;
-    margin: 0 16px;
-    background: $ui-black-40;
+  @media (min-width: $ui-tablet) {
+    &__logo {
+      display: block;
+    }
+
+    &__nav {
+      justify-content: center;
+    }
+
+    &__actions-divider {
+      min-width: 1px;
+      height: 16px;
+      margin: 0 16px;
+      background: $ui-black-40;
+    }
+
+    &__registration {
+      display: block;
+    }
   }
 }

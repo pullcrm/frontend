@@ -156,6 +156,14 @@ export default class Home extends Vue {
     }
   }
 
+  mounted () {
+    const { phone } = this.$route.query
+
+    if (phone) {
+      this.form.phone = String(phone)
+    }
+  }
+
   async onSubmit () {
     try {
       await this.$api.users.confirmation({
@@ -204,7 +212,10 @@ export default class Home extends Vue {
 
   onBack () {
     this.$router.push({
-      name: 'login'
+      name: 'login',
+      query: {
+        ...this.$route.query
+      }
     })
   }
 }

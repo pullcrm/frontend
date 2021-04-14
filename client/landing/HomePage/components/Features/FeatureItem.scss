@@ -3,6 +3,20 @@
   justify-content: center;
 
   img {
-    height: 420px;
+    width: calc(100% - 16px);
+    height: auto;
+  }
+
+  @media (min-width: $ui-tablet) {
+    img {
+      width: auto;
+      height: 220px;
+    }
+  }
+
+  @media (min-width: $ui-laptop) {
+    img {
+      height: 420px;
+    }
   }
 }

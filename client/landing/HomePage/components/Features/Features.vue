@@ -23,7 +23,10 @@
           icon="solid/plus-circle-fill"
           title="Создание записи"
         >
-          dgdrg
+          <FeatureItem
+            :image="require('~/assets/images/features-appointment.png')"
+            title="Pullcrm-features"
+          />
         </UiTabBody>
 
         <UiTabBody
@@ -31,7 +34,10 @@
           icon="solid/chart-bar-fill"
           title="Аналитика"
         >
-          dgdrgdrg
+          <FeatureItem
+            :image="require('~/assets/images/features-analytic.png')"
+            title="Pullcrm-features"
+          />
         </UiTabBody>
       </UiTabs>
     </div>
@@ -42,7 +48,7 @@
       responsive
       class="landing-home-page-features__disclaimer"
     >
-      Все функции Pullcrm доступны абсолютно бесплатно!
+      Все функции Pullcrm доступны <span class="nobr">абсолютно бесплатно!</span>
     </UiText>
   </div>
 </template>

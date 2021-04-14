@@ -78,11 +78,11 @@ export default class DropPlaceholder extends Vue {
   .schedule-drop-placeholder {
     z-index: 5;
     padding: 8px;
-    border: 2px dashed $ui-brand-blue;
+    border: 2px dashed $ui-blue-brand;
     pointer-events: none;
 
     &._overed {
-      background: rgba($ui-brand-blue, 0.1);
+      background: rgba($ui-blue-brand, 0.1);
     }
   }
 </style>

@@ -58,7 +58,10 @@
           <UiText
             class="auth-page-login__reset"
             tag="RouterLink"
-            :to="{ name: 'restore' }"
+            :to="{
+              name: 'restore',
+              query: { phone }
+            }"
             size="s"
           >
             Восстановить доступ
@@ -75,7 +78,8 @@
 
             <UiButton
               :to="{
-                name: 'registration'
+                name: 'registration',
+                query: { phone }
               }"
               type="submit"
               size="l"
@@ -131,6 +135,14 @@ export default class Login extends Vue {
           invalid: 'Пароль введен неверно'
         }
       }
+    }
+  }
+
+  mounted () {
+    const { phone } = this.$route.query
+
+    if (phone) {
+      this.phone = String(phone)
     }
   }
 

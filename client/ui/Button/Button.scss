@@ -26,9 +26,9 @@
   user-select: none;
 
   &__content {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    @include ui-truncate;
+
+    order: 2;
   }
 
   &_disabled {
@@ -95,9 +95,19 @@
     transform: translate(-50%, -50%);
   }
 
+  &__prepend {
+    order: 1;
+  }
+
+  &__append {
+    order: 3;
+  }
+
   &__prepend,
   &__append {
     flex-shrink: 0;
+    margin-right: -12px;
+    margin-left: -12px;
 
     .ui-icon {
       display: block;

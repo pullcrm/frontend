@@ -6,8 +6,8 @@
   align-items: center;
 
   &:focus-within {
-    .ui-input__left-icon {
-      color: $ui-brand-blue;
+    .ui-input__icon._left {
+      color: $ui-blue-brand;
     }
   }
 
@@ -35,8 +35,7 @@
     }
   }
 
-  &__left-icon,
-  &__right-icon {
+  &__icon {
     color: $ui-black-60;
     transition: color var(--ui-transition-hover);
   }
@@ -47,7 +46,13 @@
     transition: color var(--ui-transition-hover);
     user-select: none;
 
-    &:hover {
+    @include ui-hover {
+      &:hover {
+        color: $ui-black-100;
+      }
+    }
+
+    &:active {
       color: $ui-black-100;
     }
 
@@ -93,17 +98,17 @@
       box-shadow var(--ui-transition-hover),
       background-color var(--ui-transition-hover);
     appearance: none;
-    caret-color: $ui-brand-blue;
+    -webkit-text-fill-color: $ui-black-100;
 
-    @media (hover: hover) {
+    @include ui-hover {
       &:not(:disabled):hover {
-        border-color: $ui-brand-blue;
+        border-color: $ui-blue-brand;
       }
     }
 
     &:focus {
-      border-color: $ui-brand-blue;
-      box-shadow: 0 0 0 1px $ui-brand-blue;
+      border-color: $ui-blue-brand;
+      box-shadow: 0 0 0 1px $ui-blue-brand;
     }
 
     &:disabled {
@@ -112,6 +117,7 @@
 
     @include placeholder {
       color: $ui-black-60;
+      -webkit-text-fill-color: $ui-black-60;
     }
   }
 }

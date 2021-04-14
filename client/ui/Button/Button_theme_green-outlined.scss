@@ -1,14 +1,14 @@
 @mixin ui-button_theme_green-outlined {
-  color: $ui-brand-green;
+  color: $ui-green-brand;
   background: $ui-white;
-  border: 1px solid $ui-brand-green;
+  border: 1px solid $ui-green-brand;
 
   @media (hover: hover) {
     &:hover {
-      @include ui-shadow-4($ui-brand-green);
+      @include ui-shadow-4($ui-green-brand);
 
       color: $ui-white;
-      background-color: $ui-brand-green;
+      background-color: $ui-green-brand;
     }
   }
 

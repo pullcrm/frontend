@@ -7,10 +7,16 @@
       class="ui-input__prepend"
     >
       <UiIcon
-        class="ui-input__left-icon"
+        class="ui-input__icon _left"
         :name="leftIcon"
         size="s"
       />
+    </span>
+    <span
+      v-else-if="$slots.prepend"
+      class="ui-input__prepend"
+    >
+      <slot name="prepend" />
     </span>
 
     <span
@@ -38,10 +44,16 @@
       class="ui-input__append"
     >
       <UiIcon
-        class="ui-input__right-icon"
+        class="ui-input__icon _right"
         :name="rightIcon"
         size="s"
       />
+    </span>
+    <span
+      v-else-if="$slots.append"
+      class="ui-input__append"
+    >
+      <slot name="append" />
     </span>
 
     <span class="ui-input__content">

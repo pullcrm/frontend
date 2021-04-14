@@ -94,7 +94,7 @@ export default class Company extends Vue {
       justify-content: space-between;
 
       .ui-icon {
-        color: $ui-brand-blue;
+        color: $ui-blue-brand;
       }
 
       .ui-avatar {
@@ -118,17 +118,17 @@ export default class Company extends Vue {
       margin-top: 12px;
 
       .ui-icon {
-        color: $ui-brand-blue;
+        color: $ui-blue-brand;
       }
     }
 
     &:hover {
-      border-color: $ui-brand-blue;
+      border-color: $ui-blue-brand;
     }
 
     &._active {
-      border-color: $ui-brand-blue;
-      box-shadow: 0 0 0 1px $ui-brand-blue;
+      border-color: $ui-blue-brand;
+      box-shadow: 0 0 0 1px $ui-blue-brand;
     }
   }
 </style>

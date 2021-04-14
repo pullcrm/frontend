@@ -49,7 +49,7 @@ export default class UiNotificationBadge extends Vue {
       justify-content: center;
       margin-left: 10px;
       color: $ui-white;
-      background: $ui-brand-blue;
+      background: $ui-blue-brand;
       border-radius: 100px;
       content: attr(data-count);
     }

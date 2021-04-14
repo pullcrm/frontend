@@ -53,6 +53,8 @@
             type="submit"
             size="m"
             theme="blue"
+            left-icon="solid/hand-pointing-fill"
+            class="landing-home-page-intro__action"
           >
             Попробовать
           </UiButton>
@@ -88,8 +90,12 @@ export default class Intro extends Vue {
   get validations (): Validations {
     return {
       phone: {
-        rules: 'required',
+        rules: {
+          min: 10,
+          required: true
+        },
         messages: {
+          min: 'Не верный формат номера',
           required: 'Введите номер телефона'
         },
         serverMessages: {
@@ -101,14 +107,29 @@ export default class Intro extends Vue {
 
   get writerList () {
     return [
-      'барбешопов!',
-      'салонов красоты!',
-      'мастеров маникюра!'
+      'барбешопов!'
+      // 'салонов красоты!',
+      // 'мастеров маникюра!'
     ]
   }
 
-  onSubmit () {
-    //
+  async onSubmit () {
+    const isValid = await this.validate()
+
+    if (!isValid) return
+
+    this.$router.push({
+      name: 'registration',
+      query: {
+        phone: this.phone
+      }
+    })
+  }
+
+  validate () {
+    return this.$refs.formValidator.validate({
+      phone: this.phone
+    })
   }
 }
 </script>

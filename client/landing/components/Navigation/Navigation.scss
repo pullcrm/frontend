@@ -7,7 +7,7 @@
     bottom: 0;
     left: 0;
     height: 2px;
-    background: $ui-brand-blue;
+    background: $ui-blue-brand;
     content: '';
   }
 }
@@ -24,12 +24,6 @@
     &:hover,
     &.router-link-exact-active {
       @include navigation-item_active;
-    }
-  }
-
-  ._twitter {
-    .ui-icon {
-      color: #1da1ff/* twitter brand color */;
     }
   }
 }

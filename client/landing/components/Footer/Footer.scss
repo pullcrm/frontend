@@ -4,6 +4,7 @@
 
   &__inner {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
   }
 
@@ -16,15 +17,24 @@
   &__links {
     display: flex;
     align-items: center;
+    margin-top: 16px;
 
     a {
-      margin: 0 16px;
+      margin-right: 32px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  @media (min-width: $ui-tablet) {
+    &__inner {
+      flex-direction: row;
     }
 
-    ._twitter {
-      .ui-icon {
-        color: #1da1ff/* twitter brand color */;
-      }
+    &__links {
+      margin-top: 0;
     }
   }
 }

@@ -30,7 +30,7 @@
     </div>
 
     <UiMicroText
-      v-if="hasError"
+      v-if="hasErrorText"
       size="s"
       class="ui-field__error"
     >
@@ -38,7 +38,7 @@
     </UiMicroText>
 
     <UiMicroText
-      v-if="hasSuccess"
+      v-if="hasSuccessText"
       size="s"
       class="ui-field__success"
     >
@@ -51,7 +51,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiMicroText from '~/ui/MicroText/MicroText.vue'
+import UiMicroText from '../MicroText/MicroText.vue'
 
 @Component({
   components: {
@@ -70,12 +70,12 @@ import UiMicroText from '~/ui/MicroText/MicroText.vue'
     },
 
     error: {
-      type: String,
+      type: [String, Boolean],
       default: undefined
     },
 
     success: {
-      type: String,
+      type: [String, Boolean],
       default: undefined
     },
 
@@ -88,21 +88,31 @@ import UiMicroText from '~/ui/MicroText/MicroText.vue'
 export default class Field extends Vue {
   readonly hint?: string
   readonly label?: string
-  readonly error?: string
-  readonly success?: string
+  readonly error?: string | boolean
+  readonly success?: string | boolean
 
   get hasError () {
     return (
+      this.error !== false &&
       this.error !== null &&
       this.error !== undefined
     )
   }
 
+  get hasErrorText () {
+    return typeof this.error === 'string'
+  }
+
   get hasSuccess () {
     return (
+      this.success !== false &&
       this.success !== null &&
       this.success !== undefined
     )
+  }
+
+  get hasSuccessText () {
+    return typeof this.success === 'string'
   }
 }
 </script>

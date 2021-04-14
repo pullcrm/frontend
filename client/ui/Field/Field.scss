@@ -1,5 +1,4 @@
 .ui-field {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
 
@@ -19,6 +18,7 @@
     }
 
     .ui-input .ui-input__content input,
+    .ui-select select,
     .ui-textarea .ui-textarea__content textarea {
       border-color: $ui-red-danger;
 
@@ -30,16 +30,13 @@
 
   &_success {
     .ui-input__icon {
-      color: $ui-brand-green !important;
+      color: $ui-green-brand !important;
     }
 
     .ui-input .ui-input__content input,
+    .ui-select select,
     .ui-textarea .ui-textarea__content textarea {
-      border-color: $ui-brand-green;
-
-      &:focus {
-        box-shadow: 0 0 0 1px $ui-brand-green;
-      }
+      border-color: $ui-green-brand;
     }
   }
 
@@ -50,6 +47,7 @@
   &__label {
     @include ui-typo-14;
 
+    flex: 1;
     margin-bottom: 4px;
   }
 
@@ -67,6 +65,6 @@
 
   &__success {
     margin-top: 4px;
-    color: $ui-brand-green;
+    color: $ui-green-brand;
   }
 }

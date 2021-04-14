@@ -20,7 +20,7 @@
     }
 
     &:hover {
-      color: $ui-brand-blue;
+      color: $ui-blue-brand;
     }
   }
 
@@ -48,7 +48,7 @@
   }
 
   &__specialization {
-    @include ellipsis(1);
+    @include ui-truncate;
 
     color: $ui-black-80;
   }
@@ -59,7 +59,7 @@
   }
 
   &:hover {
-    border-color: $ui-brand-blue;
+    border-color: $ui-blue-brand;
 
     .specialists-page-card {
       &__hand {

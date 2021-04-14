@@ -2,6 +2,7 @@
   &__logo {
     display: block;
     width: 88px;
+    height: 88px;
     margin: 0 auto;
   }
 
@@ -26,7 +27,31 @@
   }
 
   &__phone {
-    width: 260px;
+    width: 100%;
     margin-right: 12px;
+  }
+
+  @media (min-width: $ui-tablet) {
+    &__phone {
+      width: 260px;
+    }
+
+    &__action {
+      .ui-button__prepend {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: $ui-tablet - 1px) {
+    &__action {
+      .ui-button__prepend {
+        margin: 0;
+      }
+
+      .ui-button__content {
+        display: none;
+      }
+    }
   }
 }

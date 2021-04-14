@@ -2,7 +2,7 @@
   <div class="typewriter">
     {{ prepend ? `${prepend}\u00A0` : '' }}{{ value }}
 
-    <span />
+    <span v-if="canTyped" />
   </div>
 </template>
 
@@ -28,7 +28,7 @@ import { delay } from '~/utils/delay'
 export default class Typewriter extends Vue {
   readonly list!: string[]
 
-  value = ''
+  value: string
 
   constructor () {
     super()
@@ -36,8 +36,14 @@ export default class Typewriter extends Vue {
     this.value = this.list[0]
   }
 
+  get canTyped () {
+    return this.list.length > 1
+  }
+
   mounted () {
-    this.printNext(1)
+    if (this.canTyped) {
+      this.printNext(1)
+    }
   }
 
   async printNext (index) {

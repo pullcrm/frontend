@@ -140,6 +140,14 @@ export default class Restore extends Vue {
     }
   }
 
+  mounted () {
+    const { phone } = this.$route.query
+
+    if (phone) {
+      this.phone = String(phone)
+    }
+  }
+
   async submit () {
     try {
       await this.$api.auth.restore({
@@ -148,7 +156,9 @@ export default class Restore extends Vue {
         newPassword: this.password
       })
 
-      // TODO: Add toast "password is changed"
+      await this.$typedStore.dispatch('toasts/show', {
+        title: 'Пароль изменен!'
+      })
 
       this.onBack()
     } catch (err) {
@@ -189,7 +199,10 @@ export default class Restore extends Vue {
 
   onBack () {
     this.$router.push({
-      name: 'login'
+      name: 'login',
+      query: {
+        ...this.$route.query
+      }
     })
   }
 }

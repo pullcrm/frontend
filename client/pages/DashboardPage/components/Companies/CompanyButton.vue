@@ -30,11 +30,11 @@ export default class CompanyButton extends Vue {}
     align-items: center;
     justify-content: center;
     height: 180px;
-    color: $ui-brand-blue;
+    color: $ui-blue-brand;
     transition: border-color $ui-transition;
 
     &:hover {
-      border-color: $ui-brand-blue;
+      border-color: $ui-blue-brand;
     }
   }
 </style>

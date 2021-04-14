@@ -123,7 +123,7 @@ export default class Header extends Vue {
     justify-content: space-between;
 
     &__status {
-      color: $ui-brand-blue;
+      color: $ui-blue-brand;
     }
   }
 </style>

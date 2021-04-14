@@ -12,13 +12,13 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import {
-  validate,
   Fields,
+  validateFields,
   FieldsValidations,
   IFieldServerError
-} from '~/utils/validator'
+} from '~/validators/validate-fields'
 
-export type Validations = FieldsValidations
+export type Validations = FieldsValidations;
 
 @Component({
   props: {
@@ -43,7 +43,7 @@ export default class FormValidator extends Vue {
   }
 
   async validate (fields: Fields) {
-    const errors = await validate(fields, this.validations)
+    const errors = await validateFields(fields, this.validations)
 
     this.reset()
 
