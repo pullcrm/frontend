@@ -12,7 +12,7 @@
     >
       <UiIcon
         :name="leftIcon"
-        size="m"
+        size="s"
       />
     </div>
     <div

@@ -15,7 +15,7 @@
       <UiIcon
         v-if="isCurrentCompany"
         name="solid/check-circle-fill"
-        size="m"
+        size="s"
       />
     </div>
 

@@ -10,7 +10,7 @@
     <div class="info-panel__icon">
       <UiIcon
         :name="icon"
-        size="m"
+        size="s"
       />
     </div>
 
@@ -26,7 +26,7 @@
     >
       <UiIcon
         name="outlined/info"
-        size="m"
+        size="s"
       />
     </UiTooltip>
   </UiPanel>

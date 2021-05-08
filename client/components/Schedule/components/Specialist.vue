@@ -37,7 +37,7 @@
       <template #inner>
         <UiIcon
           class="schedule-column-specialist__icon"
-          size="m"
+          size="s"
           name="outlined/dots-three-vertical"
         />
       </template>

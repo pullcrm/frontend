@@ -9,7 +9,7 @@
     >
       <UiIcon
         name="outlined/pencil-simple"
-        size="m"
+        size="s"
       />
     </a>
 
@@ -19,7 +19,7 @@
     >
       <UiIcon
         name="outlined/hand-grabbing"
-        size="m"
+        size="s"
       />
     </div>
 

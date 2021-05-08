@@ -1,6 +1,11 @@
 <template>
   <div class="typewriter">
-    {{ prepend ? `${prepend}\u00A0` : '' }}{{ value }}
+    <p
+      v-if="prepend"
+      v-html="prepend"
+    />
+
+    {{ value }}
 
     <span v-if="canTyped" />
   </div>
@@ -90,6 +95,10 @@ export default class Typewriter extends Vue {
   }
 
   .typewriter {
+    p {
+      display: inline;
+    }
+
     span {
       border-right: 1px solid;
       animation: caret 1s steps(1) infinite;

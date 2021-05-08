@@ -53,7 +53,7 @@
             type="submit"
             size="m"
             theme="blue"
-            left-icon="solid/hand-pointing-fill"
+            left-icon="outlined/arrow-bend-down-left"
             class="landing-home-page-intro__action"
           >
             Попробовать

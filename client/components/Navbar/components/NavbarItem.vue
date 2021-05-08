@@ -6,7 +6,7 @@
   >
     <UiIcon
       :name="icon"
-      size="m"
+      size="s"
     />
 
     <span class="navbar-item__name">

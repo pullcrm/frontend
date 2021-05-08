@@ -8,7 +8,7 @@
       >
         <template #prepend>
           <UiIcon
-            size="m"
+            size="s"
             name="outlined/arrow-left"
           />
         </template>

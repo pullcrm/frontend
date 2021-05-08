@@ -8,7 +8,6 @@
       {'_is-first': isFirst},
       {'_is-last': isLast},
     ]"
-    size="m"
   >
     {{ day }}
   </div>

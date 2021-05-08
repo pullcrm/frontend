@@ -6,7 +6,7 @@
     >
       <UiIcon
         name="outlined/x"
-        size="m"
+        size="s"
       />
     </div>
 

@@ -7,7 +7,7 @@
     <template #prepend>
       <UiIcon
         name="outlined/caret-left"
-        size="m"
+        size="s"
         @click.native="prevMonth"
       />
     </template>
@@ -17,7 +17,7 @@
     <template #append>
       <UiIcon
         name="outlined/caret-right"
-        size="m"
+        size="s"
         @click.native="nextMonth"
       />
     </template>
