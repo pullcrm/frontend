@@ -79,6 +79,9 @@ jobs:
     
       - name: Create the release folder on the server
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'mkdir /var/www/pullcrm.dev/frontend/release-${{ github.sha }}'
+    
+      - name: Unzip release
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'unzip /var/www/pullcrm.dev/frontend/release-${{ github.sha }}/release.zip'
         
       - name: Upload the dist folder to the server
         run: rsync -r ./release.zip ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.dev/frontend/release-${{ github.sha }}'
