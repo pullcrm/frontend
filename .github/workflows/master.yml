@@ -20,8 +20,8 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     env:
-      VUE_APP_RPC_URL: https://pullcrm.com/api/
-      VUE_APP_CALENDAR_TIME_STEP: 15
+      RPC_URL: https://pullcrm.com/api/
+      CALENDAR_TIME_STEP: 15
     
     strategy:
       matrix:

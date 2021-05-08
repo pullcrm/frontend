@@ -1,0 +1,58 @@
+@mixin info-panel-color ($color) {
+  .info-panel__icon {
+    background-color: $color;
+  }
+}
+
+.info-panel {
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    margin-right: 16px;
+    color: #fff;
+    border-radius: 12px;
+  }
+
+  &__text {
+    flex: 1;
+
+    .ui-text {
+      @include ui-truncate;
+
+      color: $ui-black-60;
+    }
+  }
+
+  &__info {
+    margin-left: 8px;
+
+    .ui-icon {
+      color: $ui-blue-brand;
+    }
+  }
+
+  &._theme {
+    &_blue {
+      @include info-panel-color($ui-blue-brand);
+    }
+
+    &_green {
+      @include info-panel-color($ui-green-brand);
+    }
+
+    &_yellow {
+      @include info-panel-color($ui-yellow-dark);
+    }
+
+    &_purple {
+      @include info-panel-color($ui-widget-brand);
+    }
+  }
+}

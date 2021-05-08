@@ -1,0 +1,122 @@
+.chart {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  padding-top: 8px;
+  padding-bottom: 40px;
+  padding-left: 40px;
+
+  &__inner {
+    position: relative;
+    flex: 1;
+
+    & > svg {
+      position: relative;
+      z-index: 2;
+      display: block;
+      width: 100%;
+      height: 420px;
+
+      * {
+        vector-effect: non-scaling-stroke;
+      }
+    }
+  }
+
+  &__value-line {
+    @include ui-typo-14;
+
+    position: absolute;
+    right: 0;
+    left: 0;
+    color: $ui-black-60;
+
+    &::after {
+      position: absolute;
+      top: 0;
+      left: -40px;
+      width: 40px;
+      text-align: center;
+      transform: translate(0, -50%);
+      content: attr(data-label);
+    }
+
+    &::before {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      background: $ui-black-20;
+      content: '';
+    }
+  }
+
+  &__curve {
+    fill: none;
+    stroke: $ui-blue-brand;
+    stroke-width: 2;
+  }
+
+  &__point {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: $ui-blue-brand;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__point-zone {
+    position: absolute;
+    top: -24px;
+    bottom: -36px;
+    z-index: 3;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 50px;
+    transform: translate(-50%, 0);
+
+    .ui-text {
+      color: $ui-black-60;
+    }
+  }
+
+  &__popovers {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    overflow-x: hidden;
+  }
+
+  &__popover {
+    position: absolute;
+  }
+}
+
+@include ui-mobile-only {
+  .chart {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    &__inner {
+      display: inline-block;
+
+      & > svg {
+        width: 700px;
+      }
+    }
+
+    &__point-zone {
+      width: 40px;
+    }
+  }
+}

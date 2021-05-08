@@ -1,0 +1,70 @@
+.ui-field {
+  display: flex;
+  flex-wrap: wrap;
+
+  &_required {
+    .ui-field__label {
+      &::after {
+        display: inline-block;
+        color: $ui-red-danger;
+        content: '*';
+      }
+    }
+  }
+
+  &_error {
+    .ui-input__icon {
+      color: $ui-red-danger !important;
+    }
+
+    .ui-input .ui-input__content input,
+    .ui-select select,
+    .ui-textarea .ui-textarea__content textarea {
+      border-color: $ui-red-danger;
+
+      &:focus {
+        box-shadow: 0 0 0 1px $ui-red-danger;
+      }
+    }
+  }
+
+  &_success {
+    .ui-input__icon {
+      color: $ui-green-brand !important;
+    }
+
+    .ui-input .ui-input__content input,
+    .ui-select select,
+    .ui-textarea .ui-textarea__content textarea {
+      border-color: $ui-green-brand;
+    }
+  }
+
+  &__content {
+    width: 100%;
+  }
+
+  &__label {
+    @include ui-typo-14;
+
+    flex: 1;
+    margin-bottom: 4px;
+  }
+
+  &__hint {
+    @include ui-typo-12;
+
+    margin-bottom: 4px;
+    color: $ui-blue-info;
+  }
+
+  &__error {
+    margin-top: 4px;
+    color: $ui-red-danger;
+  }
+
+  &__success {
+    margin-top: 4px;
+    color: $ui-green-brand;
+  }
+}

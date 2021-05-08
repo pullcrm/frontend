@@ -1,0 +1,15 @@
+.landing-home-page {
+  &__section {
+    margin-top: 32px;
+  }
+
+  &__footer {
+    margin-top: 44px;
+  }
+
+  @media (min-width: $ui-tablet) {
+    &__section {
+      margin-top: 44px;
+    }
+  }
+}

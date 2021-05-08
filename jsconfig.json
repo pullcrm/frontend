@@ -3,11 +3,13 @@
     "target": "ES6",
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": [
+        "./client/*"
+      ]
     }
   },
   "include": [
-    "./src/**/*"
+    "./client/**/*"
   ],
   "exclude": [
     "node_modules",

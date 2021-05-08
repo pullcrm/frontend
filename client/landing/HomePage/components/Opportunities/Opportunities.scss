@@ -1,0 +1,24 @@
+.landing-home-page-opportunities {
+  &__title {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  &__inner {
+    display: grid;
+    grid-gap: 24px;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (min-width: $ui-tablet) {
+    &__inner {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: $ui-laptop) {
+    &__inner {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}

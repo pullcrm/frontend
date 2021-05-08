@@ -1,0 +1,22 @@
+.landing-home-page-feature-item {
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: calc(100% - 16px);
+    height: auto;
+  }
+
+  @media (min-width: $ui-tablet) {
+    img {
+      width: auto;
+      height: 220px;
+    }
+  }
+
+  @media (min-width: $ui-laptop) {
+    img {
+      height: 420px;
+    }
+  }
+}

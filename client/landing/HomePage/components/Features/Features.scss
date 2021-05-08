@@ -1,0 +1,39 @@
+.landing-home-page-features {
+  border-bottom: 1px solid $ui-black-20;
+
+  &__panel {
+    padding: 32px 16px 0;
+    background-color: $ui-black-10;
+    border-radius: 12px;
+  }
+
+  &__tabs {
+    .ui-tab-button-list {
+      margin: 0 -16px 32px;
+      padding: 0 16px;
+
+      [data-key='schedule'] {
+        .ui-icon {
+          color: $ui-blue-brand;
+        }
+      }
+
+      [data-key='appointment'] {
+        .ui-icon {
+          color: $ui-widget-brand;
+        }
+      }
+
+      [data-key='analytics'] {
+        .ui-icon {
+          color: #6aceee;
+        }
+      }
+    }
+  }
+
+  &__disclaimer {
+    padding: 24px 0;
+    text-align: center;
+  }
+}
