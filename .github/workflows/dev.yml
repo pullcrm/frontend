@@ -19,9 +19,9 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    env:
-      RPC_URL: https://pullcrm.dev/api/
-      CALENDAR_TIME_STEP: 15
+    # env:
+      # RPC_URL: https://pullcrm.dev/api/
+      # CALENDAR_TIME_STEP: 15
     
     strategy:
       matrix:
@@ -73,19 +73,13 @@ jobs:
       
       - name: Build the project
         run: yarn build
-        
-      - name: Zip Folder
-        run: zip -r release.zip .
     
       - name: Create the release folder on the server
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'mkdir /var/www/pullcrm.dev/frontend/release-${{ github.sha }}'
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.dev/frontend/project/ && git pull --rebase origin && yarn install && mkdir ./releases/release-${{ github.sha }}'
         
-      - name: Upload the release zip to the server
-        run: rsync -r ./release.zip ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.dev/frontend/release-${{ github.sha }}'
-    
-      - name: Unzip release
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'unzip /var/www/pullcrm.dev/frontend/release-${{ github.sha }}/release.zip'
+      - name: Upload the nuxt folder to the server
+        run: rsync -r ./nuxt ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.dev/frontend/project/releases/release-${{ github.sha }}'
         
-      - name: Link the release folder on the server
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.dev/frontend/release && ln -s /var/www/pullcrm.dev/frontend/release-${{ github.sha }} /var/www/pullcrm.dev/frontend/release'
+      # - name: Link the release folder on the server
+      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.dev/frontend/release && ln -s /var/www/pullcrm.dev/frontend/release-${{ github.sha }} /var/www/pullcrm.dev/frontend/release'
       
