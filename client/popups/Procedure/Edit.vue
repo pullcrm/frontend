@@ -32,6 +32,18 @@
         </UiField>
 
         <UiField
+          label="Категория"
+        >
+          <UiSelect
+            v-model="form.category"
+            label-key="name"
+            :options="categories"
+            placeholder="Выбрать категорию"
+            @input="resetFieldError('category')"
+          />
+        </UiField>
+
+        <UiField
           label="Цена"
         >
           <UiInput
@@ -70,18 +82,20 @@
         <div class="procedures-edit__actions">
           <UiButton
             type="submit"
-            size="l"
+            size="m"
             theme="blue"
           >
             Редактировать услугу
           </UiButton>
 
-          <div
+          <UiButton
+            size="m"
+            theme="danger-outlined"
             class="procedures-edit__remove"
-            @click="remove"
+            @click.native="remove"
           >
-            <p>Удалить услугу</p>
-          </div>
+            Удалить услугу
+          </UiButton>
         </div>
       </UiFormValidator>
     </form>
@@ -128,19 +142,18 @@ export default class ProcedureEdit extends Vue {
     })
   }
 
+  get categories () {
+    return this.$typedStore.state.procedures.categories
+  }
+
   get validations () {
     return {}
   }
 
   async submit () {
-    await this.$api.procedures.update(this.form.id, {
-      name: this.form.name,
-      price: Number(this.form.price),
-      duration: this.form.duration,
-      description: this.form.description
-    })
-
-    await this.$typedStore.dispatch('procedures/fetch')
+    await this.$typedStore.dispatch(
+      'procedures/updateProcedure', this.form
+    )
 
     this.$emit('close')
   }
@@ -170,16 +183,7 @@ export default class ProcedureEdit extends Vue {
     }
 
     &__remove {
-      @include ui-typo-14;
-
-      display: flex;
-      justify-content: center;
       margin-top: 16px;
-      color: $ui-black-80;
-
-      p {
-        cursor: pointer;
-      }
     }
 
     .ui-field + .ui-field {

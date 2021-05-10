@@ -33,6 +33,18 @@
         </UiField>
 
         <UiField
+          label="Категория"
+        >
+          <UiSelect
+            v-model="form.category"
+            label-key="name"
+            :options="categories"
+            placeholder="Выбрать категорию"
+            @input="resetFieldError('category')"
+          />
+        </UiField>
+
+        <UiField
           label="Цена"
         >
           <UiInput
@@ -95,7 +107,8 @@ import { PROCEDURE_DURATIONS } from '~/constants/time'
 @Component({})
 export default class ProcedureNew extends Vue {
   form = {
-    duration: null
+    duration: null,
+    category: null
   }
 
   get duration () {
@@ -115,27 +128,18 @@ export default class ProcedureNew extends Vue {
     })
   }
 
+  get categories () {
+    return this.$typedStore.state.procedures.categories
+  }
+
   get validations () {
     return {}
   }
 
   async submit () {
-    await this.$api.procedures.create({
-      // @ts-ignore
-      name: this.form.name,
-      // @ts-ignore
-      price: Number(this.form.price),
-      // @ts-ignore
-      duration: this.form.duration,
-      // @ts-ignore
-      description: this.form.description
-    })
-
-    await this.onBack()
-  }
-
-  async onBack () {
-    await this.$typedStore.dispatch('procedures/fetch')
+    await this.$typedStore.dispatch(
+      'procedures/createProcedure', this.form
+    )
 
     this.$emit('close')
   }

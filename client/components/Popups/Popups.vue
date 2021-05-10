@@ -15,7 +15,7 @@
     <!-- Procedure -->
     <Popup
       v-slot="{ close, props }"
-      name="procedure-new"
+      name="new-procedure"
     >
       <ProcedureNew
         v-bind="props"
@@ -25,13 +25,34 @@
 
     <Popup
       v-slot="{ close, props }"
-      name="procedure-edit"
+      name="edit-procedure"
     >
       <ProcedureEdit
         v-bind="props"
         @close="close"
       />
     </Popup>
+
+    <Popup
+      v-slot="{ close, props }"
+      name="new-procedure-category"
+    >
+      <NewProcedureCategory
+        v-bind="props"
+        @close="close"
+      />
+    </Popup>
+
+    <Popup
+      v-slot="{ close, props }"
+      name="edit-procedure-category"
+    >
+      <EditProcedureCategory
+        v-bind="props"
+        @close="close"
+      />
+    </Popup>
+
     <!-- Procedure end -->
 
     <!-- Appointment -->
@@ -129,6 +150,16 @@ const ProcedureEdit = () => import(
   '~/popups/Procedure/Edit.vue'
 )
 
+const NewProcedureCategory = () => import(
+  /* webpackChunkName: "popups" */
+  '~/popups/ProcedureCategory/NewProcedureCategory.vue'
+)
+
+const EditProcedureCategory = () => import(
+  /* webpackChunkName: "popups" */
+  '~/popups/ProcedureCategory/EditProcedureCategory.vue'
+)
+
 const TimeOffNew = () => import(
   /* webpackChunkName: "popups" */
   '~/popups/TimeOff/New.vue'
@@ -166,7 +197,9 @@ const QuestionPopup = () => import(
     ProcedureEdit,
     QuestionPopup,
     SmsConfirmation,
-    UiPopupBackdrop
+    UiPopupBackdrop,
+    NewProcedureCategory,
+    EditProcedureCategory
   },
 
   watch: {

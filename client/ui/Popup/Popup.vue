@@ -115,19 +115,19 @@ export default {
       @include ui-hover {
         &:hover {
           .ui-icon {
-            color: $ui-black-100;
+            color: $ui-black-80;
           }
         }
       }
 
       &:active {
         .ui-icon {
-          color: $ui-black-100;
+          color: $ui-black-80;
         }
       }
 
       .ui-icon {
-        color: $ui-black-80;
+        color: $ui-black-60;
         vertical-align: middle;
         transition: color var(--ui-transition-hover);
       }

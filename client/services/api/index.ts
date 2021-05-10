@@ -188,6 +188,19 @@ export interface IAnalyticsFinanceParams {
   specialistId?: number
 }
 
+export interface ICategoryParams {
+  name: string,
+  type: 'PROCEDURE'
+}
+
+export interface ICategory {
+  id: number,
+  type: string,
+  name: string,
+  createdAt?: string,
+  updatedAt?: string
+}
+
 export const factory = (send) => ({
   auth: {
     login (params: IAuthLoginParams) : Promise<IApiAuthLogin> {
@@ -263,6 +276,24 @@ export const factory = (send) => ({
     }
   },
 
+  categories: {
+    all (): Promise<ICategory[]> {
+      return send('categories', null, 'GET')
+    },
+
+    create (params: ICategoryParams): Promise<ICategory> {
+      return send('categories', params)
+    },
+
+    update (id: number, params: ICategoryParams): Promise<ICategory> {
+      return send(`categories/${id}`, params, 'PUT')
+    },
+
+    remove (id: number): Promise<boolean> {
+      return send(`categories/${id}`, {}, 'DELETE')
+    }
+  },
+
   procedures: {
     create (params: IProcedureParams) : Promise<IProcedure> {
       return send('procedures', params)
@@ -327,9 +358,9 @@ export const factory = (send) => ({
     }
   },
 
-  categories: {
+  companyTypes: {
     all () : Promise<any> {
-      return send('categories', null, 'GET')
+      return send('types', null, 'GET')
     }
   },
 

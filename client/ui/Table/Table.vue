@@ -81,6 +81,8 @@ export default class Table extends Vue {
   async load () {
     await new Promise(requestAnimationFrame)
 
+    if (this.data.length === 0) return
+
     this.columns = [...this.$el.querySelector('tbody tr').querySelectorAll('td')]
       .map(({ attributes }) => {
         // @ts-ignore

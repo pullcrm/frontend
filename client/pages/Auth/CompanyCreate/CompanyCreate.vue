@@ -59,7 +59,7 @@
             v-model="company.type"
             label-key="name"
             placeholder="Выбрать категорию"
-            :options="categories"
+            :options="companyTypes"
             required
           />
         </UiField>
@@ -93,7 +93,7 @@ export default class CompanyCreate extends Vue {
   company = {}
 
   cities = []
-  categories = []
+  companyTypes = []
 
   isLoading = false
 
@@ -102,13 +102,13 @@ export default class CompanyCreate extends Vue {
   }
 
   async beforeMount () {
-    const [categories, cities] = await Promise.all([
-      this.$api.categories.all(),
+    const [companyTypes, cities] = await Promise.all([
+      this.$api.companyTypes.all(),
       this.$api.cities.all()
     ])
 
     this.cities = cities
-    this.categories = categories
+    this.companyTypes = companyTypes
   }
 
   async submit () {

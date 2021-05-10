@@ -4,4 +4,16 @@
     justify-content: space-between;
     margin-bottom: 24px;
   }
+
+  &__actions {
+    margin: 0 -12px;
+
+    .ui-button {
+      margin: 0 12px;
+    }
+  }
+
+  &__group {
+    margin-bottom: 24px;
+  }
 }
