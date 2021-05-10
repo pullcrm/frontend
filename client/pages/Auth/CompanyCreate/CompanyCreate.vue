@@ -56,7 +56,7 @@
           required
         >
           <UiSelect
-            v-model="company.category"
+            v-model="company.type"
             label-key="name"
             placeholder="Выбрать категорию"
             :options="categories"
@@ -121,7 +121,7 @@ export default class CompanyCreate extends Vue {
         // @ts-ignore
         cityId: this.company.city.id,
         // @ts-ignore
-        categoryId: this.company.category.id
+        typeId: this.company.type.id
       })
 
       await this.onCompany(companyId)

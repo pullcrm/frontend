@@ -29,11 +29,11 @@
     </UiText>
 
     <UiText
-      class="dashboard-page-company__category"
+      class="dashboard-page-company__type"
       size="m"
       responsive
     >
-      {{ company.category.name }}
+      {{ company.type.name }}
     </UiText>
 
     <UiText
@@ -110,7 +110,7 @@ export default class Company extends Vue {
       font-weight: 500;
     }
 
-    &__category {
+    &__type {
       color: $ui-black-80;
     }
 

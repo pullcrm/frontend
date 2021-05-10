@@ -63,7 +63,7 @@
         required
       >
         <UiSelect
-          v-model="company.category"
+          v-model="company.type"
           label-key="name"
           required
           :options="categories"
@@ -260,7 +260,7 @@ export default class Settings extends Vue {
       await this.$api.companies.update(this.company.id, {
         name: this.company.name,
         cityId: this.company.city.id,
-        categoryId: this.company.category.id
+        typeId: this.company.type.id
       })
 
       this.$typedStore.dispatch('toasts/show', { title: 'Сохранено!' })

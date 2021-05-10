@@ -86,7 +86,7 @@ export interface IRegistrationUser {
 export interface ICompaniesCreateParams {
   name?: string,
   cityId?: number,
-  categoryId?: number,
+  typeId?: number,
   logoId?: number
 }
 
