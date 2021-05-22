@@ -15,12 +15,12 @@ const middleware: Middleware = async ({ typedStore, route, redirect }) => {
   if (role.name === SPECIALIST) {
     if (
       /\/specialist\//.test(route.path) &&
-      Number(route.params.specialistId) === specialistId
+      Number(route.params.slug) === specialistId
     ) return
 
     redirect({
       name: 'specialistInfo',
-      params: { specialistId }
+      params: { slug: specialistId }
     })
   }
 }

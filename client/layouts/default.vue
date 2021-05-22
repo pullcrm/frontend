@@ -2,12 +2,12 @@
   <div class="default-layout">
     <Nuxt />
 
-    <!-- <Popups />
+    <Popups />
     <Toasts />
 
     <PopperMenu
       ref="popperMenu"
-    /> -->
+    />
   </div>
 </template>
 
@@ -15,29 +15,29 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-// import Popups from '~/components/Popups/Popups.vue'
-// import Toasts from '~/components/Toasts/Toasts.vue'
-// import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
+import Popups from '~/components/Popups/Popups.vue'
+import Toasts from '~/components/Toasts/Toasts.vue'
+import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
 
 @Component({
   components: {
-    // Popups,
-    // Toasts,
-    // PopperMenu
-  }
+    Popups,
+    Toasts,
+    PopperMenu
+  },
 
-  // provide () {
-  //   return {
-  //     getPopperMenu: () => {
-  //       return this.$refs.popperMenu
-  //     }
-  //   }
-  // }
+  provide () {
+    return {
+      getPopperMenu: () => {
+        return this.$refs.popperMenu
+      }
+    }
+  }
 })
 export default class DefaultLayout extends Vue {
-  // $refs: {
-  //   popperMenu: PopperMenu
-  // }
+  $refs: {
+    popperMenu: PopperMenu
+  }
 }
 </script>
 
