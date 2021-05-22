@@ -1,0 +1,35 @@
+.procedures-page-procedure-card {
+  @include ui-hover {
+    &:hover {
+      border-color: $ui-blue-brand;
+    }
+  }
+
+  &__title {
+    margin-bottom: 4px;
+  }
+
+  &__sub-title {
+    @include ui-truncate(2);
+
+    height: 32px;
+    color: $ui-black-60;
+  }
+
+  &__duration {
+    color: $ui-black-60;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+  }
+
+  @media (min-width: $ui-tablet) {
+    &__sub-title {
+      height: 40px;
+    }
+  }
+}

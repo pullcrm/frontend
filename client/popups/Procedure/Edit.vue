@@ -3,10 +3,6 @@
     class="procedures-edit"
     @close="$emit('close')"
   >
-    <UiBack
-      @back="$emit('close')"
-    />
-
     <UiTitle
       class="procedures-edit__title"
       size="s"
@@ -170,7 +166,6 @@ export default class ProcedureEdit extends Vue {
 <style lang="scss">
   .procedures-edit {
     &__title {
-      margin-top: 8px;
       margin-bottom: 24px;
     }
 

@@ -14,7 +14,7 @@ const CompanyCreate = lazyComponent(() => import('~/pages/Auth/CompanyCreate/Com
 const DashboardPage = lazyComponent(() => import('~/pages/DashboardPage/DashboardPage.vue'))
 const SchedulePage = lazyComponent(() => import('~/pages/SchedulePage/SchedulePage.vue'))
 const SpecialistsPage = lazyComponent(() => import('~/pages/SpecialistsPage/SpecialistsPage.vue'))
-const Procedures = lazyComponent(() => import('~/pages/Procedures/Procedures.vue'))
+const ProceduresPage = lazyComponent(() => import('~/pages/ProceduresPage/ProceduresPage.vue'))
 const TimeOff = lazyComponent(() => import('~/pages/TimeOff/TimeOff.vue'))
 
 const SpecialistInfoPage = lazyComponent(() => import('~/pages/SpecialistPage/SpecialistInfoPage/SpecialistInfoPage.vue'))
@@ -41,7 +41,7 @@ const routes: RouteConfig[] = [
 
   { path: '/schedule/', name: 'schedule', component: SchedulePage },
   { path: '/time-off/', name: 'timeOff', component: TimeOff },
-  { path: '/procedures/', name: 'procedures', component: Procedures },
+  { path: '/procedures/', name: 'procedures', component: ProceduresPage },
   { path: '/specialists/', name: 'specialists', component: SpecialistsPage },
 
   { path: '/specialist/:slug/info/', name: 'specialistInfo', component: SpecialistInfoPage },

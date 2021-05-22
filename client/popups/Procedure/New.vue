@@ -3,10 +3,6 @@
     class="procedures-new"
     @close="$emit('close')"
   >
-    <UiBack
-      @back="$emit('close')"
-    />
-
     <UiTitle
       class="procedures-new__title"
       size="s"
@@ -104,11 +100,28 @@ import { minutesToTime } from '~/utils/time'
 
 import { PROCEDURE_DURATIONS } from '~/constants/time'
 
-@Component({})
+@Component({
+  props: {
+    category: {
+      type: Object,
+      default: null
+    }
+  }
+})
 export default class ProcedureNew extends Vue {
+  readonly category
+
   form = {
     duration: null,
     category: null
+  }
+
+  constructor () {
+    super()
+
+    if (this.category) {
+      this.form.category = this.category
+    }
   }
 
   get duration () {
@@ -149,7 +162,6 @@ export default class ProcedureNew extends Vue {
 <style lang="scss">
   .procedures-new {
     &__title {
-      margin-top: 8px;
       margin-bottom: 24px;
     }
 

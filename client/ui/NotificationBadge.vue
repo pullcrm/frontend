@@ -61,7 +61,7 @@ export default class UiNotificationBadge extends Vue {
         min-width: 24px;
         height: 24px;
         padding: 0 4px;
-        font-weight: 700;
+        font-weight: 500;
         text-transform: uppercase;
       }
     }

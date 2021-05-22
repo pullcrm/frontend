@@ -30,19 +30,5 @@ export default {
     &_narrow {
       @include ui-container-narrow;
     }
-
-    .ui-panel {
-      &:not(:last-child) {
-        margin-bottom: 32px;
-      }
-    }
-
-    @include ui-mobile-only {
-      .ui-panel {
-        &:not(:last-child) {
-          margin-bottom: 16px;
-        }
-      }
-    }
   }
 </style>

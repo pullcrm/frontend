@@ -120,6 +120,10 @@
         &_size_l {
           @include ui-button_size_32;
         }
+
+        &_size_m {
+          @include ui-button_size_32;
+        }
       }
     }
   }

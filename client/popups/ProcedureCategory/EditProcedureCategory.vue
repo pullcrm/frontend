@@ -106,10 +106,10 @@ export default class ProcedureEdit extends Vue {
     .ui-button {
       width: 100%;
       margin-top: 24px;
-    }
 
-    .ui-field + .ui-field {
-      margin-top: 20px;
+      & + .ui-button {
+        margin-top: 20px;
+      }
     }
   }
 </style>

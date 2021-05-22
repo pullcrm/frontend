@@ -89,10 +89,11 @@ export default class Placeholder extends Vue {
     }
 
     &__title {
-      @include ui-typo-28;
+      @include ui-typo-24;
 
       width: 100%;
       max-width: 448px;
+      font-weight: 500;
     }
 
     &__text {
@@ -100,7 +101,8 @@ export default class Placeholder extends Vue {
 
       width: 100%;
       max-width: 448px;
-      margin-top: 8px;
+      margin-top: 4px;
+      font-weight: 400;
     }
 
     &__sub-text {

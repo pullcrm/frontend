@@ -46,6 +46,10 @@ const mutations = {
 }
 
 const getters = {
+  total (state) {
+    return state.procedures.length
+  },
+
   byGroups (state) {
     return state.categories.reduce((acc, category) => {
       const procedures = state.procedures.filter(procedure => {
