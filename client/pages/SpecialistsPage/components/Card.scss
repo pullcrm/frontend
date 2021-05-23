@@ -35,8 +35,6 @@
     height: 40px;
     color: $ui-black-50;
     cursor: grab;
-    opacity: 0;
-    transition: opacity var(--ui-transition);
   }
 
   &__avatar {
@@ -50,21 +48,18 @@
   &__specialization {
     @include ui-truncate;
 
+    height: 20px;
+    margin-bottom: 12px;
     color: $ui-black-80;
   }
 
   &__phone {
-    margin-top: 12px;
     padding-right: 24px;
   }
 
-  &:hover {
-    border-color: $ui-blue-brand;
-
-    .specialists-page-card {
-      &__hand {
-        opacity: 1;
-      }
+  @include ui-hover {
+    &:hover {
+      border-color: $ui-blue-brand;
     }
   }
 }

@@ -1,3 +1,5 @@
+import { SPECIALIST, MANAGER, ADMIN } from '~/constants/roles'
+
 export const statuses = {
   ALL: {
     id: 1,
@@ -11,4 +13,12 @@ export const statuses = {
     id: 3,
     value: 'Не доступен'
   }
+}
+
+export function getRoleNameByAlias (alias) {
+  return {
+    [ADMIN]: 'Руководители',
+    [MANAGER]: 'Менеджеры',
+    [SPECIALIST]: 'Специалисты'
+  }[alias]
 }

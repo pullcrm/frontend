@@ -51,6 +51,10 @@ const getters = {
     }, {})
   },
 
+  total (state) {
+    return state.specialists.length
+  },
+
   byId: (_state, localGetters) => (specialistId) => {
     return localGetters.specialistsDict[specialistId]
   }

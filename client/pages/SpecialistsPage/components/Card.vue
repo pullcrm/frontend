@@ -15,6 +15,7 @@
 
     <div
       id="hand"
+      v-handle
       class="specialists-page-card__hand"
     >
       <UiIcon
@@ -43,7 +44,6 @@
     </UiText>
 
     <UiText
-      v-if="specialist.specialization"
       class="specialists-page-card__specialization"
       size="m"
     >
@@ -63,6 +63,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { HandleDirective } from 'vue-slicksort'
+
 import UiIndicator from '~/ui/Indicator.vue'
 
 @Component({
@@ -75,6 +77,10 @@ import UiIndicator from '~/ui/Indicator.vue'
       type: Object,
       required: true
     }
+  },
+
+  directives: {
+    handle: HandleDirective
   }
 })
 export default class Card extends Vue {
@@ -98,7 +104,7 @@ export default class Card extends Vue {
     }
 
     if (this.status === 'DASHBOARD') {
-      return 'blue'
+      return 'orange'
     }
 
     return 'gray'

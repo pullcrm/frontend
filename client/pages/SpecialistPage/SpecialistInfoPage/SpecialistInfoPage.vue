@@ -203,7 +203,7 @@ export default class SpecialistInfoPage extends Vue {
 
       await this.$api.specialist.update({
         id,
-        email: user.email,
+        email: user.email || undefined,
         status,
         lastName: user.lastName,
         firstName: user.firstName,

@@ -1,9 +1,9 @@
 <template>
   <div class="ui-tabs">
-    <TabButtonList
+    <UiTabButtonList
       v-if="nav && tabs.length > 1"
     >
-      <TabButton
+      <UiTabButton
         v-for="tab in tabs"
         :key="tab.key"
         :size="size"
@@ -13,8 +13,8 @@
         :responsive="responsive"
       >
         {{ tab.title }}
-      </TabButton>
-    </TabButtonList>
+      </UiTabButton>
+    </UiTabButtonList>
 
     <slot
       :active-tab="activeTab"
@@ -26,13 +26,13 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import TabButton from '../TabButton/TabButton.vue'
-import TabButtonList from '../TabButtonList/TabButtonList.vue'
+import UiTabButton from '../TabButton/TabButton.vue'
+import UiTabButtonList from '../TabButtonList/TabButtonList.vue'
 
 @Component({
   components: {
-    TabButton,
-    TabButtonList
+    UiTabButton,
+    UiTabButtonList
   },
 
   props: {

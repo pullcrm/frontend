@@ -1,53 +1,60 @@
 <template>
-  <div class="sortable-list">
-    <template
-      v-for="item in items"
+  <Component
+    :is="enabled ? 'SlickList' : 'div'"
+    :value="items"
+    use-window-as-scroll-container
+    v-bind="$attrs"
+    class="sortable-list"
+    @input="onInput"
+  >
+    <Component
+      :is="enabled ? 'SlickItem' : 'div'"
+      v-for="(item, index) in items"
+      :key="index"
+      :index="index"
+      :class="itemClass"
     >
       <slot :item="item" />
-    </template>
-  </div>
+    </Component>
+  </Component>
 </template>
 
 <script lang="ts">
-// TODO: Need refactor
-// https://github.com/Traxo7/vue-sortable-list/blob/master/src/index.js
+// https://github.com/Jexordexan/vue-slicksort
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { SlickList, SlickItem } from 'vue-slicksort'
+
 @Component({
+  inheritAttrs: true,
+
+  components: {
+    SlickItem,
+    SlickList
+  },
+
   props: {
     items: {
       type: Array,
       required: true
-    }
-  },
+    },
 
-  provide () {
-    return {
-      sortableList: () => {
-        return this
-      }
+    enabled: {
+      type: Boolean,
+      default: true
+    },
+
+    itemClass: {
+      type: [String, Object, Array],
+      default: undefined
     }
   }
 })
 export default class SortableList extends Vue {
   readonly items: any[]
 
-  draggingElement = null
-  draggingElementIndex = null
-
-  isBefore (el1, el2) {
-    if (el2.parentNode === el1.parentNode) {
-      for (let cur = el1.previousSibling; cur; cur = cur.previousSibling) {
-        if (cur === el2) {
-          return true
-        }
-      }
-    }
-    return false
-  }
-
-  update (items) {
+  onInput (items) {
     this.$emit('update', items)
   }
 }

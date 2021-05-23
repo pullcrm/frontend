@@ -58,6 +58,12 @@ export default class Indicator extends Vue {
       }
     }
 
+    &_orange {
+      &::after {
+        background-color: $ui-orange-brand;
+      }
+    }
+
     &_gray {
       &::after {
         background: $ui-black-40;

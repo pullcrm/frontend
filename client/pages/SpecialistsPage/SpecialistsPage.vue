@@ -5,7 +5,7 @@
     <div class="specialists-page-header">
       <UiNotificationBadge
         class="specialists-page-header__left"
-        :count="count"
+        :count="total"
       >
         <UiTitle
           size="l"
@@ -35,31 +35,30 @@
       </div>
     </div>
 
-    <!-- <UiTabs
-      class="specialists-page__tabs"
-      :tabs="tabs"
-    /> -->
+    <UiNavigation
+      class="specialists-page__navigation"
+      :navigation="navigation"
+      :value="activeNavigation"
+      @input="onNavigation"
+    />
 
     <SortableList
-      class="ui-grid"
       :items="specialists"
+      axis="xy"
+      :item-class="[
+        'ui-grid-item',
+        'ui-grid-item_12',
+        'ui-grid-item_tablet_6',
+        'ui-grid-item_laptop_3'
+      ]"
+      use-drag-handle
+      class="ui-grid"
       @update="onSort"
     >
       <template #default="{ item }">
-        <SortableItem
-          :key="`specialist-${item.id}`"
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12',
-            'ui-grid-item_tablet_6',
-            'ui-grid-item_laptop_3'
-          ]"
-          handle-selector="#hand"
-        >
-          <SpecialistCard
-            :specialist="item"
-          />
-        </SortableItem>
+        <SpecialistCard
+          :specialist="item"
+        />
       </template>
     </SortableList>
   </UiContainer>
@@ -69,61 +68,67 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { getRoleNameByAlias } from '~/logics/specialist'
+
 import UiNotificationBadge from '~/ui/NotificationBadge.vue'
 
 import SortableList from '~/components/SortableList/SortableList.vue'
-import SortableItem from '~/components/SortableList/SortableItem.vue'
 
 import SpecialistCard from './components/Card.vue'
+
+import { SPECIALIST, MANAGER, ADMIN } from '~/constants/roles'
 
 @Component({
   layout: 'dashboard',
 
   components: {
     SortableList,
-    SortableItem,
     SpecialistCard,
     UiNotificationBadge
   }
 })
 export default class Specialists extends Vue {
-  get tabs () {
+  get total () {
+    return this.$store.getters['specialists/total']
+  }
+
+  get activeNavigation () {
+    return getRoleNameByAlias(this.$route.query.role) || 'Все'
+  }
+
+  get navigation () {
     return [
-      {
-        name: 'Все',
-        to: this.$route
-      },
-
-      {
-        name: 'Специалисты',
-        to: '/dashboard'
-      },
-
-      {
-        name: 'Менеджеры',
-        to: '/dashboard'
-      },
-
-      {
-        name: 'Администраторы',
-        to: '/dashboard'
-      }
+      { name: 'Все' },
+      { name: 'Специалисты', value: SPECIALIST },
+      { name: 'Менеджеры', value: MANAGER },
+      { name: 'Руководители', value: ADMIN }
     ]
   }
 
   get specialists () {
     return this.$typedStore.state.specialists.specialists
-  }
+      .filter(({ role }) => {
+        if (!this.$route.query.role) return true
 
-  get count () {
-    return this.specialists.length
+        return role.name === this.$route.query.role
+      })
   }
 
   async add () {
     await this.$typedStore.dispatch('popup/show', 'specialist-new')
   }
 
+  async onNavigation (item) {
+    await this.$router.replace({
+      query: {
+        role: item.value || undefined
+      }
+    })
+  }
+
   async onSort (items) {
+    this.$typedStore.commit('specialists/SET_SPECIALISTS', items)
+
     const specialists = items.map(({ id }, index) => {
       return {
         id,
