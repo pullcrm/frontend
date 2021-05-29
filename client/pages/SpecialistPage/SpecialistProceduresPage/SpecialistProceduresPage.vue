@@ -41,9 +41,10 @@ import { groupByCategoryId } from '~/logics/procedures'
 
 import Popup from '~/components/Popups/Popup.vue'
 
-import ProceduresGroup from '../components/ProceduresGroup/ProceduresGroup.vue'
 import SpecialistLayout from '../components/SpecialistLayout.vue'
 import SpecialistProcedures from '../components/SpecialistProcedures/SpecialistProcedures.vue'
+
+import ProceduresGroup from './components/ProceduresGroup.vue'
 
 @Component({
   components: {
