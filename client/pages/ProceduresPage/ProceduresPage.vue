@@ -1,5 +1,10 @@
 <template>
-  <div class="procedures-page">
+  <div
+    :class="[
+      'procedures-page',
+      {'procedures-page_one-category': categories.length <= 1}
+    ]"
+  >
     <UiContainer>
       <Header
         class="procedures-page__header"

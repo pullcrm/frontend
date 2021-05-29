@@ -1,4 +1,10 @@
 .procedures-page {
+  &_one-category {
+    .procedures-page-group__title {
+      display: none;
+    }
+  }
+
   &__header {
     margin-bottom: 24px;
   }

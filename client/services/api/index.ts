@@ -216,7 +216,7 @@ export const factory = (send) => ({
     },
 
     logout (): Promise<Boolean> {
-      return send('logout', null, 'DELETE')
+      return send('logout', {}, 'POST')
     },
 
     refreshToken (params: IApiRefreshTokenParams): Promise<IApiRefreshToken> {
@@ -271,6 +271,10 @@ export const factory = (send) => ({
 
     setProcedures (id: number, params: any) {
       return send(`specialists/${id}/procedures`, params, 'PUT')
+    },
+
+    remove (id: number) {
+      return send(`specialists/${id}`, {}, 'DELETE')
     }
   },
 

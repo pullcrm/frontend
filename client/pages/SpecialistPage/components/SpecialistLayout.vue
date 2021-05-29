@@ -30,7 +30,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { SPECIALIST } from '~/constants/roles'
+import { ADMIN, SPECIALIST } from '~/constants/roles'
 
 @Component({})
 export default class SpecialistLayout extends Vue {
@@ -62,6 +62,10 @@ export default class SpecialistLayout extends Vue {
 
       this.isMyProfile && {
         name: 'Выйти'
+      },
+
+      this.isDeletable && {
+        name: 'Удалить профиль'
       }
     ].filter(Boolean)
   }
@@ -76,6 +80,13 @@ export default class SpecialistLayout extends Vue {
 
   get isMyProfile () {
     return this.specialistId === this.positionId
+  }
+
+  get isDeletable () {
+    return (
+      this.role.name === ADMIN &&
+      this.isMyProfile === false
+    )
   }
 
   get specialistId () {
@@ -93,6 +104,27 @@ export default class SpecialistLayout extends Vue {
   async onNavigation (item) {
     if (item.name === 'Выйти') {
       await this.logout()
+    }
+
+    if (item.name === 'Удалить профиль') {
+      await this.remove()
+    }
+  }
+
+  async remove () {
+    const result = await this.$typedStore.dispatch('popup/askQuestion', {
+      title: 'Вы действительно хотите удалить профиль сотрудника? Это действие не обратимо!',
+      acceptButtonTitle: 'Удалить!'
+    })
+
+    if (result) {
+      await this.$api.specialist.remove(this.specialistId)
+
+      const { href } = this.$router.resolve({
+        name: 'specialists'
+      })
+
+      window.location.href = href
     }
   }
 
