@@ -21,16 +21,9 @@
       </UiPlaceholder>
 
       <ProceduresGroup
-        v-for="(procedures, categoryId) in proceduresByGroups"
-        :key="categoryId"
-        :category-id="+categoryId"
-        :procedures="procedures"
-        class="procedures-page__group"
-      />
-
-      <ProceduresGroup
-        key="withoutGroup"
-        :procedures="proceduresWithoutGroup"
+        v-for="(category) in categories"
+        :key="category.id"
+        :category="category"
         class="procedures-page__group"
       />
     </UiContainer>
@@ -57,12 +50,8 @@ export default class Procedures extends Vue {
     return this.$typedStore.getters['procedures/isEmpty']
   }
 
-  get proceduresByGroups () {
-    return this.$typedStore.getters['procedures/byGroups']
-  }
-
-  get proceduresWithoutGroup () {
-    return this.$typedStore.getters['procedures/withoutGroup']
+  get categories () {
+    return this.$typedStore.getters['procedures/categories']
   }
 
   onAddProcedure () {

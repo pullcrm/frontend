@@ -132,7 +132,7 @@ export default class Specialists extends Vue {
     const specialists = items.map(({ id }, index) => {
       return {
         id,
-        rate: index
+        order: index
       }
     })
 

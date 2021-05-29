@@ -19,6 +19,7 @@ const TimeOff = lazyComponent(() => import('~/pages/TimeOff/TimeOff.vue'))
 
 const SpecialistInfoPage = lazyComponent(() => import('~/pages/SpecialistPage/SpecialistInfoPage/SpecialistInfoPage.vue'))
 const SpecialistSchedulePage = lazyComponent(() => import('~/pages/SpecialistPage/SpecialistSchedulePage/SpecialistSchedulePage.vue'))
+const SpecialistProceduresPage = lazyComponent(() => import('~/pages/SpecialistPage/SpecialistProceduresPage/SpecialistProceduresPage.vue'))
 
 const SmsSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/SmsSettingsPage/SmsSettingsPage.vue'))
 const WidgetSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/WidgetSettingsPage/WidgetSettingsPage.vue'))
@@ -46,6 +47,7 @@ const routes: RouteConfig[] = [
 
   { path: '/specialist/:slug/info/', name: 'specialistInfo', component: SpecialistInfoPage },
   { path: '/specialist/:slug/schedule/', name: 'specialistSchedule', component: SpecialistSchedulePage },
+  { path: '/specialist/:slug/procedures/', name: 'specialistProcedures', component: SpecialistProceduresPage },
 
   { path: '/settings/', name: 'settings', redirect: '/settings/company/' },
   { path: '/settings/sms/', name: 'smsSettings', component: SmsSettingsPage },

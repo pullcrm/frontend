@@ -212,6 +212,10 @@ export default class AppointmentNew extends Vue {
   }
 
   get procedures () {
+    if (this.form.specialist?.procedures.length > 0) {
+      return this.form.specialist.procedures
+    }
+
     return this.$typedStore.state.procedures.procedures
   }
 

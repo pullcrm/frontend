@@ -1,0 +1,9 @@
+.specialist-procedures-page-procedures-group {
+  &__procedure-preview + &__procedure-preview {
+    margin-top: 12px;
+  }
+
+  &__name {
+    margin-bottom: 12px;
+  }
+}

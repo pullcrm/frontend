@@ -55,7 +55,7 @@ const store = () => {
           commit('SET_PROFILE', profile)
           commit('position/SET_POSITIONS', positions, { root: true })
         } catch (err) {
-          if (err.code) {
+          if (err.status === 401) {
             await dispatch('auth/reset', null, { root: true })
 
             window.location.reload()

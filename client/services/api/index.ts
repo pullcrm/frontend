@@ -263,6 +263,14 @@ export const factory = (send) => ({
 
     bulk (params: any) {
       return send('specialists/bulk', params, 'PUT')
+    },
+
+    procedures (id: number) {
+      return send(`specialists/${id}/procedures`, null, 'GET')
+    },
+
+    setProcedures (id: number, params: any) {
+      return send(`specialists/${id}/procedures`, params, 'PUT')
     }
   },
 

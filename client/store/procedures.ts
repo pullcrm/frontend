@@ -1,4 +1,4 @@
-import { normalizeProcedureParams } from '~/logics/procedures'
+import { normalizeProcedureParams, normalizeCategories } from '~/logics/procedures'
 
 function createState () {
   return {
@@ -50,21 +50,8 @@ const getters = {
     return state.procedures.length
   },
 
-  byGroups (state) {
-    return state.categories.reduce((acc, category) => {
-      const procedures = state.procedures.filter(procedure => {
-        return procedure.category?.id === category.id
-      })
-
-      return {
-        ...acc,
-        [category.id]: procedures
-      }
-    }, {})
-  },
-
-  withoutGroup (state) {
-    return state.procedures.filter(procedure => !procedure.category)
+  categories (state) {
+    return normalizeCategories(state.categories, state.procedures)
   },
 
   categoriesDict (state) {

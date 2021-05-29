@@ -20,7 +20,7 @@ const actions = {
       this.$api.public.companyById(companyId),
       this.$api.public.proceduresByCompanyId({ companyId }),
       this.$api.public.specialistsByCompanyId({
-        sort: 'rate',
+        sort: 'order',
         order: 'asc',
         companyId
       })

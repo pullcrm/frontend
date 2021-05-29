@@ -1,15 +1,18 @@
 <template>
-  <div class="procedures-page-group">
+  <div
+    :class="[
+      'procedures-page-group',
+      {'procedures-page-group_has-category-id': categoryId}
+    ]"
+  >
     <UiTitle
-      tag="a"
       size="s"
       responsive
       right-icon="outlined/pencil-simple"
-      href="#"
       class="procedures-page-group__title"
       @click.native.prevent="onEditCategory"
     >
-      {{ categoryName }}
+      {{ category.name }}
     </UiTitle>
 
     <div class="procedures-page-group__grid ui-grid">
@@ -59,14 +62,9 @@ import ProcedureCard from './ProcedureCard.vue'
 
 @Component({
   props: {
-    procedures: {
-      type: Array,
+    category: {
+      type: Object,
       required: true
-    },
-
-    categoryId: {
-      type: Number,
-      default: null
     }
   },
 
@@ -75,19 +73,18 @@ import ProcedureCard from './ProcedureCard.vue'
   }
 })
 export default class ProceduresGroup extends Vue {
-  readonly procedures
-  readonly categoryId!: number | null
+  readonly category
 
-  get category () {
-    return this.$typedStore.getters['procedures/categoriesDict'][this.categoryId]
+  get categoryId () {
+    return this.category.id
   }
 
-  get categoryName () {
-    return this.category?.name ?? 'Без категории'
+  get procedures () {
+    return this.category.procedures
   }
 
   async onEditCategory () {
-    if (!this.category) return
+    if (!this.categoryId) return
 
     await this.$typedStore.dispatch('popup/show', {
       name: 'edit-procedure-category',

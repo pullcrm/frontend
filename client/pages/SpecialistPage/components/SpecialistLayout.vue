@@ -52,6 +52,14 @@ export default class SpecialistLayout extends Vue {
         }
       },
 
+      {
+        name: 'Услуги',
+        to: {
+          ...this.$route,
+          name: 'specialistProcedures'
+        }
+      },
+
       this.isMyProfile && {
         name: 'Выйти'
       }
