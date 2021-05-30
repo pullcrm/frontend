@@ -87,7 +87,15 @@ export interface ICompaniesCreateParams {
   name?: string,
   cityId?: number,
   typeId?: number,
-  logoId?: number
+  logoId?: number,
+  userId?: number,
+  address?: string,
+  phone?: string,
+  description?: string,
+  viber?: string,
+  telegram?: string,
+  instagram?: string,
+  facebook?: string
 }
 
 export interface IProcedureParams {
@@ -439,8 +447,8 @@ export const factory = (send) => ({
       return send('companies/my/settings', params, 'PUT')
     },
 
-    settingRemove (params: any) : Promise<any> {
-      return send('companies/my/settings', params, 'DELETE')
+    settingRemove () : Promise<any> {
+      return send('companies/my/settings', {}, 'DELETE')
     },
 
     balance () : Promise<any> {

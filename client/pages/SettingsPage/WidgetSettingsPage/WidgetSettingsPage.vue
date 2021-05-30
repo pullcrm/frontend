@@ -30,7 +30,7 @@ import Component from 'vue-class-component'
 
 import UiContent from '~/ui/Content/Content.vue'
 
-import SettingsLayout from '../components/SettingsLayout.vue'
+import SettingsLayout from '../components/Layout.vue'
 
 // @ts-ignore
 // import code from './code.txt'

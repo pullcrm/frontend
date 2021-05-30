@@ -2,100 +2,129 @@
   <SettingsLayout
     class="sms-settings-page"
   >
+    <UiTitle
+      size="s"
+      responsive
+      class="sms-settings-page__title"
+    >
+      Настройки СМС
+    </UiTitle>
+
     <template
       v-if="isSMSAuthorize"
     >
-      <div class="ui-grid">
-        <UiTitle
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-          size="s"
-          responsive
-        >
-          Авторизовано в SMSC.UA
-        </UiTitle>
+      <SmsPlaceholder
+        title="Вы атворизованы в СМС-сервисе"
+        sub-title="Вам доступны функции отправки пользователям сообщений о предстоящих записях"
+      >
+        <template #append>
+          <UiButton
+            size="s"
+            theme="danger-outlined"
+            @click.native="deauthorize"
+          >
+            Деавторизоваться
+          </UiButton>
+        </template>
+      </SmsPlaceholder>
 
-        <UiSwitch
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-          :value="settings.hasCreationSMS"
-          size="m"
-          @input="onSettings('hasCreationSMS', $event)"
-        >
-          <template #append>
-            <UiText
-              size="m"
-              responsive
-            >
-              Отправлять смс клиенту после создания записи (по умолчанию)
-            </UiText>
-          </template>
-        </UiSwitch>
+      <UiDivider />
 
-        <UiSwitch
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-          size="m"
-          :value="settings.hasRemindSMS"
-          @input="onSettings('hasRemindSMS', $event)"
-        >
-          <template #append>
-            <UiText
-              size="m"
-              responsive
-            >
-              Напоминать клиенту о записи (по умолчанию)
-            </UiText>
-          </template>
-        </UiSwitch>
+      <SmsPlaceholder
+        title="Уведомлять клиента после создания записи"
+        sub-title="СМС отправится через 2 минуты после создания записи"
+      >
+        <template #append>
+          <UiSwitch
+            :value="settings.hasCreationSMS"
+            size="m"
+            @input="onSettings('hasCreationSMS', $event)"
+          />
+        </template>
+      </SmsPlaceholder>
 
-        <UiField
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-          label="За сколько времени напоминать о записи?"
-        >
+      <SmsTemplate
+        class="sms-settings-page__sms-template"
+        :template.sync="smsRemindTemplate"
+        disclaimer="Поставьте в места для генерации данных по отдельным записям: %specialist%, %date%, %time%, %procedures%"
+      />
+
+      <UiDivider />
+
+      <SmsPlaceholder
+        title="Уведомлять клиента перед записью"
+      >
+        <template #append>
+          <UiSwitch
+            size="m"
+            :value="settings.hasRemindSMS"
+            @input="onSettings('hasRemindSMS', $event)"
+          />
+        </template>
+      </SmsPlaceholder>
+
+      <UiText
+        class="sms-settings-page__notify-selector"
+        size="l"
+        responsive
+      >
+        Уведомлять за:
+
+        <template #append>
           <UiSelect
             label-key="name"
-            :value="remindTime | minutesToTime"
+            :value="remindTime"
             :options="durationList"
             required
             :clearable="false"
             placeholder="Выбрать время"
             @input="onSettings('remindSMSMinutes', $event.value)"
-          />
-        </UiField>
+          >
+            <template #input="{ onFocus }">
+              <UiText
+                size="m"
+                responsive
+                right-icon="outlined/caret-down"
+                @click.native="onFocus"
+              >
+                {{ remindTime.name }} до начала
+              </UiText>
+            </template>
+          </UiSelect>
+        </template>
+      </UiText>
 
-        <UiButton
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-          theme="blue"
-          :loading="isLoading"
-          responsive
-          @click.native="save"
-        >
-          Сохранить
-        </UiButton>
-      </div>
+      <SmsTemplate
+        class="sms-settings-page__sms-template"
+        :template.sync="smsRemindTemplate"
+        disclaimer="Примерная стоимость: 1.20 грн"
+      />
+
+      <!-- <UiButton
+        theme="blue"
+        :loading="isLoading"
+        responsive
+        @click.native="save"
+      >
+        Сохранить
+      </UiButton> -->
     </template>
 
-    <UiButton
+    <SmsPlaceholder
       v-else
-      theme="info-outlined"
-      responsive
-      @click.native="smsPopup"
+      title="Авторизация в СМС-сервисе"
+      sub-title="Включите функцию отправки пользователям сообщений о предстоящих записях"
     >
-      Авторизоваться в smsc
-    </UiButton>
+      <template #append>
+        <UiButton
+          size="s"
+          theme="blue"
+          @click.native="smsPopup"
+        >
+          Авторизоваться
+        </UiButton>
+      </template>
+    </SmsPlaceholder>
   </SettingsLayout>
 </template>
 
@@ -105,7 +134,9 @@ import Component from 'vue-class-component'
 
 import { minutesToTime } from '~/utils/time'
 
-import SettingsLayout from '../components/SettingsLayout.vue'
+import SmsTemplate from '../components/SmsTemplate.vue'
+import SettingsLayout from '../components/Layout.vue'
+import SmsPlaceholder from '../components/SmsPlaceholder.vue'
 
 import { SMS_REMIND_DURATIONS } from '~/constants/time'
 
@@ -113,7 +144,9 @@ import { SMS_REMIND_DURATIONS } from '~/constants/time'
   layout: 'dashboard',
 
   components: {
-    SettingsLayout
+    SmsTemplate,
+    SettingsLayout,
+    SmsPlaceholder
   }
 })
 export default class SmsSettingsPage extends Vue {
@@ -121,12 +154,20 @@ export default class SmsSettingsPage extends Vue {
 
   settings = this.$typedStore.getters['sms/settings']
 
+  smsRemindTemplate = 'Вы записаны к Алексею Михайленко на 12 окт 2021 в 15:00'
+
   get remindTime () {
-    return this.settings.remindSMSMinutes
+    return {
+      name: minutesToTime(this.settings.remindSMSMinutes),
+      value: this.settings.remindSMSMinutes
+    }
   }
 
   get durationList () {
-    return SMS_REMIND_DURATIONS.map(minutes => minutesToTime(minutes))
+    return SMS_REMIND_DURATIONS.map(minutes => ({
+      name: minutesToTime(minutes),
+      value: minutes
+    }))
   }
 
   get isSMSAuthorize () {
@@ -166,6 +207,19 @@ export default class SmsSettingsPage extends Vue {
 
   smsPopup () {
     this.$typedStore.dispatch('popup/show', 'sms-auth')
+  }
+
+  async deauthorize () {
+    const result = await this.$typedStore.dispatch('popup/askQuestion', {
+      title: 'Вы уверены что хотите деавторизоваться?',
+      acceptButtonTitle: 'Подтвердить'
+    })
+
+    if (result) {
+      await this.$api.sms.settingRemove()
+
+      window.location.reload()
+    }
   }
 }
 </script>

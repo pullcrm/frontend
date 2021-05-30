@@ -3,31 +3,44 @@
     class="company-settings-page"
   >
     <div class="ui-grid">
-      <FileUpload
+      <UiTitle
+        size="s"
         :class="[
           'ui-grid-item',
           'ui-grid-item_12'
         ]"
-        :image="logo"
-        responsive
-        @input="onAvatar"
       >
-        <template #default="{ url }">
-          <UiAvatar
-            :image="url"
-            :name="company.name"
-            size="l"
-            responsive
-          />
-        </template>
-      </FileUpload>
+        О компании
+      </UiTitle>
 
       <UiField
         :class="[
           'ui-grid-item',
           'ui-grid-item_12'
         ]"
+      >
+        <FileUpload
+          :image="logo"
+          responsive
+          @input="onAvatar"
+        >
+          <template #default="{ url }">
+            <UiAvatar
+              :image="url"
+              :name="company.name"
+              size="l"
+              responsive
+            />
+          </template>
+        </FileUpload>
+      </UiField>
+
+      <UiField
         label="Название компании"
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12'
+        ]"
       >
         <UiInput
           v-model="company.name"
@@ -36,13 +49,12 @@
       </UiField>
 
       <UiField
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12',
-          'ui-grid-item_tablet_6'
-        ]"
         label="Город"
         required
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12'
+        ]"
       >
         <UiSelect
           v-model="company.city"
@@ -54,13 +66,12 @@
       </UiField>
 
       <UiField
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12',
-          'ui-grid-item_tablet_6'
-        ]"
         label="Категория"
         required
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12'
+        ]"
       >
         <UiSelect
           v-model="company.type"
@@ -73,120 +84,116 @@
       </UiField>
 
       <UiField
+        label="Адрес"
         :class="[
           'ui-grid-item',
           'ui-grid-item_12'
         ]"
-        label="Адрес"
       >
         <UiInput
-          value=""
+          v-model="company.address"
           placeholder="Введите адрес"
         />
       </UiField>
 
-      <UiTitle
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12'
-        ]"
-        size="s"
-        responsive
-      >
-        Дополнительная информация
-      </UiTitle>
-
       <UiField
+        label="Телефон"
         :class="[
           'ui-grid-item',
           'ui-grid-item_12'
         ]"
-        label="Телефон"
       >
         <UiInput
-          value=""
+          v-model="company.phone"
           placeholder="066"
         />
       </UiField>
 
       <UiField
+        label="О компании"
         :class="[
           'ui-grid-item',
-          'ui-grid-item_12',
-          'ui-grid-item_tablet_6'
+          'ui-grid-item_12'
         ]"
-        label="Viber"
       >
         <UiInput
-          value=""
+          v-model="company.description"
+          tag="textarea"
+          placeholder="Введите текст"
+        />
+      </UiField>
+
+      <UiDivider
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12'
+        ]"
+      />
+
+      <UiField
+        label="Viber"
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_6'
+        ]"
+      >
+        <UiInput
+          v-model="company.viber"
           placeholder="Viber"
         />
       </UiField>
 
       <UiField
+        label="Telegram"
         :class="[
           'ui-grid-item',
-          'ui-grid-item_12',
-          'ui-grid-item_tablet_6'
+          'ui-grid-item_6',
+          'ui-grid-item_mobile_12'
         ]"
-        label="Telegram"
       >
         <UiInput
-          value=""
+          v-model="company.telegram"
           placeholder="Telegram"
         />
       </UiField>
 
       <UiField
+        label="Instagram"
         :class="[
           'ui-grid-item',
-          'ui-grid-item_12',
-          'ui-grid-item_tablet_6'
+          'ui-grid-item_6',
+          'ui-grid-item_mobile_12'
         ]"
-        label="Instagram"
       >
         <UiInput
-          value=""
+          v-model="company.instagram"
           placeholder="Instagram"
         />
       </UiField>
 
       <UiField
+        label="Facebook"
         :class="[
           'ui-grid-item',
-          'ui-grid-item_12',
-          'ui-grid-item_tablet_6'
+          'ui-grid-item_6',
+          'ui-grid-item_mobile_12'
         ]"
-        label="Facebook"
       >
         <UiInput
-          value=""
+          v-model="company.facebook"
           placeholder="Facebook"
         />
       </UiField>
 
-      <UiField
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12'
-        ]"
-        label="О компании"
-      >
-        <UiInput
-          tag="textarea"
-          value=""
-          placeholder="Введите текст"
-        />
-      </UiField>
-
       <UiButton
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12'
-        ]"
         theme="blue"
         :loading="isLoading"
         responsive
+        :class="[
+          'ui-grid-item',
+          'ui-grid-item_12',
+          'ui-grid-item_mobile_12'
+        ]"
         @click.native="save"
       >
         Сохранить
@@ -199,9 +206,11 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { normalizeCompanyParams } from '~/logics/company'
+
 import FileUpload from '~/components/FileUpload/FileUpload.vue'
 
-import SettingsLayout from '../components/SettingsLayout.vue'
+import SettingsLayout from '../components/Layout.vue'
 
 @Component({
   layout: 'dashboard',
@@ -257,11 +266,10 @@ export default class Settings extends Vue {
     try {
       this.isLoading = true
 
-      await this.$api.companies.update(this.company.id, {
-        name: this.company.name,
-        cityId: this.company.city.id,
-        typeId: this.company.type.id
-      })
+      await this.$api.companies.update(
+        this.company.id,
+        normalizeCompanyParams(this.company)
+      )
 
       this.$typedStore.dispatch('toasts/show', { title: 'Сохранено!' })
 
