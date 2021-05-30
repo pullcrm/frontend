@@ -372,7 +372,7 @@ export const factory = (send) => ({
 
   companyTypes: {
     all () : Promise<any> {
-      return send('types', null, 'GET')
+      return send('companies/my/types', null, 'GET')
     }
   },
 
