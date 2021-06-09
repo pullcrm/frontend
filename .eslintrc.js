@@ -35,6 +35,7 @@ module.exports = {
       groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
       pathGroups: [
         { pattern: '~/constants', group: 'internal', position: 'after' },
+        { pattern: '~/constants/*', group: 'internal', position: 'after' },
         { pattern: '~/store', group: 'internal', position: 'after' },
         { pattern: '~/store/**', group: 'internal', position: 'after' },
         { pattern: '~/services/**', group: 'internal', position: 'after' },

@@ -29,3 +29,21 @@ export function normalizeCompanyParams (company): ICompaniesCreateParams {
     instagram
   }
 }
+
+export function normalizeSmsSettingsParams (params) {
+  const {
+    hasRemindSMS,
+    hasCreationSMS,
+    remindSMSMinutes,
+    remindSMSTemplate,
+    creationSMSTemplate
+  } = params
+
+  return {
+    hasRemindSMS,
+    hasCreationSMS,
+    remindSMSMinutes,
+    remindSMSTemplate: remindSMSTemplate || undefined,
+    creationSMSTemplate: creationSMSTemplate || undefined
+  }
+}

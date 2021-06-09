@@ -36,17 +36,17 @@
       >
         <template #append>
           <UiSwitch
-            :value="settings.hasCreationSMS"
+            v-model="settings.hasCreationSMS"
             size="m"
-            @input="onSettings('hasCreationSMS', $event)"
           />
         </template>
       </SmsPlaceholder>
 
       <SmsTemplate
         class="sms-settings-page__sms-template"
-        :template.sync="smsRemindTemplate"
+        :template="smsCreationTemplate"
         disclaimer="Поставьте в места для генерации данных по отдельным записям: %specialist%, %date%, %time%, %procedures%"
+        @update:template="settings.creationSMSTemplate = $event"
       />
 
       <UiDivider />
@@ -56,9 +56,8 @@
       >
         <template #append>
           <UiSwitch
+            v-model="settings.hasRemindSMS"
             size="m"
-            :value="settings.hasRemindSMS"
-            @input="onSettings('hasRemindSMS', $event)"
           />
         </template>
       </SmsPlaceholder>
@@ -78,7 +77,7 @@
             required
             :clearable="false"
             placeholder="Выбрать время"
-            @input="onSettings('remindSMSMinutes', $event.value)"
+            @input="settings.remindSMSMinutes = $event.value"
           >
             <template #input="{ onFocus }">
               <UiText
@@ -96,18 +95,20 @@
 
       <SmsTemplate
         class="sms-settings-page__sms-template"
-        :template.sync="smsRemindTemplate"
+        :template="smsRemindTemplate"
         disclaimer="Примерная стоимость: 1.20 грн"
+        @update:template="settings.remindSMSTemplate = $event"
       />
 
-      <!-- <UiButton
+      <UiButton
+        class="sms-settings-page__button"
         theme="blue"
         :loading="isLoading"
         responsive
         @click.native="save"
       >
         Сохранить
-      </UiButton> -->
+      </UiButton>
     </template>
 
     <SmsPlaceholder
@@ -132,13 +133,17 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { SMS_CREATION_TEMPLATE } from '~/constants'
+
+import { SMS_REMIND_DURATIONS } from '~/constants/time'
+
 import { minutesToTime } from '~/utils/time'
+
+import { normalizeSmsSettingsParams } from '~/logics/company'
 
 import SmsTemplate from '../components/SmsTemplate.vue'
 import SettingsLayout from '../components/Layout.vue'
 import SmsPlaceholder from '../components/SmsPlaceholder.vue'
-
-import { SMS_REMIND_DURATIONS } from '~/constants/time'
 
 @Component({
   layout: 'dashboard',
@@ -154,7 +159,13 @@ export default class SmsSettingsPage extends Vue {
 
   settings = this.$typedStore.getters['sms/settings']
 
-  smsRemindTemplate = 'Вы записаны к Алексею Михайленко на 12 окт 2021 в 15:00'
+  get smsRemindTemplate () {
+    return this.settings.remindSMSTemplate || SMS_CREATION_TEMPLATE
+  }
+
+  get smsCreationTemplate () {
+    return this.settings.creationSMSTemplate || SMS_CREATION_TEMPLATE
+  }
 
   get remindTime () {
     return {
@@ -178,17 +189,9 @@ export default class SmsSettingsPage extends Vue {
     try {
       this.isLoading = true
 
-      const {
-        hasRemindSMS,
-        hasCreationSMS,
-        remindSMSMinutes
-      } = this.settings
-
-      await this.$api.sms.settingUpdate({
-        hasRemindSMS,
-        hasCreationSMS,
-        remindSMSMinutes
-      })
+      await this.$api.sms.settingUpdate(
+        normalizeSmsSettingsParams(this.settings)
+      )
 
       this.$typedStore.dispatch('toasts/show', { title: 'Сохранено!' })
     } catch {
@@ -199,10 +202,6 @@ export default class SmsSettingsPage extends Vue {
     } finally {
       this.isLoading = false
     }
-  }
-
-  onSettings (key, value) {
-    this.settings[key] = value
   }
 
   smsPopup () {
