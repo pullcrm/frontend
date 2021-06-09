@@ -9,74 +9,54 @@
         Настройки
       </UiTitle>
 
-      <div class="ui-grid">
-        <div
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12',
-            'ui-grid-item_tablet_4',
-            'ui-grid-item_laptop_3',
-            'ui-grid-item_desktop_2'
-          ]"
+      <div class="settings-page-layout__container">
+        <UiPanel
+          size="s"
+          responsive
+          class="settings-page-layout__sidebar"
         >
-          <UiPanel
-            size="s"
+          <UiText
+            tag="RouterLink"
+            :to="{ name: 'companySettings' }"
+            size="l"
             responsive
-            class="settings-page-layout__sidebar"
+            class="settings-page-layout__link"
           >
-            <UiText
-              tag="RouterLink"
-              :to="{ name: 'companySettings' }"
-              size="l"
-              responsive
-              class="settings-page-layout__link"
-            >
-              О компании
-            </UiText>
-            <UiText
-              size="l"
-              responsive
-              class="settings-page-layout__link"
-            >
-              График работы
-            </UiText>
-            <UiText
-              tag="RouterLink"
-              :to="{ name: 'smsSettings' }"
-              size="l"
-              responsive
-              class="settings-page-layout__link"
-            >
-              Настройки СМС
-            </UiText>
-            <UiText
-              tag="RouterLink"
-              :to="{ name: 'widgetSettings' }"
-              size="l"
-              responsive
-              class="settings-page-layout__link"
-            >
-              Онлайн запись
-            </UiText>
-          </UiPanel>
-        </div>
+            О компании
+          </UiText>
+          <UiText
+            size="l"
+            responsive
+            class="settings-page-layout__link"
+          >
+            График работы
+          </UiText>
+          <UiText
+            tag="RouterLink"
+            :to="{ name: 'smsSettings' }"
+            size="l"
+            responsive
+            class="settings-page-layout__link"
+          >
+            Настройки СМС
+          </UiText>
+          <UiText
+            tag="RouterLink"
+            :to="{ name: 'widgetSettings' }"
+            size="l"
+            responsive
+            class="settings-page-layout__link"
+          >
+            Онлайн запись
+          </UiText>
+        </UiPanel>
 
-        <div
+        <UiPanel
           class="settings-page-layout__inner"
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12',
-            'ui-grid-item_tablet_8',
-            'ui-grid-item_laptop_8',
-            'ui-grid-item_desktop_6'
-          ]"
+          responsive
         >
-          <UiPanel
-            responsive
-          >
-            <slot />
-          </UiPanel>
-        </div>
+          <slot />
+        </UiPanel>
       </div>
     </UiContainer>
   </div>
