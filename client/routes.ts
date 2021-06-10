@@ -24,6 +24,7 @@ const SpecialistProceduresPage = lazyComponent(() => import('~/pages/SpecialistP
 const SmsSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/SmsSettingsPage/SmsSettingsPage.vue'))
 const WidgetSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/WidgetSettingsPage/WidgetSettingsPage.vue'))
 const CompanySettingsPage = lazyComponent(() => import('~/pages/SettingsPage/CompanySettingsPage/CompanySettingsPage.vue'))
+const TimetableSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/TimetableSettingsPage/TimetableSettingsPage.vue'))
 
 const AnalyticsAppointmentsPage = lazyComponent(() => import('~/pages/AnalyticsPage/AppointmentsPage/AppointmentsPage.vue'))
 const AnalyticsFinancePage = lazyComponent(() => import('~/pages/AnalyticsPage/FinancePage/FinancePage.vue'))
@@ -53,6 +54,7 @@ const routes: RouteConfig[] = [
   { path: '/settings/sms/', name: 'smsSettings', component: SmsSettingsPage },
   { path: '/settings/widget/', name: 'widgetSettings', component: WidgetSettingsPage },
   { path: '/settings/company/', name: 'companySettings', component: CompanySettingsPage },
+  { path: '/settings/timetable/', name: 'timetableSettings', component: TimetableSettingsPage },
 
   { path: '/analytics/', name: 'analytics', redirect: '/analytics/appointments/' },
   { path: '/analytics/appointments/', name: 'analyticsAppointments', component: AnalyticsAppointmentsPage },

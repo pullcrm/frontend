@@ -424,6 +424,12 @@ export const factory = (send) => ({
     }
   },
 
+  timetable: {
+    get (id: number): Promise<any> {
+      return send(`public/timework/${id}`, null, 'GET')
+    }
+  },
+
   analytics: {
     simple (params: IAnalyticsSimpleParams): Promise<any> {
       return send('companies/my/stats', params, 'GET')

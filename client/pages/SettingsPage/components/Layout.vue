@@ -25,6 +25,8 @@
             О компании
           </UiText>
           <UiText
+            tag="RouterLink"
+            :to="{ name: 'timetableSettings' }"
             size="l"
             responsive
             class="settings-page-layout__link"
