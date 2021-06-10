@@ -1,13 +1,38 @@
-.sms-settings-page {
+.widget-settings-page {
   &__title {
     margin-bottom: 24px;
   }
 
+  &__time {
+    & > span {
+      display: flex;
+    }
+
+    .ui-select {
+      display: inline-flex;
+      margin-top: 8px;
+
+      & > .ui-text {
+        color: $ui-blue-brand;
+      }
+    }
+  }
+
   &__code {
-    white-space: pre-line;
+    pre {
+      white-space: pre-line;
+    }
 
     code {
       white-space: pre-wrap;
     }
+  }
+
+  .ui-divider {
+    margin: 24px 0;
+  }
+
+  .ui-panel + .ui-panel {
+    margin-top: 24px;
   }
 }

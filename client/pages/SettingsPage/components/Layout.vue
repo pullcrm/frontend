@@ -51,12 +51,9 @@
           </UiText>
         </UiPanel>
 
-        <UiPanel
-          class="settings-page-layout__inner"
-          responsive
-        >
+        <div class="settings-page-layout__inner">
           <slot />
-        </UiPanel>
+        </div>
       </div>
     </UiContainer>
   </div>

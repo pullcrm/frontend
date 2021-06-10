@@ -2,130 +2,135 @@
   <SettingsLayout
     class="sms-settings-page"
   >
-    <UiTitle
-      size="s"
+    <UiPanel
+      size="m"
       responsive
-      class="sms-settings-page__title"
     >
-      Настройки СМС
-    </UiTitle>
+      <UiTitle
+        size="s"
+        responsive
+        class="sms-settings-page__title"
+      >
+        Настройки СМС
+      </UiTitle>
 
-    <template
-      v-if="isSMSAuthorize"
-    >
-      <SmsPlaceholder
-        title="Вы атворизованы в СМС-сервисе"
-        sub-title="Вам доступны функции отправки пользователям сообщений о предстоящих записях"
+      <template
+        v-if="isSMSAuthorize"
+      >
+        <Section
+          title="Вы атворизованы в СМС-сервисе"
+          sub-title="Вам доступны функции отправки пользователям сообщений о предстоящих записях"
+        >
+          <template #append>
+            <UiButton
+              size="s"
+              theme="danger-outlined"
+              @click.native="deauthorize"
+            >
+              Деавторизоваться
+            </UiButton>
+          </template>
+        </Section>
+
+        <UiDivider />
+
+        <Section
+          title="Уведомлять клиента после создания записи"
+          sub-title="СМС отправится через 2 минуты после создания записи"
+        >
+          <template #append>
+            <UiSwitch
+              v-model="settings.hasCreationSMS"
+              size="m"
+            />
+          </template>
+        </Section>
+
+        <SmsTemplate
+          class="sms-settings-page__sms-template"
+          :template="smsCreationTemplate"
+          disclaimer="Поставьте в места для генерации данных по отдельным записям: %specialist%, %date%, %time%, %procedures%"
+          @update:template="settings.creationSMSTemplate = $event"
+        />
+
+        <UiDivider />
+
+        <Section
+          title="Уведомлять клиента перед записью"
+        >
+          <template #append>
+            <UiSwitch
+              v-model="settings.hasRemindSMS"
+              size="m"
+            />
+          </template>
+        </Section>
+
+        <UiText
+          class="sms-settings-page__notify-selector"
+          size="l"
+          responsive
+        >
+          Уведомлять за:
+
+          <template #append>
+            <UiSelect
+              label-key="name"
+              :value="remindTime"
+              :options="durationList"
+              required
+              :clearable="false"
+              placeholder="Выбрать время"
+              @input="settings.remindSMSMinutes = $event.value"
+            >
+              <template #input="{ onFocus }">
+                <UiText
+                  size="m"
+                  responsive
+                  right-icon="outlined/caret-down"
+                  @click.native="onFocus"
+                >
+                  {{ remindTime.name }} до начала
+                </UiText>
+              </template>
+            </UiSelect>
+          </template>
+        </UiText>
+
+        <SmsTemplate
+          class="sms-settings-page__sms-template"
+          :template="smsRemindTemplate"
+          disclaimer="Примерная стоимость: 1.20 грн"
+          @update:template="settings.remindSMSTemplate = $event"
+        />
+
+        <UiButton
+          class="sms-settings-page__button"
+          theme="blue"
+          :loading="isLoading"
+          responsive
+          @click.native="save"
+        >
+          Сохранить
+        </UiButton>
+      </template>
+
+      <Section
+        v-else
+        title="Авторизация в СМС-сервисе"
+        sub-title="Включите функцию отправки пользователям сообщений о предстоящих записях"
       >
         <template #append>
           <UiButton
             size="s"
-            theme="danger-outlined"
-            @click.native="deauthorize"
+            theme="blue"
+            @click.native="smsPopup"
           >
-            Деавторизоваться
+            Авторизоваться
           </UiButton>
         </template>
-      </SmsPlaceholder>
-
-      <UiDivider />
-
-      <SmsPlaceholder
-        title="Уведомлять клиента после создания записи"
-        sub-title="СМС отправится через 2 минуты после создания записи"
-      >
-        <template #append>
-          <UiSwitch
-            v-model="settings.hasCreationSMS"
-            size="m"
-          />
-        </template>
-      </SmsPlaceholder>
-
-      <SmsTemplate
-        class="sms-settings-page__sms-template"
-        :template="smsCreationTemplate"
-        disclaimer="Поставьте в места для генерации данных по отдельным записям: %specialist%, %date%, %time%, %procedures%"
-        @update:template="settings.creationSMSTemplate = $event"
-      />
-
-      <UiDivider />
-
-      <SmsPlaceholder
-        title="Уведомлять клиента перед записью"
-      >
-        <template #append>
-          <UiSwitch
-            v-model="settings.hasRemindSMS"
-            size="m"
-          />
-        </template>
-      </SmsPlaceholder>
-
-      <UiText
-        class="sms-settings-page__notify-selector"
-        size="l"
-        responsive
-      >
-        Уведомлять за:
-
-        <template #append>
-          <UiSelect
-            label-key="name"
-            :value="remindTime"
-            :options="durationList"
-            required
-            :clearable="false"
-            placeholder="Выбрать время"
-            @input="settings.remindSMSMinutes = $event.value"
-          >
-            <template #input="{ onFocus }">
-              <UiText
-                size="m"
-                responsive
-                right-icon="outlined/caret-down"
-                @click.native="onFocus"
-              >
-                {{ remindTime.name }} до начала
-              </UiText>
-            </template>
-          </UiSelect>
-        </template>
-      </UiText>
-
-      <SmsTemplate
-        class="sms-settings-page__sms-template"
-        :template="smsRemindTemplate"
-        disclaimer="Примерная стоимость: 1.20 грн"
-        @update:template="settings.remindSMSTemplate = $event"
-      />
-
-      <UiButton
-        class="sms-settings-page__button"
-        theme="blue"
-        :loading="isLoading"
-        responsive
-        @click.native="save"
-      >
-        Сохранить
-      </UiButton>
-    </template>
-
-    <SmsPlaceholder
-      v-else
-      title="Авторизация в СМС-сервисе"
-      sub-title="Включите функцию отправки пользователям сообщений о предстоящих записях"
-    >
-      <template #append>
-        <UiButton
-          size="s"
-          theme="blue"
-          @click.native="smsPopup"
-        >
-          Авторизоваться
-        </UiButton>
-      </template>
-    </SmsPlaceholder>
+      </Section>
+    </UiPanel>
   </SettingsLayout>
 </template>
 
@@ -141,17 +146,17 @@ import { minutesToTime } from '~/utils/time'
 
 import { normalizeSmsSettingsParams } from '~/logics/company'
 
+import Section from '../components/Section.vue'
 import SmsTemplate from '../components/SmsTemplate.vue'
 import SettingsLayout from '../components/Layout.vue'
-import SmsPlaceholder from '../components/SmsPlaceholder.vue'
 
 @Component({
   layout: 'dashboard',
 
   components: {
+    Section,
     SmsTemplate,
-    SettingsLayout,
-    SmsPlaceholder
+    SettingsLayout
   }
 })
 export default class SmsSettingsPage extends Vue {

@@ -1,10 +1,10 @@
 <template>
-  <div class="settings-page-sms-placeholder">
-    <div class="settings-page-sms-placeholder__text">
+  <div class="settings-page-section">
+    <div class="settings-page-section__text">
       <UiText
         size="l"
         responsive
-        class="settings-page-sms-placeholder__title"
+        class="settings-page-section__title"
       >
         {{ title }}
       </UiText>
@@ -13,7 +13,7 @@
         v-if="subTitle"
         size="m"
         responsive
-        class="settings-page-sms-placeholder__sub-title"
+        class="settings-page-section__sub-title"
       >
         {{ subTitle }}
       </UiText>
@@ -21,7 +21,7 @@
 
     <div
       v-if="$slots.append"
-      class="settings-page-sms-placeholder__append"
+      class="settings-page-section__append"
     >
       <slot name="append" />
     </div>
@@ -29,7 +29,6 @@
 </template>
 
 <script lang="ts">
-// TODO: Rename component
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
@@ -37,19 +36,19 @@ import Component from 'vue-class-component'
   props: {
     title: {
       type: String,
-      default: ''
+      required: true
     },
 
     subTitle: {
       type: String,
-      default: ''
+      default: undefined
     }
   }
 })
-export default class SmsPlaceholder extends Vue {
-  readonly title?: string
+export default class Section extends Vue {
+  readonly title: string
   readonly subTitle?: string
 }
 </script>
 
-<style lang="scss" src="./SmsPlaceholder.scss"></style>
+<style lang="scss" src="./Section.scss"></style>

@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+export const code = `
 <style>
   .pullcrm-pro-widget-iframe iframe {
     width: 100%;
@@ -30,3 +32,4 @@
     }
   })
 </script>
+`

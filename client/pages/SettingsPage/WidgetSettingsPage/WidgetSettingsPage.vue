@@ -1,26 +1,89 @@
 <template>
   <SettingsLayout
-    class="sms-settings-page"
+    class="widget-settings-page"
   >
-    <UiTitle
-      class="sms-settings-page__title"
-      size="l"
+    <UiPanel
+      size="m"
       responsive
     >
-      Интеграция виджета
-    </UiTitle>
+      <UiTitle
+        size="s"
+        responsive
+        class="widget-settings-page__title"
+      >
+        Онлайн запись
+      </UiTitle>
 
-    <UiContent>
-      <p>
-        Виджет позволяет выбрать сотрудника, услугу, доступный день и время для создания записи в рамках вашей компании.
-      </p>
+      <Section
+        title="Включить онлайн запись"
+        sub-title="Разрешить пользователям записываться через виджет"
+      >
+        <template #append>
+          <UiSwitch
+            :value="true"
+            size="m"
+          />
+        </template>
+      </Section>
 
-      <h3>Базовая разметка виджета для выбраной компании</h3>
+      <UiDivider />
 
-      <pre class="sms-settings-page__code">
-        <code v-text="htmlCode" />
-      </pre>
-    </UiContent>
+      <UiText
+        class="widget-settings-page__time"
+        size="l"
+        responsive
+      >
+        <span>Клиент может записаться на запись не ранее чем за:</span>
+
+        <UiSelect
+          label-key="name"
+          :value="minTime"
+          :options="durationList"
+          required
+          :clearable="false"
+          placeholder="Выбрать время"
+          @input="time = $event.value"
+        >
+          <template #input="{ onFocus }">
+            <UiText
+              size="m"
+              responsive
+              right-icon="outlined/caret-down"
+              @click.native="onFocus"
+            >
+              {{ minTime.name }} до начала
+            </UiText>
+          </template>
+        </UiSelect>
+      </UiText>
+    </UiPanel>
+
+    <UiPanel
+      size="m"
+      responsive
+    >
+      <UiTitle
+        size="s"
+        responsive
+        class="widget-settings-page__title"
+      >
+        Интеграция виджета на вашем сайте
+      </UiTitle>
+
+      <UiContent
+        class="widget-settings-page__code"
+      >
+        <p>
+          Виджет позволяет выбрать сотрудника, услугу, доступный день и время для создания записи в рамках вашей компании.
+        </p>
+
+        <p>Базовая разметка виджета для выбраной компании</p>
+
+        <pre>
+          <code v-text="htmlCode" />
+        </pre>
+      </UiContent>
+    </UiPanel>
   </SettingsLayout>
 </template>
 
@@ -28,31 +91,51 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { SMS_REMIND_DURATIONS } from '~/constants/time'
+
+import { minutesToTime } from '~/utils/time'
+
 import UiContent from '~/ui/Content/Content.vue'
 
+import Section from '../components/Section.vue'
 import SettingsLayout from '../components/Layout.vue'
 
-// @ts-ignore
-// import code from './code.txt'
+import { code } from './code'
 
 @Component({
   layout: 'dashboard',
 
   components: {
+    Section,
     UiContent,
     SettingsLayout
   }
 })
 export default class WidgetSettingsPage extends Vue {
+  time = 15
+
   get companyId () {
     return this.$typedStore.getters['position/companyId']
   }
 
+  get minTime () {
+    return {
+      name: minutesToTime(this.time),
+      value: this.time
+    }
+  }
+
+  get durationList () {
+    return SMS_REMIND_DURATIONS.map(minutes => ({
+      name: minutesToTime(minutes),
+      value: minutes
+    }))
+  }
+
   get htmlCode () {
-    return ''
-    // return code
-    //   .trim()
-    //   .replace('{ companyId }', this.companyId)
+    return code
+      .trim()
+      .replace('{ companyId }', this.companyId)
   }
 }
 </script>

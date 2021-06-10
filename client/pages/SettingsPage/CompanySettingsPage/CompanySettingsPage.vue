@@ -2,203 +2,208 @@
   <SettingsLayout
     class="company-settings-page"
   >
-    <div class="ui-grid">
-      <UiTitle
-        size="s"
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12'
-        ]"
-      >
-        О компании
-      </UiTitle>
-
-      <UiField
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12'
-        ]"
-      >
-        <FileUpload
-          :image="logo"
-          responsive
-          @input="onAvatar"
+    <UiPanel
+      size="m"
+      responsive
+    >
+      <div class="ui-grid">
+        <UiTitle
+          size="s"
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
         >
-          <template #default="{ url }">
-            <UiAvatar
-              :image="url"
-              :name="company.name"
-              size="l"
-              responsive
-            />
-          </template>
-        </FileUpload>
-      </UiField>
+          О компании
+        </UiTitle>
 
-      <UiField
-        label="Название компании"
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12'
-        ]"
-      >
-        <UiInput
-          v-model="company.name"
-          placeholder="Введите название"
-        />
-      </UiField>
+        <UiField
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+        >
+          <FileUpload
+            :image="logo"
+            responsive
+            @input="onAvatar"
+          >
+            <template #default="{ url }">
+              <UiAvatar
+                :image="url"
+                :name="company.name"
+                size="l"
+                responsive
+              />
+            </template>
+          </FileUpload>
+        </UiField>
 
-      <UiField
-        label="Город"
-        required
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12'
-        ]"
-      >
-        <UiSelect
-          v-model="company.city"
-          label-key="name"
+        <UiField
+          label="Название компании"
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+        >
+          <UiInput
+            v-model="company.name"
+            placeholder="Введите название"
+          />
+        </UiField>
+
+        <UiField
+          label="Город"
           required
-          :options="cities"
-          placeholder="Выбрать город"
-        />
-      </UiField>
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+        >
+          <UiSelect
+            v-model="company.city"
+            label-key="name"
+            required
+            :options="cities"
+            placeholder="Выбрать город"
+          />
+        </UiField>
 
-      <UiField
-        label="Категория"
-        required
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12'
-        ]"
-      >
-        <UiSelect
-          v-model="company.type"
-          label-key="name"
+        <UiField
+          label="Категория"
           required
-          :options="companyTypes"
-          :clearable="false"
-          placeholder="Выбрать категорию"
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+        >
+          <UiSelect
+            v-model="company.type"
+            label-key="name"
+            required
+            :options="companyTypes"
+            :clearable="false"
+            placeholder="Выбрать категорию"
+          />
+        </UiField>
+
+        <UiField
+          label="Адрес"
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+        >
+          <UiInput
+            v-model="company.address"
+            placeholder="Введите адрес"
+          />
+        </UiField>
+
+        <UiField
+          label="Телефон"
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+        >
+          <UiInput
+            v-model="company.phone"
+            placeholder="066"
+          />
+        </UiField>
+
+        <UiField
+          label="О компании"
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
+        >
+          <UiInput
+            v-model="company.description"
+            tag="textarea"
+            placeholder="Введите текст"
+          />
+        </UiField>
+
+        <UiDivider
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12'
+          ]"
         />
-      </UiField>
 
-      <UiField
-        label="Адрес"
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12'
-        ]"
-      >
-        <UiInput
-          v-model="company.address"
-          placeholder="Введите адрес"
-        />
-      </UiField>
+        <UiField
+          label="Viber"
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_6'
+          ]"
+        >
+          <UiInput
+            v-model="company.viber"
+            placeholder="Viber"
+          />
+        </UiField>
 
-      <UiField
-        label="Телефон"
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12'
-        ]"
-      >
-        <UiInput
-          v-model="company.phone"
-          placeholder="066"
-        />
-      </UiField>
+        <UiField
+          label="Telegram"
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_6',
+            'ui-grid-item_mobile_12'
+          ]"
+        >
+          <UiInput
+            v-model="company.telegram"
+            placeholder="Telegram"
+          />
+        </UiField>
 
-      <UiField
-        label="О компании"
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12'
-        ]"
-      >
-        <UiInput
-          v-model="company.description"
-          tag="textarea"
-          placeholder="Введите текст"
-        />
-      </UiField>
+        <UiField
+          label="Instagram"
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_6',
+            'ui-grid-item_mobile_12'
+          ]"
+        >
+          <UiInput
+            v-model="company.instagram"
+            placeholder="Instagram"
+          />
+        </UiField>
 
-      <UiDivider
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12'
-        ]"
-      />
+        <UiField
+          label="Facebook"
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_6',
+            'ui-grid-item_mobile_12'
+          ]"
+        >
+          <UiInput
+            v-model="company.facebook"
+            placeholder="Facebook"
+          />
+        </UiField>
 
-      <UiField
-        label="Viber"
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_6'
-        ]"
-      >
-        <UiInput
-          v-model="company.viber"
-          placeholder="Viber"
-        />
-      </UiField>
-
-      <UiField
-        label="Telegram"
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_6',
-          'ui-grid-item_mobile_12'
-        ]"
-      >
-        <UiInput
-          v-model="company.telegram"
-          placeholder="Telegram"
-        />
-      </UiField>
-
-      <UiField
-        label="Instagram"
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_6',
-          'ui-grid-item_mobile_12'
-        ]"
-      >
-        <UiInput
-          v-model="company.instagram"
-          placeholder="Instagram"
-        />
-      </UiField>
-
-      <UiField
-        label="Facebook"
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_6',
-          'ui-grid-item_mobile_12'
-        ]"
-      >
-        <UiInput
-          v-model="company.facebook"
-          placeholder="Facebook"
-        />
-      </UiField>
-
-      <UiButton
-        theme="blue"
-        :loading="isLoading"
-        responsive
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12',
-          'ui-grid-item_mobile_12'
-        ]"
-        @click.native="save"
-      >
-        Сохранить
-      </UiButton>
-    </div>
+        <UiButton
+          theme="blue"
+          :loading="isLoading"
+          responsive
+          :class="[
+            'ui-grid-item',
+            'ui-grid-item_12',
+            'ui-grid-item_mobile_12'
+          ]"
+          @click.native="save"
+        >
+          Сохранить
+        </UiButton>
+      </div>
+    </UiPanel>
   </SettingsLayout>
 </template>
 
