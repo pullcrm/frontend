@@ -6,6 +6,7 @@ export function normalizeTimeOffs (timeOffs) {
   return timeOffs.map(timeOff => {
     const {
       id,
+      description,
       specialistId,
       endDateTime,
       startDateTime
@@ -13,6 +14,7 @@ export function normalizeTimeOffs (timeOffs) {
 
     return {
       id,
+      description,
       specialistId,
       endTime: getTime(endDateTime),
       startTime: getTime(startDateTime),

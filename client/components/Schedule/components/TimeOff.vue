@@ -1,9 +1,13 @@
 <template>
-  <div
+  <UiText
     class="schedule-timeoff"
+    size="l"
+    responsive
     :style="gridArea"
-    @dblclick="edit"
-  />
+    @dblclick.native="edit"
+  >
+    {{ description }}
+  </UiText>
 </template>
 
 <script lang="ts">
@@ -22,6 +26,10 @@ import { slugFromTime } from '~/utils/time'
 })
 export default class TimeOff extends Vue {
   readonly timeOff
+
+  get description () {
+    return this.timeOff.description.slice(0, 15)
+  }
 
   get from () {
     return slugFromTime(this.timeOff.startTime)
@@ -51,7 +59,13 @@ export default class TimeOff extends Vue {
 
 <style lang="scss">
   .schedule-timeoff {
+    @include ui-text-border($ui-black-10, 2px);
+
     z-index: 7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $ui-black-60;
     background-color: $ui-gray-brand;
     background-image: url('~assets/svg/disabled-time-pattern.svg');
     background-position: bottom right;

@@ -165,7 +165,8 @@ export interface ITimeOffGetAllParams {
 export interface ITimeOffCreateParams {
   specialistId: number,
   startDateTime: string,
-  endDateTime: string
+  endDateTime: string,
+  description?: string
 }
 
 export interface IAppointmentAllParams {

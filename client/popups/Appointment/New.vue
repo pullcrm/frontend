@@ -110,6 +110,8 @@ import Component from 'vue-class-component'
 
 import { SOURCE_DASHBOARD } from '~/constants'
 
+import { IN_PROGRESS } from '~/constants/appointment'
+
 import { toDate } from '~/utils/date-time'
 
 import { getProceduresDuration } from '~/logics/appointment'
@@ -123,8 +125,6 @@ import AppointmentClientSimple from './components/ClientSimple.vue'
 import AppointmentSpecialistSelect from './components/SpecialistSelect.vue'
 import AppointmentProceduresSelect from './components/ProceduresSelect.vue'
 import AppointmentAdditionalSettings from './components/AdditionalSettings.vue'
-
-import { IN_PROGRESS } from '~/constants/appointment'
 
 @Component({
   components: {

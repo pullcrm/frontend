@@ -20,18 +20,6 @@
         ref="formValidator"
         :validations="validations"
       >
-        <!-- <UiField
-          label="Краткое описание"
-        >
-          <UiInput
-            v-model="form.name"
-            required
-            left-icon="outlined/pencil"
-            placeholder="Введите описание"
-            @input="resetFieldError('name')"
-          />
-        </UiField> -->
-
         <UiField
           label="Сотрудник"
         >
@@ -107,6 +95,17 @@
           </UiField>
         </template>
 
+        <UiField
+          label="Краткое описание"
+        >
+          <UiInput
+            v-model="form.description"
+            tag="textarea"
+            placeholder="Введите описание"
+            @input="resetFieldError('description')"
+          />
+        </UiField>
+
         <div class="time-off-new-popup__actions">
           <UiButton
             type="submit"
@@ -158,7 +157,8 @@ export default class TimeOffNew extends Vue {
   form = {
     endTime: null,
     startTime: this.time,
-    specialist: this.specialistId && this.specialists.find(({ id }) => id === this.specialistId)
+    specialist: this.specialistId && this.specialists.find(({ id }) => id === this.specialistId),
+    description: ''
   }
 
   date = new Date(this.$typedStore.state.schedule.date)
@@ -192,7 +192,8 @@ export default class TimeOffNew extends Vue {
     await this.$api.timeOff.create({
       specialistId: this.form.specialist.id,
       endDateTime,
-      startDateTime
+      startDateTime,
+      description: this.form.description
     })
 
     this.close()

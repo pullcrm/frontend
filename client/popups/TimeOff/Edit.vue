@@ -20,18 +20,6 @@
         ref="formValidator"
         :validations="validations"
       >
-        <!-- <UiField
-          label="Краткое описание"
-        >
-          <UiInput
-            v-model="form.name"
-            required
-            left-icon="outlined/pencil"
-            placeholder="Введите описание"
-            @input="resetFieldError('name')"
-          />
-        </UiField> -->
-
         <UiField
           label="Сотрудник"
         >
@@ -107,6 +95,17 @@
           </UiField>
         </template>
 
+        <UiField
+          label="Краткое описание"
+        >
+          <UiInput
+            v-model="form.description"
+            tag="textarea"
+            placeholder="Введите описание"
+            @input="resetFieldError('description')"
+          />
+        </UiField>
+
         <div class="time-off-edit-popup__actions">
           <UiButton
             type="submit"
@@ -173,7 +172,8 @@ export default class TimeOffEdit extends Vue {
     id: null,
     endTime: null,
     specialist: null,
-    startTime: null
+    startTime: null,
+    description: ''
   }
 
   date = new Date()
@@ -187,12 +187,14 @@ export default class TimeOffEdit extends Vue {
       startTime,
       endDateTime,
       specialistId,
-      startDateTime
+      startDateTime,
+      description
     } = this.timeOff
 
     this.form.id = id
     this.form.endTime = endTime
     this.form.startTime = startTime
+    this.form.description = description
 
     this.date = toDate(startDateTime).toDate()
 
@@ -230,7 +232,8 @@ export default class TimeOffEdit extends Vue {
     await this.$api.timeOff.update(this.form.id, {
       specialistId: this.form.specialist.id,
       endDateTime,
-      startDateTime
+      startDateTime,
+      description: this.form.description
     })
 
     this.close()
