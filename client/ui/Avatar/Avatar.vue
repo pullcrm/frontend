@@ -76,7 +76,7 @@ export default class ImagePreviewCircle extends Vue {
   }
 
   get letter () {
-    const words = this.name.split(' ')
+    const words = this.name.trim().split(' ')
 
     if (words.length > 1) {
       return `${words[0][0]}${words[1][0]}`
