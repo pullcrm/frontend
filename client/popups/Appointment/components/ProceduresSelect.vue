@@ -46,8 +46,8 @@
     <UiField>
       <UiMultiSelect
         :value="procedures"
-        :options="normalizedOptions"
-        label-key="title"
+        :options="options"
+        label-key="name"
         placeholder="Выбрать услуги"
         @input="
           $emit('resetFieldError', 'procedures')
@@ -97,8 +97,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { formatMoney } from '~/utils/money'
-
 @Component({
   props: {
     total: {
@@ -126,15 +124,6 @@ export default class ProceduresSelect extends Vue {
 
   get count () {
     return this.procedures.length
-  }
-
-  get normalizedOptions () {
-    return this.options.map(option => {
-      return {
-        ...option,
-        title: `${option.name} - ${formatMoney(option.price)}`
-      }
-    })
   }
 
   onInput (procedures) {
