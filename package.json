@@ -21,7 +21,7 @@
     "start": "cross-env NODE_ENV=production nuxt start",
     "clean": "rm -rf .nuxt dist",
     "build": "yarn clean && cross-env NODE_ENV=production nuxt build",
-    "server": "git pull --rebase origin && yarn install && yarn build && pm2 reload ecosystem.config.js",
+    "server": "git pull --rebase origin && yarn install && yarn build",
     "lint:js": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --ignore-path .eslintignore .",
     "lint:js:fix": "eslint --fix --ext .js,.ts,.vue --ignore-path .gitignore --ignore-path .eslintignore .",
     "lint:css": "stylelint 'client/**/*.{vue,scss,css}'",
