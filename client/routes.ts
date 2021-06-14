@@ -29,7 +29,7 @@ const TimetableSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/T
 const AnalyticsAppointmentsPage = lazyComponent(() => import('~/pages/AnalyticsPage/AppointmentsPage/AppointmentsPage.vue'))
 const AnalyticsFinancePage = lazyComponent(() => import('~/pages/AnalyticsPage/FinancePage/FinancePage.vue'))
 
-const Error = lazyComponent(() => import('~/pages/Error/404.vue'))
+const ErrorPage = lazyComponent(() => import('~/pages/ErrorPage/ErrorPage.vue'))
 
 const routes: RouteConfig[] = [
   // Widgets
@@ -64,7 +64,7 @@ const routes: RouteConfig[] = [
   { path: '/restore/', name: 'restore', component: Restore, meta: { public: true } },
   { path: '/registration/', name: 'registration', component: Registration, meta: { public: true } },
 
-  { path: '*', component: Error, meta: { public: true } }
+  { path: '*', component: ErrorPage, meta: { public: true } }
 ]
 
 export default routes

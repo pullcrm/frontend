@@ -1,0 +1,17 @@
+.base-widget-procedure-panel {
+  display: flex;
+  align-items: center;
+
+  &__center {
+    color: $ui-black-60;
+    text-align: center;
+  }
+
+  &__right {
+    text-align: right;
+  }
+
+  & > div {
+    flex-grow: 1;
+  }
+}

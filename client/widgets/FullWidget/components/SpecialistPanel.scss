@@ -1,0 +1,25 @@
+.full-widget-specialist-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &__info {
+    flex-grow: 1;
+    margin: 0 16px;
+  }
+
+  &__name {
+    display: inline-block;
+  }
+
+  &__specialization {
+    margin-top: 4px;
+    color: $ui-black-60;
+  }
+
+  &__link {
+    @include ui-extend-click-area(8px);
+
+    color: $ui-blue-brand;
+  }
+}

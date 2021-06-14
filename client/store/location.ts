@@ -76,17 +76,13 @@ const LocationModule: Module<IState, IRootState> = {
     //   }
     // },
 
-    // from (state, localGetters) {
-    //   if (state.history.length > 1) {
-    //     return {
-    //       host: localGetters.host,
-    //       userAgent: localGetters.userAgent,
-    //       ...state.history[1]
-    //     }
-    //   }
+    from (state) {
+      if (state.history.length > 1) {
+        return state.history[1]
+      }
 
-    //   return null
-    // }
+      return null
+    }
   }
 }
 

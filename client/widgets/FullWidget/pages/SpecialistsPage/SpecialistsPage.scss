@@ -1,0 +1,9 @@
+.full-widget-specialists-page {
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__specialist-panel + &__specialist-panel {
+    margin-top: 16px;
+  }
+}

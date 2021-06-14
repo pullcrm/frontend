@@ -1,0 +1,17 @@
+.full-widget-procedures-page {
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__button {
+    width: 100%;
+  }
+
+  &__procedure-panel + &__procedure-panel {
+    margin-top: 16px;
+  }
+
+  &__procedures-group + &__procedures-group {
+    margin-top: 24px;
+  }
+}

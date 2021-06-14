@@ -77,6 +77,19 @@
     -$width  0       0 $color;
 }
 
+@mixin ui-extend-click-area($margin) {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: -$margin;
+    right: -$margin;
+    bottom: -$margin;
+    left: -$margin;
+    content: '';
+  }
+}
+
 @mixin ui-mobile-only {
   @media (max-width: $ui-tablet - 1px) {
     @content;
