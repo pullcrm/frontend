@@ -126,6 +126,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { AVATAR } from '~/constants/files'
+
 import { copyText } from '~/utils/clipboard'
 
 import { statuses } from '~/logics/specialist'
@@ -134,8 +136,6 @@ import SpecialistLayout from '../components/SpecialistLayout.vue'
 
 import Avatars from './components/Avatars.vue'
 import CreatedAt from './components/CreatedAt.vue'
-
-import { AVATAR } from '~/constants/files'
 
 @Component({
   components: {

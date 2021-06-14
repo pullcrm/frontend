@@ -122,14 +122,10 @@ export default class RpcClient {
   /**
    * Upload
    */
-  upload = async (file: File) => {
-    const formData = new FormData()
-
-    formData.append('file', file)
-
+  upload = async (form: FormData) => {
     const response = await fetch(this.endpointUpload, {
       method: 'POST',
-      body: formData,
+      body: form,
       headers: this.headers
     })
 
@@ -150,7 +146,7 @@ export default class RpcClient {
       })
     }
 
-    return rpcResponse.result
+    return rpcResponse
   }
 
   /**

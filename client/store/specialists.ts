@@ -21,7 +21,7 @@ const actions = {
 
   async onUploadAvatar ({ dispatch }, form) {
     try {
-      return await this.$api.files.create(form)
+      return await this.$apiClient.upload(form)
     } catch (err) {
       if (err.status === 400) {
         await dispatch('toasts/show', {

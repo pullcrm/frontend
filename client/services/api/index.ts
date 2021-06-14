@@ -364,10 +364,6 @@ export const factory = (send) => ({
       return send(`files/${id}`, params, 'GET')
     },
 
-    create (params: any) : Promise<any> {
-      return send('files', params, 'FORM')
-    },
-
     remove (id: number) {
       return send(`files/${id}`, {}, 'DELETE')
     }

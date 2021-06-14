@@ -32,9 +32,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import FileUpload from '~/components/FileUpload/FileUpload.vue'
-
 import { AVATAR } from '~/constants/files'
+
+import FileUpload from '~/components/FileUpload/FileUpload.vue'
 
 @Component({
   components: {
@@ -91,6 +91,8 @@ export default class Avatars extends Vue {
 
     if (result?.id) {
       await this.updateAvatar(result.id)
+
+      window.location.reload()
     }
   }
 

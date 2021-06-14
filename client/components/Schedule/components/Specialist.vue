@@ -74,9 +74,9 @@ import Component from 'vue-class-component'
 
 import { START_TIME_OF_DAY, END_TIME_OF_DAY } from '~/constants'
 
-import { setTime } from '~/utils/date-time'
-
 import { COMPLETED } from '~/constants/appointment'
+
+import { setTime } from '~/utils/date-time'
 
 @Component({
   props: {
