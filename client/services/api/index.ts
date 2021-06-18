@@ -418,6 +418,14 @@ export const factory = (send) => ({
 
     companyById (id: number): Promise<any> {
       return send(`public/companies/${id}`, null, 'GET')
+    },
+
+    specialistById (id: number): Promise<any> {
+      return send(`public/specialists/${id}`, null, 'GET')
+    },
+
+    categories (params: any): Promise<any> {
+      return send('public/categories', params, 'GET')
     }
   },
 

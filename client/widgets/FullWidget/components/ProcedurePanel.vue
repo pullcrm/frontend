@@ -2,7 +2,7 @@
   <UiPanel
     size="s"
     class="base-widget-procedure-panel"
-    @click.native="onPick"
+    @click.native.prevent="onPick"
   >
     <UiText
       size="l"
@@ -18,7 +18,9 @@
         />
       </template>
 
-      Стрижка
+      <a href="#">
+        {{ procedure.name }}
+      </a>
     </UiText>
 
     <UiText
@@ -26,7 +28,7 @@
       responsive
       class="base-widget-procedure-panel__center"
     >
-      1 ч
+      {{ procedure.duration | minutesToTime }}
     </UiText>
 
     <UiPrice
@@ -34,7 +36,7 @@
       responsive
       class="base-widget-procedure-panel__right"
     >
-      600 грн
+      {{ procedure.price | price }}
     </UiPrice>
   </UiPanel>
 </template>

@@ -1,0 +1,35 @@
+.full-widget-date-picker-item {
+  width: 32px;
+  text-align: center;
+
+  &:not(&_active):hover {
+    .full-widget-date-picker-item {
+      &__date {
+        background-color: $ui-blue-10;
+      }
+    }
+  }
+
+  &_active {
+    .full-widget-date-picker-item {
+      &__date {
+        color: $ui-white;
+        background-color: $ui-blue-brand;
+      }
+    }
+  }
+
+  &__day {
+    margin-bottom: 4px;
+    color: $ui-black-80;
+  }
+
+  &__date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+}

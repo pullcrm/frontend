@@ -54,24 +54,24 @@ import ProceduresGroup from '../../components/ProceduresGroup.vue'
 
   async asyncData ({ route, api }) {
     const companyId = Number(route.query.companyId || 0)
-    // const specialistId = Number(route.query.specialistId || 0)
+    const specialistId = Number(route.query.specialistId || 0)
 
     await api.public.companyById(companyId)
 
-    const [procedures, categories] = await Promise.all([
-      api.procedures.all(),
-      api.categories.all()
+    const [specialist, categories] = await Promise.all([
+      api.public.specialistById(specialistId),
+      api.public.categories({
+        companyId
+      })
     ])
 
-    // const [procedures, specialists] = await Promise.all([
-    //   [] || api.public.proceduresByCompanyId({ companyId }),
-    //   // TODO: Fetch current specialist
-    //   api.public.specialistsByCompanyId({
-    //     sort: 'order',
-    //     order: 'asc',
-    //     companyId
-    //   })
-    // ])
+    let { procedures } = specialist
+
+    if (procedures.length === 0) {
+      procedures = await api.public.proceduresByCompanyId({
+        companyId
+      })
+    }
 
     return {
       procedures,
@@ -84,7 +84,10 @@ export default class ProceduresPage extends Vue {
   readonly categories
 
   get normalizeCategories () {
-    return normalizeCategories(this.categories, this.procedures)
+    return normalizeCategories(
+      this.categories, this.procedures
+    )
+      .filter(category => category.procedures.length > 0)
   }
 
   async onSubmit () {

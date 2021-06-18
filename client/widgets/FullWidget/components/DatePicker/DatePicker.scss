@@ -1,0 +1,22 @@
+.full-widget-date-picker {
+  &__carousel {
+    --ui-carousel-item-width: 32px;
+    --ui-carousel-item-gap: 24px;
+
+    .ui-carousel__inner {
+      margin: -12px 0;
+      padding: 12px 0;
+    }
+
+    .ui-carousel__next,
+    .ui-carousel__prev {
+      background: transparent;
+    }
+
+    @include ui-mobile-only {
+      .ui-carousel__controls {
+        display: none;
+      }
+    }
+  }
+}

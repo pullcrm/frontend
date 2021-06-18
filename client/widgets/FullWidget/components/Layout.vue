@@ -109,6 +109,7 @@ export default class Container extends Vue {
     height: var(--full-widget-footer-height);
     padding: 0 16px;
     text-align: center;
+    background-color: $ui-white;
     border-top: 1px solid $ui-black-20;
   }
 
