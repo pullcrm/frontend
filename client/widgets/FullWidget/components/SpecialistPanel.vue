@@ -80,7 +80,7 @@ export default class SpecialistPanel extends Vue {
 
   async onPick () {
     await this.$router.push({
-      name: 'FullWidgetProceduresPage',
+      name: 'fullWidgetProceduresPage',
       query: {
         ...this.$route.query,
         specialistId: this.specialist.id

@@ -24,6 +24,7 @@
 
     <template #fixed-panel>
       <UiButton
+        v-if="canNext"
         size="m"
         theme="blue"
         class="full-widget-procedures-page__button"
@@ -83,6 +84,10 @@ export default class ProceduresPage extends Vue {
   readonly procedures
   readonly categories
 
+  get canNext () {
+    return Boolean(this.$route.query.procedureIds)
+  }
+
   get normalizeCategories () {
     return normalizeCategories(
       this.categories, this.procedures
@@ -92,7 +97,7 @@ export default class ProceduresPage extends Vue {
 
   async onSubmit () {
     await this.$router.push({
-      name: 'FullWidgetPickDatePage',
+      name: 'fullWidgetPickDatePage',
       query: this.$route.query
     })
   }

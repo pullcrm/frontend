@@ -1,11 +1,13 @@
-.full-widget-pick-date-page {
+.full-widget-order-page {
   &__title,
-  &__date-picker,
+  &__info-panel,
+  &__company-panel,
   &__specialist-panel {
     margin-bottom: 24px;
   }
 
   &__button {
     width: 100%;
+    margin-bottom: 16px;
   }
 }

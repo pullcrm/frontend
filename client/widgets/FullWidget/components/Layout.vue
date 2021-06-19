@@ -46,13 +46,26 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-@Component({})
+@Component({
+  props: {
+    back: {
+      type: Boolean,
+      default: true
+    }
+  }
+})
 export default class Container extends Vue {
+  readonly back: boolean
+
   get from () {
     return this.$typedStore.getters['location/from']
   }
 
   get hasBack () {
+    if (this.back === false) {
+      return false
+    }
+
     return Boolean(this.from)
   }
 

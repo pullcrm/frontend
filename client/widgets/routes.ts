@@ -10,6 +10,8 @@ const BaseWidgetOrder = dynamicPage(() => import('./BaseWidget/pages/BaseWidgetO
 const FullWidgetSpecialistsPage = dynamicPage(() => import('./FullWidget/pages/SpecialistsPage/SpecialistsPage.vue'))
 const FullWidgetProceduresPage = dynamicPage(() => import('./FullWidget/pages/ProceduresPage/ProceduresPage.vue'))
 const FullWidgetPickDatePage = dynamicPage(() => import('./FullWidget/pages/PickDatePage/PickDatePage.vue'))
+const FullWidgetConfirmationPage = dynamicPage(() => import('./FullWidget/pages/ConfirmationPage/ConfirmationPage.vue'))
+const FullWidgetOrderPage = dynamicPage(() => import('./FullWidget/pages/OrderPage/OrderPage.vue'))
 
 const checkRouterBeforeEnter = (to, from, next) => {
   if (!from.name) {
@@ -60,20 +62,32 @@ export default [
 
   {
     path: '/widgets/full/',
-    name: 'FullWidgetSpecialistsPage',
+    name: 'fullWidgetSpecialistsPage',
     component: FullWidgetSpecialistsPage,
     meta: { public: true }
   },
   {
     path: '/widgets/full/procedures/',
-    name: 'FullWidgetProceduresPage',
+    name: 'fullWidgetProceduresPage',
     component: FullWidgetProceduresPage,
     meta: { public: true }
   },
   {
     path: '/widgets/full/pick-date/',
-    name: 'FullWidgetPickDatePage',
+    name: 'fullWidgetPickDatePage',
     component: FullWidgetPickDatePage,
+    meta: { public: true }
+  },
+  {
+    path: '/widgets/full/confirmation/',
+    name: 'fullWidgetConfirmationPage',
+    component: FullWidgetConfirmationPage,
+    meta: { public: true }
+  },
+  {
+    path: '/widgets/full/order/',
+    name: 'fullWidgetOrderPage',
+    component: FullWidgetOrderPage,
     meta: { public: true }
   }
 ]

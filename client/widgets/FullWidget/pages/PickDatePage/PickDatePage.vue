@@ -23,6 +23,18 @@
     <TimePicker
       :hours="filteredAvailableHours"
     />
+
+    <template #fixed-panel>
+      <UiButton
+        v-if="canNext"
+        size="m"
+        theme="blue"
+        class="full-widget-pick-date-page__button"
+        @click.native="onSubmit"
+      >
+        Продолжить
+      </UiButton>
+    </template>
   </Layout>
 </template>
 
@@ -111,12 +123,20 @@ export default class PickDatePage extends Vue {
 
   availableHours = []
 
+  get canNext () {
+    return this.date && this.time
+  }
+
   get date () {
-    return String(this.$route.query.date)
+    return this.$route.query.date
+  }
+
+  get time () {
+    return this.$route.query.time
   }
 
   get filteredAvailableHours () {
-    if (dayjs(this.date).isToday()) {
+    if (dayjs(String(this.date)).isToday()) {
       return this.availableHours.filter(item => {
         return item.isAfter(dayjs() /** add(30, 'minute') */)
       })
@@ -139,6 +159,13 @@ export default class PickDatePage extends Vue {
   get duration () {
     return this.activeProcedures
       .reduce((acc, { duration }) => acc + duration, 0)
+  }
+
+  async onSubmit () {
+    await this.$router.push({
+      name: 'fullWidgetConfirmationPage',
+      query: this.$route.query
+    })
   }
 }
 </script>

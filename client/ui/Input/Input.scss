@@ -3,7 +3,6 @@
 
   position: relative;
   display: flex;
-  align-items: center;
 
   &:focus-within {
     .ui-input__icon._left {
@@ -13,11 +12,13 @@
 
   &__append {
     position: absolute;
+    top: 12px;
     right: 12px;
     order: 1;
 
     ~ .ui-input__content {
-      input {
+      input,
+      textarea {
         padding-right: 40px;
       }
     }
@@ -25,11 +26,13 @@
 
   &__prepend {
     position: absolute;
+    top: 12px;
     left: 12px;
     order: 3;
 
     ~ .ui-input__content {
-      input {
+      input,
+      textarea {
         padding-left: 40px;
       }
     }
@@ -78,8 +81,8 @@
       min-width: 100%;
       max-width: 100%;
       min-height: 80px;
-      padding-top: 8px;
-      padding-bottom: 8px;
+      padding-top: 12px;
+      padding-bottom: 12px;
     }
   }
 

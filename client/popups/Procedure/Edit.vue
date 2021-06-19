@@ -102,11 +102,11 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { PROCEDURE_DURATIONS } from '~/constants/time'
+
 import { IProcedure } from '~/services/api'
 
 import { minutesToTime } from '~/utils/time'
-
-import { PROCEDURE_DURATIONS } from '~/constants/time'
 
 @Component({
   props: {

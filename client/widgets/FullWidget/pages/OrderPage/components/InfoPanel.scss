@@ -1,0 +1,13 @@
+.full-widget-order-page-info-panel {
+  display: flex;
+  align-items: center;
+
+  &__inner {
+    flex: 1;
+    margin-right: 16px;
+  }
+
+  &__date {
+    margin-top: 4px;
+  }
+}

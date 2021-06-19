@@ -1,20 +1,23 @@
 <template>
   <UiPanel
     size="s"
-    class="full-widget-pick-date-page-specialist-panel"
+    class="full-widget-confirmation-page-info-panel"
   >
     <UiAvatar
       :image="avatar"
       :name="fullName"
       size="m"
-      class="full-widget-pick-date-page-specialist-panel__image"
+      class="full-widget-confirmation-page-info-panel__image"
     />
 
-    <div class="full-widget-pick-date-page-specialist-panel__info">
+    <div class="full-widget-confirmation-page-info-panel__info">
       <UiText
+        tag="a"
+        href="#"
         size="l"
         strong
         responsive
+        class="full-widget-confirmation-page-info-panel__procedures"
       >
         {{ proceduresText }}
       </UiText>
@@ -22,15 +25,22 @@
       <UiText
         size="m"
         responsive
-        class="full-widget-pick-date-page-specialist-panel__name"
+        class="full-widget-confirmation-page-info-panel__name"
       >
         {{ fullName }}
       </UiText>
     </div>
 
+    <UiText
+      size="m"
+      class="full-widget-confirmation-page-info-panel__date"
+    >
+      {{ date }}
+    </UiText>
+
     <UiPrice
       size="s"
-      class="full-widget-pick-date-page-specialist-panel__price"
+      class="full-widget-confirmation-page-info-panel__price"
     >
       {{ price | price }}
     </UiPrice>
@@ -43,6 +53,11 @@ import Component from 'vue-class-component'
 
 @Component({
   props: {
+    date: {
+      type: String,
+      required: true
+    },
+
     procedures: {
       type: Array,
       required: true
@@ -54,7 +69,8 @@ import Component from 'vue-class-component'
     }
   }
 })
-export default class SpecialistPanel extends Vue {
+export default class InfoPanel extends Vue {
+  readonly date
   readonly procedures
   readonly specialist
 
@@ -88,4 +104,4 @@ export default class SpecialistPanel extends Vue {
 }
 </script>
 
-<style lang="scss" src="./SpecialistPanel.scss"></style>
+<style lang="scss" src="./InfoPanel.scss"></style>

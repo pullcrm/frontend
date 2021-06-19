@@ -80,7 +80,7 @@ export default class ProcedurePanel extends Vue {
 
   async onPick () {
     await this.$router.push({
-      name: 'FullWidgetPickDatePage',
+      name: 'fullWidgetPickDatePage',
       query: {
         ...this.$route.query,
         procedureIds: [

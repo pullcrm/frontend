@@ -109,6 +109,7 @@
         >
           <UiInput
             v-model="company.phone"
+            mask="38 (###) #### ###"
             placeholder="066"
           />
         </UiField>
