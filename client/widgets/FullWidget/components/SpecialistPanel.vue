@@ -36,7 +36,7 @@
     <a
       href="#"
       class="full-widget-specialist-panel__link"
-      @click.prevent.stop
+      @click.prevent.stop="onSpecialist"
     >
       <UiIcon
         size="m"
@@ -83,6 +83,18 @@ export default class SpecialistPanel extends Vue {
       name: 'fullWidgetProceduresPage',
       query: {
         ...this.$route.query,
+        specialistId: this.specialist.id
+      }
+    })
+  }
+
+  async onSpecialist () {
+    const { companyId } = this.$route.query
+
+    await this.$router.push({
+      name: 'fullWidgetSpecialistPage',
+      query: {
+        companyId,
         specialistId: this.specialist.id
       }
     })

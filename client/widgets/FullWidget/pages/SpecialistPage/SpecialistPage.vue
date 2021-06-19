@@ -1,24 +1,39 @@
 <template>
-  <Layout class="full-widget-procedures-page">
+  <Layout class="full-widget-specialist-page">
+    <UiAvatar
+      :image="avatar"
+      :name="fullName"
+      size="l"
+      class="full-widget-specialist-page__avatar"
+    />
+
     <UiTitle
-      size="m"
-      responsive
-      class="full-widget-procedures-page__title"
+      size="s"
+      class="full-widget-specialist-page__name"
     >
-      Выберите услуги
+      {{ fullName }}
     </UiTitle>
+
+    <UiText
+      size="m"
+      class="full-widget-specialist-page__specialization"
+    >
+      {{ specialist.specialization }}
+    </UiText>
+
+    <UiDivider />
 
     <ProceduresGroup
       v-for="category in normalizeCategories"
       :key="`category-${category.id}`"
       :title="category.name"
-      class="full-widget-procedures-page__procedures-group"
+      class="full-widget-specialist-page__procedures-group"
     >
       <ProcedurePanel
         v-for="procedure in category.procedures"
         :key="`procedure-${procedure.id}`"
         :procedure="procedure"
-        class="full-widget-procedures-page__procedure-panel"
+        class="full-widget-specialist-page__procedure-panel"
       />
     </ProceduresGroup>
 
@@ -27,7 +42,7 @@
         v-if="canNext"
         size="m"
         theme="blue"
-        class="full-widget-procedures-page__button"
+        class="full-widget-specialist-page__button"
         @click.native="onSubmit"
       >
         Продолжить
@@ -77,14 +92,33 @@ import ProceduresGroup from '../../components/ProceduresGroup.vue'
     }
 
     return {
+      specialist,
       procedures,
       categories
     }
   }
 })
-export default class ProceduresPage extends Vue {
+export default class SpecialistPage extends Vue {
+  readonly specialist
   readonly procedures
   readonly categories
+
+  get user () {
+    return this.specialist.user
+  }
+
+  get avatar () {
+    return this.specialist.user.avatar?.path
+  }
+
+  get fullName () {
+    const { firstName, lastName } = this.user
+
+    return [firstName, lastName]
+      .map(item => item.trim())
+      .filter(Boolean)
+      .join(' ')
+  }
 
   get canNext () {
     return Boolean(this.$route.query.procedureIds)
@@ -109,4 +143,4 @@ export default class ProceduresPage extends Vue {
 }
 </script>
 
-<style lang="scss" src="./ProceduresPage.scss"></style>
+<style lang="scss" src="./SpecialistPage.scss"></style>

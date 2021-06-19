@@ -8,6 +8,7 @@ const BaseWidgetCheckout = dynamicPage(() => import('./BaseWidget/pages/BaseWidg
 const BaseWidgetOrder = dynamicPage(() => import('./BaseWidget/pages/BaseWidgetOrder/BaseWidgetOrder.vue'))
 
 const FullWidgetSpecialistsPage = dynamicPage(() => import('./FullWidget/pages/SpecialistsPage/SpecialistsPage.vue'))
+const FullWidgetSpecialistPage = dynamicPage(() => import('./FullWidget/pages/SpecialistPage/SpecialistPage.vue'))
 const FullWidgetProceduresPage = dynamicPage(() => import('./FullWidget/pages/ProceduresPage/ProceduresPage.vue'))
 const FullWidgetPickDatePage = dynamicPage(() => import('./FullWidget/pages/PickDatePage/PickDatePage.vue'))
 const FullWidgetConfirmationPage = dynamicPage(() => import('./FullWidget/pages/ConfirmationPage/ConfirmationPage.vue'))
@@ -64,6 +65,12 @@ export default [
     path: '/widgets/full/',
     name: 'fullWidgetSpecialistsPage',
     component: FullWidgetSpecialistsPage,
+    meta: { public: true }
+  },
+  {
+    path: '/widgets/full/specialist/',
+    name: 'fullWidgetSpecialistPage',
+    component: FullWidgetSpecialistPage,
     meta: { public: true }
   },
   {

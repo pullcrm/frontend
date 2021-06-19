@@ -66,10 +66,11 @@
           </UiField>
 
           <UiText
+            v-if="settings.hasRemindSMS"
             size="s"
             class="full-widget-confirmation-page__disclaimer"
           >
-            Мы напомним вам о записи за 1 час до начала
+            Мы напомним вам о записи за {{ settings.remindSMSMinutes | minutesToTime }} до начала
           </UiText>
 
           <UiButton
@@ -144,6 +145,10 @@ export default class ConfirmationPage extends Vue {
 
   $refs: {
     formValidator: UiFormValidator
+  }
+
+  get settings () {
+    return this.company.company_setting || {}
   }
 
   get validations (): Validations {

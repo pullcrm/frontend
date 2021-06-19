@@ -47,6 +47,8 @@ import Component from 'vue-class-component'
 
 import xor from 'lodash/xor'
 
+import dayjs from '~/utils/dayjs'
+
 @Component({
   props: {
     procedure: {
@@ -83,6 +85,7 @@ export default class ProcedurePanel extends Vue {
       name: 'fullWidgetPickDatePage',
       query: {
         ...this.$route.query,
+        date: dayjs(new Date()).format('YYYY-MM-DD'),
         procedureIds: [
           String(this.procedure.id)
         ]
