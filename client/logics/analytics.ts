@@ -22,16 +22,16 @@ export function normalizeAppointmentsStats (stats) {
 
 export function normalizeAnalyticsStats (stats) {
   const {
-    avg,
-    count,
-    income,
+    total,
+    price,
+    amount,
     procedures
   } = stats
 
   return {
-    total: count,
-    income,
-    average: avg,
+    total: amount,
+    income: total,
+    average: price,
     procedures
   }
 }

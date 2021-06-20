@@ -77,7 +77,7 @@
             size="m"
             responsive
           >
-            {{ row.income | price }}
+            {{ row.total | price }}
           </UiText>
         </UiTableColumn>
       </template>
