@@ -107,7 +107,7 @@ export default class Day extends Vue {
         [this.dayAlias]: Object.values(options).join(';')
       })
 
-      await this.$typedStore.dispatch('position/fetchTimetable')
+      await this.$typedStore.dispatch('timetable/fetch')
     } finally {
       this.$typedStore.commit('SET_LOADING', false)
     }

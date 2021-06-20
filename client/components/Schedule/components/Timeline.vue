@@ -21,7 +21,7 @@ import Component from 'vue-class-component'
 @Component({})
 export default class Timeline extends Vue {
   get workingHours () {
-    return this.$time.workingHours
+    return this.$typedStore.getters['timetable/workingHours']
   }
 
   get timeHours () {

@@ -32,7 +32,7 @@ import { TIME_STEP } from '~/constants'
 
 // TODO: Replace all ~/utils/date-time to ~/utils/dayjs
 import { toDate } from '~/utils/date-time'
-import { slugFromTime } from '~/utils/time'
+import { shiftTimeDownBySteps, slugFromTime } from '~/utils/time'
 
 import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
 
@@ -59,6 +59,10 @@ export default class HourTile extends Vue {
 
   $refs: {
     icon: HTMLElement
+  }
+
+  get workingHours () {
+    return this.$typedStore.getters['timetable/workingHours']
   }
 
   get isSMSAuthorize (): Boolean {
@@ -130,7 +134,7 @@ export default class HourTile extends Vue {
 
   dropZoneEnterHandler () {
     const steps = (this.$typedStore.getters['drugAndDrop/totalDuration'] / TIME_STEP) - 1
-    const time = this.$time.shiftTimeDownBySteps(this.hour, steps)
+    const time = shiftTimeDownBySteps(this.workingHours, this.hour, steps)
 
     if (this.$typedStore.getters['drugAndDrop/getSlotByTime'](time, this.specialistId) === false) {
       return

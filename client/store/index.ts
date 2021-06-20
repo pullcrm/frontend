@@ -10,6 +10,7 @@ import location, { IState as ILocationState } from './location'
 import schedule from './schedule'
 import position from './position'
 import analytics from './analytics'
+import timetable from './timetable'
 import procedures from './procedures'
 import specialists from './specialists'
 import drugAndDrop from './drug-and-drop'
@@ -26,6 +27,7 @@ export interface IModules {
   schedule: any,
   position: any,
   analytics: any,
+  timetable: any,
   procedures: any,
   specialists: any,
   drugAndDrop: any,
@@ -94,6 +96,7 @@ const store = () => {
       schedule,
       position,
       analytics,
+      timetable,
       procedures,
       specialists,
       drugAndDrop,

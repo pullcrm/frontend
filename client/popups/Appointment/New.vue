@@ -39,7 +39,7 @@
           :date.sync="form.date"
           :duration="duration"
           :start-at.sync="form.startTime"
-          :working-hours="workingHours"
+          :avaliable-hours="avaliableHours"
           @resetFieldError="resetFieldError"
         />
 
@@ -181,7 +181,7 @@ export default class AppointmentNew extends Vue {
   readonly specialistId!: number | null
 
   isLoading = false
-  workingHours = []
+  avaliableHours = []
 
   form = {
     date: toDate(this.$typedStore.state.schedule.date),
@@ -257,13 +257,13 @@ export default class AppointmentNew extends Vue {
   }
 
   async fetchAvailableTime () {
-    this.workingHours = []
+    this.avaliableHours = []
 
     if (!this.form.specialist?.id || this.duration === 0) {
       return
     }
 
-    this.workingHours = await this.$api.appointments.availableTime({
+    this.avaliableHours = await this.$api.appointments.availableTime({
       date: this.form.date.format('YYYY-MM-DD'),
       specialistId: this.form.specialist.id,
       duration: this.duration
@@ -271,7 +271,7 @@ export default class AppointmentNew extends Vue {
   }
 
   checkStartTime () {
-    const startTimeIndex = this.workingHours.indexOf(this.form.startTime)
+    const startTimeIndex = this.avaliableHours.indexOf(this.form.startTime)
 
     if (startTimeIndex === -1) {
       this.form.startTime = null

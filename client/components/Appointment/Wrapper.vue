@@ -31,11 +31,11 @@ import Component from 'vue-class-component'
 
 import { SOURCE_WIDGET } from '~/constants'
 
-import { slugFromTime } from '~/utils/time'
+import { IN_PROGRESS } from '~/constants/appointment'
+
+import { getTimePoints, slugFromTime } from '~/utils/time'
 
 import { getProceduresDuration } from '~/logics/appointment'
-
-import { IN_PROGRESS } from '~/constants/appointment'
 
 @Component({
   props: {
@@ -61,12 +61,16 @@ export default class Appointment extends Vue {
     return status
   }
 
+  get workingHours () {
+    return this.$typedStore.getters['timetable/workingHours']
+  }
+
   get totalTime () {
     return getProceduresDuration(this.appointment)
   }
 
   get timePoints () {
-    return this.$time.getTimePoints({
+    return getTimePoints(this.workingHours, {
       timeStart: this.appointment.startTime,
       totalTime: this.totalTime
     })

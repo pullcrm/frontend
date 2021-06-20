@@ -75,7 +75,7 @@ export default class ScheduleColumn extends Vue {
   readonly appointments
 
   get workingHours () {
-    return this.$time.workingHours
+    return this.$typedStore.getters['timetable/workingHours']
   }
 
   get gridTemplateRows () {

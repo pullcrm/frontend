@@ -205,7 +205,7 @@ export default class TimeOffEdit extends Vue {
   }
 
   get workingHours () {
-    return this.$time.workingHours
+    return this.$typedStore.getters['timetable/workingHours']
   }
 
   get workingHoursForTimeEnd () {

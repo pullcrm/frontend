@@ -45,7 +45,7 @@ import TimeTableDay from './components/Day.vue'
 })
 export default class TimetableSettingsPage extends Vue {
   get timetable () {
-    return this.$typedStore.getters['position/normalizeTimetable']
+    return this.$typedStore.getters['timetable/normalizeTimetable']
   }
 }
 </script>

@@ -13,7 +13,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { slugFromTime } from '~/utils/time'
+import { getTimePoints, slugFromTime } from '~/utils/time'
 
 import { getProceduresDuration } from '~/logics/appointment'
 
@@ -50,8 +50,12 @@ export default class DropPlaceholder extends Vue {
     return getProceduresDuration(appointment)
   }
 
+  get workingHours () {
+    return this.$typedStore.getters['timetable/workingHours']
+  }
+
   get timePoints () {
-    return this.$time.getTimePoints({
+    return getTimePoints(this.workingHours, {
       timeStart: this.time,
       totalTime: this.totalDuration
     })

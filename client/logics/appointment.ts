@@ -43,7 +43,7 @@ export function normalizeAppointmentParams (submitParams) {
 }
 
 export function getProceduresDuration ({ procedures }) {
-  return procedures.reduce((acc, { duration }) => (acc + duration), 0)
+  return procedures.reduce((acc, { duration }) => acc + duration, 0)
 }
 
 export function getAppointmentSubtitle (appointment) {

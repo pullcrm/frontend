@@ -1,3 +1,5 @@
+import { TIME_STEP } from '~/constants'
+
 import dayjs from './dayjs'
 import { pluralize } from './pluralize'
 
@@ -46,4 +48,39 @@ export function getWorkingHours (open, close) {
   } while (from.format('HH:mm') !== close)
 
   return [...hours, close]
+}
+
+// TODO: Refactor
+export function shiftTimeDownBySteps (workingHours, time, steps) {
+  let timeIndex = workingHours.indexOf(time) - steps
+
+  while (!workingHours[timeIndex]) {
+    timeIndex += 1
+  }
+
+  return workingHours[timeIndex]
+}
+
+// TODO: Refactor
+export function shiftTimeUpBySteps (workingHours, time, steps) {
+  let timeIndex = workingHours.indexOf(time) + steps
+
+  while (!workingHours[timeIndex]) {
+    timeIndex -= 1
+  }
+
+  return workingHours[timeIndex]
+}
+
+// TODO: Refactor
+export function getTimePoints (workingHours, { timeStart, totalTime }) {
+  const fromIndex = workingHours.indexOf(timeStart)
+
+  let toIndex = fromIndex + (totalTime / Number(TIME_STEP)) - 1
+
+  if (!workingHours[toIndex]) {
+    toIndex = workingHours.length - 1
+  }
+
+  return workingHours.slice(fromIndex, toIndex + 1)
 }

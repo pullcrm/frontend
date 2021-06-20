@@ -15,6 +15,7 @@ function createState () {
 const actions = {
   async fetch ({ dispatch, commit }) {
     commit('SET_LOADING', true)
+    dispatch('reset')
 
     await Promise.all([
       dispatch('fetchTimeOffs'),
@@ -31,6 +32,12 @@ const actions = {
     })
 
     commit('SET_TIME_OFFS', timeOffs)
+  },
+
+  reset ({ commit }) {
+    commit('SET_TIME_OFFS', [])
+    commit('appointments/SET_QUEUE', [], { root: true })
+    commit('appointments/SET_APPOINTMENTS', [], { root: true })
   }
 }
 

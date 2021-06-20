@@ -34,7 +34,7 @@
         <UiSelect
           :value="startAt"
           required
-          :options="workingHours"
+          :options="avaliableHours"
           left-icon="outlined/clock"
           placeholder="00:00"
           @input="
@@ -80,6 +80,7 @@ import Component from 'vue-class-component'
 import { TIME_STEP } from '~/constants'
 
 import dayjs from '~/utils/dayjs'
+import { shiftTimeUpBySteps } from '~/utils/time'
 
 @Component({
   props: {
@@ -98,7 +99,7 @@ import dayjs from '~/utils/dayjs'
       required: true
     },
 
-    workingHours: {
+    avaliableHours: {
       type: Array,
       default: () => []
     }
@@ -108,7 +109,7 @@ export default class DateTime extends Vue {
   readonly date
   readonly startAt
   readonly duration: number
-  readonly workingHours
+  readonly avaliableHours
 
   get customDate (): Date {
     if (this.date) {
@@ -122,10 +123,14 @@ export default class DateTime extends Vue {
     this.$emit('update:date', dayjs(date))
   }
 
+  get workingHours () {
+    return this.$typedStore.getters['timetable/workingHours']
+  }
+
   get toTime () {
     const steps = this.duration / TIME_STEP
 
-    return this.$time.shiftTimeUpBySteps(this.startAt, steps)
+    return shiftTimeUpBySteps(this.workingHours, this.startAt, steps)
   }
 }
 </script>

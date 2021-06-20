@@ -157,7 +157,6 @@ const config: NuxtOptions = {
     { src: '~/plugins/typed-store' },
     { src: '~/plugins/runtime-config' },
     { src: '~/plugins/storage' },
-    { src: '~/plugins/time' },
     { src: '~/plugins/api' },
     // { src: '~/plugins/logger' },
     // { src: '~/plugins/auth' },

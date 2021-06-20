@@ -66,13 +66,15 @@ import Component from 'vue-class-component'
 
 import { TIME_STEP } from '~/constants'
 
+import { COMPLETED } from '~/constants/appointment'
+
+import { shiftTimeUpBySteps } from '~/utils/time'
+
 import { getAppointmentSubtitle, getProceduresDuration } from '~/logics/appointment'
 
 import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
 
 import Wrapper from './Wrapper.vue'
-
-import { COMPLETED } from '~/constants/appointment'
 
 @Component({
   inject: ['getPopperMenu'],
@@ -105,6 +107,10 @@ export default class Appointment extends Vue {
     return getAppointmentSubtitle(this.appointment)
   }
 
+  get workingHours () {
+    return this.$typedStore.getters['timetable/workingHours']
+  }
+
   get totalTime () {
     return getProceduresDuration(this.appointment)
   }
@@ -116,7 +122,7 @@ export default class Appointment extends Vue {
   get toTime () {
     const steps = this.totalTime / TIME_STEP
 
-    return this.$time.shiftTimeUpBySteps(this.fromTime, steps)
+    return shiftTimeUpBySteps(this.workingHours, this.fromTime, steps)
   }
 
   openMenu () {

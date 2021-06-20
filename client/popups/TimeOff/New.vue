@@ -164,7 +164,7 @@ export default class TimeOffNew extends Vue {
   date = new Date(this.$typedStore.state.schedule.date)
 
   get workingHours () {
-    return this.$time.workingHours
+    return this.$typedStore.getters['timetable/workingHours']
   }
 
   get workingHoursForTimeEnd () {
