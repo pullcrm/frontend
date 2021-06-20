@@ -2,4 +2,8 @@
   &__title {
     margin-bottom: 24px;
   }
+
+  &__day + &__day {
+    margin-top: 24px;
+  }
 }

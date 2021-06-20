@@ -52,7 +52,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import dayjs from '~/utils/dayjs'
-import { setTime } from '~/utils/date-time'
+import { setTime } from '~/utils/time'
 
 import Layout from '../../components/Layout.vue'
 import CompanyPanel from '../../components/CompanyPanel.vue'

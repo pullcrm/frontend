@@ -132,7 +132,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { setTime, toDate } from '~/utils/date-time'
+import { toDate } from '~/utils/date-time'
+import { setTime } from '~/utils/time'
 
 import { isCloseDay } from '~/logics/time-offs'
 

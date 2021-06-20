@@ -76,7 +76,7 @@ import { START_TIME_OF_DAY, END_TIME_OF_DAY } from '~/constants'
 
 import { COMPLETED } from '~/constants/appointment'
 
-import { setTime } from '~/utils/date-time'
+import { setTime } from '~/utils/time'
 
 @Component({
   props: {

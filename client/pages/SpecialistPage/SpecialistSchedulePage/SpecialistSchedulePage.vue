@@ -32,7 +32,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import ScheduleLoader from '~/components/Schedule/components/Loader.vue'
+import ScheduleLoader from '~/components/Loader.vue'
 import ScheduleColumn from '~/components/Schedule/components/Column.vue'
 import ScheduleTimeline from '~/components/Schedule/components/Timeline.vue'
 

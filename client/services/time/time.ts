@@ -1,20 +1,6 @@
 import { TIME_STEP } from '~/constants'
 
-import { setTime } from '~/utils/date-time'
-
-function getWorkingHours (open, close) {
-  const hours = []
-
-  let from = setTime(new Date(), open)
-
-  do {
-    hours.push(from.format('HH:mm'))
-
-    from = from.add(15, 'm')
-  } while (from.format('HH:mm') !== close)
-
-  return [...hours, close]
-}
+import { getWorkingHours } from '~/utils/time'
 
 export default class Time {
   open: string

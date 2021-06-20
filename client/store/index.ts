@@ -33,6 +33,7 @@ export interface IModules {
 }
 
 export interface IState extends IModules {
+  loading: boolean,
   profile: any | null,
   isSiteLoaded: boolean
 }
@@ -43,6 +44,7 @@ const store = () => {
   return new Vuex.Store<IState>({
     // @ts-ignore
     state: {
+      loading: false,
       profile: null,
       isSiteLoaded: false
     },
@@ -73,6 +75,10 @@ const store = () => {
 
       SITE_LOADED (state) {
         state.isSiteLoaded = true
+      },
+
+      SET_LOADING (state, loading) {
+        state.loading = loading
       }
     },
 

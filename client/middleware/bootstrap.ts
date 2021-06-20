@@ -12,6 +12,7 @@ const middleware: Middleware = async ({ typedStore }) => {
   const isSMSAuthorize = typedStore.getters['sms/isAuthorize']
 
   await Promise.all([
+    typedStore.dispatch('position/fetchTimetable'),
     typedStore.dispatch('procedures/fetch'),
     typedStore.dispatch('specialists/fetch'),
     isSMSAuthorize && typedStore.dispatch('sms/balance')

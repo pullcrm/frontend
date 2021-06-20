@@ -210,6 +210,26 @@ export interface ICategory {
   updatedAt?: string
 }
 
+export interface ITimetable {
+  monday: string,
+  tuesday: string,
+  wednesday: string,
+  thursday: string,
+  friday: string,
+  saturday: string,
+  sunday: string
+}
+
+export interface ITimetableParams {
+  monday?: string,
+  tuesday?: string,
+  wednesday?: string,
+  thursday?: string,
+  friday?: string,
+  saturday?: string,
+  sunday?: string
+}
+
 export const factory = (send) => ({
   auth: {
     login (params: IAuthLoginParams) : Promise<IApiAuthLogin> {
@@ -430,8 +450,12 @@ export const factory = (send) => ({
   },
 
   timetable: {
-    get (id: number): Promise<any> {
+    get (id: number): Promise<ITimetable> {
       return send(`public/timework/${id}`, null, 'GET')
+    },
+
+    update (params: ITimetableParams): Promise<any> {
+      return send('timework', params, 'PUT')
     }
   },
 

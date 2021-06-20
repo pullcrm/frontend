@@ -16,6 +16,10 @@
       name="sidebar"
     />
 
+    <Loader
+      v-if="loading"
+    />
+
     <Popups />
     <Toasts />
     <PopperMenu
@@ -28,14 +32,15 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import Loader from '~/components/Loader.vue'
 import Navbar from '~/components/Navbar/Navbar.vue'
-
 import Popups from '~/components/Popups/Popups.vue'
 import Toasts from '~/components/Toasts/Toasts.vue'
 import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
 
 @Component({
   components: {
+    Loader,
     Navbar,
     Popups,
     Toasts,
@@ -75,6 +80,10 @@ export default class DashboardLayout extends Vue {
 
   get hasPosition () {
     return Boolean(this.$typedStore.state.position.current)
+  }
+
+  get loading () {
+    return this.$typedStore.state.loading
   }
 }
 </script>

@@ -1,7 +1,10 @@
+import { normalizeTimetable } from '~/logics/company'
+
 function createState () {
   return {
     positions: [],
-    current: null
+    current: null,
+    timetable: null
   }
 }
 
@@ -16,6 +19,14 @@ const actions = {
     }
 
     commit('SET_CURRENT', position)
+  },
+
+  async fetchTimetable ({ commit, rootGetters }) {
+    const timetable = await this.$api.timetable.get(
+      rootGetters['auth/companyId']
+    )
+
+    commit('SET_TIMETABLE', timetable)
   }
 }
 
@@ -26,6 +37,10 @@ const mutations = {
 
   SET_CURRENT (state, position) {
     state.current = position
+  },
+
+  SET_TIMETABLE (state, timetable) {
+    state.timetable = timetable
   }
 }
 
@@ -57,6 +72,10 @@ const getters = {
 
   companyId (state) {
     return state.current.company.id
+  },
+
+  normalizeTimetable (state) {
+    return normalizeTimetable(state.timetable)
   }
 }
 

@@ -16,12 +16,6 @@ export function formatDate (date: Date, format: string) {
   return formattedDate
 }
 
-export function setTime (date: Date, time: string) {
-  const [hour, minute] = time.split(':')
-
-  return dayjs(date).hour(Number(hour)).minute(Number(minute)).second(0)
-}
-
 export function toDate (date: string) {
   return dayjs(date.split('.')[0])
 }

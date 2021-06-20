@@ -93,7 +93,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import dayjs from '~/utils/dayjs'
-import { setTime } from '~/utils/date-time'
+import { setTime } from '~/utils/time'
 
 import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
 

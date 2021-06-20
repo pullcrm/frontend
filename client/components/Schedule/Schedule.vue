@@ -45,7 +45,8 @@ import Component from 'vue-class-component'
 
 import dayjs from '~/utils/dayjs'
 
-import Loader from './components/Loader.vue'
+import Loader from '~/components/Loader.vue'
+
 import Timeline from './components/Timeline.vue'
 import Specialist from './components/Specialist.vue'
 import ActiveTime from './components/ActiveTime.vue'

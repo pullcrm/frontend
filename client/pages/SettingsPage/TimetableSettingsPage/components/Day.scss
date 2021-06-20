@@ -1,0 +1,17 @@
+.timetable-settings-page-day {
+  display: flex;
+  align-items: center;
+
+  &__switch {
+    flex-grow: 1;
+    margin-right: 16px;
+  }
+
+  &__select {
+    width: 140px;
+  }
+
+  &__text {
+    margin: 0 16px;
+  }
+}

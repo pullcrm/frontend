@@ -124,7 +124,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { setTime } from '~/utils/date-time'
+import { setTime } from '~/utils/time'
 
 @Component({
   props: {

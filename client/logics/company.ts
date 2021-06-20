@@ -1,4 +1,4 @@
-import { ICompaniesCreateParams } from '~/services/api'
+import { ICompaniesCreateParams, ITimetable } from '~/services/api'
 
 export function normalizeCompanyParams (company): ICompaniesCreateParams {
   const {
@@ -45,5 +45,25 @@ export function normalizeSmsSettingsParams (params) {
     remindSMSMinutes,
     remindSMSTemplate: remindSMSTemplate || undefined,
     creationSMSTemplate: creationSMSTemplate || undefined
+  }
+}
+
+export function normalizeTimetable (timetable: ITimetable) {
+  return ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    .reduce((acc, item) => {
+      return {
+        ...acc,
+        [item]: parseTimetableItem(timetable[item])
+      }
+    }, {})
+}
+
+function parseTimetableItem (TimetableItem) {
+  const [opened, from, to] = TimetableItem.split(';')
+
+  return {
+    opened: opened === 'true',
+    from,
+    to
   }
 }
