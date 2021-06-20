@@ -72,9 +72,7 @@ export default class DatePicker extends Vue {
     let date = dayjs(this.date).locale('uk')
 
     while (this.days.length < this.daysCount) {
-      if (date.format('d') !== '0') {
-        this.days.push(date)
-      }
+      this.days.push(date)
 
       date = date.add(1, 'day')
     }

@@ -21,6 +21,14 @@
 }
 
 .specialist-page-procedure-preview {
+  &_selectable {
+    .specialist-page-procedure-preview {
+      &__body {
+        margin-left: 36px;
+      }
+    }
+  }
+
   &__header {
     display: flex;
     align-items: center;

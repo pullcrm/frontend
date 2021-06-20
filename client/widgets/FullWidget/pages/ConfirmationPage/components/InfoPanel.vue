@@ -12,8 +12,6 @@
 
     <div class="full-widget-confirmation-page-info-panel__info">
       <UiText
-        tag="a"
-        href="#"
         size="l"
         strong
         responsive

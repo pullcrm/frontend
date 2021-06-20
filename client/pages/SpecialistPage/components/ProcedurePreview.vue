@@ -3,20 +3,27 @@
     size="s"
     :class="[
       'specialist-page-procedure-preview',
-      `specialist-page-procedure-preview_size_${size}`
+      `specialist-page-procedure-preview_size_${size}`,
+      {'specialist-page-procedure-preview_selectable': selectable}
     ]"
     v-bind="$attrs"
   >
     <div class="specialist-page-procedure-preview__header">
-      <UiIcon
+      <a
         v-if="selectable"
-        :class="{'_selected': selected}"
+        href="#"
         class="specialist-page-procedure-preview__icon"
-        name="solid/check-circle-fill"
-        size="s"
-      />
+        :class="{'_selected': selected}"
+      >
+        <UiIcon
+          name="solid/check-circle-fill"
+          size="s"
+        />
+      </a>
 
       <UiText
+        :tag="selectable ? 'a' : 'div'"
+        href="#"
         size="m"
         strong
         responsive
