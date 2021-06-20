@@ -86,7 +86,7 @@ export default class DashboardLayout extends Vue {
     min-height: 100vh;
     padding: 24px 0;
     padding-left: $ui-navbar-desktop-width;
-    background: $ui-gray-brand;
+    background: $ui-black-10;
 
     &__navbar {
       position: fixed;
