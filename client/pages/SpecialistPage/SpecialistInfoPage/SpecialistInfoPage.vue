@@ -242,9 +242,17 @@ export default class SpecialistInfoPage extends Vue {
   }
 
   async copyPersonalLink () {
-    const link = `https://pullcrm.com/widgets/base/${this.companyId}/?specialistId=${this.specialistId}`
+    const { href } = this.$router.resolve({
+      name: 'fullWidgetSpecialistPage',
+      query: {
+        companyId: this.companyId,
+        specialistId: this.specialistId
+      }
+    })
 
-    copyText(link)
+    const { BASE_HOST } = this.$runtimeConfig
+
+    copyText(`https://${BASE_HOST}${href}`)
 
     await this.$typedStore.dispatch('toasts/show', {
       title: 'Ссылка скопирована!'

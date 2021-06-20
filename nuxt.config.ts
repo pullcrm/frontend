@@ -24,7 +24,7 @@ const config: NuxtOptions = {
   },
 
   publicRuntimeConfig: {
-    // BASE_HOST: process.env.BASE_HOST,
+    BASE_HOST: process.env.BASE_HOST,
     // SENTRY_ENV: process.env.SENTRY_ENV,
     // SENTRY_DSN: process.env.SENTRY_DSN,
     // SENTRY_RELEASE: process.env.SENTRY_RELEASE,
