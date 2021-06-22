@@ -1,108 +1,94 @@
 <template>
-  <Layout class="auth-page-registration">
-    <div class="auth-page-registration__inner">
-      <div class="auth-page-registration__header">
-        <UiTitle
-          size="xl"
-          responsive
+  <Layout
+    title="Регистрация"
+    sub-title="Пройдите регистрацию, чтобы получить доступ к своей компании"
+    class="auth-page-registration"
+  >
+    <form
+      @submit.prevent="onSubmit"
+    >
+      <UiBack
+        class="auth-page-registration__back"
+        @click.native="onBack"
+      />
+
+      <UiFormValidator
+        v-slot="{ resetFieldError, getFieldError }"
+        ref="formValidator"
+        :validations="validations"
+      >
+        <UiField
+          label="Имя"
         >
-          Регистрация
-        </UiTitle>
+          <UiInput
+            v-model="form.firstName"
+            left-icon="outlined/pencil"
+            name="name"
+            placeholder="Введите Имя"
+            required
+          />
+        </UiField>
+
+        <UiField
+          label="Фамилия"
+        >
+          <UiInput
+            v-model="form.lastName"
+            left-icon="outlined/pencil"
+            name="surname"
+            placeholder="Введите Фамилию"
+            required
+          />
+        </UiField>
+
+        <UiField
+          label="Телефон"
+          :error="getFieldError('phone')"
+        >
+          <UiInput
+            v-model="form.phone"
+            mask="38 (###) #### ###"
+            left-icon="outlined/phone"
+            name="phone"
+            type="phone"
+            placeholder="066"
+            required
+            @input="resetFieldError('phone')"
+          />
+        </UiField>
+
+        <UiField
+          label="Пароль"
+          :error="getFieldError('password')"
+        >
+          <UiInput
+            v-model="form.password"
+            left-icon="outlined/key"
+            name="password"
+            type="password"
+            placeholder="Введите пароль"
+            required
+            @input="resetFieldError('password')"
+          />
+        </UiField>
 
         <UiText
-          size="m"
-          responsive
+          class="auth-page-registration__policy"
+          size="s"
         >
-          Пройдите регистрацию, чтобы получить доступ к своей компании
+          Нажимая на кнопку, я соглашаюсь с <a href="#">Пользовательским соглашением</a> и <a href="#">Политикой обработки персональных данных</a>
         </UiText>
-      </div>
 
-      <form
-        @submit.prevent="onSubmit"
-      >
-        <UiBack
-          class="auth-page-registration__back"
-          @click.native="onBack"
-        />
-
-        <UiFormValidator
-          v-slot="{ resetFieldError, getFieldError }"
-          ref="formValidator"
-          :validations="validations"
+        <UiButton
+          class="auth-page-registration__button"
+          type="submit"
+          size="l"
+          theme="blue"
         >
-          <UiField
-            label="Имя"
-          >
-            <UiInput
-              v-model="form.firstName"
-              left-icon="outlined/pencil"
-              name="name"
-              placeholder="Введите Имя"
-              required
-            />
-          </UiField>
-
-          <UiField
-            label="Фамилия"
-          >
-            <UiInput
-              v-model="form.lastName"
-              left-icon="outlined/pencil"
-              name="surname"
-              placeholder="Введите Фамилию"
-              required
-            />
-          </UiField>
-
-          <UiField
-            label="Телефон"
-            :error="getFieldError('phone')"
-          >
-            <UiInput
-              v-model="form.phone"
-              mask="38 (###) #### ###"
-              left-icon="outlined/phone"
-              name="phone"
-              type="phone"
-              placeholder="066"
-              required
-              @input="resetFieldError('phone')"
-            />
-          </UiField>
-
-          <UiField
-            label="Пароль"
-            :error="getFieldError('password')"
-          >
-            <UiInput
-              v-model="form.password"
-              left-icon="outlined/key"
-              name="password"
-              type="password"
-              placeholder="Введите пароль"
-              required
-              @input="resetFieldError('password')"
-            />
-          </UiField>
-
-          <UiText
-            class="auth-page-registration__policy"
-            size="s"
-          >
-            Нажимая на кнопку, я соглашаюсь с <a href="#">Пользовательским соглашением</a> и <a href="#">Политикой обработки персональных данных</a>
-          </UiText>
-
-          <UiButton
-            class="auth-page-registration__button"
-            type="submit"
-            size="l"
-            theme="blue"
-          >
-            Зарегистрировать
-          </UiButton>
-        </UiFormValidator>
-      </form>
-    </div>
+          Зарегистрировать
+        </UiButton>
+      </UiFormValidator>
+    </form>
   </Layout>
 </template>
 

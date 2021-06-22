@@ -1,80 +1,66 @@
 <template>
-  <Layout class="auth-page-company-create">
-    <div class="auth-page-company-create__inner">
-      <div class="auth-page-company-create__header">
-        <UiTitle
-          size="xl"
-          responsive
-        >
-          Создание компании
-        </UiTitle>
+  <Layout
+    title="Создание компании"
+    sub-title="Укажите информацию о компании"
+    class="auth-page-company-create"
+  >
+    <form
+      @submit.prevent="submit"
+    >
+      <UiBack
+        v-if="hasPositions"
+        class="auth-page-company-create__back"
+        @click.native="onBack"
+      />
 
-        <UiText
-          size="m"
-          responsive
-        >
-          Укажите информацию о компании
-        </UiText>
-      </div>
-
-      <form
-        @submit.prevent="submit"
+      <UiField
+        label="Название компании"
+        required
       >
-        <UiBack
-          v-if="hasPositions"
-          class="auth-page-company-create__back"
-          @click.native="onBack"
+        <UiInput
+          v-model="company.name"
+          left-icon="outlined/pencil"
+          placeholder="Ваша компания"
+          required
         />
+      </UiField>
 
-        <UiField
-          label="Название компании"
+      <UiField
+        label="Город"
+        required
+      >
+        <UiSelect
+          v-model="company.city"
           required
-        >
-          <UiInput
-            v-model="company.name"
-            left-icon="outlined/pencil"
-            placeholder="Ваша компания"
-            required
-          />
-        </UiField>
+          :options="cities"
+          label-key="name"
+          placeholder="Выбрать город"
+        />
+      </UiField>
 
-        <UiField
-          label="Город"
+      <UiField
+        label="Категория"
+        required
+      >
+        <UiSelect
+          v-model="company.type"
+          label-key="name"
+          placeholder="Выбрать категорию"
+          :options="companyTypes"
           required
-        >
-          <UiSelect
-            v-model="company.city"
-            required
-            :options="cities"
-            label-key="name"
-            placeholder="Выбрать город"
-          />
-        </UiField>
+        />
+      </UiField>
 
-        <UiField
-          label="Категория"
-          required
-        >
-          <UiSelect
-            v-model="company.type"
-            label-key="name"
-            placeholder="Выбрать категорию"
-            :options="companyTypes"
-            required
-          />
-        </UiField>
-
-        <UiButton
-          class="auth-page-company-create__button"
-          type="submit"
-          size="l"
-          theme="blue"
-          :loading="isLoading"
-        >
-          Продолжить
-        </UiButton>
-      </form>
-    </div>
+      <UiButton
+        class="auth-page-company-create__button"
+        type="submit"
+        size="l"
+        theme="blue"
+        :loading="isLoading"
+      >
+        Продолжить
+      </UiButton>
+    </form>
   </Layout>
 </template>
 

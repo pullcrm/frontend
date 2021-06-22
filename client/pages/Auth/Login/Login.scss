@@ -1,17 +1,4 @@
 .auth-page-login {
-  &__inner {
-    width: 460px;
-  }
-
-  &__header {
-    text-align: center;
-
-    .ui-title {
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-  }
-
   &__reset {
     margin: 8px 0 16px;
     color: $ui-blue-info;
@@ -47,8 +34,6 @@
   }
 
   @include ui-mobile-only {
-    width: 100%;
-
     form {
       padding: 0;
       background: transparent;

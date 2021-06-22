@@ -1,19 +1,6 @@
 .auth-page-company-create {
-  &__inner {
-    width: 460px;
-  }
-
   &__back {
     margin-bottom: 24px;
-  }
-
-  &__header {
-    text-align: center;
-
-    .ui-title {
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
   }
 
   &__button {
@@ -34,8 +21,6 @@
   }
 
   @include ui-mobile-only {
-    width: 100%;
-
     form {
       padding: 0;
       background: transparent;

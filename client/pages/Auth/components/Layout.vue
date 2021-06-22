@@ -1,6 +1,29 @@
 <template>
   <div class="auth-page-layout">
-    <slot />
+    <div class="auth-page-layout__inner">
+      <div class="auth-page-layout__header">
+        <img
+          class="auth-page-layout__logo"
+          src="~/assets/logos/logo.svg"
+        >
+
+        <UiTitle
+          size="xl"
+          responsive
+        >
+          {{ title }}
+        </UiTitle>
+
+        <UiText
+          size="m"
+          responsive
+        >
+          {{ subTitle }}
+        </UiText>
+      </div>
+
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -8,21 +31,23 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-@Component
-export default class AuthLayout extends Vue {}
-</script>
+@Component({
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
 
-<style lang="scss">
-  .auth-page-layout {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 15vh 16px;
-    background-color: $ui-black-10;
-
-    @include ui-mobile-only {
-      background: $ui-white;
+    subTitle: {
+      type: String,
+      default: undefined
     }
   }
-</style>
+})
+export default class AuthLayout extends Vue {
+  readonly title!: string
+  readonly subTitle?: string
+}
+</script>
+
+<style lang="scss" src="./Layout.scss"></style>

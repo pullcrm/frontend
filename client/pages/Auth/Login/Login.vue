@@ -1,96 +1,82 @@
 <template>
-  <Layout class="auth-page-login">
-    <div class="auth-page-login__inner">
-      <div class="auth-page-login__header">
-        <UiTitle
-          size="xl"
-          responsive
+  <Layout
+    title="Авторизация"
+    sub-title="Войдите в систему, чтобы получить доступ к своей компании"
+    class="auth-page-login"
+  >
+    <form
+      @submit.prevent="onSubmit"
+    >
+      <UiFormValidator
+        v-slot="{ resetFieldError, getFieldError }"
+        ref="formValidator"
+        :validations="validations"
+      >
+        <UiField
+          label="Телефон"
+          :error="getFieldError('phone')"
         >
-          Авторизация
-        </UiTitle>
+          <UiInput
+            v-model="phone"
+            mask="38 (###) #### ###"
+            name="phone"
+            left-icon="outlined/phone"
+            placeholder="066"
+            required
+            @input="resetFieldError('phone')"
+          />
+        </UiField>
+
+        <UiField
+          label="Пароль"
+          :error="getFieldError('password')"
+        >
+          <UiInput
+            v-model="password"
+            type="password"
+            name="password"
+            left-icon="outlined/key"
+            placeholder="Введите пароль"
+            required
+            @input="resetFieldError('password')"
+          />
+        </UiField>
 
         <UiText
-          size="m"
-          responsive
+          class="auth-page-login__reset"
+          tag="RouterLink"
+          :to="{
+            name: 'restore',
+            query: { phone }
+          }"
+          size="s"
         >
-          Войдите в систему, чтобы получить доступ к своей компании
+          Восстановить доступ
         </UiText>
-      </div>
 
-      <form
-        @submit.prevent="onSubmit"
-      >
-        <UiFormValidator
-          v-slot="{ resetFieldError, getFieldError }"
-          ref="formValidator"
-          :validations="validations"
-        >
-          <UiField
-            label="Телефон"
-            :error="getFieldError('phone')"
+        <div class="auth-page-login__actions">
+          <UiButton
+            type="submit"
+            size="l"
+            theme="blue"
           >
-            <UiInput
-              v-model="phone"
-              mask="38 (###) #### ###"
-              name="phone"
-              left-icon="outlined/phone"
-              placeholder="066"
-              required
-              @input="resetFieldError('phone')"
-            />
-          </UiField>
+            Войти
+          </UiButton>
 
-          <UiField
-            label="Пароль"
-            :error="getFieldError('password')"
-          >
-            <UiInput
-              v-model="password"
-              type="password"
-              name="password"
-              left-icon="outlined/key"
-              placeholder="Введите пароль"
-              required
-              @input="resetFieldError('password')"
-            />
-          </UiField>
-
-          <UiText
-            class="auth-page-login__reset"
-            tag="RouterLink"
+          <UiButton
             :to="{
-              name: 'restore',
+              name: 'registration',
               query: { phone }
             }"
-            size="s"
+            type="submit"
+            size="l"
+            theme="info-outlined"
           >
-            Восстановить доступ
-          </UiText>
-
-          <div class="auth-page-login__actions">
-            <UiButton
-              type="submit"
-              size="l"
-              theme="blue"
-            >
-              Войти
-            </UiButton>
-
-            <UiButton
-              :to="{
-                name: 'registration',
-                query: { phone }
-              }"
-              type="submit"
-              size="l"
-              theme="info-outlined"
-            >
-              Регистрация
-            </UiButton>
-          </div>
-        </UiFormValidator>
-      </form>
-    </div>
+            Регистрация
+          </UiButton>
+        </div>
+      </UiFormValidator>
+    </form>
   </Layout>
 </template>
 
