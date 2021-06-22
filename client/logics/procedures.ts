@@ -30,11 +30,11 @@ export function normalizeCategories (categories, procedures) {
       }
     }),
 
-    {
+    grouped[0] && {
       name: 'Без категории',
-      procedures: grouped[0] ?? []
+      procedures: grouped[0]
     }
-  ]
+  ].filter(Boolean)
 }
 
 export function groupByCategoryId (procedures) {

@@ -145,7 +145,7 @@ export default class ValuesChart {
   get lines () {
     const lines = []
 
-    for (let index = 0; index <= this.valueLinesCount; index++) {
+    for (let index = 0; index < this.valueLinesCount; index++) {
       const value = this.minAvailableLine + this.valueLinesStep * index
 
       lines.push({ value, label: `${value}` })
