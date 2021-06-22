@@ -151,7 +151,7 @@ export default class Specialist extends Vue {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 16px 8px 16px 16px;
+    padding: 12px;
     background: $ui-white;
 
     &._status_DASHBOARD {

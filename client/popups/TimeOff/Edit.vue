@@ -214,7 +214,7 @@ export default class TimeOffEdit extends Vue {
     const startTimeIndex = this.workingHours.indexOf(this.form.startTime)
 
     return this.workingHours.filter((_time, index) => {
-      return startTimeIndex - 1 < index
+      return startTimeIndex < index
     })
   }
 

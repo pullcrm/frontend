@@ -187,6 +187,7 @@ export default class HourTile extends Vue {
     justify-content: center;
     width: 100%;
     height: 100%;
+    overflow: hidden;
     border-bottom: 1px solid $ui-black-40;
     cursor: pointer;
 

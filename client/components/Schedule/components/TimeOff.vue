@@ -41,7 +41,7 @@ export default class TimeOff extends Vue {
 
   get gridArea () {
     return {
-      gridRow: `${this.from} / ${this.to}`,
+      gridRow: `${this.from}-start / ${this.to}-start`,
       gridColumn: 'start / end'
     }
   }

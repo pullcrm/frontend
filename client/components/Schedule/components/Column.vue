@@ -79,9 +79,13 @@ export default class ScheduleColumn extends Vue {
   }
 
   get gridTemplateRows () {
-    return this.workingHours.map(hour => {
+    return this.workingHours.map((hour, index) => {
       // TODO: Remove `time-` from grid name
       hour = `time-${hour.replace(':', '-')}`
+
+      if (index === this.workingHours.length - 1) {
+        return `[${hour}-start] 0px [${hour}-end] 0`
+      }
 
       return `[${hour}-start] ${SCHEDULE_APPOINTMENT_HEIGHT}px [${hour}-end] 0`
     }).join(' ')

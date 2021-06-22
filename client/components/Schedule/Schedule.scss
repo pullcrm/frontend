@@ -22,11 +22,13 @@
     flex: 1;
     overflow-x: auto;
     border: 1px solid $ui-black-40;
+    border-bottom: none;
   }
 
   &__timeline {
-    margin-top: 60px;
+    margin-top: calc(60px - #{$SCHEDULE_ROW_HEIGHT / 2});
     margin-right: 8px;
+    margin-bottom: -#{$SCHEDULE_ROW_HEIGHT / 2};
   }
 
   &__specialist {
@@ -40,6 +42,7 @@
     &__timeline {
       position: relative;
       z-index: 9;
+      margin-top: 52px;
       margin-right: -36px;
       pointer-events: none;
     }
