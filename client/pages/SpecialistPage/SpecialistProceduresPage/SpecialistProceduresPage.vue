@@ -11,6 +11,7 @@
     />
 
     <UiButton
+      v-if="isEditableList"
       size="m"
       theme="blue"
       responsive
@@ -36,6 +37,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+
+import { SPECIALIST } from '~/constants/roles'
 
 import { groupByCategoryId } from '~/logics/procedures'
 
@@ -65,6 +68,14 @@ export default class SpecialistProceduresPage extends Vue {
 
   get user () {
     return this.specialist.user
+  }
+
+  get role () {
+    return this.specialist.role
+  }
+
+  get isEditableList () {
+    return this.role.name !== SPECIALIST
   }
 
   get proceduresByCategory () {

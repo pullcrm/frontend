@@ -89,6 +89,7 @@
           v-model="status"
           :options="statusList"
           label-key="value"
+          :disabled="isStatusDisabled"
         />
       </UiField>
 
@@ -127,6 +128,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import { AVATAR } from '~/constants/files'
+import { SPECIALIST } from '~/constants/roles'
 
 import { copyText } from '~/utils/clipboard'
 
@@ -158,6 +160,16 @@ import CreatedAt from './components/CreatedAt.vue'
       specialist
     }
   }
+
+  // async fetch () {
+  //   const slug = Number(this.$route.params.slug)
+
+  //   this.specialist = await this.$api.public.specialistById(slug)
+
+  //   this.avatars = await this.$api.files.all(this.user.id, {
+  //     group: AVATAR
+  //   })
+  // }
 })
 export default class SpecialistInfoPage extends Vue {
   avatars: any[]
@@ -175,6 +187,14 @@ export default class SpecialistInfoPage extends Vue {
 
   get user () {
     return this.specialist.user
+  }
+
+  get role () {
+    return this.specialist.role
+  }
+
+  get isStatusDisabled () {
+    return this.role.name === SPECIALIST
   }
 
   get status () {

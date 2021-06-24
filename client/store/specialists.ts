@@ -1,3 +1,7 @@
+import { SPECIALIST } from '~/constants/roles'
+
+import { normalizeSpecialists } from '~/logics/specialist'
+
 function createState () {
   return {
     specialists: []
@@ -5,18 +9,26 @@ function createState () {
 }
 
 const actions = {
-  async fetch ({ commit }) {
-    let specialists = await this.$api.specialist.all({
-      sort: 'order',
-      order: 'asc'
-    })
+  // TODO: Refactor
+  async fetch ({ commit, rootGetters }) {
+    let specialists = []
 
-    specialists = specialists.map(item => ({
-      ...item,
-      fullName: `${item.user.firstName} ${item.user.lastName}`
-    }))
+    const { name: role } = rootGetters['position/role']
 
-    commit('SET_SPECIALISTS', specialists)
+    if (role === SPECIALIST) {
+      const specialist = await this.$api.public.specialistById(
+        rootGetters['position/currentId']
+      )
+
+      specialists = [specialist]
+    } else {
+      specialists = await this.$api.specialist.all({
+        sort: 'order',
+        order: 'asc'
+      })
+    }
+
+    commit('SET_SPECIALISTS', normalizeSpecialists(specialists))
   },
 
   async onUploadAvatar ({ dispatch }, form) {

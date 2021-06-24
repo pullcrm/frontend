@@ -22,3 +22,10 @@ export function getRoleNameByAlias (alias) {
     [SPECIALIST]: 'Специалисты'
   }[alias]
 }
+
+export function normalizeSpecialists (specialists) {
+  return specialists.map(item => ({
+    ...item,
+    fullName: `${item.user.firstName} ${item.user.lastName}`
+  }))
+}
