@@ -10,13 +10,13 @@
         </UiText>
 
         <div class="landing-footer__links">
-          <UiText
+          <!-- <UiText
             tag="RouterLink"
             to="/faq/"
             size="m"
           >
             FAQ
-          </UiText>
+          </UiText> -->
 
           <UiText
             tag="a"

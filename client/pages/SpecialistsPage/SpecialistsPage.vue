@@ -68,6 +68,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { SPECIALIST, MANAGER, ADMIN } from '~/constants/roles'
+
 import { getRoleNameByAlias } from '~/logics/specialist'
 
 import UiNotificationBadge from '~/ui/NotificationBadge.vue'
@@ -75,8 +77,6 @@ import UiNotificationBadge from '~/ui/NotificationBadge.vue'
 import SortableList from '~/components/SortableList/SortableList.vue'
 
 import SpecialistCard from './components/Card.vue'
-
-import { SPECIALIST, MANAGER, ADMIN } from '~/constants/roles'
 
 @Component({
   layout: 'dashboard',

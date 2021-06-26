@@ -15,6 +15,10 @@
         {{ specialist.fullName }}
       </UiTitle>
 
+      <CompanyPicker
+        class="specialist-page-layout__company-picker"
+      />
+
       <UiNavigation
         class="specialist-page-layout__navigation"
         :navigation="navigation"
@@ -32,7 +36,13 @@ import Component from 'vue-class-component'
 
 import { ADMIN, SPECIALIST } from '~/constants/roles'
 
-@Component({})
+import CompanyPicker from './CompanyPicker.vue'
+
+@Component({
+  components: {
+    CompanyPicker
+  }
+})
 export default class SpecialistLayout extends Vue {
   get navigation () {
     return [

@@ -26,7 +26,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import ProcedurePreview from '../../ProcedurePreview.vue'
+import ProcedurePreview from '../ProcedurePreview.vue'
 
 @Component({
   components: {

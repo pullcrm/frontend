@@ -50,12 +50,12 @@
     </UiPanel>
 
     <UiText
-      v-if="disclaimer"
+      v-if="$slots.disclaimer"
       size="m"
       responsive
       class="settings-page-sms-template__disclaimer"
     >
-      {{ disclaimer }}
+      <slot name="disclaimer" />
     </UiText>
   </div>
 </template>
@@ -69,16 +69,11 @@ import Component from 'vue-class-component'
     template: {
       type: String,
       required: true
-    },
-
-    disclaimer: {
-      type: String,
-      default: ''
     }
   }
 })
 export default class SmsTemplate extends Vue {
-  readonly disclaimer?: string
+  readonly template!: string
 }
 </script>
 

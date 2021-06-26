@@ -16,19 +16,23 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import dayjs from '~/utils/dayjs'
+import { setTime } from '~/utils/time'
 
 const TIME = 1000 * 60 /* 1 minute */
 
 @Component({})
 export default class ActiveTime extends Vue {
-  startEt = 10
-  endAt = 20
-
   position = 0
   time = null
 
+  get timeWork () {
+    return this.$typedStore.getters['timetable/timeWork']
+  }
+
   mounted () {
-    this.startTimer()
+    const { from, to } = this.timeWork
+
+    this.startTimer(from, to)
 
     const interval = setInterval(this.startTimer, TIME)
 
@@ -37,20 +41,19 @@ export default class ActiveTime extends Vue {
     })
   }
 
-  startTimer () {
-    const nowHour = Number(dayjs(new Date()).format('HH'))
-    const nowMinutes = Number(dayjs(new Date()).format('mm'))
+  startTimer (startEt, endAt) {
+    const minutesOfDay = (setTime(new Date(), endAt).unix() - setTime(new Date(), startEt).unix()) / 60
+    const minutesToNow = (dayjs(new Date()).unix() - setTime(new Date(), startEt).unix()) / 60
 
-    if (nowHour < this.startEt || nowHour >= this.endAt) {
+    this.position = minutesToNow * 100 / minutesOfDay
+
+    if (this.position < 0 || this.position > 100) {
       this.time = null
 
       return
     }
 
-    const position = ((nowHour - this.startEt) * 10) + (nowMinutes / 60 * 10)
-
     this.time = dayjs(new Date()).format('HH:mm')
-    this.position = Math.floor(position)
   }
 }
 </script>
@@ -58,16 +61,15 @@ export default class ActiveTime extends Vue {
 <style lang="scss">
 .schedule-active-time {
   position: absolute;
-  top: 68px;
+  top: 60px;
   right: 0;
-  bottom: 32px;
+  bottom: 0;
   left: 0;
   z-index: 11;
   pointer-events: none;
 
   &__inner {
     position: absolute;
-    top: 100px;
     right: 0;
     left: 0;
     height: 1px;

@@ -51,7 +51,7 @@ import Component from 'vue-class-component'
 
 import { groupByCategoryId } from '~/logics/procedures'
 
-import ProceduresGroup from './components/ProceduresGroup.vue'
+import ProceduresGroup from './ProceduresGroup.vue'
 
 @Component({
   components: {

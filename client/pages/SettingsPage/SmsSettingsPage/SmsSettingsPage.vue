@@ -2,21 +2,19 @@
   <SettingsLayout
     class="sms-settings-page"
   >
-    <UiPanel
-      size="m"
-      responsive
-    >
-      <UiTitle
-        size="s"
+    <template v-if="isAuthorize">
+      <UiPanel
+        size="m"
         responsive
-        class="sms-settings-page__title"
       >
-        Настройки СМС
-      </UiTitle>
+        <UiTitle
+          size="s"
+          responsive
+          class="sms-settings-page__title"
+        >
+          Настройки СМС
+        </UiTitle>
 
-      <template
-        v-if="isSMSAuthorize"
-      >
         <Section
           title="Вы атворизованы в СМС-сервисе"
           sub-title="Вам доступны функции отправки пользователям сообщений о предстоящих записях"
@@ -31,11 +29,14 @@
             </UiButton>
           </template>
         </Section>
+      </UiPanel>
 
-        <UiDivider />
-
+      <UiPanel
+        size="m"
+        responsive
+      >
         <Section
-          title="Уведомлять клиента после создания записи"
+          title="Уведомить клиента после создания записи"
           sub-title="СМС отправится через 2 минуты после создания записи"
         >
           <template #append>
@@ -49,14 +50,24 @@
         <SmsTemplate
           class="sms-settings-page__sms-template"
           :template="smsCreationTemplate"
-          disclaimer="Поставьте в места для генерации данных по отдельным записям: %specialist%, %date%, %time%, %procedures%"
           @update:template="settings.creationSMSTemplate = $event"
-        />
+        >
+          <template #disclaimer>
+            Используйте алиасы для генерации данных: <br>
+            %date% - дата в формате "28:06", <br>
+            %time% - время начала онлайн записи, <br>
+            %specialist% - Имя специалиста, <br>
+            %procedures% - список выбранных услуг через запятую
+          </template>
+        </SmsTemplate>
+      </UiPanel>
 
-        <UiDivider />
-
+      <UiPanel
+        size="m"
+        responsive
+      >
         <Section
-          title="Уведомлять клиента перед записью"
+          title="Уведомить клиента перед записью"
         >
           <template #append>
             <UiSwitch
@@ -100,23 +111,43 @@
         <SmsTemplate
           class="sms-settings-page__sms-template"
           :template="smsRemindTemplate"
-          disclaimer="Примерная стоимость: 1.20 грн"
           @update:template="settings.remindSMSTemplate = $event"
-        />
-
-        <UiButton
-          class="sms-settings-page__button"
-          theme="blue"
-          :loading="isLoading"
-          responsive
-          @click.native="save"
         >
-          Сохранить
-        </UiButton>
-      </template>
+          <template #disclaimer>
+            Используйте алиасы для генерации данных: <br>
+            %date% - дата в формате "28:06", <br>
+            %time% - время начала онлайн записи, <br>
+            %specialist% - Имя специалиста, <br>
+            %procedures% - список выбранных услуг через запятую
+          </template>
+        </SmsTemplate>
+      </UiPanel>
+
+      <UiButton
+        class="sms-settings-page__button"
+        theme="blue"
+        :loading="isLoading"
+        responsive
+        @click.native="save"
+      >
+        Сохранить
+      </UiButton>
+    </template>
+
+    <UiPanel
+      v-else
+      size="m"
+      responsive
+    >
+      <UiTitle
+        size="s"
+        responsive
+        class="sms-settings-page__title"
+      >
+        Настройки СМС
+      </UiTitle>
 
       <Section
-        v-else
         title="Авторизация в СМС-сервисе"
         sub-title="Включите функцию отправки пользователям сообщений о предстоящих записях"
       >
@@ -164,6 +195,10 @@ export default class SmsSettingsPage extends Vue {
 
   settings = this.$typedStore.getters['sms/settings']
 
+  get isAuthorize () {
+    return this.$typedStore.getters['sms/isAuthorize']
+  }
+
   get smsRemindTemplate () {
     return this.settings.remindSMSTemplate || SMS_CREATION_TEMPLATE
   }
@@ -184,10 +219,6 @@ export default class SmsSettingsPage extends Vue {
       name: minutesToTime(minutes),
       value: minutes
     }))
-  }
-
-  get isSMSAuthorize () {
-    return this.$typedStore.getters['sms/isAuthorize']
   }
 
   async save () {

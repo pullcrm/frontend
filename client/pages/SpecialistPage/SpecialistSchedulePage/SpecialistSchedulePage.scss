@@ -2,12 +2,18 @@
   &__schedule {
     position: relative;
     display: flex;
-    margin-top: 16px;
+    margin-top: 24px;
   }
 
   &__column {
     flex-basis: calc(100% - 36px/* timeline width */ - 8px/* margin-left */);
     margin-left: 8px;
-    border: 1px solid #eaeaef;
+    border: 1px solid $ui-black-20;
+    border-bottom: none;
+  }
+
+  &__timeline {
+    margin-top: -15px;
+    margin-bottom: -15px;
   }
 }

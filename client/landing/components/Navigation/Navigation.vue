@@ -9,14 +9,14 @@
       Главная
     </UiText>
 
-    <UiText
+    <!-- <UiText
       tag="RouterLink"
       to="/faq/"
       size="m"
       strong
     >
       FAQ
-    </UiText>
+    </UiText> -->
 
     <UiText
       tag="a"

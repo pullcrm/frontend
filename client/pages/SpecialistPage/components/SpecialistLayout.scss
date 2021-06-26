@@ -5,11 +5,9 @@
     margin-bottom: 16px;
   }
 
-  &__title {
-    margin-bottom: 24px;
-  }
-
-  &__navigation {
+  &__title,
+  &__navigation,
+  &__company-picker {
     margin-bottom: 24px;
   }
 }

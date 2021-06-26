@@ -65,6 +65,6 @@ export default class Contenteditable extends Vue {
 
 <style lang="scss">
 .ui-contenteditable {
-  display: inline;
+  display: block;
 }
 </style>
