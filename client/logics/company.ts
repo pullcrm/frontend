@@ -1,5 +1,18 @@
 import { ICompaniesCreateParams, ITimetable } from '~/services/api'
 
+export function normalizeCompany (company) {
+  return {
+    ...company,
+    phone: company.phone || '',
+    viber: company.viber || '',
+    address: company.address || '',
+    telegram: company.telegram || '',
+    facebook: company.facebook || '',
+    instagram: company.instagram || '',
+    description: company.description || ''
+  }
+}
+
 export function normalizeCompanyParams (company): ICompaniesCreateParams {
   const {
     name,
@@ -20,7 +33,7 @@ export function normalizeCompanyParams (company): ICompaniesCreateParams {
     cityId: city.id,
     typeId: type.id,
     phone,
-    logoId,
+    logoId: logoId || undefined,
     address,
     description,
     viber,

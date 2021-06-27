@@ -1,3 +1,5 @@
+import { normalizeCompany } from '~/logics/company'
+
 function createState () {
   return {
     positions: [],
@@ -52,7 +54,7 @@ const getters = {
   },
 
   company (state) {
-    return state.current.company
+    return normalizeCompany(state.current.company)
   },
 
   companyId (state) {

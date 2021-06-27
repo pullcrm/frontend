@@ -6,7 +6,10 @@
       size="m"
       responsive
     >
-      <div class="ui-grid">
+      <form
+        class="ui-grid"
+        @submit.prevent="save"
+      >
         <UiTitle
           size="s"
           :class="[
@@ -191,6 +194,7 @@
         </UiField>
 
         <UiButton
+          type="submit"
           theme="blue"
           :loading="isLoading"
           responsive
@@ -199,11 +203,10 @@
             'ui-grid-item_12',
             'ui-grid-item_mobile_12'
           ]"
-          @click.native="save"
         >
           Сохранить
         </UiButton>
-      </div>
+      </form>
     </UiPanel>
   </SettingsLayout>
 </template>

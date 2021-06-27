@@ -388,12 +388,6 @@ export default class BarbershopLondon extends Vue {
         color: $ui-black-60;
       }
 
-      input,
-      textarea {
-        color: $ui-white;
-        background: transparent;
-      }
-
       & + .ui-field {
         margin-top: 24px;
       }
