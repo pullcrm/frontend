@@ -1,21 +1,23 @@
 <template>
   <div class="landing-home-page-intro">
-    <img
-      class="landing-home-page-intro__logo"
-      src="~/assets/logos/logo.svg"
-      alt="Pullcrm-logo"
-    >
+    <div class="landing-home-page-intro__header">
+      <img
+        class="landing-home-page-intro__logo"
+        src="~/assets/logos/logo.svg"
+        alt="Pullcrm-logo"
+      >
 
-    <UiTitle
-      size="xl"
-      responsive
-      class="landing-home-page-intro__title"
-    >
-      <Typewritter
-        :list="writerList"
-        prepend="Учет клиентов для"
-      />
-    </UiTitle>
+      <UiTitle
+        size="xl"
+        responsive
+        class="landing-home-page-intro__title"
+      >
+        <Typewritter
+          :list="writerList"
+          prepend="Учет клиентов <span></span> для"
+        />
+      </UiTitle>
+    </div>
 
     <UiText
       size="l"
@@ -42,9 +44,11 @@
               v-model="phone"
               mask="38 (###) #### ###"
               name="phone"
+              type="phone"
+              required
               left-icon="outlined/phone"
               placeholder="Введите номер телефона"
-              required
+              autocomplete="on"
               @input="resetFieldError('phone')"
             />
           </UiField>
@@ -107,9 +111,10 @@ export default class Intro extends Vue {
 
   get writerList () {
     return [
-      'барбешопов!'
-      // 'салонов красоты!',
-      // 'мастеров маникюра!'
+      'барбешопов!',
+      'тату салонов!',
+      'салонов красоты!',
+      'мастеров маникюра!'
     ]
   }
 

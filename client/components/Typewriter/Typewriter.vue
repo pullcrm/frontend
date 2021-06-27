@@ -99,7 +99,7 @@ export default class Typewriter extends Vue {
       display: inline;
     }
 
-    span {
+    > span {
       border-right: 1px solid;
       animation: caret 1s steps(1) infinite;
     }

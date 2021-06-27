@@ -42,11 +42,19 @@ import CompanyButton from './CompanyButton.vue'
   }
 })
 export default class Companies extends Vue {
+  get companyId () {
+    return this.$typedStore.getters['position/companyId']
+  }
+
   get positions () {
     return this.$typedStore.state.position.positions
   }
 
   async onPosition (position) {
+    if (position.company.id === this.companyId) {
+      return
+    }
+
     await this.$typedStore.dispatch('auth/refreshTokenByPosition', position)
 
     location.reload()

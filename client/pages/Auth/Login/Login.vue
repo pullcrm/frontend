@@ -19,10 +19,12 @@
           <UiInput
             v-model="phone"
             mask="38 (###) #### ###"
+            type="phone"
             name="phone"
+            required
             left-icon="outlined/phone"
             placeholder="066"
-            required
+            autocomplete="on"
             @input="resetFieldError('phone')"
           />
         </UiField>
@@ -35,9 +37,10 @@
             v-model="password"
             type="password"
             name="password"
+            required
             left-icon="outlined/key"
             placeholder="Введите пароль"
-            required
+            autocomplete="on"
             @input="resetFieldError('password')"
           />
         </UiField>
