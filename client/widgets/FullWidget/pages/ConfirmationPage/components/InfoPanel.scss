@@ -1,0 +1,21 @@
+.full-widget-confirmation-page-info-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &__info {
+    flex-grow: 1;
+    margin: 0 16px;
+  }
+
+  &__date {
+    margin-right: 16px;
+    color: $ui-black-60;
+    text-transform: capitalize;
+  }
+
+  &__specialization {
+    margin-top: 4px;
+    color: $ui-black-60;
+  }
+}

@@ -1,0 +1,46 @@
+.auth-page-registration {
+  &__back {
+    margin-bottom: 24px;
+  }
+
+  &__policy {
+    margin-top: 16px;
+    padding: 8px 16px;
+    text-align: center;
+    background: rgba($ui-black-20, 0.6);
+    border-radius: 8px;
+
+    a {
+      color: #189eff;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__button {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  form {
+    margin-top: 24px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 16px rgba($ui-black-100, 0.1);
+  }
+
+  .ui-field + .ui-field {
+    margin-top: 20px;
+  }
+
+  @include ui-mobile-only {
+    form {
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+}

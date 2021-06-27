@@ -1,0 +1,13 @@
+.specialist-page-layout {
+  padding: 24px 0 40px;
+
+  &__back {
+    margin-bottom: 16px;
+  }
+
+  &__title,
+  &__navigation,
+  &__company-picker {
+    margin-bottom: 24px;
+  }
+}

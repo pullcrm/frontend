@@ -1,0 +1,16 @@
+.ui-tab-button-list {
+  @include hide-scrollbar;
+
+  overflow-y: auto;
+  white-space: nowrap;
+  text-align: center;
+
+  .ui-tab-button {
+    display: inline-flex;
+    margin-right: 32px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

@@ -5,10 +5,10 @@ name: CI
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ devel ]
-  pull_request:
-    branches: [ devel ]
+  # push:
+    # branches: [ devel ]
+  # pull_request:
+    # branches: [ devel ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -19,9 +19,9 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    env:
-      VUE_APP_RPC_URL: https://pullcrm.dev/api/
-      VUE_APP_CALENDAR_TIME_STEP: 15
+    # env:
+      # RPC_URL: https://dev.pullcrm.com/api/
+      # CALENDAR_TIME_STEP: 15
     
     strategy:
       matrix:
@@ -75,11 +75,11 @@ jobs:
         run: yarn build
     
       - name: Create the release folder on the server
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'mkdir /var/www/pullcrm.dev/frontend/release-${{ github.sha }}'
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.dev/frontend/project/ && git pull --rebase origin && yarn install && mkdir ./releases/release-${{ github.sha }}'
         
-      - name: Upload the dist folder to the server
-        run: rsync -r ./dist ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.dev/frontend/release-${{ github.sha }}'
+      - name: Upload the nuxt folder to the server
+        run: rsync -r ./nuxt ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.dev/frontend/project/releases/release-${{ github.sha }}'
         
-      - name: Link the release folder on the server
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.dev/frontend/release && ln -s /var/www/pullcrm.dev/frontend/release-${{ github.sha }} /var/www/pullcrm.dev/frontend/release'
+      # - name: Link the release folder on the server
+      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.dev/frontend/release && ln -s /var/www/pullcrm.dev/frontend/release-${{ github.sha }} /var/www/pullcrm.dev/frontend/release'
       

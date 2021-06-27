@@ -34,25 +34,40 @@ module.exports = {
       'newlines-between': 'always-and-inside-groups',
       groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
       pathGroups: [
-        { pattern: '@/constants', group: 'internal', position: 'after' },
-        { pattern: '@/store/**', group: 'internal', position: 'after' },
-        { pattern: '@/services/**', group: 'internal', position: 'after' },
-        { pattern: '@/utils/**', group: 'internal', position: 'after' },
-        { pattern: '@/logics/**', group: 'internal', position: 'after' },
-        { pattern: '@/ui/**', group: 'internal', position: 'after' },
-        { pattern: '@/components/**', group: 'internal', position: 'after' },
-        { pattern: '@/popups/**', group: 'internal', position: 'after' }
+        { pattern: '~/constants', group: 'internal', position: 'after' },
+        { pattern: '~/constants/*', group: 'internal', position: 'after' },
+        { pattern: '~/store', group: 'internal', position: 'after' },
+        { pattern: '~/store/**', group: 'internal', position: 'after' },
+        { pattern: '~/services/**', group: 'internal', position: 'after' },
+        { pattern: '~/validators/**', group: 'internal', position: 'after' },
+        { pattern: '~/utils/**', group: 'internal', position: 'after' },
+        { pattern: '~/logics/**', group: 'internal', position: 'after' },
+        { pattern: '~/banners/**', group: 'internal', position: 'after' },
+        { pattern: '~/brandings/**', group: 'internal', position: 'after' },
+        { pattern: '~/ui/**', group: 'internal', position: 'after' },
+        { pattern: '~/old-ui/**', group: 'internal', position: 'after' },
+        { pattern: '~/components/**', group: 'internal', position: 'after' },
+        { pattern: '~/popups/**', group: 'internal', position: 'after' },
+        { pattern: '~/views/**', group: 'internal', position: 'after' },
+        { pattern: '~/widgets/**', group: 'internal', position: 'after' }
       ]
     }],
 
     // Unicorn rules
     'unicorn/no-null': 0,
+    'unicorn/import-style': 0,
+    'unicorn/prefer-ternary': 0,
+    'unicorn/no-array-reduce': 0,
+    'unicorn/no-array-for-each': 0,
     'unicorn/prefer-node-remove': 0,
     'unicorn/prefer-node-append': 0,
+    'unicorn/prefer-dom-node-remove': 0,
+    'unicorn/prefer-dom-node-append': 0,
     'unicorn/catch-error-name': ['error', { name: 'err' }],
     'unicorn/no-abusive-eslint-disable': 'warn',
     'unicorn/prevent-abbreviations': 0,
     'unicorn/no-fn-reference-in-iterator': 0,
+    'unicorn/no-array-callback-reference': 0,
     'unicorn/filename-case': ['warn', {
       cases: {
         kebabCase: true,
@@ -99,10 +114,21 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/no-empty-function': 0,
-    '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/method-signature-style': 'error',
     '@typescript-eslint/default-param-last': 'error',
+    '@typescript-eslint/member-delimiter-style': ['error', {
+      multiline: {
+        delimiter: 'comma',
+        requireLast: false
+      },
+      singleline: {
+        delimiter: 'comma',
+        requireLast: false
+      }
+    }],
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
     '@typescript-eslint/adjacent-overload-signatures': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/array-type': ['error', {
       default: 'array-simple'
     }],

@@ -1,0 +1,24 @@
+@mixin ui-button_size_48 {
+  @include ui-typo-14;
+
+  min-width: 48px;
+  height: 48px;
+  padding: 0 24px - 1px/* border */;
+  border-radius: 12px;
+
+  .ui-button__content + .ui-button__prepend {
+    margin-right: 8px;
+    margin-left: -8px - 1px/* border */;
+  }
+
+  .ui-button__content + .ui-button__append,
+  .ui-button__prepend + .ui-button__append {
+    margin-right: -8px - 1px/* border */;
+    margin-left: 8px;
+  }
+
+  .ui-button__icon {
+    width: 20px;
+    height: 20px;
+  }
+}

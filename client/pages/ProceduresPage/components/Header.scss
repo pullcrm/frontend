@@ -1,0 +1,25 @@
+.procedures-page-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__actions {
+    margin: 8px -4px 0;
+
+    .ui-button {
+      margin: 0 4px;
+    }
+  }
+
+  @media (min-width: $ui-tablet) {
+    flex-direction: row;
+
+    &__actions {
+      margin: 0 -12px;
+
+      .ui-button {
+        margin: 0 12px;
+      }
+    }
+  }
+}

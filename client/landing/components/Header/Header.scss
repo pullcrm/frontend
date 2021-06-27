@@ -1,0 +1,62 @@
+.landing-header {
+  background: $ui-white;
+  border-bottom: 1px solid $ui-black-20;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: calc(56px - 1px/* border-bottom*/);
+  }
+
+  &__logo {
+    display: none;
+    flex: 1;
+
+    img {
+      width: 32px;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex: 1;
+    height: 100%;
+  }
+
+  &__registration {
+    display: none;
+  }
+
+  &__actions {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+
+    .ui-icon {
+      color: $ui-black-80;
+    }
+  }
+
+  @media (min-width: $ui-tablet) {
+    &__logo {
+      display: block;
+    }
+
+    &__nav {
+      justify-content: center;
+    }
+
+    &__actions-divider {
+      min-width: 1px;
+      height: 16px;
+      margin: 0 16px;
+      background: $ui-black-40;
+    }
+
+    &__registration {
+      display: block;
+    }
+  }
+}

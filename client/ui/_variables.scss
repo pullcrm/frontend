@@ -1,0 +1,81 @@
+$SCHEDULE_ROW_WIDTH: 280px;
+$SCHEDULE_ROW_HEIGHT: 30px;
+
+$ui-navbar-desktop-width: 56px;
+
+$border-color: #ebebeb;
+
+// Ui-colors
+$ui-blue-brand: #3c8aff;
+$ui-green-brand: #4dbd71;
+$ui-orange-brand: #fd983a;
+$ui-widget-brand: #705bcf;
+
+$ui-white: #fff;
+
+// Black
+$ui-black-100: #1d1d21;
+$ui-black-90: #3b3b45;
+$ui-black-80: #6f6f76;
+$ui-black-60: #9797a0;
+$ui-black-50: #b6b6bf;
+$ui-black-40: #dbdbe0;
+$ui-black-20: #eaeaef;
+$ui-black-10: #f8f8fb;
+$ui-black-hover-15: #474747;
+$ui-black-hover-25: #666;
+
+$ui-blue-100: #3a65d8;
+$ui-blue-80: #3b77ea;
+$ui-blue-70: $ui-blue-brand;
+$ui-blue-60: #3a99ff;
+$ui-blue-60: #4da8ff;
+$ui-blue-10: #e4f3ff;
+
+// Breakpoints
+$ui-mobile: 320px;
+$ui-mobile-portrait: 600px;
+$ui-tablet: 768px;
+$ui-laptop: 1024px;
+$ui-desktop: 1440px;
+$ui-desktop-large: 1920px;
+$ui-desktop-4k: 2560px;
+// todo: min/max variables
+
+// Transitions
+$ui-transition: 0.2s ease-in;
+
+// Blue
+$ui-blue: #e8f1fd;
+$ui-blue-info: #2f80ed;
+$ui-blue-info-hover-15: #4e92ef;
+
+// Red
+$ui-red-danger: #ff5454;
+
+// Orange
+$ui-orange-warning: #fcb35a;
+$ui-orange-secondary: #ffeddc;
+
+// Rose
+$ui-rose: #fad5d5;
+
+// Blue
+$ui-blue-hover-15: #3a6cf8;
+$ui-blue-hover-25: #3261e3;
+
+// Yellow
+$ui-yellow: #fdecb9;
+$ui-yellow-brand: #ffda34; // ?
+$ui-yellow-hover-15: #f0d043;
+$ui-yellow-hover-25: #ecc413;
+$ui-yellow-dark: #fdbe3a;
+
+// Green
+$ui-green-waiting: #3bceac;
+$ui-dark-green: #9de3cb;
+$ui-dark-green-hover-15: #7bd1b3;
+$ui-dark-green-hover-25: #5eba9b;
+$ui-light-green: #d3f4dd;
+$ui-green-hover-15: #3db363;
+$ui-green-hover-25: #389f59;

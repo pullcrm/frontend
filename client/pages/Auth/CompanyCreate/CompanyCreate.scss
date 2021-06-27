@@ -1,0 +1,30 @@
+.auth-page-company-create {
+  &__back {
+    margin-bottom: 24px;
+  }
+
+  &__button {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  form {
+    margin-top: 24px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 16px rgba($ui-black-100, 0.1);
+  }
+
+  .ui-field + .ui-field {
+    margin-top: 20px;
+  }
+
+  @include ui-mobile-only {
+    form {
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+}

@@ -1,0 +1,98 @@
+<template>
+  <UiPanel
+    size="s"
+    class="base-widget-procedure-panel"
+    @click.native.prevent="onPick"
+  >
+    <UiText
+      size="l"
+      responsive
+      class="base-widget-procedure-panel__left"
+    >
+      <template #prepend>
+        <UiCheckbox
+          size="m"
+          :value="isActive"
+          @input="onSelect"
+          @click.native.stop
+        />
+      </template>
+
+      <a href="#">
+        {{ procedure.name }}
+      </a>
+    </UiText>
+
+    <UiText
+      size="m"
+      responsive
+      class="base-widget-procedure-panel__center"
+    >
+      {{ procedure.duration | minutesToTime }}
+    </UiText>
+
+    <UiPrice
+      size="s"
+      responsive
+      class="base-widget-procedure-panel__right"
+    >
+      {{ procedure.price | price }}
+    </UiPrice>
+  </UiPanel>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+import xor from 'lodash/xor'
+
+import dayjs from '~/utils/dayjs'
+
+@Component({
+  props: {
+    procedure: {
+      type: Object,
+      required: true
+    }
+  }
+})
+export default class ProcedurePanel extends Vue {
+  readonly procedure
+
+  get isActive () {
+    return this.activeProcedureIds.includes(this.procedure.id)
+  }
+
+  get activeProcedureIds () {
+    // eslint-disable-next-line unicorn/prefer-spread
+    return [].concat(this.$route.query.procedureIds ?? []).map(Number)
+  }
+
+  async onSelect () {
+    const procedureIds = xor(this.activeProcedureIds, [this.procedure.id])
+
+    await this.$router.replace({
+      query: {
+        ...this.$route.query,
+        procedureIds: procedureIds.map(String)
+      }
+    })
+  }
+
+  async onPick () {
+    await this.$router.push({
+      name: 'fullWidgetPickDatePage',
+      query: {
+        ...this.$route.query,
+        date: dayjs(new Date()).format('YYYY-MM-DD'),
+        procedureIds: [
+          String(this.procedure.id)
+        ]
+      }
+    })
+  }
+}
+</script>
+
+<style lang="scss" src="./ProcedurePanel.scss"></style>

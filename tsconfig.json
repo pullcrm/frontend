@@ -19,20 +19,20 @@
       "dom.iterable"
     ],
     "paths": {
-      "@/*": [
-        "src/*"
+      "~/*": [
+        "client/*"
       ]
     },
     "types": [
-      "webpack-env",
       "@nuxt/types",
       "@types/node",
-      "@types/yandex-maps"
+      "@types/requestidlecallback"
     ]
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue"
+    "shims.d.ts",
+    "nuxt.config.ts",
+    "client/**/*.vue",
+    "client/**/*.ts"
   ]
 }

@@ -1,0 +1,31 @@
+.settings-page-sms-template {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  &__text_1 {
+    color: $ui-black-80;
+
+    .ui-text__prepend {
+      padding: 4px;
+      color: $ui-white;
+      background-color: $ui-green-brand;
+      border-radius: 8px;
+    }
+  }
+
+  &__text_2 {
+    color: $ui-black-50;
+  }
+
+  &__title {
+    margin-bottom: 4px;
+  }
+
+  &__disclaimer {
+    margin-top: 16px;
+    color: $ui-black-80;
+  }
+}

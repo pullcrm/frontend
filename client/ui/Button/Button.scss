@@ -1,0 +1,130 @@
+@import 'Button_size_32';
+@import 'Button_size_44';
+@import 'Button_size_48';
+@import 'Button_theme_green';
+@import 'Button_theme_green-outlined';
+@import 'Button_theme_yellow';
+@import 'Button_theme_yellow-outlined';
+@import 'Button_theme_blue';
+@import 'Button_theme_info-outlined';
+@import 'Button_theme_danger-outlined';
+@import 'Button_theme_transparent';
+
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  vertical-align: baseline;
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    color var(--ui-transition-hover),
+    border-color var(--ui-transition-hover),
+    background-color var(--ui-transition-hover);
+  user-select: none;
+
+  &__content {
+    @include ui-truncate;
+
+    order: 2;
+  }
+
+  &_disabled {
+    pointer-events: none;
+  }
+
+  &_loading {
+    position: relative;
+    pointer-events: none;
+
+    .ui-button__content {
+      visibility: hidden;
+    }
+  }
+
+  &_size_s {
+    @include ui-button_size_32;
+  }
+
+  &_size_m {
+    @include ui-button_size_44;
+  }
+
+  &_size_l {
+    @include ui-button_size_48;
+  }
+
+  &_theme_blue {
+    @include ui-button_theme_blue;
+  }
+
+  &_theme_danger-outlined {
+    @include ui-button_theme_danger-outlined;
+  }
+
+  &_theme_green {
+    @include ui-button_theme_green;
+  }
+
+  &_theme_green-outlined {
+    @include ui-button_theme_green-outlined;
+  }
+
+  &_theme_info-outlined {
+    @include ui-button_theme_info-outlined;
+  }
+
+  &_theme_transparent {
+    @include ui-button_theme_transparent;
+  }
+
+  &_theme_yellow {
+    @include ui-button_theme_yellow;
+  }
+
+  &_theme_yellow-outlined {
+    @include ui-button_theme_yellow-outlined;
+  }
+
+  &__loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__prepend {
+    order: 1;
+  }
+
+  &__append {
+    order: 3;
+  }
+
+  &__prepend,
+  &__append {
+    flex-shrink: 0;
+    margin-right: -12px;
+    margin-left: -12px;
+
+    .ui-icon {
+      display: block;
+    }
+  }
+
+  @media (max-width: $ui-tablet - 1px) {
+    &_responsive {
+      &.ui-button {
+        &_size_l {
+          @include ui-button_size_32;
+        }
+
+        &_size_m {
+          @include ui-button_size_32;
+        }
+      }
+    }
+  }
+}

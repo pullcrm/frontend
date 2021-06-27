@@ -1,0 +1,32 @@
+.full-widget-pick-date-page-time-picker-group {
+  display: flex;
+
+  &_theme_primary {
+    .full-widget-pick-date-page-time-picker-group {
+      &__icon {
+        color: $ui-yellow-dark;
+      }
+    }
+  }
+
+  &_theme_secondary {
+    .full-widget-pick-date-page-time-picker-group {
+      &__icon {
+        color: $ui-widget-brand;
+      }
+    }
+  }
+
+  &__icon {
+    margin-top: 4px;
+    margin-right: 8px;
+  }
+
+  &__badges {
+    flex-grow: 1;
+  }
+
+  &__badge {
+    margin: 0 4px 8px;
+  }
+}

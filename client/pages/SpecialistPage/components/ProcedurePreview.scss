@@ -1,0 +1,85 @@
+@mixin procedure-preview_size_s {
+  .specialist-page-procedure-preview {
+    &__header {
+      .specialist-page-procedure-preview {
+        &__price {
+          display: none;
+        }
+      }
+    }
+
+    &__body {
+      margin-top: 4px;
+
+      .specialist-page-procedure-preview {
+        &__price {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.specialist-page-procedure-preview {
+  &_selectable {
+    .specialist-page-procedure-preview {
+      &__body {
+        margin-left: 36px;
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin: 0 -8px;
+
+    & > * {
+      margin: 0 8px;
+    }
+
+    .specialist-page-procedure-preview {
+      &__title {
+        flex: 1;
+      }
+
+      &__price {
+        width: 112px;
+        text-align: center;
+      }
+
+      &__duration {
+        width: 118px;
+        text-align: center;
+      }
+    }
+  }
+
+  &__icon {
+    color: $ui-blue-brand;
+    opacity: 0;
+
+    &._selected {
+      opacity: 1;
+    }
+  }
+
+  &__body {
+    margin-top: 8px;
+
+    .specialist-page-procedure-preview {
+      &__price {
+        display: none;
+        margin-bottom: 4px;
+      }
+    }
+  }
+
+  &_size_s {
+    @include procedure-preview_size_s;
+  }
+
+  @media (max-width: $ui-mobile-portrait - 1px) {
+    @include procedure-preview_size_s;
+  }
+}

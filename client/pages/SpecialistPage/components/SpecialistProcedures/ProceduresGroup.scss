@@ -1,0 +1,15 @@
+.specialist-procedures-procedures-group {
+  &__procedure-preview + &__procedure-preview {
+    margin-top: 12px;
+  }
+
+  &__procedure-preview {
+    &:hover {
+      background-color: $ui-black-10;
+    }
+  }
+
+  &__name {
+    margin-bottom: 12px;
+  }
+}

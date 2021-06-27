@@ -1,0 +1,18 @@
+.specialist-procedures {
+  &__title {
+    margin-bottom: 8px;
+  }
+
+  &__sub-title {
+    margin-bottom: 24px;
+    color: $ui-black-80;
+  }
+
+  &__procedures-group {
+    margin-bottom: 24px;
+  }
+
+  &__button {
+    width: 100%;
+  }
+}

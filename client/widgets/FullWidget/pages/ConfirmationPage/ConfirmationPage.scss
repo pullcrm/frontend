@@ -1,0 +1,29 @@
+.full-widget-confirmation-page {
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__info-panel {
+    margin-bottom: 24px;
+  }
+
+  &__disclaimer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    margin-top: 20px;
+    text-align: center;
+    background: $ui-black-10;
+    border-radius: 8px;
+  }
+
+  &__button {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .ui-field + .ui-field {
+    margin-top: 20px;
+  }
+}

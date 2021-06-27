@@ -1,0 +1,33 @@
+.sms-settings-page {
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__sms-template {
+    margin-top: 16px;
+  }
+
+  &__notify-selector {
+    display: inline-flex;
+    margin: 16px 0;
+
+    .ui-select {
+      & > .ui-text {
+        color: $ui-blue-brand;
+      }
+    }
+  }
+
+  &__button {
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  .ui-divider {
+    margin: 24px 0;
+  }
+
+  .ui-panel + .ui-panel {
+    margin-top: 24px;
+  }
+}

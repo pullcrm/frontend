@@ -1,0 +1,21 @@
+@mixin time-pickup-picker-badge_active {
+  color: $ui-white;
+  background-color: $ui-blue-brand;
+}
+
+.full-widget-pick-date-page-time-picker-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+  background-color: $ui-black-10;
+  border-radius: 100px;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+
+  &:hover,
+  &_active {
+    @include time-pickup-picker-badge_active;
+  }
+}

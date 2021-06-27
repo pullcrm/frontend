@@ -1,0 +1,55 @@
+/*
+  If an icon was imported from Figma, you should run `yarn figma:prepare-icons`.
+
+  It will:
+  - remove width and height attrigutes
+  - add the id attribute to the `<svg />` element
+  - replace coming colors to css variables
+*/
+
+.ui-icon {
+  display: inline-flex;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  --ui-icon-primary-color: currentColor;
+  --ui-icon-secondary-color: currentColor;
+
+  svg {
+    display: none;
+    width: inherit;
+    height: inherit;
+    pointer-events: none;
+  }
+
+  // Disable background fallback for new browsers which support css variables and external resources in xlink:href
+  @supports (display: var(--variable)) {
+    background-image: none !important;
+
+    svg {
+      display: block;
+    }
+  }
+
+  &_size_xs {
+    width: 16px;
+    height: 16px;
+  }
+
+  &_size_s {
+    width: 20px;
+    height: 20px;
+  }
+
+  &_size_m {
+    width: 24px;
+    height: 24px;
+  }
+
+  &_size_l {
+    width: 32px;
+    height: 32px;
+  }
+}

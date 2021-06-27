@@ -1,0 +1,18 @@
+.settings-page-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__text {
+    flex: 1;
+  }
+
+  &__append {
+    margin-left: 16px;
+  }
+
+  &__sub-title {
+    margin-top: 4px;
+    color: $ui-black-60;
+  }
+}

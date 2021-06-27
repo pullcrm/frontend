@@ -1,0 +1,10 @@
+.full-widget-pick-date-page-time-picker {
+  &__group + &__group {
+    margin-top: 24px;
+  }
+
+  &__empty {
+    margin: 44px 0;
+    text-align: center;
+  }
+}

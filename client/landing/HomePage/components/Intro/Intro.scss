@@ -1,0 +1,95 @@
+.landing-home-page-intro {
+  &__logo {
+    display: block;
+    width: 88px;
+    height: 88px;
+  }
+
+  &__title {
+    width: 100%;
+    margin-top: 16px;
+    text-align: center;
+
+    .typewriter p {
+      span {
+        display: block;
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  &__sub-title {
+    margin-top: 16px;
+    color: $ui-black-60;
+    text-align: center;
+  }
+
+  &__form {
+    margin-top: 20px;
+
+    .ui-form-validator {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__phone {
+    width: 100%;
+    margin-right: 12px;
+  }
+
+  @media (min-width: $ui-tablet) {
+    &__header {
+      flex-direction: row;
+    }
+
+    &__logo {
+      margin-right: 24px;
+    }
+
+    &__title {
+      width: auto;
+      min-width: 390px;
+      margin-top: 0;
+      text-align: left;
+
+      .typewriter p {
+        display: block;
+
+        span {
+          display: inline;
+        }
+      }
+    }
+
+    &__phone {
+      width: 260px;
+    }
+
+    &__action {
+      .ui-button__prepend {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: $ui-tablet - 1px) {
+    &__action {
+      .ui-button__prepend {
+        margin-right: 0;
+        margin-left: 0;
+      }
+
+      .ui-button__content {
+        display: none;
+      }
+    }
+  }
+}

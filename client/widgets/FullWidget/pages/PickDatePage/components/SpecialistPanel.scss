@@ -1,0 +1,19 @@
+.full-widget-pick-date-page-specialist-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &__info {
+    flex-grow: 1;
+    margin: 0 16px;
+  }
+
+  &__name {
+    margin-top: 4px;
+    color: $ui-black-60;
+  }
+
+  &__price {
+    margin-left: 16px;
+  }
+}

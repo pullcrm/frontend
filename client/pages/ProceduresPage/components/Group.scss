@@ -1,0 +1,44 @@
+.procedures-page-group {
+  &_has-category-id {
+    .procedures-page-group {
+      &__title {
+        cursor: pointer;
+
+        .ui-title__append {
+          display: block;
+        }
+
+        @include ui-hover {
+          &:hover {
+            color: $ui-blue-brand;
+
+            .ui-title__append {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__title {
+    display: inline-flex;
+    margin-bottom: 12px;
+    color: $ui-black-100;
+    transition: color var(--ui-transition-hover);
+
+    .ui-title__append {
+      display: none;
+      color: $ui-blue-brand;
+      opacity: 0;
+    }
+  }
+
+  &__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 140px;
+    color: $ui-blue-brand;
+  }
+}
