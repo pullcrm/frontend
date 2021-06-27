@@ -145,3 +145,6 @@ jest_*/
 
 # Icons
 /**/icons-figma
+
+# pm2
+ecosystem.config.js
