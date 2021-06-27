@@ -20,7 +20,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # env:
-      # RPC_URL: https://pullcrm.dev/api/
+      # RPC_URL: https://dev.pullcrm.com/api/
       # CALENDAR_TIME_STEP: 15
     
     strategy:
