@@ -70,29 +70,42 @@ export default class Avatars extends Vue {
   }
 
   async uploadAvatar (file) {
-    if (!file) return
+    try {
+      if (!file) return
 
-    if (this.avatars.length > 5) {
-      this.$typedStore.dispatch('toasts/show', {
-        type: 'error',
-        title: 'Превишен лимин загрузки аватаров!'
-      })
+      if (this.avatars.length > 5) {
+        this.$typedStore.dispatch('toasts/show', {
+          type: 'error',
+          title: 'Превишен лимин загрузки аватаров!'
+        })
 
-      return
-    }
+        return
+      }
 
-    const formData = new FormData()
+      const formData = new FormData()
 
-    formData.append('file', file)
-    formData.append('group', AVATAR)
-    formData.append('userId', this.user.id)
+      formData.append('file', file)
+      formData.append('group', AVATAR)
+      formData.append('userId', this.user.id)
 
-    const result = await this.$typedStore.dispatch('specialists/onUploadAvatar', formData)
+      const result = await this.$typedStore.dispatch('specialists/onUploadAvatar', formData)
 
-    if (result?.id) {
-      await this.updateAvatar(result.id)
+      if (result?.id) {
+        await this.updateAvatar(result.id)
 
-      window.location.reload()
+        window.location.reload()
+      }
+    } catch (err) {
+      if (err.status === 413) {
+        this.$typedStore.dispatch('toasts/show', {
+          type: 'error',
+          title: 'Файл слишком большой, попробуйте в другом размере'
+        })
+
+        return
+      }
+
+      throw err
     }
   }
 

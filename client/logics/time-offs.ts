@@ -1,5 +1,3 @@
-import { START_TIME_OF_DAY, END_TIME_OF_DAY } from '~/constants'
-
 import { getTime } from '~/utils/date-time'
 
 export function normalizeTimeOffs (timeOffs) {
@@ -24,12 +22,12 @@ export function normalizeTimeOffs (timeOffs) {
   })
 }
 
-export function isCloseDay ({ startDateTime, endDateTime }) {
+export function isCloseDay ({ startDateTime, endDateTime }, timeWork) {
   const endTime = getTime(endDateTime)
   const startTime = getTime(startDateTime)
 
   return (
-    endTime === END_TIME_OF_DAY &&
-    startTime === START_TIME_OF_DAY
+    endTime === timeWork.to &&
+    startTime === timeWork.from
   )
 }

@@ -1,6 +1,6 @@
 import { formatDate } from '~/utils/date-time'
 
-import { normalizeTimeOffs, isCloseDay } from '~/logics/time-offs'
+import { normalizeTimeOffs } from '~/logics/time-offs'
 
 function createState () {
   return {
@@ -62,14 +62,6 @@ const mutations = {
 const getters = {
   normalizeTimeOffs (state) {
     return normalizeTimeOffs(state.timeOffs)
-  },
-
-  isClosedDay (state) {
-    return (specialistId) => {
-      return state.timeOffs.some(timeOff => {
-        return isCloseDay(timeOff) && timeOff.specialistId === specialistId
-      })
-    }
   }
 }
 

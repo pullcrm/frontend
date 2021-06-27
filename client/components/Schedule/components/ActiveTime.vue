@@ -34,7 +34,7 @@ export default class ActiveTime extends Vue {
 
     this.startTimer(from, to)
 
-    const interval = setInterval(this.startTimer, TIME)
+    const interval = setInterval(() => this.startTimer(from, to), TIME)
 
     this.$on('hook:beforeDestroy', () => {
       clearInterval(interval)

@@ -72,11 +72,11 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { START_TIME_OF_DAY, END_TIME_OF_DAY } from '~/constants'
-
 import { COMPLETED } from '~/constants/appointment'
 
 import { setTime } from '~/utils/time'
+
+import { isCloseDay } from '~/logics/time-offs'
 
 @Component({
   props: {
@@ -101,8 +101,22 @@ export default class Specialist extends Vue {
     return this.user.avatar?.path
   }
 
+  get timeOffs () {
+    return this.$typedStore.state.schedule.timeOffs
+  }
+
+  get timeWork () {
+    return this.$typedStore.getters['timetable/timeWork']
+  }
+
   get isClosedDay () {
-    return this.$typedStore.getters['schedule/isClosedDay'](this.specialist.id)
+    return this.timeOffs.some(timeOff => {
+      if (timeOff.specialistId !== this.specialist.id) {
+        return false
+      }
+
+      return isCloseDay(timeOff, this.timeWork)
+    })
   }
 
   get appointments () {
@@ -121,15 +135,18 @@ export default class Specialist extends Vue {
   }
 
   async onCloseDay () {
+    const { from, to } = this.timeWork
+
     const date = new Date(this.$typedStore.state.schedule.date)
 
-    const endDateTime = setTime(date, END_TIME_OF_DAY).format('MM.DD.YY HH:mm')
-    const startDateTime = setTime(date, START_TIME_OF_DAY).format('MM.DD.YY HH:mm')
+    const startDateTime = setTime(date, from).format('MM.DD.YY HH:mm')
+    const endDateTime = setTime(date, to).format('MM.DD.YY HH:mm')
 
     await this.$api.timeOff.create({
       specialistId: this.specialist.id,
       endDateTime,
-      startDateTime
+      startDateTime,
+      description: ''
     })
 
     await this.$typedStore.dispatch('schedule/fetchTimeOffs')

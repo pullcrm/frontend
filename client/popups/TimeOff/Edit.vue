@@ -201,7 +201,11 @@ export default class TimeOffEdit extends Vue {
 
     this.form.specialist = this.specialists.find(({ id }) => id === specialistId)
 
-    this.isCloseDay = isCloseDay({ startDateTime, endDateTime })
+    this.isCloseDay = isCloseDay({ startDateTime, endDateTime }, this.timeWork)
+  }
+
+  get timeWork () {
+    return this.$typedStore.getters['timetable/timeWork']
   }
 
   get workingHours () {

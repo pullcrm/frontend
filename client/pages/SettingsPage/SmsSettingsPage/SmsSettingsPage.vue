@@ -169,7 +169,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { SMS_CREATION_TEMPLATE } from '~/constants'
+import { SMS_REMIND_TEMPLATE, SMS_CREATION_TEMPLATE } from '~/constants'
 
 import { SMS_REMIND_DURATIONS } from '~/constants/time'
 
@@ -200,7 +200,7 @@ export default class SmsSettingsPage extends Vue {
   }
 
   get smsRemindTemplate () {
-    return this.settings.remindSMSTemplate || SMS_CREATION_TEMPLATE
+    return this.settings.remindSMSTemplate || SMS_REMIND_TEMPLATE
   }
 
   get smsCreationTemplate () {
