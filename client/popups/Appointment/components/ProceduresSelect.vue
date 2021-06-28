@@ -129,11 +129,11 @@ export default class ProceduresSelect extends Vue {
   onInput (procedures) {
     this.$emit('update:procedures', procedures)
 
-    // if (this.customTotal) return
+    if (this.customTotal) return
 
-    // const total = procedures.reduce((sum, { price }) => (sum + price), 0) ?? 0
+    const total = procedures.reduce((sum, { price }) => (sum + price), 0) ?? 0
 
-    // this.$emit('update:total', total)
+    this.$emit('update:total', total)
   }
 
   onCustomPrice (price) {
