@@ -190,7 +190,7 @@ export default class SpecialistInfoPage extends Vue {
   }
 
   get role () {
-    return this.specialist.role
+    return this.$typedStore.getters['position/role']
   }
 
   get isStatusDisabled () {

@@ -26,7 +26,7 @@ export default class CompanyPicker extends Vue {
   }
 
   get role () {
-    return this.position.role
+    return this.$typedStore.getters['position/role']
   }
 
   get companyId () {

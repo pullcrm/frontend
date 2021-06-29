@@ -71,7 +71,7 @@ export default class SpecialistProceduresPage extends Vue {
   }
 
   get role () {
-    return this.specialist.role
+    return this.$typedStore.getters['position/role']
   }
 
   get isEditableList () {
