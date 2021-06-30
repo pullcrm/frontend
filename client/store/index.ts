@@ -60,7 +60,7 @@ const store = () => {
           commit('position/SET_POSITIONS', positions, { root: true })
         } catch (err) {
           if (err.status === 401) {
-            await dispatch('auth/reset', null, { root: true })
+            await dispatch('auth/refreshToken', null, { root: true })
 
             window.location.reload()
           }
