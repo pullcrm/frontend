@@ -29,20 +29,14 @@ const AuthModule: Module<IState, IRootState> = {
       await dispatch('saveTokens', tokens)
     },
 
-    async fetchToken ({ commit, dispatch }) {
-      try {
-        const accessToken = this.$localStorage.getItem(ACCESS_TOKEN)
-        const refreshToken = this.$localStorage.getItem(REFRESH_TOKEN)
+    async fetchToken ({ commit }) {
+      const accessToken = this.$localStorage.getItem(ACCESS_TOKEN)
+      const refreshToken = this.$localStorage.getItem(REFRESH_TOKEN)
 
-        if (accessToken && refreshToken) {
-          commit('SET_TOKENS', { accessToken, refreshToken })
+      if (accessToken && refreshToken) {
+        commit('SET_TOKENS', { accessToken, refreshToken })
 
-          this.$apiClient.setToken(accessToken)
-        }
-      } catch {
-        await dispatch('reset')
-
-        location.reload()
+        this.$apiClient.setToken(accessToken)
       }
     },
 

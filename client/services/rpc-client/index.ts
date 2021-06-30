@@ -77,6 +77,13 @@ export default class RpcClient {
     const duration = Date.now() - Number(startTime)
 
     if (!response.ok) {
+      // TODO: Refactor this
+      const { message } = await response.json()
+
+      if (method !== 'token' && method !== 'users/profile' && message === 'Expired access token') {
+        await window.location.reload()
+      }
+
       this.onResponse({
         token: this.token,
         method,
