@@ -24,8 +24,14 @@ export function getRoleNameByAlias (alias) {
 }
 
 export function normalizeSpecialists (specialists) {
-  return specialists.map(item => ({
-    ...item,
-    fullName: `${item.user.firstName} ${item.user.lastName}`
-  }))
+  return specialists.map(item => {
+    const { firstName, lastName } = item.user
+
+    return {
+      ...item,
+      fullName: [firstName, lastName]
+        .map(item => item.trim())
+        .join(' ')
+    }
+  })
 }
