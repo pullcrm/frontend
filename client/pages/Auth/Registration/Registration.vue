@@ -103,6 +103,10 @@ import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
 import Layout from '../components/Layout.vue'
 
 @Component({
+  middleware: [
+    'redirects/dashboard'
+  ],
+
   components: {
     Layout
   }
