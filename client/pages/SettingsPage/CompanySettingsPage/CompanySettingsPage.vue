@@ -6,206 +6,218 @@
       size="m"
       responsive
     >
-      <form
-        class="ui-grid"
-        @submit.prevent="save"
-      >
-        <UiTitle
-          size="s"
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
+      <form @submit.prevent="submit">
+        <UiFormValidator
+          ref="formValidator"
+          :validations="validations"
+          class="ui-grid"
         >
-          О компании
-        </UiTitle>
+          <template #default="{ resetFieldError, getFieldError }">
+            <UiTitle
+              size="s"
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_12'
+              ]"
+            >
+              О компании
+            </UiTitle>
 
-        <UiField
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-        >
-          <FileUpload
-            :image="logo"
-            responsive
-            @input="onAvatar"
-          >
-            <template #default="{ url }">
-              <UiAvatar
-                :image="url"
-                :name="company.name"
-                size="l"
+            <UiField
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_12'
+              ]"
+            >
+              <FileUpload
+                :image="logo"
                 responsive
+                @input="onAvatar"
+              >
+                <template #default="{ url }">
+                  <UiAvatar
+                    :image="url"
+                    :name="company.name"
+                    size="l"
+                    responsive
+                  />
+                </template>
+              </FileUpload>
+            </UiField>
+
+            <UiField
+              label="Название компании"
+              :error="getFieldError('name')"
+              required
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_12'
+              ]"
+            >
+              <UiInput
+                v-model="company.name"
+                placeholder="Введите название"
+                @input="resetFieldError('name')"
               />
-            </template>
-          </FileUpload>
-        </UiField>
+            </UiField>
 
-        <UiField
-          label="Название компании"
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-        >
-          <UiInput
-            v-model="company.name"
-            placeholder="Введите название"
-          />
-        </UiField>
+            <UiField
+              label="Город"
+              required
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_12'
+              ]"
+            >
+              <UiSelect
+                v-model="company.city"
+                label-key="name"
+                required
+                :options="cities"
+                placeholder="Выбрать город"
+              />
+            </UiField>
 
-        <UiField
-          label="Город"
-          required
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-        >
-          <UiSelect
-            v-model="company.city"
-            label-key="name"
-            required
-            :options="cities"
-            placeholder="Выбрать город"
-          />
-        </UiField>
+            <UiField
+              label="Категория"
+              required
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_12'
+              ]"
+            >
+              <UiSelect
+                v-model="company.type"
+                label-key="name"
+                required
+                :options="companyTypes"
+                :clearable="false"
+                placeholder="Выбрать категорию"
+              />
+            </UiField>
 
-        <UiField
-          label="Категория"
-          required
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-        >
-          <UiSelect
-            v-model="company.type"
-            label-key="name"
-            required
-            :options="companyTypes"
-            :clearable="false"
-            placeholder="Выбрать категорию"
-          />
-        </UiField>
+            <UiField
+              label="Адрес"
+              :error="getFieldError('address')"
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_12'
+              ]"
+            >
+              <UiInput
+                v-model="company.address"
+                placeholder="Введите адрес"
+                @input="resetFieldError('address')"
+              />
+            </UiField>
 
-        <UiField
-          label="Адрес"
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-        >
-          <UiInput
-            v-model="company.address"
-            placeholder="Введите адрес"
-          />
-        </UiField>
+            <UiField
+              label="Телефон"
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_12'
+              ]"
+            >
+              <UiInput
+                v-model="company.phone"
+                mask="38 (###) #### ###"
+                placeholder="066"
+              />
+            </UiField>
 
-        <UiField
-          label="Телефон"
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-        >
-          <UiInput
-            v-model="company.phone"
-            mask="38 (###) #### ###"
-            placeholder="066"
-          />
-        </UiField>
+            <UiField
+              label="О компании"
+              :error="getFieldError('description')"
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_12'
+              ]"
+            >
+              <UiInput
+                v-model="company.description"
+                tag="textarea"
+                placeholder="Введите текст"
+                @input="resetFieldError('description')"
+              />
+            </UiField>
 
-        <UiField
-          label="О компании"
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-        >
-          <UiInput
-            v-model="company.description"
-            tag="textarea"
-            placeholder="Введите текст"
-          />
-        </UiField>
+            <UiDivider
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_12'
+              ]"
+            />
 
-        <UiDivider
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12'
-          ]"
-        />
+            <UiField
+              label="Viber"
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_6'
+              ]"
+            >
+              <UiInput
+                v-model="company.viber"
+                placeholder="Viber"
+              />
+            </UiField>
 
-        <UiField
-          label="Viber"
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_6'
-          ]"
-        >
-          <UiInput
-            v-model="company.viber"
-            placeholder="Viber"
-          />
-        </UiField>
+            <UiField
+              label="Telegram"
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_6',
+                'ui-grid-item_mobile_12'
+              ]"
+            >
+              <UiInput
+                v-model="company.telegram"
+                placeholder="Telegram"
+              />
+            </UiField>
 
-        <UiField
-          label="Telegram"
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_6',
-            'ui-grid-item_mobile_12'
-          ]"
-        >
-          <UiInput
-            v-model="company.telegram"
-            placeholder="Telegram"
-          />
-        </UiField>
+            <UiField
+              label="Instagram"
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_6',
+                'ui-grid-item_mobile_12'
+              ]"
+            >
+              <UiInput
+                v-model="company.instagram"
+                placeholder="Instagram"
+              />
+            </UiField>
 
-        <UiField
-          label="Instagram"
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_6',
-            'ui-grid-item_mobile_12'
-          ]"
-        >
-          <UiInput
-            v-model="company.instagram"
-            placeholder="Instagram"
-          />
-        </UiField>
+            <UiField
+              label="Facebook"
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_6',
+                'ui-grid-item_mobile_12'
+              ]"
+            >
+              <UiInput
+                v-model="company.facebook"
+                placeholder="Facebook"
+              />
+            </UiField>
 
-        <UiField
-          label="Facebook"
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_6',
-            'ui-grid-item_mobile_12'
-          ]"
-        >
-          <UiInput
-            v-model="company.facebook"
-            placeholder="Facebook"
-          />
-        </UiField>
-
-        <UiButton
-          type="submit"
-          theme="blue"
-          :loading="isLoading"
-          responsive
-          :class="[
-            'ui-grid-item',
-            'ui-grid-item_12',
-            'ui-grid-item_mobile_12'
-          ]"
-        >
-          Сохранить
-        </UiButton>
+            <UiButton
+              type="submit"
+              theme="blue"
+              :loading="isLoading"
+              responsive
+              :class="[
+                'ui-grid-item',
+                'ui-grid-item_12',
+                'ui-grid-item_mobile_12'
+              ]"
+            >
+              Сохранить
+            </UiButton>
+          </template>
+        </UiFormValidator>
       </form>
     </UiPanel>
   </SettingsLayout>
@@ -216,6 +228,8 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import { normalizeCompanyParams } from '~/logics/company'
+
+import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
 
 import FileUpload from '~/components/FileUpload/FileUpload.vue'
 
@@ -238,6 +252,41 @@ export default class Settings extends Vue {
   companyTypes = []
 
   companyName!: string
+
+  $refs: {
+    formValidator: UiFormValidator
+  }
+
+  get validations (): Validations {
+    return {
+      name: {
+        rules: {
+          max: 255,
+          required: true
+        },
+        messages: {
+          max: 'Максимальная длина строки 255 символов',
+          required: 'Введите название компании'
+        }
+      },
+      address: {
+        rules: {
+          max: 255
+        },
+        messages: {
+          max: 'Максимальная длина строки 255 символов'
+        }
+      },
+      description: {
+        rules: {
+          max: 255
+        },
+        messages: {
+          max: 'Максимальная длина строки 255 символов'
+        }
+      }
+    }
+  }
 
   get logo () {
     return this.company.logo?.path
@@ -271,7 +320,11 @@ export default class Settings extends Vue {
     return await this.$typedStore.dispatch('profile')
   }
 
-  async save () {
+  async submit () {
+    const isValid = await this.validate()
+
+    if (!isValid) return
+
     try {
       this.isLoading = true
 
@@ -287,6 +340,10 @@ export default class Settings extends Vue {
     } finally {
       this.isLoading = false
     }
+  }
+
+  validate () {
+    return this.$refs.formValidator.validate(this.company)
   }
 }
 </script>
