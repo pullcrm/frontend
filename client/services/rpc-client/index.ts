@@ -161,9 +161,9 @@ export default class RpcClient {
    */
   private get headers () {
     return {
+      Authorization: this.auth ? 'Basic ' + btoa(`${this.auth}`) : null,
       ...this.defaultHeaders,
-      // Authorization: this.auth ? 'Basic ' + btoa(`${this.auth}`) : null,
-      ...(this.token && { Authorization: `Bearer ${this.token}` })
+      ...(this.token && { Authorization2: `Bearer ${this.token}` })
     }
   }
 
