@@ -241,6 +241,12 @@ import SettingsLayout from '../components/Layout.vue'
   components: {
     FileUpload,
     SettingsLayout
+  },
+
+  head () {
+    return {
+      title: 'Информация о компании - pullcrm'
+    }
   }
 })
 export default class Settings extends Vue {

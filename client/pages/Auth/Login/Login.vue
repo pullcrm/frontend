@@ -98,6 +98,12 @@ import Layout from '../components/Layout.vue'
 
   components: {
     Layout
+  },
+
+  head () {
+    return {
+      title: 'Авторизация - pullcrm'
+    }
   }
 })
 export default class Login extends Vue {

@@ -159,6 +159,12 @@ import CreatedAt from './components/CreatedAt.vue'
       avatars,
       specialist
     }
+  },
+
+  head () {
+    return {
+      title: 'Информация о сотруднике - pullcrm'
+    }
   }
 
   // async fetch () {

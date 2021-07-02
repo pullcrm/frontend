@@ -85,6 +85,12 @@ import SpecialistCard from './components/Card.vue'
     SortableList,
     SpecialistCard,
     UiNotificationBadge
+  },
+
+  head () {
+    return {
+      title: 'Список сотрудников - pullcrm'
+    }
   }
 })
 export default class Specialists extends Vue {

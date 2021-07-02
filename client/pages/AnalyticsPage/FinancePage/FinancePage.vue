@@ -85,6 +85,12 @@ import FinanceTable from './components/Table.vue'
         endDate.toDate()
       ]
     }
+  },
+
+  head () {
+    return {
+      title: 'Аналитика финансов - pullcrm'
+    }
   }
 })
 export default class FinancePage extends Vue {

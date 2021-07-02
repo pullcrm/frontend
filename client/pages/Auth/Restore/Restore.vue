@@ -93,6 +93,12 @@ import Layout from '../components/Layout.vue'
 
   components: {
     Layout
+  },
+
+  head () {
+    return {
+      title: 'Восстановление пароля - pullcrm'
+    }
   }
 })
 export default class Restore extends Vue {

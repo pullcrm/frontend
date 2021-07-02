@@ -188,6 +188,12 @@ import SettingsLayout from '../components/Layout.vue'
     Section,
     SmsTemplate,
     SettingsLayout
+  },
+
+  head () {
+    return {
+      title: 'Настройки СМС - pullcrm'
+    }
   }
 })
 export default class SmsSettingsPage extends Vue {

@@ -75,6 +75,12 @@ import LineChart from './components/LineChart.vue'
         endDate.toDate()
       ]
     }
+  },
+
+  head () {
+    return {
+      title: 'Аналитика по записям - pullcrm'
+    }
   }
 })
 export default class AppointmentsPage extends Vue {

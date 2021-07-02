@@ -73,6 +73,12 @@ import Layout from '~/pages/Auth/components/Layout.vue'
 @Component({
   components: {
     Layout
+  },
+
+  head () {
+    return {
+      title: 'Новая компания - pullcrm'
+    }
   }
 })
 export default class CompanyCreate extends Vue {
