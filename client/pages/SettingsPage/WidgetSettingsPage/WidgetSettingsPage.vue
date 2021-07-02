@@ -109,6 +109,12 @@ import { code } from './code'
     Section,
     UiContent,
     SettingsLayout
+  },
+
+  head () {
+    return {
+      title: 'Настройки онлайн записи - pullcrm'
+    }
   }
 })
 export default class WidgetSettingsPage extends Vue {

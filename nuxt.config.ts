@@ -70,7 +70,7 @@ const config: NuxtOptions = {
     htmlAttrs: {
       lang: 'ru'
     },
-    title: 'Онлайн запись клиентов - pullcrm',
+    title: 'Учет клиентов и онлайн запись - pullcrm',
     meta: [
       { charset: 'utf-8' },
       { hid: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover' },
@@ -83,6 +83,7 @@ const config: NuxtOptions = {
       { name: 'msapplication-TileColor', content: '#333' },
       { name: 'theme-color', content: '#333' },
       { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
+      { hid: 'description', name: 'description', content: 'Pullcrm - удобный инструмен автоматизации записи для вашей компани. Онлайн запись для: ✅Барбершопа ✅Салона красоты ✅Тату салона ✅Медицинского центра ✅Стоматологии.' },
       // @ts-ignore
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge,chrome=1' }
     ],

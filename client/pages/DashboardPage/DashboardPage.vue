@@ -44,6 +44,12 @@ import DonateBanner from './components/DonateBanner.vue'
     await typedStore.dispatch('analytics/fetchSimpleStats', {
       date: dayjs()
     })
+  },
+
+  head () {
+    return {
+      title: 'Главный дашборд - pullcrm'
+    }
   }
 })
 export default class Dashboard extends Vue {}

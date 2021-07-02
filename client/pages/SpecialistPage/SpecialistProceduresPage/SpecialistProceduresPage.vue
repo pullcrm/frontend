@@ -55,6 +55,12 @@ import ProceduresGroup from './components/ProceduresGroup.vue'
     ProceduresGroup,
     SpecialistLayout,
     SpecialistProcedures
+  },
+
+  head () {
+    return {
+      title: 'Список услуг сотрудника - pullcrm'
+    }
   }
 })
 export default class SpecialistProceduresPage extends Vue {

@@ -41,6 +41,12 @@ import TimeTableDay from './components/Day.vue'
   components: {
     TimeTableDay,
     SettingsLayout
+  },
+
+  head () {
+    return {
+      title: 'НАстройки графика работы - pullcrm'
+    }
   }
 })
 export default class TimetableSettingsPage extends Vue {

@@ -48,6 +48,12 @@ import ProceduresGroup from './components/Group.vue'
   components: {
     Header,
     ProceduresGroup
+  },
+
+  head () {
+    return {
+      title: 'Список услуг - pullcrm'
+    }
   }
 })
 export default class Procedures extends Vue {

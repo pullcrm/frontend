@@ -36,6 +36,12 @@ import Header from './components/Header.vue'
     Queue,
     Header,
     Schedule
+  },
+
+  head () {
+    return {
+      title: 'Календарь - pullcrm'
+    }
   }
 })
 export default class SchedulePage extends Vue {

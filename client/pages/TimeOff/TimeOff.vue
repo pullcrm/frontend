@@ -36,6 +36,12 @@ import TimeOffTable from './components/Table.vue'
 
   components: {
     TimeOffTable
+  },
+
+  head () {
+    return {
+      title: 'Не рабочее время - pullcrm'
+    }
   }
 })
 export default class TimeOff extends Vue {

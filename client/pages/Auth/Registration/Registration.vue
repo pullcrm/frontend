@@ -109,6 +109,12 @@ import Layout from '../components/Layout.vue'
 
   components: {
     Layout
+  },
+
+  head () {
+    return {
+      title: 'Регистрация - pullcrm'
+    }
   }
 })
 export default class Home extends Vue {

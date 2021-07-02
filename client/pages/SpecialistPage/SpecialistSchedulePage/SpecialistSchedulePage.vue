@@ -65,6 +65,12 @@ import Header from './components/Header.vue'
     return {
       specialist
     }
+  },
+
+  head () {
+    return {
+      title: 'Календарь сотрудника - pullcrm'
+    }
   }
 })
 export default class SpecialistSchedulePage extends Vue {
