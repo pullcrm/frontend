@@ -1,2 +1,11 @@
 User-agent: *
 Disallow: *
+Allow: /
+Allow: /login/
+Allow: /registration/
+Allow: /restore/
+Allow: *favicon*
+Allow: */img/*
+Allow: */images/*
+Allow: */logos/*
+Allow: */_nuxt/*
