@@ -24,7 +24,7 @@
       responsive
       class="landing-home-page-intro__sub-title"
     >
-      Получите все преимущетсва Pullcrm асболютно бесплатно.
+      Получите все преимущетсва Pullcrm абсолютно бесплатно.
     </UiText>
 
     <form
