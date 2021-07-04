@@ -1,0 +1,36 @@
+.header {
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__left {
+    display: flex;
+
+    .ui-text {
+      color: $ui-black-80;
+
+      .ui-icon {
+        color: $ui-black-60;
+      }
+    }
+
+    .ui-text + .ui-text {
+      margin-left: 32px;
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+  }
+
+  &__balance {
+    margin-right: 24px;
+
+    .ui-icon {
+      color: $ui-black-60;
+    }
+  }
+}

@@ -8,6 +8,8 @@
       class="dashboard-layout__container"
       :class="{'_has-sidebar': hasSidebar}"
     >
+      <Header class="dashboard-layout__header" />
+
       <Nuxt />
     </div>
 
@@ -33,6 +35,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import Loader from '~/components/Loader.vue'
+import Header from '~/components/Header/Header.vue'
 import Navbar from '~/components/Navbar/Navbar.vue'
 import Popups from '~/components/Popups/Popups.vue'
 import Toasts from '~/components/Toasts/Toasts.vue'
@@ -41,6 +44,7 @@ import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
 @Component({
   components: {
     Loader,
+    Header,
     Navbar,
     Popups,
     Toasts,
@@ -107,6 +111,10 @@ export default class DashboardLayout extends Vue {
 
     &__container {
       width: 100%;
+    }
+
+    &__header {
+      margin-bottom: 24px;
     }
 
     // @FIXME:
