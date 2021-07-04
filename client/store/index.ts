@@ -13,7 +13,6 @@ import analytics from './analytics'
 import timetable from './timetable'
 import procedures from './procedures'
 import specialists from './specialists'
-import drugAndDrop from './drug-and-drop'
 import appointments from './appointments'
 
 export interface IModules {
@@ -30,7 +29,6 @@ export interface IModules {
   timetable: any,
   procedures: any,
   specialists: any,
-  drugAndDrop: any,
   appointments: any
 }
 
@@ -99,7 +97,6 @@ const store = () => {
       timetable,
       procedures,
       specialists,
-      drugAndDrop,
       appointments
     }
   })

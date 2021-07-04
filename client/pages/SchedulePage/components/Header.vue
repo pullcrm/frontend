@@ -42,21 +42,6 @@
     </div>
 
     <div class="schedule-page-header__right">
-      <UiText
-        v-if="balance !== null"
-        class="schedule-page-header__balance"
-        size="m"
-        left-icon="outlined/chat-text"
-        responsive
-      >
-        <UiPrice
-          size="xs"
-          responsive
-        >
-          {{ balance | price }}
-        </UiPrice>
-      </UiText>
-
       <UiButton
         class="schedule-page-header__add"
         size="m"
@@ -86,10 +71,6 @@ import dayjs from '~/utils/dayjs'
 
 @Component({})
 export default class Header extends Vue {
-  get balance () {
-    return this.$typedStore.state.sms.balance
-  }
-
   get date () {
     return new Date(this.$typedStore.state.schedule.date) as Date
   }

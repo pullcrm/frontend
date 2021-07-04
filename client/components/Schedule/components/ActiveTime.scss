@@ -1,0 +1,55 @@
+.schedule-active-time {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 11;
+  pointer-events: none;
+
+  &__inner {
+    position: absolute;
+    right: 0;
+    left: calc(36px + 16px - 8px);
+    height: 1px;
+    color: $ui-red-danger;
+    background: $ui-red-danger;
+
+    &::before {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      width: 8px;
+      height: 8px;
+      background: inherit;
+      border-radius: 50%;
+      transform: translate(-50%, 50%);
+      content: '';
+    }
+
+    &::after {
+      @include ui-typo-12;
+
+      position: absolute;
+      top: 50%;
+      right: calc(100% + 16px - 8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 48px;
+      color: inherit;
+      font-weight: 700;
+      background: linear-gradient(
+        180deg,
+        rgba($ui-black-10, 0) 0%,
+        $ui-black-10 25.04%,
+        $ui-black-10 77.08%,
+        rgba($ui-black-10, 0) 100%
+      );
+      transform: translateY(-50%);
+      content: attr(data-time);
+    }
+  }
+}

@@ -1,0 +1,7 @@
+@mixin appointment_size_l {
+  .appointment {
+    &__sub-title {
+      display: none;
+    }
+  }
+}

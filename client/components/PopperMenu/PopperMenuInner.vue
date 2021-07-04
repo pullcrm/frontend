@@ -101,7 +101,7 @@ export default class PopperMenuItem extends Vue {
 <style lang="scss">
   .popover-menu-inner {
     position: fixed;
-    z-index: 101;
+    z-index: 99;
     display: flex;
     pointer-events: none;
 

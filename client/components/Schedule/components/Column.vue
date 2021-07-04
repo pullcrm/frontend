@@ -9,6 +9,7 @@
       <Appointment
         v-for="appointment in appointments"
         :key="`appointment-${appointment.id}`"
+        responsive
         :appointment="appointment"
       />
 
@@ -19,14 +20,19 @@
       />
 
       <HourTile
-        v-for="(hour, index) in workingHours"
-        :key="`hour-tile-${index}`"
-        :hour="hour"
-        :specialist-id="specialist.id"
+        v-if="hoveredTime"
+        ref="hourTile"
+        :time="hoveredTime"
+        :specialist="specialist"
+        class="schedule-column__hour-tile"
       />
 
-      <DropPlaceholder
-        :specialist-id="specialist.id"
+      <div
+        class="schedule-column__cursor"
+        @click="openMenu"
+        @dblclick="addAppointment"
+        @mousemove="onMousemove"
+        @mouseleave="onMouseleave"
       />
     </div>
   </div>
@@ -38,13 +44,17 @@ import Component from 'vue-class-component'
 
 import { SCHEDULE_APPOINTMENT_HEIGHT } from '~/constants'
 
+import { slugFromTime } from '~/utils/time'
+
+import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
 import Appointment from '~/components/Appointment/Appointment.vue'
 
 import TimeOff from './TimeOff.vue'
 import HourTile from './HourTile.vue'
-import DropPlaceholder from './DropPlaceholder.vue'
 
 @Component({
+  inject: ['getPopperMenu'],
+
   props: {
     specialist: {
       type: Object,
@@ -65,8 +75,7 @@ import DropPlaceholder from './DropPlaceholder.vue'
   components: {
     TimeOff,
     HourTile,
-    Appointment,
-    DropPlaceholder
+    Appointment
   }
 })
 export default class ScheduleColumn extends Vue {
@@ -74,14 +83,21 @@ export default class ScheduleColumn extends Vue {
   readonly specialist
   readonly appointments
 
+  hoveredTime = null
+
+  readonly getPopperMenu!: () => PopperMenu
+
+  $refs: {
+    hourTile: HourTile
+  }
+
   get workingHours () {
     return this.$typedStore.getters['timetable/workingHours']
   }
 
   get gridTemplateRows () {
     return this.workingHours.map((hour, index) => {
-      // TODO: Remove `time-` from grid name
-      hour = `time-${hour.replace(':', '-')}`
+      hour = slugFromTime(hour)
 
       if (index === this.workingHours.length - 1) {
         return `[${hour}-start] 0px [${hour}-end] 0`
@@ -97,14 +113,77 @@ export default class ScheduleColumn extends Vue {
       gridTemplateRows: this.gridTemplateRows
     }
   }
+
+  openMenu () {
+    if (!this.hoveredTime) return
+
+    const popperMenu = this.getPopperMenu()
+
+    if (popperMenu.reference === this.$refs.hourTile.icon) {
+      return
+    }
+
+    const addAppointment = {
+      name: 'Добавить запись',
+      icon: 'outlined/plus-circle',
+      click: this.addAppointment
+    }
+
+    const addTimeOff = {
+      name: 'Закрыть запись',
+      icon: 'outlined/prohibit',
+      click: this.addTimeOff
+    }
+
+    popperMenu.open(this.$refs.hourTile.icon, {
+      name: `Начало: ${this.hoveredTime}`,
+      options: [
+        addAppointment,
+        addTimeOff
+      ],
+      placement: 'right'
+    })
+  }
+
+  addAppointment () {
+    if (!this.hoveredTime) return
+
+    this.$typedStore.dispatch('popup/show', {
+      name: 'appointment',
+      props: {
+        type: 'new',
+        time: this.hoveredTime,
+        specialistId: this.specialist.id
+      }
+    })
+  }
+
+  addTimeOff () {
+    this.$typedStore.dispatch('popup/show', {
+      name: 'time-off-new',
+      props: {
+        time: this.hoveredTime,
+        specialistId: this.specialist.id
+      }
+    })
+  }
+
+  onMousemove (event) {
+    const index = Math.floor(event.offsetY / SCHEDULE_APPOINTMENT_HEIGHT)
+
+    if (event.offsetY > 0 && this.workingHours[index] !== this.hoveredTime) {
+      this.getPopperMenu().close()
+
+      this.hoveredTime = this.workingHours[index]
+    }
+  }
+
+  onMouseleave () {
+    if (this.getPopperMenu().isOpened) return
+
+    this.hoveredTime = null
+  }
 }
 </script>
 
-<style lang="scss">
-  .schedule-column {
-    &__grid {
-      display: grid;
-      user-select: none;
-    }
-  }
-</style>
+<style lang="scss" src="./Column.scss"></style>
