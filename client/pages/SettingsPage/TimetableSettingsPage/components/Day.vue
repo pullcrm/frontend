@@ -16,33 +16,35 @@
       </template>
     </UiSwitch>
 
-    <UiSelect
-      :value="from"
-      :options="timeOptions"
-      required
-      :disabled="!opened"
-      placeholder="Время открытия"
-      class="timetable-settings-page-day__select"
-      @input="onUpdate('from', $event)"
-    />
+    <div class="timetable-settings-page-day__selectors">
+      <UiSelect
+        :value="from"
+        :options="timeOptions"
+        required
+        :disabled="!opened"
+        placeholder="Время открытия"
+        class="timetable-settings-page-day__select"
+        @input="onUpdate('from', $event)"
+      />
 
-    <UiText
-      size="l"
-      responsive
-      class="timetable-settings-page-day__text"
-    >
-      до
-    </UiText>
+      <UiText
+        size="l"
+        responsive
+        class="timetable-settings-page-day__text"
+      >
+        до
+      </UiText>
 
-    <UiSelect
-      :value="to"
-      :options="timeOptions"
-      required
-      :disabled="!opened"
-      placeholder="Время закрытия"
-      class="timetable-settings-page-day__select"
-      @input="onUpdate('to', $event)"
-    />
+      <UiSelect
+        :value="to"
+        :options="timeOptions"
+        required
+        :disabled="!opened"
+        placeholder="Время закрытия"
+        class="timetable-settings-page-day__select"
+        @input="onUpdate('to', $event)"
+      />
+    </div>
   </div>
 </template>
 
