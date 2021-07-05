@@ -6,12 +6,12 @@
     background-image: linear-gradient(
       $ui-black-40,
       $ui-black-40 1px,
-      $ui-black-10 1.5px,
-      $ui-black-10 $SCHEDULE_ROW_HEIGHT,
+      rgba($ui-white, 0) 1.5px,
+      rgba($ui-white, 0) $SCHEDULE_ROW_HEIGHT,
       #eaeaea,
       #eaeaea #{$SCHEDULE_ROW_HEIGHT + 1px},
-      $ui-black-10 #{$SCHEDULE_ROW_HEIGHT + 1.5px},
-      $ui-black-10 #{$SCHEDULE_ROW_HEIGHT * 2}
+      rgba($ui-white, 0) #{$SCHEDULE_ROW_HEIGHT + 1.5px},
+      rgba($ui-white, 0) #{$SCHEDULE_ROW_HEIGHT * 2}
     );
     background-size: 100% #{$SCHEDULE_ROW_HEIGHT * 2};
     user-select: none;
