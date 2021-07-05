@@ -26,11 +26,25 @@
     align-items: center;
   }
 
+  &__mail {
+    display: none;
+  }
+
   &__balance {
-    margin-right: 24px;
+    margin-right: 16px;
 
     .ui-icon {
       color: $ui-black-60;
+    }
+  }
+
+  @media (min-width: $ui-tablet) {
+    &__mail {
+      display: flex;
+    }
+
+    &__balance {
+      margin-right: 24px;
     }
   }
 }

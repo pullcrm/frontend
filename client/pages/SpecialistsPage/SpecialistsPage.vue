@@ -49,7 +49,8 @@
         'ui-grid-item',
         'ui-grid-item_12',
         'ui-grid-item_tablet_6',
-        'ui-grid-item_laptop_3'
+        'ui-grid-item_laptop_4',
+        'ui-grid-item_desktop_3'
       ]"
       use-drag-handle
       class="ui-grid"

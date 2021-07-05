@@ -20,6 +20,7 @@
             size="l"
             right-icon="outlined/megaphone"
             responsive
+            class="header__mail"
           >
             Сообщить о проблеме
           </UiText>

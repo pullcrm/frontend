@@ -26,14 +26,15 @@
           clickable
           @click.native="openMenu"
         >
-          Выполнено
+          {{ statusName }}
         </UiBadge>
 
         <UiText
           size="s"
           class="appointment__type"
         >
-          Офлайн
+          <!-- TODO: Add source -->
+          {{ sourceName }}
         </UiText>
       </div>
 
@@ -78,7 +79,7 @@ import { COMPLETED, IN_PROGRESS } from '~/constants/appointment'
 
 import { shiftTimeUpBySteps, getTimePoints, slugFromTime } from '~/utils/time'
 
-import { getAppointmentSubtitle, getProceduresDuration } from '~/logics/appointment'
+import { getAppointmentSubtitle, getProceduresDuration, statusesDict, sourcesDict } from '~/logics/appointment'
 
 import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
 
@@ -117,6 +118,14 @@ export default class Appointment extends Vue {
     }
 
     return status
+  }
+
+  get statusName () {
+    return statusesDict[this.appointment.status]
+  }
+
+  get sourceName () {
+    return sourcesDict[this.appointment.source]
   }
 
   get timePoints () {

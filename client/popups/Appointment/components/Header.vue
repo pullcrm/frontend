@@ -75,9 +75,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { statusesDict } from '~/logics/appointment'
-
 import { IN_PROGRESS, COMPLETED, CANCELED } from '~/constants/appointment'
+
+import { statusesDict } from '~/logics/appointment'
 
 @Component({
   props: {

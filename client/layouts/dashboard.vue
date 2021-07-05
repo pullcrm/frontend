@@ -97,7 +97,7 @@ export default class DashboardLayout extends Vue {
     display: flex;
     align-items: flex-start;
     min-height: 100vh;
-    padding: 24px 0;
+    padding-top: 16px;
     padding-left: $ui-navbar-desktop-width;
     background: $ui-black-10;
 
@@ -114,15 +114,22 @@ export default class DashboardLayout extends Vue {
     }
 
     &__header {
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     // @FIXME:
     @media (min-width: $ui-laptop) {
+      padding-top: 24px;
+      padding-bottom: 24px;
+
       &__container {
         &._has-sidebar {
           width: calc(100% - 296px);
         }
+      }
+
+      &__header {
+        margin-bottom: 24px;
       }
     }
 
