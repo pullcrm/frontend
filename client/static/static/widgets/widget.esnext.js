@@ -100,7 +100,7 @@ window.pullcrm._loadStyles = () => {
       right: 0;
       bottom: 0;
       left: 0;
-      z-index: 100;
+      z-index: 999;
       -webkit-animation: ui-popup-backdrop 0.2s both ease-out;
       animation: ui-popup-backdrop 0.2s both ease-out;
     }
@@ -150,7 +150,7 @@ window.pullcrm._loadStyles = () => {
 
     .pullcrm-widget-full__container iframe {
       width: 300px;
-      max-height: 100:;
+      height: 100%;
       border: none;
     }
 
@@ -164,6 +164,10 @@ window.pullcrm._loadStyles = () => {
       height: 28px;
       line-height: 1;
       cursor: pointer;
+    }
+
+    ._pullcrm_body_hidden {
+      overflow: hidden;
     }
 
     @media (min-width: 360px) {
@@ -232,6 +236,8 @@ window.pullcrm._createWidget = (url) => {
   backdrop.addEventListener('click', window.pullcrm._close, { passive: true })
 
   document.body.appendChild(widget)
+
+  document.body.classList.add('_pullcrm_body_hidden')
 }
 
 window.pullcrm._close = () => {
@@ -245,6 +251,9 @@ window.pullcrm._close = () => {
   }
 
   widget.remove()
+
+  document.body.classList.remove('_pullcrm_body_hidden')
+
   close.removeEventListener('click', window.pullcrm._close)
   backdrop.removeEventListener('click', window.pullcrm._close)
 }
