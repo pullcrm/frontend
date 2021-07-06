@@ -128,9 +128,7 @@ window.pullcrm.loadWidget = function () {
         utm_campaign: utmParams === null || utmParams === void 0 ? void 0 : utmParams.utmCampaign
     });
     window.pullcrm._loadStyles();
-    window.pullcrm._createWidget("http://" + _host + "/widgets/full/?" + query);
-    // const iframe = widget.querySelector('iframe')
-    // iframe.src = `https://${window.pullcrm._host}/widgets/full/?${query}`
+    window.pullcrm._createWidget("https://" + _host + "/widgets/full/?" + query);
 };
 (function () {
     var buttons = document.querySelectorAll("a[href=\"https://" + window.pullcrm._host + "\"]");
