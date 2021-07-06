@@ -69,6 +69,10 @@ export default class Container extends Vue {
     return Boolean(this.from)
   }
 
+  postMessage (event, payload = {}) {
+    parent.postMessage(`pullcrm:${event}|${JSON.stringify(payload)}`, '*')
+  }
+
   onBack () {
     this.$router.go(-1)
   }
@@ -134,7 +138,7 @@ export default class Container extends Vue {
     bottom: 0;
     left: 0;
     z-index: 2;
-    padding: 12px 0;
+    padding: 12px 16px;
     background-color: $ui-white;
   }
 }

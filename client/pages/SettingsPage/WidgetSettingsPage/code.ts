@@ -1,35 +1,19 @@
 /* eslint-disable no-useless-escape */
 export const code = `
-<style>
-  .pullcrm-pro-widget-iframe iframe {
-    width: 100%;
-    height: 0;
-    margin: 0;
-    padding: 0;
-    border: none;
-  }
-</style>
-
-<div class="pullcrm-pro-widget-iframe">
-  <iframe src="https://pullcrm.com/widgets/base/{ companyId }/"></iframe>
-</div>
-
 <script>
-  window.addEventListener('message', (ev) => {
-    var matches = String(ev.data).match(/^pullcrm:(\w+)\|(.+)$/i)
+  window.pullcrm = {}
+  window.pullcrm._host = 'pullcrm.com'
 
-    if (!matches) return
+  window.pullcrm.companyId = '8'
 
-    var event = matches[1]
-    var payload = JSON.parse(matches[2])
+  window.pullcrm.onOrderCreated = function () {
+    // Событие успешно созданой записи
+  }
 
-    if (event === 'updateHeight') {
-      document.querySelector('.pullcrm-pro-widget-iframe iframe').style.height = payload.height + 'px'
-    }
+  var script = document.createElement('script')
+  script.src = 'https://' + window.pullcrm._host + '/static/widgets/widget.compiled.js?l=' + Date.now()
+  script.async = true
 
-    if (event === 'createOrder') {
-      // Order created
-    }
-  })
+  document.head.appendChild(script)
 </script>
 `
