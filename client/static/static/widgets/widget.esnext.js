@@ -300,14 +300,15 @@ window.pullcrm.loadWidget = () => {
 })()
 
 window.addEventListener('message', (ev) => {
-  const matches = String(ev.data).match(/^pullcrm:(w+)|(.+)$/i)
+  if (/pullcrm/.test(ev.data) === false) {
+    return
+  }
 
-  if (!matches) return
+  const [event] = ev.data.replace('pullcrm:', '').split('|')
 
-  const event = matches[1]
-  // const payload = JSON.parse(matches[2])
+  // const params = JSON.parse(payload)
 
-  const { onOrderCreated } = window.pullcrm
+  const { onOrderCreated } = window.pullcrm || {}
 
   if (event === 'orderCreated' && typeof onOrderCreated === 'function') {
     onOrderCreated()

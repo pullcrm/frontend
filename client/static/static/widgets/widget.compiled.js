@@ -143,12 +143,12 @@ window.pullcrm.loadWidget = function () {
     });
 })();
 window.addEventListener('message', function (ev) {
-    var matches = String(ev.data).match(/^pullcrm:(w+)|(.+)$/i);
-    if (!matches)
+    if (/pullcrm/.test(ev.data) === false) {
         return;
-    var event = matches[1];
-    // const payload = JSON.parse(matches[2])
-    var onOrderCreated = window.pullcrm.onOrderCreated;
+    }
+    var event = ev.data.replace('pullcrm:', '').split('|')[0];
+    // const params = JSON.parse(payload)
+    var onOrderCreated = (window.pullcrm || {}).onOrderCreated;
     if (event === 'orderCreated' && typeof onOrderCreated === 'function') {
         onOrderCreated();
     }
