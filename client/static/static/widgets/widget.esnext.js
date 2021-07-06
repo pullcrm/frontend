@@ -274,10 +274,6 @@ window.pullcrm.loadWidget = () => {
   window.pullcrm._loadStyles()
 
   window.pullcrm._createWidget(`http://${_host}/widgets/full/?${query}`)
-
-  // const iframe = widget.querySelector('iframe')
-
-  // iframe.src = `https://${window.pullcrm._host}/widgets/full/?${query}`
 }
 
 (function () {
