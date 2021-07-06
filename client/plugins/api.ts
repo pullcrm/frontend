@@ -6,7 +6,7 @@ import RpcClient from '~/services/rpc-client'
 type Api = ReturnType<typeof createApi>
 
 const plugin: Plugin = (ctx, inject) => {
-  const { runtimeConfig } = ctx
+  const { runtimeConfig, typedStore } = ctx
 
   const user = runtimeConfig.RPC_USER
   const password = runtimeConfig.RPC_PASSWORD
@@ -23,6 +23,7 @@ const plugin: Plugin = (ctx, inject) => {
 
   // Initialize the api client
   const apiClient = new RpcClient({
+    store: typedStore,
     endpoint: `${runtimeConfig.RPC_URL}/`,
     endpointUpload: `${runtimeConfig.RPC_UPLOAD_URL}/`,
     ...apiClientOptions
