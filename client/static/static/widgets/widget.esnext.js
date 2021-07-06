@@ -135,6 +135,8 @@ window.pullcrm._loadStyles = () => {
       box-shadow: 0 8px 16px rgb(0 0 0 / 12%);
       position: relative;
       z-index: 101;
+      max-height: 700px;
+      height: calc(100% - 48px);
       display: inline-block;
       white-space: normal;
       text-align: left;
@@ -148,8 +150,7 @@ window.pullcrm._loadStyles = () => {
 
     .pullcrm-widget-full__container iframe {
       width: 300px;
-      max-height: 700px;
-      height: calc(100% - 48px);
+      max-height: 100:;
       border: none;
     }
 
@@ -281,6 +282,7 @@ window.pullcrm.loadWidget = () => {
 
   ;[...buttons].forEach(button => {
     button.addEventListener('click', function (event) {
+      event.stopPropagation()
       event.preventDefault()
 
       window.pullcrm.loadWidget()

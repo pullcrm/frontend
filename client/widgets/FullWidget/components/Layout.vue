@@ -27,7 +27,7 @@
         responsive
         class="full-widget-layout__disclaimer"
       >
-        <strong>Pullcrm</strong> — удобный инстурмент автоматизации записи для вашей компании
+        <strong>Pullcrm</strong> — удобный инструмент автоматизации записи для вашей компании
       </UiText>
     </div>
 
