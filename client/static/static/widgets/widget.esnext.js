@@ -273,7 +273,7 @@ window.pullcrm.loadWidget = () => {
 
   window.pullcrm._loadStyles()
 
-  window.pullcrm._createWidget(`http://${_host}/widgets/full/?${query}`)
+  window.pullcrm._createWidget(`https://${_host}/widgets/full/?${query}`)
 }
 
 (function () {
