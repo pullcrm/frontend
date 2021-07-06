@@ -13,7 +13,7 @@ interface IConstructorParams {
   endpointUpload?: RpcClient['endpointUpload'],
   auth?: RpcClient['auth'],
   headers?: RpcClient['defaultHeaders'],
-  store: RpcClient['store']
+  typedStore: RpcClient['typedStore']
 }
 
 export default class RpcClient {
@@ -24,7 +24,7 @@ export default class RpcClient {
   token?: string
   defaultHeaders?: Record<string, string>
 
-  store: ReturnType<typeof store>
+  typedStore: ReturnType<typeof store>
 
   /**
    * Constructor
@@ -32,10 +32,10 @@ export default class RpcClient {
   constructor (params: IConstructorParams) {
     const {
       auth,
-      store,
       headers,
       endpoint,
-      endpointUpload
+      endpointUpload,
+      typedStore
     } = params
 
     this.endpoint = endpoint
@@ -44,7 +44,7 @@ export default class RpcClient {
     this.auth = auth
     this.defaultHeaders = headers
 
-    this.store = store
+    this.typedStore = typedStore
   }
 
   setToken (token: string) {
@@ -75,7 +75,7 @@ export default class RpcClient {
     })
 
     if (method !== 'token' && response.status === 401) {
-      await this.store.dispatch('auth/refreshToken')
+      await this.typedStore.dispatch('auth/refreshToken')
 
       return this.call(method, params, type)
     }
