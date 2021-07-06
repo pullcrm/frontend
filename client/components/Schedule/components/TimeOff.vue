@@ -65,10 +65,14 @@ export default class TimeOff extends Vue {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 1px;
     color: $ui-black-60;
     background-color: $ui-black-10;
     background-image: url('~assets/svg/disabled-time-pattern.svg');
     background-position: bottom right;
-    border-bottom: 1px solid $ui-black-40;
+    background-size: $SCHEDULE_ROW_HEIGHT;
+    box-shadow:
+      0 1px 0 $ui-black-40,
+      0 -1px 0 $ui-black-40;
   }
 </style>

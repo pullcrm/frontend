@@ -46,7 +46,6 @@ const config: NuxtOptions = {
       'bootstrap',
       'role-redirect',
 
-      // 'logger',
       'redirects/slash',
       'location'
       // 'analytics-params.server',
@@ -159,7 +158,7 @@ const config: NuxtOptions = {
     { src: '~/plugins/runtime-config' },
     { src: '~/plugins/storage' },
     { src: '~/plugins/api' },
-    // { src: '~/plugins/logger' },
+    { src: '~/plugins/errors' },
     // { src: '~/plugins/auth' },
     { src: '~/plugins/vue-filters' },
     // { src: '~/plugins/vue-ignore-elements' },

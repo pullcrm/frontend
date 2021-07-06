@@ -1,20 +1,19 @@
 import fetch from 'isomorphic-unfetch'
-// import { btoa } from 'isomorphic-base64'
+import { btoa } from 'isomorphic-base64'
+
+import store from '~/store'
 
 import {
-  RpcError,
-  RpcUploadError,
   HttpError,
   HttpUploadError
 } from './errors'
-
-import { IRpcResponse } from './rpc'
 
 interface IConstructorParams {
   endpoint: RpcClient['endpoint'],
   endpointUpload?: RpcClient['endpointUpload'],
   auth?: RpcClient['auth'],
-  headers?: RpcClient['defaultHeaders']
+  headers?: RpcClient['defaultHeaders'],
+  typedStore: RpcClient['typedStore']
 }
 
 export default class RpcClient {
@@ -25,7 +24,7 @@ export default class RpcClient {
   token?: string
   defaultHeaders?: Record<string, string>
 
-  onResponse = (_payload: any) => {}
+  typedStore: ReturnType<typeof store>
 
   /**
    * Constructor
@@ -35,7 +34,8 @@ export default class RpcClient {
       auth,
       headers,
       endpoint,
-      endpointUpload
+      endpointUpload,
+      typedStore
     } = params
 
     this.endpoint = endpoint
@@ -43,6 +43,8 @@ export default class RpcClient {
 
     this.auth = auth
     this.defaultHeaders = headers
+
+    this.typedStore = typedStore
   }
 
   setToken (token: string) {
@@ -53,8 +55,6 @@ export default class RpcClient {
    * Call
    */
   call = async (method: string, params: object = {}, type = 'POST') => {
-    const startTime = new Date()
-
     const headers = {
       ...this.headers,
       'Content-Type': 'application/json'
@@ -74,25 +74,13 @@ export default class RpcClient {
       headers
     })
 
-    const duration = Date.now() - Number(startTime)
+    if (method !== 'token' && response.status === 401) {
+      await this.typedStore.dispatch('auth/refreshToken')
+
+      return this.call(method, params, type)
+    }
 
     if (!response.ok) {
-      // TODO: Refactor this
-      const { message } = await response.json()
-
-      if (method !== 'token' && method !== 'users/profile' && message === 'Expired access token') {
-        await window.location.reload()
-      }
-
-      this.onResponse({
-        token: this.token,
-        method,
-        params,
-        headers,
-        duration,
-        startTime
-      })
-
       throw new HttpError({
         method,
         params,
@@ -100,28 +88,7 @@ export default class RpcClient {
       })
     }
 
-    const rpcResponse: IRpcResponse = await response.json()
-
-    this.onResponse({
-      token: this.token,
-      method,
-      params,
-      headers,
-      duration,
-      startTime,
-      rpcResponse
-    })
-
-    if (rpcResponse.error) {
-      const error = rpcResponse.error
-
-      throw new RpcError({
-        method,
-        params,
-        error,
-        token: this.token
-      })
-    }
+    const rpcResponse = await response.json()
 
     return rpcResponse
   }
@@ -142,18 +109,7 @@ export default class RpcClient {
       })
     }
 
-    const rpcResponse: IRpcResponse = await response.json()
-
-    if (rpcResponse.error) {
-      const error = rpcResponse.error
-
-      throw new RpcUploadError({
-        error,
-        token: this.token
-      })
-    }
-
-    return rpcResponse
+    return await response.json()
   }
 
   /**
@@ -161,9 +117,9 @@ export default class RpcClient {
    */
   private get headers () {
     return {
+      Authorization: this.auth ? 'Basic ' + btoa(`${this.auth}`) : null,
       ...this.defaultHeaders,
-      // Authorization: this.auth ? 'Basic ' + btoa(`${this.auth}`) : null,
-      ...(this.token && { Authorization: `Bearer ${this.token}` })
+      ...(this.token && { Authorization2: `Bearer ${this.token}` })
     }
   }
 

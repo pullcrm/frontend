@@ -55,7 +55,7 @@ const AuthModule: Module<IState, IRootState> = {
 
         await dispatch('saveTokens', { ...result, refreshToken })
       } catch (err) {
-        if (err.status === 403) {
+        if (err.status === 403 || err.status === 401) {
           await dispatch('reset')
 
           location.reload()
@@ -80,7 +80,13 @@ const AuthModule: Module<IState, IRootState> = {
 
         await dispatch('saveTokens', { ...result, refreshToken })
       } catch (err) {
-        if (err.status === 403) {
+        if (err.status === 403 || err.status === 401) {
+          // Add save toast in cookie method
+          // await dispatch('toasts/show', {
+          //   type: 'error',
+          //   title: 'Время сессии истекло, пожалуйста, авторизуйтесь снова'
+          // }, { root: true })
+
           await dispatch('reset')
 
           location.reload()

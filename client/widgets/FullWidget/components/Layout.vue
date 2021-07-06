@@ -27,7 +27,7 @@
         responsive
         class="full-widget-layout__disclaimer"
       >
-        <strong>Pullcrm</strong> — удобный инстурмент автоматизации записи для вашей компании
+        <strong>Pullcrm</strong> — удобный инструмент автоматизации записи для вашей компании
       </UiText>
     </div>
 
@@ -67,6 +67,10 @@ export default class Container extends Vue {
     }
 
     return Boolean(this.from)
+  }
+
+  postMessage (event, payload = {}) {
+    parent.postMessage(`pullcrm:${event}|${JSON.stringify(payload)}`, '*')
   }
 
   onBack () {
@@ -134,7 +138,7 @@ export default class Container extends Vue {
     bottom: 0;
     left: 0;
     z-index: 2;
-    padding: 12px 0;
+    padding: 12px 16px;
     background-color: $ui-white;
   }
 }

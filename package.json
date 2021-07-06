@@ -22,6 +22,7 @@
     "clean": "rm -rf .nuxt dist",
     "build": "yarn clean && cross-env NODE_ENV=production nuxt build",
     "server": "git pull --rebase origin && yarn install && yarn build",
+    "build:widget": "tsc 'client/static/static/widgets/widget.esnext.js' --allowJs --target 'ES5' --outFile 'client/static/static/widgets/widget.compiled.js'",
     "lint:js": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --ignore-path .eslintignore .",
     "lint:js:fix": "eslint --fix --ext .js,.ts,.vue --ignore-path .gitignore --ignore-path .eslintignore .",
     "lint:css": "stylelint 'client/**/*.{vue,scss,css}'",

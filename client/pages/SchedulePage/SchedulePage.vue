@@ -1,6 +1,14 @@
 <template>
   <div class="schedule-page">
     <UiContainer>
+      <UiTitle
+        size="m"
+        responsive
+        class="schedule-page__title"
+      >
+        Календарь
+      </UiTitle>
+
       <Header
         class="schedule-page__header"
       />

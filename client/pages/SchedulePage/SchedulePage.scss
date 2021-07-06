@@ -3,6 +3,10 @@
     margin: 0 0 16px;
   }
 
+  &__title {
+    margin-bottom: 20px;
+  }
+
   @media (max-width: $ui-laptop - 1px) {
     &__schedule {
       margin: 0 calc(-1 * var(--ui-container-padding));

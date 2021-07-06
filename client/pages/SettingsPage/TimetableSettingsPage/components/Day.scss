@@ -1,17 +1,36 @@
 .timetable-settings-page-day {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 
   &__switch {
     flex-grow: 1;
-    margin-right: 16px;
+    margin-bottom: 16px;
+  }
+
+  &__selectors {
+    display: flex;
+    align-items: center;
   }
 
   &__select {
-    width: 140px;
+    width: 100%;
   }
 
   &__text {
     margin: 0 16px;
+  }
+
+  @media (min-width: $ui-mobile-portrait) {
+    flex-direction: row;
+    align-items: center;
+
+    &__switch {
+      margin-right: 16px;
+      margin-bottom: 0;
+    }
+
+    &__select {
+      width: 140px;
+    }
   }
 }

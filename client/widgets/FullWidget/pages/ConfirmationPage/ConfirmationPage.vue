@@ -1,5 +1,8 @@
 <template>
-  <Layout class="full-widget-confirmation-page">
+  <Layout
+    ref="layout"
+    class="full-widget-confirmation-page"
+  >
     <UiTitle
       size="m"
       responsive
@@ -144,6 +147,7 @@ export default class ConfirmationPage extends Vue {
   }
 
   $refs: {
+    layout: Layout,
     formValidator: UiFormValidator
   }
 
@@ -210,7 +214,7 @@ export default class ConfirmationPage extends Vue {
     try {
       this.isLoading = true
 
-      const { hasCreationSMS, hasRemindSMS } = this.company.company_setting
+      const { hasCreationSMS, hasRemindSMS } = this.company.company_setting || {}
 
       await this.$api.public.appointmentCreate({
         ...this.form,
@@ -227,7 +231,7 @@ export default class ConfirmationPage extends Vue {
         title: 'Запись создана'
       })
 
-      // this.$refs.baseWidgetLayout.postMessage('createOrder')
+      this.$refs.layout.postMessage('orderCreated')
 
       this.$router.push({
         ...this.$route,

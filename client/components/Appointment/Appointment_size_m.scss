@@ -1,0 +1,18 @@
+@mixin appointment_size_m {
+  .appointment {
+    &__header,
+    &__duration {
+      display: none;
+    }
+
+    &__inner {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    &__title {
+      width: 100%;
+    }
+  }
+}

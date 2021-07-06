@@ -1,0 +1,26 @@
+@mixin appointment_size_s {
+  .appointment {
+    &__header,
+    &__duration {
+      display: none;
+    }
+
+    &__sub-title {
+      order: 3;
+      width: 100%;
+    }
+
+    &__inner {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &__price {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+}

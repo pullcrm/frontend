@@ -58,47 +58,4 @@ export default class ActiveTime extends Vue {
 }
 </script>
 
-<style lang="scss">
-.schedule-active-time {
-  position: absolute;
-  top: 60px;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 11;
-  pointer-events: none;
-
-  &__inner {
-    position: absolute;
-    right: 0;
-    left: 0;
-    height: 1px;
-    color: #ef4137;
-    background: #ff958e;
-
-    &::before {
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      display: flex;
-      width: 5px;
-      height: 5px;
-      background: #ef4137;
-      border-radius: 50%;
-      content: '';
-    }
-
-    &::after {
-      @include ui-typo-12;
-
-      position: absolute;
-      top: 50%;
-      right: calc(100% + 4px);
-      color: inherit;
-      font-weight: 700;
-      transform: translateY(-50%);
-      content: attr(data-time);
-    }
-  }
-}
-</style>
+<style lang="scss" src="./ActiveTime.scss"></style>
