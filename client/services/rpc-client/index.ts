@@ -13,7 +13,7 @@ interface IConstructorParams {
   endpointUpload?: RpcClient['endpointUpload'],
   auth?: RpcClient['auth'],
   headers?: RpcClient['defaultHeaders'],
-  store: ReturnType<typeof store>
+  store: RpcClient['store']
 }
 
 export default class RpcClient {
