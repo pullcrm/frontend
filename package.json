@@ -18,7 +18,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nuxt",
     "debug": "cross-env NODE_ENV=development node --inspect node_modules/.bin/nuxt-ts",
-    "start": "cross-env NODE_ENV=production nuxt start",
+    "start": "cross-env NODE_ENV=production SENTRY_RELEASE=`git rev-parse --short HEAD` nuxt start",
     "clean": "rm -rf .nuxt dist",
     "build": "yarn clean && cross-env NODE_ENV=production nuxt build",
     "server": "git pull --rebase origin && yarn install && yarn build",
@@ -38,9 +38,9 @@
   ],
   "dependencies": {
     "@nuxt/types": "2.15.3",
-    "@sentry/browser": "6.2.3",
-    "@sentry/integrations": "6.2.3",
-    "@sentry/node": "6.2.3",
+    "@sentry/browser": "^6.8.0",
+    "@sentry/integrations": "^6.8.0",
+    "@sentry/node": "^6.8.0",
     "@types/requestidlecallback": "^0.3.1",
     "animated-scroll-to": "^2.0.10",
     "cookie": "0.4.0",
