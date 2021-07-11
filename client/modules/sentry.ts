@@ -5,7 +5,7 @@ import { Transaction, Dedupe, ExtraErrorData, RewriteFrames } from '@sentry/inte
 const SentryModule: Module = function () {
   Sentry.init({
     dsn: process.env.SENTRY_DSN,
-    release: process.env.SENTRY_RELEASE,
+    // release: process.env.SENTRY_RELEASE,
     environment: process.env.SENTRY_ENV,
     integrations: [
       new Dedupe(),

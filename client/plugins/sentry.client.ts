@@ -6,7 +6,7 @@ import { Dedupe, ExtraErrorData, Vue as VueIntegration } from '@sentry/integrati
 const plugin: Plugin = ({ runtimeConfig }) => {
   Sentry.init({
     dsn: runtimeConfig.SENTRY_DSN,
-    release: runtimeConfig.SENTRY_RELEASE,
+    // release: runtimeConfig.SENTRY_RELEASE,
     environment: runtimeConfig.SENTRY_ENV,
     integrations: [
       new Dedupe(),
