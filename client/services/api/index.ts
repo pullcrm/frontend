@@ -245,6 +245,13 @@ export interface ITimetableParams {
   sunday?: string
 }
 
+export interface ISettingsWidgetUpdateParams {
+  isActive?: boolean,
+  isQueue?: boolean,
+  daysForward?: number,
+  minutesBefore?: number
+}
+
 export const factory = (send) => ({
   auth: {
     login (params: IAuthLoginParams) : Promise<IApiAuthLogin> {
@@ -490,19 +497,29 @@ export const factory = (send) => ({
 
   sms: {
     settingCreate (params: ISmsCreateParams) : Promise<any> {
-      return send('companies/my/settings', params)
+      return send('sms/settings', params)
     },
 
     settingUpdate (params: any) : Promise<any> {
-      return send('companies/my/settings', params, 'PUT')
+      return send('sms/settings', params, 'PUT')
     },
 
     settingRemove () : Promise<any> {
-      return send('companies/my/settings', {}, 'DELETE')
+      return send('sms/settings', {}, 'DELETE')
     },
 
     balance () : Promise<any> {
       return send('sms/balance', null, 'GET')
+    }
+  },
+
+  settings: {
+    widget () : Promise<any> {
+      return send('public/widget', null, 'GET')
+    },
+
+    widgetUpdate (params: ISettingsWidgetUpdateParams) : Promise<any> {
+      return send('widget', params, 'PUT')
     }
   }
 })

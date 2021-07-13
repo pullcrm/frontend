@@ -20,8 +20,9 @@
       >
         <template #append>
           <UiSwitch
-            :value="true"
+            :value="settings.isActive"
             size="m"
+            @input="setActive"
           />
         </template>
       </Section>
@@ -42,7 +43,7 @@
           required
           :clearable="false"
           placeholder="Выбрать время"
-          @input="time = $event.value"
+          @input="setMinutesBefore"
         >
           <template #input="{ onFocus }">
             <UiText
@@ -120,7 +121,7 @@ import { code } from './code'
   }
 })
 export default class WidgetSettingsPage extends Vue {
-  time = 15
+  settings = this.$typedStore.getters['position/widgetSettings']
 
   get companyId () {
     return this.$typedStore.getters['position/companyId']
@@ -128,8 +129,8 @@ export default class WidgetSettingsPage extends Vue {
 
   get minTime () {
     return {
-      name: minutesToTime(this.time),
-      value: this.time
+      name: minutesToTime(this.settings.minutesBefore),
+      value: this.settings.minutesBefore
     }
   }
 
@@ -144,6 +145,28 @@ export default class WidgetSettingsPage extends Vue {
     return code
       .trim()
       .replace('{ companyId }', this.companyId)
+  }
+
+  setActive (event) {
+    this.settings.isActive = event
+
+    this.submit()
+  }
+
+  setMinutesBefore (event) {
+    this.settings.minutesBefore = event.value
+
+    this.submit()
+  }
+
+  async submit () {
+    await this.$api.settings.widgetUpdate(
+      this.settings
+    )
+
+    await this.$typedStore.dispatch('toasts/show', {
+      title: 'Сохранено!'
+    })
   }
 }
 </script>

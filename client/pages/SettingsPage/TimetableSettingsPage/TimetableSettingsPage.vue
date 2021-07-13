@@ -45,7 +45,7 @@ import TimeTableDay from './components/Day.vue'
 
   head () {
     return {
-      title: 'НАстройки графика работы - pullcrm'
+      title: 'Настройки графика работы - pullcrm'
     }
   }
 })

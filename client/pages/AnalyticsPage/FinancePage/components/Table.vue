@@ -29,7 +29,7 @@
             size="m"
             responsive
           >
-            {{ row.price | price }}
+            {{ row.avgPrice | price }}
           </UiText>
         </UiTableColumn>
 
@@ -41,7 +41,7 @@
             size="m"
             responsive
           >
-            {{ row.amount }}
+            {{ row.total }}
           </UiText>
         </UiTableColumn>
 
@@ -77,7 +77,7 @@
             size="m"
             responsive
           >
-            {{ row.total | price }}
+            {{ row.income | price }}
           </UiText>
         </UiTableColumn>
       </template>

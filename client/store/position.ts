@@ -59,6 +59,10 @@ const getters = {
 
   companyId (state) {
     return state.current.company.id
+  },
+
+  widgetSettings (_state, localGetters) {
+    return localGetters.company.widget_setting
   }
 }
 

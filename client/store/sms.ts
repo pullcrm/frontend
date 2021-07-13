@@ -53,7 +53,7 @@ const SmsModule: Module<IState, IRootState> = {
     },
 
     settings (_state, _getters, _rootState, rootGetters) {
-      return rootGetters['position/company'].company_setting
+      return rootGetters['position/company'].sms_setting
     }
   }
 }
