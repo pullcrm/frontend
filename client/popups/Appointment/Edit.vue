@@ -4,7 +4,6 @@
       class="appointment-popup__header"
       title="Редактировать"
       :status.sync="form.status"
-      :is-queue.sync="form.isQueue"
     />
 
     <form @submit.prevent="submit">
@@ -32,6 +31,21 @@
           :procedures.sync="form.procedures"
           @resetFieldError="resetFieldError"
         />
+
+        <UiSwitch
+          v-model="form.isQueue"
+          size="m"
+          class="appointment-popup__queue"
+        >
+          <template #append>
+            <UiText
+              size="m"
+              responsive
+            >
+              Добавить в очередь
+            </UiText>
+          </template>
+        </UiSwitch>
 
         <AppointmentDateTime
           v-if="form.isQueue === false"
