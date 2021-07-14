@@ -1,5 +1,8 @@
 <template>
-  <Layout class="full-widget-pick-date-page">
+  <Layout
+    back
+    class="full-widget-pick-date-page"
+  >
     <UiTitle
       size="m"
       responsive
@@ -21,7 +24,7 @@
     />
 
     <TimePicker
-      :hours="filteredAvailableHours"
+      :hours="availableHours"
     />
 
     <template #fixed-panel>
@@ -82,12 +85,20 @@ import SpecialistPanel from './components/SpecialistPanel.vue'
       duration: this.duration,
       companyId,
       specialistId
-    }).then((result) => {
+    }).then(result => {
       return result.map(item => {
         const [hour, minute] = item.split(':').map(Number)
 
         return dayjs().hour(hour).minute(minute)
       })
+    }).then(result => {
+      if (dayjs(String(this.date)).isToday()) {
+        return result.filter(async item => {
+          return await item.isAfter(dayjs() /** add(30, 'minute') */)
+        })
+      }
+
+      return result
     })
   },
 
@@ -133,16 +144,6 @@ export default class PickDatePage extends Vue {
 
   get time () {
     return this.$route.query.time
-  }
-
-  get filteredAvailableHours () {
-    if (dayjs(String(this.date)).isToday()) {
-      return this.availableHours.filter(item => {
-        return item.isAfter(dayjs() /** add(30, 'minute') */)
-      })
-    }
-
-    return this.availableHours
   }
 
   get activeProcedureIds () {

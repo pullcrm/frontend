@@ -19,8 +19,7 @@ export interface IStateHistoryItem {
 
 export interface IState {
   history: IStateHistoryItem[],
-  analyticsParams: Record<string, string>,
-  renderedRoutePath: string
+  analyticsParams: Record<string, string>
 }
 
 const LocationModule: Module<IState, IRootState> = {
@@ -29,18 +28,13 @@ const LocationModule: Module<IState, IRootState> = {
   state () {
     return {
       history: [],
-      analyticsParams: {},
-      renderedRoutePath: null
+      analyticsParams: {}
     }
   },
 
   mutations: {
     SET_ANALYTICS_PARAMS (state, params: IState['analyticsParams']) {
       state.analyticsParams = params
-    },
-
-    SET_RENDERED_ROUTE_PATH (state, path: IState['renderedRoutePath']) {
-      state.renderedRoutePath = path
     },
 
     ADD (state, route) {

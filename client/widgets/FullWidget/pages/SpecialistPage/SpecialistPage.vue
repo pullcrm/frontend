@@ -1,5 +1,8 @@
 <template>
-  <Layout class="full-widget-specialist-page">
+  <Layout
+    :back="canBack"
+    class="full-widget-specialist-page"
+  >
     <UiAvatar
       :image="avatar"
       :name="fullName"
@@ -102,6 +105,8 @@ export default class SpecialistPage extends Vue {
   readonly specialist
   readonly procedures
   readonly categories
+
+  canBack = Boolean(this.$typedStore.getters['location/from'])
 
   get user () {
     return this.specialist.user

@@ -1,8 +1,13 @@
 <template>
   <div class="full-widget-date-picker">
-    <UiCarousel
-      class="full-widget-date-picker__carousel"
+    <UiText
+      size="m"
+      class="full-widget-date-picker__title"
     >
+      {{ title }}
+    </UiText>
+
+    <UiCarousel class="full-widget-date-picker__carousel">
       <UiCarouselItem
         v-for="(day, index) in days"
         :key="index"
@@ -37,7 +42,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import 'dayjs/locale/uk'
+import uniq from 'lodash/uniq'
 
 import dayjs from '~/utils/dayjs'
 
@@ -69,13 +74,19 @@ export default class DatePicker extends Vue {
   constructor () {
     super()
 
-    let date = dayjs(this.date).locale('uk')
+    let date = dayjs(this.date)
 
     while (this.days.length < this.daysCount) {
       this.days.push(date)
 
       date = date.add(1, 'day')
     }
+  }
+
+  get title () {
+    return uniq(
+      this.days.map(day => day.format('MMMM YYYY'))
+    ).join(' - ')
   }
 }
 </script>

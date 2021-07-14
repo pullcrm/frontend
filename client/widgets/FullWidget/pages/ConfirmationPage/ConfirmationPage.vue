@@ -1,6 +1,7 @@
 <template>
   <Layout
     ref="layout"
+    back
     class="full-widget-confirmation-page"
   >
     <UiTitle
