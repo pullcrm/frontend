@@ -10,8 +10,7 @@ export interface IApiAuthLogin {
 }
 
 export interface IUsersCreateParams {
-  firstName: string,
-  lastName: string,
+  fullName: string,
   phone: string,
   password: string,
   code: string
@@ -20,8 +19,7 @@ export interface IUsersCreateParams {
 export interface IUser {
   id?: number,
   refreshToken?: string,
-  firstName: string,
-  lastName: string,
+  fullName: string,
   avatar?: string,
   email?: string,
   phone?: string,
@@ -52,8 +50,7 @@ export interface IUsersConfirmation {
 }
 
 export interface IRegistrationUserParams {
-  firstName: string,
-  lastName: string,
+  fullName: string,
   phone: string,
   description?: string,
   status?: string,
@@ -74,8 +71,7 @@ export interface IAvatar {
 export interface IRegistrationUser {
   specialists?: any,
   id: number,
-  firstName: string,
-  lastName: string,
+  fullName: string,
   email: string,
   phone: string,
   avatar: IAvatar,

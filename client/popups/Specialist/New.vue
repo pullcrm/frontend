@@ -25,28 +25,15 @@
         :validations="validations"
       >
         <UiField
-          label="Имя"
-          :error="getFieldError('firstName')"
+          label="Имя и Фамилия"
+          :error="getFieldError('fullName')"
         >
           <UiInput
-            v-model="form.firstName"
+            v-model="form.fullName"
             name="name"
-            placeholder="Введите Имя"
+            placeholder="Введите Имя и Фамилию"
             required
-            @input="resetFieldError('firstName')"
-          />
-        </UiField>
-
-        <UiField
-          label="Фамилия"
-          :error="getFieldError('lastName')"
-        >
-          <UiInput
-            v-model="form.lastName"
-            name="surname"
-            placeholder="Введите Фамилию"
-            required
-            @input="resetFieldError('lastName')"
+            @input="resetFieldError('fullName')"
           />
         </UiField>
 
@@ -98,8 +85,7 @@ import FileUpload from '~/components/FileUpload/FileUpload.vue'
 })
 export default class SpecialistNew extends Vue {
   form: IRegistrationUserParams = {
-    firstName: '',
-    lastName: '',
+    fullName: '',
     phone: ''
   }
 

@@ -8,7 +8,7 @@
     <UiAvatar
       class="schedule-column-specialist__avatar"
       :image="avatar"
-      :name="user.firstName"
+      :name="user.fullName"
       size="s"
     />
 
@@ -17,7 +17,7 @@
         class="schedule-column-specialist__name"
         size="s"
       >
-        {{ user.firstName }} {{ user.lastName }}
+        {{ user.fullName }}
       </UiText>
 
       <UiText

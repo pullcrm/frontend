@@ -13,25 +13,13 @@
       @submit.prevent="onSubmit"
     >
       <UiField
-        label="Имя"
+        label="Имя и Фамилия"
         required
       >
         <UiInput
-          v-model="specialist.user.firstName"
+          v-model="specialist.user.fullName"
           name="name"
-          placeholder="Введите Имя"
-          required
-        />
-      </UiField>
-
-      <UiField
-        label="Фамилия"
-        required
-      >
-        <UiInput
-          v-model="specialist.user.lastName"
-          name="surname"
-          placeholder="Введите Фамилию"
+          placeholder="Введите Имя и Фамилию"
           required
         />
       </UiField>
@@ -231,8 +219,7 @@ export default class SpecialistInfoPage extends Vue {
         id,
         email: user.email || undefined,
         status,
-        lastName: user.lastName,
-        firstName: user.firstName,
+        fullName: user.fullName,
         description,
         specialization
       })

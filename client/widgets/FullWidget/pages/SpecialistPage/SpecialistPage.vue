@@ -117,12 +117,7 @@ export default class SpecialistPage extends Vue {
   }
 
   get fullName () {
-    const { firstName, lastName } = this.user
-
-    return [firstName, lastName]
-      .map(item => item.trim())
-      .filter(Boolean)
-      .join(' ')
+    return this.user.fullName
   }
 
   get canNext () {

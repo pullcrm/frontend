@@ -18,25 +18,13 @@
         :validations="validations"
       >
         <UiField
-          label="Имя"
+          label="Имя и Фамилия"
         >
           <UiInput
-            v-model="form.firstName"
+            v-model="form.fullName"
             left-icon="outlined/pencil"
             name="name"
-            placeholder="Введите Имя"
-            required
-          />
-        </UiField>
-
-        <UiField
-          label="Фамилия"
-        >
-          <UiInput
-            v-model="form.lastName"
-            left-icon="outlined/pencil"
-            name="surname"
-            placeholder="Введите Фамилию"
+            placeholder="Введите Имя и Фамилию"
             required
           />
         </UiField>
@@ -119,8 +107,7 @@ import Layout from '../components/Layout.vue'
 })
 export default class Home extends Vue {
   form: IRegistrationUserParams = {
-    firstName: '',
-    lastName: '',
+    fullName: '',
     phone: '',
     password: ''
   }
