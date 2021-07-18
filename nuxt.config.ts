@@ -165,7 +165,7 @@ const config: NuxtOptions = {
     { src: '~/plugins/sentry.client' },
     // { src: '~/plugins/polyfills.client' },
     // { src: '~/plugins/chat.client' },
-    // { src: '~/plugins/analytics.client' },
+    { src: '~/plugins/analytics.client' },
     // { src: '~/plugins/experiment.client' },
     { src: '~/plugins/click-outside.client' },
     { src: '~/plugins/observe-visibility.client' },
