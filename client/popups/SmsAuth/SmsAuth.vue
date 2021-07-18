@@ -3,38 +3,46 @@
     class="sms-auth"
     @close="$emit('close')"
   >
-    <UiBack
-      @back="$emit('close')"
-    />
-
     <UiTitle
       class="sms-auth__title"
       size="s"
     >
-      SMSC авторизация
+      Настройка API для отправки СМС
     </UiTitle>
 
     <form @submit.prevent="submit">
       <UiField
-        label="Логин"
+        label="Имя отправителя"
         required
       >
         <UiInput
-          v-model="form.login"
+          v-model="companyName"
           left-icon="outlined/pencil"
-          placeholder="Введите логин"
+          placeholder="Введите имя"
           required
         />
       </UiField>
 
       <UiField
-        label="Пароль"
+        label="Публичный ключ"
         required
       >
         <UiInput
-          v-model="form.password"
+          v-model="publicKey"
           left-icon="outlined/pencil"
-          placeholder="Введите пароль"
+          placeholder="Введите ключ"
+          required
+        />
+      </UiField>
+
+      <UiField
+        label="Приватный ключ"
+        required
+      >
+        <UiInput
+          v-model="privateKey"
+          left-icon="outlined/pencil"
+          placeholder="Введите ключ"
           required
         />
       </UiField>
@@ -44,7 +52,7 @@
         theme="blue"
         :loading="isLoading"
       >
-        Авторизоваться в smsc
+        Авторизоваться
       </UiButton>
     </form>
   </UiPopup>
@@ -54,17 +62,13 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { ISmsCreateParams } from '~/services/api'
+import { SMS_CREATION_TEMPLATE, SMS_REMIND_TEMPLATE } from '~/constants'
 
 @Component({})
 export default class ProcedureEdit extends Vue {
-  form: ISmsCreateParams = {
-    login: '',
-    password: '',
-    hasRemindSMS: false,
-    hasCreationSMS: false,
-    remindSMSMinutes: 60
-  }
+  publicKey = ''
+  privateKey = ''
+  companyName = ''
 
   isLoading = false
 
@@ -72,7 +76,17 @@ export default class ProcedureEdit extends Vue {
     try {
       this.isLoading = true
 
-      await this.$api.sms.settingCreate(this.form)
+      await this.$api.sms.settingCreate({
+        publicKey: this.publicKey,
+        privateKey: this.privateKey,
+        companyName: this.companyName,
+        // default params
+        hasRemindSMS: true,
+        hasCreationSMS: false,
+        remindSMSMinutes: 60,
+        remindSMSTemplate: SMS_REMIND_TEMPLATE,
+        creationSMSTemplate: SMS_CREATION_TEMPLATE
+      })
 
       window.location.reload()
     } catch (err) {

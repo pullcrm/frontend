@@ -185,11 +185,14 @@ export interface IAppointmentAllParams {
 }
 
 export interface ISmsCreateParams {
-  login: string,
-  password: string,
+  publicKey: string,
+  privateKey: string,
   hasCreationSMS: boolean,
   hasRemindSMS: boolean,
-  remindSMSMinutes: number
+  remindSMSMinutes: number,
+  creationSMSTemplate: string,
+  remindSMSTemplate: string,
+  companyName: string
 }
 
 export interface IAnalyticsSimpleParams {
