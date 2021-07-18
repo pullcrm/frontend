@@ -1,3 +1,5 @@
+export const GA_ID = 'UA-202590817-1'
+
 export const SCHEDULE_APPOINTMENT_HEIGHT = 30
 
 export const TIME_STEP = Number(process.env.CALENDAR_TIME_STEP)
