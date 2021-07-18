@@ -78,13 +78,28 @@
           Виджет позволяет выбрать сотрудника, услугу, доступный день и время для создания записи в рамках вашей компании.
         </p>
 
-        <p>Для открытия виджета, добавте на сайте тег с сылкой на сайт https://pullcrm.com, эта ссылка будет запускать виджет</p>
-
-        <p>Код инициализации виджета на вашем сайте</p>
+        <p>
+          <strong>Скрипт для инициализации виджета</strong>
+        </p>
 
         <pre>
           <code v-text="htmlCode" />
         </pre>
+
+        <p>Для открытия виджета, добавьте на сайте тег с сылкой на сайт https://pullcrm.com, эта ссылка будет открывать виджет.</p>
+
+        <p>Ссылка может иметь любую структуру, текст или вложенность.</p>
+
+        <pre>
+          <code
+            v-text="htmlCodeButton"
+          />
+        </pre>
+
+        <p>
+          <strong>Обратите внимание:</strong>
+          Ссылку не разрешается закрывать от индексации любыми способами, это единственное правило использования виджета.
+        </p>
       </UiContent>
     </UiPanel>
   </SettingsLayout>
@@ -103,7 +118,7 @@ import UiContent from '~/ui/Content/Content.vue'
 import Section from '../components/Section.vue'
 import SettingsLayout from '../components/Layout.vue'
 
-import { code } from './code'
+import { code, codeButton } from './code'
 
 @Component({
   layout: 'dashboard',
@@ -145,6 +160,10 @@ export default class WidgetSettingsPage extends Vue {
     return code
       .trim()
       .replace('{ companyId }', this.companyId)
+  }
+
+  get htmlCodeButton () {
+    return codeButton.trim()
   }
 
   setActive (event) {

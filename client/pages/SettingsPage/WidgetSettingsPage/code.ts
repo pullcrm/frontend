@@ -17,3 +17,5 @@ export const code = `
   document.head.appendChild(script)
 </script>
 `
+
+export const codeButton = '<a href="https://pullcrm.com"> Записатся онлайн </a>'
