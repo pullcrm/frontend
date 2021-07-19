@@ -1,5 +1,8 @@
 <template>
-  <Layout class="full-widget-procedures-page">
+  <Layout
+    back
+    class="full-widget-procedures-page"
+  >
     <UiTitle
       size="m"
       responsive

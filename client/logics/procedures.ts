@@ -6,7 +6,8 @@ export function normalizeProcedureParams (procedure) {
     price,
     duration,
     category,
-    description
+    description,
+    specialistIds
   } = procedure
 
   return {
@@ -15,7 +16,8 @@ export function normalizeProcedureParams (procedure) {
     duration,
     categoryId: null,
     ...(category && { categoryId: category.id }),
-    description
+    description,
+    specialistIds: specialistIds || []
   }
 }
 

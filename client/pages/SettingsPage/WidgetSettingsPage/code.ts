@@ -4,7 +4,7 @@ export const code = `
   window.pullcrm = {}
   window.pullcrm._host = 'pullcrm.com'
 
-  window.pullcrm.companyId = '8'
+  window.pullcrm.companyId = '{ companyId }'
 
   window.pullcrm.onOrderCreated = function () {
     // Событие успешно созданой записи
@@ -17,3 +17,5 @@ export const code = `
   document.head.appendChild(script)
 </script>
 `
+
+export const codeButton = '<a href="https://pullcrm.com"> Записатся онлайн </a>'

@@ -1,5 +1,8 @@
 <template>
-  <Layout class="full-widget-specialist-page">
+  <Layout
+    :back="canBack"
+    class="full-widget-specialist-page"
+  >
     <UiAvatar
       :image="avatar"
       :name="fullName"
@@ -103,6 +106,8 @@ export default class SpecialistPage extends Vue {
   readonly procedures
   readonly categories
 
+  canBack = Boolean(this.$typedStore.getters['location/from'])
+
   get user () {
     return this.specialist.user
   }
@@ -112,12 +117,7 @@ export default class SpecialistPage extends Vue {
   }
 
   get fullName () {
-    const { firstName, lastName } = this.user
-
-    return [firstName, lastName]
-      .map(item => item.trim())
-      .filter(Boolean)
-      .join(' ')
+    return this.user.fullName
   }
 
   get canNext () {

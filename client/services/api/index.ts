@@ -10,8 +10,7 @@ export interface IApiAuthLogin {
 }
 
 export interface IUsersCreateParams {
-  firstName: string,
-  lastName: string,
+  fullName: string,
   phone: string,
   password: string,
   code: string
@@ -20,8 +19,7 @@ export interface IUsersCreateParams {
 export interface IUser {
   id?: number,
   refreshToken?: string,
-  firstName: string,
-  lastName: string,
+  fullName: string,
   avatar?: string,
   email?: string,
   phone?: string,
@@ -52,8 +50,7 @@ export interface IUsersConfirmation {
 }
 
 export interface IRegistrationUserParams {
-  firstName: string,
-  lastName: string,
+  fullName: string,
   phone: string,
   description?: string,
   status?: string,
@@ -74,8 +71,7 @@ export interface IAvatar {
 export interface IRegistrationUser {
   specialists?: any,
   id: number,
-  firstName: string,
-  lastName: string,
+  fullName: string,
   email: string,
   phone: string,
   avatar: IAvatar,
@@ -189,11 +185,14 @@ export interface IAppointmentAllParams {
 }
 
 export interface ISmsCreateParams {
-  login: string,
-  password: string,
+  publicKey: string,
+  privateKey: string,
   hasCreationSMS: boolean,
   hasRemindSMS: boolean,
-  remindSMSMinutes: number
+  remindSMSMinutes: number,
+  creationSMSTemplate: string,
+  remindSMSTemplate: string,
+  companyName: string
 }
 
 export interface IAnalyticsSimpleParams {
@@ -243,6 +242,13 @@ export interface ITimetableParams {
   friday?: string,
   saturday?: string,
   sunday?: string
+}
+
+export interface ISettingsWidgetUpdateParams {
+  isActive?: boolean,
+  isQueue?: boolean,
+  daysForward?: number,
+  minutesBefore?: number
 }
 
 export const factory = (send) => ({
@@ -490,19 +496,29 @@ export const factory = (send) => ({
 
   sms: {
     settingCreate (params: ISmsCreateParams) : Promise<any> {
-      return send('companies/my/settings', params)
+      return send('sms/settings', params)
     },
 
     settingUpdate (params: any) : Promise<any> {
-      return send('companies/my/settings', params, 'PUT')
+      return send('sms/settings', params, 'PUT')
     },
 
     settingRemove () : Promise<any> {
-      return send('companies/my/settings', {}, 'DELETE')
+      return send('sms/settings', {}, 'DELETE')
     },
 
     balance () : Promise<any> {
       return send('sms/balance', null, 'GET')
+    }
+  },
+
+  settings: {
+    widget () : Promise<any> {
+      return send('public/widget', null, 'GET')
+    },
+
+    widgetUpdate (params: ISettingsWidgetUpdateParams) : Promise<any> {
+      return send('widget', params, 'PUT')
     }
   }
 })

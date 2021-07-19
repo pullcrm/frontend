@@ -72,7 +72,7 @@
           size="s"
           responsive
         >
-          {{ average | price }}
+          {{ income / total | price }}
         </UiTitle>
       </InfoPanel>
     </div>

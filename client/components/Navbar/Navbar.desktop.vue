@@ -51,7 +51,7 @@
           class="navbar-desktop__avatar"
           size="s"
           :image="avatar"
-          :name="profile.firstName"
+          :name="profile.fullName"
         />
       </template>
 

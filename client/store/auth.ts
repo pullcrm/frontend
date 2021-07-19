@@ -67,21 +67,19 @@ const AuthModule: Module<IState, IRootState> = {
 
     async refreshToken ({ state, dispatch }) {
       try {
-        const refreshToken = state.refreshToken
-
         const { role, companyId, userId } = jwtDecode(state.accessToken)
 
         const result = await this.$api.auth.refreshToken({
           role,
           userId,
           companyId,
-          refreshToken
+          refreshToken: state.refreshToken
         })
 
-        await dispatch('saveTokens', { ...result, refreshToken })
+        await dispatch('saveTokens', result)
       } catch (err) {
         if (err.status === 403 || err.status === 401) {
-          // Add save toast in cookie method
+          // Add `save toast in cookie` method
           // await dispatch('toasts/show', {
           //   type: 'error',
           //   title: 'Время сессии истекло, пожалуйста, авторизуйтесь снова'

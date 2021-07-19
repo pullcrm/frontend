@@ -12,26 +12,40 @@ export function normalizeAppointmentsStats (stats) {
   } = stats
 
   return {
-    total: count,
-    online,
-    offline,
-    completed,
+    total: count || 0,
+    online: online || 0,
+    offline: offline || 0,
+    completed: completed || 0,
     appointments: appointments.sort(sortAppointments)
   }
 }
 
 export function normalizeAnalyticsStats (stats) {
   const {
-    total,
-    price,
     amount,
-    procedures
+    procedures,
+    actualIncome,
+    potentialIncome
   } = stats
 
   return {
     total: amount,
-    income: total,
-    average: price,
-    procedures
+    income: actualIncome,
+    average: potentialIncome,
+    procedures: normalizeAnalyticsStatsProcedures(procedures)
   }
+}
+
+function normalizeAnalyticsStatsProcedures (procedures) {
+  return procedures.map(item => {
+    return {
+      name: item.name,
+      total: item.amount,
+      online: item.online,
+      income: item.actualIncome,
+      offline: item.offline,
+      average: item.potentialIncome,
+      avgPrice: item.avgPrice
+    }
+  })
 }

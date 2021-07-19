@@ -1,8 +1,5 @@
 <template>
-  <Layout
-    :back="false"
-    class="full-widget-order-page"
-  >
+  <Layout class="full-widget-order-page">
     <UiTitle
       size="m"
       responsive

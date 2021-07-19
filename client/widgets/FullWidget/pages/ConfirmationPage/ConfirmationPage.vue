@@ -1,6 +1,7 @@
 <template>
   <Layout
     ref="layout"
+    back
     class="full-widget-confirmation-page"
   >
     <UiTitle
@@ -152,7 +153,7 @@ export default class ConfirmationPage extends Vue {
   }
 
   get settings () {
-    return this.company.company_setting || {}
+    return this.company.sms_setting || {}
   }
 
   get validations (): Validations {
@@ -214,7 +215,7 @@ export default class ConfirmationPage extends Vue {
     try {
       this.isLoading = true
 
-      const { hasCreationSMS, hasRemindSMS } = this.company.company_setting || {}
+      const { hasCreationSMS, hasRemindSMS } = this.company.sms_setting || {}
 
       await this.$api.public.appointmentCreate({
         ...this.form,

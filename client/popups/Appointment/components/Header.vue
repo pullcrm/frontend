@@ -1,40 +1,12 @@
 <template>
   <div class="appointment-popup-header">
-    <UiPopover
-      ref="popover"
-      size="m"
-      placement="bottom_start"
+    <UiTitle
+      class="appointment-popup-header__title"
+      size="l"
+      responsive
     >
-      <UiTitle
-        class="appointment-popup-header__title"
-        size="l"
-        responsive
-      >
-        {{ title }}
-      </UiTitle>
-
-      <template #body="{ close }">
-        <UiDropdownList>
-          <UiText
-            tag="a"
-            href="#"
-            :left-icon="isQueue ? 'outlined/minus' : 'outlined/check'"
-            @click.native.prevent="close(), $emit('update:isQueue', false)"
-          >
-            Календарь
-          </UiText>
-
-          <UiText
-            tag="a"
-            href="#"
-            :left-icon="!isQueue ? 'outlined/minus' : 'outlined/check'"
-            @click.native.prevent="close(), $emit('update:isQueue', true)"
-          >
-            Очередь
-          </UiText>
-        </UiDropdownList>
-      </template>
-    </UiPopover>
+      {{ title }}
+    </UiTitle>
 
     <UiPopover
       ref="popover"
@@ -89,18 +61,12 @@ import { statusesDict } from '~/logics/appointment'
     status: {
       type: String,
       required: true
-    },
-
-    isQueue: {
-      type: Boolean,
-      default: false
     }
   }
 })
 export default class Header extends Vue {
   readonly title!: string
   readonly status!: string
-  readonly isQueue!: boolean
 
   get activeStatus () {
     return statusesDict[this.status]

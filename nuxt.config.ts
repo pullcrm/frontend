@@ -25,8 +25,8 @@ const config: NuxtOptions = {
 
   publicRuntimeConfig: {
     BASE_HOST: process.env.BASE_HOST,
-    // SENTRY_ENV: process.env.SENTRY_ENV,
-    // SENTRY_DSN: process.env.SENTRY_DSN,
+    SENTRY_ENV: process.env.SENTRY_ENV,
+    SENTRY_DSN: process.env.SENTRY_DSN,
     // SENTRY_RELEASE: process.env.SENTRY_RELEASE,
     RPC_URL: process.env.RPC_URL,
     RPC_UPLOAD_URL: process.env.RPC_UPLOAD_URL,
@@ -142,8 +142,8 @@ const config: NuxtOptions = {
 
   modules: [
     ['@nuxtjs/router', { fileName: 'router.ts' }],
+    '~/modules/sentry.ts',
     'portal-vue/nuxt'
-    // '~/modules/sentry.ts',
     // '~/modules/consola.ts',
     // ['~/modules/prometheus.ts', { prefix: 'desktop_' }]
   ],
@@ -162,10 +162,10 @@ const config: NuxtOptions = {
     // { src: '~/plugins/auth' },
     { src: '~/plugins/vue-filters' },
     // { src: '~/plugins/vue-ignore-elements' },
-    // { src: '~/plugins/sentry.client' },
+    { src: '~/plugins/sentry.client' },
     // { src: '~/plugins/polyfills.client' },
     // { src: '~/plugins/chat.client' },
-    // { src: '~/plugins/analytics.client' },
+    { src: '~/plugins/analytics.client' },
     // { src: '~/plugins/experiment.client' },
     { src: '~/plugins/click-outside.client' },
     { src: '~/plugins/observe-visibility.client' },
