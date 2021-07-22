@@ -112,7 +112,7 @@ export default class Intro extends Vue {
   get writerList () {
     return [
       'бизнеса!',
-      'барбешопа!',
+      'барбершопа!',
       'груминг салона!',
       // 'мастера маникюра!',
       'тату салона!',
