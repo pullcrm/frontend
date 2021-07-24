@@ -313,10 +313,10 @@ export default class Settings extends Vue {
 
     const formData = new FormData()
 
-    formData.append('file', file)
+    formData.append('files', file)
     formData.append('userId', userId)
 
-    const result = await this.$apiClient.upload(formData)
+    const [result] = await this.$apiClient.upload(formData)
 
     await this.$api.companies.update(this.company.id, {
       logoId: result.id
