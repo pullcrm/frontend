@@ -17,7 +17,7 @@
         class="full-widget-layout__logo"
       >
         <img
-          src="~/assets/logos/logo.svg"
+          src="~/assets/logos/logo_new.svg"
           alt="pullcrm"
         >
       </a>

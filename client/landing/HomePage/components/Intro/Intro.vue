@@ -3,7 +3,7 @@
     <div class="landing-home-page-intro__header">
       <img
         class="landing-home-page-intro__logo"
-        src="~/assets/logos/logo.svg"
+        src="~/assets/logos/logo_new.svg"
         alt="Pullcrm-logo"
       >
 

@@ -10,7 +10,7 @@
           >
             <template #prepend>
               <img
-                src="~/assets/logos/logo.svg"
+                src="~/assets/logos/logo_new.svg"
                 alt="Pullcrm-logo"
               >
             </template>
