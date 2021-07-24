@@ -25,7 +25,7 @@
               theme="danger-outlined"
               @click.native="deauthorize"
             >
-              Деавторизоваться
+              Отключить
             </UiButton>
           </template>
         </Section>
@@ -157,7 +157,7 @@
             theme="blue"
             @click.native="smsPopup"
           >
-            Авторизоваться
+            Подключить
           </UiButton>
         </template>
       </Section>

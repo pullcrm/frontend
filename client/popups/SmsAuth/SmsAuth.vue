@@ -4,11 +4,26 @@
     @close="$emit('close')"
   >
     <UiTitle
-      class="sms-auth__title"
       size="s"
+      class="sms-auth__title"
     >
       Настройка API для отправки СМС
     </UiTitle>
+
+    <UiText
+      size="m"
+      class="sms-auth__sub-title"
+    >
+      Для добавления СМС оповещений вам нужно выполнить действия описанные в
+      <UiLink
+        tag="a"
+        theme="action"
+        target="_blank"
+        href="https://classic-helmet-a8f.notion.site/15550c9172b740b98d036829a93b7f95"
+      >
+        документации по ссылке
+      </UiLink>.
+    </UiText>
 
     <form @submit.prevent="submit">
       <UiField
@@ -113,8 +128,12 @@ export default class ProcedureEdit extends Vue {
 <style lang="scss">
   .sms-auth {
     &__title {
-      margin-top: 8px;
+      margin: 8px 0;
+    }
+
+    &__sub-title {
       margin-bottom: 24px;
+      color: $ui-black-80;
     }
 
     .ui-button {
