@@ -1,6 +1,6 @@
 <template>
   <Component
-    :is="to ? 'RouterLink' : 'div'"
+    :is="to ? 'RouterLink' : tag"
     class="navbar-item"
     :to="to"
   >
@@ -21,6 +21,11 @@ import Component from 'vue-class-component'
 
 @Component({
   props: {
+    tag: {
+      type: String,
+      default: 'div'
+    },
+
     to: {
       type: [Object, String],
       default: null
@@ -37,7 +42,12 @@ import Component from 'vue-class-component'
     }
   }
 })
-export default class NavbarItem extends Vue {}
+export default class NavbarItem extends Vue {
+  readonly to
+  readonly tag
+  readonly icon
+  readonly name
+}
 </script>
 
 <style lang="scss" src="./NavbarItem.scss"></style>
