@@ -45,9 +45,9 @@ const config: NuxtOptions = {
       'company',
       'bootstrap',
       'role-redirect',
-
       'redirects/slash',
-      'location'
+      'location',
+      'site-loaded'
       // 'analytics-params.server',
       // 'bootstrap.server',
       // 'experiment',

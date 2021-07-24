@@ -26,6 +26,7 @@
 
       <UiField
         label="Телефон"
+        required
       >
         <UiInput
           :value="specialist.user.phone"
@@ -69,18 +70,6 @@
         />
       </UiField>
 
-      <UiField
-        label="Доступность для записи"
-        required
-      >
-        <UiSelect
-          v-model="status"
-          :options="statusList"
-          label-key="value"
-          :disabled="isStatusDisabled"
-        />
-      </UiField>
-
       <CreatedAt
         class="specialist-info-page__created-at"
         :created-at="specialist.createdAt"
@@ -98,7 +87,6 @@
       </UiLink>
 
       <UiButton
-        id="submit-button"
         class="specialist-info-page__button"
         size="l"
         type="submit"
@@ -116,11 +104,8 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import { AVATAR } from '~/constants/files'
-import { SPECIALIST } from '~/constants/roles'
 
 import { copyText } from '~/utils/clipboard'
-
-import { statuses } from '~/logics/specialist'
 
 import SpecialistLayout from '../components/SpecialistLayout.vue'
 
@@ -185,22 +170,6 @@ export default class SpecialistInfoPage extends Vue {
 
   get role () {
     return this.$typedStore.getters['position/role']
-  }
-
-  get isStatusDisabled () {
-    return this.role.name === SPECIALIST
-  }
-
-  get status () {
-    return statuses[this.specialist.status]
-  }
-
-  set status (val) {
-    this.specialist.status = val.key
-  }
-
-  get statusList () {
-    return Object.keys(statuses).map(key => ({ key, ...statuses[key] }))
   }
 
   async onSubmit () {
@@ -274,4 +243,4 @@ export default class SpecialistInfoPage extends Vue {
 }
 </script>
 
-<style lang="scss" src="./SpecialistInfoPage.scss"></style>
+<style lang="scss" src="./InfoPage.scss"></style>

@@ -20,20 +20,31 @@ const SmsModule: Module<IState, IRootState> = {
   },
 
   actions: {
-    async balance ({ commit, state }) {
-      if (!state.balancePromise) {
-        const balancePromise = this.$api.sms.balance()
+    async balance ({ commit, state, dispatch }) {
+      try {
+        if (!state.balancePromise) {
+          const balancePromise = this.$api.sms.balance()
 
-        commit('SET_BALANCE_PROMISE', balancePromise)
+          commit('SET_BALANCE_PROMISE', balancePromise)
 
-        setTimeout(() => {
-          commit('SET_BALANCE_PROMISE', null)
-        }, BALANCE_TIMEOUT)
+          setTimeout(() => {
+            commit('SET_BALANCE_PROMISE', null)
+          }, BALANCE_TIMEOUT)
+        }
+
+        const { balance } = await state.balancePromise
+
+        commit('SET_BALANCE', Number(balance))
+      } catch (err) {
+        if (err.status === 500) {
+          return dispatch('toasts/show', {
+            title: 'Неправильные СМС токены!',
+            type: 'error'
+          }, { root: true })
+        }
+
+        throw err
       }
-
-      const { balance } = await state.balancePromise
-
-      commit('SET_BALANCE', Number(balance))
     }
   },
 

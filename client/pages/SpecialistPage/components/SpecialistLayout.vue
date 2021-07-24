@@ -22,7 +22,6 @@
       <UiNavigation
         class="specialist-page-layout__navigation"
         :navigation="navigation"
-        @input="onNavigation"
       />
 
       <slot />
@@ -34,7 +33,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { ADMIN, SPECIALIST } from '~/constants/roles'
+import { SPECIALIST } from '~/constants/roles'
 
 import CompanyPicker from './CompanyPicker.vue'
 
@@ -70,33 +69,18 @@ export default class SpecialistLayout extends Vue {
         }
       },
 
-      this.isMyProfile && {
-        name: 'Выйти'
-      },
-
-      this.isDeletable && {
-        name: 'Удалить профиль'
+      {
+        name: 'Настройки',
+        to: {
+          ...this.$route,
+          name: 'specialistSettings'
+        }
       }
     ].filter(Boolean)
   }
 
   get role () {
     return this.$typedStore.getters['position/role']
-  }
-
-  get positionId () {
-    return this.$typedStore.getters['position/currentId']
-  }
-
-  get isMyProfile () {
-    return this.specialistId === this.positionId
-  }
-
-  get isDeletable () {
-    return (
-      this.role.name === ADMIN &&
-      this.isMyProfile === false
-    )
   }
 
   get specialistId () {
@@ -109,50 +93,6 @@ export default class SpecialistLayout extends Vue {
 
   get hasBack () {
     return this.role.name !== SPECIALIST
-  }
-
-  async onNavigation (item) {
-    if (item.name === 'Выйти') {
-      await this.logout()
-    }
-
-    if (item.name === 'Удалить профиль') {
-      await this.remove()
-    }
-  }
-
-  async remove () {
-    const result = await this.$typedStore.dispatch('popup/askQuestion', {
-      title: 'Вы действительно хотите удалить профиль сотрудника? Это действие не обратимо!',
-      acceptButtonTitle: 'Удалить!'
-    })
-
-    if (result) {
-      await this.$api.specialist.remove(this.specialistId)
-
-      const { href } = this.$router.resolve({
-        name: 'specialists'
-      })
-
-      window.location.href = href
-    }
-  }
-
-  async logout () {
-    const result = await this.$typedStore.dispatch('popup/askQuestion', {
-      title: 'Вы действительно хотите завершить сеанс?',
-      acceptButtonTitle: 'Выйти'
-    })
-
-    if (result) {
-      await this.$typedStore.dispatch('auth/logout')
-
-      const { href } = this.$router.resolve({
-        name: 'login'
-      })
-
-      window.location.href = href
-    }
   }
 
   async onBack () {

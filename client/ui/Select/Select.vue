@@ -107,7 +107,7 @@ import UiInputAutocompleteItem from '../InputAutocompleteItem/InputAutocompleteI
 
   watch: {
     visibleItems () {
-      this.activeItemIndex = 0
+      this.activeItemIndex = this.getActiveIndex()
     },
 
     value: {
@@ -350,6 +350,18 @@ export default class UiSelect extends Vue {
     }
 
     this.isFocused = false
+  }
+
+  getActiveIndex () {
+    if (!this.value) return 0
+
+    const index = this.visibleItems.findIndex(item => {
+      return this.getTitle(this.value) === this.getTitle(item)
+    })
+
+    return index >= 0
+      ? index
+      : 0
   }
 
   /**

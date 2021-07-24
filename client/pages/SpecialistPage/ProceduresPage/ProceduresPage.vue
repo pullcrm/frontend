@@ -107,4 +107,4 @@ export default class SpecialistProceduresPage extends Vue {
 }
 </script>
 
-<style lang="scss" src="./SpecialistProceduresPage.scss"></style>
+<style lang="scss" src="./ProceduresPage.scss"></style>

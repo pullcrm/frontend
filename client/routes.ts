@@ -17,9 +17,10 @@ const SpecialistsPage = lazyComponent(() => import('~/pages/SpecialistsPage/Spec
 const ProceduresPage = lazyComponent(() => import('~/pages/ProceduresPage/ProceduresPage.vue'))
 const TimeOff = lazyComponent(() => import('~/pages/TimeOff/TimeOff.vue'))
 
-const SpecialistInfoPage = lazyComponent(() => import('~/pages/SpecialistPage/SpecialistInfoPage/SpecialistInfoPage.vue'))
-const SpecialistSchedulePage = lazyComponent(() => import('~/pages/SpecialistPage/SpecialistSchedulePage/SpecialistSchedulePage.vue'))
-const SpecialistProceduresPage = lazyComponent(() => import('~/pages/SpecialistPage/SpecialistProceduresPage/SpecialistProceduresPage.vue'))
+const SpecialistInfoPage = lazyComponent(() => import('~/pages/SpecialistPage/InfoPage/InfoPage.vue'))
+const SpecialistSchedulePage = lazyComponent(() => import('~/pages/SpecialistPage/SchedulePage/SchedulePage.vue'))
+const SpecialistSettingsPage = lazyComponent(() => import('~/pages/SpecialistPage/SettingsPage/SettingsPage.vue'))
+const SpecialistProceduresPage = lazyComponent(() => import('~/pages/SpecialistPage/ProceduresPage/ProceduresPage.vue'))
 
 const SmsSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/SmsSettingsPage/SmsSettingsPage.vue'))
 const WidgetSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/WidgetSettingsPage/WidgetSettingsPage.vue'))
@@ -48,6 +49,7 @@ const routes: RouteConfig[] = [
 
   { path: '/specialist/:slug/info/', name: 'specialistInfo', component: SpecialistInfoPage },
   { path: '/specialist/:slug/schedule/', name: 'specialistSchedule', component: SpecialistSchedulePage },
+  { path: '/specialist/:slug/settings/', name: 'specialistSettings', component: SpecialistSettingsPage },
   { path: '/specialist/:slug/procedures/', name: 'specialistProcedures', component: SpecialistProceduresPage },
 
   { path: '/settings/', name: 'settings', redirect: '/settings/company/' },
