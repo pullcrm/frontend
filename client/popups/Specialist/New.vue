@@ -74,6 +74,8 @@ import Component from 'vue-class-component'
 
 import { IRegistrationUserParams } from '~/services/api'
 
+import { formatPhone } from '~/utils/format-phone'
+
 import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
 
 import FileUpload from '~/components/FileUpload/FileUpload.vue'
@@ -109,6 +111,10 @@ export default class SpecialistNew extends Vue {
     }
   }
 
+  get specialistsDict () {
+    return this.$typedStore.getters['specialists/specialistsDict']
+  }
+
   async onSubmit () {
     try {
       this.isLoading = true
@@ -138,22 +144,31 @@ export default class SpecialistNew extends Vue {
   async confirmation () {
     const result = await this.$typedStore.dispatch('popup/smsConfirmation', {
       title: 'Регистрация',
-      subTitle: `На ваш телефон ${this.form.phone} был выслан СМС-код для подтверждения регистрации`,
+      subTitle: `На телефон ${formatPhone(this.form.phone)} был выслан СМС-код для подтверждения регистрации`,
       submit: this.onCreateUser
     })
 
     if (result) {
-      await this.$typedStore.dispatch('specialists/fetch')
-
       this.$emit('close')
     }
   }
 
   async onCreateUser (code) {
-    return this.$api.specialist.create({
+    const { id } = await this.$api.specialist.create({
       ...this.form,
       code
     })
+
+    await this.$typedStore.dispatch('specialists/fetch')
+
+    if (this.$typedStore.getters['procedures/total'] > 0) {
+      const specialist = this.specialistsDict[id]
+
+      this.$typedStore.dispatch('popup/show', {
+        name: 'specialist-procedures',
+        props: { specialist }
+      })
+    }
   }
 }
 </script>

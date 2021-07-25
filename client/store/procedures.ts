@@ -18,12 +18,10 @@ const actions = {
     commit('SET_CATEGORIES', categories)
   },
 
-  async updateProcedure ({ dispatch }, procedure) {
-    await this.$api.procedures.update(
+  async updateProcedure (_, procedure) {
+    return await this.$api.procedures.update(
       procedure.id, normalizeProcedureParams(procedure)
     )
-
-    await dispatch('fetch')
   },
 
   async createProcedure ({ dispatch }, procedure) {

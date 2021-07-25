@@ -210,11 +210,7 @@ export default class AppointmentEdit extends Vue {
   }
 
   get procedures () {
-    if (this.form.specialist?.procedures.length > 0) {
-      return this.form.specialist.procedures
-    }
-
-    return this.$typedStore.state.procedures.procedures
+    return this.form.specialist.procedures
   }
 
   get date () {
