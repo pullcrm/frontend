@@ -58,7 +58,15 @@ import ProceduresGroup from './components/Group.vue'
 })
 export default class Procedures extends Vue {
   get isEmpty () {
+    if (this.hasCategories) {
+      return false
+    }
+
     return this.$typedStore.getters['procedures/isEmpty']
+  }
+
+  get hasCategories () {
+    return this.categories.length > 0
   }
 
   get categories () {
