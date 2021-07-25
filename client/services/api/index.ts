@@ -102,8 +102,17 @@ export interface IProcedureParams {
   description?: string
 }
 
+export interface IProcedureCategory {
+  companyId: number,
+  createdAt: string,
+  id: number,
+  name: string,
+  type: 'PROCEDURE'
+}
+
 export interface IProcedure {
   id: number,
+  category?: IProcedureCategory,
   companyId: number,
   createdAt: Date,
   duration: number,

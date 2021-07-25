@@ -71,26 +71,22 @@ import ProceduresGroup from '../../components/ProceduresGroup.vue'
       })
     ])
 
-    let { procedures } = specialist
-
-    if (procedures.length === 0) {
-      procedures = await api.public.proceduresByCompanyId({
-        companyId
-      })
-    }
-
     return {
-      procedures,
+      specialist,
       categories
     }
   }
 })
 export default class ProceduresPage extends Vue {
-  readonly procedures
+  readonly specialist
   readonly categories
 
   get canNext () {
     return Boolean(this.$route.query.procedureIds)
+  }
+
+  get procedures () {
+    return this.specialist.procedures
   }
 
   get normalizeCategories () {

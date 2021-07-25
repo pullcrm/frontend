@@ -64,6 +64,7 @@ import Component from 'vue-class-component'
   }
 })
 export default class Placeholder extends Vue {
+  readonly image?: string
   readonly title: string
   readonly text?: string
   readonly subText?: string
@@ -93,7 +94,7 @@ export default class Placeholder extends Vue {
 
       width: 100%;
       max-width: 448px;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     &__text {

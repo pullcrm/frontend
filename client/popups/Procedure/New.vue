@@ -98,6 +98,8 @@ import Component from 'vue-class-component'
 
 import { PROCEDURE_DURATIONS } from '~/constants/time'
 
+import { IProcedure } from '~/services/api'
+
 import { minutesToTime } from '~/utils/time'
 
 @Component({
@@ -111,7 +113,7 @@ import { minutesToTime } from '~/utils/time'
 export default class ProcedureNew extends Vue {
   readonly category
 
-  form = {
+  form: Partial<IProcedure> = {
     duration: null,
     category: null
   }

@@ -65,6 +65,17 @@
         </UiField>
 
         <UiField
+          label="Сотрудники"
+        >
+          <UiMultiSelect
+            v-model="selectedSpecialists"
+            :options="specialsts"
+            label-key="fullName"
+            placeholder="Выбрать специалистов"
+          />
+        </UiField>
+
+        <UiField
           label="Описание"
         >
           <UiInput
@@ -121,6 +132,21 @@ export default class ProcedureEdit extends Vue {
 
   form = this.procedure
 
+  selectedSpecialists = []
+
+  constructor () {
+    super()
+
+    this.selectedSpecialists = this.specialsts
+      .filter(({ procedures }) => {
+        return procedures.some(({ id }) => id === this.procedure.id)
+      })
+  }
+
+  get specialsts () {
+    return this.$typedStore.state.specialists.specialists
+  }
+
   get duration () {
     return minutesToTime(this.form.duration)
   }
@@ -147,16 +173,26 @@ export default class ProcedureEdit extends Vue {
   }
 
   async submit () {
-    await this.$typedStore.dispatch(
-      'procedures/updateProcedure', this.form
-    )
+    await this.$typedStore.dispatch('procedures/updateProcedure', {
+      ...this.form,
+      specialistIds: this.selectedSpecialists.map(({ id }) => id)
+    })
+
+    await Promise.all([
+      this.$typedStore.dispatch('procedures/fetch'),
+      this.$typedStore.dispatch('specialists/fetch')
+    ])
 
     this.$emit('close')
   }
 
   async remove () {
     await this.$api.procedures.remove(this.form.id)
-    await this.$typedStore.dispatch('procedures/fetch')
+
+    await Promise.all([
+      this.$typedStore.dispatch('procedures/fetch'),
+      this.$typedStore.dispatch('specialists/fetch')
+    ])
 
     this.$emit('close')
   }

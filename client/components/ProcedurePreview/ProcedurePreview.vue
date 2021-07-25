@@ -2,17 +2,17 @@
   <UiPanel
     size="s"
     :class="[
-      'specialist-page-procedure-preview',
-      `specialist-page-procedure-preview_size_${size}`,
-      {'specialist-page-procedure-preview_selectable': selectable}
+      'procedure-preview',
+      `procedure-preview_size_${size}`,
+      {'procedure-preview_selectable': selectable}
     ]"
     v-bind="$attrs"
   >
-    <div class="specialist-page-procedure-preview__header">
+    <div class="procedure-preview__header">
       <a
         v-if="selectable"
         href="#"
-        class="specialist-page-procedure-preview__icon"
+        class="procedure-preview__icon"
         :class="{'_selected': selected}"
       >
         <UiIcon
@@ -27,14 +27,14 @@
         size="m"
         strong
         responsive
-        class="specialist-page-procedure-preview__title"
+        class="procedure-preview__title"
       >
         {{ procedure.name }}
       </UiText>
 
       <UiPrice
         size="xs"
-        class="specialist-page-procedure-preview__price"
+        class="procedure-preview__price"
       >
         {{ procedure.price | price }}
       </UiPrice>
@@ -42,7 +42,7 @@
       <UiText
         size="m"
         responsive
-        class="specialist-page-procedure-preview__duration"
+        class="procedure-preview__duration"
       >
         {{ procedure.duration | minutesToTime }}
       </UiText>
@@ -51,18 +51,18 @@
         size="s"
         theme="info-outlined"
         :left-icon="isOpened ? 'outlined/caret-up' : 'outlined/caret-down'"
-        class="specialist-page-procedure-preview__toggle"
+        class="procedure-preview__toggle"
         @click.native.stop="isOpened = !isOpened"
       />
     </div>
 
     <div
       v-show="isOpened"
-      class="specialist-page-procedure-preview__body"
+      class="procedure-preview__body"
     >
       <UiPrice
         size="xs"
-        class="specialist-page-procedure-preview__price"
+        class="procedure-preview__price"
       >
         {{ procedure.price | price }}
       </UiPrice>
@@ -70,7 +70,7 @@
       <UiText
         size="m"
         responsive
-        class="specialist-page-procedure-preview__description"
+        class="procedure-preview__description"
       >
         {{ procedure.description || 'Описание отсутствует!' }}
       </UiText>

@@ -2,6 +2,13 @@
   <SpecialistLayout
     class="specialist-procedures-page"
   >
+    <UiPlaceholder
+      v-if="isEmpty"
+      title="Список услуг пуст"
+      text="Добавьте услугу, чтобы специалист начал работу"
+      class="specialist-procedures-page__placeholder"
+    />
+
     <ProceduresGroup
       v-for="(procedures, categoryId) in proceduresByCategory"
       :key="categoryId"
@@ -21,16 +28,6 @@
     >
       Изменить список услуг
     </UiButton>
-
-    <Popup
-      v-slot="{ close, props }"
-      name="specialist-procedures"
-    >
-      <SpecialistProcedures
-        v-bind="props"
-        @close="close"
-      />
-    </Popup>
   </SpecialistLayout>
 </template>
 
@@ -42,19 +39,14 @@ import { SPECIALIST } from '~/constants/roles'
 
 import { groupByCategoryId } from '~/logics/procedures'
 
-import Popup from '~/components/Popups/Popup.vue'
-
 import SpecialistLayout from '../components/SpecialistLayout.vue'
-import SpecialistProcedures from '../components/SpecialistProcedures/SpecialistProcedures.vue'
 
 import ProceduresGroup from './components/ProceduresGroup.vue'
 
 @Component({
   components: {
-    Popup,
     ProceduresGroup,
-    SpecialistLayout,
-    SpecialistProcedures
+    SpecialistLayout
   },
 
   head () {
@@ -84,16 +76,16 @@ export default class SpecialistProceduresPage extends Vue {
     return this.role.name !== SPECIALIST
   }
 
+  get isEmpty () {
+    return this.procedures.length === 0
+  }
+
   get proceduresByCategory () {
     return groupByCategoryId(this.procedures)
   }
 
   get procedures () {
-    if (this.specialist.procedures.length > 0) {
-      return this.specialist.procedures
-    }
-
-    return this.$typedStore.state.procedures.procedures
+    return this.specialist.procedures
   }
 
   openPopup () {
