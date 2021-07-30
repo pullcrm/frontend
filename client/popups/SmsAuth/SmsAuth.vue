@@ -26,49 +26,59 @@
     </UiText>
 
     <form @submit.prevent="submit">
-      <UiField
-        label="Имя отправителя"
-        required
+      <UiFormValidator
+        ref="formValidator"
+        :validations="validations"
       >
-        <UiInput
-          v-model="companyName"
-          left-icon="outlined/pencil"
-          placeholder="Введите имя"
-          required
-        />
-      </UiField>
+        <template #default="{ resetFieldError, getFieldError }">
+          <UiField
+            label="Имя отправителя"
+            :error="getFieldError('companyName')"
+            required
+          >
+            <UiInput
+              v-model="companyName"
+              left-icon="outlined/pencil"
+              placeholder="Введите имя"
+              @input="resetFieldError('companyName')"
+            />
+          </UiField>
 
-      <UiField
-        label="Публичный ключ"
-        required
-      >
-        <UiInput
-          v-model="publicKey"
-          left-icon="outlined/pencil"
-          placeholder="Введите ключ"
-          required
-        />
-      </UiField>
+          <UiField
+            label="Публичный ключ"
+            :error="getFieldError('publicKey')"
+            required
+          >
+            <UiInput
+              v-model="publicKey"
+              left-icon="outlined/pencil"
+              placeholder="Введите ключ"
+              @input="resetFieldError('publicKey')"
+            />
+          </UiField>
 
-      <UiField
-        label="Приватный ключ"
-        required
-      >
-        <UiInput
-          v-model="privateKey"
-          left-icon="outlined/pencil"
-          placeholder="Введите ключ"
-          required
-        />
-      </UiField>
+          <UiField
+            label="Приватный ключ"
+            :error="getFieldError('privateKey')"
+            required
+          >
+            <UiInput
+              v-model="privateKey"
+              left-icon="outlined/pencil"
+              placeholder="Введите ключ"
+              @input="resetFieldError('privateKey')"
+            />
+          </UiField>
 
-      <UiButton
-        type="submit"
-        theme="blue"
-        :loading="isLoading"
-      >
-        Авторизоваться
-      </UiButton>
+          <UiButton
+            type="submit"
+            theme="blue"
+            :loading="isLoading"
+          >
+            Авторизоваться
+          </UiButton>
+        </template>
+      </UiFormValidator>
     </form>
   </UiPopup>
 </template>
@@ -79,6 +89,8 @@ import Component from 'vue-class-component'
 
 import { SMS_CREATION_TEMPLATE, SMS_REMIND_TEMPLATE } from '~/constants'
 
+import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
+
 @Component({})
 export default class ProcedureEdit extends Vue {
   publicKey = ''
@@ -87,7 +99,51 @@ export default class ProcedureEdit extends Vue {
 
   isLoading = false
 
+  $refs: {
+    formValidator: UiFormValidator
+  }
+
+  get validations (): Validations {
+    return {
+      companyName: {
+        rules: {
+          max: 11,
+          regex: /^([^!"#%'*,;<=>^{|}~]+)([A-Za-z]+)+$/,
+          required: true
+        },
+        messages: {
+          max: 'Максимальное количество символов 11',
+          regex: 'Используйте только латинские буквы без спец символов',
+          required: 'Введите имя компании'
+        },
+        serverMessages: {
+          invalid: 'Имя введено неверно'
+        }
+      },
+      publicKey: {
+        rules: {
+          required: true
+        },
+        messages: {
+          required: 'Введите публичный ключ'
+        }
+      },
+      privateKey: {
+        rules: {
+          required: true
+        },
+        messages: {
+          required: 'Введите приватный ключ'
+        }
+      }
+    }
+  }
+
   async submit () {
+    const isValid = await this.validate()
+
+    if (!isValid) return
+
     try {
       this.isLoading = true
 
@@ -121,6 +177,14 @@ export default class ProcedureEdit extends Vue {
     } finally {
       this.isLoading = false
     }
+  }
+
+  validate () {
+    return this.$refs.formValidator.validate({
+      publicKey: this.publicKey,
+      privateKey: this.privateKey,
+      companyName: this.companyName
+    })
   }
 }
 </script>
