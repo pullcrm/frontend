@@ -75,6 +75,7 @@ import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
         const isSMSAuthorize = this.$typedStore.getters['sms/isAuthorize']
 
         await Promise.all([
+          this.$typedStore.dispatch('timetable/fetch'),
           this.$typedStore.dispatch('procedures/fetch'),
           this.$typedStore.dispatch('specialists/fetch'),
           isSMSAuthorize && this.$typedStore.dispatch('sms/balance')

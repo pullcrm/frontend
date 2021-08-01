@@ -215,6 +215,7 @@ export default class ConfirmationPage extends Vue {
     try {
       this.isLoading = true
 
+      // TODO: Need to remove
       const { hasCreationSMS, hasRemindSMS } = this.company.sms_setting || {}
 
       await this.$api.public.appointmentCreate({

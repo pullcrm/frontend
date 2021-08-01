@@ -71,8 +71,8 @@ export function normalizeTimetable (timetable: ITimetable) {
     }, {})
 }
 
-function parseTimetableItem (TimetableItem) {
-  const [opened, from, to] = TimetableItem.split(';')
+function parseTimetableItem (item) {
+  const [opened, from, to] = item.split(';')
 
   return {
     opened: opened === 'true',
