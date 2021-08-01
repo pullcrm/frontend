@@ -4,6 +4,10 @@ const plugin: Plugin = ({ app }) => {
   // eslint-disable-next-line unicorn/consistent-function-scoping
   const decorate = (fn) => {
     return async function (err) {
+      if (err.status === 403 && err.method === 'token') {
+        return
+      }
+
       if (err.status !== 401) {
         return fn.call(this, err)
       }
