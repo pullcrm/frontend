@@ -70,17 +70,20 @@ import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
   },
 
   watch: {
-    async hasPosition (value) {
-      if (value) {
-        const isSMSAuthorize = this.$typedStore.getters['sms/isAuthorize']
+    hasPosition: {
+      async handler (value) {
+        if (value) {
+          const isSMSAuthorize = this.$typedStore.getters['sms/isAuthorize']
 
-        await Promise.all([
-          this.$typedStore.dispatch('timetable/fetch'),
-          this.$typedStore.dispatch('procedures/fetch'),
-          this.$typedStore.dispatch('specialists/fetch'),
-          isSMSAuthorize && this.$typedStore.dispatch('sms/balance')
-        ])
-      }
+          await Promise.all([
+            this.$typedStore.dispatch('timetable/fetch'),
+            this.$typedStore.dispatch('procedures/fetch'),
+            this.$typedStore.dispatch('specialists/fetch'),
+            isSMSAuthorize && this.$typedStore.dispatch('sms/balance')
+          ])
+        }
+      },
+      immediate: true
     }
   },
 
