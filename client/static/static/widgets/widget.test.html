@@ -13,7 +13,7 @@
       }
 
       var script = document.createElement('script')
-      script.src = 'https://' + window.pullcrm._host + '/static/widgets/widget.compiled.js?l=' + Date.now()
+      script.src = 'http://' + window.pullcrm._host + '/static/widgets/widget.compiled.js?l=' + Date.now()
       script.async = true
 
       document.head.appendChild(script)
@@ -21,6 +21,6 @@
   </head>
 
   <body>
-    <a href="https://pullcrm.com">Записаться</a>
+    <a href="https://localhost:8080">Записаться</a>
   </body>
 </html>

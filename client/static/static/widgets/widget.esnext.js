@@ -100,7 +100,7 @@ window.pullcrm._loadStyles = () => {
       right: 0;
       bottom: 0;
       left: 0;
-      z-index: 999;
+      z-index: 999999;
       -webkit-animation: ui-popup-backdrop 0.2s both ease-out;
       animation: ui-popup-backdrop 0.2s both ease-out;
     }
@@ -135,21 +135,18 @@ window.pullcrm._loadStyles = () => {
       box-shadow: 0 8px 16px rgb(0 0 0 / 12%);
       position: relative;
       z-index: 101;
-      max-height: 700px;
-      height: calc(100% - 48px);
+      height: 100%;
       display: inline-block;
       white-space: normal;
       text-align: left;
       vertical-align: middle;
       background-color: #fff;
-      border-radius: 8px;
       pointer-events: all;
-      margin: 24px 8px;
       overflow: hidden;
     }
 
     .pullcrm-widget-full__container iframe {
-      width: 300px;
+      width: 100vw;
       height: 100%;
       border: none;
     }
@@ -170,19 +167,14 @@ window.pullcrm._loadStyles = () => {
       overflow: hidden;
     }
 
-    @media (min-width: 360px) {
-      .pullcrm-widget-full__container iframe {
-        width: 340px;
-      }
-    }
-
-    @media (min-width: 410px) {
-      .pullcrm-widget-full__container iframe {
-        width: 360px;
-      }
-    }
-
     @media (min-width: 480px) {
+      .pullcrm-widget-full__container {
+        max-height: 700px;
+        height: calc(100% - 48px);
+        margin: 24px 8px;
+        border-radius: 8px;
+      }
+
       .pullcrm-widget-full__container iframe {
         width: 420px;
       }
