@@ -10,14 +10,18 @@
     </div>
 
     <div class="ui-placeholder__title">
-      {{ title }}
+      <slot name="title">
+        {{ title }}
+      </slot>
     </div>
 
     <div
-      v-if="text"
+      v-if="text || $slots.text"
       class="ui-placeholder__text"
     >
-      {{ text }}
+      <slot name="text">
+        {{ text }}
+      </slot>
     </div>
 
     <div

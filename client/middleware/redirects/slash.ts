@@ -1,8 +1,6 @@
 import { Middleware } from '@nuxt/types'
 
-const middleware: Middleware = (ctx) => {
-  const { route, redirect, typedStore } = ctx
-
+const middleware: Middleware = ({ route, typedStore }) => {
   if (typedStore.state.isSiteLoaded) {
     return
   }
@@ -12,7 +10,7 @@ const middleware: Middleware = (ctx) => {
   if (!/\/$/.test(path)) {
     const urlWithSlash = [`${path}/`, query].filter(Boolean).join('?')
 
-    return redirect(301, encodeURI(urlWithSlash))
+    window.location.href = urlWithSlash
   }
 }
 

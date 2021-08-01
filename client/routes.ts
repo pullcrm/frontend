@@ -66,7 +66,7 @@ const routes: RouteConfig[] = [
   { path: '/restore/', name: 'restore', component: Restore, meta: { public: true } },
   { path: '/registration/', name: 'registration', component: Registration, meta: { public: true } },
 
-  { path: '*', component: ErrorPage, meta: { public: true } }
+  { path: '*', name: 'error', component: ErrorPage, meta: { public: true } }
 ]
 
 export default routes
