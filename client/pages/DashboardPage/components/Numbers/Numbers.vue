@@ -1,5 +1,8 @@
 <template>
-  <div class="dashboard-page-numbers">
+  <div
+    v-if="simpleStats"
+    class="dashboard-page-numbers"
+  >
     <UiTitle
       class="dashboard-page-numbers__title"
       size="s"

@@ -25,6 +25,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { ADMIN } from '~/constants/roles'
+
 import dayjs from '~/utils/dayjs'
 
 import Numbers from './components/Numbers/Numbers.vue'
@@ -41,9 +43,13 @@ import DonateBanner from './components/DonateBanner.vue'
   },
 
   async asyncData ({ typedStore }) {
-    await typedStore.dispatch('analytics/fetchSimpleStats', {
-      date: dayjs()
-    })
+    const role = typedStore.getters['position/role']
+
+    if (role.name === ADMIN) {
+      await typedStore.dispatch('analytics/fetchSimpleStats', {
+        date: dayjs()
+      })
+    }
   },
 
   head () {

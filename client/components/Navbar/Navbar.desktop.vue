@@ -30,6 +30,7 @@
     />
 
     <NavbarItem
+      v-if="isAnalyticsVisible"
       :to="{ name: 'analytics' }"
       icon="solid/chart-bar-fill"
       name="Аналитика"
@@ -75,6 +76,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { ADMIN } from '~/constants/roles'
+
 import NavbarItem from './components/NavbarItem.vue'
 
 @Component({
@@ -83,6 +86,14 @@ import NavbarItem from './components/NavbarItem.vue'
   }
 })
 export default class NavbarDesktop extends Vue {
+  get role () {
+    return this.$typedStore.getters['position/role']
+  }
+
+  get isAnalyticsVisible () {
+    return this.role.name === ADMIN
+  }
+
   get profile () {
     return this.$typedStore.state.profile
   }
