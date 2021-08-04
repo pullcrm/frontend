@@ -68,6 +68,17 @@
         </UiField>
 
         <UiField
+          label="Сотрудники"
+        >
+          <UiMultiSelect
+            v-model="selectedSpecialists"
+            :options="specialsts"
+            label-key="fullName"
+            placeholder="Выбрать специалистов"
+          />
+        </UiField>
+
+        <UiField
           label="Описание"
         >
           <UiInput
@@ -113,6 +124,8 @@ import { minutesToTime } from '~/utils/time'
 export default class ProcedureNew extends Vue {
   readonly category
 
+  selectedSpecialists = []
+
   form: Partial<IProcedure> = {
     duration: null,
     category: null
@@ -124,6 +137,10 @@ export default class ProcedureNew extends Vue {
     if (this.category) {
       this.form.category = this.category
     }
+  }
+
+  get specialsts () {
+    return this.$typedStore.state.specialists.specialists
   }
 
   get duration () {
@@ -152,9 +169,12 @@ export default class ProcedureNew extends Vue {
   }
 
   async submit () {
-    await this.$typedStore.dispatch(
-      'procedures/createProcedure', this.form
-    )
+    await this.$typedStore.dispatch('procedures/createProcedure', {
+      ...this.form,
+      specialistIds: this.selectedSpecialists.map(({ id }) => id)
+    })
+
+    await this.$typedStore.dispatch('specialists/fetch')
 
     this.$emit('close')
   }
