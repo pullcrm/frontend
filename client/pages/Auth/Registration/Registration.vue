@@ -19,13 +19,14 @@
       >
         <UiField
           label="Имя и Фамилия"
+          :error="getFieldError('fullName')"
         >
           <UiInput
             v-model="form.fullName"
             left-icon="outlined/pencil"
             name="name"
             placeholder="Введите Имя и Фамилию"
-            required
+            @input="resetFieldError('fullName')"
           />
         </UiField>
 
@@ -40,7 +41,6 @@
             name="phone"
             type="phone"
             placeholder="066"
-            required
             @input="resetFieldError('phone')"
           />
         </UiField>
@@ -55,7 +55,6 @@
             name="password"
             type="password"
             placeholder="Введите пароль"
-            required
             @input="resetFieldError('password')"
           />
         </UiField>
@@ -118,9 +117,25 @@ export default class Home extends Vue {
 
   get validations (): Validations {
     return {
-      phone: {
-        rules: 'required',
+      fullName: {
+        rules: {
+          min: 4,
+          required: true
+        },
         messages: {
+          min: 'Минимальное количество символов: 4',
+          required: 'Введите ваше имя'
+        }
+      },
+      phone: {
+        rules: {
+          min: 10,
+          regex: /^0\d+$/,
+          required: true
+        },
+        messages: {
+          min: 'Не верный формат номера',
+          regex: 'Не верный формат номера',
           required: 'Введите номер телефона'
         },
         serverMessages: {
@@ -128,8 +143,12 @@ export default class Home extends Vue {
         }
       },
       password: {
-        rules: 'required',
+        rules: {
+          min: 4,
+          required: true
+        },
         messages: {
+          min: 'Минимальное количество символов: 4',
           required: 'Введите пароль'
         },
         serverMessages: {
@@ -148,6 +167,10 @@ export default class Home extends Vue {
   }
 
   async onSubmit () {
+    const isValid = await this.validate()
+
+    if (!isValid) return
+
     try {
       await this.$api.users.confirmation({
         phone: this.form.phone,
@@ -191,6 +214,10 @@ export default class Home extends Vue {
 
     await this.$api.auth.registration(form)
     await this.$typedStore.dispatch('auth/login', form)
+  }
+
+  validate () {
+    return this.$refs.formValidator.validate(this.form)
   }
 
   onBack () {

@@ -18,7 +18,6 @@
       >
         <UiInput
           :value="name"
-          required
           placeholder="Введите имя"
           @input="
             $emit('update:name', $event)
@@ -37,7 +36,6 @@
         <UiInput
           mask="38 (###) #### ###"
           :value="phone"
-          required
           placeholder="Введите номер телефона"
           @input="
             $emit('update:phone', $event)

@@ -30,6 +30,7 @@
         <template #default="{ resetFieldError, getFieldError }">
           <UiField
             :error="getFieldError('fullName')"
+            required
           >
             <UiInput
               v-model="form.fullName"
@@ -37,13 +38,13 @@
               name="fullName"
               left-icon="outlined/user"
               placeholder="Имя"
-              required
               @input="resetFieldError('fullName')"
             />
           </UiField>
 
           <UiField
             :error="getFieldError('phone')"
+            required
           >
             <UiInput
               v-model="form.phone"
@@ -51,7 +52,6 @@
               name="phone"
               left-icon="outlined/phone"
               placeholder="Телефон"
-              required
               @input="resetFieldError('phone')"
             />
           </UiField>
@@ -170,10 +170,12 @@ export default class ConfirmationPage extends Vue {
       phone: {
         rules: {
           min: 10,
+          regex: /^0\d+$/,
           required: true
         },
         messages: {
           min: 'Не верный формат номера',
+          regex: 'Не верный формат номера',
           required: 'Введите номер телефона'
         }
       }
@@ -212,6 +214,10 @@ export default class ConfirmationPage extends Vue {
   }
 
   async onSubmit () {
+    const isValid = await this.validate()
+
+    if (!isValid) return
+
     try {
       this.isLoading = true
 
@@ -243,7 +249,7 @@ export default class ConfirmationPage extends Vue {
       if (err.status === 400) {
         this.$typedStore.dispatch('toasts/show', {
           type: 'error',
-          title: 'Указана не вся информация, исправте данные!'
+          title: 'Что-то пошло не так, попробуйте вернутся назад и выбрать другое время!'
         })
 
         return
@@ -253,6 +259,10 @@ export default class ConfirmationPage extends Vue {
     } finally {
       this.isLoading = false
     }
+  }
+
+  validate () {
+    return this.$refs.formValidator.validate(this.form)
   }
 }
 </script>

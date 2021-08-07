@@ -226,7 +226,7 @@ export default class AppointmentNew extends Vue {
   }
 
   get procedures () {
-    return this.form.specialist.procedures
+    return this.form.specialist?.procedures ?? []
   }
 
   get date () {
@@ -258,10 +258,22 @@ export default class AppointmentNew extends Vue {
       this.isLoading = true
 
       await this.$typedStore.dispatch('appointments/create', this.form)
-      await this.$typedStore.dispatch('schedule/fetch')
 
       this.$typedStore.dispatch('popup/hide')
+    } catch (err) {
+      if (err.status === 400) {
+        this.$typedStore.dispatch('toasts/show', {
+          type: 'error',
+          title: err.message
+        })
+
+        return
+      }
+
+      throw err
     } finally {
+      await this.$typedStore.dispatch('schedule/fetch')
+
       this.isLoading = false
     }
   }

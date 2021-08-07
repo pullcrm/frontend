@@ -29,7 +29,7 @@ export function normalizeAppointmentParams (submitParams) {
   return {
     date: date.format('YYYY-MM-DD'),
     total,
-    phone: phone,
+    phone: phone || undefined,
     status: status,
     isQueue: isQueue,
     fullName: fullName,

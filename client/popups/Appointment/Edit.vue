@@ -245,6 +245,17 @@ export default class AppointmentEdit extends Vue {
       await this.$typedStore.dispatch('schedule/fetch')
 
       this.$typedStore.dispatch('popup/hide')
+    } catch (err) {
+      if (err.status === 400) {
+        this.$typedStore.dispatch('toasts/show', {
+          type: 'error',
+          title: err.message
+        })
+
+        return
+      }
+
+      throw err
     } finally {
       this.isLoading = false
     }
