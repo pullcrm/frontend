@@ -111,7 +111,7 @@ export default class SpecialistPage extends Vue {
   }
 
   get canNext () {
-    return Boolean(this.$route.query.procedureIds)
+    return this.$route.query.procedureIds?.length > 0
   }
 
   get procedures () {

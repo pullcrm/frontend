@@ -2,7 +2,7 @@
   <UiPanel
     size="s"
     class="base-widget-procedure-panel"
-    @click.native.prevent="onPick"
+    @click.native.prevent="onSelect"
   >
     <UiText
       size="l"
@@ -13,8 +13,6 @@
         <UiCheckbox
           size="m"
           :value="isActive"
-          @input="onSelect"
-          @click.native.stop
         />
       </template>
 
@@ -47,8 +45,6 @@ import Component from 'vue-class-component'
 
 import xor from 'lodash/xor'
 
-import dayjs from '~/utils/dayjs'
-
 @Component({
   props: {
     procedure: {
@@ -76,19 +72,6 @@ export default class ProcedurePanel extends Vue {
       query: {
         ...this.$route.query,
         procedureIds: procedureIds.map(String)
-      }
-    })
-  }
-
-  async onPick () {
-    await this.$router.push({
-      name: 'fullWidgetPickDatePage',
-      query: {
-        ...this.$route.query,
-        date: dayjs(new Date()).format('YYYY-MM-DD'),
-        procedureIds: [
-          String(this.procedure.id)
-        ]
       }
     })
   }
