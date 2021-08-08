@@ -86,24 +86,14 @@ import ProceduresGroup from '../../components/ProceduresGroup.vue'
       })
     ])
 
-    let { procedures } = specialist
-
-    if (procedures.length === 0) {
-      procedures = await api.public.proceduresByCompanyId({
-        companyId
-      })
-    }
-
     return {
       specialist,
-      procedures,
       categories
     }
   }
 })
 export default class SpecialistPage extends Vue {
   readonly specialist
-  readonly procedures
   readonly categories
 
   canBack = Boolean(this.$typedStore.getters['location/from'])
@@ -121,7 +111,11 @@ export default class SpecialistPage extends Vue {
   }
 
   get canNext () {
-    return Boolean(this.$route.query.procedureIds)
+    return this.$route.query.procedureIds?.length > 0
+  }
+
+  get procedures () {
+    return this.specialist.procedures
   }
 
   get normalizeCategories () {

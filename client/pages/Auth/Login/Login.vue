@@ -21,7 +21,6 @@
             mask="38 (###) #### ###"
             type="phone"
             name="phone"
-            required
             left-icon="outlined/phone"
             placeholder="066"
             autocomplete="on"
@@ -37,7 +36,6 @@
             v-model="password"
             type="password"
             name="password"
-            required
             left-icon="outlined/key"
             placeholder="Введите пароль"
             autocomplete="on"
@@ -117,8 +115,14 @@ export default class Login extends Vue {
   get validations (): Validations {
     return {
       phone: {
-        rules: 'required',
+        rules: {
+          min: 10,
+          regex: /^0\d+$/,
+          required: true
+        },
         messages: {
+          min: 'Не верный формат номера',
+          regex: 'Не верный формат номера',
           required: 'Введите номер телефона'
         },
         serverMessages: {
@@ -146,6 +150,10 @@ export default class Login extends Vue {
   }
 
   async onSubmit () {
+    const isValid = await this.validate()
+
+    if (!isValid) return
+
     try {
       await this.$typedStore.dispatch('auth/login', {
         phone: this.phone,
@@ -177,6 +185,13 @@ export default class Login extends Vue {
 
       throw err
     }
+  }
+
+  validate () {
+    return this.$refs.formValidator.validate({
+      phone: this.phone,
+      password: this.password
+    })
   }
 }
 </script>

@@ -28,7 +28,6 @@
             left-icon="outlined/phone"
             placeholder="066"
             :disabled="isValid"
-            required
             @input="resetFieldError('phone')"
           />
         </UiField>
@@ -36,6 +35,18 @@
         <template
           v-if="isValid"
         >
+          <UiField
+            label="Код смс"
+            :error="getFieldError('code')"
+          >
+            <UiInput
+              v-model="code"
+              left-icon="outlined/chat-centered-text"
+              placeholder="Введите СМС-код"
+              @input="resetFieldError('code')"
+            />
+          </UiField>
+
           <UiField
             label="Пароль"
             :error="getFieldError('password')"
@@ -45,22 +56,22 @@
               left-icon="outlined/key"
               name="password"
               type="password"
-              placeholder="Введите пароль"
-              required
+              placeholder="Введите новый пароль"
               @input="resetFieldError('password')"
             />
           </UiField>
 
           <UiField
-            label="Код смс"
-            :error="getFieldError('code')"
+            label="Повторите пароль"
+            :error="getFieldError('repeatPassword')"
           >
             <UiInput
-              v-model="code"
-              left-icon="outlined/chat-centered-text"
-              placeholder="Введите код с sms"
-              required
-              @input="resetFieldError('code')"
+              v-model="repeatPassword"
+              left-icon="outlined/key"
+              name="repeatPassword"
+              type="password"
+              placeholder="Введите повторно новый пароль"
+              @input="resetFieldError('repeatPassword')"
             />
           </UiField>
         </template>
@@ -105,6 +116,7 @@ export default class Restore extends Vue {
   code = ''
   phone = ''
   password = ''
+  repeatPassword = ''
 
   isValid = false
 
@@ -132,6 +144,21 @@ export default class Restore extends Vue {
         serverMessages: {
           invalid: 'Не правильный код'
         }
+      },
+
+      password: {
+        rules: 'required',
+        messages: {
+          required: 'Введите новый пароль'
+        }
+      },
+
+      repeatPassword: {
+        rules: 'required|confirmed:password',
+        messages: {
+          required: 'Введите повторно новый пароль',
+          confirmed: 'Пароль не сходится'
+        }
       }
     }
   }
@@ -145,6 +172,10 @@ export default class Restore extends Vue {
   }
 
   async submit () {
+    const isValid = await this.validate()
+
+    if (!isValid) return
+
     try {
       await this.$api.auth.restore({
         code: this.code,
@@ -191,6 +222,15 @@ export default class Restore extends Vue {
 
       throw err
     }
+  }
+
+  validate () {
+    return this.$refs.formValidator.validate({
+      code: this.code,
+      phone: this.phone,
+      password: this.password,
+      repeatPassword: this.repeatPassword
+    })
   }
 
   onBack () {

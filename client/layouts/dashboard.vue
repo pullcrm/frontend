@@ -8,7 +8,25 @@
       class="dashboard-layout__container"
       :class="{'_has-sidebar': hasSidebar}"
     >
-      <Header class="dashboard-layout__header" />
+      <UiContainer
+        class="dashboard-layout__header"
+      >
+        <Header />
+
+        <UiAlert
+          v-if="hasSmsError"
+          theme="error"
+          left-icon="solid/warning-circle-fill"
+        >
+          Оповещения по СМС отключены! Попробуйте обновить настройки поставщика.
+          <UiLink
+            theme="action"
+            @click.native="resetSms"
+          >
+            Сбросить настройки
+          </UiLink>
+        </UiAlert>
+      </UiContainer>
 
       <Nuxt />
     </div>
@@ -52,16 +70,20 @@ import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
   },
 
   watch: {
-    async hasPosition (value) {
-      if (value) {
-        const isSMSAuthorize = this.$typedStore.getters['sms/isAuthorize']
+    hasPosition: {
+      async handler (value) {
+        if (value) {
+          const isSMSAuthorize = this.$typedStore.getters['sms/isAuthorize']
 
-        await Promise.all([
-          this.$typedStore.dispatch('procedures/fetch'),
-          this.$typedStore.dispatch('specialists/fetch'),
-          isSMSAuthorize && this.$typedStore.dispatch('sms/balance')
-        ])
-      }
+          await Promise.all([
+            this.$typedStore.dispatch('timetable/fetch'),
+            this.$typedStore.dispatch('procedures/fetch'),
+            this.$typedStore.dispatch('specialists/fetch'),
+            isSMSAuthorize && this.$typedStore.dispatch('sms/balance')
+          ])
+        }
+      },
+      immediate: true
     }
   },
 
@@ -78,6 +100,10 @@ export default class DashboardLayout extends Vue {
     popperMenu: PopperMenu
   }
 
+  get hasSmsError () {
+    return this.$typedStore.state.sms.hasSmsError
+  }
+
   get hasSidebar () {
     return this.$typedStore.state.schedule.isQueueOpened
   }
@@ -88,6 +114,16 @@ export default class DashboardLayout extends Vue {
 
   get loading () {
     return this.$typedStore.state.loading
+  }
+
+  async resetSms () {
+    await this.$api.sms.settingRemove()
+
+    const { href } = this.$router.resolve({
+      name: 'smsSettings'
+    })
+
+    window.location.href = href
   }
 }
 </script>
@@ -115,6 +151,10 @@ export default class DashboardLayout extends Vue {
 
     &__header {
       margin-bottom: 16px;
+
+      .ui-alert {
+        margin-top: 16px;
+      }
     }
 
     // @FIXME:

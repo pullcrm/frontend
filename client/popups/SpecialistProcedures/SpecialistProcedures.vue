@@ -18,7 +18,7 @@
         class="specialist-procedures__sub-title"
         size="m"
       >
-        Выберите перечень услуг которые вы предоставляете
+        Выберите перечень услуг которые предоставляет сотрудник
       </UiText>
 
       <div class="specialist-procedures__inner">

@@ -25,7 +25,7 @@
               theme="danger-outlined"
               @click.native="deauthorize"
             >
-              Деавторизоваться
+              Отключить
             </UiButton>
           </template>
         </Section>
@@ -54,7 +54,7 @@
         >
           <template #disclaimer>
             Используйте алиасы для генерации данных: <br>
-            %date% - дата в формате "28:06", <br>
+            %date% - дата в формате "28.06", <br>
             %time% - время начала онлайн записи, <br>
             %specialist% - Имя специалиста, <br>
             %procedures% - список выбранных услуг через запятую
@@ -115,7 +115,7 @@
         >
           <template #disclaimer>
             Используйте алиасы для генерации данных: <br>
-            %date% - дата в формате "28:06", <br>
+            %date% - дата в формате "28.06", <br>
             %time% - время начала онлайн записи, <br>
             %specialist% - Имя специалиста, <br>
             %procedures% - список выбранных услуг через запятую
@@ -157,7 +157,7 @@
             theme="blue"
             @click.native="smsPopup"
           >
-            Авторизоваться
+            Подключить
           </UiButton>
         </template>
       </Section>

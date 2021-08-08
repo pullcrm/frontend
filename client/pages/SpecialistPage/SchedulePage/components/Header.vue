@@ -54,9 +54,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import dayjs from '~/utils/dayjs'
-
 import { COMPLETED } from '~/constants/appointment'
+
+import dayjs from '~/utils/dayjs'
 
 @Component({
   props: {

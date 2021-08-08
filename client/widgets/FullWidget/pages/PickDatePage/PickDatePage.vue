@@ -78,7 +78,9 @@ import SpecialistPanel from './components/SpecialistPanel.vue'
   },
 
   async fetch () {
-    const { companyId, specialistId, date } = this.$route.query
+    const date = this.$route.query.date
+    const companyId = Number(this.$route.query.companyId || 0)
+    const specialistId = Number(this.$route.query.specialistId || 0)
 
     this.availableHours = await this.$api.public.hoursSlots({
       date,
@@ -92,13 +94,11 @@ import SpecialistPanel from './components/SpecialistPanel.vue'
         return dayjs().hour(hour).minute(minute)
       })
     }).then(result => {
-      if (dayjs(String(this.date)).isToday()) {
-        return result.filter(async item => {
-          return await item.isAfter(dayjs() /** add(30, 'minute') */)
-        })
-      }
+      return result.filter(item => {
+        if (!this.isToday) return true
 
-      return result
+        return item.isAfter(dayjs() /** add(30, 'minute') */)
+      })
     })
   },
 
@@ -110,29 +110,27 @@ import SpecialistPanel from './components/SpecialistPanel.vue'
 
     const specialist = await api.public.specialistById(specialistId)
 
-    let { procedures } = specialist
-
-    if (procedures.length === 0) {
-      procedures = await api.public.proceduresByCompanyId({
-        companyId
-      })
-    }
-
     return {
       companyId,
-      procedures,
       specialist
     }
   }
 })
 export default class PickDatePage extends Vue {
   readonly companyId!: number
-  readonly procedures
-  readonly specialist
+  readonly specialist!: any
+
+  availableHours = []
 
   fromDatePick = new Date()
 
-  availableHours = []
+  get isToday () {
+    return dayjs(String(this.date)).isToday()
+  }
+
+  get procedures () {
+    return this.specialist.procedures
+  }
 
   get canNext () {
     return this.date && this.time

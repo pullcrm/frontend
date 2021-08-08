@@ -106,4 +106,4 @@ export default class SpecialistSchedulePage extends Vue {
 }
 </script>
 
-<style lang="scss" src="./SpecialistSchedulePage.scss"></style>
+<style lang="scss" src="./SchedulePage.scss"></style>

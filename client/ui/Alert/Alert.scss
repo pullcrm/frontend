@@ -3,7 +3,8 @@
   display: flex;
   align-items: center;
   padding: 16px 16px 16px 20px;
-  border: 1px solid $ui-black-40;
+  background-color: $ui-white;
+  border: 1px solid $ui-black-20;
   border-radius: 10px;
 
   &_theme_success {

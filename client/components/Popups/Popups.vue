@@ -98,6 +98,16 @@
       />
     </Popup>
 
+    <Popup
+      v-slot="{ close, props }"
+      name="specialist-procedures"
+    >
+      <SpecialistProcedures
+        v-bind="props"
+        @close="close"
+      />
+    </Popup>
+
     <UiPopupBackdrop
       v-if="confirmation"
       @close="smsConfirmed(false)"
@@ -138,6 +148,11 @@ const Appointment = () => import(
 const SpecialistNew = () => import(
   /* webpackChunkName: "popups" */
   '~/popups/Specialist/New.vue'
+)
+
+const SpecialistProcedures = () => import(
+  /* webpackChunkName: "popups" */
+  '~/popups/SpecialistProcedures/SpecialistProcedures.vue'
 )
 
 const ProcedureNew = () => import(
@@ -198,6 +213,7 @@ const QuestionPopup = () => import(
     QuestionPopup,
     SmsConfirmation,
     UiPopupBackdrop,
+    SpecialistProcedures,
     NewProcedureCategory,
     EditProcedureCategory
   },

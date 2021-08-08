@@ -53,42 +53,7 @@
           $emit('resetFieldError', 'procedures')
           onInput($event)
         "
-      >
-        <template #badge="{ item, title, remove }">
-          <UiPopover
-            class="appointment-popup-procedures-select__procedure"
-            size="s"
-            theme="dark"
-            placement="top"
-            @click.native.prevent
-          >
-            <UiBadge
-              :key="title"
-              class="ui-multi-select__badge"
-              size="m"
-              clickable
-            >
-              {{ title }}
-
-              <template #append>
-                <UiIcon
-                  name="outlined/x"
-                  size="xs"
-                  @click.native.prevent.stop="remove"
-                />
-              </template>
-            </UiBadge>
-
-            <template #body>
-              <UiText
-                class="appointment-popup-procedures-select__procedure-text"
-              >
-                {{ item.duration | minutesToTime }} - {{ item.price | price }}
-              </UiText>
-            </template>
-          </UiPopover>
-        </template>
-      </UiMultiSelect>
+      />
     </UiField>
   </div>
 </template>

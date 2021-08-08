@@ -8,13 +8,15 @@ function createState () {
 }
 
 const actions = {
-  async fetch ({ commit, rootGetters }) {
-    const companyId = rootGetters['auth/companyId']
-
-    const position = rootGetters['position/positionsDict'][companyId]
+  async fetch ({ commit, dispatch, rootGetters }) {
+    const position = rootGetters['position/positionsDict'][
+      rootGetters['auth/companyId']
+    ]
 
     if (!position) {
-      // TODO: Reset tokens or throw error
+      await dispatch('auth/reset', null, { root: true })
+
+      window.location.reload()
     }
 
     commit('SET_CURRENT', position)

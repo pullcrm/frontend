@@ -84,11 +84,11 @@ export default class Avatars extends Vue {
 
       const formData = new FormData()
 
-      formData.append('file', file)
+      formData.append('files', file)
       formData.append('group', AVATAR)
       formData.append('userId', this.user.id)
 
-      const result = await this.$typedStore.dispatch('specialists/onUploadAvatar', formData)
+      const [result] = await this.$typedStore.dispatch('specialists/onUploadAvatar', formData)
 
       if (result?.id) {
         await this.updateAvatar(result.id)

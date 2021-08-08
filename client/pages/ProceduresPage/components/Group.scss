@@ -2,6 +2,7 @@
   &_has-category-id {
     .procedures-page-group {
       &__title {
+        display: inline-flex;
         cursor: pointer;
 
         .ui-title__append {
@@ -22,7 +23,7 @@
   }
 
   &__title {
-    display: inline-flex;
+    display: none;
     margin-bottom: 12px;
     color: $ui-black-100;
     transition: color var(--ui-transition-hover);

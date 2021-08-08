@@ -13,15 +13,25 @@
     />
 
     <NavbarItem
+      tag="a"
+      href="#"
       icon="solid/plus-circle-fill"
       name="Записать"
-      @click.native="addAppointment"
+      @click.native.prevent="addAppointment"
     />
 
     <NavbarItem
+      v-if="isAnalyticsVisible"
       :to="{ name: 'analytics' }"
       icon="solid/chart-bar-fill"
       name="Аналитика"
+    />
+
+    <NavbarItem
+      v-else
+      :to="{ name: 'specialists' }"
+      icon="solid/users-fill"
+      name="Сотрудники"
     />
 
     <UiPopover
@@ -30,14 +40,19 @@
     >
       <template #default="{ isOpened }">
         <NavbarItem
+          tag="a"
+          href="#"
           :class="{'_active': isOpened}"
           icon="solid/folder-notch-open-fill"
           name="Меню"
         />
       </template>
 
-      <template #body>
-        <div class="navbar-mobile__popover-menu">
+      <template #body="{ close }">
+        <div
+          class="navbar-mobile__popover-menu"
+          @click="close"
+        >
           <UiText
             tag="RouterLink"
             :to="{ name: 'specialists' }"
@@ -66,9 +81,11 @@
           </UiText>
 
           <UiText
+            tag="a"
+            href="#"
             size="m"
             left-icon="outlined/sign-out"
-            @click.native.prevent="logout"
+            @click.native.prevent.stop="logout"
           >
             Выйти
           </UiText>
@@ -82,6 +99,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { ADMIN } from '~/constants/roles'
+
 import NavbarItem from './components/NavbarItem.vue'
 
 @Component({
@@ -90,6 +109,14 @@ import NavbarItem from './components/NavbarItem.vue'
   }
 })
 export default class NavbarMobile extends Vue {
+  get role () {
+    return this.$typedStore.getters['position/role']
+  }
+
+  get isAnalyticsVisible () {
+    return this.role.name === ADMIN
+  }
+
   async addAppointment () {
     await this.$typedStore.dispatch('popup/show', {
       name: 'appointment',

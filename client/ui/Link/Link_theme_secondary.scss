@@ -1,13 +1,13 @@
 @mixin ui-link_theme_secondary {
-  color: $ui-blue-info;
+  color: $ui-green-brand;
 
   &:active {
-    color: $ui-blue-hover-15;
+    color: $ui-green-hover-15;
   }
 
   @include ui-hover {
     &:hover {
-      color: $ui-blue-hover-15;
+      color: $ui-green-hover-15;
     }
   }
 }

@@ -6,7 +6,8 @@ const BALANCE_TIMEOUT = 1 * 1000 * 60
 
 export interface IState {
   balance: number | null,
-  balancePromise: Promise<any> | null
+  balancePromise: Promise<any> | null,
+  hasSmsError: boolean
 }
 
 const SmsModule: Module<IState, IRootState> = {
@@ -15,25 +16,34 @@ const SmsModule: Module<IState, IRootState> = {
   state () {
     return {
       balance: null,
-      balancePromise: null
+      balancePromise: null,
+      hasSmsError: false
     }
   },
 
   actions: {
     async balance ({ commit, state }) {
-      if (!state.balancePromise) {
-        const balancePromise = this.$api.sms.balance()
+      try {
+        if (!state.balancePromise) {
+          const balancePromise = this.$api.sms.balance()
 
-        commit('SET_BALANCE_PROMISE', balancePromise)
+          commit('SET_BALANCE_PROMISE', balancePromise)
 
-        setTimeout(() => {
-          commit('SET_BALANCE_PROMISE', null)
-        }, BALANCE_TIMEOUT)
+          setTimeout(() => {
+            commit('SET_BALANCE_PROMISE', null)
+          }, BALANCE_TIMEOUT)
+        }
+
+        const { balance } = await state.balancePromise
+
+        commit('SET_BALANCE', Number(balance))
+      } catch (err) {
+        if (err.status === 500) {
+          return commit('SET_HAS_SMS_ERROR', true)
+        }
+
+        throw err
       }
-
-      const { balance } = await state.balancePromise
-
-      commit('SET_BALANCE', Number(balance))
     }
   },
 
@@ -44,6 +54,10 @@ const SmsModule: Module<IState, IRootState> = {
 
     SET_BALANCE_PROMISE (state, balancePromise) {
       state.balancePromise = balancePromise
+    },
+
+    SET_HAS_SMS_ERROR (state, hasSmsError) {
+      state.hasSmsError = hasSmsError
     }
   },
 
