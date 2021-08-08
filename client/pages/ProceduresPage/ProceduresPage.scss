@@ -3,13 +3,11 @@
     margin-bottom: 24px;
   }
 
-  &__group {
-    margin-bottom: 24px;
+  &__group + &__group {
+    margin-top: 24px;
 
-    &:not(.procedures-page-group_has-category-id) {
-      .procedures-page-group__title {
-        display: none;
-      }
+    .procedures-page-group__title {
+      display: inline-flex;
     }
   }
 }
