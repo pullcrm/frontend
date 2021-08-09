@@ -16,7 +16,7 @@ const actions = {
     const { name: role } = rootGetters['position/role']
 
     if (role === SPECIALIST) {
-      const specialist = await this.$api.public.specialistById(
+      const specialist = await this.$api.specialist.get(
         rootGetters['position/currentId']
       )
 
