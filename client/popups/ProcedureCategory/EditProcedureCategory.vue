@@ -11,35 +11,43 @@
     </UiTitle>
 
     <form @submit.prevent="submit">
-      <UiField
-        label="Название категории"
-        required
+      <UiFormValidator
+        ref="formValidator"
+        :validations="validations"
       >
-        <UiInput
-          v-model="category.name"
-          left-icon="outlined/pencil"
-          placeholder="Введите название"
-          required
-        />
-      </UiField>
+        <template #default="{ resetFieldError, getFieldError }">
+          <UiField
+            label="Название категории"
+            :error="getFieldError('name')"
+            required
+          >
+            <UiInput
+              v-model="category.name"
+              left-icon="outlined/pencil"
+              placeholder="Введите название"
+              @input="resetFieldError('name')"
+            />q
+          </UiField>
 
-      <UiButton
-        type="submit"
-        size="l"
-        theme="blue"
-        :loading="isLoading"
-      >
-        Редактировать
-      </UiButton>
+          <UiButton
+            type="submit"
+            size="l"
+            theme="blue"
+            :loading="isLoading"
+          >
+            Редактировать
+          </UiButton>
 
-      <UiButton
-        size="m"
-        theme="danger-outlined"
-        :loading="isLoading"
-        @click.native="remove"
-      >
-        Удалить категорию
-      </UiButton>
+          <UiButton
+            size="m"
+            theme="danger-outlined"
+            :loading="isLoading"
+            @click.native="remove"
+          >
+            Удалить категорию
+          </UiButton>
+        </template>
+      </UiFormValidator>
     </form>
   </UiPopup>
 </template>
@@ -49,6 +57,8 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import { ICategory } from '~/services/api'
+
+import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
 
 @Component({
   props: {
@@ -63,7 +73,32 @@ export default class ProcedureEdit extends Vue {
 
   isLoading = false
 
+  $refs: {
+    formValidator: UiFormValidator
+  }
+
+  get validations (): Validations {
+    return {
+      name: {
+        rules: {
+          min: 4,
+          max: 255,
+          required: true
+        },
+        messages: {
+          min: 'Минимальное количество символов: 4',
+          max: 'Максимальное количество символов: 255',
+          required: 'Введите название категории'
+        }
+      }
+    }
+  }
+
   async submit () {
+    const isValid = await this.validate()
+
+    if (!isValid) return
+
     try {
       this.isLoading = true
 
@@ -92,6 +127,12 @@ export default class ProcedureEdit extends Vue {
     } finally {
       this.isLoading = false
     }
+  }
+
+  validate () {
+    return this.$refs.formValidator.validate({
+      name: this.category.name
+    })
   }
 }
 </script>
