@@ -77,12 +77,16 @@
             />
           </UiField>
 
-          <UiField label="Описание">
+          <UiField
+            label="Описание"
+            :error="getFieldError('description')"
+          >
             <UiInput
               v-model="form.description"
               tag="textarea"
               name="description"
               placeholder="Добавьте описание"
+              @input="resetFieldError('description')"
             />
           </UiField>
 
@@ -177,6 +181,15 @@ export default class ProcedureNew extends Vue {
         },
         messages: {
           required: 'Укажите длительность услуги'
+        }
+      },
+
+      description: {
+        rules: {
+          max: 255
+        },
+        messages: {
+          max: 'Максимальное количество символов: 255'
         }
       }
     }
