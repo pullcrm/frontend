@@ -271,7 +271,7 @@ export default class Settings extends Vue {
           required: true
         },
         messages: {
-          max: 'Максимальная длина строки 255 символов',
+          max: 'Максимальное количество символов: 255',
           required: 'Введите название компании'
         }
       },
@@ -280,7 +280,7 @@ export default class Settings extends Vue {
           max: 255
         },
         messages: {
-          max: 'Максимальная длина строки 255 символов'
+          max: 'Максимальное количество символов: 255'
         }
       },
       description: {
@@ -288,7 +288,7 @@ export default class Settings extends Vue {
           max: 255
         },
         messages: {
-          max: 'Максимальная длина строки 255 символов'
+          max: 'Максимальное количество символов: 255'
         }
       }
     }

@@ -33,6 +33,7 @@
             type="submit"
             size="l"
             theme="blue"
+            :loading="isLoading"
           >
             Добавить
           </UiButton>
@@ -51,6 +52,8 @@ import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
 @Component({})
 export default class ProcedureEdit extends Vue {
   name = ''
+
+  isLoading = false
 
   $refs: {
     formValidator: UiFormValidator
@@ -78,14 +81,20 @@ export default class ProcedureEdit extends Vue {
 
     if (!isValid) return
 
-    await this.$api.categories.create({
-      name: this.name,
-      type: 'PROCEDURE'
-    })
+    try {
+      this.isLoading = true
 
-    await this.$typedStore.dispatch('procedures/fetch')
+      await this.$api.categories.create({
+        name: this.name,
+        type: 'PROCEDURE'
+      })
 
-    this.$emit('close')
+      await this.$typedStore.dispatch('procedures/fetch')
+
+      this.$emit('close')
+    } finally {
+      this.isLoading = false
+    }
   }
 
   validate () {

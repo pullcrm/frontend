@@ -16,115 +16,120 @@
 
     <form @submit.prevent="submit">
       <UiFormValidator
-        v-slot="{ resetFieldError }"
         ref="formValidator"
         :validations="validations"
       >
-        <UiField
-          label="Сотрудник"
-        >
-          <UiSelect
-            v-model="form.specialist"
-            :options="specialists"
-            label-key="fullName"
-            placeholder="Выбрать сотрудника"
-            :clearable="false"
+        <template #default="{ resetFieldError, getFieldError }">
+          <UiField
+            label="Сотрудник"
             required
-            @input="resetFieldError('specialist')"
-          />
-        </UiField>
-
-        <UiPopover
-          class="time-off-edit-popup__popover"
-          size="m"
-          placement="bottom_start"
-        >
-          <UiField label="Дата">
-            <UiInput
-              :value="date | formatDate('D MMMM')"
-              readonly
-              left-icon="outlined/pencil"
+            :error="getFieldError('specialist')"
+          >
+            <UiSelect
+              v-model="form.specialist"
+              :options="specialists"
+              label-key="fullName"
+              placeholder="Выбрать сотрудника"
+              :clearable="false"
+              @input="resetFieldError('specialist')"
             />
           </UiField>
 
-          <template #body>
-            <DataPicker v-model="date" />
-          </template>
-        </UiPopover>
-
-        <UiField>
-          <UiSwitch
-            v-model="isCloseDay"
+          <UiPopover
+            class="time-off-edit-popup__popover"
             size="m"
+            placement="bottom_start"
           >
-            <template #append>
-              <UiText
-                size="m"
-              >
-                Закрыть запись на целый день
-              </UiText>
+            <UiField label="Дата">
+              <UiInput
+                :value="date | formatDate('D MMMM')"
+                readonly
+                left-icon="outlined/pencil"
+              />
+            </UiField>
+
+            <template #body>
+              <DataPicker v-model="date" />
             </template>
-          </UiSwitch>
-        </UiField>
+          </UiPopover>
 
-        <template
-          v-if="isCloseDay === false"
-        >
-          <UiField
-            label="Время начала"
+          <UiField>
+            <UiSwitch
+              v-model="isCloseDay"
+              size="m"
+            >
+              <template #append>
+                <UiText
+                  size="m"
+                >
+                  Закрыть запись на целый день
+                </UiText>
+              </template>
+            </UiSwitch>
+          </UiField>
+
+          <template
+            v-if="isCloseDay === false"
           >
-            <UiSelect
-              v-model="form.startTime"
-              :options="workingHours"
+            <UiField
+              label="Время начала"
               required
-              placeholder="Выбрать время начала"
-              @input="resetFieldError('timeStart')"
+              :error="getFieldError('startTime')"
+            >
+              <UiSelect
+                v-model="form.startTime"
+                :options="workingHours"
+                placeholder="Выбрать время начала"
+                @input="resetFieldError('timeStart')"
+              />
+            </UiField>
+
+            <UiField
+              label="Время конца"
+              required
+              :error="getFieldError('endTime')"
+            >
+              <UiSelect
+                v-model="form.endTime"
+                :options="workingHoursForTimeEnd"
+                placeholder="Выбрать время конца"
+                @input="resetFieldError('endTime')"
+              />
+            </UiField>
+          </template>
+
+          <UiField
+            label="Краткое описание"
+            :error="getFieldError('description')"
+          >
+            <UiInput
+              v-model="form.description"
+              tag="textarea"
+              placeholder="Введите описание"
+              @input="resetFieldError('description')"
             />
           </UiField>
 
-          <UiField
-            label="Время конца"
-          >
-            <UiSelect
-              v-model="form.endTime"
-              :options="workingHoursForTimeEnd"
-              required
-              placeholder="Выбрать время конца"
-              @input="resetFieldError('endTime')"
-            />
-          </UiField>
+          <div class="time-off-edit-popup__actions">
+            <UiButton
+              type="submit"
+              size="l"
+              theme="blue"
+              :loading="isLoading"
+            >
+              Сохранить
+            </UiButton>
+
+            <UiButton
+              size="l"
+              theme="danger-outlined"
+              :loading="isLoading"
+              @click.native="remove"
+            >
+              Удалить
+            </UiButton>
+          </div>
         </template>
-
-        <UiField
-          label="Краткое описание"
-        >
-          <UiInput
-            v-model="form.description"
-            tag="textarea"
-            placeholder="Введите описание"
-            @input="resetFieldError('description')"
-          />
-        </UiField>
-
-        <div class="time-off-edit-popup__actions">
-          <UiButton
-            type="submit"
-            size="l"
-            theme="blue"
-            :loading="isLoading"
-          >
-            Сохранить
-          </UiButton>
-
-          <UiButton
-            size="l"
-            theme="danger-outlined"
-            :loading="isLoading"
-            @click.native="remove"
-          >
-            Удалить
-          </UiButton>
-        </div>
       </UiFormValidator>
     </form>
   </UiPopup>
@@ -138,6 +143,8 @@ import { toDate } from '~/utils/date-time'
 import { setTime } from '~/utils/time'
 
 import { isCloseDay } from '~/logics/time-offs'
+
+import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
 
 import DataPicker from '~/components/DatePicker/DatePicker.vue'
 
@@ -189,6 +196,10 @@ export default class TimeOffEdit extends Vue {
 
   date = new Date()
 
+  $refs: {
+    formValidator: UiFormValidator
+  }
+
   constructor () {
     super()
 
@@ -232,8 +243,36 @@ export default class TimeOffEdit extends Vue {
     })
   }
 
-  get validations () {
-    return {}
+  get validations (): Validations {
+    return {
+      specialist: {
+        rules: 'required',
+        messages: {
+          required: 'Выберите специалиста'
+        }
+      },
+
+      startTime: !this.isCloseDay && {
+        rules: 'required',
+        messages: {
+          required: 'Укажите время начала'
+        }
+      },
+
+      endTime: !this.isCloseDay && {
+        rules: 'required',
+        messages: {
+          required: 'Укажите время завершения'
+        }
+      },
+
+      description: {
+        rules: 'max:255',
+        messages: {
+          max: 'Максимальное количество символов: 255'
+        }
+      }
+    }
   }
 
   get specialists () {
@@ -241,9 +280,13 @@ export default class TimeOffEdit extends Vue {
   }
 
   async submit () {
-    this.isLoading = true
+    const isValid = await this.validate()
+
+    if (!isValid) return
 
     try {
+      this.isLoading = true
+
       const endDateTime = setTime(this.date, this.form.endTime).format('MM.DD.YY HH:mm')
       const startDateTime = setTime(this.date, this.form.startTime).format('MM.DD.YY HH:mm')
 
@@ -275,6 +318,10 @@ export default class TimeOffEdit extends Vue {
     } finally {
       this.isLoading = false
     }
+  }
+
+  validate () {
+    return this.$refs.formValidator.validate(this.form)
   }
 
   async close () {
