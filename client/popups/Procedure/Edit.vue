@@ -100,6 +100,7 @@
               type="submit"
               size="m"
               theme="blue"
+              :loading="isLoading"
             >
               Редактировать услугу
             </UiButton>
@@ -108,6 +109,7 @@
               size="m"
               theme="danger-outlined"
               class="procedures-edit__remove"
+              :loading="isLoading"
               @click.native="remove"
             >
               Удалить услугу
@@ -141,6 +143,8 @@ import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
 })
 export default class ProcedureEdit extends Vue {
   readonly procedure!: IProcedure
+
+  isLoading = false
 
   form = this.procedure
 
@@ -237,28 +241,40 @@ export default class ProcedureEdit extends Vue {
 
     if (!isValid) return
 
-    await this.$typedStore.dispatch('procedures/updateProcedure', {
-      ...this.form,
-      specialistIds: this.selectedSpecialists.map(({ id }) => id)
-    })
+    try {
+      this.isLoading = true
 
-    await Promise.all([
-      this.$typedStore.dispatch('procedures/fetch'),
-      this.$typedStore.dispatch('specialists/fetch')
-    ])
+      await this.$typedStore.dispatch('procedures/updateProcedure', {
+        ...this.form,
+        specialistIds: this.selectedSpecialists.map(({ id }) => id)
+      })
 
-    this.$emit('close')
+      await Promise.all([
+        this.$typedStore.dispatch('procedures/fetch'),
+        this.$typedStore.dispatch('specialists/fetch')
+      ])
+
+      this.$emit('close')
+    } finally {
+      this.isLoading = false
+    }
   }
 
   async remove () {
-    await this.$api.procedures.remove(this.form.id)
+    try {
+      this.isLoading = true
 
-    await Promise.all([
-      this.$typedStore.dispatch('procedures/fetch'),
-      this.$typedStore.dispatch('specialists/fetch')
-    ])
+      await this.$api.procedures.remove(this.form.id)
 
-    this.$emit('close')
+      await Promise.all([
+        this.$typedStore.dispatch('procedures/fetch'),
+        this.$typedStore.dispatch('specialists/fetch')
+      ])
+
+      this.$emit('close')
+    } finally {
+      this.isLoading = false
+    }
   }
 
   validate () {

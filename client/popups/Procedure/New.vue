@@ -95,6 +95,7 @@
               type="submit"
               size="l"
               theme="blue"
+              :loading="isLoading"
             >
               Добавить услугу
             </UiButton>
@@ -127,6 +128,8 @@ import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
 })
 export default class ProcedureNew extends Vue {
   readonly category
+
+  isLoading = false
 
   selectedSpecialists = []
 
@@ -225,14 +228,20 @@ export default class ProcedureNew extends Vue {
 
     if (!isValid) return
 
-    await this.$typedStore.dispatch('procedures/createProcedure', {
-      ...this.form,
-      specialistIds: this.selectedSpecialists.map(({ id }) => id)
-    })
+    try {
+      this.isLoading = true
 
-    await this.$typedStore.dispatch('specialists/fetch')
+      await this.$typedStore.dispatch('procedures/createProcedure', {
+        ...this.form,
+        specialistIds: this.selectedSpecialists.map(({ id }) => id)
+      })
 
-    this.$emit('close')
+      await this.$typedStore.dispatch('specialists/fetch')
+
+      this.$emit('close')
+    } finally {
+      this.isLoading = false
+    }
   }
 
   validate () {
