@@ -48,7 +48,7 @@
           href="#"
           size="m"
           left-icon="outlined/pencil"
-          @click.native.prevent="openPopup"
+          @click.native.prevent="edit"
         >
           Редактировать
         </UiText>
@@ -152,11 +152,11 @@ export default class Specialist extends Vue {
     await this.$typedStore.dispatch('schedule/fetchTimeOffs')
   }
 
-  async openPopup () {
+  async edit () {
     await this.$router.push({
       name: 'specialistInfo',
       params: {
-        specialistId: this.specialist.id
+        slug: this.specialist.id
       }
     })
   }

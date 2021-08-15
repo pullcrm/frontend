@@ -21,8 +21,10 @@
         </UiText>
 
         <template #body>
-          <UiCalendar
+          <DataPicker
             v-model="dates"
+            range
+            :disabled-date="notAfterToday"
             @input="fetch"
           />
         </template>
@@ -46,6 +48,8 @@ import Component from 'vue-class-component'
 
 import dayjs from '~/utils/dayjs'
 
+import DataPicker from '~/components/DatePicker/DatePicker.vue'
+
 import AnalyticsLayout from '../components/AnalyticsLayout.vue'
 
 import Numbers from './components/Numbers.vue'
@@ -57,12 +61,13 @@ import LineChart from './components/LineChart.vue'
   components: {
     Numbers,
     LineChart,
+    DataPicker,
     AnalyticsLayout
   },
 
   async asyncData ({ typedStore }) {
-    const startDate = dayjs().date(1)
-    const endDate = dayjs().date(dayjs().daysInMonth())
+    const startDate = dayjs().subtract(14, 'day')
+    const endDate = dayjs()
 
     await typedStore.dispatch('analytics/fetchAppointmentsStats', {
       startDate: startDate.format('YYYY-MM-DD'),
@@ -102,11 +107,27 @@ export default class AppointmentsPage extends Vue {
     return this.appointmentsList.map(item => item.step).join('')
   }
 
+  // TODO: Add second validation about maximum days for one pick
   async fetch () {
+    if (this.validateDate() === false) {
+      return this.$typedStore.dispatch('toasts/show', {
+        title: 'Фильтрация доступна при выборе дат от двух дней',
+        type: 'error'
+      })
+    }
+
     await this.$typedStore.dispatch('analytics/fetchAppointmentsStats', {
       startDate: dayjs(this.startDate).format('YYYY-MM-DD'),
       endDate: dayjs(this.endDate).format('YYYY-MM-DD')
     })
+  }
+
+  validateDate () {
+    return dayjs(this.startDate).isSame(dayjs(this.endDate), 'day') === false
+  }
+
+  notAfterToday (date) {
+    return date > new Date(new Date().setHours(0, 0, 0, 0))
   }
 }
 </script>

@@ -16,7 +16,9 @@
         </UiButton>
 
         <template #body>
-          <UiCalendar v-model="date" />
+          <DataPicker
+            v-model="date"
+          />
         </template>
       </UiPopover>
 
@@ -69,7 +71,13 @@ import Component from 'vue-class-component'
 
 import dayjs from '~/utils/dayjs'
 
-@Component({})
+import DataPicker from '~/components/DatePicker/DatePicker.vue'
+
+@Component({
+  components: {
+    DataPicker
+  }
+})
 export default class Header extends Vue {
   get date () {
     return new Date(this.$typedStore.state.schedule.date) as Date

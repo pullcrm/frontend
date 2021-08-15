@@ -21,8 +21,10 @@
         </UiText>
 
         <template #body>
-          <UiCalendar
+          <DataPicker
             v-model="dates"
+            range
+            :disabled-date="notAfterToday"
             @input="fetch"
           />
         </template>
@@ -56,6 +58,8 @@ import Component from 'vue-class-component'
 
 import dayjs from '~/utils/dayjs'
 
+import DataPicker from '~/components/DatePicker/DatePicker.vue'
+
 import AnalyticsLayout from '../components/AnalyticsLayout.vue'
 
 import Numbers from './components/Numbers.vue'
@@ -66,13 +70,14 @@ import FinanceTable from './components/Table.vue'
 
   components: {
     Numbers,
+    DataPicker,
     FinanceTable,
     AnalyticsLayout
   },
 
   async asyncData ({ typedStore }) {
-    const startDate = dayjs().date(1)
-    const endDate = dayjs().date(dayjs().daysInMonth())
+    const startDate = dayjs().subtract(14, 'day')
+    const endDate = dayjs()
 
     await typedStore.dispatch('analytics/fetchFinanceStats', {
       startDate: startDate.format('YYYY-MM-DD'),
@@ -109,12 +114,17 @@ export default class FinancePage extends Vue {
     return this.$typedStore.state.specialists.specialists
   }
 
+  // TODO: Add validation about maximum days for one pick
   async fetch () {
     await this.$typedStore.dispatch('analytics/fetchFinanceStats', {
       startDate: dayjs(this.startDate).format('YYYY-MM-DD'),
       endDate: dayjs(this.endDate).format('YYYY-MM-DD'),
       specialistId: this.specialist?.id
     })
+  }
+
+  notAfterToday (date) {
+    return date > new Date(new Date().setHours(0, 0, 0, 0))
   }
 }
 </script>

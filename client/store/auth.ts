@@ -53,7 +53,7 @@ const AuthModule: Module<IState, IRootState> = {
           refreshToken
         })
 
-        await dispatch('saveTokens', { ...result, refreshToken })
+        await dispatch('saveTokens', result)
       } catch (err) {
         if (err.status === 403 || err.status === 401) {
           await dispatch('reset')

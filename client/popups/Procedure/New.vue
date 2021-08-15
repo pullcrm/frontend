@@ -12,92 +12,95 @@
 
     <form @submit.prevent="submit">
       <UiFormValidator
-        v-slot="{ resetFieldError }"
         ref="formValidator"
         :validations="validations"
       >
-        <UiField
-          label="Название услуги"
-        >
-          <UiInput
-            v-model="form.name"
+        <template #default="{ resetFieldError, getFieldError }">
+          <UiField
+            label="Название услуги"
+            :error="getFieldError('name')"
             required
-            left-icon="outlined/pencil"
-            placeholder="Введите название"
-            @input="resetFieldError('name')"
-          />
-        </UiField>
-
-        <UiField
-          label="Категория"
-        >
-          <UiSelect
-            v-model="form.category"
-            label-key="name"
-            :options="categories"
-            placeholder="Выбрать категорию"
-            @input="resetFieldError('category')"
-          />
-        </UiField>
-
-        <UiField
-          label="Цена"
-        >
-          <UiInput
-            v-model="form.price"
-            type="number"
-            required
-            left-icon="outlined/pencil"
-            placeholder="Укажите цену"
-            @input="resetFieldError('price')"
-          />
-        </UiField>
-
-        <UiField
-          label="Длительность"
-        >
-          <UiSelect
-            v-model="duration"
-            label-key="name"
-            required
-            :options="durationList"
-            left-icon="outlined/pencil"
-            placeholder="Выбрать время"
-            @input="resetFieldError('duration')"
-          />
-        </UiField>
-
-        <UiField
-          label="Сотрудники"
-        >
-          <UiMultiSelect
-            v-model="selectedSpecialists"
-            :options="specialsts"
-            label-key="fullName"
-            placeholder="Выбрать специалистов"
-          />
-        </UiField>
-
-        <UiField
-          label="Описание"
-        >
-          <UiInput
-            v-model="form.description"
-            tag="textarea"
-            name="description"
-            placeholder="Добавьте описание"
-          />
-        </UiField>
-
-        <div class="procedures-new__actions">
-          <UiButton
-            type="submit"
-            size="l"
-            theme="blue"
           >
-            Добавить услугу
-          </UiButton>
-        </div>
+            <UiInput
+              v-model="form.name"
+              left-icon="outlined/pencil"
+              placeholder="Введите название"
+              @input="resetFieldError('name')"
+            />
+          </UiField>
+
+          <UiField label="Категория">
+            <UiSelect
+              v-model="form.category"
+              label-key="name"
+              :options="categories"
+              placeholder="Выбрать категорию"
+            />
+          </UiField>
+
+          <UiField
+            label="Цена"
+            :error="getFieldError('price')"
+            required
+          >
+            <UiInput
+              v-model="form.price"
+              type="number"
+              left-icon="outlined/pencil"
+              placeholder="Укажите цену"
+              @input="resetFieldError('price')"
+            />
+          </UiField>
+
+          <UiField
+            label="Длительность"
+            :error="getFieldError('duration')"
+            required
+          >
+            <UiSelect
+              v-model="duration"
+              label-key="name"
+              :options="durationList"
+              :clearable="false"
+              left-icon="outlined/pencil"
+              placeholder="Выбрать время"
+              @input="resetFieldError('duration')"
+            />
+          </UiField>
+
+          <UiField label="Сотрудники">
+            <UiMultiSelect
+              v-model="selectedSpecialists"
+              :options="specialsts"
+              label-key="fullName"
+              placeholder="Выбрать специалистов"
+            />
+          </UiField>
+
+          <UiField
+            label="Описание"
+            :error="getFieldError('description')"
+          >
+            <UiInput
+              v-model="form.description"
+              tag="textarea"
+              name="description"
+              placeholder="Добавьте описание"
+              @input="resetFieldError('description')"
+            />
+          </UiField>
+
+          <div class="procedures-new__actions">
+            <UiButton
+              type="submit"
+              size="l"
+              theme="blue"
+              :loading="isLoading"
+            >
+              Добавить услугу
+            </UiButton>
+          </div>
+        </template>
       </UiFormValidator>
     </form>
   </UiPopup>
@@ -113,6 +116,8 @@ import { IProcedure } from '~/services/api'
 
 import { minutesToTime } from '~/utils/time'
 
+import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
+
 @Component({
   props: {
     category: {
@@ -124,6 +129,8 @@ import { minutesToTime } from '~/utils/time'
 export default class ProcedureNew extends Vue {
   readonly category
 
+  isLoading = false
+
   selectedSpecialists = []
 
   form: Partial<IProcedure> = {
@@ -131,11 +138,63 @@ export default class ProcedureNew extends Vue {
     category: null
   }
 
+  $refs: {
+    formValidator: UiFormValidator
+  }
+
   constructor () {
     super()
 
     if (this.category) {
       this.form.category = this.category
+    }
+  }
+
+  get validations (): Validations {
+    return {
+      name: {
+        rules: {
+          min: 4,
+          max: 255,
+          required: true
+        },
+        messages: {
+          min: 'Минимальное количество символов: 4',
+          max: 'Максимальное количество символов: 255',
+          required: 'Введите название услуги'
+        }
+      },
+
+      price: {
+        rules: {
+          required: true,
+          min_value: 0,
+          max_value: 99999
+        },
+        messages: {
+          required: 'Укажите цену',
+          min_value: 'Минимальная цена: 0',
+          max_value: 'Максимальная цена: 99999'
+        }
+      },
+
+      duration: {
+        rules: {
+          required: true
+        },
+        messages: {
+          required: 'Укажите длительность услуги'
+        }
+      },
+
+      description: {
+        rules: {
+          max: 255
+        },
+        messages: {
+          max: 'Максимальное количество символов: 255'
+        }
+      }
     }
   }
 
@@ -148,7 +207,7 @@ export default class ProcedureNew extends Vue {
   }
 
   set duration ($event: any) {
-    this.form.duration = $event.value
+    this.form.duration = $event?.value ?? ''
   }
 
   get durationList () {
@@ -164,19 +223,29 @@ export default class ProcedureNew extends Vue {
     return this.$typedStore.state.procedures.categories
   }
 
-  get validations () {
-    return {}
+  async submit () {
+    const isValid = await this.validate()
+
+    if (!isValid) return
+
+    try {
+      this.isLoading = true
+
+      await this.$typedStore.dispatch('procedures/createProcedure', {
+        ...this.form,
+        specialistIds: this.selectedSpecialists.map(({ id }) => id)
+      })
+
+      await this.$typedStore.dispatch('specialists/fetch')
+
+      this.$emit('close')
+    } finally {
+      this.isLoading = false
+    }
   }
 
-  async submit () {
-    await this.$typedStore.dispatch('procedures/createProcedure', {
-      ...this.form,
-      specialistIds: this.selectedSpecialists.map(({ id }) => id)
-    })
-
-    await this.$typedStore.dispatch('specialists/fetch')
-
-    this.$emit('close')
+  validate () {
+    return this.$refs.formValidator.validate(this.form)
   }
 }
 </script>

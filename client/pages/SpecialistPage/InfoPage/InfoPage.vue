@@ -143,7 +143,7 @@ import CreatedAt from './components/CreatedAt.vue'
   // async fetch () {
   //   const slug = Number(this.$route.params.slug)
 
-  //   this.specialist = await this.$api.public.specialistById(slug)
+  //   this.specialist = await this.$api.specialist.get(slug)
 
   //   this.avatars = await this.$api.files.all(this.user.id, {
   //     group: AVATAR

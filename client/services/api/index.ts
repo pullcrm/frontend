@@ -308,6 +308,10 @@ export const factory = (send) => ({
   },
 
   specialist: {
+    get (id: number) {
+      return send(`specialists/${id}`, null, 'GET')
+    },
+
     create (params: IRegistrationUserParams) : Promise<IRegistrationUser> {
       return send('specialists', params)
     },
