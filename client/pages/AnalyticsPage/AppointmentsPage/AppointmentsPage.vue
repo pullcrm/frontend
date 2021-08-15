@@ -61,8 +61,8 @@ import LineChart from './components/LineChart.vue'
   },
 
   async asyncData ({ typedStore }) {
-    const startDate = dayjs().date(1)
-    const endDate = dayjs().date(dayjs().daysInMonth())
+    const startDate = dayjs().subtract(14, 'day')
+    const endDate = dayjs()
 
     await typedStore.dispatch('analytics/fetchAppointmentsStats', {
       startDate: startDate.format('YYYY-MM-DD'),
@@ -103,10 +103,21 @@ export default class AppointmentsPage extends Vue {
   }
 
   async fetch () {
+    if (this.validateDate() === false) {
+      return this.$typedStore.dispatch('toasts/show', {
+        title: 'Фильтрация доступна при выборе дат от двух дней',
+        type: 'error'
+      })
+    }
+
     await this.$typedStore.dispatch('analytics/fetchAppointmentsStats', {
       startDate: dayjs(this.startDate).format('YYYY-MM-DD'),
       endDate: dayjs(this.endDate).format('YYYY-MM-DD')
     })
+  }
+
+  validateDate () {
+    return dayjs(this.startDate).isSame(dayjs(this.endDate), 'day') === false
   }
 }
 </script>
