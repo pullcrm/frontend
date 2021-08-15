@@ -21,8 +21,10 @@
         </UiText>
 
         <template #body>
-          <UiCalendar
+          <DataPicker
             v-model="dates"
+            range
+            :disabled-date="notAfterToday"
             @input="fetch"
           />
         </template>
@@ -46,6 +48,8 @@ import Component from 'vue-class-component'
 
 import dayjs from '~/utils/dayjs'
 
+import DataPicker from '~/components/DatePicker/DatePicker.vue'
+
 import AnalyticsLayout from '../components/AnalyticsLayout.vue'
 
 import Numbers from './components/Numbers.vue'
@@ -57,6 +61,7 @@ import LineChart from './components/LineChart.vue'
   components: {
     Numbers,
     LineChart,
+    DataPicker,
     AnalyticsLayout
   },
 
@@ -102,6 +107,7 @@ export default class AppointmentsPage extends Vue {
     return this.appointmentsList.map(item => item.step).join('')
   }
 
+  // TODO: Add second validation about maximum days for one pick
   async fetch () {
     if (this.validateDate() === false) {
       return this.$typedStore.dispatch('toasts/show', {
@@ -118,6 +124,10 @@ export default class AppointmentsPage extends Vue {
 
   validateDate () {
     return dayjs(this.startDate).isSame(dayjs(this.endDate), 'day') === false
+  }
+
+  notAfterToday (date) {
+    return date > new Date(new Date().setHours(0, 0, 0, 0))
   }
 }
 </script>

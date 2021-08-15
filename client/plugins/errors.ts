@@ -8,7 +8,7 @@ const plugin: Plugin = ({ app }) => {
         return
       }
 
-      if (err.status !== 401) {
+      if (err?.status !== 401) {
         return fn.call(this, err)
       }
     }

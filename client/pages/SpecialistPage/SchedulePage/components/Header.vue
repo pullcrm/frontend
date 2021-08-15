@@ -16,7 +16,9 @@
         </UiButton>
 
         <template #body>
-          <UiCalendar v-model="date" />
+          <DataPicker
+            v-model="date"
+          />
         </template>
       </UiPopover>
 
@@ -58,7 +60,13 @@ import { COMPLETED } from '~/constants/appointment'
 
 import dayjs from '~/utils/dayjs'
 
+import DataPicker from '~/components/DatePicker/DatePicker.vue'
+
 @Component({
+  components: {
+    DataPicker
+  },
+
   props: {
     appointments: Array,
     default: () => []

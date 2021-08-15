@@ -48,7 +48,7 @@
           </UiField>
 
           <template #body>
-            <UiCalendar v-model="date" />
+            <DataPicker v-model="date" />
           </template>
         </UiPopover>
 
@@ -111,6 +111,7 @@
             type="submit"
             size="l"
             theme="blue"
+            :loading="isLoading"
           >
             Добавить
           </UiButton>
@@ -126,7 +127,13 @@ import Component from 'vue-class-component'
 
 import { setTime } from '~/utils/time'
 
+import DataPicker from '~/components/DatePicker/DatePicker.vue'
+
 @Component({
+  components: {
+    DataPicker
+  },
+
   props: {
     specialistId: {
       type: Number,
@@ -151,6 +158,8 @@ import { setTime } from '~/utils/time'
 export default class TimeOffNew extends Vue {
   readonly time!: string | null
   readonly specialistId!: number | null
+
+  isLoading = false
 
   isCloseDay = false
 
@@ -186,19 +195,25 @@ export default class TimeOffNew extends Vue {
   }
 
   async submit () {
-    const endDateTime = setTime(this.date, this.form.endTime).format('MM.DD.YY HH:mm')
-    const startDateTime = setTime(this.date, this.form.startTime).format('MM.DD.YY HH:mm')
+    this.isLoading = true
 
-    await this.$api.timeOff.create({
-      specialistId: this.form.specialist.id,
-      endDateTime,
-      startDateTime,
-      description: this.form.description
-    })
+    try {
+      const endDateTime = setTime(this.date, this.form.endTime).format('MM.DD.YY HH:mm')
+      const startDateTime = setTime(this.date, this.form.startTime).format('MM.DD.YY HH:mm')
 
-    this.close()
+      await this.$api.timeOff.create({
+        specialistId: this.form.specialist.id,
+        endDateTime,
+        startDateTime,
+        description: this.form.description
+      })
 
-    await this.$typedStore.dispatch('schedule/fetchTimeOffs')
+      await this.$typedStore.dispatch('schedule/fetchTimeOffs')
+
+      this.close()
+    } finally {
+      this.isLoading = false
+    }
   }
 
   async close () {

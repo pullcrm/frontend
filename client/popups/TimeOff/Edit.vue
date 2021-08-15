@@ -48,7 +48,7 @@
           </UiField>
 
           <template #body>
-            <UiCalendar v-model="date" />
+            <DataPicker v-model="date" />
           </template>
         </UiPopover>
 
@@ -111,6 +111,7 @@
             type="submit"
             size="l"
             theme="blue"
+            :loading="isLoading"
           >
             Сохранить
           </UiButton>
@@ -118,6 +119,7 @@
           <UiButton
             size="l"
             theme="danger-outlined"
+            :loading="isLoading"
             @click.native="remove"
           >
             Удалить
@@ -137,7 +139,13 @@ import { setTime } from '~/utils/time'
 
 import { isCloseDay } from '~/logics/time-offs'
 
+import DataPicker from '~/components/DatePicker/DatePicker.vue'
+
 @Component({
+  components: {
+    DataPicker
+  },
+
   props: {
     timeOff: {
       type: Object,
@@ -166,6 +174,8 @@ import { isCloseDay } from '~/logics/time-offs'
 })
 export default class TimeOffEdit extends Vue {
   readonly timeOff
+
+  isLoading = false
 
   isCloseDay = false
 
@@ -231,28 +241,40 @@ export default class TimeOffEdit extends Vue {
   }
 
   async submit () {
-    const endDateTime = setTime(this.date, this.form.endTime).format('MM.DD.YY HH:mm')
-    const startDateTime = setTime(this.date, this.form.startTime).format('MM.DD.YY HH:mm')
+    this.isLoading = true
 
-    await this.$api.timeOff.update(this.form.id, {
-      specialistId: this.form.specialist.id,
-      endDateTime,
-      startDateTime,
-      description: this.form.description
-    })
+    try {
+      const endDateTime = setTime(this.date, this.form.endTime).format('MM.DD.YY HH:mm')
+      const startDateTime = setTime(this.date, this.form.startTime).format('MM.DD.YY HH:mm')
 
-    this.close()
+      await this.$api.timeOff.update(this.form.id, {
+        specialistId: this.form.specialist.id,
+        endDateTime,
+        startDateTime,
+        description: this.form.description
+      })
 
-    await this.$typedStore.dispatch('schedule/fetchTimeOffs')
+      await this.$typedStore.dispatch('schedule/fetchTimeOffs')
+
+      this.close()
+    } finally {
+      this.isLoading = false
+    }
   }
 
   async remove () {
-    await this.$api.timeOff.delete(this.form.id)
-    await this.$typedStore.dispatch('schedule/fetchTimeOffs')
+    this.isLoading = true
 
-    this.$typedStore.dispatch('toasts/show', { title: 'Удалено!' })
+    try {
+      await this.$api.timeOff.delete(this.form.id)
+      await this.$typedStore.dispatch('schedule/fetchTimeOffs')
 
-    this.close()
+      this.$typedStore.dispatch('toasts/show', { title: 'Удалено!' })
+
+      this.close()
+    } finally {
+      this.isLoading = false
+    }
   }
 
   async close () {
