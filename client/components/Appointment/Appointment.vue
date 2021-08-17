@@ -99,6 +99,7 @@ import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
   }
 })
 export default class Appointment extends Vue {
+  readonly responsive: boolean
   readonly appointment
 
   isActive = false
@@ -210,7 +211,7 @@ export default class Appointment extends Vue {
   }
 
   async onCompleted () {
-    await this.$api.appointments.update(this.appointment.id, {
+    await this.$api.appointments.updateStatus(this.appointment.id, {
       status: COMPLETED
     })
 
