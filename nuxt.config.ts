@@ -41,6 +41,7 @@ const config: NuxtOptions = {
 
   router: {
     middleware: [
+      'redirects/pwa',
       'auth',
       'company',
       'bootstrap',
