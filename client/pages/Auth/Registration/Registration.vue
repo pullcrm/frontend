@@ -71,6 +71,7 @@
           type="submit"
           size="l"
           theme="blue"
+          :loading="isLoading"
         >
           Зарегистрировать
         </UiButton>
@@ -110,6 +111,8 @@ export default class Home extends Vue {
     phone: '',
     password: ''
   }
+
+  isLoading = false
 
   $refs: {
     formValidator: UiFormValidator
@@ -172,6 +175,8 @@ export default class Home extends Vue {
     if (!isValid) return
 
     try {
+      this.isLoading = true
+
       await this.$api.users.confirmation({
         phone: this.form.phone,
         type: 'REGISTRATION'
@@ -189,6 +194,8 @@ export default class Home extends Vue {
       }
 
       throw err
+    } finally {
+      this.isLoading = false
     }
   }
 
