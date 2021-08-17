@@ -162,6 +162,10 @@ export interface IAppointmentUpdateParams {
   hasCreationSMS?: boolean
 }
 
+export interface IAppointmentUpdateStatusParams {
+  status?: string
+}
+
 export interface IRestoreUserParams {
   phone: string,
   newPassword: string,
@@ -402,6 +406,10 @@ export const factory = (send) => ({
 
     update (id: number, params: IAppointmentUpdateParams) : Promise<any> {
       return send(`appointments/${id}`, params, 'PUT')
+    },
+
+    updateStatus (id: number, params: IAppointmentUpdateStatusParams) : Promise<any> {
+      return send(`appointments/${id}/status`, params, 'PUT')
     },
 
     remove (id: number) : Promise<any> {
