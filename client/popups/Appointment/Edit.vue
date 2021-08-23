@@ -246,7 +246,7 @@ export default class AppointmentEdit extends Vue {
 
       this.$typedStore.dispatch('popup/hide')
     } catch (err) {
-      if (err.status === 400) {
+      if (err.code === 400) {
         this.$typedStore.dispatch('toasts/show', {
           type: 'error',
           title: err.message

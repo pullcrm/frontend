@@ -16,6 +16,7 @@ export class RpcError extends Error {
     super()
 
     this.name = 'RpcError'
+    this.code = 400
     this.token = token ? token.slice(0, 6) : null
     this.params = params
     this.method = method
