@@ -2,7 +2,7 @@
   <div
     :class="[
       'procedures-page-group',
-      {'procedures-page-group_has-category-id': categoryId}
+      {'procedures-page-group_has-category-id': categoryId > 0}
     ]"
   >
     <UiTitle
@@ -12,45 +12,35 @@
       class="procedures-page-group__title"
       @click.native.prevent="onEditCategory"
     >
-      {{ category.name }}
+      {{ categoryTitle }}
     </UiTitle>
 
-    <div class="procedures-page-group__grid ui-grid">
-      <ProcedureCard
-        v-for="procedure in procedures"
-        :key="procedure.id"
-        :procedure="procedure"
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12',
-          'ui-grid-item_tablet_6',
-          'ui-grid-item_laptop_3'
-        ]"
-      />
+    <SortableList
+      v-if="procedures.length > 0"
+      :items="procedures"
+      axis="xy"
+      :item-class="[
+        'ui-grid-item',
+        'ui-grid-item_12',
+        'ui-grid-item_tablet_6',
+        'ui-grid-item_laptop_3'
+      ]"
+      use-drag-handle
+      class="ui-grid"
+      @update="onSort"
+    >
+      <template #default="{ item }">
+        <ProcedureCard
+          :procedure="item"
+        />
+      </template>
+    </SortableList>
 
-      <UiPanel
-        v-if="procedures.length === 0"
-        tag="a"
-        size="s"
-        href="#"
-        class="procedures-page-group__placeholder"
-        :class="[
-          'ui-grid-item',
-          'ui-grid-item_12',
-          'ui-grid-item_tablet_6',
-          'ui-grid-item_laptop_3'
-        ]"
-        @click.native.prevent="onAdd"
-      >
-        <UiText
-          size="m"
-          right-icon="outlined/plus"
-          responsive
-        >
-          Добавить услугу
-        </UiText>
-      </UiPanel>
-    </div>
+    <Placeholder
+      v-else
+      :category="category"
+      class="procedures-page-group__placeholder"
+    />
   </div>
 </template>
 
@@ -58,29 +48,50 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { IGroupItem } from '~/logics/procedures'
+
+import SortableList from '~/components/SortableList/SortableList.vue'
+
+import Placeholder from './Placeholder.vue'
 import ProcedureCard from './ProcedureCard.vue'
 
 @Component({
   props: {
-    category: {
+    group: {
       type: Object,
+      required: true
+    },
+
+    index: {
+      type: Number,
       required: true
     }
   },
 
   components: {
+    Placeholder,
+    SortableList,
     ProcedureCard
   }
 })
 export default class ProceduresGroup extends Vue {
-  readonly category
-
-  get categoryId () {
-    return this.category.id
-  }
+  readonly group!: IGroupItem
+  readonly index!: number
 
   get procedures () {
-    return this.category.procedures
+    return this.group.procedures
+  }
+
+  get category () {
+    return this.group.category
+  }
+
+  get categoryId () {
+    return this.category?.id ?? 0
+  }
+
+  get categoryTitle () {
+    return this.group.categoryTitle
   }
 
   async onEditCategory () {
@@ -94,13 +105,21 @@ export default class ProceduresGroup extends Vue {
     })
   }
 
-  async onAdd () {
-    await this.$typedStore.dispatch('popup/show', {
-      name: 'new-procedure',
-      props: {
-        category: this.category
+  async onSort (items) {
+    this.$typedStore.commit('procedures/SET_GROUPED_BY_INDEX', {
+      index: this.index,
+      procedures: items
+    })
+
+    const procedures = items.map(({ id }, index) => {
+      return {
+        id,
+        order: index
       }
     })
+
+    await this.$api.procedures.bulk(procedures)
+    await this.$typedStore.dispatch('procedures/fetch')
   }
 }
 </script>

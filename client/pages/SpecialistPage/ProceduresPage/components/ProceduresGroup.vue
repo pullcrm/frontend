@@ -6,11 +6,11 @@
       responsive
       class="specialist-procedures-page-procedures-group__name"
     >
-      {{ categoryName }}
+      {{ group.categoryTitle }}
     </UiText>
 
     <ProcedurePreview
-      v-for="procedure in procedures"
+      v-for="procedure in group.procedures"
       :key="`procedure-${procedure.id}`"
       :procedure="procedure"
       class="specialist-procedures-page-procedures-group__procedure-preview"
@@ -22,6 +22,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { IGroupItem } from '~/logics/procedures'
+
 import ProcedurePreview from '~/components/ProcedurePreview/ProcedurePreview.vue'
 
 @Component({
@@ -30,28 +32,14 @@ import ProcedurePreview from '~/components/ProcedurePreview/ProcedurePreview.vue
   },
 
   props: {
-    procedures: {
-      type: Array,
-      default: () => []
-    },
-
-    categoryId: {
-      type: Number,
-      default: null
+    group: {
+      type: Object,
+      required: true
     }
   }
 })
 export default class ProceduresGroup extends Vue {
-  readonly categoryId: number | null
-  readonly procedures: any[]
-
-  get category () {
-    return this.$typedStore.getters['procedures/categoriesDict'][this.categoryId]
-  }
-
-  get categoryName () {
-    return this.category?.name ?? 'Без категории'
-  }
+  readonly group: IGroupItem
 }
 </script>
 

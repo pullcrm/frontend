@@ -53,6 +53,8 @@ import { SlickList, SlickItem } from 'vue-slicksort'
 })
 export default class SortableList extends Vue {
   readonly items: any[]
+  readonly enabled: boolean
+  readonly itemClass?: string | object | any[]
 
   onInput (items) {
     this.$emit('update', items)

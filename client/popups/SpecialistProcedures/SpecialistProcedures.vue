@@ -23,10 +23,9 @@
 
       <div class="specialist-procedures__inner">
         <ProceduresGroup
-          v-for="(procedures, categoryId) in proceduresByCategory"
-          :key="categoryId"
-          :procedures="procedures"
-          :category-id="Number(categoryId)"
+          v-for="(item, index) in items"
+          :key="index"
+          :group="item"
           :procedure-ids.sync="procedureIds"
           class="specialist-procedures__procedures-group"
         />
@@ -49,7 +48,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { groupByCategoryId } from '~/logics/procedures'
+import { groupByCategory } from '~/logics/procedures'
 
 import ProceduresGroup from './ProceduresGroup.vue'
 
@@ -81,8 +80,12 @@ export default class ProcedureEdit extends Vue {
     return this.$typedStore.state.procedures.procedures
   }
 
-  get proceduresByCategory () {
-    return groupByCategoryId(this.procedures)
+  get categories () {
+    return this.$typedStore.state.procedures.categories
+  }
+
+  get items () {
+    return groupByCategory(this.procedures, this.categories)
   }
 
   async onSubmit () {

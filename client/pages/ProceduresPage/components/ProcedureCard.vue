@@ -25,21 +25,34 @@
     </UiText>
 
     <div class="procedures-page-procedure-card__footer">
-      <UiText
-        size="m"
-        responsive
-        class="procedures-page-procedure-card__duration"
-      >
-        {{ procedure.duration | minutesToTime }}
-      </UiText>
+      <div class="procedures-page-procedure-card__info">
+        <UiText
+          size="m"
+          responsive
+          class="procedures-page-procedure-card__duration"
+        >
+          {{ procedure.duration | minutesToTime }}
+        </UiText>
 
-      <UiPrice
-        size="s"
-        responsive
-        class="procedures-page-procedure-card__price"
+        <UiPrice
+          size="s"
+          responsive
+          class="procedures-page-procedure-card__price"
+        >
+          {{ procedure.price | price }}
+        </UiPrice>
+      </div>
+
+      <div
+        id="hand"
+        v-handle
+        class="procedures-page-procedure-card__hand"
       >
-        {{ procedure.price | price }}
-      </UiPrice>
+        <UiIcon
+          name="outlined/hand-grabbing"
+          size="s"
+        />
+      </div>
     </div>
   </UiPanel>
 </template>
@@ -48,12 +61,18 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { HandleDirective } from 'vue-slicksort'
+
 @Component({
   props: {
     procedure: {
       type: Object,
       required: true
     }
+  },
+
+  directives: {
+    handle: HandleDirective
   }
 })
 export default class ProcedureCard extends Vue {

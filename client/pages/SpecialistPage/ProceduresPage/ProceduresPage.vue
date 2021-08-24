@@ -10,10 +10,9 @@
     />
 
     <ProceduresGroup
-      v-for="(procedures, categoryId) in proceduresByCategory"
-      :key="categoryId"
-      :procedures="procedures"
-      :category-id="Number(categoryId)"
+      v-for="(item, index) in items"
+      :key="index"
+      :group="item"
       class="specialist-procedures-page__procedures-group"
     />
 
@@ -37,7 +36,7 @@ import Component from 'vue-class-component'
 
 import { SPECIALIST } from '~/constants/roles'
 
-import { groupByCategoryId } from '~/logics/procedures'
+import { groupByCategory } from '~/logics/procedures'
 
 import SpecialistLayout from '../components/SpecialistLayout.vue'
 
@@ -77,15 +76,24 @@ export default class SpecialistProceduresPage extends Vue {
   }
 
   get isEmpty () {
-    return this.procedures.length === 0
-  }
-
-  get proceduresByCategory () {
-    return groupByCategoryId(this.procedures)
+    return this.items.length === 0
   }
 
   get procedures () {
     return this.specialist.procedures
+  }
+
+  get categories () {
+    return this.$typedStore.state.procedures.categories
+  }
+
+  get groupByCategory () {
+    return groupByCategory(this.procedures, this.categories)
+  }
+
+  get items () {
+    return this.groupByCategory
+      .filter(({ procedures }) => procedures.length > 0)
   }
 
   openPopup () {

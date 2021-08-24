@@ -264,6 +264,13 @@ export interface ISettingsWidgetUpdateParams {
   minutesBefore?: number
 }
 
+export interface IProceduresParams {
+  offset?: number,
+  limit?: number,
+  sort?: string,
+  order?: string
+}
+
 export const factory = (send) => ({
   auth: {
     login (params: IAuthLoginParams) : Promise<IApiAuthLogin> {
@@ -386,8 +393,12 @@ export const factory = (send) => ({
       return send(`procedures/${id}`, params, 'PUT')
     },
 
-    all () : Promise<IProcedure[]> {
-      return send('procedures', null, 'GET')
+    bulk (params: any) {
+      return send('procedures/bulk', params, 'PUT')
+    },
+
+    all (params: IProceduresParams) : Promise<IProcedure[]> {
+      return send('procedures', params, 'GET')
     }
   },
 

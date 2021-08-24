@@ -1,10 +1,5 @@
 <template>
-  <div
-    :class="[
-      'procedures-page',
-      {'procedures-page_one-category': categories.length <= 1}
-    ]"
-  >
+  <div class="procedures-page">
     <UiContainer>
       <Header
         class="procedures-page__header"
@@ -26,9 +21,10 @@
       </UiPlaceholder>
 
       <ProceduresGroup
-        v-for="(category) in categories"
-        :key="category.id"
-        :category="category"
+        v-for="(group, index) in grouped"
+        :key="index"
+        :index="index"
+        :group="group"
         class="procedures-page__group"
       />
     </UiContainer>
@@ -58,27 +54,15 @@ import ProceduresGroup from './components/Group.vue'
 })
 export default class Procedures extends Vue {
   get isEmpty () {
-    if (this.hasCategories) {
-      return false
-    }
-
-    return this.$typedStore.getters['procedures/isEmpty']
+    return this.grouped.length === 0
   }
 
-  get hasCategories () {
-    return this.categories.length > 0
-  }
-
-  get categories () {
-    return this.$typedStore.getters['procedures/categories']
+  get grouped () {
+    return this.$typedStore.state.procedures.grouped
   }
 
   onAddProcedure () {
     this.$typedStore.dispatch('popup/show', 'new-procedure')
-  }
-
-  onEditCategory () {
-    this.$typedStore.dispatch('popup/show', 'new-procedure-category')
   }
 }
 </script>

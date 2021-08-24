@@ -26,7 +26,7 @@
               left-icon="outlined/pencil"
               placeholder="Введите название"
               @input="resetFieldError('name')"
-            />q
+            />
           </UiField>
 
           <UiButton

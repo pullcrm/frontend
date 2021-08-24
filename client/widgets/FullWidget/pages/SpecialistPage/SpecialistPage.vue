@@ -27,13 +27,13 @@
     <UiDivider />
 
     <ProceduresGroup
-      v-for="category in normalizeCategories"
-      :key="`category-${category.id}`"
-      :title="category.name"
+      v-for="(item, index) in items"
+      :key="`category-${index}`"
+      :title="item.categoryTitle"
       class="full-widget-specialist-page__procedures-group"
     >
       <ProcedurePanel
-        v-for="procedure in category.procedures"
+        v-for="procedure in item.procedures"
         :key="`procedure-${procedure.id}`"
         :procedure="procedure"
         class="full-widget-specialist-page__procedure-panel"
@@ -60,7 +60,7 @@ import Component from 'vue-class-component'
 
 import dayjs from '~/utils/dayjs'
 
-import { normalizeCategories } from '~/logics/procedures'
+import { groupByCategory } from '~/logics/procedures'
 
 import Layout from '../../components/Layout.vue'
 import ProcedurePanel from '../../components/ProcedurePanel.vue'
@@ -118,11 +118,9 @@ export default class SpecialistPage extends Vue {
     return this.specialist.procedures
   }
 
-  get normalizeCategories () {
-    return normalizeCategories(
-      this.categories, this.procedures
-    )
-      .filter(category => category.procedures.length > 0)
+  get items () {
+    return groupByCategory(this.procedures, this.categories)
+      .filter(({ procedures }) => procedures.length > 0)
   }
 
   async onSubmit () {

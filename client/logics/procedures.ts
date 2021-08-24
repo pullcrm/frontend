@@ -1,4 +1,10 @@
-import groupBy from 'lodash/groupBy'
+import { UNCATEGORIZED_TITLE } from '~/constants'
+
+export interface IGroupItem {
+  category: any,
+  procedures: any[],
+  categoryTitle: string
+}
 
 export function normalizeProcedureParams (procedure) {
   const {
@@ -21,36 +27,32 @@ export function normalizeProcedureParams (procedure) {
   }
 }
 
-export function normalizeCategories (categories, procedures) {
-  const grouped = groupByCategoryId(procedures)
-
-  return [
-    ...categories.map(category => {
-      return {
-        ...category,
-        procedures: grouped[category.id] ?? []
-      }
-    }),
-
-    grouped[0] && {
-      name: 'Без категории',
-      procedures: grouped[0]
+export function groupByCategory (procedures, categories): IGroupItem[] {
+  const group = categories.map(category => {
+    return {
+      category,
+      procedures: filterProceduresByCategoryId(procedures, category.id),
+      categoryTitle: category.name
     }
-  ].filter(Boolean)
-}
+  }, {})
 
-export function groupByCategoryId (procedures) {
-  return groupBy(procedures, getCategory)
-}
+  const uncategorizedProcedures = procedures.filter(({ category }) => !category)
 
-export function getCategory ({ category, categoryId }) {
-  if (categoryId) {
-    return categoryId
+  if (uncategorizedProcedures.length > 0) {
+    group.push({
+      category: null,
+      procedures: uncategorizedProcedures,
+      categoryTitle: UNCATEGORIZED_TITLE
+    })
   }
 
-  if (category) {
-    return category.id
-  }
+  return group
+}
 
-  return 0
+function filterProceduresByCategoryId (procedures, categoryId) {
+  return procedures.filter(({ category }) => {
+    if (!category) return false
+
+    return category.id === categoryId
+  })
 }
