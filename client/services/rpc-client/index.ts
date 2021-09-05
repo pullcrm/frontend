@@ -4,6 +4,7 @@ import { btoa } from 'isomorphic-base64'
 import store from '~/store'
 
 import {
+  RpcError,
   HttpError,
   HttpUploadError
 } from './errors'
@@ -89,6 +90,17 @@ export default class RpcClient {
     }
 
     const rpcResponse = await response.json()
+
+    if (rpcResponse.error) {
+      const error = rpcResponse.error
+
+      throw new RpcError({
+        method,
+        params,
+        error,
+        token: this.token
+      })
+    }
 
     return rpcResponse
   }
