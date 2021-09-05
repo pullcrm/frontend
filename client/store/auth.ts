@@ -2,6 +2,10 @@ import { Module } from 'vuex/types'
 
 import jwtDecode from 'jwt-decode'
 
+import { AUTH_TOKEN_COOKIE_DAYS } from '~/constants'
+
+import { removeCookie, setCookie } from '~/utils/cookies'
+
 import { IState as IRootState } from '.'
 
 export interface IState {
@@ -29,14 +33,9 @@ const AuthModule: Module<IState, IRootState> = {
       await dispatch('saveTokens', tokens)
     },
 
-    async fetchToken ({ commit }) {
-      const accessToken = this.$localStorage.getItem(ACCESS_TOKEN)
-      const refreshToken = this.$localStorage.getItem(REFRESH_TOKEN)
-
-      if (accessToken && refreshToken) {
-        commit('SET_TOKENS', { accessToken, refreshToken })
-
-        this.$apiClient.setToken(accessToken)
+    async authorize ({ state }) {
+      if (state.accessToken) {
+        this.$apiClient.setToken(state.accessToken)
       }
     },
 
@@ -95,8 +94,13 @@ const AuthModule: Module<IState, IRootState> = {
     },
 
     async saveTokens ({ commit }, { accessToken, refreshToken }) {
-      this.$localStorage.setItem(ACCESS_TOKEN, accessToken)
-      this.$localStorage.setItem(REFRESH_TOKEN, refreshToken)
+      document.cookie = setCookie(ACCESS_TOKEN, accessToken, {
+        days: AUTH_TOKEN_COOKIE_DAYS
+      })
+
+      document.cookie = setCookie(REFRESH_TOKEN, refreshToken, {
+        days: AUTH_TOKEN_COOKIE_DAYS
+      })
 
       this.$apiClient.setToken(accessToken)
 
@@ -104,8 +108,10 @@ const AuthModule: Module<IState, IRootState> = {
     },
 
     reset ({ commit }) {
-      this.$localStorage.removeItem(ACCESS_TOKEN)
-      this.$localStorage.removeItem(REFRESH_TOKEN)
+      if (process.client) {
+        document.cookie = removeCookie(ACCESS_TOKEN)
+        document.cookie = removeCookie(REFRESH_TOKEN)
+      }
 
       commit('SET_TOKENS', { accessToken: null, refreshToken: null })
     },

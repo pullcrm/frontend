@@ -1,6 +1,6 @@
 .schedule-page-queue {
   z-index: 13;
-  width: #{$SCHEDULE_ROW_WIDTH + 8px};
+  width: #{$SCHEDULE_ROW_WIDTH + 16px};
 
   &__inner {
     @include hide-scrollbar;
@@ -10,42 +10,36 @@
     right: 0;
     bottom: 0;
     z-index: inherit;
-    width: #{$SCHEDULE_ROW_WIDTH + 8px};
-    padding: 16px 4px;
+    width: inherit;
+    padding: 24px 14px;
     overflow-y: auto;
     background-color: $ui-white;
     box-shadow: -1px 0 0 $ui-black-20;
   }
 
-  &__backdrop {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: inherit;
-    display: none;
-    padding: 8px;
-    color: $ui-black-10;
-    background: rgba(#000, 0.6);
+  &__schedule-date-picker {
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    margin-bottom: 16px;
+  }
+
+  &__appointment {
+    margin: 0 0 14px;
   }
 
   &__action {
     display: flex;
     justify-content: center;
-    margin: 8px 6px;
-    padding: 28px 0;
+    padding: 30px 0;
     color: $ui-black-60;
-    border: 1px dashed $ui-black-40;
+    border: 2px dashed $ui-black-40;
     border-radius: 4px;
     cursor: pointer;
   }
 
   @media (max-width: $ui-laptop - 1px) {
-    width: 0;
-
-    &__backdrop {
-      display: block;
-    }
+    display: none;
   }
 }

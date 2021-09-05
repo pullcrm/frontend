@@ -1,10 +1,18 @@
 .schedule-page {
+  padding-bottom: #{48 + 24px};
+
   &__header {
-    margin: 0 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
   }
 
-  &__title {
-    margin-bottom: 20px;
+  &__date-picker-button {
+    @include ui-safe-bottom(calc(var(--site-fixed-tab-bar-height) + 24px));
+
+    right: 24px;
+    z-index: 12;
   }
 
   @media (max-width: $ui-laptop - 1px) {

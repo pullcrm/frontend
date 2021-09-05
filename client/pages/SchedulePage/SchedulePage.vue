@@ -1,17 +1,23 @@
 <template>
   <div class="schedule-page">
     <UiContainer>
-      <UiTitle
-        size="m"
-        responsive
-        class="schedule-page__title"
-      >
-        Календарь
-      </UiTitle>
+      <div class="schedule-page__header">
+        <UiTitle
+          size="m"
+          responsive
+        >
+          Календарь
+        </UiTitle>
 
-      <Header
-        class="schedule-page__header"
-      />
+        <UiButton
+          size="m"
+          theme="blue"
+          right-icon="outlined/plus"
+          @click.native="addAppointment"
+        >
+          Добавить запись
+        </UiButton>
+      </div>
 
       <Schedule
         class="schedule-page__schedule"
@@ -19,10 +25,11 @@
       />
     </UiContainer>
 
-    <Portal
-      v-if="isQueueOpened"
-      to="sidebar"
-    >
+    <DatePickerButton
+      class="schedule-page__date-picker-button"
+    />
+
+    <Portal to="sidebar">
       <Queue />
     </Portal>
   </div>
@@ -35,15 +42,15 @@ import Component from 'vue-class-component'
 import Schedule from '~/components/Schedule/Schedule.vue'
 
 import Queue from './components/Queue.vue'
-import Header from './components/Header.vue'
+import DatePickerButton from './components/DatePickerButton/DatePickerButton.vue'
 
 @Component({
   layout: 'dashboard',
 
   components: {
     Queue,
-    Header,
-    Schedule
+    Schedule,
+    DatePickerButton
   },
 
   head () {
@@ -53,10 +60,6 @@ import Header from './components/Header.vue'
   }
 })
 export default class SchedulePage extends Vue {
-  get isQueueOpened (): boolean {
-    return this.$typedStore.state.schedule.isQueueOpened
-  }
-
   get isLoading () {
     return this.$typedStore.state.schedule.isLoading
   }
@@ -69,6 +72,13 @@ export default class SchedulePage extends Vue {
     }
 
     await this.$typedStore.dispatch('schedule/fetch')
+  }
+
+  async addAppointment () {
+    await this.$typedStore.dispatch('popup/show', {
+      name: 'appointment',
+      props: { type: 'new' }
+    })
   }
 }
 </script>

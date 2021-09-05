@@ -16,7 +16,7 @@ const plugin: Plugin = (ctx, inject) => {
       ? `${user}:${password}`
       : null,
     headers: {
-      'user-agent': window.navigator.userAgent,
+      // 'user-agent': window.navigator.userAgent,
       'accept-encoding': 'gzip'
     }
   }

@@ -7,10 +7,6 @@ const middleware: Middleware = async ({ typedStore, route, redirect }) => {
     return
   }
 
-  if (!typedStore.state.auth.accessToken) {
-    await typedStore.dispatch('auth/fetchToken')
-  }
-
   if (typedStore.state.auth.accessToken) {
     return await typedStore.dispatch('profile')
   }

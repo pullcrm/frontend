@@ -1,3 +1,4 @@
+import { Route } from 'vue-router/types'
 import { Module } from 'vuex/types'
 
 import { IState as IRootState } from '.'
@@ -19,7 +20,12 @@ export interface IStateHistoryItem {
 
 export interface IState {
   history: IStateHistoryItem[],
-  analyticsParams: Record<string, string>
+  host: string,
+  baseHost: string,
+  userIp: string,
+  userAgent: string,
+  analyticsParams: Record<string, string>,
+  renderedRoutePath: string
 }
 
 const LocationModule: Module<IState, IRootState> = {
@@ -28,20 +34,43 @@ const LocationModule: Module<IState, IRootState> = {
   state () {
     return {
       history: [],
-      analyticsParams: {}
+      host: null,
+      baseHost: null,
+      userIp: null,
+      userAgent: null,
+      analyticsParams: {},
+      renderedRoutePath: null
     }
   },
 
   mutations: {
+    SET_HOST (state, host: IState['host']) {
+      state.host = host
+    },
+
+    SET_BASE_HOST (state, baseHost: IState['baseHost']) {
+      state.baseHost = baseHost
+    },
+
+    SET_USER_IP (state, userIp: IState['userIp']) {
+      state.userIp = userIp
+    },
+
+    SET_USER_AGENT (state, userAgent: IState['userAgent']) {
+      state.userAgent = userAgent
+    },
+
     SET_ANALYTICS_PARAMS (state, params: IState['analyticsParams']) {
       state.analyticsParams = params
     },
 
-    ADD (state, route) {
-      const { host, protocol } = window.location
+    SET_RENDERED_ROUTE_PATH (state, path: IState['renderedRoutePath']) {
+      state.renderedRoutePath = path
+    },
 
+    ADD (state, route: Route) {
       const item = {
-        url: `${protocol}//${host}${route.fullPath}`,
+        url: `https://${state.host}${route.fullPath}`,
         path: route.path,
         name: route.name,
         query: route.query,
@@ -54,25 +83,23 @@ const LocationModule: Module<IState, IRootState> = {
   },
 
   getters: {
-    // host () {
-    //   return window.location.host
-    // },
-
-    // userAgent () {
-    //   return window.navigator.userAgent
-    // },
-
-    // current (state, localGetters) {
-    //   return {
-    //     host: localGetters.host,
-    //     userAgent: localGetters.userAgent,
-    //     ...state.history[0]
-    //   }
-    // },
+    current (state) {
+      return {
+        host: state.host,
+        baseHost: state.baseHost,
+        userAgent: state.userAgent,
+        ...state.history[0]
+      }
+    },
 
     from (state) {
       if (state.history.length > 1) {
-        return state.history[1]
+        return {
+          host: state.host,
+          baseHost: state.baseHost,
+          userAgent: state.userAgent,
+          ...state.history[1]
+        }
       }
 
       return null

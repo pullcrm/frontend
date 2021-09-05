@@ -1,20 +1,22 @@
 <template>
   <div class="schedule-page-queue">
-    <div
-      class="schedule-page-queue__backdrop"
-      @click="closeQueue"
-    >
-      <UiIcon
-        name="outlined/x"
-        size="s"
-      />
-    </div>
-
     <div class="schedule-page-queue__inner">
+      <ScheduleDatePicker
+        class="schedule-page-queue__schedule-date-picker"
+      />
+
+      <UiTitle
+        size="s"
+        class="schedule-page-queue__title"
+      >
+        Очередь
+      </UiTitle>
+
       <Appointment
         v-for="appointment in queue"
         :key="`queue-${appointment.id}`"
         :appointment="appointment"
+        class="schedule-page-queue__appointment"
         @open="openAppointment"
       />
 
@@ -23,7 +25,7 @@
         @click="addAppointment"
       >
         <UiText
-          size="m"
+          size="l"
           responsive
           left-icon="outlined/note-pencil"
         >
@@ -40,18 +42,17 @@ import Component from 'vue-class-component'
 
 import Appointment from '~/components/Appointment/Appointment.vue'
 
+import ScheduleDatePicker from './ScheduleDatePicker.vue'
+
 @Component({
   components: {
-    Appointment
+    Appointment,
+    ScheduleDatePicker
   }
 })
 export default class Queue extends Vue {
   get queue () {
     return this.$typedStore.state.appointments.queue
-  }
-
-  closeQueue () {
-    this.$typedStore.commit('schedule/SET_QUEUE_OPEN', false)
   }
 
   addAppointment () {

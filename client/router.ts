@@ -17,7 +17,7 @@ Router.prototype.push = function push (location) {
 
 Vue.use(Router)
 
-if ('scrollRestoration' in window.history) {
+if (process.client && 'scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual'
 
   window.addEventListener('beforeunload', () => {

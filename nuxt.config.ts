@@ -11,7 +11,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 const config: NuxtOptions = {
   telemetry: false,
 
-  ssr: false,
+  ssr: true,
 
   server: {
     port: process.env.PORT
@@ -159,6 +159,7 @@ const config: NuxtOptions = {
     { src: '~/plugins/runtime-config' },
     { src: '~/plugins/storage' },
     { src: '~/plugins/api' },
+    { src: '~/plugins/auth' },
     { src: '~/plugins/errors' },
     // { src: '~/plugins/auth' },
     { src: '~/plugins/vue-filters' },

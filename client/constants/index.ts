@@ -2,6 +2,12 @@ export const GA_ID = 'UA-202590817-1'
 
 export const SCHEDULE_APPOINTMENT_HEIGHT = 30
 
+export const AUTH_TOKEN_COOKIE_DAYS = 30
+
+export const ACCESS_TOKEN = 'ACCESS_TOKEN_PULL_CRM'
+
+export const REFRESH_TOKEN = 'REFRESH_TOKEN_PULL_CRM'
+
 export const TIME_STEP = Number(process.env.CALENDAR_TIME_STEP)
 
 export const SOURCE_WIDGET = 'WIDGET'

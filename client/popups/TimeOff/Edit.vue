@@ -49,7 +49,7 @@
             </UiField>
 
             <template #body>
-              <DataPicker v-model="date" />
+              <DatePicker v-model="date" />
             </template>
           </UiPopover>
 
@@ -146,11 +146,11 @@ import { isCloseDay } from '~/logics/time-offs'
 
 import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
 
-import DataPicker from '~/components/DatePicker/DatePicker.vue'
+import DatePicker from '~/components/DatePicker/DatePicker.vue'
 
 @Component({
   components: {
-    DataPicker
+    DatePicker
   },
 
   props: {

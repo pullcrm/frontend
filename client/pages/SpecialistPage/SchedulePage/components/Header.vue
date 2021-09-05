@@ -16,7 +16,7 @@
         </UiButton>
 
         <template #body>
-          <DataPicker
+          <DatePicker
             v-model="date"
           />
         </template>
@@ -60,11 +60,11 @@ import { COMPLETED } from '~/constants/appointment'
 
 import dayjs from '~/utils/dayjs'
 
-import DataPicker from '~/components/DatePicker/DatePicker.vue'
+import DatePicker from '~/components/DatePicker/DatePicker.vue'
 
 @Component({
   components: {
-    DataPicker
+    DatePicker
   },
 
   props: {
