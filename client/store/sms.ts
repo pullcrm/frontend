@@ -2,7 +2,7 @@ import { Module } from 'vuex/types'
 
 import { IState as IRootState } from '.'
 
-const BALANCE_TIMEOUT = 1 * 1000 * 60
+const BALANCE_TIMEOUT = 1 * 1000 * 60 * 5
 
 export interface IState {
   balance: number | null,
@@ -29,9 +29,11 @@ const SmsModule: Module<IState, IRootState> = {
 
           commit('SET_BALANCE_PROMISE', balancePromise)
 
-          setTimeout(() => {
-            commit('SET_BALANCE_PROMISE', null)
-          }, BALANCE_TIMEOUT)
+          if (process.client) {
+            setTimeout(() => {
+              commit('SET_BALANCE_PROMISE', null)
+            }, BALANCE_TIMEOUT)
+          }
         }
 
         const { balance } = await state.balancePromise
