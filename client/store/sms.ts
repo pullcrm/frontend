@@ -27,9 +27,9 @@ const SmsModule: Module<IState, IRootState> = {
         if (!state.balancePromise) {
           const balancePromise = this.$api.sms.balance()
 
-          commit('SET_BALANCE_PROMISE', balancePromise)
-
           if (process.client) {
+            commit('SET_BALANCE_PROMISE', balancePromise)
+
             setTimeout(() => {
               commit('SET_BALANCE_PROMISE', null)
             }, BALANCE_TIMEOUT)
