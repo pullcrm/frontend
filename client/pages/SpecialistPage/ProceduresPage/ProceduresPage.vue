@@ -1,5 +1,6 @@
 <template>
   <SpecialistLayout
+    :specialist="specialist"
     class="specialist-procedures-page"
   >
     <UiPlaceholder
