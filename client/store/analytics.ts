@@ -87,7 +87,7 @@ const AnalyticsModule: Module<IState, IRootState> = {
 
   getters: {
     appointmentsList (state) {
-      return state.appointmentsStats.appointments
+      return state.appointmentsStats?.appointments
     }
   }
 }
