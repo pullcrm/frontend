@@ -1,5 +1,8 @@
 <template>
-  <SpecialistLayout class="specialist-settings-page">
+  <SpecialistLayout
+    :specialist="specialist"
+    class="specialist-settings-page"
+  >
     <form @submit.prevent="onSubmit">
       <UiField
         label="Доступность для записи"
@@ -78,10 +81,10 @@ import SpecialistLayout from '../components/SpecialistLayout.vue'
     SpecialistLayout
   },
 
-  async asyncData ({ typedStore, route }) {
+  async asyncData ({ route, api }) {
     const slug = Number(route.params.slug)
 
-    const specialist = typedStore.getters['specialists/byId'](slug)
+    const specialist = await api.specialist.get(slug)
 
     const specialistRole = roles[
       specialist.role.name

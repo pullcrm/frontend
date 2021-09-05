@@ -48,6 +48,16 @@ import ProceduresGroup from './components/ProceduresGroup.vue'
     SpecialistLayout
   },
 
+  async asyncData ({ route, api }) {
+    const slug = Number(route.params.slug)
+
+    const specialist = await api.specialist.get(slug)
+
+    return {
+      specialist
+    }
+  },
+
   head () {
     return {
       title: 'Список услуг сотрудника - pullcrm'
@@ -55,13 +65,7 @@ import ProceduresGroup from './components/ProceduresGroup.vue'
   }
 })
 export default class SpecialistProceduresPage extends Vue {
-  get specialistId () {
-    return Number(this.$route.params.slug)
-  }
-
-  get specialist () {
-    return this.$typedStore.getters['specialists/byId'](this.specialistId)
-  }
+  readonly specialist
 
   get user () {
     return this.specialist.user

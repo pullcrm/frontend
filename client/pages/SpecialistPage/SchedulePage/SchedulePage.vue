@@ -1,6 +1,7 @@
 <template>
   <SpecialistLayout
     class="specialist-schedule-page"
+    :specialist="specialist"
   >
     <Header
       :appointments="filteredAppointments"

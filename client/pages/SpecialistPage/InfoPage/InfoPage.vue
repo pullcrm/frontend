@@ -1,6 +1,7 @@
 <template>
   <SpecialistLayout
     class="specialist-info-page"
+    :specialist="specialist"
   >
     <Avatars
       class="specialist-info-page__avatars"

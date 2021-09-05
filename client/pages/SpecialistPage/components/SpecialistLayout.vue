@@ -38,11 +38,20 @@ import { SPECIALIST } from '~/constants/roles'
 import CompanyPicker from './CompanyPicker.vue'
 
 @Component({
+  props: {
+    specialist: {
+      type: Object,
+      required: true
+    }
+  },
+
   components: {
     CompanyPicker
   }
 })
 export default class SpecialistLayout extends Vue {
+  readonly specialist
+
   get navigation () {
     return [
       {
@@ -81,14 +90,6 @@ export default class SpecialistLayout extends Vue {
 
   get role () {
     return this.$typedStore.getters['position/role']
-  }
-
-  get specialistId () {
-    return Number(this.$route.params.slug)
-  }
-
-  get specialist () {
-    return this.$typedStore.getters['specialists/byId'](this.specialistId)
   }
 
   get hasBack () {
