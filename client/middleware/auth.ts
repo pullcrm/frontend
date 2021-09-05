@@ -1,7 +1,7 @@
 import { Middleware } from '@nuxt/types'
 
-const middleware: Middleware = async ({ typedStore, route, redirect }) => {
-  if (route.meta.some((record) => record.public)) return
+const middleware: Middleware = async ({ typedStore, redirect }) => {
+  // if (route.meta.some((record) => record.public)) return
 
   if (typedStore.state.profile) {
     return
