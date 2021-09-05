@@ -10,6 +10,10 @@
     }
   }
 
+  &__error {
+    margin-bottom: 16px;
+  }
+
   &__actions {
     display: flex;
     flex-direction: column;

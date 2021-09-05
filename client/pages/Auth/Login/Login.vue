@@ -24,7 +24,10 @@
             left-icon="outlined/phone"
             placeholder="066"
             autocomplete="on"
-            @input="resetFieldError('phone')"
+            @input="
+              error = null,
+              resetFieldError('phone')
+            "
           />
         </UiField>
 
@@ -39,21 +42,33 @@
             left-icon="outlined/key"
             placeholder="Введите пароль"
             autocomplete="on"
-            @input="resetFieldError('password')"
+            @input="
+              error = null,
+              resetFieldError('password')
+            "
           />
         </UiField>
 
         <UiText
-          class="auth-page-login__reset"
           tag="RouterLink"
           :to="{
             name: 'restore',
             query: { phone }
           }"
           size="s"
+          class="auth-page-login__reset"
         >
           Восстановить доступ
         </UiText>
+
+        <UiAlert
+          v-if="error"
+          theme="error"
+          left-icon="solid/warning-circle-fill"
+          class="auth-page-login__error"
+        >
+          {{ error.message }}
+        </UiAlert>
 
         <div class="auth-page-login__actions">
           <UiButton
@@ -108,6 +123,8 @@ export default class Login extends Vue {
   password = ''
   phone = ''
 
+  error = null
+
   $refs: {
     formValidator: UiFormValidator
   }
@@ -124,18 +141,12 @@ export default class Login extends Vue {
           min: 'Не верный формат номера',
           regex: 'Не верный формат номера',
           required: 'Введите номер телефона'
-        },
-        serverMessages: {
-          invalid: 'Номер телефона введен неверно'
         }
       },
       password: {
         rules: 'required',
         messages: {
           required: 'Введите пароль'
-        },
-        serverMessages: {
-          invalid: 'Пароль введен неверно'
         }
       }
     }
@@ -174,13 +185,8 @@ export default class Login extends Vue {
 
       await this.$router.push({ name: 'companyCreate' })
     } catch (err) {
-      const serverErrors = [
-        err.status === 400 && { field: 'password', error: 'invalid' }
-      ].filter(Boolean)
-
-      if (serverErrors.length > 0) {
-        this.$refs.formValidator.setServerErrors(serverErrors)
-        return
+      if (err.fieldName) {
+        this.error = err
       }
 
       throw err
