@@ -14,7 +14,9 @@
     color: $ui-black-100;
     background-color: $ui-black-10;
     border-radius: 24px;
-    transition: all var(--ui-transition);
+    transition:
+      color var(--ui-transition),
+      background-color var(--ui-transition);
 
     &:hover {
       background-color: $ui-black-20;
