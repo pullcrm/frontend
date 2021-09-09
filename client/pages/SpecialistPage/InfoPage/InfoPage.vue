@@ -35,6 +35,7 @@
           mask="+38 (###) #### ###"
           type="phone"
           disabled
+          inputmode="tel"
           left-icon="outlined/phone"
         />
       </UiField>

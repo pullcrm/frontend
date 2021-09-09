@@ -46,6 +46,7 @@
               name="phone"
               type="phone"
               required
+              inputmode="tel"
               left-icon="outlined/phone"
               placeholder="Введите номер телефона"
               autocomplete="on"

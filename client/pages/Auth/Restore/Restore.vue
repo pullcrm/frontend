@@ -26,6 +26,7 @@
             mask="+38 (###) #### ###"
             name="phone"
             left-icon="outlined/phone"
+            inputmode="tel"
             placeholder="066"
             :disabled="isValid"
             @input="resetFieldError('phone')"

@@ -47,6 +47,7 @@
             name="phone"
             type="phone"
             required
+            inputmode="tel"
             left-icon="outlined/phone"
             placeholder="066"
             @input="resetFieldError('phone')"

@@ -21,6 +21,7 @@
             mask="+38 (###) #### ###"
             type="phone"
             name="phone"
+            inputmode="tel"
             left-icon="outlined/phone"
             placeholder="066"
             autocomplete="on"
