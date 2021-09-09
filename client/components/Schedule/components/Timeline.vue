@@ -49,14 +49,6 @@ export default class Timeline extends Vue {
 
     @media (max-width: $ui-laptop - 1px) {
       flex-basis: var(--time-line-width);
-      padding-top: 60px;
-      border-right: 1px solid #dbdbe0;
-
-      .schedule-timeline__item {
-        &:last-child {
-          display: none;
-        }
-      }
     }
   }
 </style>
