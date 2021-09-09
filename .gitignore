@@ -148,3 +148,6 @@ jest_*/
 
 # pm2
 ecosystem.config.js
+
+# cypress tests
+cypress/
