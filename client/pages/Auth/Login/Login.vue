@@ -187,6 +187,8 @@ export default class Login extends Vue {
     } catch (err) {
       if (err.fieldName) {
         this.error = err
+
+        return
       }
 
       throw err
