@@ -1,11 +1,41 @@
 <template>
-  <DatePicker
-    v-model="date"
-    :get-classes="getClasses"
-    title-format="DD.MM.YYYY"
-    class="schedule-page-queue-schedule-date-picker"
-    @input="$emit('input', $event)"
-  />
+  <div class="schedule-page-queue-schedule-date-picker">
+    <DatePicker
+      v-model="date"
+      :get-classes="getClasses"
+      title-format="DD.MM.YYYY"
+      class="schedule-page-queue-schedule-date-picker__date-picker"
+      @input="$emit('input', $event)"
+    />
+
+    <div class="schedule-page-queue-schedule-date-picker__footer">
+      <UiText
+        tag="a"
+        href="#"
+        size="m"
+        :class="[
+          'schedule-page-queue-schedule-date-picker__button',
+          {'active': isToday}
+        ]"
+        @click.native.prevent="setToday"
+      >
+        Сегодня
+      </UiText>
+
+      <UiText
+        tag="a"
+        href="#"
+        size="m"
+        :class="[
+          'schedule-page-queue-schedule-date-picker__button',
+          {'active': isTomorrow}
+        ]"
+        @click.native.prevent="setTomorrow"
+      >
+        Завтра
+      </UiText>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -37,8 +67,28 @@ export default class ScheduleDatePicker extends Vue {
     this.$typedStore.dispatch('schedule/fetch')
   }
 
+  get isToday () {
+    return dayjs(this.date).isToday()
+  }
+
+  get isTomorrow () {
+    return dayjs(this.date).isTomorrow()
+  }
+
   get timetable () {
     return this.$typedStore.getters['timetable/normalizeTimetable']
+  }
+
+  setToday () {
+    if (this.isToday) return
+
+    this.date = new Date()
+  }
+
+  setTomorrow () {
+    if (this.isTomorrow) return
+
+    this.date = dayjs().add(1, 'day').toDate()
   }
 
   getClasses (date) {

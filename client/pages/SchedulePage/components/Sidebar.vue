@@ -1,13 +1,13 @@
 <template>
-  <div class="schedule-page-queue">
-    <div class="schedule-page-queue__inner">
+  <div class="schedule-page-sidebar">
+    <div class="schedule-page-sidebar__inner">
       <ScheduleDatePicker
-        class="schedule-page-queue__schedule-date-picker"
+        class="schedule-page-sidebar__schedule-date-picker"
       />
 
       <UiTitle
         size="s"
-        class="schedule-page-queue__title"
+        class="schedule-page-sidebar__title"
       >
         Очередь
       </UiTitle>
@@ -16,12 +16,12 @@
         v-for="appointment in queue"
         :key="`queue-${appointment.id}`"
         :appointment="appointment"
-        class="schedule-page-queue__appointment"
+        class="schedule-page-sidebar__appointment"
         @open="openAppointment"
       />
 
       <div
-        class="schedule-page-queue__action"
+        class="schedule-page-sidebar__action"
         @click="addAppointment"
       >
         <UiText
@@ -50,7 +50,7 @@ import ScheduleDatePicker from './ScheduleDatePicker.vue'
     ScheduleDatePicker
   }
 })
-export default class Queue extends Vue {
+export default class Sidebar extends Vue {
   get queue () {
     return this.$typedStore.state.appointments.queue
   }
@@ -77,4 +77,4 @@ export default class Queue extends Vue {
 }
 </script>
 
-<style lang="scss" src="./Queue.scss"></style>
+<style lang="scss" src="./Sidebar.scss"></style>

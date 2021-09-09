@@ -10,7 +10,7 @@
         </UiTitle>
 
         <UiButton
-          size="m"
+          size="s"
           theme="blue"
           right-icon="outlined/plus"
           @click.native="addAppointment"
@@ -30,7 +30,7 @@
     />
 
     <Portal to="sidebar">
-      <Queue />
+      <Sidebar />
     </Portal>
   </div>
 </template>
@@ -41,14 +41,14 @@ import Component from 'vue-class-component'
 
 import Schedule from '~/components/Schedule/Schedule.vue'
 
-import Queue from './components/Queue.vue'
+import Sidebar from './components/Sidebar.vue'
 import DatePickerButton from './components/DatePickerButton/DatePickerButton.vue'
 
 @Component({
   layout: 'dashboard',
 
   components: {
-    Queue,
+    Sidebar,
     Schedule,
     DatePickerButton
   },
