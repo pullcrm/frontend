@@ -17,6 +17,7 @@
           'schedule-page-queue-schedule-date-picker__button',
           {'active': isToday}
         ]"
+        data-test="date-picker-today"
         @click.native.prevent="setToday"
       >
         Сегодня
@@ -30,6 +31,7 @@
           'schedule-page-queue-schedule-date-picker__button',
           {'active': isTomorrow}
         ]"
+        data-test="date-picker-tomorrow"
         @click.native.prevent="setTomorrow"
       >
         Завтра
