@@ -21,7 +21,6 @@
       v-if="isEditableList"
       size="m"
       theme="blue"
-      responsive
       right-icon="outlined/pencil-simple"
       class="specialist-procedures-page__button"
       @click.native="openPopup"
