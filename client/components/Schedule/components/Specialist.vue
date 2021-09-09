@@ -139,8 +139,8 @@ export default class Specialist extends Vue {
 
     const date = new Date(this.$typedStore.state.schedule.date)
 
-    const startDateTime = setTime(date, from).format('MM.DD.YY HH:mm')
-    const endDateTime = setTime(date, to).format('MM.DD.YY HH:mm')
+    const startDateTime = setTime(date, from).format('YYYY-MM-DD HH:mm:ss')
+    const endDateTime = setTime(date, to).format('YYYY-MM-DD HH:mm:ss')
 
     await this.$api.timeOff.create({
       specialistId: this.specialist.id,
