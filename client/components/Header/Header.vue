@@ -29,17 +29,16 @@
         <div class="header__right">
           <UiText
             v-if="balance !== null"
-            class="header__balance"
-            size="m"
-            right-icon="outlined/chat-circle-dots"
+            tag="a"
+            href="#"
+            size="l"
+            strong
             responsive
+            right-icon="outlined/chat-circle-dots"
+            class="header__balance"
+            @click.native="onBalance"
           >
-            <UiPrice
-              size="s"
-              responsive
-            >
-              {{ balance | price }}
-            </UiPrice>
+            {{ balance | price }}
           </UiText>
 
           <UiAvatar
@@ -87,6 +86,10 @@ export default class Header extends Vue {
     })
 
     return `https://${BASE_HOST}${href}`
+  }
+
+  onBalance () {
+    window.open('https://atomic.center/sms/billing/', '_blank')
   }
 }
 </script>
