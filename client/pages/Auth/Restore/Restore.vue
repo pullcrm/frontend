@@ -23,7 +23,7 @@
         >
           <UiInput
             v-model="phone"
-            mask="38 (###) #### ###"
+            mask="+38 (###) #### ###"
             name="phone"
             left-icon="outlined/phone"
             placeholder="066"

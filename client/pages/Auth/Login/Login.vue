@@ -18,7 +18,7 @@
         >
           <UiInput
             v-model="phone"
-            mask="38 (###) #### ###"
+            mask="+38 (###) #### ###"
             type="phone"
             name="phone"
             left-icon="outlined/phone"

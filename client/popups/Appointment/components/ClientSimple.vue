@@ -34,7 +34,7 @@
         ]"
       >
         <UiInput
-          mask="38 (###) #### ###"
+          mask="+38 (###) #### ###"
           :value="phone"
           placeholder="Введите номер телефона"
           @input="

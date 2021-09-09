@@ -32,7 +32,7 @@
         <UiInput
           :value="specialist.user.phone"
           name="phone"
-          mask="38 (###) #### ###"
+          mask="+38 (###) #### ###"
           type="phone"
           disabled
           left-icon="outlined/phone"

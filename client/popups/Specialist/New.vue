@@ -43,7 +43,7 @@
         >
           <UiInput
             v-model="form.phone"
-            mask="38 (###) #### ###"
+            mask="+38 (###) #### ###"
             name="phone"
             type="phone"
             required
