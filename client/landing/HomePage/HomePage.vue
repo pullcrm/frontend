@@ -4,6 +4,7 @@
 
     <Container>
       <Intro
+        :types="typesFiltered"
         class="landing-home-page__section"
       />
 
@@ -48,9 +49,36 @@ import Opportunities from './components/Opportunities/Opportunities.vue'
     Reviews,
     Container,
     Opportunities
+  },
+
+  async asyncData ({ api }) {
+    const types = await api.public.companyTypes()
+
+    return {
+      types
+    }
   }
 })
-export default class HomePage extends Vue {}
+export default class HomePage extends Vue {
+  readonly types: any[]
+
+  get typesDict () {
+    return this.types.reduce((acc, type) => {
+      return {
+        ...acc,
+        [type.id]: type
+      }
+    }, {})
+  }
+
+  get typesFiltered () {
+    return [
+      this.typesDict[1],
+      this.typesDict[12],
+      this.typesDict[2]
+    ].filter(Boolean)
+  }
+}
 </script>
 
 <style lang="scss" src="./HomePage.scss"></style>

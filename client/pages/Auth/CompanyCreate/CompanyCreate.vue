@@ -75,6 +75,18 @@ import Layout from '~/pages/Auth/components/Layout.vue'
     Layout
   },
 
+  async asyncData ({ api }) {
+    const [companyTypes, cities] = await Promise.all([
+      api.companyTypes.all(),
+      api.cities.all()
+    ])
+
+    return {
+      cities,
+      companyTypes
+    }
+  },
+
   head () {
     return {
       title: 'Новая компания - pullcrm'
@@ -82,10 +94,14 @@ import Layout from '~/pages/Auth/components/Layout.vue'
   }
 })
 export default class CompanyCreate extends Vue {
-  company = {}
+  readonly cities = []
+  readonly companyTypes = []
 
-  cities = []
-  companyTypes = []
+  company = {
+    name: '',
+    city: null,
+    type: null
+  }
 
   isLoading = false
 
@@ -93,14 +109,14 @@ export default class CompanyCreate extends Vue {
     return this.$typedStore.getters['position/hasPositions']
   }
 
-  async beforeMount () {
-    const [companyTypes, cities] = await Promise.all([
-      this.$api.companyTypes.all(),
-      this.$api.cities.all()
-    ])
+  mounted () {
+    const type = this.companyTypes.find(({ id }) => {
+      return id === Number(this.$route.query.companyType)
+    })
 
-    this.cities = cities
-    this.companyTypes = companyTypes
+    if (type) {
+      this.company.type = type
+    }
   }
 
   async submit () {
@@ -108,11 +124,8 @@ export default class CompanyCreate extends Vue {
       this.isLoading = true
 
       const { id: companyId } = await this.$api.companies.create({
-        // @ts-ignore
         name: this.company.name,
-        // @ts-ignore
         cityId: this.company.city.id,
-        // @ts-ignore
         typeId: this.company.type.id
       })
 

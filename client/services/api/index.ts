@@ -499,6 +499,10 @@ export const factory = (send) => ({
 
     categories (params: any): Promise<any> {
       return send('public/categories', params, 'GET')
+    },
+
+    companyTypes (): Promise<any> {
+      return send('public/companies/types', null, 'GET')
     }
   },
 

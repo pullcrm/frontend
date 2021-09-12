@@ -19,24 +19,18 @@
 
       <div class="landing-home-page-intro__actions">
         <UiButton
-          theme="info-outlined"
+          v-for="type in types"
+          :key="type.id"
+          :to="{
+            name: 'registration',
+            query: {
+              companyType: type.id
+            }
+          }"
           size="m"
-        >
-          Барбершоп
-        </UiButton>
-
-        <UiButton
           theme="info-outlined"
-          size="m"
         >
-          Груминг салон
-        </UiButton>
-
-        <UiButton
-          theme="info-outlined"
-          size="m"
-        >
-          Салон красоты
+          {{ type.name }}
         </UiButton>
 
         <UiButton
@@ -73,19 +67,16 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-@Component({})
+@Component({
+  props: {
+    types: {
+      type: Array,
+      default: () => []
+    }
+  }
+})
 export default class Intro extends Vue {
-  // 'бизнеса!',
-  // 'барбершопа!',
-  // 'груминг салона!',
-  // 'мастера маникюра!',
-  // 'тату салона!',
-  // 'медицинского центра!',
-  // 'салона красоты!',
-  // 'центра стоматологии!',
-  // 'фитнес центра!',
-  // 'SPA салона!',
-  // 'солярия!'
+  readonly types
 }
 </script>
 

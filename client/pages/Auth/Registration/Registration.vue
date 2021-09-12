@@ -85,6 +85,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import pick from 'lodash/pick'
+
 import { IRegistrationUserParams } from '~/services/api'
 
 import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
@@ -209,7 +211,10 @@ export default class Home extends Vue {
 
     if (result) {
       return this.$router.push({
-        name: 'companyCreate'
+        name: 'companyCreate',
+        query: pick(this.$route.query, [
+          'companyType'
+        ])
       })
     }
   }
