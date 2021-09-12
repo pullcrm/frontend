@@ -91,13 +91,13 @@ import SpecialistPanel from './components/SpecialistPanel.vue'
       return result.map(item => {
         const [hour, minute] = item.split(':').map(Number)
 
-        return dayjs().hour(hour).minute(minute)
+        return (new Date()).setHours(hour, minute, 0)
       })
     }).then(result => {
       return result.filter(item => {
         if (!this.isToday) return true
 
-        return item.isAfter(dayjs() /** add(30, 'minute') */)
+        return dayjs(item).isAfter(dayjs() /** add(30, 'minute') */)
       })
     })
   },
