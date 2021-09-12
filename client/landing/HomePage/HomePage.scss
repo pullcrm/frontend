@@ -1,4 +1,6 @@
 .landing-home-page {
+  overflow-x: hidden;
+
   &__section {
     margin-top: 32px;
   }
@@ -7,9 +9,9 @@
     margin-top: 44px;
   }
 
-  @media (min-width: $ui-tablet) {
+  @media (min-width: $ui-laptop) {
     &__section {
-      margin-top: 44px;
+      margin-top: 64px;
     }
   }
 }

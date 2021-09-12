@@ -97,6 +97,12 @@ export default class Panel extends Vue {}
 
             padding: 16px;
           }
+
+          &_size_l {
+            --ui-panel-padding: 24px;
+
+            padding: 24px;
+          }
         }
       }
     }

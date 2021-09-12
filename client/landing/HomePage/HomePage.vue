@@ -7,11 +7,15 @@
         class="landing-home-page__section"
       />
 
-      <Features
+      <Opportunities
         class="landing-home-page__section"
       />
 
-      <Opportunities
+      <About
+        class="landing-home-page__section"
+      />
+
+      <Reviews
         class="landing-home-page__section"
       />
     </Container>
@@ -26,20 +30,22 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import Footer from '../components/Footer/Footer.vue'
-import Header from '../components/Header/Header.vue'
-import Container from '../components/Container.vue'
+import Footer from '~/landing/components/Footer/Footer.vue'
+import Header from '~/landing/components/Header/Header.vue'
+import Container from '~/landing/components/Container.vue'
 
 import Intro from './components/Intro/Intro.vue'
-import Features from './components/Features/Features.vue'
+import About from './components/About/About.vue'
+import Reviews from './components/Reviews/Reviews.vue'
 import Opportunities from './components/Opportunities/Opportunities.vue'
 
 @Component({
   components: {
     Intro,
+    About,
     Footer,
     Header,
-    Features,
+    Reviews,
     Container,
     Opportunities
   }

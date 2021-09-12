@@ -1,71 +1,71 @@
 <template>
   <div class="landing-home-page-intro">
-    <div class="landing-home-page-intro__header">
-      <img
-        class="landing-home-page-intro__logo"
-        src="~/assets/logos/logo_new.svg"
-        alt="Pullcrm-logo"
-      >
-
+    <div class="landing-home-page-intro__info">
       <UiTitle
-        size="xl"
-        responsive
+        tag="h1"
+        size="l"
         class="landing-home-page-intro__title"
       >
-        <Typewritter
-          :list="writerList"
-          prepend="Учет клиентов для <br/> твоего"
-        />
+        <span>Онлайн запись</span>
+        И учет клиентов <br> для вашего бизнеса
       </UiTitle>
+
+      <UiText
+        size="m"
+        class="landing-home-page-intro__text"
+      >
+        Используй простую систему учета клиентов, <br> с онлайн бронированием, абсолютно бесплатно.
+      </UiText>
+
+      <div class="landing-home-page-intro__actions">
+        <UiButton
+          theme="info-outlined"
+          size="m"
+        >
+          Барбершоп
+        </UiButton>
+
+        <UiButton
+          theme="info-outlined"
+          size="m"
+        >
+          Груминг салон
+        </UiButton>
+
+        <UiButton
+          theme="info-outlined"
+          size="m"
+        >
+          Салон красоты
+        </UiButton>
+
+        <UiButton
+          :to="{ name: 'registration' }"
+          size="m"
+          theme="blue"
+          right-icon="outlined/arrow-right"
+        >
+          Подключить
+        </UiButton>
+      </div>
     </div>
 
-    <UiText
-      size="l"
-      responsive
-      class="landing-home-page-intro__sub-title"
-    >
-      Получите все преимущетсва Pullcrm абсолютно бесплатно.
-    </UiText>
-
-    <form
-      class="landing-home-page-intro__form"
-      @submit.prevent="onSubmit"
-    >
-      <UiFormValidator
-        ref="formValidator"
-        :validations="validations"
+    <div class="landing-home-page-intro__image">
+      <UiButton
+        v-show="false"
+        size="m"
+        theme="green"
+        right-icon="solid/play-fill"
+        class="landing-home-page-intro__video"
       >
-        <template #default="{ resetFieldError, getFieldError }">
-          <UiField
-            class="landing-home-page-intro__phone"
-            :error="getFieldError('phone')"
-          >
-            <UiInput
-              v-model="phone"
-              mask="+38 (###) #### ###"
-              name="phone"
-              type="phone"
-              required
-              inputmode="tel"
-              left-icon="outlined/phone"
-              placeholder="Введите номер телефона"
-              autocomplete="on"
-              @input="resetFieldError('phone')"
-            />
-          </UiField>
+        Посмотреть
+      </UiButton>
 
-          <UiButton
-            type="submit"
-            size="m"
-            theme="blue"
-            left-icon="outlined/arrow-bend-down-left"
-            class="landing-home-page-intro__action"
-          >
-            Попробовать
-          </UiButton>
-        </template>
-      </UiFormValidator>
-    </form>
+      <img
+        src="/static/img/landing-intro.png"
+        alt="pullcrm intro image"
+      >
+    </div>
   </div>
 </template>
 
@@ -73,77 +73,19 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
-
-import Typewritter from '~/components/Typewriter/Typewriter.vue'
-
-import Container from '../../../components/Container.vue'
-
-@Component({
-  components: {
-    Container,
-    Typewritter
-  }
-})
+@Component({})
 export default class Intro extends Vue {
-  phone = ''
-
-  $refs: {
-    formValidator: UiFormValidator
-  }
-
-  get validations (): Validations {
-    return {
-      phone: {
-        rules: {
-          min: 10,
-          required: true
-        },
-        messages: {
-          min: 'Не верный формат номера',
-          required: 'Введите номер телефона'
-        },
-        serverMessages: {
-          invalid: 'Номер телефона введен неверно'
-        }
-      }
-    }
-  }
-
-  get writerList () {
-    return [
-      'бизнеса!',
-      'барбершопа!',
-      'груминг салона!',
-      // 'мастера маникюра!',
-      'тату салона!',
-      // 'медицинского центра!',
-      'салона красоты!',
-      // 'центра стоматологии!',
-      // 'фитнес центра!',
-      // 'SPA салона!',
-      'солярия!'
-    ]
-  }
-
-  async onSubmit () {
-    const isValid = await this.validate()
-
-    if (!isValid) return
-
-    this.$router.push({
-      name: 'registration',
-      query: {
-        phone: this.phone
-      }
-    })
-  }
-
-  validate () {
-    return this.$refs.formValidator.validate({
-      phone: this.phone
-    })
-  }
+  // 'бизнеса!',
+  // 'барбершопа!',
+  // 'груминг салона!',
+  // 'мастера маникюра!',
+  // 'тату салона!',
+  // 'медицинского центра!',
+  // 'салона красоты!',
+  // 'центра стоматологии!',
+  // 'фитнес центра!',
+  // 'SPA салона!',
+  // 'солярия!'
 }
 </script>
 

@@ -1,96 +1,88 @@
 .landing-home-page-intro {
-  &__logo {
-    display: block;
-    width: 88px;
-    height: 88px;
-    border-radius: 16px;
+  --intro-info-block-width: 348px;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__info {
+    max-width: var(--intro-info-block-width);
+    text-align: center;
+  }
+
+  &__video {
+    @include ui-shadow-16;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+  }
+
+  &__image {
+    position: relative;
+    max-width: 512px;
+    margin-top: 24px;
+
+    img {
+      width: 100%;
+    }
   }
 
   &__title {
-    width: 100%;
-    margin-top: 16px;
-    text-align: center;
+    margin-bottom: 24px;
 
-    .typewriter p {
-      span {
-        display: block;
-      }
+    span {
+      display: block;
+      color: $ui-blue-brand;
     }
   }
 
-  &__header {
+  &__text {
+    margin-bottom: 24px;
+    color: $ui-black-80;
+  }
+
+  &__actions {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
-    margin-top: 20px;
-  }
+    margin: 0 -4px -8px;
 
-  &__sub-title {
-    margin-top: 16px;
-    color: $ui-black-60;
-    text-align: center;
-  }
-
-  &__form {
-    margin-top: 20px;
-
-    .ui-form-validator {
-      display: flex;
-      justify-content: center;
+    .ui-button {
+      margin: 0 4px 8px;
     }
   }
 
-  &__phone {
-    width: 100%;
-    margin-right: 12px;
-  }
+  @media (min-width: $ui-laptop) {
+    align-items: flex-start;
+    height: 440px;
 
-  @media (min-width: $ui-tablet) {
-    &__header {
-      flex-direction: row;
-    }
-
-    &__logo {
-      margin-right: 24px;
-    }
-
-    &__title {
-      width: auto;
-      min-width: 390px;
-      margin-top: 0;
+    &__info {
       text-align: left;
-
-      // .typewriter p {
-      //   display: block;
-
-      //   span {
-      //     display: inline;
-      //   }
-      // }
     }
 
-    &__phone {
-      width: 260px;
+    &__actions {
+      justify-content: flex-start;
     }
 
-    &__action {
-      .ui-button__prepend {
-        display: none;
-      }
+    &__image {
+      position: absolute;
+      top: 0;
+      left: calc(var(--intro-info-block-width) + 70px/* margin-left */);
+      width: 641px;
+      max-width: 100%;
+      height: inherit;
+      margin-top: 0;
     }
   }
 
   @media (max-width: $ui-tablet - 1px) {
-    &__action {
-      .ui-button__prepend {
-        margin-right: 0;
-        margin-left: 0;
-      }
-
-      .ui-button__content {
-        display: none;
-      }
+    &__title {
+      @include ui-typo-24;
     }
   }
 }

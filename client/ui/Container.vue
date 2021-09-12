@@ -1,22 +1,38 @@
 <template>
   <div
-    :class="{
-      'ui-container_narrow': narrow,
-      'ui-container_wide': !narrow
-    }"
-    class="ui-container"
+    :class="[
+      'ui-container',
+      `ui-container_${type}`
+    ]"
   >
     <slot />
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component({
   props: {
     narrow: {
       type: Boolean,
       default: false
+    },
+
+    large: {
+      type: Boolean,
+      default: false
     }
+  }
+})
+export default class Container extends Vue {
+  get type () {
+    if (this.narrow) {
+      return 'narrow'
+    }
+
+    return 'wide'
   }
 }
 </script>

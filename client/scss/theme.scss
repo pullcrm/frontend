@@ -13,6 +13,7 @@ html {
 body {
   --safe-area-inset-bottom: env(safe-area-inset-bottom, 0);
 
+  overflow-x: hidden;
   background-color: $ui-white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
