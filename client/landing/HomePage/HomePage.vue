@@ -16,9 +16,9 @@
         class="landing-home-page__section"
       />
 
-      <Reviews
+      <!-- <Reviews
         class="landing-home-page__section"
-      />
+      /> -->
     </Container>
 
     <Footer
@@ -37,7 +37,7 @@ import Container from '~/landing/components/Container.vue'
 
 import Intro from './components/Intro/Intro.vue'
 import About from './components/About/About.vue'
-import Reviews from './components/Reviews/Reviews.vue'
+// import Reviews from './components/Reviews/Reviews.vue'
 import Opportunities from './components/Opportunities/Opportunities.vue'
 
 @Component({
@@ -46,7 +46,7 @@ import Opportunities from './components/Opportunities/Opportunities.vue'
     About,
     Footer,
     Header,
-    Reviews,
+    // Reviews,
     Container,
     Opportunities
   },

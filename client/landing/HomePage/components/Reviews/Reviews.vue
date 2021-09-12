@@ -4,7 +4,7 @@
       class="landing-home-page-reviews__title"
       size="m"
     >
-      Мои компании
+      Отзывы наших клиентов
     </UiTitle>
 
     <UiCarousel
