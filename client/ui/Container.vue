@@ -18,15 +18,12 @@ import Component from 'vue-class-component'
     narrow: {
       type: Boolean,
       default: false
-    },
-
-    large: {
-      type: Boolean,
-      default: false
     }
   }
 })
 export default class Container extends Vue {
+  readonly narrow: boolean
+
   get type () {
     if (this.narrow) {
       return 'narrow'
