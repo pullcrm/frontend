@@ -82,6 +82,7 @@
           type="submit"
           size="l"
           theme="blue"
+          :loading="isLoading"
         >
           {{ isValid ? 'Изменить пароль' : 'Восстановить' }}
         </UiButton>
@@ -120,6 +121,7 @@ export default class Restore extends Vue {
   repeatPassword = ''
 
   isValid = false
+  isLoading = false
 
   $refs: {
     formValidator: UiFormValidator
@@ -128,8 +130,14 @@ export default class Restore extends Vue {
   get validations (): Validations {
     return {
       phone: {
-        rules: 'required',
+        rules: {
+          min: 10,
+          regex: /^0\d+$/,
+          required: true
+        },
         messages: {
+          min: 'Не верный формат номера',
+          regex: 'Не верный формат номера',
           required: 'Введите номер телефона'
         },
         serverMessages: {
@@ -137,9 +145,13 @@ export default class Restore extends Vue {
         }
       },
 
-      code: {
-        rules: 'required',
+      code: this.isValid && {
+        rules: {
+          min: 4,
+          required: true
+        },
         messages: {
+          min: 'Код должен состоять с 4-х символов',
           required: 'Введите код'
         },
         serverMessages: {
@@ -147,14 +159,18 @@ export default class Restore extends Vue {
         }
       },
 
-      password: {
-        rules: 'required',
+      password: this.isValid && {
+        rules: {
+          min: 4,
+          required: true
+        },
         messages: {
+          min: 'Введите минимум 4 символа',
           required: 'Введите новый пароль'
         }
       },
 
-      repeatPassword: {
+      repeatPassword: this.isValid && {
         rules: 'required|confirmed:password',
         messages: {
           required: 'Введите повторно новый пароль',
@@ -178,6 +194,8 @@ export default class Restore extends Vue {
     if (!isValid) return
 
     try {
+      this.isLoading = true
+
       await this.$api.auth.restore({
         code: this.code,
         phone: this.phone,
@@ -200,11 +218,19 @@ export default class Restore extends Vue {
       }
 
       throw err
+    } finally {
+      this.isLoading = false
     }
   }
 
   async confirmationPhone () {
+    const isValid = await this.validate()
+
+    if (!isValid) return
+
     try {
+      this.isLoading = true
+
       await this.$api.users.confirmation({
         phone: this.phone,
         type: 'RESET_PASSWORD'
@@ -222,6 +248,8 @@ export default class Restore extends Vue {
       }
 
       throw err
+    } finally {
+      this.isLoading = false
     }
   }
 

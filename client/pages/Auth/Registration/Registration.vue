@@ -188,7 +188,7 @@ export default class Home extends Vue {
       return this.confirmation()
     } catch (err) {
       const serverErrors = [
-        err.status === 500 && { field: 'phone', error: 'invalid' }
+        err.code === 400 && { field: 'phone', error: 'invalid' }
       ].filter(Boolean)
 
       if (serverErrors.length > 0) {
