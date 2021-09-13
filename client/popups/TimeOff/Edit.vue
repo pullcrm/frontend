@@ -287,8 +287,8 @@ export default class TimeOffEdit extends Vue {
     try {
       this.isLoading = true
 
-      const endDateTime = setTime(this.date, this.form.endTime).format('MM.DD.YY HH:mm')
-      const startDateTime = setTime(this.date, this.form.startTime).format('MM.DD.YY HH:mm')
+      const endDateTime = setTime(this.date, this.form.endTime).format('YYYY-MM-DD HH:mm:ss')
+      const startDateTime = setTime(this.date, this.form.startTime).format('YYYY-MM-DD HH:mm:ss')
 
       await this.$api.timeOff.update(this.form.id, {
         specialistId: this.form.specialist.id,
