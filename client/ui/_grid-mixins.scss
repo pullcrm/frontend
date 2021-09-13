@@ -1,41 +1,26 @@
 @mixin ui-container {
-  --ui-container-padding: 16px;
+  --ui-container-padding: #{$ui-mobile-padding};
 
-  width: calc(100% - 16px * 2);
+  width: calc(100% - var(--ui-container-padding) * 2);
   margin-right: auto;
   margin-left: auto;
 
   @media (min-width: $ui-mobile-portrait) {
-    --ui-container-padding: 20px;
-
-    width: calc(100% - 20px * 2);
+    --ui-container-padding: #{$ui-mobile-portrait-padding};
   }
 
   @media (min-width: $ui-tablet) {
-    --ui-container-padding: 44px;
+    --ui-container-padding: #{$ui-tablet-padding};
+  }
 
-    width: calc(100% - 44px * 2);
+  @media (min-width: $ui-laptop) {
+    --ui-container-padding: #{$ui-laptop-padding};
   }
 
   @media (min-width: $ui-desktop) {
-    --ui-container-padding: 60px;
+    --ui-container-padding: #{$ui-desktop-padding};
 
-    width: calc(100% - 60px * 2);
-    max-width: calc(#{$ui-desktop} - 60px * 2);
-  }
-
-  @media (min-width: $ui-desktop-large) {
-    --ui-container-padding: 60px;
-
-    width: calc(100% - 60px * 2);
-    max-width: calc(#{$ui-desktop-large} - 60px * 2);
-  }
-
-  @media (min-width: $ui-desktop-4k) {
-    --ui-container-padding: 60px;
-
-    width: calc(100% - 60px * 2);
-    max-width: calc(#{$ui-desktop-4k} - 60px * 2);
+    max-width: calc(#{$ui-desktop} - var(--ui-container-padding) * 2);
   }
 }
 

@@ -7,6 +7,7 @@ export class RpcError extends Error {
   token: string
   method: string
   params: object
+  fieldName: string
 
   sentryCategory: string
   sentryFingerprint: any[]
@@ -15,15 +16,15 @@ export class RpcError extends Error {
     super()
 
     this.name = 'RpcError'
-    this.code = error.code
-    this.data = error.data
+    this.code = 400
     this.token = token ? token.slice(0, 6) : null
     this.params = params
     this.method = method
-    this.message = `Method "${method}" returned code ${error.code} because ${error.message}.`
+    this.message = error.message
+    this.fieldName = error.fieldName
 
     this.sentryCategory = 'rpcClient'
-    this.sentryFingerprint = [method, error.code]
+    this.sentryFingerprint = [method, error.message]
   }
 }
 

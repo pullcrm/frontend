@@ -11,7 +11,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 const config: NuxtOptions = {
   telemetry: false,
 
-  ssr: false,
+  ssr: true,
 
   server: {
     port: process.env.PORT
@@ -73,7 +73,7 @@ const config: NuxtOptions = {
     title: 'Учет клиентов и онлайн запись - pullcrm',
     meta: [
       { charset: 'utf-8' },
-      { hid: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover' },
+      { hid: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover' },
       { name: 'mobile-web-app-capable', content: 'yes' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
       { name: 'application-name', content: 'Pullcrm' },
@@ -159,6 +159,7 @@ const config: NuxtOptions = {
     { src: '~/plugins/runtime-config' },
     { src: '~/plugins/storage' },
     { src: '~/plugins/api' },
+    { src: '~/plugins/auth' },
     { src: '~/plugins/errors' },
     // { src: '~/plugins/auth' },
     { src: '~/plugins/vue-filters' },

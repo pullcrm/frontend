@@ -34,8 +34,9 @@
         ]"
       >
         <UiInput
-          mask="38 (###) #### ###"
+          mask="+38 (###) #### ###"
           :value="phone"
+          inputmode="tel"
           placeholder="Введите номер телефона"
           @input="
             $emit('update:phone', $event)

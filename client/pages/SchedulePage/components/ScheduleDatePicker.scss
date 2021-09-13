@@ -1,0 +1,48 @@
+
+.schedule-page-queue-schedule-date-picker {
+  &__date-picker {
+    width: 100%;
+  }
+
+  &__footer {
+    display: flex;
+    margin-top: 8px;
+  }
+
+  &__button {
+    padding: 8px 16px;
+    color: $ui-black-100;
+    background-color: $ui-black-10;
+    border-radius: 24px;
+    transition:
+      color var(--ui-transition),
+      background-color var(--ui-transition);
+
+    &:hover {
+      background-color: $ui-black-20;
+    }
+
+    &:active,
+    &.active {
+      color: $ui-white;
+      background-color: $ui-blue-brand;
+    }
+  }
+
+  &__button + &__button {
+    margin-left: 8px;
+  }
+
+  .custom-ui-calendar {
+    width: inherit;
+  }
+
+  .custom-ui-calendar-content {
+    height: 256px;
+    margin: 0 -5px;
+  }
+
+  .custom-ui-table {
+    border-spacing: 5px 4px;
+  }
+}

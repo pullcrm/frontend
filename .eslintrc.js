@@ -47,6 +47,7 @@ module.exports = {
         { pattern: '~/ui/**', group: 'internal', position: 'after' },
         { pattern: '~/old-ui/**', group: 'internal', position: 'after' },
         { pattern: '~/components/**', group: 'internal', position: 'after' },
+        { pattern: '~/landing/**', group: 'internal', position: 'after' },
         { pattern: '~/popups/**', group: 'internal', position: 'after' },
         { pattern: '~/views/**', group: 'internal', position: 'after' },
         { pattern: '~/widgets/**', group: 'internal', position: 'after' }

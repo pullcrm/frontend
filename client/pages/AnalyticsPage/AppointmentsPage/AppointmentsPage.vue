@@ -21,7 +21,7 @@
         </UiText>
 
         <template #body>
-          <DataPicker
+          <DatePicker
             v-model="dates"
             range
             :disabled-date="notAfterToday"
@@ -48,7 +48,7 @@ import Component from 'vue-class-component'
 
 import dayjs from '~/utils/dayjs'
 
-import DataPicker from '~/components/DatePicker/DatePicker.vue'
+import DatePicker from '~/components/DatePicker/DatePicker.vue'
 
 import AnalyticsLayout from '../components/AnalyticsLayout.vue'
 
@@ -61,7 +61,7 @@ import LineChart from './components/LineChart.vue'
   components: {
     Numbers,
     LineChart,
-    DataPicker,
+    DatePicker,
     AnalyticsLayout
   },
 

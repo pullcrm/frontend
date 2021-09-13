@@ -22,32 +22,24 @@
           <Navigation />
         </div>
 
-        <div class="landing-header__actions">
-          <UiText
-            tag="RouterLink"
-            to="/login/"
-            size="m"
-            strong
-            left-icon="outlined/sign-in"
-            class="landing-header__login"
-          >
-            Войти
-          </UiText>
+        <Actions
+          class="landing-header__actions"
+        />
 
-          <div class="landing-header__actions-divider" />
-
-          <UiText
-            tag="RouterLink"
-            to="/registration/"
-            size="m"
-            strong
-            class="landing-header__registration"
-          >
-            Регистрация
-          </UiText>
-        </div>
+        <UiIcon
+          size="m"
+          name="solid/list-fill"
+          class="landing-header__burger"
+          @click.native="mobileMenuOpen = true"
+        />
       </div>
     </Container>
+
+    <MobileMenu
+      v-if="mobileMenuOpen"
+      class="landing-header__mobile-menu"
+      @close="mobileMenuOpen = false"
+    />
   </div>
 </template>
 
@@ -56,15 +48,22 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import Container from '../Container.vue'
-import Navigation from '../Navigation/Navigation.vue'
+
+import Actions from './components/Actions/Actions.vue'
+import MobileMenu from './components/MobileMenu/MobileMenu.vue'
+import Navigation from './components/Navigation/Navigation.vue'
 
 @Component({
   components: {
+    Actions,
     Container,
+    MobileMenu,
     Navigation
   }
 })
-export default class Header extends Vue {}
+export default class Header extends Vue {
+  mobileMenuOpen = false
+}
 </script>
 
 <style lang="scss" src="./Header.scss"></style>

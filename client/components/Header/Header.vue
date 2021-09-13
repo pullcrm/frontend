@@ -1,52 +1,55 @@
 <template>
   <div class="header">
-    <div class="header__left">
-      <UiText
-        tag="a"
-        size="l"
-        :href="siteUrl"
-        target="_blank"
-        right-icon="solid/link-fill"
-        responsive
-      >
-        Ваш веб-сайт
-      </UiText>
+    <UiContainer>
+      <div class="header__inner">
+        <div class="header__left">
+          <UiText
+            tag="a"
+            size="l"
+            :href="siteUrl"
+            target="_blank"
+            right-icon="solid/link-fill"
+            responsive
+          >
+            Ваш веб-сайт
+          </UiText>
 
-      <UiText
-        tag="a"
-        href="mailto:admin@pullcrm.com"
-        size="l"
-        right-icon="outlined/megaphone"
-        responsive
-        class="header__mail"
-      >
-        Сообщить о проблеме
-      </UiText>
-    </div>
+          <UiText
+            tag="a"
+            href="mailto:admin@pullcrm.com"
+            size="l"
+            right-icon="outlined/megaphone"
+            responsive
+            class="header__mail"
+          >
+            Сообщить о проблеме
+          </UiText>
+        </div>
 
-    <div class="header__right">
-      <UiText
-        v-if="balance !== null"
-        class="header__balance"
-        size="m"
-        right-icon="outlined/chat-circle-dots"
-        responsive
-      >
-        <UiPrice
-          size="s"
-          responsive
-        >
-          {{ balance | price }}
-        </UiPrice>
-      </UiText>
+        <div class="header__right">
+          <UiText
+            v-if="balance !== null"
+            tag="a"
+            href="#"
+            size="l"
+            strong
+            responsive
+            right-icon="outlined/chat-circle-dots"
+            class="header__balance"
+            @click.native="onBalance"
+          >
+            {{ balance | price }}
+          </UiText>
 
-      <UiAvatar
-        class="header__avatar"
-        size="s"
-        :image="logo"
-        :name="company.name"
-      />
-    </div>
+          <UiAvatar
+            class="header__avatar"
+            size="s"
+            :image="logo"
+            :name="company.name"
+          />
+        </div>
+      </div>
+    </UiContainer>
   </div>
 </template>
 
@@ -83,6 +86,10 @@ export default class Header extends Vue {
     })
 
     return `https://${BASE_HOST}${href}`
+  }
+
+  onBalance () {
+    window.open('https://atomic.center/sms/billing/', '_blank')
   }
 }
 </script>

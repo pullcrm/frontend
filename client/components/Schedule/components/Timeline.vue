@@ -32,7 +32,7 @@ export default class Timeline extends Vue {
 
 <style lang="scss">
   .schedule-timeline {
-    flex-basis: 36px;
+    flex-basis: var(--time-line-width);
 
     &__item {
       display: flex;
@@ -45,6 +45,10 @@ export default class Timeline extends Vue {
       &:not(:last-child) {
         margin-bottom: $SCHEDULE_ROW_HEIGHT;
       }
+    }
+
+    @media (max-width: $ui-laptop - 1px) {
+      flex-basis: var(--time-line-width);
     }
   }
 </style>

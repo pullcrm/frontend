@@ -1,5 +1,6 @@
 <template>
   <SpecialistLayout
+    :specialist="specialist"
     class="specialist-procedures-page"
   >
     <UiPlaceholder
@@ -10,10 +11,9 @@
     />
 
     <ProceduresGroup
-      v-for="(procedures, categoryId) in proceduresByCategory"
-      :key="categoryId"
-      :procedures="procedures"
-      :category-id="Number(categoryId)"
+      v-for="(item, index) in items"
+      :key="index"
+      :group="item"
       class="specialist-procedures-page__procedures-group"
     />
 
@@ -21,7 +21,6 @@
       v-if="isEditableList"
       size="m"
       theme="blue"
-      responsive
       right-icon="outlined/pencil-simple"
       class="specialist-procedures-page__button"
       @click.native="openPopup"
@@ -37,7 +36,7 @@ import Component from 'vue-class-component'
 
 import { SPECIALIST } from '~/constants/roles'
 
-import { groupByCategoryId } from '~/logics/procedures'
+import { groupByCategory } from '~/logics/procedures'
 
 import SpecialistLayout from '../components/SpecialistLayout.vue'
 
@@ -49,6 +48,16 @@ import ProceduresGroup from './components/ProceduresGroup.vue'
     SpecialistLayout
   },
 
+  async asyncData ({ route, api }) {
+    const slug = Number(route.params.slug)
+
+    const specialist = await api.specialist.get(slug)
+
+    return {
+      specialist
+    }
+  },
+
   head () {
     return {
       title: 'Список услуг сотрудника - pullcrm'
@@ -56,13 +65,7 @@ import ProceduresGroup from './components/ProceduresGroup.vue'
   }
 })
 export default class SpecialistProceduresPage extends Vue {
-  get specialistId () {
-    return Number(this.$route.params.slug)
-  }
-
-  get specialist () {
-    return this.$typedStore.getters['specialists/byId'](this.specialistId)
-  }
+  readonly specialist
 
   get user () {
     return this.specialist.user
@@ -77,15 +80,24 @@ export default class SpecialistProceduresPage extends Vue {
   }
 
   get isEmpty () {
-    return this.procedures.length === 0
-  }
-
-  get proceduresByCategory () {
-    return groupByCategoryId(this.procedures)
+    return this.items.length === 0
   }
 
   get procedures () {
     return this.specialist.procedures
+  }
+
+  get categories () {
+    return this.$typedStore.state.procedures.categories
+  }
+
+  get groupByCategory () {
+    return groupByCategory(this.procedures, this.categories)
+  }
+
+  get items () {
+    return this.groupByCategory
+      .filter(({ procedures }) => procedures.length > 0)
   }
 
   openPopup () {

@@ -2,7 +2,6 @@
   <div class="landing-home-page-opportunities">
     <UiTitle
       size="m"
-      responsive
       class="landing-home-page-opportunities__title"
     >
       Возможности и преимущества

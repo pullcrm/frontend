@@ -10,9 +10,6 @@
   }
 
   &__logo {
-    display: none;
-    flex: 1;
-
     img {
       width: 32px;
       border-radius: 8px;
@@ -20,44 +17,30 @@
   }
 
   &__nav {
-    display: flex;
-    flex: 1;
-    height: 100%;
-  }
-
-  &__registration {
     display: none;
   }
 
   &__actions {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: flex-end;
-
-    .ui-icon {
-      color: $ui-black-80;
-    }
+    display: none;
   }
 
   @media (min-width: $ui-tablet) {
-    &__logo {
-      display: block;
+    &__burger,
+    &__mobile-menu {
+      display: none;
     }
 
     &__nav {
+      display: flex;
+      flex: 1;
       justify-content: center;
+      height: 100%;
     }
 
-    &__actions-divider {
-      min-width: 1px;
-      height: 16px;
-      margin: 0 16px;
-      background: $ui-black-40;
-    }
-
-    &__registration {
-      display: block;
+    &__logo,
+    &__actions {
+      display: flex;
+      width: 165px;
     }
   }
 }

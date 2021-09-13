@@ -4,16 +4,21 @@
 
     <Container>
       <Intro
-        class="landing-home-page__section"
-      />
-
-      <Features
+        :types="typesFiltered"
         class="landing-home-page__section"
       />
 
       <Opportunities
         class="landing-home-page__section"
       />
+
+      <About
+        class="landing-home-page__section"
+      />
+
+      <!-- <Reviews
+        class="landing-home-page__section"
+      /> -->
     </Container>
 
     <Footer
@@ -26,25 +31,54 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import Footer from '../components/Footer/Footer.vue'
-import Header from '../components/Header/Header.vue'
-import Container from '../components/Container.vue'
+import Footer from '~/landing/components/Footer/Footer.vue'
+import Header from '~/landing/components/Header/Header.vue'
+import Container from '~/landing/components/Container.vue'
 
 import Intro from './components/Intro/Intro.vue'
-import Features from './components/Features/Features.vue'
+import About from './components/About/About.vue'
+// import Reviews from './components/Reviews/Reviews.vue'
 import Opportunities from './components/Opportunities/Opportunities.vue'
 
 @Component({
   components: {
     Intro,
+    About,
     Footer,
     Header,
-    Features,
+    // Reviews,
     Container,
     Opportunities
+  },
+
+  async asyncData ({ api }) {
+    const types = await api.public.companyTypes()
+
+    return {
+      types
+    }
   }
 })
-export default class HomePage extends Vue {}
+export default class HomePage extends Vue {
+  readonly types: any[]
+
+  get typesDict () {
+    return this.types.reduce((acc, type) => {
+      return {
+        ...acc,
+        [type.id]: type
+      }
+    }, {})
+  }
+
+  get typesFiltered () {
+    return [
+      this.typesDict[1],
+      this.typesDict[12],
+      this.typesDict[2]
+    ].filter(Boolean)
+  }
+}
 </script>
 
 <style lang="scss" src="./HomePage.scss"></style>

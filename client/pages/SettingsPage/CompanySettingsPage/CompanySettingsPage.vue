@@ -120,7 +120,8 @@
             >
               <UiInput
                 v-model="company.phone"
-                mask="38 (###) #### ###"
+                mask="+38 (###) #### ###"
+                inputmode="tel"
                 placeholder="066"
               />
             </UiField>

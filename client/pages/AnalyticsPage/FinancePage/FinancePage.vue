@@ -21,7 +21,7 @@
         </UiText>
 
         <template #body>
-          <DataPicker
+          <DatePicker
             v-model="dates"
             range
             :disabled-date="notAfterToday"
@@ -58,7 +58,7 @@ import Component from 'vue-class-component'
 
 import dayjs from '~/utils/dayjs'
 
-import DataPicker from '~/components/DatePicker/DatePicker.vue'
+import DatePicker from '~/components/DatePicker/DatePicker.vue'
 
 import AnalyticsLayout from '../components/AnalyticsLayout.vue'
 
@@ -70,7 +70,7 @@ import FinanceTable from './components/Table.vue'
 
   components: {
     Numbers,
-    DataPicker,
+    DatePicker,
     FinanceTable,
     AnalyticsLayout
   },

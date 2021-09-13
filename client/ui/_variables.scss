@@ -34,12 +34,20 @@ $ui-blue-10: #e4f3ff;
 
 // Breakpoints
 $ui-mobile: 320px;
+$ui-mobile-padding: 16px;
+
 $ui-mobile-portrait: 600px;
+$ui-mobile-portrait-padding: 20px;
+
 $ui-tablet: 768px;
+$ui-tablet-padding: 40px;
+
 $ui-laptop: 1024px;
+$ui-laptop-padding: 40px;
+
 $ui-desktop: 1440px;
-$ui-desktop-large: 1920px;
-$ui-desktop-4k: 2560px;
+$ui-desktop-padding: 60px;
+
 // todo: min/max variables
 
 // Transitions

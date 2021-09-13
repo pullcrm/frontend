@@ -1,51 +1,37 @@
 <template>
-  <div class="dashboard-layout">
-    <Navbar
-      class="dashboard-layout__navbar"
-    />
+  <ClientOnly>
+    <div class="dashboard-layout">
+      <Navbar
+        class="dashboard-layout__navbar"
+      />
 
-    <div
-      class="dashboard-layout__container"
-      :class="{'_has-sidebar': hasSidebar}"
-    >
-      <UiContainer
-        class="dashboard-layout__header"
-      >
-        <Header />
+      <div class="dashboard-layout__container">
+        <SmsAlert
+          class="dashboard-layout__sms-alert"
+        />
 
-        <UiAlert
-          v-if="hasSmsError"
-          theme="error"
-          left-icon="solid/warning-circle-fill"
-        >
-          Оповещения по СМС отключены! Попробуйте обновить настройки поставщика.
-          <UiLink
-            theme="action"
-            @click.native="resetSms"
-          >
-            Сбросить настройки
-          </UiLink>
-        </UiAlert>
-      </UiContainer>
+        <Header
+          class="dashboard-layout__header"
+        />
 
-      <Nuxt />
+        <Nuxt />
+
+        <div class="dashboard-layout__footer" />
+      </div>
+
+      <PortalTarget name="sidebar" />
+
+      <Loader
+        v-if="loading"
+      />
+
+      <Popups />
+      <Toasts />
+      <PopperMenu
+        ref="popperMenu"
+      />
     </div>
-
-    <PortalTarget
-      class="dashboard-layout__sidebar"
-      name="sidebar"
-    />
-
-    <Loader
-      v-if="loading"
-    />
-
-    <Popups />
-    <Toasts />
-    <PopperMenu
-      ref="popperMenu"
-    />
-  </div>
+  </ClientOnly>
 </template>
 
 <script lang="ts">
@@ -57,6 +43,7 @@ import Header from '~/components/Header/Header.vue'
 import Navbar from '~/components/Navbar/Navbar.vue'
 import Popups from '~/components/Popups/Popups.vue'
 import Toasts from '~/components/Toasts/Toasts.vue'
+import SmsAlert from '~/components/SmsAlert/SmsAlert.vue'
 import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
 
 @Component({
@@ -66,6 +53,7 @@ import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
     Navbar,
     Popups,
     Toasts,
+    SmsAlert,
     PopperMenu
   },
 
@@ -100,14 +88,6 @@ export default class DashboardLayout extends Vue {
     popperMenu: PopperMenu
   }
 
-  get hasSmsError () {
-    return this.$typedStore.state.sms.hasSmsError
-  }
-
-  get hasSidebar () {
-    return this.$typedStore.state.schedule.isQueueOpened
-  }
-
   get hasPosition () {
     return Boolean(this.$typedStore.state.position.current)
   }
@@ -115,73 +95,7 @@ export default class DashboardLayout extends Vue {
   get loading () {
     return this.$typedStore.state.loading
   }
-
-  async resetSms () {
-    await this.$api.sms.settingRemove()
-
-    const { href } = this.$router.resolve({
-      name: 'smsSettings'
-    })
-
-    window.location.href = href
-  }
 }
 </script>
 
-<style lang="scss">
-  .dashboard-layout {
-    display: flex;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding-top: 16px;
-    padding-left: $ui-navbar-desktop-width;
-    background: $ui-black-10;
-
-    &__navbar {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 13;
-    }
-
-    &__container {
-      width: 100%;
-    }
-
-    &__header {
-      margin-bottom: 16px;
-
-      .ui-alert {
-        margin-top: 16px;
-      }
-    }
-
-    // @FIXME:
-    @media (min-width: $ui-laptop) {
-      padding-top: 24px;
-      padding-bottom: 24px;
-
-      &__container {
-        &._has-sidebar {
-          width: calc(100% - 296px);
-        }
-      }
-
-      &__header {
-        margin-bottom: 24px;
-      }
-    }
-
-    @media (max-width: $ui-laptop - 1px) {
-      padding-bottom: #{$ui-navbar-desktop-width + 16px};
-      padding-bottom: calc(#{$ui-navbar-desktop-width + 16px} + var(--safe-area-inset-bottom));
-      padding-left: 0;
-
-      &__navbar {
-        top: initial;
-        right: 0;
-      }
-    }
-  }
-</style>
+<style lang="scss" src="./dashboard.scss"></style>

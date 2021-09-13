@@ -63,14 +63,18 @@ const EVENING_TIME = 17
 export default class TimePicker extends Vue {
   readonly hours
 
+  get hoursNormalize () {
+    return this.hours.map(dayjs)
+  }
+
   get morningHours () {
-    return this.hours.filter(item => {
+    return this.hoursNormalize.filter(item => {
       return item.isBefore(dayjs().hour(AFTERNOONS_TIME).minute(0))
     })
   }
 
   get afternoonsHours () {
-    return this.hours.filter(item => {
+    return this.hoursNormalize.filter(item => {
       return (
         item.isAfter(dayjs().hour(AFTERNOONS_TIME).minute(0)) &&
         item.isBefore(dayjs().hour(EVENING_TIME).minute(0))
@@ -79,7 +83,7 @@ export default class TimePicker extends Vue {
   }
 
   get eveningHours () {
-    return this.hours.filter(item => {
+    return this.hoursNormalize.filter(item => {
       return item.isAfter(dayjs().hour(EVENING_TIME).minute(0))
     })
   }

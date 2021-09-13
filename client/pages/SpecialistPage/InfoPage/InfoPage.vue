@@ -1,6 +1,7 @@
 <template>
   <SpecialistLayout
     class="specialist-info-page"
+    :specialist="specialist"
   >
     <Avatars
       class="specialist-info-page__avatars"
@@ -31,9 +32,10 @@
         <UiInput
           :value="specialist.user.phone"
           name="phone"
-          mask="38 (###) #### ###"
+          mask="+38 (###) #### ###"
           type="phone"
           disabled
+          inputmode="tel"
           left-icon="outlined/phone"
         />
       </UiField>
@@ -119,10 +121,10 @@ import CreatedAt from './components/CreatedAt.vue'
     SpecialistLayout
   },
 
-  async asyncData ({ typedStore, route, api }) {
+  async asyncData ({ route, api }) {
     const slug = Number(route.params.slug)
 
-    const specialist = typedStore.getters['specialists/byId'](slug)
+    const specialist = await api.specialist.get(slug)
 
     const avatars = await api.files.all(specialist.user.id, {
       group: AVATAR
@@ -139,16 +141,6 @@ import CreatedAt from './components/CreatedAt.vue'
       title: 'Информация о сотруднике - pullcrm'
     }
   }
-
-  // async fetch () {
-  //   const slug = Number(this.$route.params.slug)
-
-  //   this.specialist = await this.$api.specialist.get(slug)
-
-  //   this.avatars = await this.$api.files.all(this.user.id, {
-  //     group: AVATAR
-  //   })
-  // }
 })
 export default class SpecialistInfoPage extends Vue {
   avatars: any[]
@@ -166,10 +158,6 @@ export default class SpecialistInfoPage extends Vue {
 
   get user () {
     return this.specialist.user
-  }
-
-  get role () {
-    return this.$typedStore.getters['position/role']
   }
 
   async onSubmit () {
@@ -207,20 +195,15 @@ export default class SpecialistInfoPage extends Vue {
   }
 
   async refresh () {
-    await Promise.all([
-      this.fetchAvatars,
-      this.$typedStore.dispatch('specialists/fetch')
+    const [avatars, specialist] = await Promise.all([
+      this.$api.files.all(this.user.id, {
+        group: AVATAR
+      }),
+      this.$api.specialist.get(this.specialistId)
     ])
 
-    this.specialist = this.$typedStore.getters['specialists/byId'](this.specialistId)
-  }
-
-  async fetchAvatars () {
-    const result = await this.$api.files.all(this.user.id, {
-      group: AVATAR
-    })
-
-    this.avatars = result
+    this.avatars = avatars
+    this.specialist = specialist
   }
 
   async copyPersonalLink () {

@@ -1,7 +1,9 @@
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   &__left {
     display: flex;
@@ -30,9 +32,14 @@
 
   &__balance {
     margin-right: 16px;
+    color: $ui-green-brand;
 
     .ui-icon {
       color: $ui-black-60;
+    }
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 

@@ -36,10 +36,11 @@
         >
           <UiInput
             v-model="form.phone"
-            mask="38 (###) #### ###"
-            left-icon="outlined/phone"
+            mask="+38 (###) #### ###"
             name="phone"
             type="phone"
+            inputmode="tel"
+            left-icon="outlined/phone"
             placeholder="066"
             @input="resetFieldError('phone')"
           />
@@ -83,6 +84,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+
+import pick from 'lodash/pick'
 
 import { IRegistrationUserParams } from '~/services/api'
 
@@ -185,7 +188,7 @@ export default class Home extends Vue {
       return this.confirmation()
     } catch (err) {
       const serverErrors = [
-        err.status === 500 && { field: 'phone', error: 'invalid' }
+        err.code === 400 && { field: 'phone', error: 'invalid' }
       ].filter(Boolean)
 
       if (serverErrors.length > 0) {
@@ -208,7 +211,10 @@ export default class Home extends Vue {
 
     if (result) {
       return this.$router.push({
-        name: 'companyCreate'
+        name: 'companyCreate',
+        query: pick(this.$route.query, [
+          'companyType'
+        ])
       })
     }
   }

@@ -19,7 +19,7 @@
         </UiField>
 
         <template #body>
-          <DataPicker v-model="customDate" />
+          <DatePicker v-model="customDate" />
         </template>
       </UiPopover>
 
@@ -82,11 +82,11 @@ import { TIME_STEP } from '~/constants'
 import dayjs from '~/utils/dayjs'
 import { shiftTimeUpBySteps } from '~/utils/time'
 
-import DataPicker from '~/components/DatePicker/DatePicker.vue'
+import DatePicker from '~/components/DatePicker/DatePicker.vue'
 
 @Component({
   components: {
-    DataPicker
+    DatePicker
   },
 
   props: {

@@ -7,14 +7,14 @@ function createState () {
     date: formatDate(new Date(), 'YYYY-MM-DD'),
     timeOffs: [],
 
-    isLoading: false,
-    isQueueOpened: false
+    isLoading: false
   }
 }
 
 const actions = {
   async fetch ({ dispatch, commit }) {
     commit('SET_LOADING', true)
+
     dispatch('reset')
 
     await Promise.all([
@@ -36,7 +36,6 @@ const actions = {
 
   reset ({ commit }) {
     commit('SET_TIME_OFFS', [])
-    commit('appointments/SET_QUEUE', [], { root: true })
     commit('appointments/SET_APPOINTMENTS', [], { root: true })
   }
 }
@@ -52,10 +51,6 @@ const mutations = {
 
   SET_LOADING (state, loading) {
     state.isLoading = loading
-  },
-
-  SET_QUEUE_OPEN (state, isOpened) {
-    state.isQueueOpened = isOpened
   }
 }
 

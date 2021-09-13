@@ -1,0 +1,32 @@
+.landing-home-page-reviews {
+  &__title {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  &__carousel {
+    .ui-carousel__inner {
+      margin: -8px 0;
+      padding: 8px 0;
+    }
+
+    --ui-carousel-item-gap: 24px;
+    --ui-carousel-item-count: 1;
+
+    @media (min-width: $ui-laptop) {
+      --ui-carousel-item-count: 2;
+    }
+  }
+
+  @media (min-width: $ui-laptop) {
+    &__title {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: $ui-tablet - 1px) {
+    &__title {
+      @include ui-typo-24;
+    }
+  }
+}

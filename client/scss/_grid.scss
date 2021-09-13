@@ -79,14 +79,3 @@
     }
   }
 }
-
-/*
-  Utility class for screens > desktop-large
-*/
-@media (min-width: $ui-desktop-large) {
-  @for $i from 0 through 12 {
-    .ui-grid-item_desktop-large_#{$i} {
-      @include ui-grid-item-span($i);
-    }
-  }
-}

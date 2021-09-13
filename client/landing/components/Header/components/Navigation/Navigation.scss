@@ -1,0 +1,55 @@
+@mixin navigation-item_active {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -16px;
+    width: 2px;
+    background: $ui-blue-brand;
+    content: '';
+  }
+
+  @media (min-width: $ui-tablet) {
+    &::before {
+      top: initial;
+      left: 0;
+      width: 100%;
+      height: 2px;
+    }
+  }
+}
+
+.landing-navigation {
+  display: flex;
+  flex-direction: column;
+  margin: -4px 0;
+
+  a {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+    padding: 8px 0;
+
+    &.router-link-exact-active {
+      @include navigation-item_active;
+    }
+
+    @include ui-hover {
+      &:hover {
+        @include navigation-item_active;
+      }
+    }
+  }
+
+  @media (min-width: $ui-tablet) {
+    flex-direction: row;
+    margin: 0 -16px;
+
+    a {
+      margin: 0 16px;
+      padding: 0;
+    }
+  }
+}

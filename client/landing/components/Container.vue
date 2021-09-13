@@ -17,6 +17,6 @@ export default class Container extends Vue {}
   @include ui-container;
 
   // @TODO: Refactor
-  max-width: 956px !important;
+  max-width: 968px !important;
 }
 </style>

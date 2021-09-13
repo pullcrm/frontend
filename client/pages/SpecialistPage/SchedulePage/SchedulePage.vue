@@ -1,6 +1,7 @@
 <template>
   <SpecialistLayout
     class="specialist-schedule-page"
+    :specialist="specialist"
   >
     <Header
       :appointments="filteredAppointments"
@@ -57,10 +58,10 @@ import Header from './components/Header.vue'
     }
   },
 
-  async asyncData ({ typedStore, route }) {
+  async asyncData ({ route, api }) {
     const slug = Number(route.params.slug)
 
-    const specialist = typedStore.getters['specialists/byId'](slug)
+    const specialist = await api.specialist.get(slug)
 
     return {
       specialist

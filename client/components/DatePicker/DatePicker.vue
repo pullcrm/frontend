@@ -1,6 +1,10 @@
 <template>
   <DatePicker
     inline
+    time-title-format="YYYY-MM"
+    :lang="{
+      monthFormat: 'MMMM'
+    }"
     prefix-class="custom-ui"
     v-bind="$attrs"
     v-on="$listeners"
@@ -44,8 +48,81 @@ $calendar-in-range-background-color: $ui-blue-10;
   padding: 0;
 }
 
+.custom-ui-btn,
+.custom-ui-time-header,
+.custom-ui-calendar-header,
+.custom-ui-calendar-header-label {
+  @include ui-typo-16;
+
+  text-transform: capitalize;
+}
+
+.custom-ui-table-date {
+  .cell {
+    &._closed {
+      color: $ui-red-danger;
+    }
+
+    &.today {
+      position: relative;
+
+      &:hover {
+        color: $ui-blue-brand;
+      }
+
+      &::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border: 1px solid $ui-blue-60;
+        content: '';
+      }
+    }
+
+    &.not-current-month {
+      color: $ui-black-50;
+    }
+
+    &.active {
+      color: $ui-white;
+
+      &:hover {
+        color: $ui-white;
+      }
+    }
+  }
+
+  td,
+  th {
+    @include ui-typo-14;
+  }
+
+  th {
+    color: $ui-black-60;
+  }
+}
+
+.custom-ui-calendar-header {
+  height: 24px;
+  margin-bottom: 6px;
+}
+
+.custom-ui-btn-icon-double-left,
+.custom-ui-btn-icon-double-right {
+  display: none;
+}
+
+.custom-ui-icon-left,
+.custom-ui-icon-right {
+  &::before {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 .custom-ui-calendar + .custom-ui-calendar {
-  margin-left: 12px;
-  padding-left: 12px;
+  display: none;
 }
 </style>

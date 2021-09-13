@@ -9,17 +9,11 @@
     v-bind="$attrs"
   >
     <div class="procedure-preview__header">
-      <a
+      <UiCheckbox
         v-if="selectable"
-        href="#"
-        class="procedure-preview__icon"
-        :class="{'_selected': selected}"
-      >
-        <UiIcon
-          name="solid/check-circle-fill"
-          size="s"
-        />
-      </a>
+        size="m"
+        :value="selected"
+      />
 
       <UiText
         :tag="selectable ? 'a' : 'div'"

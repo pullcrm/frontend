@@ -1,4 +1,6 @@
 .schedule {
+  --time-line-width: 50px;
+
   position: relative;
   display: flex;
 
@@ -39,17 +41,24 @@
 
   @media (max-width: $ui-laptop - 1px) {
     &__timeline {
-      position: relative;
-      z-index: 9;
-      margin-top: 52px;
-      margin-right: -36px;
-      pointer-events: none;
+      margin: 0;
+      padding-top: 60px;
+      border-right: 1px solid #dbdbe0;
+
+      .schedule-timeline__item {
+        &:last-child {
+          display: none;
+        }
+      }
     }
 
     &__inner {
       border-right: none;
-      border-bottom: none;
       border-left: none;
     }
+  }
+
+  @media (min-width: $ui-laptop) {
+    --time-line-width: 36px;
   }
 }

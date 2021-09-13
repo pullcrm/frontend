@@ -6,19 +6,31 @@
 
   &__inner {
     display: grid;
-    grid-gap: 24px;
+    grid-row-gap: 16px;
+    grid-column-gap: 24px;
     grid-template-columns: repeat(1, 1fr);
   }
 
   @media (min-width: $ui-tablet) {
     &__inner {
+      grid-row-gap: 24px;
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (min-width: $ui-laptop) {
+    &__title {
+      text-align: left;
+    }
+
     &__inner {
       grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: $ui-tablet - 1px) {
+    &__title {
+      @include ui-typo-24;
     }
   }
 }

@@ -2,11 +2,8 @@ import { Module } from 'vuex/types'
 
 import { IState as IRootState } from '.'
 
-const BALANCE_TIMEOUT = 1 * 1000 * 60
-
 export interface IState {
   balance: number | null,
-  balancePromise: Promise<any> | null,
   hasSmsError: boolean
 }
 
@@ -16,25 +13,14 @@ const SmsModule: Module<IState, IRootState> = {
   state () {
     return {
       balance: null,
-      balancePromise: null,
       hasSmsError: false
     }
   },
 
   actions: {
-    async balance ({ commit, state }) {
+    async balance ({ commit }) {
       try {
-        if (!state.balancePromise) {
-          const balancePromise = this.$api.sms.balance()
-
-          commit('SET_BALANCE_PROMISE', balancePromise)
-
-          setTimeout(() => {
-            commit('SET_BALANCE_PROMISE', null)
-          }, BALANCE_TIMEOUT)
-        }
-
-        const { balance } = await state.balancePromise
+        const { balance } = await this.$api.sms.balance()
 
         commit('SET_BALANCE', Number(balance))
       } catch (err) {
@@ -50,10 +36,6 @@ const SmsModule: Module<IState, IRootState> = {
   mutations: {
     SET_BALANCE (state, balance) {
       state.balance = balance
-    },
-
-    SET_BALANCE_PROMISE (state, balancePromise) {
-      state.balancePromise = balancePromise
     },
 
     SET_HAS_SMS_ERROR (state, hasSmsError) {

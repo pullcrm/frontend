@@ -22,9 +22,24 @@
     color: $ui-black-60;
   }
 
-  &__footer {
+  &__price {
+    margin-top: 4px;
+  }
+
+  &__hand {
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: -10px;
+    color: $ui-black-50;
+    cursor: grab;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: flex-end;
     justify-content: space-between;
     margin-top: 12px;
   }
