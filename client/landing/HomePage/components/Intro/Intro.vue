@@ -46,11 +46,11 @@
 
     <div class="landing-home-page-intro__image">
       <UiButton
-        v-show="false"
         size="m"
         theme="green"
         right-icon="solid/play-fill"
         class="landing-home-page-intro__video"
+        @click.native="openVideo"
       >
         Посмотреть
       </UiButton>
@@ -77,6 +77,10 @@ import Component from 'vue-class-component'
 })
 export default class Intro extends Vue {
   readonly types
+
+  openVideo () {
+    this.$typedStore.dispatch('popup/show', 'youtube-intro')
+  }
 }
 </script>
 
