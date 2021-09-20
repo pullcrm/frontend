@@ -1,5 +1,15 @@
 <template>
   <div class="popups">
+    <Popup
+      v-slot="{ close, props }"
+      name="youtube-intro"
+    >
+      <YoutubeIntro
+        v-bind="props"
+        @close="close"
+      />
+    </Popup>
+
     <!-- Specialist -->
     <Popup
       v-slot="{ close, props }"
@@ -140,6 +150,11 @@ import UiPopupBackdrop from '~/ui/PopupBackdrop/PopupBackdrop.vue'
 
 import Popup from './Popup.vue'
 
+const YoutubeIntro = () => import(
+  /* webpackChunkName: "popups" */
+  '~/popups/YoutubeIntro/YoutubeIntro.vue'
+)
+
 const Appointment = () => import(
   /* webpackChunkName: "popups" */
   '~/popups/Appointment/Appointment.vue'
@@ -207,6 +222,7 @@ const QuestionPopup = () => import(
     TimeOffNew,
     Appointment,
     TimeOffEdit,
+    YoutubeIntro,
     SpecialistNew,
     ProcedureNew,
     ProcedureEdit,
