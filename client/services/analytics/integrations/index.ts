@@ -9,6 +9,10 @@ export abstract class Integration {
     _payload: { to: Route, from: Route | null }
   ) {}
 
+  userRegistration (
+    _payload: {}
+  ) {}
+
   /* Web vitals */
 
   webVitals (

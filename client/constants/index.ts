@@ -1,5 +1,7 @@
 export const GA_ID = 'UA-202590817-1'
 
+export const FACEBOOK_ID = '583150136064291'
+
 export const SCHEDULE_APPOINTMENT_HEIGHT = 30
 
 export const AUTH_TOKEN_COOKIE_DAYS = 30

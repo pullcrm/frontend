@@ -1,15 +1,19 @@
-// import { initFacebook } from '../initializers/facebook'
+import { initFacebook } from '../initializers/facebook'
 
-// import { Integration, EventPayload } from '.'
+import { Integration } from '.'
 
-// export default class FacebookIntegration extends Integration {
-//   pageView = () => {
-//     return this.track('PageView')
-//   }
+export default class FacebookIntegration extends Integration {
+  pageView = () => {
+    return this.track('PageView')
+  }
 
-//   private async track (...args: any[]) {
-//     await initFacebook()
+  userRegistration = () => {
+    return this.track('CompleteRegistration')
+  }
 
-//     window.fbq('track', ...args)
-//   }
-// }
+  private async track (...args: any[]) {
+    await initFacebook()
+
+    window.fbq('track', ...args)
+  }
+}

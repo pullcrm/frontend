@@ -210,6 +210,8 @@ export default class Home extends Vue {
     })
 
     if (result) {
+      await this.$track('userRegistration', {})
+
       return this.$router.push({
         name: 'companyCreate',
         query: pick(this.$route.query, [

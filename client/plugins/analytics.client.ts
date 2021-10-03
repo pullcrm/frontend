@@ -7,7 +7,7 @@ import { Route } from 'vue-router/types/router'
 import { GA_ID } from '~/constants'
 
 import Analytics from '~/services/analytics'
-// import FacebookIntegration from '~/services/analytics/integrations/facebook-integration'
+import FacebookIntegration from '~/services/analytics/integrations/facebook-integration'
 import GoogleAnalyticsIntegration from '~/services/analytics/integrations/google-analytics-integration'
 // import WidgetPostMessageIntegration from '~/services/analytics/integrations/widget-post-message-integration'
 
@@ -31,7 +31,7 @@ const plugin: Plugin = async ({ app }, inject) => {
   // }
 
   // Install the facebook integration
-  // analytics.install(new FacebookIntegration())
+  analytics.install(new FacebookIntegration())
 
   // Install the google analytics integration
   analytics.install(new GoogleAnalyticsIntegration({
