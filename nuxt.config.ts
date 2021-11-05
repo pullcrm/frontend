@@ -166,7 +166,7 @@ const config: NuxtOptions = {
     { src: '~/plugins/vue-filters' },
     // { src: '~/plugins/vue-ignore-elements' },
     { src: '~/plugins/sentry.client' },
-    // { src: '~/plugins/polyfills.client' },
+    { src: '~/plugins/polyfills.client' },
     // { src: '~/plugins/chat.client' },
     { src: '~/plugins/analytics.client' },
     // { src: '~/plugins/experiment.client' },
