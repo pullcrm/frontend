@@ -16,7 +16,10 @@
     />
 
     <div class="landing-home-page-review__author">
-      <div class="landing-home-page-review__image">
+      <div
+        v-if="review.image"
+        class="landing-home-page-review__image"
+      >
         <img
           :src="review.image"
           :alt="review.name"
@@ -34,7 +37,9 @@
         size="m"
         class="landing-home-page-review__info"
       >
-        {{ review.info }}
+        <a :href="review.link">
+          {{ review.info }}
+        </a>
       </UiText>
     </div>
   </UiPanel>
@@ -44,7 +49,13 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { ILandingReview } from './index'
+interface IReview {
+  info: string,
+  name: string,
+  link: string | null,
+  image: string | null,
+  content: string
+}
 
 @Component({
   props: {
@@ -55,7 +66,7 @@ import { ILandingReview } from './index'
   }
 })
 export default class Review extends Vue {
-  readonly review!: ILandingReview
+  readonly review!: IReview
 }
 </script>
 
