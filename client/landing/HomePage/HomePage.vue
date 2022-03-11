@@ -3,9 +3,22 @@
     <Header />
 
     <Container>
+      <UiAlert
+        class="landing-home-page__alert"
+        theme="info"
+        left-icon="outlined/anchor"
+      >
+        <UiText
+          size="m"
+          strong
+          responsive
+        >
+          Руські CRM системи, йдіть слідом за воєнним кораблем!
+        </UiText>
+      </UiAlert>
+
       <Intro
         :types="typesFiltered"
-        class="landing-home-page__section"
       />
 
       <Opportunities
