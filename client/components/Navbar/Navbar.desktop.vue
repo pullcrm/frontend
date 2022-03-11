@@ -2,7 +2,7 @@
   <div class="navbar-desktop">
     <img
       class="navbar-desktop__logo"
-      src="~/assets/logos/logo_new.svg"
+      src="~/assets/logos/logo_ua.svg"
     >
 
     <NavbarItem
