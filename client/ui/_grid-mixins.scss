@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @mixin ui-container {
   --ui-container-padding: #{$ui-mobile-padding};
 
@@ -74,9 +76,9 @@
 }
 
 @mixin ui-grid-item-span($i) {
-  flex-basis: calc(#{$i / 12 * 100%} - var(--ui-grid-gap));
+  flex-basis: calc(#{math.div($i, 12) * 100%} - var(--ui-grid-gap));
   // IE 11 ignores an calc() function used in flex shorthand declarations
   flex-grow: 0;
   flex-shrink: 0;
-  max-width: calc(#{$i / 12 * 100%} - var(--ui-grid-gap));
+  max-width: calc(#{math.div($i, 12) * 100%} - var(--ui-grid-gap));
 }

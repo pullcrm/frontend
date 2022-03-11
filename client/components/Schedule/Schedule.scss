@@ -27,9 +27,9 @@
   }
 
   &__timeline {
-    margin-top: calc(60px - #{$SCHEDULE_ROW_HEIGHT / 2});
+    margin-top: calc(60px - #{$SCHEDULE_ROW_HEIGHT * 0.5});
     margin-right: 16px;
-    margin-bottom: -#{$SCHEDULE_ROW_HEIGHT / 2};
+    margin-bottom: -#{$SCHEDULE_ROW_HEIGHT * 0.5};
   }
 
   &__specialist {
