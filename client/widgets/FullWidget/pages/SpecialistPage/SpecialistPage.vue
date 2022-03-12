@@ -48,7 +48,7 @@
         class="full-widget-specialist-page__button"
         @click.native="onSubmit"
       >
-        Продолжить
+        Продовжити
       </UiButton>
     </template>
   </Layout>

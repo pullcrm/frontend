@@ -8,7 +8,7 @@
         size="l"
         responsive
       >
-        Список услуг
+        Список послуг
       </UiTitle>
     </UiNotificationBadge>
 
@@ -19,7 +19,7 @@
         responsive
         @click.native="onAddCategory"
       >
-        Добавить категорию
+        Добавити категорію
       </UiButton>
 
       <UiButton
@@ -28,7 +28,7 @@
         responsive
         @click.native="onAddProcedure"
       >
-        Добавить услугу
+        Добавити послугу
       </UiButton>
     </div>
   </div>

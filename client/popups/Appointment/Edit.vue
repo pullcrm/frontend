@@ -2,7 +2,7 @@
   <div class="appointment-popup__inner">
     <AppointmentHeader
       class="appointment-popup__header"
-      title="Редактировать"
+      title="Редагувати"
       :status.sync="form.status"
     />
 
@@ -42,7 +42,7 @@
               size="m"
               responsive
             >
-              Добавить в очередь
+              Добавити в чергу
             </UiText>
           </template>
         </UiSwitch>
@@ -53,18 +53,18 @@
           :date.sync="form.date"
           :duration="duration"
           :start-at.sync="form.startTime"
-          :avaliable-hours="avaliableHours"
+          :available-hours="availableHours"
           @resetFieldError="resetFieldError"
         />
 
         <UiField
           class="appointment-popup__comment"
-          label="Комментарий"
+          label="Коментар"
         >
           <UiInput
             v-model="form.description"
             tag="textarea"
-            placeholder="Введите текст"
+            placeholder="Введіть текст"
             @input="resetFieldError('description')"
           />
         </UiField>
@@ -94,7 +94,7 @@
           theme="blue"
           :loading="isLoading"
         >
-          Сохранить
+          Зберегти
         </UiButton>
 
         <UiButton
@@ -103,7 +103,7 @@
           :loading="isLoading"
           @click.native="remove"
         >
-          Удалить
+          Видалити
         </UiButton>
       </div>
 
@@ -119,7 +119,7 @@
             theme="blue"
             :loading="isLoading"
           >
-            Сохранить
+            Зберегти
           </UiButton>
         </UiContainer>
       </FixedPanel>
@@ -188,7 +188,7 @@ export default class AppointmentEdit extends Vue {
   readonly appointment!: any
 
   isLoading = false
-  avaliableHours = []
+  availableHours = []
 
   form = {
     ...this.appointment,
@@ -266,8 +266,8 @@ export default class AppointmentEdit extends Vue {
       this.isLoading = true
 
       const result = await this.$typedStore.dispatch('popup/askQuestion', {
-        title: 'Вы действительно хотите удалить эту запись?',
-        acceptButtonTitle: 'Удалить'
+        title: 'Ви дійсно хочете видалити цей запис?',
+        acceptButtonTitle: 'Видалити'
       })
 
       if (result) {
@@ -282,13 +282,13 @@ export default class AppointmentEdit extends Vue {
   }
 
   async fetchAvailableTime () {
-    this.avaliableHours = []
+    this.availableHours = []
 
     if (!this.form.specialist?.id || this.duration === 0) {
       return
     }
 
-    this.avaliableHours = await this.$api.appointments.availableTime({
+    this.availableHours = await this.$api.appointments.availableTime({
       date: this.form.date.format('YYYY-MM-DD'),
       excludeId: this.form.id,
       specialistId: this.form.specialist.id,
@@ -297,7 +297,7 @@ export default class AppointmentEdit extends Vue {
   }
 
   checkStartTime () {
-    const startTimeIndex = this.avaliableHours.indexOf(this.form.startTime)
+    const startTimeIndex = this.availableHours.indexOf(this.form.startTime)
 
     if (startTimeIndex === -1) {
       this.form.startTime = null
@@ -310,7 +310,7 @@ export default class AppointmentEdit extends Vue {
     if (procedures.length === 0) {
       await this.$typedStore.dispatch('toasts/show', {
         type: 'error',
-        title: 'Нужно выбрать услуги'
+        title: 'Потрібно вибрати послуги'
       })
 
       return false

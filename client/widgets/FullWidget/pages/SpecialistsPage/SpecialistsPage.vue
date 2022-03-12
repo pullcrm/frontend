@@ -5,7 +5,7 @@
       responsive
       class="full-widget-specialists-page__title"
     >
-      Выберите специалиста
+      Виберіть спеціаліста
     </UiTitle>
 
     <SpecialistPanel

@@ -22,7 +22,7 @@
         :options="timeOptions"
         required
         :disabled="!opened"
-        placeholder="Время открытия"
+        placeholder="Час відкриття"
         class="timetable-settings-page-day__select"
         @input="onUpdate('from', $event)"
       />
@@ -40,7 +40,7 @@
         :options="timeOptions"
         required
         :disabled="!opened"
-        placeholder="Время закрытия"
+        placeholder="Час закриття"
         class="timetable-settings-page-day__select"
         @input="onUpdate('to', $event)"
       />

@@ -15,7 +15,7 @@
           size="m"
           responsive
         >
-          Продажи
+          Продажі
         </UiText>
 
         <UiTitle
@@ -40,7 +40,7 @@
           size="m"
           responsive
         >
-          Доход
+          Дохід
         </UiText>
 
         <UiTitle
@@ -65,7 +65,7 @@
           size="m"
           responsive
         >
-          Средний чек
+          Середній чек
         </UiText>
 
         <UiTitle

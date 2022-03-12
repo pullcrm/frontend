@@ -8,7 +8,7 @@
           size="m"
           responsive
         >
-          Не рабочое время
+          Не робочий час
         </UiTitle>
 
         <UiButton
@@ -16,7 +16,7 @@
           responsive
           @click.native="onAdd"
         >
-          Закрыть запись
+          Закрити запис
         </UiButton>
       </div>
 
@@ -40,7 +40,7 @@ import TimeOffTable from './components/Table.vue'
 
   head () {
     return {
-      title: 'Не рабочее время - pullcrm'
+      title: 'Не робочий час - pullcrm'
     }
   }
 })

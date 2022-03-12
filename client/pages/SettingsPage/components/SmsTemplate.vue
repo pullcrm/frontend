@@ -18,7 +18,7 @@
             />
           </template>
 
-          Сообщение
+          Повідомлення
         </UiText>
 
         <UiText
@@ -26,7 +26,7 @@
           responsive
           class="settings-page-sms-template__text_2"
         >
-          Только что
+          Щойно
         </UiText>
       </div>
 
@@ -35,7 +35,7 @@
         strong
         class="settings-page-sms-template__title"
       >
-        PullCRM
+        Pullcrm
       </UiText>
 
       <UiText

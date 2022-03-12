@@ -7,7 +7,7 @@
       :value="position"
       :options="positions"
       label-key="title"
-      placeholder="Ваши компании"
+      placeholder="Ваші компанії"
       @input="fetch"
     />
   </div>
@@ -49,7 +49,7 @@ export default class CompanyPicker extends Vue {
           }
         }),
       {
-        title: 'Создать новую компанию',
+        title: 'Створити нову компанію',
         id: 0
       }
     ]

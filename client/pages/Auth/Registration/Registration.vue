@@ -1,7 +1,7 @@
 <template>
   <Layout
-    title="Регистрация"
-    sub-title="Пройдите регистрацию, чтобы получить доступ к своей компании"
+    title="Реєстрація"
+    sub-title="Пройдіть реєстрацію, щоб отримати доступ до своєї компанії"
     class="auth-page-registration"
   >
     <form
@@ -18,14 +18,14 @@
         :validations="validations"
       >
         <UiField
-          label="Имя и Фамилия"
+          label="Ім'я і Прізвище"
           :error="getFieldError('fullName')"
         >
           <UiInput
             v-model="form.fullName"
             left-icon="outlined/pencil"
             name="name"
-            placeholder="Введите Имя и Фамилию"
+            placeholder="Введіть Ім'я і Призвіще"
             @input="resetFieldError('fullName')"
           />
         </UiField>
@@ -55,7 +55,7 @@
             left-icon="outlined/key"
             name="password"
             type="password"
-            placeholder="Введите пароль"
+            placeholder="Введіть пароль"
             @input="resetFieldError('password')"
           />
         </UiField>
@@ -64,7 +64,7 @@
           class="auth-page-registration__policy"
           size="s"
         >
-          Нажимая на кнопку, я соглашаюсь с <a href="#">Пользовательским соглашением</a> и <a href="#">Политикой обработки персональных данных</a>
+          Натискаючи на кнопку, я погоджуюсь із <a href="#">Угодою користувача</a> та <a href="#">Політикою обробки персональних даних</a>
         </UiText>
 
         <UiButton
@@ -74,7 +74,7 @@
           theme="blue"
           :loading="isLoading"
         >
-          Зарегистрировать
+          Зареєструватись
         </UiButton>
       </UiFormValidator>
     </form>
@@ -104,7 +104,7 @@ import Layout from '../components/Layout.vue'
 
   head () {
     return {
-      title: 'Регистрация - pullcrm'
+      title: 'Реєстрація - pullcrm'
     }
   }
 })
@@ -129,8 +129,8 @@ export default class Home extends Vue {
           required: true
         },
         messages: {
-          min: 'Минимальное количество символов: 4',
-          required: 'Введите ваше имя'
+          min: 'Мінімальна кількість символів: 4',
+          required: 'Введіть ваше ім\'я'
         }
       },
       phone: {
@@ -140,12 +140,12 @@ export default class Home extends Vue {
           required: true
         },
         messages: {
-          min: 'Не верный формат номера',
-          regex: 'Не верный формат номера',
-          required: 'Введите номер телефона'
+          min: 'Не вірний формат номеру',
+          regex: 'Не вірний формат номеру',
+          required: 'Введіть номер телефону'
         },
         serverMessages: {
-          invalid: 'Номер телефона введен неверно'
+          invalid: 'Номер телефону введено невірно'
         }
       },
       password: {
@@ -154,11 +154,11 @@ export default class Home extends Vue {
           required: true
         },
         messages: {
-          min: 'Минимальное количество символов: 4',
-          required: 'Введите пароль'
+          min: 'Мінімальна кількість символів: 4',
+          required: 'Введіть пароль'
         },
         serverMessages: {
-          invalid: 'Пароль введен неверно'
+          invalid: 'Пароль введено невірно'
         }
       }
     }
@@ -204,8 +204,8 @@ export default class Home extends Vue {
 
   async confirmation () {
     const result = await this.$typedStore.dispatch('popup/smsConfirmation', {
-      title: 'Регистрация',
-      subTitle: `На ваш телефон ${this.form.phone} был выслан СМС-код для подтверждения регистрации`,
+      title: 'Реєстрація',
+      subTitle: `На ваш телефон ${this.form.phone} був відправлений СМС-код для підтвердження реєстрації`,
       submit: this.onCreateUser
     })
 

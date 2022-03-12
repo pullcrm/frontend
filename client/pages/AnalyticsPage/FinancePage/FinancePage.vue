@@ -36,7 +36,7 @@
           :options="specialists"
           clearable
           label-key="fullName"
-          placeholder="Все сотрудники"
+          placeholder="Всі співробітники"
           @input="fetch"
         />
       </UiField>
@@ -94,7 +94,7 @@ import FinanceTable from './components/Table.vue'
 
   head () {
     return {
-      title: 'Аналитика финансов - pullcrm'
+      title: 'Аналітика фінансів - pullcrm'
     }
   }
 })

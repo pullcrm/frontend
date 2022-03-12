@@ -8,7 +8,7 @@
       responsive
       class="full-widget-procedures-page__title"
     >
-      Выберите услуги
+      Виберіть послуги
     </UiTitle>
 
     <ProceduresGroup
@@ -33,7 +33,7 @@
         class="full-widget-procedures-page__button"
         @click.native="onSubmit"
       >
-        Продолжить
+        Продовжити
       </UiButton>
     </template>
   </Layout>

@@ -54,7 +54,7 @@ import DonateBanner from './components/DonateBanner.vue'
 
   head () {
     return {
-      title: 'Главный дашборд - pullcrm'
+      title: 'Головний дашборд - pullcrm'
     }
   }
 })

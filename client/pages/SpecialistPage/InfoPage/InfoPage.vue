@@ -14,13 +14,13 @@
       @submit.prevent="onSubmit"
     >
       <UiField
-        label="Имя и Фамилия"
+        label="Ім'я і Прізвище"
         required
       >
         <UiInput
           v-model="specialist.user.fullName"
           name="name"
-          placeholder="Введите Имя и Фамилию"
+          placeholder="Введіть Ім'я і Прізвище"
           required
         />
       </UiField>
@@ -47,7 +47,7 @@
           v-model="specialist.user.email"
           name="email"
           type="email"
-          placeholder="Введите почту"
+          placeholder="Введіть почту"
         />
       </UiField>
 
@@ -57,17 +57,17 @@
         <UiInput
           v-model="specialist.specialization"
           name="specialization"
-          placeholder="Профиль специалиста"
+          placeholder="Профіль спеціаліста"
         />
       </UiField>
 
       <UiField
-        label="Описание"
+        label="Опис"
       >
         <UiInput
           v-model="specialist.description"
           name="description"
-          placeholder="Добавьте описание"
+          placeholder="Добавте опис"
           tag="textarea"
         />
       </UiField>
@@ -85,7 +85,7 @@
         class="specialist-info-page__widget"
         @click.native.prevent="copyPersonalLink"
       >
-        Персональная ссылка на страницу записи
+        Персональне посилання на сторінку запису
       </UiLink>
 
       <UiButton
@@ -95,7 +95,7 @@
         theme="blue"
         :loading="isLoading"
       >
-        Сохранить
+        Зберегти
       </UiButton>
     </form>
   </SpecialistLayout>
@@ -138,7 +138,7 @@ import CreatedAt from './components/CreatedAt.vue'
 
   head () {
     return {
-      title: 'Информация о сотруднике - pullcrm'
+      title: 'Информація про спеціаліста - pullcrm'
     }
   }
 })
@@ -181,12 +181,12 @@ export default class SpecialistInfoPage extends Vue {
         specialization
       })
 
-      this.$typedStore.dispatch('toasts/show', { title: 'Сохранено!' })
+      this.$typedStore.dispatch('toasts/show', { title: 'Збережено!' })
 
       this.refresh()
     } catch (err) {
       this.$typedStore.dispatch('toasts/show', {
-        title: `Ошибка: ${err.data.message}`,
+        title: `Помилка: ${err.data.message}`,
         type: 'error'
       })
     } finally {
@@ -220,7 +220,7 @@ export default class SpecialistInfoPage extends Vue {
     copyText(`https://${BASE_HOST}${href}`)
 
     await this.$typedStore.dispatch('toasts/show', {
-      title: 'Ссылка скопирована!'
+      title: 'Посилання скопійовано'
     })
   }
 }

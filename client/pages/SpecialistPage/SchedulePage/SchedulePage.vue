@@ -70,7 +70,7 @@ import Header from './components/Header.vue'
 
   head () {
     return {
-      title: 'Календарь сотрудника - pullcrm'
+      title: 'Календар спеціаліста - pullcrm'
     }
   }
 })

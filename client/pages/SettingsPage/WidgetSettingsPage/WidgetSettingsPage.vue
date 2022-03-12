@@ -11,12 +11,12 @@
         responsive
         class="widget-settings-page__title"
       >
-        Онлайн запись
+        Онлайн запис
       </UiTitle>
 
       <Section
-        title="Включить онлайн запись"
-        sub-title="Разрешить пользователям записываться через виджет"
+        title="Включити онлайн запис"
+        sub-title="Дозволити користувачам записуватися через віджет"
       >
         <template #append>
           <UiSwitch
@@ -34,7 +34,7 @@
         size="l"
         responsive
       >
-        <span>Клиент может записаться на запись не ранее чем за:</span>
+        <span>Клієнт може записатися на запис не раніше ніж за:</span>
 
         <UiSelect
           label-key="name"
@@ -42,7 +42,7 @@
           :options="durationList"
           required
           :clearable="false"
-          placeholder="Выбрать время"
+          placeholder="Вибрати час"
           @input="setMinutesBefore"
         >
           <template #input="{ onFocus }">
@@ -52,7 +52,7 @@
               right-icon="outlined/caret-down"
               @click.native="onFocus"
             >
-              {{ minTime.name }} до начала
+              {{ minTime.name }} до початку
             </UiText>
           </template>
         </UiSelect>
@@ -68,27 +68,27 @@
         responsive
         class="widget-settings-page__title"
       >
-        Интеграция виджета на вашем сайте
+        Інтеграція віджету на вашому сайті
       </UiTitle>
 
       <UiContent
         class="widget-settings-page__code"
       >
         <p>
-          Виджет позволяет выбрать сотрудника, услугу, доступный день и время для создания записи в рамках вашей компании.
+          Віджет дозволяє вибрати співробітника, послугу, доступний день та час для створення запису у межах вашої компанії.
         </p>
 
         <p>
-          <strong>Скрипт для инициализации виджета</strong>
+          <strong>Скрипт для ініціалізації віджету</strong>
         </p>
 
         <pre>
           <code v-text="htmlCode" />
         </pre>
 
-        <p>Для открытия виджета, добавьте на сайте тег с сылкой на сайт https://pullcrm.com, эта ссылка будет открывать виджет.</p>
+        <p>Для відкриття віджету, додайте на сайті тег із посиланням на сайт https://pullcrm.com, це посилання буде відкривати віджет.</p>
 
-        <p>Ссылка может иметь любую структуру, текст или вложенность.</p>
+        <p>Посилання може мати будь-яку структуру, текст чи вкладеність.</p>
 
         <pre>
           <code
@@ -97,8 +97,8 @@
         </pre>
 
         <p>
-          <strong>Обратите внимание:</strong>
-          Ссылку не разрешается закрывать от индексации любыми способами, это единственное правило использования виджета.
+          <strong>Зверніть увагу:</strong>
+          Посилання не дозволяється закривати від індексації будь-якими способами, це єдине правило використання віджету.
         </p>
       </UiContent>
     </UiPanel>
@@ -131,7 +131,7 @@ import { code, codeButton } from './code'
 
   head () {
     return {
-      title: 'Настройки онлайн записи - pullcrm'
+      title: 'Налаштування онлайн запису - pullcrm'
     }
   }
 })
@@ -184,7 +184,7 @@ export default class WidgetSettingsPage extends Vue {
     )
 
     await this.$typedStore.dispatch('toasts/show', {
-      title: 'Сохранено!'
+      title: 'Збережено!'
     })
   }
 }

@@ -7,7 +7,7 @@
       class="new-procedures-category__title"
       size="s"
     >
-      Добавить категорию
+      Добавити категорію
     </UiTitle>
 
     <form @submit.prevent="submit">
@@ -17,14 +17,14 @@
       >
         <template #default="{ resetFieldError, getFieldError }">
           <UiField
-            label="Название категории"
+            label="Назва категорії"
             :error="getFieldError('name')"
             required
           >
             <UiInput
               v-model="name"
               left-icon="outlined/pencil"
-              placeholder="Введите название"
+              placeholder="Введіть назву"
               @input="resetFieldError('name')"
             />
           </UiField>
@@ -35,7 +35,7 @@
             theme="blue"
             :loading="isLoading"
           >
-            Добавить
+            Добавити
           </UiButton>
         </template>
       </UiFormValidator>
@@ -68,9 +68,9 @@ export default class ProcedureEdit extends Vue {
           required: true
         },
         messages: {
-          min: 'Минимальное количество символов: 4',
-          max: 'Максимальное количество символов: 255',
-          required: 'Введите название категории'
+          min: 'Мінімальна кількість символів: 4',
+          max: 'Максимальна кількість символів: 255',
+          required: 'Введіть назву категорії'
         }
       }
     }

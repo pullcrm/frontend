@@ -11,7 +11,7 @@
           size="l"
           responsive
         >
-          Сотрудники
+          Співробітники
         </UiTitle>
       </UiNotificationBadge>
 
@@ -20,7 +20,7 @@
           class="specialists-page-header__search"
           value=""
           left-icon="outlined/magnifying-glass"
-          placeholder="Поиск по имени или телефону"
+          placeholder="Пошук по імені або телефону"
         /> -->
 
         <UiButton
@@ -30,7 +30,7 @@
           right-icon="outlined/plus"
           @click.native="add"
         >
-          Добавить сотрудника
+          Добавити співробітника
         </UiButton>
       </div>
     </div>
@@ -90,7 +90,7 @@ import SpecialistCard from './components/Card.vue'
 
   head () {
     return {
-      title: 'Список сотрудников - pullcrm'
+      title: 'Список співробітників - pullcrm'
     }
   }
 })
@@ -105,10 +105,10 @@ export default class Specialists extends Vue {
 
   get navigation () {
     return [
-      { name: 'Все' },
-      { name: 'Специалисты', value: SPECIALIST },
-      { name: 'Менеджеры', value: MANAGER },
-      { name: 'Руководители', value: ADMIN }
+      { name: 'Всі' },
+      { name: 'Спеціалісти', value: SPECIALIST },
+      { name: 'Менеджера', value: MANAGER },
+      { name: 'Керівники', value: ADMIN }
     ]
   }
 

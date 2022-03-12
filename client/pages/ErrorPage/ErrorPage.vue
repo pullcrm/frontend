@@ -4,26 +4,26 @@
       <UiPlaceholder
         v-if="status === 404"
         title="404"
-        text="Страница не найдена"
+        text="Сторінка не знайдена"
         image="/static/img/404.svg"
       >
         <UiButton
           theme="info-outlined"
           @click.native="goHome"
         >
-          Перейти на главную
+          Перейти на головну
         </UiButton>
       </UiPlaceholder>
 
       <UiPlaceholder
         v-else
-        title="Сайт временно не доступен"
+        title="Сайт тимчасово не доступний"
         image="/static/img/server-error.svg"
       >
         <template #text>
-          Попробуйте повторить запрос позже <br>
+          Спробуйте повторити запит пізніше <br>
 
-          Email для связи:
+          Email для зв'язку:
           <UiLink
             tag="a"
             theme="action"
@@ -37,7 +37,7 @@
           theme="blue"
           @click.native="onReload"
         >
-          Обновить страницу
+          Оновити сторінку
         </UiButton>
       </UiPlaceholder>
     </UiContainer>

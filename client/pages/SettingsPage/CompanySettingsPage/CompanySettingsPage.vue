@@ -20,7 +20,7 @@
                 'ui-grid-item_12'
               ]"
             >
-              О компании
+              Про компанію
             </UiTitle>
 
             <UiField
@@ -46,7 +46,7 @@
             </UiField>
 
             <UiField
-              label="Название компании"
+              label="Назва компанії"
               :error="getFieldError('name')"
               required
               :class="[
@@ -56,13 +56,13 @@
             >
               <UiInput
                 v-model="company.name"
-                placeholder="Введите название"
+                placeholder="Введіть назву"
                 @input="resetFieldError('name')"
               />
             </UiField>
 
             <UiField
-              label="Город"
+              label="Місто"
               required
               :class="[
                 'ui-grid-item',
@@ -74,12 +74,12 @@
                 label-key="name"
                 required
                 :options="cities"
-                placeholder="Выбрать город"
+                placeholder="Вибрати місто"
               />
             </UiField>
 
             <UiField
-              label="Категория"
+              label="Категорія"
               required
               :class="[
                 'ui-grid-item',
@@ -92,12 +92,12 @@
                 required
                 :options="companyTypes"
                 :clearable="false"
-                placeholder="Выбрать категорию"
+                placeholder="Вибрати категорію"
               />
             </UiField>
 
             <UiField
-              label="Адрес"
+              label="Адреса"
               :error="getFieldError('address')"
               :class="[
                 'ui-grid-item',
@@ -106,7 +106,7 @@
             >
               <UiInput
                 v-model="company.address"
-                placeholder="Введите адрес"
+                placeholder="Введіть адресу"
                 @input="resetFieldError('address')"
               />
             </UiField>
@@ -127,7 +127,7 @@
             </UiField>
 
             <UiField
-              label="О компании"
+              label="Про компанію"
               :error="getFieldError('description')"
               :class="[
                 'ui-grid-item',
@@ -137,7 +137,7 @@
               <UiInput
                 v-model="company.description"
                 tag="textarea"
-                placeholder="Введите текст"
+                placeholder="Введіть текст"
                 @input="resetFieldError('description')"
               />
             </UiField>
@@ -215,7 +215,7 @@
                 'ui-grid-item_mobile_12'
               ]"
             >
-              Сохранить
+              Зберегти
             </UiButton>
           </template>
         </UiFormValidator>
@@ -246,7 +246,7 @@ import SettingsLayout from '../components/Layout.vue'
 
   head () {
     return {
-      title: 'Информация о компании - pullcrm'
+      title: 'Інформація про компанію - pullcrm'
     }
   }
 })
@@ -272,8 +272,8 @@ export default class Settings extends Vue {
           required: true
         },
         messages: {
-          max: 'Максимальное количество символов: 255',
-          required: 'Введите название компании'
+          max: 'Максимальна кількість символів: 255',
+          required: 'Введіть назву компанії'
         }
       },
       address: {
@@ -281,7 +281,7 @@ export default class Settings extends Vue {
           max: 255
         },
         messages: {
-          max: 'Максимальное количество символов: 255'
+          max: 'Максимальна кількість символів: 255'
         }
       },
       description: {
@@ -289,7 +289,7 @@ export default class Settings extends Vue {
           max: 255
         },
         messages: {
-          max: 'Максимальное количество символов: 255'
+          max: 'Максимальна кількість символів: 255'
         }
       }
     }
@@ -340,7 +340,7 @@ export default class Settings extends Vue {
         normalizeCompanyParams(this.company)
       )
 
-      this.$typedStore.dispatch('toasts/show', { title: 'Сохранено!' })
+      this.$typedStore.dispatch('toasts/show', { title: 'Збережено!' })
 
       // TODO: Replace to fetch company info
       await this.$typedStore.dispatch('profile')

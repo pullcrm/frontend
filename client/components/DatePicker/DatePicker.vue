@@ -17,7 +17,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import DatePicker from 'vue2-datepicker'
-import 'vue2-datepicker/locale/ru'
+import 'vue2-datepicker/locale/uk'
 
 @Component({
   inheritAttrs: false,

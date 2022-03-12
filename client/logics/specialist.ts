@@ -4,24 +4,24 @@ export const statuses = {
   ALL: {
     id: 1,
     name: 'ALL',
-    value: 'На всех платформах'
+    value: 'На всіх платформах'
   },
   DASHBOARD: {
     id: 2,
     name: 'DASHBOARD',
-    value: 'Только в админ панеле'
+    value: 'Тільки в адмін панелі'
   },
   HIDE: {
     id: 3,
     name: 'HIDE',
-    value: 'Не доступен'
+    value: 'Не доступний'
   }
 }
 
 export const roles = {
   [ADMIN]: {
     id: 1,
-    name: 'Руководитель',
+    name: 'Керівник',
     value: ADMIN
   },
   [MANAGER]: {
@@ -31,16 +31,16 @@ export const roles = {
   },
   [SPECIALIST]: {
     id: 3,
-    name: 'Специалист',
+    name: 'Спеціаліст',
     value: SPECIALIST
   }
 }
 
 export function getRoleNameByAlias (alias) {
   return {
-    [ADMIN]: 'Руководители',
-    [MANAGER]: 'Менеджеры',
-    [SPECIALIST]: 'Специалисты'
+    [ADMIN]: 'Керівники',
+    [MANAGER]: 'Менеджера',
+    [SPECIALIST]: 'Спеціалісти'
   }[alias]
 }
 

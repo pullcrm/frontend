@@ -12,12 +12,12 @@
           responsive
           class="sms-settings-page__title"
         >
-          Настройки СМС
+          Налаштування СМС
         </UiTitle>
 
         <Section
-          title="Вы авторизованы в СМС-сервисе"
-          sub-title="Вам доступны функции отправки пользователям сообщений о предстоящих записях"
+          title="Ви авторизовані в СМС-сервісі"
+          sub-title="Доступні функції надсилання користувачам повідомлень про статуси записів"
         >
           <template #append>
             <UiButton
@@ -25,7 +25,7 @@
               theme="danger-outlined"
               @click.native="deauthorize"
             >
-              Отключить
+              Відключити
             </UiButton>
           </template>
         </Section>
@@ -36,8 +36,8 @@
         responsive
       >
         <Section
-          title="Уведомить клиента после создания записи"
-          sub-title="СМС отправится через 2 минуты после создания записи"
+          title="Повідомити клієнта після створення запису"
+          sub-title="СМС відправиться через 2 хвилини після створення запису"
         >
           <template #append>
             <UiSwitch
@@ -53,11 +53,11 @@
           @update:template="settings.creationSMSTemplate = $event"
         >
           <template #disclaimer>
-            Используйте алиасы для генерации данных: <br>
-            %date% - дата в формате "28.06", <br>
-            %time% - время начала онлайн записи, <br>
-            %specialist% - Имя специалиста, <br>
-            %procedures% - список выбранных услуг через запятую
+            Використовуйте аліаси для генерації даних: <br>
+            %date% - дата в форматі "28.06"; <br>
+            %time% - час початку запису; <br>
+            %specialist% - ім'я спеціаліста; <br>
+            %procedures% - список вибраних послуг через кому.
           </template>
         </SmsTemplate>
       </UiPanel>
@@ -91,7 +91,7 @@
               :options="durationList"
               required
               :clearable="false"
-              placeholder="Выбрать время"
+              placeholder="Вибрати час"
               @input="settings.remindSMSMinutes = $event.value"
             >
               <template #input="{ onFocus }">
@@ -101,7 +101,7 @@
                   right-icon="outlined/caret-down"
                   @click.native="onFocus"
                 >
-                  {{ remindTime.name }} до начала
+                  {{ remindTime.name }} до початку
                 </UiText>
               </template>
             </UiSelect>
@@ -114,11 +114,11 @@
           @update:template="settings.remindSMSTemplate = $event"
         >
           <template #disclaimer>
-            Используйте алиасы для генерации данных: <br>
-            %date% - дата в формате "28.06", <br>
-            %time% - время начала онлайн записи, <br>
-            %specialist% - Имя специалиста, <br>
-            %procedures% - список выбранных услуг через запятую
+            Використовуйте аліаси для генерації даних: <br>
+            %date% - дата в форматі "28.06"; <br>
+            %time% - час початку запису; <br>
+            %specialist% - ім'я спеціаліста; <br>
+            %procedures% - список вибраних послуг через кому.
           </template>
         </SmsTemplate>
       </UiPanel>
@@ -130,7 +130,7 @@
         responsive
         @click.native="save"
       >
-        Сохранить
+        Зберегти
       </UiButton>
     </template>
 
@@ -144,12 +144,12 @@
         responsive
         class="sms-settings-page__title"
       >
-        Настройки СМС
+        Налаштування СМС
       </UiTitle>
 
       <Section
-        title="Авторизация в СМС-сервисе"
-        sub-title="Включите функцию отправки пользователям сообщений о предстоящих записях"
+        title="Авторизація в СМС-сервисі"
+        sub-title="Увімкніть функцію надсилання користувачам повідомлень про майбутні записи"
       >
         <template #append>
           <UiButton
@@ -157,7 +157,7 @@
             theme="blue"
             @click.native="smsPopup"
           >
-            Подключить
+            Підключитись
           </UiButton>
         </template>
       </Section>
@@ -192,7 +192,7 @@ import SettingsLayout from '../components/Layout.vue'
 
   head () {
     return {
-      title: 'Настройки СМС - pullcrm'
+      title: 'Налаштування СМС - pullcrm'
     }
   }
 })
@@ -235,11 +235,11 @@ export default class SmsSettingsPage extends Vue {
         normalizeSmsSettingsParams(this.settings)
       )
 
-      this.$typedStore.dispatch('toasts/show', { title: 'Сохранено!' })
+      this.$typedStore.dispatch('toasts/show', { title: 'Збережено!' })
     } catch {
       this.$typedStore.dispatch('toasts/show', {
         type: 'error',
-        title: 'Что-то не так!'
+        title: 'Щось не так!'
       })
     } finally {
       this.isLoading = false
@@ -252,8 +252,8 @@ export default class SmsSettingsPage extends Vue {
 
   async deauthorize () {
     const result = await this.$typedStore.dispatch('popup/askQuestion', {
-      title: 'Вы уверены что хотите деавторизоваться?',
-      acceptButtonTitle: 'Подтвердить'
+      title: 'Ви впевнені, що хочете деавторизуватися?',
+      acceptButtonTitle: 'Підтвердити'
     })
 
     if (result) {

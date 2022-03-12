@@ -66,7 +66,7 @@
         responsive
         class="procedure-preview__description"
       >
-        {{ procedure.description || 'Описание отсутствует!' }}
+        {{ procedure.description || 'Опис відсутній!' }}
       </UiText>
     </div>
   </UiPanel>

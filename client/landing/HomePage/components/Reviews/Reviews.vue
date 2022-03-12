@@ -7,7 +7,7 @@
       class="landing-home-page-reviews__title"
       size="m"
     >
-      Отзывы наших клиентов
+      Відгуки наших клієнтів
     </UiTitle>
 
     <UiCarousel

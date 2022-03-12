@@ -38,7 +38,7 @@ const actions = {
       if (err.status === 400) {
         await dispatch('toasts/show', {
           type: 'error',
-          title: 'У файла большой размер, к загрузке доступны файлы меньше 500Кб'
+          title: 'Великий розмір файлу. До завантаження доступні файли менше 500Кб'
         }, { root: true })
       }
 

@@ -11,7 +11,7 @@
         responsive
         class="timetable-settings-page__title"
       >
-        График работы
+        Графік роботи
       </UiTitle>
 
       <TimeTableDay
@@ -45,7 +45,7 @@ import TimeTableDay from './components/Day.vue'
 
   head () {
     return {
-      title: 'Настройки графика работы - pullcrm'
+      title: 'Налаштування графіку работи - pullcrm'
     }
   }
 })

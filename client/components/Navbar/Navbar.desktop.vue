@@ -8,38 +8,38 @@
     <NavbarItem
       :to="{ name: 'dashboard' }"
       icon="solid/house-fill"
-      name="Главная"
+      name="Головна"
     />
 
     <NavbarItem
       :to="{ name: 'schedule' }"
       icon="solid/calendar-fill"
-      name="Календарь"
+      name="Календар"
     />
 
     <NavbarItem
       :to="{ name: 'specialists' }"
       icon="solid/users-fill"
-      name="Сотрудники"
+      name="Співробітники"
     />
 
     <NavbarItem
       :to="{ name: 'procedures' }"
       icon="solid/list"
-      name="Услуги"
+      name="Послуги"
     />
 
     <NavbarItem
       v-if="isAnalyticsVisible"
       :to="{ name: 'analytics' }"
       icon="solid/chart-bar-fill"
-      name="Аналитика"
+      name="Аналітика"
     />
 
     <NavbarItem
       :to="{ name: 'settings' }"
       icon="solid/gear-fill"
-      name="Настройки"
+      name="Налаштування"
     />
 
     <div class="navbar-desktop__space" />
@@ -65,7 +65,7 @@
           left-icon="outlined/sign-out"
           @click.native.prevent="logout"
         >
-          Выйти
+          Вийти
         </UiText>
       </UiDropdownList>
     </UiDropdownMenu>

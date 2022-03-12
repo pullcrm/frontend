@@ -12,7 +12,7 @@
       <UiTitle
         size="s"
       >
-        Добавить сотрудника
+        Добавити співробітника
       </UiTitle>
     </div>
 
@@ -25,13 +25,13 @@
         :validations="validations"
       >
         <UiField
-          label="Имя и Фамилия"
+          label="Ім'я і Прізвище"
           :error="getFieldError('fullName')"
         >
           <UiInput
             v-model="form.fullName"
             name="name"
-            placeholder="Введите Имя и Фамилию"
+            placeholder="Введіть Ім'я і Прізвище"
             required
             @input="resetFieldError('fullName')"
           />
@@ -61,7 +61,7 @@
             theme="blue"
             :loading="isLoading"
           >
-            Добавить сотрудника
+            Добавити співробітника
           </UiButton>
         </div>
       </UiFormValidator>
@@ -103,10 +103,10 @@ export default class SpecialistNew extends Vue {
       phone: {
         rules: 'required',
         messages: {
-          required: 'Введите номер телефона'
+          required: 'Введіть номер телефону'
         },
         serverMessages: {
-          invalid: 'Номер телефона введен неверно'
+          invalid: 'Номер телефону введено невірно'
         }
       }
     }
@@ -144,8 +144,8 @@ export default class SpecialistNew extends Vue {
 
   async confirmation () {
     const result = await this.$typedStore.dispatch('popup/smsConfirmation', {
-      title: 'Регистрация',
-      subTitle: `На телефон ${formatPhone(this.form.phone)} был выслан СМС-код для подтверждения регистрации`,
+      title: 'Реєстрація',
+      subTitle: `На телефон ${formatPhone(this.form.phone)} було надіслано СМС-код для підтвердження реєстрації`,
       submit: this.onCreateUser
     })
 

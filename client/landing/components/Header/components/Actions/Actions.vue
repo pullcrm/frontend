@@ -7,7 +7,7 @@
       strong
       class="landing-header-actions__login"
     >
-      Войти
+      Увійти
     </UiText>
 
     <div class="landing-header-actions__divider" />
@@ -19,7 +19,7 @@
       strong
       class="landing-header-actions__registration"
     >
-      Регистрация
+      Реєстрація
     </UiText>
   </div>
 </template>

@@ -5,7 +5,7 @@
   >
     <form @submit.prevent="onSubmit">
       <UiField
-        label="Доступность для записи"
+        label="Доступність для запису"
         required
       >
         <UiSelect
@@ -37,7 +37,7 @@
         theme="blue"
         :loading="isLoading"
       >
-        Сохранить
+        Зберегти
       </UiButton>
 
       <UiButton
@@ -47,7 +47,7 @@
         theme="danger-outlined"
         @click.native="onLogout"
       >
-        Выйти
+        Вийти
       </UiButton>
 
       <template v-if="isDeletable">
@@ -59,7 +59,7 @@
           theme="danger-outlined"
           @click.native="onRemove"
         >
-          Удалить сотрудника
+          Видалити співробітника
         </UiButton>
       </template>
     </form>
@@ -162,12 +162,12 @@ export default class SpecialistSettingsPage extends Vue {
         status: this.specialist.status
       })
 
-      this.$typedStore.dispatch('toasts/show', { title: 'Сохранено!' })
+      this.$typedStore.dispatch('toasts/show', { title: 'Збережено!' })
 
       this.refresh()
     } catch (err) {
       this.$typedStore.dispatch('toasts/show', {
-        title: `Ошибка: ${err.data.message}`,
+        title: `Помилка: ${err.data.message}`,
         type: 'error'
       })
     } finally {
@@ -177,8 +177,8 @@ export default class SpecialistSettingsPage extends Vue {
 
   async onLogout () {
     const result = await this.$typedStore.dispatch('popup/askQuestion', {
-      title: 'Вы действительно хотите завершить сеанс?',
-      acceptButtonTitle: 'Выйти'
+      title: 'Ви дійсно бажаєте завершити сеанс?',
+      acceptButtonTitle: 'Вийти'
     })
 
     if (result) {
@@ -194,8 +194,8 @@ export default class SpecialistSettingsPage extends Vue {
 
   async onRemove () {
     const result = await this.$typedStore.dispatch('popup/askQuestion', {
-      title: 'Вы действительно хотите удалить профиль сотрудника? Это действие не обратимо!',
-      acceptButtonTitle: 'Удалить!'
+      title: 'Ви дійсно бажаєте видалити профіль співробітника? Ця дія не оборотна!',
+      acceptButtonTitle: 'Видалити!'
     })
 
     if (result) {

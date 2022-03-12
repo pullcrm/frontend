@@ -29,12 +29,12 @@
           'ui-grid-item_12',
           'ui-grid-item_tablet_4'
         ]"
-        label="Время начала"
+        label="Час початку"
       >
         <UiSelect
           :value="startAt"
           required
-          :options="avaliableHours"
+          :options="availableHours"
           left-icon="outlined/clock"
           placeholder="00:00"
           @input="
@@ -50,7 +50,7 @@
           'ui-grid-item_12',
           'ui-grid-item_tablet_4'
         ]"
-        label="Длительность"
+        label="Тривалість"
       >
         <UiInput
           :value="duration | minutesToTime"
@@ -68,7 +68,7 @@
       size="m"
       responsive
     >
-      Завершение в {{ toTime }}
+      Завершується в {{ toTime }}
     </UiText>
   </div>
 </template>
@@ -105,7 +105,7 @@ import DatePicker from '~/components/DatePicker/DatePicker.vue'
       required: true
     },
 
-    avaliableHours: {
+    availableHours: {
       type: Array,
       default: () => []
     }
@@ -115,7 +115,7 @@ export default class DateTime extends Vue {
   readonly date
   readonly startAt
   readonly duration: number
-  readonly avaliableHours
+  readonly availableHours
 
   get customDate (): Date {
     if (this.date) {

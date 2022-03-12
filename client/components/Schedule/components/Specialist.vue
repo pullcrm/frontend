@@ -25,7 +25,7 @@
         size="s"
       >
         {{ appointmentsCount }}
-        {{ appointmentsCount | pluralize('клиент', 'клиента', 'клиентов') }}
+        {{ appointmentsCount | pluralize('клієнт', 'клієнта', 'клієнтів') }}
         <span> - </span>
         {{ money | price }}
       </UiText>
@@ -50,7 +50,7 @@
           left-icon="outlined/pencil"
           @click.native.prevent="edit"
         >
-          Редактировать
+          Редагувати
         </UiText>
 
         <UiText
@@ -61,7 +61,7 @@
           left-icon="outlined/prohibit"
           @click.native.prevent="onCloseDay"
         >
-          Закрыть запись <br> на этот день
+          Закрити запис <br> на цей день
         </UiText>
       </UiDropdownList>
     </UiDropdownMenu>

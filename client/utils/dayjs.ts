@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/method-signature-style */
 import * as dayjs from 'dayjs'
 
-import 'dayjs/locale/ru'
+import 'dayjs/locale/uk'
 
 const isToday = require('dayjs/plugin/isToday')
 const isTomorrow = require('dayjs/plugin/isTomorrow')
@@ -9,7 +9,7 @@ const isTomorrow = require('dayjs/plugin/isTomorrow')
 dayjs.extend(isToday)
 dayjs.extend(isTomorrow)
 
-dayjs.locale('ru')
+dayjs.locale('uk')
 
 export default dayjs
 

@@ -28,7 +28,7 @@
           :validations="validations"
         >
           <UiField
-            label="Код подтверждения"
+            label="Код підтвердження"
             :error="getFieldError('code')"
           >
             <UiInput
@@ -48,7 +48,7 @@
           size="l"
           theme="blue"
         >
-          Подтвердить
+          Підтвердити
         </UiButton>
       </form>
     </div>
@@ -90,7 +90,7 @@ export default class SmsConfirmation extends Vue {
           required: ''
         },
         serverMessages: {
-          invalid: 'Код введен неверно'
+          invalid: 'Код введено невірно'
         }
       }
     }

@@ -39,13 +39,13 @@
         theme="transparent"
         @click.native="date = new Date()"
       >
-        Сегодня
+        Сьогодні
       </UiButton>
     </div>
 
     <div class="specialist-schedule-page-header__right">
       {{ appointmentsCount }}
-      {{ appointmentsCount | pluralize('клиент', 'клиента', 'клиентов') }}
+      {{ appointmentsCount | pluralize('клієнт', 'клієнта', 'клієнтів') }}
       <span> - </span>
       {{ money | price }}
     </div>

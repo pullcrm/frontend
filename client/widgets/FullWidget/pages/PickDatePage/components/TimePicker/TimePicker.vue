@@ -30,7 +30,7 @@
       strong
       class="full-widget-pick-date-page-time-picker__empty"
     >
-      В этот день нету доступного времени для записи
+      Цього дня немає доступного часу для запису
     </UiText>
   </div>
 </template>

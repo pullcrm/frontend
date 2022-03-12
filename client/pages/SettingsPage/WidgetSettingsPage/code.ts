@@ -7,7 +7,7 @@ export const code = `
   window.pullcrm.companyId = '{ companyId }'
 
   window.pullcrm.onOrderCreated = function () {
-    // Событие успешно созданой записи
+    // Подія успішно створеного запису
   }
 
   var script = document.createElement('script')

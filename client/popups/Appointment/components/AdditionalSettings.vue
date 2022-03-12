@@ -5,17 +5,17 @@
       size="s"
       responsive
     >
-      Другое
+      Інше
     </UiTitle>
 
-    <UiField label="Источник">
+    <UiField label="Джерело">
       <UiSelect
         :value="activeSource"
         :options="sources"
         required
         label-key="name"
         :disabled="type !== 'new'"
-        placeholder="Выбрать время"
+        placeholder="Вибрати час"
         @input="$emit('update:source', $event.value)"
       />
     </UiField>

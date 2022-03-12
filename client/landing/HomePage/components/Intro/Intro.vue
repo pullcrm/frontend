@@ -6,15 +6,15 @@
         size="l"
         class="landing-home-page-intro__title"
       >
-        <span>Онлайн запись</span>
-        И учет клиентов <br> для вашего бизнеса
+        <span>Онлайн запис</span>
+        І облік клієнтів <br> для вашого бізнесу
       </UiTitle>
 
       <UiText
         size="m"
         class="landing-home-page-intro__text"
       >
-        Используй простую систему учета клиентов, <br> с онлайн бронированием, абсолютно бесплатно.
+        Використовуй зручну систему обліку клієнтів, <br> з онлайн бронюванням, абсолютно безкоштовно.
       </UiText>
 
       <div class="landing-home-page-intro__actions">
@@ -39,7 +39,7 @@
           theme="blue"
           right-icon="outlined/arrow-right"
         >
-          Подключить
+          Підключитись
         </UiButton>
       </div>
     </div>
@@ -52,7 +52,7 @@
         class="landing-home-page-intro__video"
         @click.native="openVideo"
       >
-        Посмотреть
+        Подивитись
       </UiButton>
 
       <img

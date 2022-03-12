@@ -21,7 +21,7 @@
       responsive
       class="procedures-page-procedure-card__sub-title"
     >
-      {{ procedure.description || 'Описание отсутствует' }}
+      {{ procedure.description || 'Опис відсутній' }}
     </UiText>
 
     <div class="procedures-page-procedure-card__footer">

@@ -1,7 +1,7 @@
 <template>
   <Layout
-    title="Создание компании"
-    sub-title="Укажите информацию о компании"
+    title="Створення компанії"
+    sub-title="Вкажіть інформацію про компанію"
     class="auth-page-company-create"
   >
     <form
@@ -14,19 +14,19 @@
       />
 
       <UiField
-        label="Название компании"
+        label="Назва компанії"
         required
       >
         <UiInput
           v-model="company.name"
           left-icon="outlined/pencil"
-          placeholder="Ваша компания"
+          placeholder="Ваша компанія"
           required
         />
       </UiField>
 
       <UiField
-        label="Город"
+        label="Місто"
         required
       >
         <UiSelect
@@ -34,18 +34,18 @@
           required
           :options="cities"
           label-key="name"
-          placeholder="Выбрать город"
+          placeholder="Вибрати місто"
         />
       </UiField>
 
       <UiField
-        label="Категория"
+        label="Категорія"
         required
       >
         <UiSelect
           v-model="company.type"
           label-key="name"
-          placeholder="Выбрать категорию"
+          placeholder="Вибрати категорію"
           :options="companyTypes"
           required
         />
@@ -58,7 +58,7 @@
         theme="blue"
         :loading="isLoading"
       >
-        Продолжить
+        Продовжити
       </UiButton>
     </form>
   </Layout>
@@ -89,7 +89,7 @@ import Layout from '~/pages/Auth/components/Layout.vue'
 
   head () {
     return {
-      title: 'Новая компания - pullcrm'
+      title: 'Нова компанія - pullcrm'
     }
   }
 })

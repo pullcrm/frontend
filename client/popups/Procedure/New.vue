@@ -7,7 +7,7 @@
       class="procedures-new__title"
       size="s"
     >
-      Добавить услугу
+      Добавити послугу
     </UiTitle>
 
     <form @submit.prevent="submit">
@@ -17,29 +17,29 @@
       >
         <template #default="{ resetFieldError, getFieldError }">
           <UiField
-            label="Название услуги"
+            label="Назва послуги"
             :error="getFieldError('name')"
             required
           >
             <UiInput
               v-model="form.name"
               left-icon="outlined/pencil"
-              placeholder="Введите название"
+              placeholder="Введіть назву"
               @input="resetFieldError('name')"
             />
           </UiField>
 
-          <UiField label="Категория">
+          <UiField label="Категорія">
             <UiSelect
               v-model="form.category"
               label-key="name"
               :options="categories"
-              placeholder="Выбрать категорию"
+              placeholder="Вибрати категорію"
             />
           </UiField>
 
           <UiField
-            label="Цена"
+            label="Ціна"
             :error="getFieldError('price')"
             required
           >
@@ -47,13 +47,13 @@
               v-model="form.price"
               type="number"
               left-icon="outlined/pencil"
-              placeholder="Укажите цену"
+              placeholder="Вкажіть ціну"
               @input="resetFieldError('price')"
             />
           </UiField>
 
           <UiField
-            label="Длительность"
+            label="Тривалість"
             :error="getFieldError('duration')"
             required
           >
@@ -63,29 +63,29 @@
               :options="durationList"
               :clearable="false"
               left-icon="outlined/pencil"
-              placeholder="Выбрать время"
+              placeholder="Вибрати час"
               @input="resetFieldError('duration')"
             />
           </UiField>
 
-          <UiField label="Сотрудники">
+          <UiField label="Спеціалісти">
             <UiMultiSelect
               v-model="selectedSpecialists"
-              :options="specialsts"
+              :options="specialists"
               label-key="fullName"
-              placeholder="Выбрать специалистов"
+              placeholder="Вибрати спеціалістів"
             />
           </UiField>
 
           <UiField
-            label="Описание"
+            label="Опис"
             :error="getFieldError('description')"
           >
             <UiInput
               v-model="form.description"
               tag="textarea"
               name="description"
-              placeholder="Добавьте описание"
+              placeholder="Добавте опис"
               @input="resetFieldError('description')"
             />
           </UiField>
@@ -97,7 +97,7 @@
               theme="blue"
               :loading="isLoading"
             >
-              Добавить услугу
+              Добавити послугу
             </UiButton>
           </div>
         </template>
@@ -159,9 +159,9 @@ export default class ProcedureNew extends Vue {
           required: true
         },
         messages: {
-          min: 'Минимальное количество символов: 4',
-          max: 'Максимальное количество символов: 255',
-          required: 'Введите название услуги'
+          min: 'Мінімальна кількість символів: 4',
+          max: 'Максимальна кількість символів: 255',
+          required: 'Введіть назву послуги'
         }
       },
 
@@ -172,9 +172,9 @@ export default class ProcedureNew extends Vue {
           max_value: 99999
         },
         messages: {
-          required: 'Укажите цену',
-          min_value: 'Минимальная цена: 0',
-          max_value: 'Максимальная цена: 99999'
+          required: 'Вкажіть ціну',
+          min_value: 'Мінімальна ціна: 0',
+          max_value: 'Максимальна ціна: 99999'
         }
       },
 
@@ -183,7 +183,7 @@ export default class ProcedureNew extends Vue {
           required: true
         },
         messages: {
-          required: 'Укажите длительность услуги'
+          required: 'Вкажіть тривалість послуги'
         }
       },
 
@@ -192,13 +192,13 @@ export default class ProcedureNew extends Vue {
           max: 255
         },
         messages: {
-          max: 'Максимальное количество символов: 255'
+          max: 'Максимальна кількість символів: 255'
         }
       }
     }
   }
 
-  get specialsts () {
+  get specialists () {
     return this.$typedStore.state.specialists.specialists
   }
 

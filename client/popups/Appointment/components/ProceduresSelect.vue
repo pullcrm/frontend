@@ -5,7 +5,7 @@
       size="s"
       responsive
     >
-      Услуги
+      Послуги
     </UiTitle>
 
     <UiText
@@ -13,13 +13,13 @@
       size="m"
       responsive
     >
-      Выбрано:
+      Вибрано:
 
       <strong>
         {{ count }}
       </strong>
 
-      / Сумма:
+      / Сума:
 
       <UiPopover
         class="appointment-popup-procedures-select__price-popover"
@@ -35,7 +35,7 @@
             <UiInput
               :value="customTotal || total"
               type="number"
-              placeholder="Цена"
+              placeholder="Ціна"
               @input="onCustomPrice"
             />
           </UiField>
@@ -48,7 +48,7 @@
         :value="procedures"
         :options="options"
         label-key="name"
-        placeholder="Выбрать услуги"
+        placeholder="Вибрати послуги"
         @input="
           $emit('resetFieldError', 'procedures')
           onInput($event)
