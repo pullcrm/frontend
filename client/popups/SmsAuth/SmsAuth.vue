@@ -32,7 +32,7 @@
       >
         <template #default="{ resetFieldError, getFieldError }">
           <UiField
-            label="Ім'я отправителя"
+            label="Ім'я відправника"
             :error="getFieldError('companyName')"
             required
           >

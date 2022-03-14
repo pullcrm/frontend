@@ -18,7 +18,7 @@
         :validations="validations"
       >
         <UiField
-          label="Ім'я і Прізвище"
+          label="Ім'я та Прізвище"
           :error="getFieldError('fullName')"
         >
           <UiInput

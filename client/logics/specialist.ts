@@ -39,7 +39,7 @@ export const roles = {
 export function getRoleNameByAlias (alias) {
   return {
     [ADMIN]: 'Керівники',
-    [MANAGER]: 'Менеджера',
+    [MANAGER]: 'Менеджери',
     [SPECIALIST]: 'Спеціалісти'
   }[alias]
 }

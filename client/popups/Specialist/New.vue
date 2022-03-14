@@ -25,13 +25,13 @@
         :validations="validations"
       >
         <UiField
-          label="Ім'я і Прізвище"
+          label="Ім'я та Прізвище"
           :error="getFieldError('fullName')"
         >
           <UiInput
             v-model="form.fullName"
             name="name"
-            placeholder="Введіть Ім'я і Прізвище"
+            placeholder="Введіть Ім'я та Прізвище"
             required
             @input="resetFieldError('fullName')"
           />

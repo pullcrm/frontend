@@ -107,7 +107,7 @@ export default class Specialists extends Vue {
     return [
       { name: 'Всі' },
       { name: 'Спеціалісти', value: SPECIALIST },
-      { name: 'Менеджера', value: MANAGER },
+      { name: 'Менеджери', value: MANAGER },
       { name: 'Керівники', value: ADMIN }
     ]
   }

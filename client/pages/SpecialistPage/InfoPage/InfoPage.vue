@@ -14,13 +14,13 @@
       @submit.prevent="onSubmit"
     >
       <UiField
-        label="Ім'я і Прізвище"
+        label="Ім'я та Прізвище"
         required
       >
         <UiInput
           v-model="specialist.user.fullName"
           name="name"
-          placeholder="Введіть Ім'я і Прізвище"
+          placeholder="Введіть Ім'я та Прізвище"
           required
         />
       </UiField>
@@ -41,7 +41,7 @@
       </UiField>
 
       <UiField
-        label="Почта"
+        label="Пошта"
       >
         <UiInput
           v-model="specialist.user.email"

@@ -86,7 +86,7 @@ export default class Numbers extends Vue {
       },
 
       {
-        name: 'Средній чек за місяць',
+        name: 'Середній чек за місяць',
         total: this.monthAverage,
         theme: 'yellow',
         icon: 'solid/receipt-fill'
