@@ -1,7 +1,7 @@
 <template>
   <Layout
-    title="Авторизация"
-    sub-title="Войдите в систему, чтобы получить доступ к своей компании"
+    title="Авторизація"
+    sub-title="Увійдіть у систему, щоб отримати доступ до своєї компанії"
     class="auth-page-login"
   >
     <form
@@ -41,7 +41,7 @@
             type="password"
             name="password"
             left-icon="outlined/key"
-            placeholder="Введите пароль"
+            placeholder="Введіть пароль"
             autocomplete="on"
             @input="
               error = null,
@@ -59,7 +59,7 @@
           size="s"
           class="auth-page-login__reset"
         >
-          Восстановить доступ
+          Відновити доступ
         </UiText>
 
         <UiAlert
@@ -77,7 +77,7 @@
             size="l"
             theme="blue"
           >
-            Войти
+            Увійти
           </UiButton>
 
           <UiButton
@@ -89,7 +89,7 @@
             size="l"
             theme="info-outlined"
           >
-            Регистрация
+            Реєстрація
           </UiButton>
         </div>
       </UiFormValidator>
@@ -116,7 +116,7 @@ import Layout from '../components/Layout.vue'
 
   head () {
     return {
-      title: 'Авторизация - pullcrm'
+      title: 'Авторизація - pullcrm'
     }
   }
 })
@@ -139,15 +139,15 @@ export default class Login extends Vue {
           required: true
         },
         messages: {
-          min: 'Не верный формат номера',
-          regex: 'Не верный формат номера',
-          required: 'Введите номер телефона'
+          min: 'Не вірний формат номеру',
+          regex: 'Не вірний формат номеру',
+          required: 'Введіть номер телефону'
         }
       },
       password: {
         rules: 'required',
         messages: {
-          required: 'Введите пароль'
+          required: 'Введіть пароль'
         }
       }
     }

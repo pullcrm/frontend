@@ -12,7 +12,7 @@
             left-icon="solid/circle-fill"
             responsive
           >
-            Всего
+            Всього
 
             <template #append>
               {{ point.value }}
@@ -25,7 +25,7 @@
             left-icon="solid/circle-fill"
             responsive
           >
-            Выполнено
+            Виконано
 
             <template #append>
               {{ point.info.completed }}

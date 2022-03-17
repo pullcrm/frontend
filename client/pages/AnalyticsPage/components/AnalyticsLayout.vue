@@ -6,7 +6,7 @@
         size="l"
         responsive
       >
-        Аналитика
+        Аналітика
       </UiTitle>
 
       <UiNavigation
@@ -28,12 +28,12 @@ export default class AnalyticsLayout extends Vue {
   get navigation () {
     return [
       {
-        name: 'Календарь',
+        name: 'Календар',
         to: { name: 'analyticsAppointments' }
       },
 
       {
-        name: 'Финансы',
+        name: 'Фінанси',
         to: { name: 'analyticsFinance' }
       }
     ]

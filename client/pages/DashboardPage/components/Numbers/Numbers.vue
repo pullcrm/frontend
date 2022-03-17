@@ -8,7 +8,7 @@
       size="s"
       responsive
     >
-      Обзор
+      Огляд
     </UiTitle>
 
     <div class="ui-grid">
@@ -72,21 +72,21 @@ export default class Numbers extends Vue {
   get numbers () {
     return [
       {
-        name: 'Доход за сегодня',
+        name: 'Дохід за сьогодні',
         total: this.dayTotal,
         theme: 'blue',
         icon: 'solid/sun-horizon-fill'
       },
 
       {
-        name: 'Доход за текущий месяц',
+        name: 'Дохід за поточний місяць',
         total: this.monthTotal,
         theme: 'green',
         icon: 'solid/calendar-fill'
       },
 
       {
-        name: 'Средний чек за месяц',
+        name: 'Середній чек за місяць',
         total: this.monthAverage,
         theme: 'yellow',
         icon: 'solid/receipt-fill'

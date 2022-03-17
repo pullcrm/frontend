@@ -22,7 +22,7 @@
             responsive
             class="header__mail"
           >
-            Сообщить о проблеме
+            Повідомити про проблему
           </UiText>
         </div>
 

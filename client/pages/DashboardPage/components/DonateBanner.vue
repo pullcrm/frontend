@@ -9,7 +9,7 @@
       size="xl"
       responsive
     >
-      Собираем деньги на функционал списка клиентов компании!
+      Збираємо гроші на функціонал списку клієнтів компанії!
     </UiTitle>
 
     <img
@@ -23,7 +23,7 @@
         responsive
         @click.native="onSubscribe"
       >
-        Помочь проекту
+        Допомогти проекту
       </UiButton>
     </div>
   </UiPanel>
@@ -37,8 +37,8 @@ import Component from 'vue-class-component'
 export default class DonateBanner extends Vue {
   async onSubscribe () {
     const result = await this.$typedStore.dispatch('popup/askQuestion', {
-      title: 'Мы отправим вас на страницу оплаты',
-      acceptButtonTitle: 'Хорошо'
+      title: 'Ми перенаправимо вас на сторінку донатів',
+      acceptButtonTitle: 'Відкрити'
     })
 
     if (result) {

@@ -68,9 +68,9 @@ const config: NuxtOptions = {
 
   head: {
     htmlAttrs: {
-      lang: 'ru'
+      lang: 'uk'
     },
-    title: 'Учет клиентов и онлайн запись - pullcrm',
+    title: 'Облік клієнтів та онлайн запис - pullcrm',
     meta: [
       { charset: 'utf-8' },
       { hid: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover' },
@@ -83,7 +83,7 @@ const config: NuxtOptions = {
       { name: 'msapplication-TileColor', content: '#333' },
       { name: 'theme-color', content: '#333' },
       { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
-      { hid: 'description', name: 'description', content: 'Pullcrm - удобный инструмен автоматизации записи для вашей компани. Онлайн запись для: ✅Барбершопа ✅Салона красоты ✅Тату салона ✅Медицинского центра ✅Стоматологии.' },
+      { hid: 'description', name: 'description', content: 'Pullcrm - зручний інструмент автоматизації запису для вашої компанії. Онлайн запис для: ✅Барбершопу ✅Салону краси ✅Тату салону ✅Медичного центру ✅Стоматології.' },
       { name: 'facebook-domain-verification', content: 'sh91u782fzoza8xz3iclnolr65ad0a' },
       // @ts-ignore
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge,chrome=1' }
@@ -166,7 +166,7 @@ const config: NuxtOptions = {
     { src: '~/plugins/vue-filters' },
     // { src: '~/plugins/vue-ignore-elements' },
     { src: '~/plugins/sentry.client' },
-    // { src: '~/plugins/polyfills.client' },
+    { src: '~/plugins/polyfills.client' },
     // { src: '~/plugins/chat.client' },
     { src: '~/plugins/analytics.client' },
     // { src: '~/plugins/experiment.client' },

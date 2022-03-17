@@ -55,7 +55,7 @@ export default class SpecialistLayout extends Vue {
   get navigation () {
     return [
       {
-        name: 'Информация',
+        name: 'Інформація',
         to: {
           ...this.$route,
           name: 'specialistInfo'
@@ -63,7 +63,7 @@ export default class SpecialistLayout extends Vue {
       },
 
       {
-        name: 'Журнал записей',
+        name: 'Журнал записів',
         to: {
           ...this.$route,
           name: 'specialistSchedule'
@@ -71,7 +71,7 @@ export default class SpecialistLayout extends Vue {
       },
 
       {
-        name: 'Услуги',
+        name: 'Послуги',
         to: {
           ...this.$route,
           name: 'specialistProcedures'
@@ -79,7 +79,7 @@ export default class SpecialistLayout extends Vue {
       },
 
       {
-        name: 'Настройки',
+        name: 'Налаштування',
         to: {
           ...this.$route,
           name: 'specialistSettings'

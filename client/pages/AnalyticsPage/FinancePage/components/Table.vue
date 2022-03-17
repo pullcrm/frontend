@@ -10,7 +10,7 @@
     >
       <template #default="{ row }">
         <UiTableColumn
-          name="Название"
+          name="Назва"
           align="left"
         >
           <UiText
@@ -22,7 +22,7 @@
         </UiTableColumn>
 
         <UiTableColumn
-          name="Цена"
+          name="Ціна"
           align="center"
         >
           <UiText
@@ -34,7 +34,7 @@
         </UiTableColumn>
 
         <UiTableColumn
-          name="Продажи"
+          name="Продажі"
           align="center"
         >
           <UiText
@@ -70,7 +70,7 @@
         </UiTableColumn>
 
         <UiTableColumn
-          name="Доход"
+          name="Дохід"
           align="center"
         >
           <UiText

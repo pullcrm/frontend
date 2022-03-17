@@ -5,7 +5,7 @@
       responsive
       class="full-widget-order-page__title"
     >
-      Ваша запись
+      Ваш запис
     </UiTitle>
 
     <InfoPanel
@@ -24,14 +24,14 @@
       class="full-widget-order-page__company-panel"
     />
 
-    <UiButton
+    <!-- <UiButton
       size="m"
       theme="blue"
       class="full-widget-order-page__button"
       @click.native="onAdd"
     >
-      Добавить в календарь
-    </UiButton>
+      Добавити в календар
+    </UiButton> -->
 
     <UiButton
       size="m"
@@ -39,7 +39,7 @@
       class="full-widget-order-page__button"
       @click.native="onNew"
     >
-      Записаться еще
+      Записатися ще
     </UiButton>
   </Layout>
 </template>

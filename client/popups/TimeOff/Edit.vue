@@ -11,7 +11,7 @@
       class="time-off-edit-popup__title"
       size="s"
     >
-      Изменить
+      Змінити
     </UiTitle>
 
     <form @submit.prevent="submit">
@@ -21,7 +21,7 @@
       >
         <template #default="{ resetFieldError, getFieldError }">
           <UiField
-            label="Сотрудник"
+            label="Спеціаліст"
             required
             :error="getFieldError('specialist')"
           >
@@ -29,7 +29,7 @@
               v-model="form.specialist"
               :options="specialists"
               label-key="fullName"
-              placeholder="Выбрать сотрудника"
+              placeholder="Вибрати спеціаліста"
               :clearable="false"
               @input="resetFieldError('specialist')"
             />
@@ -62,7 +62,7 @@
                 <UiText
                   size="m"
                 >
-                  Закрыть запись на целый день
+                  Закрити запис на весь день
                 </UiText>
               </template>
             </UiSwitch>
@@ -72,40 +72,40 @@
             v-if="isCloseDay === false"
           >
             <UiField
-              label="Время начала"
+              label="Час початку"
               required
               :error="getFieldError('startTime')"
             >
               <UiSelect
                 v-model="form.startTime"
                 :options="workingHours"
-                placeholder="Выбрать время начала"
+                placeholder="Вибрати час початку"
                 @input="resetFieldError('timeStart')"
               />
             </UiField>
 
             <UiField
-              label="Время конца"
+              label="Час закінчення"
               required
               :error="getFieldError('endTime')"
             >
               <UiSelect
                 v-model="form.endTime"
                 :options="workingHoursForTimeEnd"
-                placeholder="Выбрать время конца"
+                placeholder="Вибрати час закінчення"
                 @input="resetFieldError('endTime')"
               />
             </UiField>
           </template>
 
           <UiField
-            label="Краткое описание"
+            label="Короткий опис"
             :error="getFieldError('description')"
           >
             <UiInput
               v-model="form.description"
               tag="textarea"
-              placeholder="Введите описание"
+              placeholder="Введіть опис"
               @input="resetFieldError('description')"
             />
           </UiField>
@@ -117,7 +117,7 @@
               theme="blue"
               :loading="isLoading"
             >
-              Сохранить
+              Зберегти
             </UiButton>
 
             <UiButton
@@ -126,7 +126,7 @@
               :loading="isLoading"
               @click.native="remove"
             >
-              Удалить
+              Видалити
             </UiButton>
           </div>
         </template>
@@ -248,28 +248,28 @@ export default class TimeOffEdit extends Vue {
       specialist: {
         rules: 'required',
         messages: {
-          required: 'Выберите специалиста'
+          required: 'Виберіть спеціаліста'
         }
       },
 
       startTime: !this.isCloseDay && {
         rules: 'required',
         messages: {
-          required: 'Укажите время начала'
+          required: 'Вкажіть час початку'
         }
       },
 
       endTime: !this.isCloseDay && {
         rules: 'required',
         messages: {
-          required: 'Укажите время завершения'
+          required: 'Вкажіть час завершения'
         }
       },
 
       description: {
         rules: 'max:255',
         messages: {
-          max: 'Максимальное количество символов: 255'
+          max: 'Максимальна кількість символів: 255'
         }
       }
     }
@@ -312,7 +312,7 @@ export default class TimeOffEdit extends Vue {
       await this.$api.timeOff.delete(this.form.id)
       await this.$typedStore.dispatch('schedule/fetchTimeOffs')
 
-      this.$typedStore.dispatch('toasts/show', { title: 'Удалено!' })
+      this.$typedStore.dispatch('toasts/show', { title: 'Видалено!' })
 
       this.close()
     } finally {

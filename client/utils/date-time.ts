@@ -1,6 +1,6 @@
 import * as dayjs from 'dayjs'
 
-import 'dayjs/locale/ru'
+import 'dayjs/locale/uk'
 
 const isToday = require('dayjs/plugin/isToday')
 const isTomorrow = require('dayjs/plugin/isTomorrow')

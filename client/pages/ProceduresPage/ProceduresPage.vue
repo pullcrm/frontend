@@ -7,8 +7,8 @@
 
       <UiPlaceholder
         v-if="isEmpty"
-        title="Список услуг пуст"
-        text="Добавьте услугу, чтобы начать работу"
+        title="Список послуг порожній"
+        text="Додайте послугу, щоб розпочати роботу"
         :image="require('~/assets/images/procedures-empty.svg')"
       >
         <UiButton
@@ -16,7 +16,7 @@
           right-icon="outlined/plus"
           @click.native="onAddProcedure"
         >
-          Добавить услугу
+          Добавити послугу
         </UiButton>
       </UiPlaceholder>
 
@@ -48,7 +48,7 @@ import ProceduresGroup from './components/Group.vue'
 
   head () {
     return {
-      title: 'Список услуг - pullcrm'
+      title: 'Список послуг - pullcrm'
     }
   }
 })

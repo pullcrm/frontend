@@ -5,7 +5,7 @@
       size="s"
       responsive
     >
-      Исполнитель
+      Виконавець
     </UiTitle>
 
     <UiField>
@@ -14,7 +14,7 @@
         required
         :options="options"
         label-key="fullName"
-        placeholder="Выбрать исполнителя"
+        placeholder="Вибрати виконавця"
         @input="
           $emit('resetFieldError', 'specialist')
           $emit('update:specialist', $event)

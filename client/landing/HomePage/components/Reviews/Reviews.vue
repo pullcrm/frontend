@@ -1,10 +1,13 @@
 <template>
-  <div class="landing-home-page-reviews">
+  <div
+    v-if="reviews.length > 0"
+    class="landing-home-page-reviews"
+  >
     <UiTitle
       class="landing-home-page-reviews__title"
       size="m"
     >
-      Отзывы наших клиентов
+      Відгуки наших клієнтів
     </UiTitle>
 
     <UiCarousel
@@ -28,8 +31,6 @@ import Component from 'vue-class-component'
 
 import Review from './Review.vue'
 
-import { reviews } from './index'
-
 @Component({
   components: {
     Review
@@ -37,7 +38,7 @@ import { reviews } from './index'
 })
 export default class Reviews extends Vue {
   get reviews () {
-    return reviews
+    return []
   }
 }
 </script>

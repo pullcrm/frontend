@@ -6,7 +6,7 @@
         responsive
         class="settings-page-layout__title"
       >
-        Настройки
+        Налаштування
       </UiTitle>
 
       <div class="settings-page-layout__container">
@@ -22,7 +22,7 @@
             responsive
             class="settings-page-layout__link"
           >
-            О компании
+            Про компанію
           </UiText>
           <UiText
             tag="RouterLink"
@@ -31,7 +31,7 @@
             responsive
             class="settings-page-layout__link"
           >
-            График работы
+            Графік роботи
           </UiText>
           <UiText
             tag="RouterLink"
@@ -40,7 +40,7 @@
             responsive
             class="settings-page-layout__link"
           >
-            Настройки СМС
+            Налаштування СМС
           </UiText>
           <UiText
             tag="RouterLink"
@@ -49,7 +49,7 @@
             responsive
             class="settings-page-layout__link"
           >
-            Онлайн запись
+            Онлайн запис
           </UiText>
         </UiPanel>
 

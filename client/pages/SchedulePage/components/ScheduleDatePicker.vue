@@ -20,7 +20,7 @@
         data-test="date-picker-today"
         @click.native.prevent="setToday"
       >
-        Сегодня
+        Сьогодні
       </UiText>
 
       <UiText

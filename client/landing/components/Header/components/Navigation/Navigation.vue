@@ -6,7 +6,7 @@
       size="m"
       strong
     >
-      Главная
+      Головна
     </UiText>
 
     <!-- <UiText

@@ -5,7 +5,7 @@
       size="s"
       responsive
     >
-      Клиент
+      Клієнт
     </UiTitle>
 
     <div class="ui-grid">
@@ -18,7 +18,7 @@
       >
         <UiInput
           :value="name"
-          placeholder="Введите имя"
+          placeholder="Введіть ім'я"
           @input="
             $emit('update:name', $event)
             $emit('resetFieldError', 'name')
@@ -37,7 +37,7 @@
           mask="+38 (###) #### ###"
           :value="phone"
           inputmode="tel"
-          placeholder="Введите номер телефона"
+          placeholder="Введіть номер телефону"
           @input="
             $emit('update:phone', $event)
             $emit('resetFieldError', 'phone')
@@ -50,7 +50,7 @@
         theme="yellow"
         right-icon="outlined/caret-down"
       >
-        Быстрая запись
+        Швидкий запис
       </UiButton> -->
     </div>
   </div>

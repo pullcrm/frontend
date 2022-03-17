@@ -7,21 +7,21 @@
       size="s"
       class="sms-auth__title"
     >
-      Настройка API для отправки СМС
+      Налаштування API для надсилання СМС
     </UiTitle>
 
     <UiText
       size="m"
       class="sms-auth__sub-title"
     >
-      Для добавления СМС оповещений вам нужно выполнить действия описанные в
+      Для додавання СМС оповіщень вам потрібно виконати дії, описані в
       <UiLink
         tag="a"
         theme="action"
         target="_blank"
         href="https://classic-helmet-a8f.notion.site/15550c9172b740b98d036829a93b7f95"
       >
-        документации по ссылке
+        документації за посиланням
       </UiLink>.
     </UiText>
 
@@ -32,40 +32,40 @@
       >
         <template #default="{ resetFieldError, getFieldError }">
           <UiField
-            label="Имя отправителя"
+            label="Ім'я відправника"
             :error="getFieldError('companyName')"
             required
           >
             <UiInput
               v-model="companyName"
               left-icon="outlined/pencil"
-              placeholder="Введите имя"
+              placeholder="Введіть ім'я"
               @input="resetFieldError('companyName')"
             />
           </UiField>
 
           <UiField
-            label="Публичный ключ"
+            label="Публічний ключ"
             :error="getFieldError('publicKey')"
             required
           >
             <UiInput
               v-model="publicKey"
               left-icon="outlined/pencil"
-              placeholder="Введите ключ"
+              placeholder="Введіть ключ"
               @input="resetFieldError('publicKey')"
             />
           </UiField>
 
           <UiField
-            label="Приватный ключ"
+            label="Приватний ключ"
             :error="getFieldError('privateKey')"
             required
           >
             <UiInput
               v-model="privateKey"
               left-icon="outlined/pencil"
-              placeholder="Введите ключ"
+              placeholder="Введіть ключ"
               @input="resetFieldError('privateKey')"
             />
           </UiField>
@@ -75,7 +75,7 @@
             theme="blue"
             :loading="isLoading"
           >
-            Авторизоваться
+            Авторизуватися
           </UiButton>
         </template>
       </UiFormValidator>
@@ -112,12 +112,12 @@ export default class ProcedureEdit extends Vue {
           required: true
         },
         messages: {
-          max: 'Максимальное количество символов 11',
-          regex: 'Используйте только латинские буквы без спец символов',
-          required: 'Введите имя компании'
+          max: 'Максимальна кількість символів 11',
+          regex: 'Використовуйте тільки латинські літери без спеціальних символів',
+          required: 'Введіть ім\'я компанії'
         },
         serverMessages: {
-          invalid: 'Имя введено неверно'
+          invalid: 'Ім\'я введено неверно'
         }
       },
       publicKey: {
@@ -125,7 +125,7 @@ export default class ProcedureEdit extends Vue {
           required: true
         },
         messages: {
-          required: 'Введите публичный ключ'
+          required: 'Введіть публічний ключ'
         }
       },
       privateKey: {
@@ -133,7 +133,7 @@ export default class ProcedureEdit extends Vue {
           required: true
         },
         messages: {
-          required: 'Введите приватный ключ'
+          required: 'Введіть приватний ключ'
         }
       }
     }
@@ -164,7 +164,7 @@ export default class ProcedureEdit extends Vue {
       if (err.status === 404) {
         this.$typedStore.dispatch('toasts/show', {
           type: 'error',
-          title: 'Введены не верные данные'
+          title: 'Введено неправильні дані'
         })
 
         return
@@ -172,7 +172,7 @@ export default class ProcedureEdit extends Vue {
 
       this.$typedStore.dispatch('toasts/show', {
         type: 'error',
-        title: 'Что-то не так!'
+        title: 'Щось не так!'
       })
     } finally {
       this.isLoading = false

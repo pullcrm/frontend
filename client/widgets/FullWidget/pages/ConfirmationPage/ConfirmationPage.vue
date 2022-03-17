@@ -9,7 +9,7 @@
       responsive
       class="full-widget-confirmation-page__title"
     >
-      Подтвердите запись
+      Підтвердьте запис
     </UiTitle>
 
     <InfoPanel
@@ -37,7 +37,7 @@
               trim
               name="fullName"
               left-icon="outlined/user"
-              placeholder="Имя"
+              placeholder="Ім'я"
               @input="resetFieldError('fullName')"
             />
           </UiField>
@@ -65,7 +65,7 @@
               tag="textarea"
               name="description"
               left-icon="outlined/chat-circle-dots"
-              placeholder="Комментарий или пожелание"
+              placeholder="Коментар або побажання"
               @input="resetFieldError('description')"
             />
           </UiField>
@@ -75,7 +75,7 @@
             size="s"
             class="full-widget-confirmation-page__disclaimer"
           >
-            Мы напомним вам о записи за {{ settings.remindSMSMinutes | minutesToTime }} до начала
+            Ми нагадаємо вам про запис за {{ settings.remindSMSMinutes | minutesToTime }} до початку
           </UiText>
 
           <UiButton
@@ -85,7 +85,7 @@
             :loading="isLoading"
             class="full-widget-confirmation-page__button"
           >
-            Подтвердить
+            Підтвердити
           </UiButton>
         </template>
       </UiFormValidator>
@@ -164,7 +164,7 @@ export default class ConfirmationPage extends Vue {
           required: true
         },
         messages: {
-          required: 'Введите ваше имя'
+          required: 'Введіть ваше ім\'я'
         }
       },
 
@@ -175,9 +175,9 @@ export default class ConfirmationPage extends Vue {
           required: true
         },
         messages: {
-          min: 'Не верный формат номера',
-          regex: 'Не верный формат номера',
-          required: 'Введите номер телефона'
+          min: 'Не вірний формат номеру',
+          regex: 'Не вірний формат номеру',
+          required: 'Введіть номер телефону'
         }
       }
     }
@@ -210,7 +210,7 @@ export default class ConfirmationPage extends Vue {
   get dateText () {
     const date = setTime(new Date(this.date), this.time)
 
-    // Четверг, 19:00 – 20:00
+    // Четвер, 19:00 – 20:00
     return `${dayjs(this.date).format('dddd')}, ${date.format('HH:mm')} - ${date.add(this.duration, 'minute').format('HH:mm')}`
   }
 
@@ -237,7 +237,7 @@ export default class ConfirmationPage extends Vue {
       })
 
       this.$typedStore.dispatch('toasts/show', {
-        title: 'Запись создана'
+        title: 'Запис створено'
       })
 
       this.$refs.layout.postMessage('orderCreated')
@@ -250,7 +250,7 @@ export default class ConfirmationPage extends Vue {
       if (err.status === 400) {
         this.$typedStore.dispatch('toasts/show', {
           type: 'error',
-          title: 'Что-то пошло не так, попробуйте вернутся назад и выбрать другое время!'
+          title: 'Щось пішло не так, спробуйте повернутись назад і вибрати інший час!'
         })
 
         return

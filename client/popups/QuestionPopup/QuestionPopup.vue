@@ -49,7 +49,7 @@ export default class QuestionPopup extends Vue {
   }
 
   get cancelButtonTitle () {
-    return this.question.cancelButtonTitle || 'Отмена'
+    return this.question.cancelButtonTitle || 'Скасувати'
   }
 }
 </script>

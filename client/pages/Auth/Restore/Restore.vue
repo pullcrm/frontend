@@ -1,7 +1,7 @@
 <template>
   <Layout
-    title="Восстановить доступ"
-    sub-title="Введите номер телефона, чтобы восстановить доступ"
+    title="Відновити доступ"
+    sub-title="Введіть номер телефону, щоб відновити доступ"
     class="auth-page-restore"
   >
     <form
@@ -43,7 +43,7 @@
             <UiInput
               v-model="code"
               left-icon="outlined/chat-centered-text"
-              placeholder="Введите СМС-код"
+              placeholder="Введіть СМС-код"
               @input="resetFieldError('code')"
             />
           </UiField>
@@ -57,13 +57,13 @@
               left-icon="outlined/key"
               name="password"
               type="password"
-              placeholder="Введите новый пароль"
+              placeholder="Введіть новий пароль"
               @input="resetFieldError('password')"
             />
           </UiField>
 
           <UiField
-            label="Повторите пароль"
+            label="Повторіть пароль"
             :error="getFieldError('repeatPassword')"
           >
             <UiInput
@@ -71,7 +71,7 @@
               left-icon="outlined/key"
               name="repeatPassword"
               type="password"
-              placeholder="Введите повторно новый пароль"
+              placeholder="Введіть повторно новий пароль"
               @input="resetFieldError('repeatPassword')"
             />
           </UiField>
@@ -84,7 +84,7 @@
           theme="blue"
           :loading="isLoading"
         >
-          {{ isValid ? 'Изменить пароль' : 'Восстановить' }}
+          {{ isValid ? 'Змінити пароль' : 'Відновити' }}
         </UiButton>
       </UiFormValidator>
     </form>
@@ -110,7 +110,7 @@ import Layout from '../components/Layout.vue'
 
   head () {
     return {
-      title: 'Восстановление пароля - pullcrm'
+      title: 'Відновлення паролю - pullcrm'
     }
   }
 })
@@ -136,12 +136,12 @@ export default class Restore extends Vue {
           required: true
         },
         messages: {
-          min: 'Не верный формат номера',
-          regex: 'Не верный формат номера',
-          required: 'Введите номер телефона'
+          min: 'Не вірний формат номеру',
+          regex: 'Не вірний формат номеру',
+          required: 'Введіть номер телефону'
         },
         serverMessages: {
-          invalid: 'Номер не найден'
+          invalid: 'Номер не знайдено'
         }
       },
 
@@ -151,11 +151,11 @@ export default class Restore extends Vue {
           required: true
         },
         messages: {
-          min: 'Код должен состоять с 4-х символов',
-          required: 'Введите код'
+          min: 'Код має складатися з 4-х символів',
+          required: 'Введіть код'
         },
         serverMessages: {
-          invalid: 'Не правильный код'
+          invalid: 'Не вірний код'
         }
       },
 
@@ -165,16 +165,16 @@ export default class Restore extends Vue {
           required: true
         },
         messages: {
-          min: 'Введите минимум 4 символа',
-          required: 'Введите новый пароль'
+          min: 'Мінімальна кількість символів: 4',
+          required: 'Введіть новий пароль'
         }
       },
 
       repeatPassword: this.isValid && {
         rules: 'required|confirmed:password',
         messages: {
-          required: 'Введите повторно новый пароль',
-          confirmed: 'Пароль не сходится'
+          required: 'Введіть повторно новий пароль',
+          confirmed: 'Пароль не збігається'
         }
       }
     }
@@ -203,7 +203,7 @@ export default class Restore extends Vue {
       })
 
       await this.$typedStore.dispatch('toasts/show', {
-        title: 'Пароль изменен!'
+        title: 'Пароль змінено!'
       })
 
       this.onBack()

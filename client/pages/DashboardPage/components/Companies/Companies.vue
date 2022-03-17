@@ -5,7 +5,7 @@
       size="s"
       responsive
     >
-      Мои компании
+      Мої компанії
     </UiTitle>
 
     <UiCarousel

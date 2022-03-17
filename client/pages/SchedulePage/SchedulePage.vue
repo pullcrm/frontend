@@ -6,7 +6,7 @@
           size="m"
           responsive
         >
-          Календарь
+          Календар
         </UiTitle>
 
         <UiButton
@@ -15,7 +15,7 @@
           right-icon="outlined/plus"
           @click.native="addAppointment"
         >
-          Добавить запись
+          Добавити запис
         </UiButton>
       </div>
 
@@ -55,7 +55,7 @@ import DatePickerButton from './components/DatePickerButton/DatePickerButton.vue
 
   head () {
     return {
-      title: 'Календарь - pullcrm'
+      title: 'Календар - pullcrm'
     }
   }
 })

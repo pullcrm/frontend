@@ -10,7 +10,7 @@
         size="m"
         responsive
       >
-        Добавлен в компанию
+        Доданий до компанії
       </UiText>
 
       <UiText

@@ -124,19 +124,19 @@ export default class ScheduleColumn extends Vue {
     }
 
     const addAppointment = {
-      name: 'Добавить запись',
+      name: 'Добавити запис',
       icon: 'outlined/plus-circle',
       click: this.addAppointment
     }
 
     const addTimeOff = {
-      name: 'Закрыть запись',
+      name: 'Закрити запис',
       icon: 'outlined/prohibit',
       click: this.addTimeOff
     }
 
     popperMenu.open(this.$refs.hourTile.icon, {
-      name: `Начало: ${this.hoveredTime}`,
+      name: `Початок: ${this.hoveredTime}`,
       options: [
         addAppointment,
         addTimeOff

@@ -16,7 +16,7 @@ export function minutesToTime (minutes: number) {
   let str = ''
 
   if (hour > 0) {
-    str += `${hour} ${pluralize(hour, 'час', 'часа', 'часов')}`
+    str += `${hour} ${pluralize(hour, 'година', 'години', 'годин')}`
   }
 
   if (str) {
@@ -24,7 +24,7 @@ export function minutesToTime (minutes: number) {
   }
 
   if (minute > 0) {
-    str += `${minute} ${pluralize(minute, 'минута', 'минуты', 'минут')}`
+    str += `${minute} ${pluralize(minute, 'хвилина', 'хвилини', 'хвилин')}`
   }
 
   return str

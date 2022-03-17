@@ -10,23 +10,23 @@
         <th
           align="left"
         >
-          Сотрудник
+          Співробітник
         </th>
         <th
           align="left"
         >
-          Время начала
+          Час початку
         </th>
         <th
           align="left"
         >
-          Время конца
+          Час закінчення
         </th>
         <th
           width="200"
           align="right"
         >
-          Действия
+          Дії
         </th>
       </template>
 
@@ -60,7 +60,7 @@
             size="m"
             @click.native="onEdit(row)"
           >
-            Изменить
+            Змінити
           </UiButton>
         </UiTableColumn>
       </template>

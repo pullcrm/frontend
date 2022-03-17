@@ -17,7 +17,7 @@
         class="full-widget-layout__logo"
       >
         <img
-          src="~/assets/logos/logo_new.svg"
+          src="~/assets/logos/logo_ua.svg"
           alt="pullcrm"
         >
       </a>
@@ -27,7 +27,7 @@
         responsive
         class="full-widget-layout__disclaimer"
       >
-        <strong>Pullcrm</strong> — удобный инструмент автоматизации записи для вашей компании
+        <strong>Pullcrm</strong> — зручний інструмент автоматизації запису для вашої компанії
       </UiText>
     </div>
 

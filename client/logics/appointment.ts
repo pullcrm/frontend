@@ -1,12 +1,12 @@
 export const statusesDict = {
-  IN_PROGRESS: 'В работе',
-  CANCELED: 'Отменено',
-  COMPLETED: 'Выполнено'
+  IN_PROGRESS: 'В работі',
+  CANCELED: 'Відмінено',
+  COMPLETED: 'Виконано'
 }
 
 export const sourcesDict = {
-  ADMIN_PANEL: 'Админ панель',
-  WIDGET: 'Виджет'
+  ADMIN_PANEL: 'Адмін панель',
+  WIDGET: 'Віджет'
 }
 
 export function normalizeAppointmentParams (submitParams) {
@@ -54,7 +54,7 @@ export function getAppointmentSubtitle (appointment) {
     .join(', ')
 
   if (description) {
-    text += `\nКомментарий: ${description}`
+    text += `\nКоментар: ${description}`
   }
 
   return text

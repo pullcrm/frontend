@@ -76,7 +76,7 @@ export default class Avatars extends Vue {
       if (this.avatars.length > 5) {
         this.$typedStore.dispatch('toasts/show', {
           type: 'error',
-          title: 'Превишен лимин загрузки аватаров!'
+          title: 'Перевищено ліміт завантаження аватарок'
         })
 
         return
@@ -99,7 +99,7 @@ export default class Avatars extends Vue {
       if (err.status === 413) {
         this.$typedStore.dispatch('toasts/show', {
           type: 'error',
-          title: 'Файл слишком большой, попробуйте в другом размере'
+          title: 'Файл занадто великий, спробуйте в іншому розмірі'
         })
 
         return
@@ -115,7 +115,7 @@ export default class Avatars extends Vue {
       avatarId
     })
 
-    this.$typedStore.dispatch('toasts/show', { title: 'Установлен новый аватар!' })
+    this.$typedStore.dispatch('toasts/show', { title: 'Встановлено новий аватар' })
 
     this.$emit('refresh')
   }

@@ -3,20 +3,20 @@
     <NavbarItem
       :to="{ name: 'dashboard' }"
       icon="solid/house-fill"
-      name="Главная"
+      name="Головна"
     />
 
     <NavbarItem
       :to="{ name: 'schedule' }"
       icon="solid/calendar-fill"
-      name="Календарь"
+      name="Календар"
     />
 
     <NavbarItem
       tag="a"
       href="#"
       icon="solid/plus-circle-fill"
-      name="Записать"
+      name="Записати"
       @click.native.prevent="addAppointment"
     />
 
@@ -24,14 +24,14 @@
       v-if="isAnalyticsVisible"
       :to="{ name: 'analytics' }"
       icon="solid/chart-bar-fill"
-      name="Аналитика"
+      name="Аналітика"
     />
 
     <NavbarItem
       v-else
       :to="{ name: 'specialists' }"
       icon="solid/users-fill"
-      name="Сотрудники"
+      name="Співробітники"
     />
 
     <UiPopover
@@ -59,7 +59,7 @@
             size="m"
             left-icon="solid/users-fill"
           >
-            Сотрудники
+            Співробітники
           </UiText>
 
           <UiText
@@ -68,7 +68,7 @@
             size="m"
             left-icon="solid/list"
           >
-            Услуги
+            Послуги
           </UiText>
 
           <UiText
@@ -77,7 +77,7 @@
             size="m"
             left-icon="solid/gear-fill"
           >
-            Настройки
+            Налаштування
           </UiText>
 
           <UiText
@@ -87,7 +87,7 @@
             left-icon="outlined/sign-out"
             @click.native.prevent.stop="logout"
           >
-            Выйти
+            Вийти
           </UiText>
         </div>
       </template>

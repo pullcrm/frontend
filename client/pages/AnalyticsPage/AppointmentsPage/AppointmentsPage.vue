@@ -84,7 +84,7 @@ import LineChart from './components/LineChart.vue'
 
   head () {
     return {
-      title: 'Аналитика по записям - pullcrm'
+      title: 'Аналітика по записам - pullcrm'
     }
   }
 })
@@ -111,7 +111,7 @@ export default class AppointmentsPage extends Vue {
   async fetch () {
     if (this.validateDate() === false) {
       return this.$typedStore.dispatch('toasts/show', {
-        title: 'Фильтрация доступна при выборе дат от двух дней',
+        title: 'Фільтрування доступне при виборі дат від двох днів',
         type: 'error'
       })
     }

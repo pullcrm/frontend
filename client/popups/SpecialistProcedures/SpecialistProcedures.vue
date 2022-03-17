@@ -11,14 +11,14 @@
         class="specialist-procedures__title"
         size="s"
       >
-        Список услуг
+        Список послуг
       </UiTitle>
 
       <UiText
         class="specialist-procedures__sub-title"
         size="m"
       >
-        Выберите перечень услуг которые предоставляет сотрудник
+        Виберіть перелік послуг, які надає спеціаліст
       </UiText>
 
       <div class="specialist-procedures__inner">
@@ -37,7 +37,7 @@
           class="specialist-procedures__button"
           @click.native="onSubmit"
         >
-          Применить ({{ procedureIds.length }})
+          Застосувати ({{ procedureIds.length }})
         </UiButton>
       </div>
     </UiPopup>
@@ -98,7 +98,7 @@ export default class ProcedureEdit extends Vue {
         procedures: this.procedureIds
       })
 
-      await this.$typedStore.dispatch('toasts/show', { title: 'Сохранено!' })
+      await this.$typedStore.dispatch('toasts/show', { title: 'Збережено!' })
       await this.$typedStore.dispatch('specialists/fetch')
 
       this.$emit('close')

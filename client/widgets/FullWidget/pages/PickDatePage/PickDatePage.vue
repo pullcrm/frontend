@@ -8,7 +8,7 @@
       responsive
       class="full-widget-pick-date-page__title"
     >
-      Выберите время
+      Виберіть час
     </UiTitle>
 
     <DatePicker
@@ -35,7 +35,7 @@
         class="full-widget-pick-date-page__button"
         @click.native="onSubmit"
       >
-        Продолжить
+        Продовжити
       </UiButton>
     </template>
   </Layout>

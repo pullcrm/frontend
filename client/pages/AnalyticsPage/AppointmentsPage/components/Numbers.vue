@@ -10,13 +10,13 @@
         ]"
         theme="blue"
         icon="solid/list"
-        info="Включая невыполненные и отмененные"
+        info="Включаючи невиконані та скасовані"
       >
         <UiText
           size="m"
           responsive
         >
-          Всего записей
+          Всього записів
         </UiText>
 
         <UiTitle
@@ -36,13 +36,13 @@
         ]"
         theme="green"
         icon="solid/check-circle-fill"
-        info="Только оплаченные"
+        info="Тільки оплачені"
       >
         <UiText
           size="m"
           responsive
         >
-          Выполнено
+          Виконано
         </UiText>
 
         <UiTitle
@@ -62,7 +62,7 @@
         ]"
         theme="yellow"
         icon="solid/device-mobile-camera-fill"
-        info="Созданные менеджером через админку"
+        info="Створені менеджером через адмінку"
       >
         <UiText
           size="m"
@@ -88,7 +88,7 @@
         ]"
         theme="purple"
         icon="outlined/globe"
-        info="Сделанные через виджет"
+        info="Створені через віджет"
       >
         <UiText
           size="m"

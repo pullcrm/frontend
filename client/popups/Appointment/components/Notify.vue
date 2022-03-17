@@ -5,7 +5,7 @@
       size="s"
       responsive
     >
-      СМС оповещение
+      СМС оповіщення
     </UiTitle>
 
     <UiField
@@ -21,7 +21,7 @@
             size="m"
             responsive
           >
-            Сообщить о записи
+            Повідомити про запис
           </UiText>
         </template>
       </UiSwitch>
@@ -38,7 +38,7 @@
             size="m"
             responsive
           >
-            Напомнить о записи за {{ remindTime | minutesToTime }} до начала
+            Нагадати про запис за {{ remindTime | minutesToTime }} до початку
           </UiText>
         </template>
       </UiSwitch>

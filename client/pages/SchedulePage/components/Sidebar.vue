@@ -9,7 +9,7 @@
         size="s"
         class="schedule-page-sidebar__title"
       >
-        Очередь
+        Черга
       </UiTitle>
 
       <Appointment
@@ -29,7 +29,7 @@
           responsive
           left-icon="outlined/note-pencil"
         >
-          Добавить в очередь
+          Добавити в чергу
         </UiText>
       </div>
     </div>

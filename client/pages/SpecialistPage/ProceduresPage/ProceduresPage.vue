@@ -5,8 +5,8 @@
   >
     <UiPlaceholder
       v-if="isEmpty"
-      title="Список услуг пуст"
-      text="Добавьте услугу, чтобы специалист начал работу"
+      title="Список послуг порожній"
+      text="Додайте послугу, щоб фахівець розпочав роботу"
       class="specialist-procedures-page__placeholder"
     />
 
@@ -25,7 +25,7 @@
       class="specialist-procedures-page__button"
       @click.native="openPopup"
     >
-      Изменить список услуг
+      Змінити список послуг
     </UiButton>
   </SpecialistLayout>
 </template>
@@ -60,7 +60,7 @@ import ProceduresGroup from './components/ProceduresGroup.vue'
 
   head () {
     return {
-      title: 'Список услуг сотрудника - pullcrm'
+      title: 'Список послуг фахівця - pullcrm'
     }
   }
 })

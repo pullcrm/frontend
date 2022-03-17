@@ -6,7 +6,7 @@
           size="m"
           class="landing-footer__about"
         >
-          <strong>Pullcrm</strong> — удобный инструмент <br> автоматизации записи для вашей компании
+          <strong>Pullcrm</strong> — зручний інструмент <br> автоматизації запису для вашої компанії
         </UiText>
 
         <div class="landing-footer__links">

@@ -2,7 +2,7 @@
   <div class="appointment-popup__inner">
     <AppointmentHeader
       class="appointment-popup__header"
-      title="Новая запись"
+      title="Новий запис"
       :status.sync="form.status"
     />
 
@@ -42,7 +42,7 @@
               size="m"
               responsive
             >
-              Добавить в очередь
+              Добавити в чергу
             </UiText>
           </template>
         </UiSwitch>
@@ -53,18 +53,18 @@
           :date.sync="form.date"
           :duration="duration"
           :start-at.sync="form.startTime"
-          :avaliable-hours="avaliableHours"
+          :available-hours="availableHours"
           @resetFieldError="resetFieldError"
         />
 
         <UiField
           class="appointment-popup__comment"
-          label="Комментарий"
+          label="Коментар"
         >
           <UiInput
             v-model="form.description"
             tag="textarea"
-            placeholder="Введите текст"
+            placeholder="Введіть текст"
             @input="resetFieldError('description')"
           />
         </UiField>
@@ -94,7 +94,7 @@
           theme="blue"
           :loading="isLoading"
         >
-          Добавить запись
+          Добавити запис
         </UiButton>
       </div>
 
@@ -110,7 +110,7 @@
             theme="blue"
             :loading="isLoading"
           >
-            Добавить запись
+            Добавити запис
           </UiButton>
         </UiContainer>
       </FixedPanel>
@@ -195,7 +195,7 @@ export default class AppointmentNew extends Vue {
   readonly specialistId!: number | null
 
   isLoading = false
-  avaliableHours = []
+  availableHours = []
 
   form = {
     date: toDate(this.$typedStore.state.schedule.date),
@@ -279,13 +279,13 @@ export default class AppointmentNew extends Vue {
   }
 
   async fetchAvailableTime () {
-    this.avaliableHours = []
+    this.availableHours = []
 
     if (!this.form.specialist?.id || this.duration === 0) {
       return
     }
 
-    this.avaliableHours = await this.$api.appointments.availableTime({
+    this.availableHours = await this.$api.appointments.availableTime({
       date: this.form.date.format('YYYY-MM-DD'),
       specialistId: this.form.specialist.id,
       duration: this.duration
@@ -293,7 +293,7 @@ export default class AppointmentNew extends Vue {
   }
 
   checkStartTime () {
-    const startTimeIndex = this.avaliableHours.indexOf(this.form.startTime)
+    const startTimeIndex = this.availableHours.indexOf(this.form.startTime)
 
     if (startTimeIndex === -1) {
       this.form.startTime = null
@@ -306,7 +306,7 @@ export default class AppointmentNew extends Vue {
     if (procedures.length === 0) {
       await this.$typedStore.dispatch('toasts/show', {
         type: 'error',
-        title: 'Нужно выбрать услуги'
+        title: 'Потрібно вибрати послуги'
       })
 
       return false

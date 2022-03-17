@@ -16,8 +16,8 @@ export const SOURCE_WIDGET = 'WIDGET'
 
 export const SOURCE_DASHBOARD = 'ADMIN_PANEL'
 
-export const SMS_REMIND_TEMPLATE = 'Напоминание о записи! %date% в %time% у вас %procedures%'
+export const SMS_REMIND_TEMPLATE = 'Нагадування про запис! %date% у %time% у вас %procedures%'
 
-export const SMS_CREATION_TEMPLATE = 'Новая запись! %date% в %time% %procedures%. Сотрудник %specialist%'
+export const SMS_CREATION_TEMPLATE = 'Новий запис! %date% у %time% %procedures%. Співробітник %specialist%'
 
-export const UNCATEGORIZED_TITLE = 'Без категории'
+export const UNCATEGORIZED_TITLE = 'Без категорії'

@@ -190,13 +190,13 @@ export default class Appointment extends Vue {
     }
 
     const edit = {
-      name: 'Редактировать',
+      name: 'Редагувати',
       icon: 'outlined/pencil',
       click: this.edit
     }
 
     const onCompleted = !this.isCompleted && {
-      name: 'Выполнено',
+      name: 'Виконано',
       icon: 'outlined/check',
       click: this.onCompleted
     }
@@ -216,7 +216,7 @@ export default class Appointment extends Vue {
     })
 
     await this.$typedStore.dispatch('toasts/show', {
-      title: 'Выполнено'
+      title: 'Виконано'
     })
 
     await this.$typedStore.dispatch('schedule/fetch')

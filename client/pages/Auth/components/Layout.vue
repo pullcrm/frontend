@@ -4,7 +4,7 @@
       <div class="auth-page-layout__header">
         <img
           class="auth-page-layout__logo"
-          src="~/assets/logos/logo_new.svg"
+          src="~/assets/logos/logo_ua.svg"
         >
 
         <UiTitle

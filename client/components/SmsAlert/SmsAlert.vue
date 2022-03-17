@@ -6,12 +6,12 @@
         left-icon="solid/warning-circle-fill"
         class="sms-alert"
       >
-        Оповещения по СМС отключены! Попробуйте обновить настройки поставщика.
+        Оповіщення щодо СМС відключені! Спробуйте оновити налаштування постачальника.
         <UiLink
           theme="action"
           @click.native="resetSms"
         >
-          Сбросить настройки
+          Скинути налаштування
         </UiLink>
       </UiAlert>
     </UiContainer>

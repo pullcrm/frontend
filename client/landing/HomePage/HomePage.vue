@@ -3,9 +3,22 @@
     <Header />
 
     <Container>
+      <UiAlert
+        class="landing-home-page__alert"
+        theme="info"
+        left-icon="outlined/anchor"
+      >
+        <UiText
+          size="m"
+          strong
+          responsive
+        >
+          Руські CRM системи, йдіть слідом за воєнним кораблем!
+        </UiText>
+      </UiAlert>
+
       <Intro
         :types="typesFiltered"
-        class="landing-home-page__section"
       />
 
       <Opportunities
@@ -16,9 +29,9 @@
         class="landing-home-page__section"
       />
 
-      <!-- <Reviews
+      <Reviews
         class="landing-home-page__section"
-      /> -->
+      />
     </Container>
 
     <Footer
@@ -37,7 +50,7 @@ import Container from '~/landing/components/Container.vue'
 
 import Intro from './components/Intro/Intro.vue'
 import About from './components/About/About.vue'
-// import Reviews from './components/Reviews/Reviews.vue'
+import Reviews from './components/Reviews/Reviews.vue'
 import Opportunities from './components/Opportunities/Opportunities.vue'
 
 @Component({
@@ -46,13 +59,16 @@ import Opportunities from './components/Opportunities/Opportunities.vue'
     About,
     Footer,
     Header,
-    // Reviews,
+    Reviews,
     Container,
     Opportunities
   },
 
   async asyncData ({ api }) {
-    const types = await api.public.companyTypes()
+    const [types] = await Promise.all([
+      api.public.companyTypes()
+      // typedStore.dispatch('notion/fetchReviews')
+    ])
 
     return {
       types
