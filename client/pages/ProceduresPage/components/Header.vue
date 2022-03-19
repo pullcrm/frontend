@@ -19,7 +19,7 @@
         responsive
         @click.native="onAddCategory"
       >
-        Добавити категорію
+        Додати категорію
       </UiButton>
 
       <UiButton
@@ -28,7 +28,7 @@
         responsive
         @click.native="onAddProcedure"
       >
-        Добавити послугу
+        Додати послугу
       </UiButton>
     </div>
   </div>

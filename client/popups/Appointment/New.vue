@@ -42,7 +42,7 @@
               size="m"
               responsive
             >
-              Добавити в чергу
+              Додати в чергу
             </UiText>
           </template>
         </UiSwitch>
@@ -94,7 +94,7 @@
           theme="blue"
           :loading="isLoading"
         >
-          Добавити запис
+          Додати запис
         </UiButton>
       </div>
 
@@ -110,7 +110,7 @@
             theme="blue"
             :loading="isLoading"
           >
-            Добавити запис
+            Додати запис
           </UiButton>
         </UiContainer>
       </FixedPanel>

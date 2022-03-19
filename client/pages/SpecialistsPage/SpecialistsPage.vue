@@ -30,7 +30,7 @@
           right-icon="outlined/plus"
           @click.native="add"
         >
-          Добавити співробітника
+          Додати співробітника
         </UiButton>
       </div>
     </div>

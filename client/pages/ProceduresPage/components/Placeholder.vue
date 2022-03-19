@@ -18,7 +18,7 @@
         right-icon="outlined/plus"
         responsive
       >
-        Добавити послугу
+        Додати послугу
       </UiText>
     </UiPanel>
   </div>

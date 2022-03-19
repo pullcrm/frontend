@@ -7,7 +7,7 @@
       class="new-procedures-category__title"
       size="s"
     >
-      Добавити категорію
+      Додати категорію
     </UiTitle>
 
     <form @submit.prevent="submit">
@@ -35,7 +35,7 @@
             theme="blue"
             :loading="isLoading"
           >
-            Добавити
+            Додати
           </UiButton>
         </template>
       </UiFormValidator>

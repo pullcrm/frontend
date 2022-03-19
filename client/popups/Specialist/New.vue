@@ -12,7 +12,7 @@
       <UiTitle
         size="s"
       >
-        Добавити співробітника
+        Додати співробітника
       </UiTitle>
     </div>
 
@@ -61,7 +61,7 @@
             theme="blue"
             :loading="isLoading"
           >
-            Добавити співробітника
+            Додати співробітника
           </UiButton>
         </div>
       </UiFormValidator>

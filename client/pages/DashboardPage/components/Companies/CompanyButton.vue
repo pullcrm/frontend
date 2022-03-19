@@ -10,7 +10,7 @@
       responsive
       right-icon="outlined/plus"
     >
-      Добавити компанію
+      Додати компанію
     </UiText>
   </UiPanel>
 </template>

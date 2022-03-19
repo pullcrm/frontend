@@ -29,7 +29,7 @@
           responsive
           left-icon="outlined/note-pencil"
         >
-          Добавити в чергу
+          Додати в чергу
         </UiText>
       </div>
     </div>
