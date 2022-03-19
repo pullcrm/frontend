@@ -32,7 +32,6 @@
             v-model="form.fullName"
             name="name"
             placeholder="Введіть Ім'я та Прізвище"
-            required
             @input="resetFieldError('fullName')"
           />
         </UiField>
@@ -46,7 +45,6 @@
             mask="+38 (###) #### ###"
             name="phone"
             type="phone"
-            required
             inputmode="tel"
             left-icon="outlined/phone"
             placeholder="066"
@@ -100,6 +98,12 @@ export default class SpecialistNew extends Vue {
 
   get validations (): Validations {
     return {
+      fullName: {
+        rules: 'required',
+        messages: {
+          required: 'Введіть Ім\'я та Призвіще'
+        }
+      },
       phone: {
         rules: 'required',
         messages: {
@@ -117,6 +121,10 @@ export default class SpecialistNew extends Vue {
   }
 
   async onSubmit () {
+    const isValid = await this.validate()
+
+    if (!isValid) return
+
     try {
       this.isLoading = true
 
@@ -128,7 +136,7 @@ export default class SpecialistNew extends Vue {
       return this.confirmation()
     } catch (err) {
       const serverErrors = [
-        err.status === 500 && { field: 'phone', error: 'invalid' }
+        err.fieldName === 'phone' && { field: 'phone', error: 'invalid' }
       ].filter(Boolean)
 
       if (serverErrors.length > 0) {
@@ -170,6 +178,13 @@ export default class SpecialistNew extends Vue {
         props: { specialist }
       })
     }
+  }
+
+  validate () {
+    return this.$refs.formValidator.validate({
+      phone: this.form.phone,
+      fullName: this.form.fullName
+    })
   }
 }
 </script>
