@@ -2,7 +2,7 @@
   <div class="landing-header-mobile-menu">
     <div
       class="landing-header-mobile-menu__backdrop"
-      @click.native="close"
+      @click="close"
     />
 
     <div class="landing-header-mobile-menu__inner">
