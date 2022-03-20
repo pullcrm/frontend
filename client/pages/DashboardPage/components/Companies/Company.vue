@@ -37,12 +37,12 @@
     </UiText>
 
     <UiText
-      class="dashboard-page-company__city"
+      class="dashboard-page-company__address"
       size="m"
       left-icon="solid/map-pin-fill"
       responsive
     >
-      {{ company.city.name }}
+      {{ location }}
     </UiText>
   </UiPanel>
 </template>
@@ -68,6 +68,12 @@ export default class Company extends Vue {
 
   get logo () {
     return this.company.logo?.path
+  }
+
+  get location () {
+    return [this.company.city.name, this.company.address]
+      .filter(Boolean)
+      .join(', ')
   }
 
   get companyId () {
@@ -114,11 +120,15 @@ export default class Company extends Vue {
       color: $ui-black-80;
     }
 
-    &__city {
+    &__address {
       margin-top: 12px;
 
       .ui-icon {
         color: $ui-blue-brand;
+      }
+
+      .ui-text__content {
+        @include ui-truncate(1);
       }
     }
 
