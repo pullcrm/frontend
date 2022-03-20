@@ -7,7 +7,7 @@
       class="procedures-new__title"
       size="s"
     >
-      Добавити послугу
+      Додати послугу
     </UiTitle>
 
     <form @submit.prevent="submit">
@@ -97,7 +97,7 @@
               theme="blue"
               :loading="isLoading"
             >
-              Добавити послугу
+              Додати послугу
             </UiButton>
           </div>
         </template>

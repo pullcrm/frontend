@@ -3,16 +3,11 @@
     class="popup-specialist"
     @close="$emit('close')"
   >
-    <UiBack
-      class="popup-specialist__back"
-      @click.native="$emit('close')"
-    />
-
     <div class="popup-specialist__header">
       <UiTitle
         size="s"
       >
-        Добавити співробітника
+        Додати співробітника
       </UiTitle>
     </div>
 
@@ -32,7 +27,6 @@
             v-model="form.fullName"
             name="name"
             placeholder="Введіть Ім'я та Прізвище"
-            required
             @input="resetFieldError('fullName')"
           />
         </UiField>
@@ -46,7 +40,6 @@
             mask="+38 (###) #### ###"
             name="phone"
             type="phone"
-            required
             inputmode="tel"
             left-icon="outlined/phone"
             placeholder="066"
@@ -61,7 +54,7 @@
             theme="blue"
             :loading="isLoading"
           >
-            Добавити співробітника
+            Додати співробітника
           </UiButton>
         </div>
       </UiFormValidator>
@@ -74,8 +67,6 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 import { IRegistrationUserParams } from '~/services/api'
-
-import { formatPhone } from '~/utils/format-phone'
 
 import UiFormValidator, { Validations } from '~/ui/FormValidator.vue'
 
@@ -100,6 +91,12 @@ export default class SpecialistNew extends Vue {
 
   get validations (): Validations {
     return {
+      fullName: {
+        rules: 'required',
+        messages: {
+          required: 'Введіть Ім\'я та Призвіще'
+        }
+      },
       phone: {
         rules: 'required',
         messages: {
@@ -117,18 +114,28 @@ export default class SpecialistNew extends Vue {
   }
 
   async onSubmit () {
+    const isValid = await this.validate()
+
+    if (!isValid) return
+
     try {
       this.isLoading = true
 
-      await this.$api.users.confirmation({
-        phone: this.form.phone,
-        type: 'REGISTRATION'
-      })
+      const { id } = await this.$api.specialist.create(this.form)
 
-      return this.confirmation()
+      await this.$typedStore.dispatch('specialists/fetch')
+
+      if (this.$typedStore.getters['procedures/total'] > 0) {
+        const specialist = this.specialistsDict[id]
+
+        this.$typedStore.dispatch('popup/show', {
+          name: 'specialist-procedures',
+          props: { specialist }
+        })
+      }
     } catch (err) {
       const serverErrors = [
-        err.status === 500 && { field: 'phone', error: 'invalid' }
+        err.fieldName === 'phone' && { field: 'phone', error: 'invalid' }
       ].filter(Boolean)
 
       if (serverErrors.length > 0) {
@@ -142,34 +149,11 @@ export default class SpecialistNew extends Vue {
     }
   }
 
-  async confirmation () {
-    const result = await this.$typedStore.dispatch('popup/smsConfirmation', {
-      title: 'Реєстрація',
-      subTitle: `На телефон ${formatPhone(this.form.phone)} було надіслано СМС-код для підтвердження реєстрації`,
-      submit: this.onCreateUser
+  validate () {
+    return this.$refs.formValidator.validate({
+      phone: this.form.phone,
+      fullName: this.form.fullName
     })
-
-    if (result) {
-      this.$emit('close')
-    }
-  }
-
-  async onCreateUser (code) {
-    const { id } = await this.$api.specialist.create({
-      ...this.form,
-      code
-    })
-
-    await this.$typedStore.dispatch('specialists/fetch')
-
-    if (this.$typedStore.getters['procedures/total'] > 0) {
-      const specialist = this.specialistsDict[id]
-
-      this.$typedStore.dispatch('popup/show', {
-        name: 'specialist-procedures',
-        props: { specialist }
-      })
-    }
   }
 }
 </script>

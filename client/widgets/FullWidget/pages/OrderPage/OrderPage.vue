@@ -30,7 +30,7 @@
       class="full-widget-order-page__button"
       @click.native="onAdd"
     >
-      Добавити в календар
+      Додати в календар
     </UiButton> -->
 
     <UiButton

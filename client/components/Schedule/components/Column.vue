@@ -124,7 +124,7 @@ export default class ScheduleColumn extends Vue {
     }
 
     const addAppointment = {
-      name: 'Добавити запис',
+      name: 'Додати запис',
       icon: 'outlined/plus-circle',
       click: this.addAppointment
     }

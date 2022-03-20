@@ -1,22 +1,29 @@
 <template>
   <UiPanel
+    :to="{
+      name: 'specialistInfo',
+      params: { slug: specialist.id }
+    }"
     class="specialists-page-card"
+    :class="[
+      { 'specialists-page-card__inactive': specialist.user.active === false }
+    ]"
   >
-    <a
+    <!-- <a
       href="#"
       class="specialists-page-card__edit"
-      @click.prevent="open"
     >
       <UiIcon
         name="outlined/pencil-simple"
         size="s"
       />
-    </a>
+    </a> -->
 
     <div
       id="hand"
       v-handle
       class="specialists-page-card__hand"
+      @click.prevent
     >
       <UiIcon
         name="outlined/hand-grabbing"
@@ -108,15 +115,6 @@ export default class Card extends Vue {
     }
 
     return 'gray'
-  }
-
-  async open () {
-    this.$router.push({
-      name: 'specialistInfo',
-      params: {
-        slug: this.specialist.id
-      }
-    })
   }
 }
 </script>

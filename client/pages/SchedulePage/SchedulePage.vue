@@ -15,7 +15,7 @@
           right-icon="outlined/plus"
           @click.native="addAppointment"
         >
-          Добавити запис
+          Додати запис
         </UiButton>
       </div>
 

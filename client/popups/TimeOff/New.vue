@@ -117,7 +117,7 @@
               theme="blue"
               :loading="isLoading"
             >
-              Добавити
+              Додати
             </UiButton>
           </div>
         </template>

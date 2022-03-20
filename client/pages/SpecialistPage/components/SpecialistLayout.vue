@@ -12,8 +12,13 @@
         size="l"
         responsive
       >
-        {{ specialist.fullName }}
+        {{ specialist.user.fullName }}
       </UiTitle>
+
+      <PhoneConfirmation
+        :specialist="specialist"
+        class="specialist-page-layout__phone-confirmation"
+      />
 
       <CompanyPicker
         class="specialist-page-layout__company-picker"
@@ -36,6 +41,7 @@ import Component from 'vue-class-component'
 import { SPECIALIST } from '~/constants/roles'
 
 import CompanyPicker from './CompanyPicker.vue'
+import PhoneConfirmation from './PhoneConfirmation.vue'
 
 @Component({
   props: {
@@ -46,7 +52,8 @@ import CompanyPicker from './CompanyPicker.vue'
   },
 
   components: {
-    CompanyPicker
+    CompanyPicker,
+    PhoneConfirmation
   }
 })
 export default class SpecialistLayout extends Vue {

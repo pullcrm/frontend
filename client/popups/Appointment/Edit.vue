@@ -42,7 +42,7 @@
               size="m"
               responsive
             >
-              Добавити в чергу
+              Додати в чергу
             </UiText>
           </template>
         </UiSwitch>

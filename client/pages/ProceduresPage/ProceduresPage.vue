@@ -16,7 +16,7 @@
           right-icon="outlined/plus"
           @click.native="onAddProcedure"
         >
-          Добавити послугу
+          Додати послугу
         </UiButton>
       </UiPlaceholder>
 

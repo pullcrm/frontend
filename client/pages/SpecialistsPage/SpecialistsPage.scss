@@ -6,9 +6,12 @@
 
 .specialists-page-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 24px;
+  column-gap: 12px;
+  row-gap: 24px;
 
   &__right {
     display: flex;
@@ -19,9 +22,9 @@
     margin-right: 24px;
   }
 
-  @media (max-width: $ui-tablet - 1px) {
-    &__right {
-      display: none;
-    }
-  }
+  // @media (max-width: $ui-tablet - 1px) {
+  //   &__right {
+  //     display: none;
+  //   }
+  // }
 }
