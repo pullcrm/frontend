@@ -93,6 +93,11 @@
     margin-right: 16px;
   }
 
+  &__append {
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+
   &__icon {
     margin: -4px 0;
     padding: 4px;

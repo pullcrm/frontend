@@ -30,6 +30,13 @@
     >
       <slot />
     </UiText>
+
+    <div
+      v-if="$slots.append"
+      class="ui-alert__append"
+    >
+      <slot name="append" />
+    </div>
   </div>
 </template>
 
