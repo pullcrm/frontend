@@ -9,6 +9,7 @@ const Landing = lazyComponent(() => import('~/landing/HomePage/HomePage.vue'))
 const Login = lazyComponent(() => import('~/pages/Auth/Login/Login.vue'))
 const Restore = lazyComponent(() => import('~/pages/Auth/Restore/Restore.vue'))
 const Registration = lazyComponent(() => import('~/pages/Auth/Registration/Registration.vue'))
+const Confirmation = lazyComponent(() => import('~/pages/Auth/Confirmation/Confirmation.vue'))
 const CompanyCreate = lazyComponent(() => import('~/pages/Auth/CompanyCreate/CompanyCreate.vue'))
 
 const DashboardPage = lazyComponent(() => import('~/pages/DashboardPage/DashboardPage.vue'))
@@ -65,6 +66,7 @@ const routes: RouteConfig[] = [
   { path: '/login/', name: 'login', component: Login, meta: { public: true } },
   { path: '/restore/', name: 'restore', component: Restore, meta: { public: true } },
   { path: '/registration/', name: 'registration', component: Registration, meta: { public: true } },
+  { path: '/confirm/:slug', name: 'confirmation', component: Confirmation, meta: { public: true, slashRedirect: false } },
 
   { path: '*', name: 'error', component: ErrorPage, meta: { public: true } }
 ]

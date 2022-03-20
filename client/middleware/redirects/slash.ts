@@ -5,6 +5,10 @@ const middleware: Middleware = ({ route, typedStore }) => {
     return
   }
 
+  if (route.meta.some(record => record.slashRedirect === false)) {
+    return
+  }
+
   const [path, query] = route.fullPath.split('?')
 
   if (!/\/$/.test(path)) {
