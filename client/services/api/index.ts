@@ -271,6 +271,11 @@ export interface IProceduresParams {
   order?: string
 }
 
+export interface IUserConfirmParams {
+  password: string,
+  token: string
+}
+
 export const factory = (send) => ({
   auth: {
     login (params: IAuthLoginParams) : Promise<IApiAuthLogin> {
@@ -315,6 +320,10 @@ export const factory = (send) => ({
   profile: {
     get () : Promise<IRegistrationUser> {
       return send('users/profile', null, 'GET')
+    },
+
+    confirm (params: IUserConfirmParams): Promise<any> {
+      return send('users/finish', params, 'PUT')
     }
   },
 
@@ -345,6 +354,10 @@ export const factory = (send) => ({
 
     setProcedures (id: number, params: any) {
       return send(`specialists/${id}/procedures`, params, 'PUT')
+    },
+
+    sendFinishLink (id: number): Promise<any> {
+      return send(`specialists/${id}/sendFinishLink`, null, 'GET')
     },
 
     remove (id: number) {
