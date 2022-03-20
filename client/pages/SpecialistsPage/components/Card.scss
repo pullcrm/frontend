@@ -2,6 +2,10 @@
   position: relative;
   transition: border-color var(--ui-transition);
 
+  &__inactive {
+    border-color: $ui-orange-warning;
+  }
+
   &__edit {
     position: absolute;
     top: 16px;

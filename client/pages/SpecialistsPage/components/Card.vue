@@ -5,6 +5,9 @@
       params: { slug: specialist.id }
     }"
     class="specialists-page-card"
+    :class="[
+      { 'specialists-page-card__inactive': specialist.user.active === false }
+    ]"
   >
     <!-- <a
       href="#"
