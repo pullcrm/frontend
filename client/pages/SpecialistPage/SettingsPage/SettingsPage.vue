@@ -194,7 +194,7 @@ export default class SpecialistSettingsPage extends Vue {
 
   async onRemove () {
     const result = await this.$typedStore.dispatch('popup/askQuestion', {
-      title: 'Ви дійсно бажаєте видалити профіль співробітника? Ця дія не оборотна!',
+      title: 'Ви дійсно бажаєте видалити профіль співробітника? Ця дія не зворотня!',
       acceptButtonTitle: 'Видалити!'
     })
 
