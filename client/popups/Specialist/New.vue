@@ -103,7 +103,8 @@ export default class SpecialistNew extends Vue {
           required: 'Введіть номер телефону'
         },
         serverMessages: {
-          invalid: 'Номер телефону введено невірно'
+          invalid: 'Номер телефону введено невірно',
+          uniq: 'Користувач, за цим номером, вже працює в компанії'
         }
       }
     }
@@ -135,6 +136,7 @@ export default class SpecialistNew extends Vue {
       }
     } catch (err) {
       const serverErrors = [
+        err.status === 400 && { field: 'phone', error: 'uniq' },
         err.fieldName === 'phone' && { field: 'phone', error: 'invalid' }
       ].filter(Boolean)
 
