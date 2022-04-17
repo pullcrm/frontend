@@ -25,6 +25,7 @@ const plugin: Plugin = (ctx, inject) => {
   const apiClient = new RpcClient({
     endpoint: `${runtimeConfig.RPC_URL}/`,
     endpointUpload: `${runtimeConfig.RPC_UPLOAD_URL}/`,
+    endpointBalanceCheckout: `${runtimeConfig.RPC_BALANCE_CHECKOUT}/`,
     typedStore,
     ...apiClientOptions
   })

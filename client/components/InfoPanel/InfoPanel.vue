@@ -18,17 +18,23 @@
       <slot />
     </div>
 
-    <UiTooltip
-      v-if="info"
-      class="info-panel__info"
-      placement="top"
-      :text="info"
+    <div
+      v-if="info || $slots.append"
+      class="info-panel__append"
     >
-      <UiIcon
-        name="outlined/info"
-        size="s"
-      />
-    </UiTooltip>
+      <slot name="append">
+        <UiTooltip
+          class="info-panel__info"
+          placement="top"
+          :text="info"
+        >
+          <UiIcon
+            name="outlined/info"
+            size="s"
+          />
+        </UiTooltip>
+      </slot>
+    </div>
   </UiPanel>
 </template>
 

@@ -20,8 +20,7 @@
     overflow: hidden;
   }
 
-  &__header,
-  &__sms-alert {
+  &__header {
     margin: 24px 0;
   }
 
@@ -29,7 +28,7 @@
     padding-bottom: 44px;
   }
 
-  @media (max-width: $ui-laptop - 1px) {
+  @media (max-width: ($ui-laptop - 1px)) {
     padding-left: 0;
 
     &__footer {

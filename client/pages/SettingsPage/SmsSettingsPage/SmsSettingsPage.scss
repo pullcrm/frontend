@@ -3,6 +3,11 @@
     margin-bottom: 24px;
   }
 
+  &__alert,
+  &__balance {
+    margin-bottom: 24px;
+  }
+
   &__sms-template {
     margin-top: 16px;
   }
@@ -16,11 +21,6 @@
         color: $ui-blue-brand;
       }
     }
-  }
-
-  &__button {
-    width: 100%;
-    margin-top: 24px;
   }
 
   .ui-divider {

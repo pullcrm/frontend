@@ -75,7 +75,7 @@ import Component from 'vue-class-component'
 
 import { TIME_STEP, SOURCE_WIDGET } from '~/constants'
 
-import { COMPLETED, IN_PROGRESS } from '~/constants/appointment'
+import { COMPLETED, IN_PROGRESS, IN_QUEUE } from '~/constants/appointment'
 
 import { shiftTimeUpBySteps, getTimePoints, slugFromTime } from '~/utils/time'
 
@@ -146,7 +146,7 @@ export default class Appointment extends Vue {
   }
 
   get gridArea () {
-    if (this.appointment.isQueue) {
+    if (this.appointment.status === IN_QUEUE) {
       return
     }
 

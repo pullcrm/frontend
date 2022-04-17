@@ -137,7 +137,6 @@ export interface IAppointmentCreateParams {
   total: number,
   phone?: string,
   status: string,
-  isQueue?: boolean,
   fullName?: string,
   startTime: string,
   specialistId: number,
@@ -152,7 +151,6 @@ export interface IAppointmentUpdateParams {
   total?: number,
   phone?: string,
   status?: string,
-  isQueue?: boolean,
   fullName?: string,
   startTime?: string,
   specialistId?: number,
@@ -198,14 +196,11 @@ export interface IAppointmentAllParams {
 }
 
 export interface ISmsCreateParams {
-  publicKey: string,
-  privateKey: string,
   hasCreationSMS: boolean,
   hasRemindSMS: boolean,
   remindSMSMinutes: number,
   creationSMSTemplate: string,
-  remindSMSTemplate: string,
-  companyName: string
+  remindSMSTemplate: string
 }
 
 export interface IAnalyticsSimpleParams {
@@ -552,12 +547,8 @@ export const factory = (send) => ({
       return send('sms/settings', params, 'PUT')
     },
 
-    settingRemove () : Promise<any> {
-      return send('sms/settings', {}, 'DELETE')
-    },
-
     balance () : Promise<any> {
-      return send('sms/balance', null, 'GET')
+      return send('balance', null, 'GET')
     }
   },
 

@@ -30,6 +30,7 @@ const config: NuxtOptions = {
     // SENTRY_RELEASE: process.env.SENTRY_RELEASE,
     RPC_URL: process.env.RPC_URL,
     RPC_UPLOAD_URL: process.env.RPC_UPLOAD_URL,
+    RPC_BALANCE_CHECKOUT: process.env.RPC_BALANCE_CHECKOUT,
     RPC_USER: process.env.RPC_USER,
     RPC_PASSWORD: process.env.RPC_PASSWORD
     // COOKIE_DOMAIN: process.env.COOKIE_DOMAIN

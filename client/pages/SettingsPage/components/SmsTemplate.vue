@@ -42,10 +42,11 @@
         size="m"
         responsive
       >
-        <UiContenteditable
+        {{ template }}
+        <!-- <UiContenteditable
           :value="template"
           @input="$emit('update:template', $event)"
-        />
+        /> -->
       </UiText>
     </UiPanel>
 

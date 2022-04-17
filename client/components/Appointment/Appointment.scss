@@ -29,6 +29,7 @@
   }
 
   &_status {
+    &_IN_QUEUE,
     &_IN_PROGRESS {
       --appointment-status-color: #{$ui-orange-brand};
     }
