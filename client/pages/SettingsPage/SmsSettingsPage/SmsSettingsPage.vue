@@ -46,6 +46,43 @@
         size="m"
         responsive
       >
+        <UiAccordion
+          class="sms-settings-page__accordion"
+        >
+          <UiAccordionItem
+            name="history"
+          >
+            <template #toggle>
+              <UiText
+                size="l"
+                strong
+                responsive
+              >
+                Історія поповнень
+              </UiText>
+            </template>
+
+            <UiText
+              v-for="item in history"
+              :key="item.id"
+              size="m"
+              responsive
+              class="sms-settings-page__history-item"
+            >
+              {{ item.createdAt | formatDate('DD.MM.YYYY') }}
+
+              <template #append>
+                {{ item.amount | price }}
+              </template>
+            </UiText>
+          </UiAccordionItem>
+        </UiAccordion>
+      </UiPanel>
+
+      <UiPanel
+        size="m"
+        responsive
+      >
         <UiTitle
           size="s"
           responsive
@@ -199,6 +236,8 @@ import { SMS_REMIND_TEMPLATE, SMS_CREATION_TEMPLATE } from '~/constants'
 
 import { SMS_REMIND_DURATIONS } from '~/constants/time'
 
+import { IHistoryItem } from '~/services/api'
+
 import { debounce } from '~/utils/debounce'
 import { minutesToTime } from '~/utils/time'
 
@@ -220,6 +259,17 @@ import SettingsLayout from '../components/Layout.vue'
     SettingsLayout
   },
 
+  async asyncData ({ api }) {
+    const { data: history } = await api.balance.history({
+      offset: 0,
+      limit: 20
+    })
+
+    return {
+      history
+    }
+  },
+
   head () {
     return {
       title: 'Налаштування СМС - pullcrm'
@@ -227,6 +277,8 @@ import SettingsLayout from '../components/Layout.vue'
   }
 })
 export default class SmsSettingsPage extends Vue {
+  readonly history: IHistoryItem[] = []
+
   isLoading = false
 
   settings = this.$typedStore.getters['sms/settings']
@@ -281,14 +333,19 @@ export default class SmsSettingsPage extends Vue {
   }
 
   async onReplenishBalance () {
+    const {
+      MINIMUM_DEPOSIT_AMOUNT,
+      MAXIMUM_DEPOSIT_AMOUNT
+    } = this.$runtimeConfig
+
     // TODO: Check type of result value
     const amount = await this.$typedStore.dispatch('popup/askQuestion', {
       title: 'Вкажіть суму для поповнення',
       input: {
         type: 'number',
-        value: 50,
-        min: 50,
-        max: 5000
+        value: MINIMUM_DEPOSIT_AMOUNT,
+        min: MINIMUM_DEPOSIT_AMOUNT,
+        max: MAXIMUM_DEPOSIT_AMOUNT
       },
       acceptButtonTitle: 'Поповнити'
     })

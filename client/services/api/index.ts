@@ -271,6 +271,24 @@ export interface IUserConfirmParams {
   token: string
 }
 
+export interface IHistoryResult {
+  pagination: {
+    limit: number,
+    offset: number,
+    total: number
+  },
+  data: IHistoryItem[]
+}
+
+export interface IHistoryItem {
+  id: number,
+  amount: number,
+  createdAt: string,
+  description: 'DEPOSIT' | 'SEND_SMS',
+  updatedAt: string,
+  userId: number
+}
+
 export const factory = (send) => ({
   auth: {
     login (params: IAuthLoginParams) : Promise<IApiAuthLogin> {
@@ -547,8 +565,18 @@ export const factory = (send) => ({
       return send('sms/settings', params, 'PUT')
     },
 
-    balance () : Promise<any> {
+    history (params: any): Promise<IHistoryResult> {
+      return send('balance/history', { ...params, description: 'SEND_SMS' }, 'GET')
+    }
+  },
+
+  balance: {
+    get () : Promise<any> {
       return send('balance', null, 'GET')
+    },
+
+    history (params: any): Promise<IHistoryResult> {
+      return send('balance/history', { ...params, description: 'DEPOSIT' }, 'GET')
     }
   },
 

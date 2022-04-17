@@ -17,7 +17,7 @@ const SmsModule: Module<IState, IRootState> = {
 
   actions: {
     async balance ({ commit }) {
-      const { balance } = await this.$api.sms.balance()
+      const { balance } = await this.$api.balance.get()
 
       commit('SET_BALANCE', Number(balance))
     }
