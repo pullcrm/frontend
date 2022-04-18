@@ -62,19 +62,36 @@
               </UiText>
             </template>
 
-            <UiText
-              v-for="item in history"
-              :key="item.id"
-              size="m"
-              responsive
-              class="sms-settings-page__history-item"
+            <UiTable
+              :data="history"
+              numbered
             >
-              {{ item.createdAt | formatDate('DD.MM.YYYY') }}
+              <template #default="{ row }">
+                <UiTableColumn
+                  name="Дата поповнення"
+                  align="left"
+                >
+                  <UiText
+                    size="m"
+                    responsive
+                  >
+                    {{ row.createdAt | formatDate('DD.MM.YYYY') }}
+                  </UiText>
+                </UiTableColumn>
 
-              <template #append>
-                {{ item.amount | price }}
+                <UiTableColumn
+                  name="Ціна"
+                  align="right"
+                >
+                  <UiText
+                    size="m"
+                    responsive
+                  >
+                    {{ row.amount | price }}
+                  </UiText>
+                </UiTableColumn>
               </template>
-            </UiText>
+            </UiTable>
           </UiAccordionItem>
         </UiAccordion>
       </UiPanel>

@@ -35,6 +35,15 @@
           </UiText>
           <UiText
             tag="RouterLink"
+            :to="{ name: 'widgetSettings' }"
+            size="l"
+            responsive
+            class="settings-page-layout__link"
+          >
+            Онлайн запис
+          </UiText>
+          <UiText
+            tag="RouterLink"
             :to="{ name: 'smsSettings' }"
             size="l"
             responsive
@@ -44,12 +53,12 @@
           </UiText>
           <UiText
             tag="RouterLink"
-            :to="{ name: 'widgetSettings' }"
+            :to="{ name: 'smsHistory' }"
             size="l"
             responsive
             class="settings-page-layout__link"
           >
-            Онлайн запис
+            Історія СМС
           </UiText>
         </UiPanel>
 

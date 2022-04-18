@@ -24,6 +24,7 @@ const SpecialistSettingsPage = lazyComponent(() => import('~/pages/SpecialistPag
 const SpecialistProceduresPage = lazyComponent(() => import('~/pages/SpecialistPage/ProceduresPage/ProceduresPage.vue'))
 
 const SmsSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/SmsSettingsPage/SmsSettingsPage.vue'))
+const SmsHistoryPage = lazyComponent(() => import('~/pages/SettingsPage/SmsHistoryPage/SmsHistoryPage.vue'))
 const WidgetSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/WidgetSettingsPage/WidgetSettingsPage.vue'))
 const CompanySettingsPage = lazyComponent(() => import('~/pages/SettingsPage/CompanySettingsPage/CompanySettingsPage.vue'))
 const TimetableSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/TimetableSettingsPage/TimetableSettingsPage.vue'))
@@ -55,6 +56,7 @@ const routes: RouteConfig[] = [
 
   { path: '/settings/', name: 'settings', redirect: '/settings/company/' },
   { path: '/settings/sms/', name: 'smsSettings', component: SmsSettingsPage },
+  { path: '/settings/sms/history/', name: 'smsHistory', component: SmsHistoryPage },
   { path: '/settings/widget/', name: 'widgetSettings', component: WidgetSettingsPage },
   { path: '/settings/company/', name: 'companySettings', component: CompanySettingsPage },
   { path: '/settings/timetable/', name: 'timetableSettings', component: TimetableSettingsPage },

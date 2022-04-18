@@ -25,7 +25,7 @@
     color: $ui-black-80;
 
     &:hover,
-    &.router-link-active {
+    &.router-link-exact-active {
       color: $ui-blue-brand;
       background: $ui-blue-10;
       border-radius: 8px;
