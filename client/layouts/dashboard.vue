@@ -75,6 +75,15 @@ import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
         return this.$refs.popperMenu
       }
     }
+  },
+
+  head () {
+    return {
+      base: {
+        href: this.$router.base,
+        target: '_blank'
+      }
+    }
   }
 })
 export default class DashboardLayout extends Vue {

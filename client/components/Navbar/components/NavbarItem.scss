@@ -10,7 +10,7 @@
   border-radius: 8px;
 
   &._active,
-  &.router-link-active {
+  &.router-link-exact-active {
     color: $ui-blue-brand;
   }
 

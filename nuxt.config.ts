@@ -44,6 +44,8 @@ const config: NuxtOptions = {
   ],
 
   router: {
+    base: '/app/',
+
     middleware: [
       'redirects/pwa',
       'auth',
@@ -83,7 +85,6 @@ const config: NuxtOptions = {
       { name: 'application-name', content: 'Pullcrm' },
       { name: 'apple-mobile-web-app-status-bar-style', content: 'white' },
       { name: 'apple-mobile-web-app-title', content: 'Pullcrm' },
-      { name: 'msapplication-TileImage', content: '/img/icons/msapplication-icon-144x144.png' },
       { name: 'msapplication-TileColor', content: '#333' },
       { name: 'theme-color', content: '#333' },
       { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
@@ -94,44 +95,11 @@ const config: NuxtOptions = {
     ],
     link: [
       { rel: 'canonical', href: 'https://pullcrm.com/' },
-      { rel: 'manifest', href: '/manifest.json' },
-      { rel: 'icon', size: '192x192', href: '/img/icons/android-chrome-192x192.png' },
-      { rel: 'apple-touch-icon', href: '/img/icons/android-chrome-192x192.png' },
-      { rel: 'icon', href: '/img/icons/android-chrome-512x512.png', size: '512x512' },
-      { rel: 'icon', href: '/img/icons/android-chrome-192x192.png', size: '192x192' },
-      { rel: 'icon', href: '/img/icons/msapplication-icon-144x144.png', size: '144x144' },
-      { rel: 'icon', href: '/img/icons/android-launchericon-96-96.png', size: '96x96' },
-      { rel: 'icon', href: '/img/icons/android-maskableicon-96-96.png', size: '96x96' },
-      { rel: 'icon', href: '/img/icons/android-launchericon-72-72.png', size: '72x72' },
-      { rel: 'icon', href: '/img/icons/android-maskableicon-72-72.png', size: '72x72' },
-      { rel: 'icon', href: '/img/icons/android-launchericon-48-48.png', size: '48x48' },
-      { rel: 'icon', href: '/img/icons/android-maskableicon-48-48.png', size: '48x48' }
-      // { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/static/img/favicon.png?v=3' },
-      // { rel: 'icon', type: 'image/png', sizes: '64x64', href: '/static/img/favicon-64x64.png?v=3' },
-      // { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/static/img/favicon-96x96.png?v=3' },
-      // { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/static/img/favicon-192x192.png?v=3' },
-      // { rel: 'icon', type: 'image/svg+xml', href: '/static/img/favicon.svg?v=3' },
-      // { rel: 'apple-touch-icon', sizes: '57x57', href: '/static/img/apple-touch-icon-57x57.png?v=3' },
-      // { rel: 'apple-touch-icon', sizes: '60x60', href: '/static/img/apple-touch-icon-60x60.png?v=3' },
-      // { rel: 'apple-touch-icon', sizes: '72x72', href: '/static/img/apple-touch-icon-72x72.png?v=3' },
-      // { rel: 'apple-touch-icon', sizes: '76x76', href: '/static/img/apple-touch-icon-76x76.png?v=3' },
-      // { rel: 'apple-touch-icon', sizes: '114x114', href: '/static/img/apple-touch-icon-114x114.png?v=3' },
-      // { rel: 'apple-touch-icon', sizes: '120x120', href: '/static/img/apple-touch-icon-120x120.png?v=3' },
-      // { rel: 'apple-touch-icon', sizes: '144x144', href: '/static/img/apple-touch-icon-144x144.png?v=3' },
-      // { rel: 'apple-touch-icon', sizes: '152x152', href: '/static/img/apple-touch-icon-152x152.png?v=3' },
-      // { rel: 'apple-touch-icon', sizes: '167x167', href: '/static/img/apple-touch-icon-167x167.png?v=3' },
-      // { rel: 'apple-touch-icon', sizes: '180x180', href: '/static/img/apple-touch-icon-180x180.png?v=3' },
-      // { rel: 'preload', crossorigin: 'anonymous', as: 'font', href: '/static/fonts/MuseoSansCyrl-500.woff2', type: 'font/woff2' },
-      // { rel: 'preload', crossorigin: 'anonymous', as: 'font', href: '/static/fonts/MuseoSansCyrl-700.woff2', type: 'font/woff2' }
-    ],
-    script: [
-      {
-        innerHTML: `
-          if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js', { scope: '/' })
-          }
-        `
-      }
+      // TODO: Add favicon
+
+      { rel: 'preload', crossorigin: 'anonymous', as: 'font', href: '/app/static/fonts/Inter-Regular.woff2', type: 'font/woff2' },
+      { rel: 'preload', crossorigin: 'anonymous', as: 'font', href: '/app/static/fonts/Inter-Medium.woff2', type: 'font/woff2' },
+      { rel: 'preload', crossorigin: 'anonymous', as: 'font', href: '/app/static/fonts/Inter-SemiBold.woff2', type: 'font/woff2' }
     ],
     __dangerouslyDisableSanitizers: ['script']
   },

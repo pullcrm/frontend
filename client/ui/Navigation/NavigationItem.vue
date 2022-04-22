@@ -56,7 +56,7 @@ export default class NavigationItem extends Vue {
   cursor: pointer;
 
   &__active,
-  &.router-link-active {
+  &.router-link-exact-active {
     color: $ui-black-100;
     background: $ui-black-20;
   }

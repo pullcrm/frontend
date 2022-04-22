@@ -11,7 +11,7 @@ export const code = `
   }
 
   var script = document.createElement('script')
-  script.src = 'https://' + window.pullcrm._host + '/static/widgets/widget.compiled.js?l=' + Date.now()
+  script.src = 'https://' + window.pullcrm._host + '/app/static/widgets/widget.compiled.js?l=' + Date.now()
   script.async = true
 
   document.head.appendChild(script)

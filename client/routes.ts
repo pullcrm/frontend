@@ -4,8 +4,6 @@ import { lazyComponent } from '~/utils/lazy-component'
 
 import widgetsRoutes from '~/widgets/routes'
 
-const Landing = lazyComponent(() => import('~/landing/HomePage/HomePage.vue'))
-
 const Login = lazyComponent(() => import('~/pages/Auth/Login/Login.vue'))
 const Restore = lazyComponent(() => import('~/pages/Auth/Restore/Restore.vue'))
 const Registration = lazyComponent(() => import('~/pages/Auth/Registration/Registration.vue'))
@@ -38,9 +36,7 @@ const routes: RouteConfig[] = [
   // Widgets
   ...widgetsRoutes,
 
-  { path: '/', name: 'landing', component: Landing, meta: { public: true } },
-
-  { path: '/dashboard/', name: 'dashboard', component: DashboardPage },
+  { path: '/', name: 'dashboard', component: DashboardPage },
 
   { path: '/company/create/', name: 'companyCreate', component: CompanyCreate },
 
