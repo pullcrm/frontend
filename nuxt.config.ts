@@ -95,7 +95,7 @@ const config: NuxtOptions = {
     ],
     link: [
       { rel: 'canonical', href: 'https://pullcrm.com/' },
-      { rel: 'icon', type: 'image/x-icon', href: '/static/logo-rounded.svg' },
+      { rel: 'icon', type: 'image/x-icon', href: '/app/static/logo-rounded.svg' },
 
       { rel: 'preload', crossorigin: 'anonymous', as: 'font', href: '/app/static/fonts/Inter-Regular.woff2', type: 'font/woff2' },
       { rel: 'preload', crossorigin: 'anonymous', as: 'font', href: '/app/static/fonts/Inter-Medium.woff2', type: 'font/woff2' },
