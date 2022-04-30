@@ -89,7 +89,7 @@ const config: NuxtOptions = {
       { name: 'theme-color', content: '#333' },
       { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
       { hid: 'description', name: 'description', content: 'Pullcrm - зручний інструмент автоматизації запису для вашої компанії. Онлайн запис для: ✅Барбершопу ✅Салону краси ✅Тату салону ✅Медичного центру ✅Стоматології.' },
-      { name: 'facebook-domain-verification', content: 'sh91u782fzoza8xz3iclnolr65ad0a' },
+      // { name: 'facebook-domain-verification', content: 'sh91u782fzoza8xz3iclnolr65ad0a' },
       // @ts-ignore
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge,chrome=1' }
     ],
