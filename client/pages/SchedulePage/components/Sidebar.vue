@@ -40,6 +40,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
+import { IN_QUEUE } from '~/constants/appointment'
+
 import Appointment from '~/components/Appointment/Appointment.vue'
 
 import ScheduleDatePicker from './ScheduleDatePicker.vue'
@@ -60,7 +62,7 @@ export default class Sidebar extends Vue {
       name: 'appointment',
       props: {
         type: 'new',
-        isQueue: true
+        defaultStatus: IN_QUEUE
       }
     })
   }

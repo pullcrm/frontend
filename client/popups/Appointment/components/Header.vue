@@ -47,7 +47,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-import { IN_PROGRESS, COMPLETED, CANCELED } from '~/constants/appointment'
+import { IN_PROGRESS, COMPLETED, CANCELED, IN_QUEUE } from '~/constants/appointment'
 
 import { statusesDict } from '~/logics/appointment'
 
@@ -73,7 +73,7 @@ export default class Header extends Vue {
   }
 
   get statuses () {
-    return [COMPLETED, CANCELED, IN_PROGRESS]
+    return [COMPLETED, CANCELED, IN_PROGRESS, IN_QUEUE]
       .map(value => ({
         name: statusesDict[value],
         value

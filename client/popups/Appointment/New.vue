@@ -32,24 +32,9 @@
           @resetFieldError="resetFieldError"
         />
 
-        <UiSwitch
-          v-model="form.isQueue"
-          size="m"
-          class="appointment-popup__queue"
-        >
-          <template #append>
-            <UiText
-              size="m"
-              responsive
-            >
-              Додати в чергу
-            </UiText>
-          </template>
-        </UiSwitch>
-
         <AppointmentDateTime
-          v-if="form.isQueue === false"
           class="appointment-popup__date-time"
+          :status="form.status"
           :date.sync="form.date"
           :duration="duration"
           :start-at.sync="form.startTime"
@@ -124,7 +109,7 @@ import Component from 'vue-class-component'
 
 import { SOURCE_DASHBOARD } from '~/constants'
 
-import { IN_PROGRESS } from '~/constants/appointment'
+import { AppointmentStatuses, IN_PROGRESS, IN_QUEUE } from '~/constants/appointment'
 
 import { toDate } from '~/utils/date-time'
 
@@ -163,9 +148,9 @@ import AppointmentAdditionalSettings from './components/AdditionalSettings.vue'
       default: null
     },
 
-    isQueue: {
-      type: Boolean,
-      default: false
+    defaultStatus: {
+      type: String,
+      default: undefined
     }
   },
 
@@ -191,8 +176,8 @@ import AppointmentAdditionalSettings from './components/AdditionalSettings.vue'
 })
 export default class AppointmentNew extends Vue {
   readonly time!: string | null
-  readonly isQueue!: boolean
   readonly specialistId!: number | null
+  readonly defaultStatus?: AppointmentStatuses
 
   isLoading = false
   availableHours = []
@@ -203,14 +188,26 @@ export default class AppointmentNew extends Vue {
     phone: '',
     source: SOURCE_DASHBOARD,
     status: IN_PROGRESS,
-    isQueue: this.isQueue,
     fullName: '',
     startTime: this.time,
     specialist: this.specialistId && this.specialists.find(({ id }) => id === this.specialistId),
     procedures: [],
     description: '',
-    hasRemindSMS: this.$typedStore.getters['sms/settings']?.hasRemindSMS,
-    hasCreationSMS: this.$typedStore.getters['sms/settings']?.hasCreationSMS
+    hasRemindSMS: false,
+    hasCreationSMS: false
+  }
+
+  constructor () {
+    super()
+
+    if (this.defaultStatus) {
+      this.form.status = this.defaultStatus
+    }
+
+    if (this.form.status !== IN_QUEUE) {
+      this.form.hasRemindSMS = this.$typedStore.getters['sms/settings']?.hasRemindSMS
+      this.form.hasCreationSMS = this.$typedStore.getters['sms/settings']?.hasCreationSMS
+    }
   }
 
   get isSmsAuthorize () {

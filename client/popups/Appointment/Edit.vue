@@ -32,24 +32,9 @@
           @resetFieldError="resetFieldError"
         />
 
-        <UiSwitch
-          v-model="form.isQueue"
-          size="m"
-          class="appointment-popup__queue"
-        >
-          <template #append>
-            <UiText
-              size="m"
-              responsive
-            >
-              Додати в чергу
-            </UiText>
-          </template>
-        </UiSwitch>
-
         <AppointmentDateTime
-          v-if="form.isQueue === false"
           class="appointment-popup__date-time"
+          :status="form.status"
           :date.sync="form.date"
           :duration="duration"
           :start-at.sync="form.startTime"

@@ -75,7 +75,7 @@ import Component from 'vue-class-component'
 
 import { TIME_STEP, SOURCE_WIDGET } from '~/constants'
 
-import { COMPLETED, IN_PROGRESS, IN_QUEUE } from '~/constants/appointment'
+import { CANCELED, COMPLETED, IN_PROGRESS, IN_QUEUE } from '~/constants/appointment'
 
 import { shiftTimeUpBySteps, getTimePoints, slugFromTime } from '~/utils/time'
 
@@ -156,10 +156,6 @@ export default class Appointment extends Vue {
     }
   }
 
-  get isCompleted () {
-    return this.appointment.status === COMPLETED
-  }
-
   get subTitle () {
     return getAppointmentSubtitle(this.appointment)
   }
@@ -189,30 +185,34 @@ export default class Appointment extends Vue {
       return
     }
 
-    const edit = {
-      name: 'Редагувати',
-      icon: 'outlined/pencil',
-      click: this.edit
+    if (this.appointment.status === IN_QUEUE) {
+      return
     }
 
-    const onCompleted = !this.isCompleted && {
-      name: 'Виконано',
-      icon: 'outlined/check',
-      click: this.onCompleted
+    const onEdit = {
+      name: 'Редагувати',
+      icon: 'outlined/pencil',
+      click: () => this.edit()
     }
+
+    const onStatuses = [IN_PROGRESS, COMPLETED, CANCELED].map(status => ({
+      name: statusesDict[status],
+      icon: status === this.appointment.status ? 'outlined/check' : 'outlined/minus',
+      click: () => this.onUpdateStatus(status)
+    }))
 
     popperMenu.open(this.$refs.status, {
       options: [
-        edit,
-        onCompleted
-      ].filter(Boolean),
+        onEdit,
+        ...onStatuses
+      ],
       placement: 'bottom_start'
     })
   }
 
-  async onCompleted () {
+  async onUpdateStatus (status) {
     await this.$api.appointments.updateStatus(this.appointment.id, {
-      status: COMPLETED
+      status: status
     })
 
     await this.$typedStore.dispatch('toasts/show', {
