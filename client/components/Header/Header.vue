@@ -34,7 +34,7 @@
             size="l"
             strong
             responsive
-            right-icon="outlined/chat-circle-dots"
+            right-icon="outlined/wallet"
             class="header__balance"
           >
             {{ balance | price }}

@@ -1,7 +1,7 @@
 import { IN_PROGRESS, CANCELED, COMPLETED, IN_QUEUE } from '~/constants/appointment'
 
 export const statusesDict = {
-  [IN_PROGRESS]: 'В работі',
+  [IN_PROGRESS]: 'В роботі',
   [CANCELED]: 'Відмінено',
   [COMPLETED]: 'Виконано',
   [IN_QUEUE]: 'В черзі'

@@ -13,7 +13,7 @@
 
       <InfoPanel
         class="sms-settings-page__balance"
-        icon="outlined/chat-circle-dots"
+        icon="outlined/wallet"
         theme="green"
       >
         <UiText
