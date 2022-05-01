@@ -38,8 +38,8 @@ jobs:
       - name: Link the release folder on the server
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.dev/frontend-2/release && ln -s /var/www/pullcrm.dev/frontend-2/versions/release-${{ github.sha }} /var/www/pullcrm.dev/frontend-2/release'
 
-      - name: Copy .env file to project
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.dev/frontend-2/.env /var/www/pullcrm.dev/frontend-2/release/.env'
+      - name: Copy .env and pm2 config files to project
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.dev/frontend-2/.env /var/www/pullcrm.dev/frontend-2/release/.env && cp /var/www/pullcrm.dev/frontend-2/ecosystem.config.js /var/www/pullcrm.dev/frontend-2/release/ecosystem.config.js'
 
       - name: Install modules and build project
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && nvm use 14 && cd /var/www/pullcrm.dev/frontend-2/release && yarn install && yarn build'
@@ -48,4 +48,4 @@ jobs:
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.dev/frontend-2/versions && rm -rf `ls -t | tail -n +6`'
 
       - name: Reload project
-        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && pm2 startOrReload /var/www/pullcrm.dev/frontend-2/ecosystem.config.js'
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && pm2 startOrReload /var/www/pullcrm.dev/frontend-2/release/ecosystem.config.js'
