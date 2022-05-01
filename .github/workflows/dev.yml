@@ -49,3 +49,11 @@ jobs:
 
       - name: Reload project
         run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && cd /var/www/pullcrm.dev/frontend-2/release/ && pm2 startOrReload ecosystem.config.js'
+
+      - name: Slack Notify
+        if: always()
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_USERNAME: Autodeploy frontend (DEV)
