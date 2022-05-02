@@ -1,12 +1,12 @@
 <template>
   <div class="appointment-popup-additional-settings">
-    <UiTitle
+    <!-- <UiTitle
       class="appointment-popup-additional-settings__title"
       size="s"
       responsive
     >
       Інше
-    </UiTitle>
+    </UiTitle> -->
 
     <UiField label="Джерело">
       <UiSelect
@@ -14,7 +14,7 @@
         :options="sources"
         required
         label-key="name"
-        :disabled="type !== 'new'"
+        disabled
         placeholder="Вибрати час"
         @input="$emit('update:source', $event.value)"
       />

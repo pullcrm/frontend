@@ -4,15 +4,15 @@ import { Route } from 'vue-router/types/router'
 
 // import { getCLS, getFID, getLCP } from 'web-vitals'
 
-import { GA_ID } from '~/constants'
+// import { GA_ID } from '~/constants'
 
 import Analytics from '~/services/analytics'
-import FacebookIntegration from '~/services/analytics/integrations/facebook-integration'
-import GoogleAnalyticsIntegration from '~/services/analytics/integrations/google-analytics-integration'
+// import FacebookIntegration from '~/services/analytics/integrations/facebook-integration'
+// import GoogleAnalyticsIntegration from '~/services/analytics/integrations/google-analytics-integration'
 // import WidgetPostMessageIntegration from '~/services/analytics/integrations/widget-post-message-integration'
 
 const plugin: Plugin = async ({ app }, inject) => {
-  const host = window.location.host
+  // const host = window.location.host
 
   // const widget = route.meta.find(({ widget }) => widget)
 
@@ -31,13 +31,13 @@ const plugin: Plugin = async ({ app }, inject) => {
   // }
 
   // Install the facebook integration
-  analytics.install(new FacebookIntegration())
+  // analytics.install(new FacebookIntegration())
 
   // Install the google analytics integration
-  analytics.install(new GoogleAnalyticsIntegration({
-    id: GA_ID,
-    host
-  }))
+  // analytics.install(new GoogleAnalyticsIntegration({
+  //   id: GA_ID,
+  //   host
+  // }))
 
   app.router.afterEach(async (to: Route, from: Route) => {
     analytics.track('pageView', {

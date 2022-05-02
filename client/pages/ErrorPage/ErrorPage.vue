@@ -5,7 +5,7 @@
         v-if="status === 404"
         title="404"
         text="Сторінка не знайдена"
-        image="/static/img/404.svg"
+        image="/app/static/img/404.svg"
       >
         <UiButton
           theme="info-outlined"
@@ -18,7 +18,7 @@
       <UiPlaceholder
         v-else
         title="Сайт тимчасово не доступний"
-        image="/static/img/server-error.svg"
+        image="/app/static/img/server-error.svg"
       >
         <template #text>
           Спробуйте повторити запит пізніше <br>

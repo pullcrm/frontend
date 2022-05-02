@@ -137,7 +137,6 @@ export interface IAppointmentCreateParams {
   total: number,
   phone?: string,
   status: string,
-  isQueue?: boolean,
   fullName?: string,
   startTime: string,
   specialistId: number,
@@ -152,7 +151,6 @@ export interface IAppointmentUpdateParams {
   total?: number,
   phone?: string,
   status?: string,
-  isQueue?: boolean,
   fullName?: string,
   startTime?: string,
   specialistId?: number,
@@ -198,14 +196,11 @@ export interface IAppointmentAllParams {
 }
 
 export interface ISmsCreateParams {
-  publicKey: string,
-  privateKey: string,
   hasCreationSMS: boolean,
   hasRemindSMS: boolean,
   remindSMSMinutes: number,
   creationSMSTemplate: string,
-  remindSMSTemplate: string,
-  companyName: string
+  remindSMSTemplate: string
 }
 
 export interface IAnalyticsSimpleParams {
@@ -274,6 +269,24 @@ export interface IProceduresParams {
 export interface IUserConfirmParams {
   password: string,
   token: string
+}
+
+export interface IHistoryResult {
+  pagination: {
+    limit: number,
+    offset: number,
+    total: number
+  },
+  data: IHistoryItem[]
+}
+
+export interface IHistoryItem {
+  id: number,
+  amount: number,
+  createdAt: string,
+  description: 'DEPOSIT' | 'SEND_SMS',
+  updatedAt: string,
+  userId: number
 }
 
 export const factory = (send) => ({
@@ -552,12 +565,18 @@ export const factory = (send) => ({
       return send('sms/settings', params, 'PUT')
     },
 
-    settingRemove () : Promise<any> {
-      return send('sms/settings', {}, 'DELETE')
+    history (params: any): Promise<IHistoryResult> {
+      return send('balance/history', { ...params, description: 'SEND_SMS' }, 'GET')
+    }
+  },
+
+  balance: {
+    get () : Promise<any> {
+      return send('balance', null, 'GET')
     },
 
-    balance () : Promise<any> {
-      return send('sms/balance', null, 'GET')
+    history (params: any): Promise<IHistoryResult> {
+      return send('balance/history', { ...params, description: 'DEPOSIT' }, 'GET')
     }
   },
 

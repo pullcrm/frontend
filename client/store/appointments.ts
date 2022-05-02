@@ -1,5 +1,7 @@
 import { Module } from 'vuex/types'
 
+import { CANCELED, COMPLETED, IN_PROGRESS, IN_QUEUE } from '~/constants/appointment'
+
 import { normalizeAppointmentParams } from '~/logics/appointment'
 
 import { IState as IRootState } from '.'
@@ -22,14 +24,17 @@ const AppointmentsModule: Module<IState, IRootState> = {
   actions: {
     async fetch ({ rootState, commit }) {
       const appointments = await this.$api.appointments.all({
-        date: rootState.schedule.date
+        date: rootState.schedule.date,
+        status: [IN_PROGRESS, CANCELED, COMPLETED]
       })
 
       commit('SET_APPOINTMENTS', appointments)
     },
 
     async fetchQueue ({ commit }) {
-      const queue = await this.$api.appointments.queue()
+      const queue = await this.$api.appointments.all({
+        status: [IN_QUEUE]
+      })
 
       commit('SET_QUEUE', queue)
     },

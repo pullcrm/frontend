@@ -1,6 +1,6 @@
 export const GA_ID = 'UA-202590817-1'
 
-export const FACEBOOK_ID = '583150136064291'
+// export const FACEBOOK_ID = '583150136064291'
 
 export const SCHEDULE_APPOINTMENT_HEIGHT = 30
 

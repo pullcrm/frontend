@@ -42,7 +42,7 @@ export default class DonateBanner extends Vue {
     })
 
     if (result) {
-      window.open('https://send.monobank.ua/jar/89hdzFyxLD', '_blank')
+      window.open('https://send.monobank.ua/jar/8KENSAmnm', '_blank')
     }
   }
 }

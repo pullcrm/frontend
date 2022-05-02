@@ -1,7 +1,10 @@
+import { IN_PROGRESS, CANCELED, COMPLETED, IN_QUEUE } from '~/constants/appointment'
+
 export const statusesDict = {
-  IN_PROGRESS: 'В работі',
-  CANCELED: 'Відмінено',
-  COMPLETED: 'Виконано'
+  [IN_PROGRESS]: 'В роботі',
+  [CANCELED]: 'Відмінено',
+  [COMPLETED]: 'Виконано',
+  [IN_QUEUE]: 'В черзі'
 }
 
 export const sourcesDict = {
@@ -15,7 +18,6 @@ export function normalizeAppointmentParams (submitParams) {
     total,
     phone,
     status,
-    isQueue,
     fullName,
     startTime,
     specialist,
@@ -30,10 +32,9 @@ export function normalizeAppointmentParams (submitParams) {
     date: date.format('YYYY-MM-DD'),
     total,
     phone: phone || undefined,
-    status: status,
-    isQueue: isQueue,
+    status,
     fullName: fullName,
-    startTime: isQueue ? null : `${startTime}:00`,
+    startTime: (startTime && `${startTime}:00`) ?? null,
     procedures: procedures.map(({ id }) => id),
     description: description,
     specialistId: specialistId ?? specialist.id,

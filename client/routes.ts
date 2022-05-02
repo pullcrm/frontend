@@ -4,8 +4,6 @@ import { lazyComponent } from '~/utils/lazy-component'
 
 import widgetsRoutes from '~/widgets/routes'
 
-const Landing = lazyComponent(() => import('~/landing/HomePage/HomePage.vue'))
-
 const Login = lazyComponent(() => import('~/pages/Auth/Login/Login.vue'))
 const Restore = lazyComponent(() => import('~/pages/Auth/Restore/Restore.vue'))
 const Registration = lazyComponent(() => import('~/pages/Auth/Registration/Registration.vue'))
@@ -24,6 +22,7 @@ const SpecialistSettingsPage = lazyComponent(() => import('~/pages/SpecialistPag
 const SpecialistProceduresPage = lazyComponent(() => import('~/pages/SpecialistPage/ProceduresPage/ProceduresPage.vue'))
 
 const SmsSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/SmsSettingsPage/SmsSettingsPage.vue'))
+const SmsHistoryPage = lazyComponent(() => import('~/pages/SettingsPage/SmsHistoryPage/SmsHistoryPage.vue'))
 const WidgetSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/WidgetSettingsPage/WidgetSettingsPage.vue'))
 const CompanySettingsPage = lazyComponent(() => import('~/pages/SettingsPage/CompanySettingsPage/CompanySettingsPage.vue'))
 const TimetableSettingsPage = lazyComponent(() => import('~/pages/SettingsPage/TimetableSettingsPage/TimetableSettingsPage.vue'))
@@ -37,9 +36,7 @@ const routes: RouteConfig[] = [
   // Widgets
   ...widgetsRoutes,
 
-  { path: '/', name: 'landing', component: Landing, meta: { public: true } },
-
-  { path: '/dashboard/', name: 'dashboard', component: DashboardPage },
+  { path: '/', name: 'dashboard', component: DashboardPage },
 
   { path: '/company/create/', name: 'companyCreate', component: CompanyCreate },
 
@@ -55,6 +52,7 @@ const routes: RouteConfig[] = [
 
   { path: '/settings/', name: 'settings', redirect: '/settings/company/' },
   { path: '/settings/sms/', name: 'smsSettings', component: SmsSettingsPage },
+  { path: '/settings/sms/history/', name: 'smsHistory', component: SmsHistoryPage },
   { path: '/settings/widget/', name: 'widgetSettings', component: WidgetSettingsPage },
   { path: '/settings/company/', name: 'companySettings', component: CompanySettingsPage },
   { path: '/settings/timetable/', name: 'timetableSettings', component: TimetableSettingsPage },

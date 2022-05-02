@@ -1,5 +1,5 @@
 
-import { FACEBOOK_ID } from '~/constants'
+// import { FACEBOOK_ID } from '~/constants'
 
 import { waitPageLoad } from '~/utils/wait-page-load'
 import { waitIdle } from '~/utils/wait-idle'
@@ -43,7 +43,7 @@ export function initFacebook () {
     window.fbq.loaded = !0
     window.fbq.version = '2.0'
     window.fbq.queue = []
-    window.fbq('init', FACEBOOK_ID)
+    // window.fbq('init', FACEBOOK_ID)
 
     loadFacebook()
 

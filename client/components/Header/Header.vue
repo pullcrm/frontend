@@ -29,14 +29,13 @@
         <div class="header__right">
           <UiText
             v-if="balance !== null"
-            tag="a"
-            href="#"
+            tag="RouterLink"
+            :to="{ name: 'smsSettings' }"
             size="l"
             strong
             responsive
-            right-icon="outlined/chat-circle-dots"
+            right-icon="outlined/wallet"
             class="header__balance"
-            @click.native="onBalance"
           >
             {{ balance | price }}
           </UiText>
@@ -86,10 +85,6 @@ export default class Header extends Vue {
     })
 
     return `https://${BASE_HOST}${href}`
-  }
-
-  onBalance () {
-    window.open('https://atomic.center/sms/billing/', '_blank')
   }
 }
 </script>

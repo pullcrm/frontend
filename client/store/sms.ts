@@ -3,8 +3,7 @@ import { Module } from 'vuex/types'
 import { IState as IRootState } from '.'
 
 export interface IState {
-  balance: number | null,
-  hasSmsError: boolean
+  balance: number | null
 }
 
 const SmsModule: Module<IState, IRootState> = {
@@ -12,34 +11,21 @@ const SmsModule: Module<IState, IRootState> = {
 
   state () {
     return {
-      balance: null,
-      hasSmsError: false
+      balance: null
     }
   },
 
   actions: {
     async balance ({ commit }) {
-      try {
-        const { balance } = await this.$api.sms.balance()
+      const { balance } = await this.$api.balance.get()
 
-        commit('SET_BALANCE', Number(balance))
-      } catch (err) {
-        if (err.status === 500) {
-          return commit('SET_HAS_SMS_ERROR', true)
-        }
-
-        throw err
-      }
+      commit('SET_BALANCE', Number(balance))
     }
   },
 
   mutations: {
     SET_BALANCE (state, balance) {
       state.balance = balance
-    },
-
-    SET_HAS_SMS_ERROR (state, hasSmsError) {
-      state.hasSmsError = hasSmsError
     }
   },
 

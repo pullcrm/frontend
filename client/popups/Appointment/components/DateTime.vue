@@ -33,8 +33,8 @@
       >
         <UiSelect
           :value="startAt"
-          required
           :options="availableHours"
+          :required="isDataTimeRequired"
           left-icon="outlined/clock"
           placeholder="00:00"
           @input="
@@ -79,6 +79,8 @@ import Component from 'vue-class-component'
 
 import { TIME_STEP } from '~/constants'
 
+import { AppointmentStatuses, IN_QUEUE } from '~/constants/appointment'
+
 import dayjs from '~/utils/dayjs'
 import { shiftTimeUpBySteps } from '~/utils/time'
 
@@ -93,6 +95,11 @@ import DatePicker from '~/components/DatePicker/DatePicker.vue'
     date: {
       type: Object,
       default: null
+    },
+
+    status: {
+      type: String,
+      required: true
     },
 
     startAt: {
@@ -113,9 +120,14 @@ import DatePicker from '~/components/DatePicker/DatePicker.vue'
 })
 export default class DateTime extends Vue {
   readonly date
+  readonly status: AppointmentStatuses
   readonly startAt
   readonly duration: number
   readonly availableHours
+
+  get isDataTimeRequired () {
+    return this.status !== IN_QUEUE
+  }
 
   get customDate (): Date {
     if (this.date) {

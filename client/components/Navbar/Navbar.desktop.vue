@@ -2,7 +2,7 @@
   <div class="navbar-desktop">
     <img
       class="navbar-desktop__logo"
-      src="~/assets/logos/logo_ua.svg"
+      src="/app/static/img/logo.svg"
     >
 
     <NavbarItem
@@ -129,7 +129,7 @@ export default class NavbarDesktop extends Vue {
       width: 40px;
       height: 40px;
       margin-bottom: 16px;
-      border-radius: 8px;
+      border-radius: 2px;
     }
 
     &__avatar {

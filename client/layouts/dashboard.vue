@@ -6,10 +6,6 @@
       />
 
       <div class="dashboard-layout__container">
-        <SmsAlert
-          class="dashboard-layout__sms-alert"
-        />
-
         <Header
           class="dashboard-layout__header"
         />
@@ -43,7 +39,6 @@ import Header from '~/components/Header/Header.vue'
 import Navbar from '~/components/Navbar/Navbar.vue'
 import Popups from '~/components/Popups/Popups.vue'
 import Toasts from '~/components/Toasts/Toasts.vue'
-import SmsAlert from '~/components/SmsAlert/SmsAlert.vue'
 import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
 
 @Component({
@@ -53,7 +48,6 @@ import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
     Navbar,
     Popups,
     Toasts,
-    SmsAlert,
     PopperMenu
   },
 
@@ -79,6 +73,15 @@ import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
     return {
       getPopperMenu: () => {
         return this.$refs.popperMenu
+      }
+    }
+  },
+
+  head () {
+    return {
+      base: {
+        href: this.$router.base,
+        target: '_blank'
       }
     }
   }

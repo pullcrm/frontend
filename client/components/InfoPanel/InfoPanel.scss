@@ -30,9 +30,11 @@
     }
   }
 
-  &__info {
+  &__append {
     margin-left: 8px;
+  }
 
+  &__info {
     .ui-icon {
       color: $ui-blue-brand;
     }

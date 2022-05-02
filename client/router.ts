@@ -33,6 +33,8 @@ export function createRouter () {
   return new Router({
     mode: 'history',
 
+    base: '/app/',
+
     fallback: true,
 
     scrollBehavior (_to, _from, savedPosition) {

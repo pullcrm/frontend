@@ -12,6 +12,7 @@ import {
 interface IConstructorParams {
   endpoint: RpcClient['endpoint'],
   endpointUpload?: RpcClient['endpointUpload'],
+  endpointBalanceCheckout?: RpcClient['endpointBalanceCheckout'],
   auth?: RpcClient['auth'],
   headers?: RpcClient['defaultHeaders'],
   typedStore: RpcClient['typedStore']
@@ -20,6 +21,7 @@ interface IConstructorParams {
 export default class RpcClient {
   endpoint: string
   endpointUpload?: string
+  endpointBalanceCheckout?: string
 
   auth?: string
   token?: string
@@ -36,11 +38,13 @@ export default class RpcClient {
       headers,
       endpoint,
       endpointUpload,
+      endpointBalanceCheckout,
       typedStore
     } = params
 
     this.endpoint = endpoint
     this.endpointUpload = endpointUpload
+    this.endpointBalanceCheckout = endpointBalanceCheckout
 
     this.auth = auth
     this.defaultHeaders = headers
@@ -125,6 +129,32 @@ export default class RpcClient {
   }
 
   /**
+   * Checkout
+   */
+  balanceCheckout = async (params: { amount: number }) => {
+    const headers = {
+      ...this.headers,
+      'Content-Type': 'application/json'
+    }
+
+    const response = await fetch(this.endpointBalanceCheckout, {
+      method: 'POST',
+      body: JSON.stringify(params),
+      headers
+    })
+
+    if (!response.ok) {
+      throw new HttpError({
+        method: 'balance/checkout',
+        params,
+        status: response.status
+      })
+    }
+
+    return await response.text()
+  }
+
+  /**
    * Get headers
    */
   private get headers () {
@@ -145,7 +175,13 @@ export default class RpcClient {
 
     return '?' + Object.keys(params)
       .filter(key => params[key])
-      .map(key => `${key}=${params[key]}`)
+      .map(key => {
+        if (Array.isArray(params[key])) {
+          return params[key].map(value => `${key}[]=${value}`).join('&')
+        }
+
+        return `${key}=${params[key]}`
+      })
       .join('&')
   }
 }

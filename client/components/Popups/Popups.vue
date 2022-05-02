@@ -100,16 +100,6 @@
 
     <Popup
       v-slot="{ close, props }"
-      name="sms-auth"
-    >
-      <SmsAuth
-        v-bind="props"
-        @close="close"
-      />
-    </Popup>
-
-    <Popup
-      v-slot="{ close, props }"
       name="specialist-procedures"
     >
       <SpecialistProcedures
@@ -137,6 +127,7 @@
         :question="question"
         @ok="answerQuestion(true)"
         @cancel="answerQuestion(false)"
+        @submit="answerQuestion"
       />
     </UiPopupBackdrop>
   </div>
@@ -200,11 +191,6 @@ const TimeOffEdit = () => import(
   '~/popups/TimeOff/Edit.vue'
 )
 
-const SmsAuth = () => import(
-  /* webpackChunkName: "popups" */
-  '~/popups/SmsAuth/SmsAuth.vue'
-)
-
 const SmsConfirmation = () => import(
   /* webpackChunkName: "popups" */
   '~/popups/Confirmation/Sms.vue'
@@ -218,7 +204,6 @@ const QuestionPopup = () => import(
 @Component({
   components: {
     Popup,
-    SmsAuth,
     TimeOffNew,
     Appointment,
     TimeOffEdit,
@@ -249,7 +234,7 @@ export default class Popups extends Vue {
     return this.$typedStore.state.popup.smsConfirmation
   }
 
-  answerQuestion (answer: boolean) {
+  answerQuestion (answer: boolean | string | number) {
     return this.$typedStore.dispatch('popup/answerQuestion', answer)
   }
 

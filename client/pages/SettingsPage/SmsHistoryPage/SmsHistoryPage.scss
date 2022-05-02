@@ -1,0 +1,13 @@
+.sms-settings-page {
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  .ui-divider {
+    margin: 24px 0;
+  }
+
+  .ui-panel + .ui-panel {
+    margin-top: 24px;
+  }
+}

@@ -7,7 +7,6 @@
     margin-bottom: 24px;
   }
 
-  &__queue,
   &__notify,
   &__comment,
   &__date-time,
@@ -48,7 +47,7 @@
     }
   }
 
-  @media (max-width: $ui-mobile-portrait - 1px) {
+  @media (max-width: ($ui-mobile-portrait - 1px)) {
     padding: 24px 0;
   }
 }

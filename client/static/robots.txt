@@ -4,5 +4,4 @@ Allow: /
 Allow: *favicon*
 Allow: */img/*
 Allow: */images/*
-Allow: */logos/*
 Allow: */_nuxt/*
