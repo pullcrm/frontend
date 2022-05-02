@@ -51,3 +51,32 @@ export function removeCookie (name: string, options: IRemoveCookieOptions = {}) 
     days: 0
   })
 }
+
+export class Cookies {
+  getCookies: () => string
+  setCookies: (cookie: string) => void
+
+  constructor (getCookies: Cookies['getCookies'], setCookies: Cookies['setCookies']) {
+    this.getCookies = getCookies
+    this.setCookies = setCookies
+  }
+
+  get (name: string, options: IGetCookieOptions = {}) {
+    return getCookie(this.getCookies(), name, options)
+  }
+
+  set (name: string, value: string, options: ISetCookieOptions = {}) {
+    const cookie = setCookie(name, value, options)
+
+    this.setCookies(cookie)
+  }
+
+  remove (name, options?: any) {
+    const { domain } = options || {}
+
+    this.set(name, '', {
+      domain,
+      days: 0
+    })
+  }
+}

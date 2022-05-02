@@ -1,17 +1,32 @@
 import { Middleware } from '@nuxt/types'
 
-const middleware: Middleware = async ({ typedStore, route, redirect }) => {
-  if (route.meta.some((record) => record.public)) return
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '~/constants'
 
-  if (typedStore.state.profile) {
-    return
+const middleware: Middleware = async ({ typedStore, route, redirect, cookies }) => {
+  try {
+    if (route.meta.some((record) => record.public)) return
+
+    if (typedStore.state.profile) {
+      return
+    }
+
+    if (typedStore.state.auth.accessToken) {
+      await typedStore.dispatch('profile')
+
+      return
+    }
+
+    redirect({ name: 'login' })
+  } catch (err) {
+    if (err.status === 403) {
+      cookies.remove(ACCESS_TOKEN)
+      cookies.remove(REFRESH_TOKEN)
+
+      redirect({ name: 'login' })
+    }
+
+    throw err
   }
-
-  if (typedStore.state.auth.accessToken) {
-    return await typedStore.dispatch('profile')
-  }
-
-  redirect({ name: 'login' })
 }
 
 export default middleware

@@ -128,6 +128,7 @@ const config: NuxtOptions = {
   },
 
   plugins: [
+    { src: '~/plugins/cookies' },
     { src: '~/plugins/typed-store' },
     { src: '~/plugins/runtime-config' },
     { src: '~/plugins/storage' },
