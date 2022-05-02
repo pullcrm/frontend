@@ -22,7 +22,7 @@ const middleware: Middleware = async ({ typedStore, route, redirect, cookies }) 
       cookies.remove(ACCESS_TOKEN)
       cookies.remove(REFRESH_TOKEN)
 
-      redirect({ name: 'login' })
+      return redirect({ name: 'login' })
     }
 
     throw err
