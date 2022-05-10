@@ -50,21 +50,11 @@ const store = () => {
     },
 
     actions: {
-      async profile ({ dispatch, commit }) {
-        try {
-          const { specialists: positions, ...profile } = await this.$api.profile.get()
+      async profile ({ commit }) {
+        const { specialists: positions, ...profile } = await this.$api.profile.get()
 
-          commit('SET_PROFILE', profile)
-          commit('position/SET_POSITIONS', positions, { root: true })
-        } catch (err) {
-          if (err.status === 401) {
-            await dispatch('auth/refreshToken', null, { root: true })
-
-            window.location.reload()
-          }
-
-          throw err
-        }
+        commit('SET_PROFILE', profile)
+        commit('position/SET_POSITIONS', positions, { root: true })
       }
     },
 

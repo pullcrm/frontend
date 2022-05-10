@@ -37,6 +37,7 @@ export interface IApiRefreshTokenParams {
 
 export interface IApiRefreshToken {
   accessToken: string,
+  refreshToken: string,
   expiresIn: number
 }
 

@@ -18,6 +18,10 @@ const middleware: Middleware = async ({ typedStore, route, redirect, cookies }) 
 
     redirect({ name: 'login' })
   } catch (err) {
+    if (err.status === 401) {
+      return redirect({ name: 'dashboard', query: { refreshToken: 'true' } })
+    }
+
     if (err.status === 403) {
       cookies.remove(ACCESS_TOKEN)
       cookies.remove(REFRESH_TOKEN)

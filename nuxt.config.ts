@@ -48,6 +48,7 @@ const config: NuxtOptions = {
 
     middleware: [
       'redirects/pwa',
+      'refresh-token',
       'auth',
       'company',
       'bootstrap',
