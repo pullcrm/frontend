@@ -79,7 +79,8 @@ export default class RpcClient {
       headers
     })
 
-    if (method !== 'token' && response.status === 401) {
+    // TODO: Fixme
+    if (process.client && method !== 'token' && response.status === 401) {
       await this.typedStore.dispatch('auth/refreshToken')
 
       return this.call(method, params, type)
