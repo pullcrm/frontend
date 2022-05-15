@@ -52,7 +52,7 @@
       </UiField>
 
       <UiField
-        label="Специализация"
+        label="Спеціалізація"
       >
         <UiInput
           v-model="specialist.specialization"
