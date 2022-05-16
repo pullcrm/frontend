@@ -93,7 +93,7 @@
       </div>
 
       <FixedPanel
-        :treshold="0.25"
+        :threshold="0.25"
         show-when-invisible="#popup-actions"
         class="appointment-popup__fixed-button"
       >
