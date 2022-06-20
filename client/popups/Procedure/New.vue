@@ -85,7 +85,7 @@
               v-model="form.description"
               tag="textarea"
               name="description"
-              placeholder="Добавте опис"
+              placeholder="Додайте опис"
               @input="resetFieldError('description')"
             />
           </UiField>

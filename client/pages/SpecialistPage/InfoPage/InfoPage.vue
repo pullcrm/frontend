@@ -67,7 +67,7 @@
         <UiInput
           v-model="specialist.description"
           name="description"
-          placeholder="Добавте опис"
+          placeholder="Додайте опис"
           tag="textarea"
         />
       </UiField>
