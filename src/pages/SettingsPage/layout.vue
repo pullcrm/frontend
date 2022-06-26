@@ -73,4 +73,4 @@
   </div>
 </template>
 
-<style lang="scss" src="./Layout.scss"></style>
+<style lang="scss" src="./layout.scss"></style>
