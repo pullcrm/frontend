@@ -68,7 +68,6 @@ module.exports = configure((/* ctx */) => {
         RPC_URL: process.env.RPC_URL,
         CALENDAR_TIME_STEP: process.env.CALENDAR_TIME_STEP,
 
-        BASE_HOST: process.env.BASE_HOST,
         SENTRY_ENV: process.env.SENTRY_ENV,
         SENTRY_DSN: process.env.SENTRY_DSN,
         // SENTRY_RELEASE: process.env.SENTRY_RELEASE,
@@ -76,6 +75,8 @@ module.exports = configure((/* ctx */) => {
         RPC_USER: process.env.RPC_USER,
         RPC_PASSWORD: process.env.RPC_PASSWORD,
         // COOKIE_DOMAIN: process.env.COOKIE_DOMAIN
+
+        SITE_BASE_HOST: process.env.SITE_BASE_HOST,
 
         MINIMUM_DEPOSIT_AMOUNT: process.env.MINIMUM_DEPOSIT_AMOUNT,
         MAXIMUM_DEPOSIT_AMOUNT: process.env.MAXIMUM_DEPOSIT_AMOUNT,
