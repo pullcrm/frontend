@@ -52,9 +52,9 @@ const serverErrors = ref<any>({})
 const v$ = useValidate(validations, form, { serverErrors })
 
 const policyUrl = computed(() => {
-  const { SITE_BASE_HOST } = process.env
+  const { BASE_HOST } = process.env
 
-  return `https://${SITE_BASE_HOST}/documents/policy/`
+  return `https://${BASE_HOST}/documents/policy/`
 })
 
 onMounted(() => {

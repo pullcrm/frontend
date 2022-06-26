@@ -94,9 +94,9 @@ async function copyPersonalLink() {
     },
   })
 
-  const { SITE_BASE_HOST } = process.env
+  const { BASE_HOST } = process.env
 
-  copyText(`https://${SITE_BASE_HOST}${href}`)
+  copyText(`https://${BASE_HOST}${href}`)
 
   await toastsStore.show({
     title: 'Посилання скопійовано',
