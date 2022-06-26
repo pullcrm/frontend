@@ -51,6 +51,12 @@ const serverErrors = ref<any>({})
 
 const v$ = useValidate(validations, form, { serverErrors })
 
+const policyUrl = computed(() => {
+  const { SITE_BASE_HOST } = process.env
+
+  return `https://${SITE_BASE_HOST}/documents/policy/`
+})
+
 onMounted(() => {
   const { phone } = route.query
 
@@ -195,7 +201,7 @@ function onBack() {
             class="auth-page-registration__policy"
             size="s"
           >
-            Натискаючи на кнопку, я погоджуюсь з <a href="/documents/policy/">Політикою обробки персональних даних</a>
+            Натискаючи на кнопку, я погоджуюсь з <a :href="policyUrl">Політикою обробки персональних даних</a>
           </UiText>
 
           <UiButton
