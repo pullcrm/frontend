@@ -29,26 +29,26 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
-      # - name: Create the release folder on the server
-      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'mkdir /var/www/pullcrm.dev/frontend/versions/release-${{ github.sha }}'
+      - name: Create the release folder on the server
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'mkdir /var/www/pullcrm.dev/frontend/versions/release-${{ github.sha }}'
 
-      # - name: Upload files to the server
-      #   run: rsync -r ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.dev/frontend/versions/release-${{ github.sha }}'
+      - name: Upload files to the server
+        run: rsync -r ./ ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:'/var/www/pullcrm.dev/frontend/versions/release-${{ github.sha }}'
 
-      # - name: Link the release folder on the server
-      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.dev/frontend/release && ln -s /var/www/pullcrm.dev/frontend/versions/release-${{ github.sha }} /var/www/pullcrm.dev/frontend/release'
+      - name: Link the release folder on the server
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'rm /var/www/pullcrm.dev/frontend/release && ln -s /var/www/pullcrm.dev/frontend/versions/release-${{ github.sha }} /var/www/pullcrm.dev/frontend/release'
 
-      # - name: Copy .env and pm2 config files to project
-      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.dev/frontend/.env /var/www/pullcrm.dev/frontend/release/.env && cp /var/www/pullcrm.dev/frontend/ecosystem.config.js /var/www/pullcrm.dev/frontend/release/ecosystem.config.js'
+      - name: Copy .env and pm2 config files to project
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cp /var/www/pullcrm.dev/frontend/.env /var/www/pullcrm.dev/frontend/release/.env && cp /var/www/pullcrm.dev/frontend/ecosystem.config.js /var/www/pullcrm.dev/frontend/release/ecosystem.config.js'
 
-      # - name: Install modules and build project
-      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && nvm use 14 && cd /var/www/pullcrm.dev/frontend/release && yarn install && yarn build'
+      - name: Install modules and build project
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && nvm use 16 && cd /var/www/pullcrm.dev/frontend/release && yarn install && yarn build'
 
-      # - name: Delete old versions of project
-      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.dev/frontend/versions && rm -rf `ls -t | tail -n +6`'
+      - name: Delete old versions of project
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cd /var/www/pullcrm.dev/frontend/versions && rm -rf `ls -t | tail -n +6`'
 
-      # - name: Reload project
-      #   run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && cd /var/www/pullcrm.dev/frontend/release/ && pm2 delete ecosystem.config.js && pm2 start ecosystem.config.js'
+      - name: Reload project
+        run: ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'source ~/.nvm/nvm.sh && cd /var/www/pullcrm.dev/frontend/release/ && pm2 delete ecosystem.config.js && pm2 start ecosystem.config.js'
 
       - name: Slack Notify
         if: always()
