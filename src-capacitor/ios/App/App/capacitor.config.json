@@ -1,6 +1,6 @@
 {
 	"appId": "com.pullcrm.capacitor.app",
-	"appName": "Quasar App",
+	"appName": "pullcrm",
 	"bundledWebRuntime": false,
 	"npmClient": "yarn",
 	"webDir": "www",
