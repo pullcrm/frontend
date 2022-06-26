@@ -1,0 +1,1 @@
+import{bt as a}from"./index.90ead00b.js";const i="AVATAR",c=a("specialist",{state:()=>({specialist:null,avatars:[]}),getters:{},actions:{async fetch(s){const t=await this.$api.specialist.get(s);this.specialist=t},async fetchAvatars(){const s=await this.$api.files.all(this.specialist.user.id,{group:i});this.avatars=s}}});export{i as A,c as u};

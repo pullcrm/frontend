@@ -1,0 +1,1 @@
+import{b as s}from"./base.686dbe64.js";import{bu as e}from"./index.53588f62.js";const a=e("sms",{state:()=>({balance:null}),getters:{isAuthorize(){return Boolean(this.settings)},settings:()=>s().company.sms_setting},actions:{async fetchBalance(){const{balance:t}=await this.$api.balance.get();this.balance=Number(t)}}});export{a as u};

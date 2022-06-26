@@ -1,1 +1,8 @@
-widget.compiled.js
+/dist
+/src-capacitor
+/src-cordova
+/src-pwa
+/src-ssr
+/.quasar
+/node_modules
+.eslintrc.js

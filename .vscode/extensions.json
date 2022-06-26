@@ -1,14 +1,15 @@
 {
-  // @see https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions
   "recommendations": [
-    // Syntax highlighting for .vue files
+    "Vue.volar",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "wayou.vscode-todo-highlight"
+  ],
+  "unwantedRecommendations": [
     "octref.vetur",
-
-    // Code format:
-    "EditorConfig.editorconfig",
-
-    // Linting:
-    "shinnn.stylelint",
-    "dbaeumer.vscode-eslint"
+    "hookyqr.beautify",
+    "dbaeumer.jshint",
+    "ms-vscode.vscode-typescript-tslint-plugin"
   ]
 }
