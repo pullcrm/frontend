@@ -151,7 +151,7 @@
         responsive
       >
         <Section
-          title="Уведомить клиента перед записью"
+          title="Повідомити клієнта перед записом"
         >
           <template #append>
             <UiSwitch

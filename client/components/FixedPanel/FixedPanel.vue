@@ -14,7 +14,7 @@ import Component from 'vue-class-component'
 
 @Component({
   props: {
-    treshold: {
+    threshold: {
       type: Number,
       default: 0.66
     },
@@ -26,7 +26,7 @@ import Component from 'vue-class-component'
   }
 })
 export default class FixedPanel extends Vue {
-  readonly treshold: number
+  readonly threshold: number
   readonly showWhenInvisible: string
 
   isVisible = false
@@ -35,7 +35,7 @@ export default class FixedPanel extends Vue {
   mounted () {
     if (this.showWhenInvisible) {
       const observer = new IntersectionObserver(this.onChangeVisibility, {
-        threshold: this.treshold
+        threshold: this.threshold
       })
 
       ;[...document.querySelectorAll(this.showWhenInvisible)].forEach((element) => {
