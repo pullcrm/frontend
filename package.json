@@ -11,7 +11,7 @@
     "dev": "QENV=development quasar dev -m ssr",
     "dev:ios": "QENV=development quasar dev -m capacitor -T ios",
     "build": "QENV=production quasar build -m ssr",
-    "build:ios": "QENV=production quasar build -m capacitor -T ios",
+    "build:ios": "QENV=production quasar build -m capacitor -T ios -ide",
     "build:pwa": "QENV=production quasar build -m pwa",
     "start": "node dist/ssr/index.js",
     "build:widget": "tsc 'public/static/widgets/widget.esnext.js' --allowJs --target 'ES5' --outFile 'public/static/widgets/widget.compiled.js'"

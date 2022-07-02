@@ -1,1 +1,0 @@
-import{bq as i,br as r}from"./index.53588f62.js";var a=i(({app:s,store:e,ssrContext:t})=>{const o=r;s.provide("$cookies",o),s.config.globalProperties.$cookies=o,e.use(()=>({$cookies:o}))});export{a as default};

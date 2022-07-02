@@ -1,1 +1,0 @@
-import{d as o,i as r,a as e}from"./isTomorrow.a3ceb101.js";o.extend(r);o.extend(e);o.locale("ru");function m(t,a){return o(t).format(a)}function f(t){return o(t.split(".")[0])}function i(t){return t=t.split(".")[0],o(t).format("HH:mm")}export{m as f,i as g,f as t};
