@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+// TODO: Try quasar example
+// https://quasar.dev/vue-directives/mutation#drag-and-drop-example
+
 // https://github.com/Jexordexan/vue-slicksort
 import { SlickItem, SlickList } from 'vue-slicksort'
 
@@ -16,31 +19,27 @@ defineProps({
   },
 })
 
-const emit = defineEmits(['update'])
+const emit = defineEmits(['update:list'])
 
 function onUpdate(items: any) {
-  emit('update', items)
+  emit('update:list', items)
 }
-
-const items2 = ref(['sadas', 'sad', 'awdaw'])
 </script>
 
 <template>
-  <div>
-    <SlickList
-      :list="list"
-      use-window-as-scroll-container
-      v-bind="$attrs"
-      class="sortable-list"
+  <SlickList
+    :list="list"
+    class="sortable-list"
+    use-window-as-scroll-container
+    @update:list="onUpdate"
+  >
+    <SlickItem
+      v-for="(item, index) in list"
+      :key="index"
+      :index="index"
+      :class="itemClass"
     >
-      <SlickItem
-        v-for="(item, index) in list"
-        :key="index"
-        :index="index"
-        :class="itemClass"
-      >
-        <slot :item="item" />
-      </SlickItem>
-    </SlickList>
-  </div>
+      <slot :item="item" />
+    </SlickItem>
+  </SlickList>
 </template>

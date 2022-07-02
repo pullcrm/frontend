@@ -40,11 +40,13 @@ export const useAuthStore = defineStore('auth', {
       this.$cookies.set(ACCESS_TOKEN, accessToken, {
         path: '/',
         expires: AUTH_TOKEN_COOKIE_DAYS,
+        sameSite: 'Lax',
       })
 
       this.$cookies.set(REFRESH_TOKEN, refreshToken, {
         path: '/',
         expires: AUTH_TOKEN_COOKIE_DAYS,
+        sameSite: 'Lax',
       })
 
       this.$apiClient.setToken(accessToken)

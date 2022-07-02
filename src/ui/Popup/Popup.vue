@@ -42,6 +42,8 @@ const onClose = () => {
     data-test="ui-popup"
     @keydown.esc="onClose"
   >
+    <div class="ui-popup__safe-area-top" />
+
     <UiBack
       v-if="back"
       class="ui-popup__back"
@@ -64,6 +66,8 @@ const onClose = () => {
     </a>
 
     <slot />
+
+    <div class="ui-popup__safe-area-bottom" />
   </div>
 </template>
 
@@ -90,6 +94,14 @@ const onClose = () => {
       min-height: 100%;
       margin: 0 !important; // TODO: Make without important
       border-radius: 0;
+    }
+
+    &__safe-area-top {
+      padding-top: var(--safe-area-inset-top);
+    }
+
+    &__safe-area-bottom {
+      padding-top: var(--safe-area-inset-bottom);
     }
 
     &__back {

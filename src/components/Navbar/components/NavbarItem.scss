@@ -9,7 +9,7 @@
   color: $ui-black-50;
   border-radius: 8px;
 
-  &.router-link-active:not([href='/']),
+  &.router-link-active,
   &.router-link-exact-active {
     color: $ui-blue-brand;
   }

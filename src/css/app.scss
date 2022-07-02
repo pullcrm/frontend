@@ -19,8 +19,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
+  -webkit-overflow-scrolling: touch;
 }
 
 .nobr {
   white-space: nowrap;
+}
+
+.q-loading-bar--top {
+  top: var(--safe-area-inset-top);
 }

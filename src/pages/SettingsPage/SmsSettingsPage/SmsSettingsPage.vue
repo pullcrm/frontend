@@ -73,8 +73,6 @@ async function onReplenishBalance() {
     MAXIMUM_DEPOSIT_AMOUNT,
   } = process.env
 
-  console.log(MINIMUM_DEPOSIT_AMOUNT)
-
   // TODO: Check type of result value
   const amount = await popupStore.askQuestion({
     title: 'Вкажіть суму для поповнення',

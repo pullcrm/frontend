@@ -36,6 +36,7 @@ async function logout() {
       :to="{ name: 'dashboard' }"
       icon="solid/house-fill"
       name="Головна"
+      active-class="router-link-active-home"
     />
 
     <NavbarItem

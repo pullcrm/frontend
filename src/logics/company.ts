@@ -17,6 +17,7 @@ export function normalizeCompany(company: any) {
     facebook: company.facebook || '',
     instagram: company.instagram || '',
     description: company.description || '',
+    widget_setting: company.widget_setting || {},
   }
 }
 

@@ -29,10 +29,13 @@ export default async function ({ redirect, ssrContext, currentRoute }: any) {
     cookies.set(ACCESS_TOKEN, result.accessToken, {
       path: '/',
       expires: AUTH_TOKEN_COOKIE_DAYS,
+      sameSite: 'Lax',
     })
+
     cookies.set(REFRESH_TOKEN, result.refreshToken, {
       path: '/',
       expires: AUTH_TOKEN_COOKIE_DAYS,
+      sameSite: 'Lax',
     })
 
     authStore.accessToken = result.accessToken

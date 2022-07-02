@@ -1,45 +1,56 @@
 <script lang="ts" setup>
-// head () {
-//   return {
-//     base: {
-//       href: this.$router.base,
-//       target: '_blank'
-//     }
-//   }
-// }
-
 import Navbar from '~/components/Navbar/Navbar.vue'
 import Header from '~/components/Header/Header.vue'
 import Loader from '~/components/Loader.vue'
 
 const baseStore = useBaseStore()
 
+const router = useRouter()
+
 const loading = computed(() => {
   return baseStore.loading
 })
+
+async function onRefresh(done: any) {
+  window.location.reload()
+
+  // await router.push({
+  //   query: {
+  //     update: Date.now(),
+  //   },
+  // })
+
+  done()
+}
 </script>
 
 <template>
   <q-layout class="dashboard-layout">
-    <Navbar
-      class="dashboard-layout__navbar"
-    />
-
-    <div class="dashboard-layout__container">
-      <Header
-        class="dashboard-layout__header"
+    <q-pull-to-refresh
+      class="dashboard-layout__pull-to-refresh"
+      no-mouse
+      @refresh="onRefresh"
+    >
+      <Navbar
+        class="dashboard-layout__navbar"
       />
 
-      <router-view />
+      <div class="dashboard-layout__container">
+        <Header
+          class="dashboard-layout__header"
+        />
 
-      <div class="dashboard-layout__footer" />
-    </div>
+        <router-view />
 
-    <PortalTarget name="sidebar" />
+        <div class="dashboard-layout__footer" />
+      </div>
 
-    <Loader
-      v-if="loading"
-    />
+      <PortalTarget name="sidebar" />
+
+      <Loader
+        v-if="loading"
+      />
+    </q-pull-to-refresh>
   </q-layout>
 </template>
 
