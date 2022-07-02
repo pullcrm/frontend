@@ -63,7 +63,7 @@ function openMenu() {
   }
 
   const onAddTimeOff = {
-    name: 'Закрити запис',
+    name: 'Додати перерву',
     icon: 'outlined/prohibit',
     click: addTimeOff,
   }

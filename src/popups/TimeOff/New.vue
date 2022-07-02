@@ -130,7 +130,7 @@ watch(
       class="time-off-new-popup__title"
       size="s"
     >
-      Закрити запис
+      Додати перерву
     </UiTitle>
 
     <form @submit.prevent="submit">

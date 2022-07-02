@@ -14,7 +14,7 @@ export default {
 
   setup() {
     useMeta({
-      title: 'Не робочий час - pullcrm',
+      title: 'Таблиця перерв - pullcrm',
     })
 
     const popupStore = usePopupStore()
@@ -40,7 +40,7 @@ export default {
           size="m"
           responsive
         >
-          Не робочий час
+          Таблиця перерв
         </UiTitle>
 
         <UiButton
@@ -48,7 +48,7 @@ export default {
           responsive
           @click="onAdd"
         >
-          Закрити запис
+          Додати перерву
         </UiButton>
       </div>
 
