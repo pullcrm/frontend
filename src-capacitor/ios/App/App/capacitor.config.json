@@ -5,7 +5,7 @@
 	"npmClient": "yarn",
 	"webDir": "www",
 	"server": {
-		"hostname": "pullcrm.capacitor",
+		"hostname": "dev.pullcrm.com",
 		"url": "http://192.168.31.67:8080"
 	}
 }

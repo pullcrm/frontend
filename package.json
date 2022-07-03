@@ -1,6 +1,6 @@
 {
   "name": "pullcrm",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Appointment Scheduling",
   "productName": "pullcrm",
   "author": "Bohdan Tsaryk <bogdan.tsarik@gmail.com>",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@antfu/eslint-config": "^0.25.1",
-    "@quasar/extras": "^1.14.0",
+    "@quasar/extras": "^1.14.2",
     "@quasar/icongenie": "^2.5.2",
     "@vuelidate/core": "^2.0.0-alpha.41",
     "@vuelidate/validators": "^2.0.0-alpha.29",
@@ -32,7 +32,7 @@
     "lodash": "^4.17.21",
     "maska": "^1.5.0",
     "pinia": "^2.0.14",
-    "quasar": "^2.7.3",
+    "quasar": "^2.7.4",
     "raf": "^3.4.1",
     "vue": "^3.2.37",
     "vue-router": "^4.0.16",
@@ -40,7 +40,7 @@
     "vue3-portal": "^1.0.3"
   },
   "devDependencies": {
-    "@quasar/app-vite": "^1.0.2",
+    "@quasar/app-vite": "^1.0.4",
     "@types/cookie": "^0.5.1",
     "@types/lodash": "^4.14.182",
     "@types/node": "^12.20.21",

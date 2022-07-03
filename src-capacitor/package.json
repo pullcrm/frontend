@@ -1,6 +1,6 @@
 {
   "name": "pullcrm",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Appointment Scheduling",
   "author": "Bohdan Tsaryk <bogdan.tsarik@gmail.com>",
   "private": true,
