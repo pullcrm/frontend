@@ -1,108 +1,87 @@
-<script lang="ts">
+<script lang="ts" setup>
 import { api } from '~/boot/api'
 import Layout from '~/pages/Auth/components/Layout.vue'
 
-export default {
-  components: {
-    Layout,
-  },
+useMeta({
+  title: 'Нова компанія - pullcrm',
+})
 
-  async preFetch() {
-    const baseStore = useBaseStore()
+const route = useRoute()
+const router = useRouter()
 
-    await Promise.all([
-      baseStore.fetchCompanyTypes,
-      baseStore.fetchCities,
-    ])
-  },
+const authStore = useAuthStore()
+const baseStore = useBaseStore()
+const positionStore = usePositionStore()
 
-  setup() {
-    useMeta({
-      title: 'Нова компанія - pullcrm',
+const company = ref<Record<string, any>>({
+  name: '',
+  city: null,
+  type: null,
+})
+
+const isLoading = ref(false)
+
+const cities = ref<any[]>([])
+const companyTypes = ref<any[]>([])
+
+const hasPositions = computed(() => {
+  return positionStore.hasPositions
+})
+
+onBeforeMount(async () => {
+  const result = await Promise.all([
+    api.cities.all(),
+    api.companyTypes.all(),
+  ])
+
+  cities.value = result[0]
+  companyTypes.value = result[1]
+})
+
+onMounted(() => {
+  const type = companyTypes.value.find(({ id }) => {
+    return id === Number(route.query.companyType)
+  })
+
+  if (type)
+    company.value.type = type
+})
+
+async function submit() {
+  try {
+    isLoading.value = true
+
+    const { id: companyId } = await api.companies.create({
+      name: company.value.name,
+      cityId: company.value.city.id,
+      typeId: company.value.type.id,
     })
 
-    const route = useRoute()
-    const router = useRouter()
+    await onCompany(companyId)
 
-    const authStore = useAuthStore()
-    const baseStore = useBaseStore()
-    const positionStore = usePositionStore()
-
-    const company = ref<Record<string, any>>({
-      name: '',
-      city: null,
-      type: null,
+    const { href } = router.resolve({
+      name: 'dashboard',
     })
 
-    const isLoading = ref(false)
+    window.location.href = href
+  }
+  finally {
+    isLoading.value = false
+  }
+}
 
-    const cities = computed(() => {
-      return baseStore.cities
-    })
+async function onCompany(companyId: number) {
+  await baseStore.fetchProfile()
 
-    const companyTypes = computed(() => {
-      return baseStore.companyTypes
-    })
+  const position = positionStore.positionsDict[companyId]
 
-    const hasPositions = computed(() => {
-      return positionStore.hasPositions
-    })
+  await authStore.refreshTokenByPosition(position)
+}
 
-    onMounted(() => {
-      const type = companyTypes.value.find(({ id }) => {
-        return id === Number(route.query.companyType)
-      })
-
-      if (type)
-        company.value.type = type
-    })
-
-    async function submit() {
-      try {
-        isLoading.value = true
-
-        const { id: companyId } = await api.companies.create({
-          name: company.value.name,
-          cityId: company.value.city.id,
-          typeId: company.value.type.id,
-        })
-
-        await onCompany(companyId)
-
-        const { href } = router.resolve({
-          name: 'dashboard',
-        })
-
-        window.location.href = href
-      }
-      finally {
-        isLoading.value = false
-      }
-    }
-
-    async function onCompany(companyId: number) {
-      await baseStore.fetchProfile()
-
-      const position = positionStore.positionsDict[companyId]
-
-      await authStore.refreshTokenByPosition(position)
-    }
-
-    async function onBack() {
-      await router.push({
-        name: 'dashboard',
-      })
-    }
-
-    return {
-      submit,
-      hasPositions,
-      onBack,
-      company,
-      companyTypes,
-      isLoading,
-    }
-  },
+async function onBack() {
+  await router.push({
+    name: 'dashboard',
+  })
 }
 </script>
 

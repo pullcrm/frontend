@@ -13,7 +13,7 @@ def capacitor_pods
   pod 'CapacitorSplashScreen', :path => '../../node_modules/@capacitor/splash-screen'
 end
 
-target 'Pullcrm' do
+target 'App' do
   capacitor_pods
   # Add your Pods here
 end
