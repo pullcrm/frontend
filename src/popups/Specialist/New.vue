@@ -56,11 +56,13 @@ async function onSubmit() {
     if (proceduresStore.total > 0) {
       const specialist = specialistsDict.value[id]
 
-      popupStore.show({
+      return popupStore.show({
         name: 'specialist-procedures',
         props: { specialist },
       })
     }
+
+    popupStore.hide()
   }
   catch (err: any) {
     // TODO: Show errors
