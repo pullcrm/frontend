@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import Header from './components/Header.vue'
 import ProceduresGroup from './components/Group.vue'
+import proceduresEmptyImage from '~/assets/images/procedures-empty.svg'
 
 useMeta({
   title: 'Список послуг - pullcrm',
@@ -33,7 +34,7 @@ function onAddProcedure() {
         v-if="isEmpty"
         title="Список послуг порожній"
         text="Додайте послугу, щоб розпочати роботу"
-        :image="require('~/assets/images/procedures-empty.svg')"
+        :image="proceduresEmptyImage"
       >
         <UiButton
           theme="blue"
