@@ -55,7 +55,7 @@ function onClose() {
     :class="[
       `ui-toast_theme_${theme}`,
     ]"
-    data-test="ui-toast"
+    :data-test="`ui-toast_${theme}`"
   >
     <div
       v-if="leftIcon"
