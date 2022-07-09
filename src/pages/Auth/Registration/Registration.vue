@@ -200,6 +200,7 @@ function onBack() {
           <UiText
             class="auth-page-registration__policy"
             size="s"
+            data-test="policy-link"
           >
             Натискаючи на кнопку, я погоджуюсь з <a :href="policyUrl">Політикою обробки персональних даних</a>
           </UiText>

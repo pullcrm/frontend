@@ -90,6 +90,7 @@ const onSubmit = async () => {
     title="Авторизація"
     sub-title="Увійдіть у систему, щоб отримати доступ до своєї компанії"
     class="auth-page-login"
+    data-test="auth-page-login"
   >
     <form @submit.prevent="onSubmit">
       <UiFormValidator
@@ -173,6 +174,7 @@ const onSubmit = async () => {
               type="submit"
               size="l"
               theme="info-outlined"
+              data-test="registration-button"
             >
               Реєстрація
             </UiButton>
