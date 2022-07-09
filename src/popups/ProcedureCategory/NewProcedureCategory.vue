@@ -69,6 +69,7 @@ async function submit() {
               v-model="name"
               left-icon="outlined/pencil"
               placeholder="Введіть назву"
+              data-test="form-name"
               @input="resetFieldError('name')"
             />
           </UiField>

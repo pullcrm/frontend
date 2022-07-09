@@ -108,6 +108,7 @@ async function onBack() {
           v-model="company.name"
           left-icon="outlined/pencil"
           placeholder="Ваша компанія"
+          data-test="form-name"
           required
         />
       </UiField>
@@ -122,6 +123,7 @@ async function onBack() {
           :options="cities"
           label-key="name"
           placeholder="Вибрати місто"
+          data-test="form-cities-select"
         />
       </UiField>
 
@@ -135,6 +137,7 @@ async function onBack() {
           placeholder="Вибрати категорію"
           :options="companyTypes"
           required
+          data-test="form-categories-select"
         />
       </UiField>
 

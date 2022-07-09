@@ -110,6 +110,7 @@ async function onSubmit() {
               v-model="form.fullName"
               name="name"
               placeholder="Введіть Ім'я та Прізвище"
+              data-test="form-name"
               @input="resetFieldError('fullName')"
             />
           </UiField>

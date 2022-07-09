@@ -74,6 +74,7 @@ async function onSort(items: any) {
 <template>
   <UiContainer
     class="specialists-page"
+    data-test="specialists-page"
   >
     <div class="specialists-page-header">
       <UiNotificationBadge

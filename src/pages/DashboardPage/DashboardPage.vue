@@ -33,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <div class="dashboard-page">
+  <div class="dashboard-page" data-test="dashboard-page">
     <UiContainer>
       <Companies
         class="dashboard-page__section"

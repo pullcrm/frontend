@@ -125,6 +125,7 @@ async function copyPersonalLink() {
           name="name"
           placeholder="Введіть Ім'я та Прізвище"
           required
+          data-test="form-name"
         />
       </UiField>
 
@@ -172,6 +173,7 @@ async function copyPersonalLink() {
           name="description"
           placeholder="Додайте опис"
           tag="textarea"
+          data-test="form-description"
         />
       </UiField>
 

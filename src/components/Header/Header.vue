@@ -38,7 +38,7 @@ const siteUrl = computed(() => {
 </script>
 
 <template>
-  <div class="header">
+  <div class="header" data-test="header">
     <UiContainer>
       <div class="header__inner">
         <div class="header__left">
@@ -49,6 +49,7 @@ const siteUrl = computed(() => {
             target="_blank"
             right-icon="solid/link-fill"
             responsive
+            data-test="widget-link"
           >
             Ваш веб-сайт
           </UiText>

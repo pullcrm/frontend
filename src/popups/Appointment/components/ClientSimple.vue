@@ -35,6 +35,7 @@ defineEmits(['update:name', 'update:phone'])
         <UiInput
           :model-value="name"
           placeholder="Введіть ім'я"
+          data-test="form-name"
           @update:model-value="
             $emit('update:name', $event)
           "
@@ -53,6 +54,7 @@ defineEmits(['update:name', 'update:phone'])
           :model-value="phone || ''"
           inputmode="tel"
           placeholder="Введіть номер телефону"
+          data-test="form-phone"
           @update:model-value="
             $emit('update:phone', $event)
           "

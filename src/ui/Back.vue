@@ -5,8 +5,11 @@ defineEmits(['back'])
 <template>
   <UiText
     class="ui-back"
+    tag="a"
+    href="#"
     size="s"
-    @click="$emit('back')"
+    data-test="back-button"
+    @click.prevent="$emit('back')"
   >
     <template #prepend>
       <UiIcon

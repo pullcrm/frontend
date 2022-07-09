@@ -204,6 +204,7 @@ export default {
               inputmode="tel"
               left-icon="outlined/phone"
               placeholder="Телефон"
+              data-test="form-phone"
               @input="resetFieldError('phone')"
             />
           </UiField>

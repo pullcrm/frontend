@@ -197,6 +197,7 @@ function onBack() {
                 v-model="state.code"
                 left-icon="outlined/chat-centered-text"
                 placeholder="Введіть СМС-код"
+                data-test="code-input"
                 @input="resetFieldError('code')"
               />
             </UiField>

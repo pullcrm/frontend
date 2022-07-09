@@ -144,6 +144,7 @@ async function remove() {
               v-model="form.name"
               left-icon="outlined/pencil"
               placeholder="Введіть назву"
+              data-test="form-name"
               @input="resetFieldError('name')"
             />
           </UiField>
@@ -156,6 +157,7 @@ async function remove() {
               label-key="name"
               :options="categories"
               placeholder="Вибрати категорію"
+              data-test="form-categories-select"
               @update:model-value="resetFieldError('category')"
             />
           </UiField>
@@ -170,6 +172,7 @@ async function remove() {
               type="number"
               left-icon="outlined/pencil"
               placeholder="Вкажіть ціну"
+              data-test="form-price"
               @input="resetFieldError('price')"
             />
           </UiField>
@@ -198,6 +201,7 @@ async function remove() {
               :options="specialistsStore.specialists"
               label-key="fullName"
               placeholder="Вибрати спеціалістів"
+              data-test="form-specialists-multi-select"
             />
           </UiField>
 
@@ -210,6 +214,7 @@ async function remove() {
               tag="textarea"
               name="description"
               placeholder="Додайте опис"
+              data-test="form-description"
               @input="resetFieldError('description')"
             />
           </UiField>

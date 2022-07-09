@@ -95,6 +95,7 @@ function onCustomPrice(price: number) {
         :options="options"
         label-key="name"
         placeholder="Вибрати послуги"
+        data-test="form-procedures-multi-select"
         @update:model-value="
           onInput($event)
         "

@@ -145,6 +145,7 @@ async function submit() {
               <UiInput
                 v-model="company.name"
                 placeholder="Введіть назву"
+                data-test="form-name"
                 @input="resetFieldError('name')"
               />
             </UiField>
@@ -163,6 +164,7 @@ async function submit() {
                 required
                 :options="cities"
                 placeholder="Вибрати місто"
+                data-test="form-cities-select"
               />
             </UiField>
 
@@ -181,6 +183,7 @@ async function submit() {
                 :options="companyTypes"
                 :clearable="false"
                 placeholder="Вибрати категорію"
+                data-test="form-categories-select"
               />
             </UiField>
 

@@ -143,6 +143,7 @@ const onSubmit = async () => {
             }"
             size="s"
             class="auth-page-login__reset"
+            data-test="reset-password-button"
           >
             Відновити доступ
           </UiText>

@@ -126,6 +126,7 @@ async function submit() {
               v-model="form.name"
               left-icon="outlined/pencil"
               placeholder="Введіть назву"
+              data-test="form-name"
               @input="resetFieldError('name')"
             />
           </UiField>
@@ -135,6 +136,7 @@ async function submit() {
               v-model="form.category"
               label-key="name"
               :options="categories"
+              data-test="form-categories-select"
               placeholder="Вибрати категорію"
             />
           </UiField>
@@ -149,6 +151,7 @@ async function submit() {
               type="number"
               left-icon="outlined/pencil"
               placeholder="Вкажіть ціну"
+              data-test="form-price"
               @input="resetFieldError('price')"
             />
           </UiField>
@@ -175,6 +178,7 @@ async function submit() {
               :options="specialistsStore.specialists"
               label-key="fullName"
               placeholder="Вибрати спеціалістів"
+              data-test="form-specialists-multi-select"
             />
           </UiField>
 
@@ -187,6 +191,7 @@ async function submit() {
               tag="textarea"
               name="description"
               placeholder="Додайте опис"
+              data-test="form-description"
               @input="resetFieldError('description')"
             />
           </UiField>

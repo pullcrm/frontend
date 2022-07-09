@@ -163,6 +163,7 @@ function onBack() {
               left-icon="outlined/pencil"
               name="name"
               placeholder="Введіть Ім'я і Призвіще"
+              data-test="form-name"
               @input="resetFieldError('fullName')"
             />
           </UiField>
