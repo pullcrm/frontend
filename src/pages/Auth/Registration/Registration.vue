@@ -141,6 +141,7 @@ function onBack() {
     title="Реєстрація"
     sub-title="Пройдіть реєстрацію, щоб отримати доступ до своєї компанії"
     class="auth-page-registration"
+    data-test="registration-page"
   >
     <form
       @submit.prevent="onSubmit"

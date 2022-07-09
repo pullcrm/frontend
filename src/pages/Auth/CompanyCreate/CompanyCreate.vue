@@ -90,6 +90,7 @@ async function onBack() {
     title="Створення компанії"
     sub-title="Вкажіть інформацію про компанію"
     class="auth-page-company-create"
+    data-test="company-create-page"
   >
     <form
       @submit.prevent="submit"
