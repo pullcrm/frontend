@@ -1,17 +1,15 @@
 import { boot } from 'quasar/wrappers'
-import { Cookies } from 'quasar'
+import { ProtectStorage } from '~/services/protect-storage'
 
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '~/constants'
 
-export default boot(({ ssrContext }: any) => {
+export default boot(async ({ ssrContext }: any) => {
   const authStore = useAuthStore()
 
-  const cookies = process.env.SERVER
-    ? Cookies.parseSSR(ssrContext)
-    : Cookies
+  const storage = new ProtectStorage({ ssrContext })
 
-  const accessToken = cookies.get(ACCESS_TOKEN)
-  const refreshToken = cookies.get(REFRESH_TOKEN)
+  const accessToken = await storage.get(ACCESS_TOKEN)
+  const refreshToken = await storage.get(REFRESH_TOKEN)
 
   authStore.accessToken = accessToken
   authStore.refreshToken = refreshToken

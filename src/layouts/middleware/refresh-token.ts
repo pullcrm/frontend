@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode'
-import { Cookies } from 'quasar'
+import { ProtectStorage } from '~/services/protect-storage'
 import { api } from '~/boot/api'
 import { ACCESS_TOKEN, AUTH_TOKEN_COOKIE_DAYS, REFRESH_TOKEN } from '~/constants'
 
@@ -9,13 +9,11 @@ export default async function ({ redirect, ssrContext, currentRoute }: any) {
 
   const authStore = useAuthStore()
 
-  const cookies = process.env.SERVER
-    ? Cookies.parseSSR(ssrContext)
-    : Cookies
+  const storage = new ProtectStorage({ ssrContext })
 
   try {
-    const accessToken: string = cookies.get(ACCESS_TOKEN)
-    const refreshToken: string = cookies.get(REFRESH_TOKEN)
+    const accessToken = await storage.get(ACCESS_TOKEN) as string
+    const refreshToken = await storage.get(REFRESH_TOKEN) as string
 
     const { role, companyId, userId } = jwtDecode(accessToken) as any
 
@@ -26,16 +24,12 @@ export default async function ({ redirect, ssrContext, currentRoute }: any) {
       refreshToken,
     })
 
-    cookies.set(ACCESS_TOKEN, result.accessToken, {
-      path: '/',
+    await storage.set(ACCESS_TOKEN, result.accessToken, {
       expires: AUTH_TOKEN_COOKIE_DAYS,
-      sameSite: 'Lax',
     })
 
-    cookies.set(REFRESH_TOKEN, result.refreshToken, {
-      path: '/',
+    await storage.set(REFRESH_TOKEN, result.refreshToken, {
       expires: AUTH_TOKEN_COOKIE_DAYS,
-      sameSite: 'Lax',
     })
 
     authStore.accessToken = result.accessToken
@@ -46,8 +40,8 @@ export default async function ({ redirect, ssrContext, currentRoute }: any) {
     redirect({ name: 'dashboard' })
   }
   catch {
-    cookies.remove(ACCESS_TOKEN)
-    cookies.remove(REFRESH_TOKEN)
+    await storage.remove(ACCESS_TOKEN)
+    await storage.remove(REFRESH_TOKEN)
 
     return redirect({ name: 'login' })
   }

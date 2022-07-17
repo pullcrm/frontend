@@ -1,6 +1,6 @@
 {
   "name": "pullcrm",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Appointment Scheduling",
   "author": "Bohdan Tsaryk <bogdan.tsarik@gmail.com>",
   "private": true,
@@ -9,6 +9,7 @@
     "@capacitor/cli": "^3.6.0",
     "@capacitor/core": "^3.6.0",
     "@capacitor/ios": "^3.6.0",
-    "@capacitor/splash-screen": "^1.2.2"
+    "@capacitor/splash-screen": "^1.2.2",
+    "@capacitor/storage": "^1.2.5"
   }
 }

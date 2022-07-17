@@ -1,6 +1,6 @@
 {
   "name": "pullcrm",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Appointment Scheduling",
   "productName": "pullcrm",
   "author": "Bohdan Tsaryk <bogdan.tsarik@gmail.com>",
@@ -18,6 +18,8 @@
   },
   "dependencies": {
     "@antfu/eslint-config": "^0.25.1",
+    "@capacitor/core": "^3.6.0",
+    "@capacitor/storage": "^1.2.5",
     "@quasar/extras": "^1.14.2",
     "@quasar/icongenie": "^2.5.2",
     "@vuelidate/core": "^2.0.0-alpha.41",

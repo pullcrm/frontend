@@ -43,7 +43,7 @@ module.exports = configure((/* ctx */) => {
       'api',
       'portal', // TODO: Remove/refactor this boot
       'progress',
-      'cookies',
+      'protect-storage',
       'ui-kit',
       // plugins
       'auth',

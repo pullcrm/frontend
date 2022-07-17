@@ -37,13 +37,13 @@ export const useAuthStore = defineStore('auth', {
       this.accessToken = accessToken
       this.refreshToken = refreshToken
 
-      this.$cookies.set(ACCESS_TOKEN, accessToken, {
+      await this.$protectStorage.set(ACCESS_TOKEN, accessToken, {
         path: '/',
         expires: AUTH_TOKEN_COOKIE_DAYS,
         sameSite: 'Lax',
       })
 
-      this.$cookies.set(REFRESH_TOKEN, refreshToken, {
+      await this.$protectStorage.set(REFRESH_TOKEN, refreshToken, {
         path: '/',
         expires: AUTH_TOKEN_COOKIE_DAYS,
         sameSite: 'Lax',
@@ -115,9 +115,9 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    reset() {
-      this.$cookies.remove(ACCESS_TOKEN)
-      this.$cookies.remove(REFRESH_TOKEN)
+    async reset() {
+      await this.$protectStorage.remove(ACCESS_TOKEN)
+      await this.$protectStorage.remove(REFRESH_TOKEN)
 
       this.accessToken = null
       this.refreshToken = null
@@ -126,7 +126,7 @@ export const useAuthStore = defineStore('auth', {
     async logout() {
       // this.$api.auth.logout()
 
-      this.reset()
+      await this.reset()
     },
   },
 })

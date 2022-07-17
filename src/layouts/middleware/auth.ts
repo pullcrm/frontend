@@ -1,10 +1,8 @@
-import { Cookies } from 'quasar'
+import { ProtectStorage } from '~/services/protect-storage'
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '~/constants'
 
 export default async function ({ redirect, ssrContext }: any) {
-  const cookies = process.env.SERVER
-    ? Cookies.parseSSR(ssrContext)
-    : Cookies
+  const storage = new ProtectStorage({ ssrContext })
 
   const baseStore = useBaseStore()
   const authStore = useAuthStore()
@@ -28,8 +26,8 @@ export default async function ({ redirect, ssrContext }: any) {
     }
 
     if (err.status === 403) {
-      cookies.remove(ACCESS_TOKEN)
-      cookies.remove(REFRESH_TOKEN)
+      await storage.remove(ACCESS_TOKEN)
+      await storage.remove(REFRESH_TOKEN)
 
       redirect('/login/')
       return

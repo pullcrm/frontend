@@ -6,6 +6,12 @@ import PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
 const popperMenu = ref<any | null>(null)
 
 provide('getPopperMenu', () => popperMenu.value)
+
+// useMeta({
+//   htmlAttr: {
+//     class: process.env.MODE === 'capacitor' ? '_capacitor' : '',
+//   },
+// })
 </script>
 
 <template>
