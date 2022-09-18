@@ -54,6 +54,7 @@ const routes: RouteRecordRaw[] = [
               { path: 'schedule/', name: 'specialistSchedule', component: () => import('pages/SpecialistPage/SchedulePage/SchedulePage.vue') },
               { path: 'settings/', name: 'specialistSettings', component: () => import('pages/SpecialistPage/SettingsPage/SettingsPage.vue') },
               { path: 'procedures/', name: 'specialistProcedures', component: () => import('pages/SpecialistPage/ProceduresPage/ProceduresPage.vue') },
+              { path: 'timetable/', name: 'timetableProcedures', component: () => import('pages/SpecialistPage/TimetablePage/TimetablePage.vue') },
             ],
           },
 

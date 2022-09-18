@@ -21,11 +21,15 @@ import Datepicker from '@vuepic/vue-datepicker'
 
 <style lang="scss">
 .date-picker {
+  --calendar-cell-size: 35px;
+
+  $dp__cell_size: var(--calendar-cell-size);
+
   @import '@vuepic/vue-datepicker/src/VueDatePicker/style/main.scss';
 
   .dp__theme_light {
     --dp-menu-border-color: transparent;
-    --dp-primary-color: #3c8aff;
+    --dp-primary-color: #{$ui-blue-brand};
   }
 
   .dp__main {

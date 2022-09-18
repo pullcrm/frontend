@@ -311,7 +311,7 @@ const onSubmit = debounce(async () => {
           size="l"
           responsive
         >
-          Уведомлять за:
+          Повідомити за:
 
           <template #append>
             <UiSelect

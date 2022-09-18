@@ -7,7 +7,6 @@ export function cleanObject<T>(obj: T): Partial<T> {
 
   for (const prop in obj) {
     // TODO think about types
-    // @ts-expect-error
     if (obj[prop] || obj[prop] === false) {
       // @ts-expect-error
       newObj[prop] = obj[prop]

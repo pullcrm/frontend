@@ -253,6 +253,19 @@ export interface ITimetableParams {
   sunday?: string
 }
 
+export interface ISpecialistTimetableParams {
+  timeWork: Array<{ startDateTime: string; endDateTime: string }>
+}
+
+export interface ISpecialistTimetableDeleteParams {
+  id: number
+}
+
+export interface ISpecialistTimetableUpdateParams extends ISpecialistTimetableDeleteParams {
+  startDateTime: string
+  endDateTime: string
+}
+
 export interface ISettingsWidgetUpdateParams {
   isActive?: boolean
   isQueue?: boolean
@@ -540,6 +553,22 @@ export const factory = (send: any) => ({
 
     update(params: ITimetableParams): Promise<any> {
       return send('timework', params, 'PUT')
+    },
+
+    add(id: number, params: ISpecialistTimetableParams): Promise<any> {
+      return send(`specialists/${id}/addTimeWork`, params, 'POST')
+    },
+
+    put(id: number, params: ISpecialistTimetableUpdateParams): Promise<any> {
+      return send(`specialists/${id}/timeWork/${params.id}`, params, 'PUT')
+    },
+
+    delete(id: number, params: ISpecialistTimetableDeleteParams): Promise<any> {
+      return send(`specialists/${id}/timeWork/${params.id}`, null, 'DELETE')
+    },
+
+    find(id: number): Promise<any> {
+      return send(`specialists/${id}/timeWork`, null, 'GET')
     },
   },
 

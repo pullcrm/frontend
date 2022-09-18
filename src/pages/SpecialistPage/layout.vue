@@ -53,6 +53,14 @@ export default {
         },
 
         {
+          name: 'Графік роботи',
+          to: {
+            ...route,
+            name: 'timetableProcedures',
+          },
+        },
+
+        {
           name: 'Налаштування',
           to: {
             ...route,

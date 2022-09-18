@@ -30,7 +30,12 @@ export const usePopupStore = defineStore('popup', {
         const { name, props } = arg
 
         this.activeName = name
-        this.activeProps = copyObject(props)
+        this.activeProps = Object.keys(props).reduce((acc, key: string) => ({
+          ...acc,
+          [key]: typeof props[key] === 'object'
+            ? copyObject(props[key])
+            : props[key],
+        }), {})
       }
 
       if (typeof arg === 'string')

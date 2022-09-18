@@ -37,6 +37,14 @@ const TimeOffEdit = defineAsyncComponent(() => import(
   '~/popups/TimeOff/Edit.vue'
 ))
 
+const TimetableNew = defineAsyncComponent(() => import(
+  '~/popups/Timetable/New.vue'
+))
+
+const TimetableEdit = defineAsyncComponent(() => import(
+  '~/popups/Timetable/Edit.vue'
+))
+
 const SmsConfirmation = defineAsyncComponent(() => import(
   '~/popups/Confirmation/Sms.vue'
 ))
@@ -160,6 +168,28 @@ function smsConfirmed(result: boolean) {
       />
     </Popup>
     <!-- TimeOff end -->
+
+    <!-- Timetable -->
+    <Popup
+      v-slot="{ close, props }"
+      name="timetable-new"
+    >
+      <TimetableNew
+        v-bind="props"
+        @close="close"
+      />
+    </Popup>
+
+    <Popup
+      v-slot="{ close, props }"
+      name="timetable-edit"
+    >
+      <TimetableEdit
+        v-bind="props"
+        @close="close"
+      />
+    </Popup>
+    <!-- Timetable end -->
 
     <Popup
       v-slot="{ close, props }"
