@@ -3,6 +3,7 @@ import Header from './components/Header.vue'
 import ScheduleLoader from '~/components/Loader.vue'
 import ScheduleColumn from '~/components/Schedule/components/Column.vue'
 import ScheduleTimeline from '~/components/Schedule/components/Timeline.vue'
+import dayjs from '~/utils/dayjs'
 
 useMeta({
   title: 'Календар спеціаліста - pullcrm',
@@ -38,10 +39,6 @@ const filteredTimeOffs = computed(() => {
 
 const filteredAppointments = computed(() => {
   return appointments.value.filter(item => item.specialist.id === specialist.value.id)
-})
-
-onMounted(async () => {
-  await scheduleStore.fetch
 })
 </script>
 

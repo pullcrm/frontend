@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { TIME_STEP } from '~/constants'
 import { IN_QUEUE } from '~/constants/appointment'
 import dayjs from '~/utils/dayjs'
-import { minutesToTime, shiftTimeUpBySteps } from '~/utils/time'
+import { minutesToTime, setTime } from '~/utils/time'
 import { formatDate } from '~/utils/date-time'
 
 import DatePicker from '~/components/DatePicker/DatePicker.vue'
@@ -56,14 +55,8 @@ const customDate = computed<Date>({
   },
 })
 
-const workingHours = computed(() => {
-  return timetableStore.workingHours
-})
-
-const toTime = computed(() => {
-  const steps = props.duration / TIME_STEP
-
-  return shiftTimeUpBySteps(workingHours.value, props.startAt, steps)
+const endTime = computed(() => {
+  return setTime(new Date(), props.startAt).add(props.duration, 'minute').format('HH:mm')
 })
 </script>
 
@@ -136,7 +129,7 @@ const toTime = computed(() => {
       size="m"
       responsive
     >
-      Завершується в {{ toTime }}
+      Завершується в {{ endTime }}
     </UiText>
   </div>
 </template>

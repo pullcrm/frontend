@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import useValidate, { ValidateMaxLength, ValidateRequired } from 'validation/index'
+import { form, v$, workingHours } from './index'
 import { formatDate, toDate } from '~/utils/date-time'
 import { setTime } from '~/utils/time'
-import { isCloseDay } from '~/logics/time-offs'
-import DatePicker from '~/components/DatePicker/DatePicker.vue'
 import { api } from '~/boot/api'
 
 const props = defineProps({
@@ -11,77 +9,25 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-
-  specialistId: {
-    type: Number,
-    default: null,
-  },
-
-  time: {
-    type: String,
-    default: null,
-  },
 })
 
 const emit = defineEmits(['close'])
 
 const toastsStore = useToastsStore()
 const scheduleStore = useScheduleStore()
-const timetableStore = useTimetableStore()
 const specialistsStore = useSpecialistsStore()
 
-const isClose = ref(
-  isCloseDay({
-    startDateTime: props.timeOff.startDateTime,
-    endDateTime: props.timeOff.endDateTime,
-  }, timetableStore.timeWork),
-)
+const date = ref(toDate(props.timeOff.startDateTime).toDate())
 const isLoading = ref(false)
 
-const form = ref({
+form.value = {
   id: props.timeOff.id,
-  endTime: props.timeOff.endTime,
-  specialist: specialistsStore.specialists.find(({ id }) => id === props.timeOff.specialistId),
   startTime: props.timeOff.startTime,
+  endTime: props.timeOff.endTime,
+
+  specialist: specialistsStore.byId(props.timeOff.specialistId),
   description: props.timeOff.description,
-})
-
-const date = ref(toDate(props.timeOff.startDateTime).toDate())
-
-const workingHours = computed(() => {
-  return timetableStore.workingHours
-})
-
-const workingHoursForTimeEnd = computed(() => {
-  if (!form.value.startTime)
-    return []
-
-  const startTimeIndex = workingHours.value.indexOf(form.value.startTime)
-
-  return workingHours.value.filter((_time, index) => {
-    return startTimeIndex < index
-  })
-})
-
-const validations = {
-  specialist: {
-    ...ValidateRequired('Виберіть спеціаліста'),
-  },
-
-  startTime: !isClose.value && {
-    ...ValidateRequired('Вкажіть час початку'),
-  },
-
-  endTime: !isClose.value && {
-    ...ValidateRequired('Вкажіть час завершения'),
-  },
-
-  description: {
-    ...ValidateMaxLength('Максимальна кількість символів: 255', 255),
-  },
 }
-
-const v$ = useValidate(validations, form)
 
 async function submit() {
   const isValid = await v$.value.$validate()
@@ -95,7 +41,7 @@ async function submit() {
     const endDateTime = setTime(date.value, form.value.endTime).format('YYYY-MM-DD HH:mm:ss')
     const startDateTime = setTime(date.value, form.value.startTime).format('YYYY-MM-DD HH:mm:ss')
 
-    await api.timeOff.update(form.value.id, {
+    await api.timeOff.update(form.value.id as number, {
       specialistId: form.value.specialist.id,
       endDateTime,
       startDateTime,
@@ -115,7 +61,7 @@ async function remove() {
   isLoading.value = true
 
   try {
-    await api.timeOff.delete(form.value.id)
+    await api.timeOff.delete(form.value.id as number)
     await scheduleStore.fetchTimeOffs()
 
     toastsStore.show({ title: 'Видалено!' })
@@ -130,16 +76,6 @@ async function remove() {
 async function close() {
   emit('close')
 }
-
-watch(
-  () => isClose.value,
-  (val) => {
-    if (val) {
-      form.value.endTime = workingHours.value[workingHours.value.length - 1]
-      form.value.startTime = workingHours.value[0]
-    }
-  },
-)
 </script>
 
 <template>
@@ -196,50 +132,31 @@ watch(
             </template>
           </UiPopover>
 
-          <UiField>
-            <UiSwitch
-              v-model="isClose"
-              size="m"
-            >
-              <template #append>
-                <UiText
-                  size="m"
-                >
-                  Закрити запис на весь день
-                </UiText>
-              </template>
-            </UiSwitch>
+          <UiField
+            label="Час початку"
+            required
+            :error="getFieldError('startTime')"
+          >
+            <UiSelect
+              v-model="form.startTime"
+              :options="workingHours.from"
+              placeholder="Вибрати час початку"
+              @update:model-value="resetFieldError('startTime')"
+            />
           </UiField>
 
-          <template
-            v-if="isClose === false"
+          <UiField
+            label="Час закінчення"
+            required
+            :error="getFieldError('endTime')"
           >
-            <UiField
-              label="Час початку"
-              required
-              :error="getFieldError('startTime')"
-            >
-              <UiSelect
-                v-model="form.startTime"
-                :options="workingHours"
-                placeholder="Вибрати час початку"
-                @update:model-value="resetFieldError('startTime')"
-              />
-            </UiField>
-
-            <UiField
-              label="Час закінчення"
-              required
-              :error="getFieldError('endTime')"
-            >
-              <UiSelect
-                v-model="form.endTime"
-                :options="workingHoursForTimeEnd"
-                placeholder="Вибрати час закінчення"
-                @update:model-value="resetFieldError('endTime')"
-              />
-            </UiField>
-          </template>
+            <UiSelect
+              v-model="form.endTime"
+              :options="workingHours.to"
+              placeholder="Вибрати час закінчення"
+              @update:model-value="resetFieldError('endTime')"
+            />
+          </UiField>
 
           <UiField
             label="Короткий опис"

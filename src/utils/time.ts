@@ -25,13 +25,15 @@ export function minutesToTime(minutes: number) {
   return str
 }
 
-export function setTime(date: Date, time: string) {
+export function setTime(date: Date, time: string): dayjs.Dayjs {
   const [hour, minute] = time.split(':')
 
   return dayjs(date).hour(Number(hour)).minute(Number(minute)).second(0)
 }
 
-export function getWorkingHours(open: string, close: string) {
+export function getWorkingHours(open: string, close: string, options?: { step?: number }) {
+  const { step = 15 } = options || {}
+
   const hours = []
 
   let from = setTime(new Date(), open)
@@ -39,28 +41,8 @@ export function getWorkingHours(open: string, close: string) {
   do {
     hours.push(from.format('HH:mm'))
 
-    from = from.add(15, 'm')
+    from = from.add(step, 'm')
   } while (from.format('HH:mm') !== close)
 
   return [...hours, close]
-}
-
-// TODO: Refactor
-export function shiftTimeDownBySteps(workingHours: string[], time: string, steps: number) {
-  let timeIndex = workingHours.indexOf(time) - steps
-
-  while (!workingHours[timeIndex])
-    timeIndex += 1
-
-  return workingHours[timeIndex]
-}
-
-// TODO: Refactor
-export function shiftTimeUpBySteps(workingHours: string[], time: string, steps: number) {
-  let timeIndex = workingHours.indexOf(time) + steps
-
-  while (!workingHours[timeIndex])
-    timeIndex -= 1
-
-  return workingHours[timeIndex]
 }

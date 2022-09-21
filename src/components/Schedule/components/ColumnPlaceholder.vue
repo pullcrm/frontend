@@ -7,10 +7,9 @@
 
 <style lang="scss">
   .schedule-column-placeholder {
+    @include background-image-disabled-placeholder(45deg);
+
     flex: 1;
-    background-color: $ui-black-10;
-    background-image: url('~/assets/svg/disabled-time-pattern.svg');
-    background-position: bottom right;
     box-shadow: inset 1px 0 0 $ui-black-40;
   }
 </style>

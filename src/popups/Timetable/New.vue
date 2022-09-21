@@ -14,14 +14,11 @@ const props = defineProps({
     type: Array,
     default: null,
   },
-
-  onReload: {
-    type: Function,
-    required: true,
-  },
 })
 
 const emit = defineEmits(['close'])
+
+const timetableStore = useTimetableStore()
 
 const isLoading = ref(false)
 const formatDates = getFormatDates(props.dates as Date[])
@@ -46,7 +43,7 @@ async function submit() {
       timeWork: dates,
     })
 
-    await props.onReload()
+    await timetableStore.fetchAll()
 
     close()
   }

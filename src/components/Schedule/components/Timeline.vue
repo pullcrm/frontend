@@ -2,18 +2,14 @@
 const timetableStore = useTimetableStore()
 
 const workingHours = computed(() => {
-  return timetableStore.workingHours
-})
-
-const timeHours = computed(() => {
-  return workingHours.value.filter((_, index) => index % 2 === 0)
+  return timetableStore.maxWorkingHours.filter((_, index) => index % 2 === 0)
 })
 </script>
 
 <template>
   <div class="schedule-timeline">
     <div
-      v-for="time in timeHours"
+      v-for="time in workingHours"
       :key="time"
       class="schedule-timeline__item"
     >

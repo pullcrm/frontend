@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-import groupBy from 'lodash/groupBy'
-import { api } from '~/boot/api'
-
 import DatePicker from '~/components/DatePicker/DatePicker.vue'
+import { fetchTimetable } from '~/logics/timetable'
 import { formatDate } from '~/utils/date-time'
+
+useMeta({
+  title: 'Графік роботи спеціаліста - pullcrm',
+})
 
 const popupStore = usePopupStore()
 const specialistStore = useSpecialistStore()
@@ -61,27 +63,18 @@ const datesAttributes = computed(() => {
   return { allowedDates }
 })
 
-async function fetchTimetable() {
+async function fetch() {
   isCalendarLoading.value = true
 
-  const result = await api.timetable.find(specialist.value.id)
-
-  currentTimetable.value = groupBy(result.map((item: any) => {
-    return {
-      date: formatDate(item.startDateTime, 'YYYY-MM-DD'),
-      start: formatDate(item.startDateTime, 'HH:mm'),
-      end: formatDate(item.endDateTime, 'HH:mm'),
-      ...item,
-    }
-  }), 'date')
+  currentTimetable.value = await fetchTimetable(specialist.value.id)
 
   isCalendarLoading.value = false
 }
 
-onBeforeMount(fetchTimetable)
+onBeforeMount(fetch)
 
 async function onReload() {
-  await fetchTimetable()
+  await fetch()
 
   dates.value = null
 }

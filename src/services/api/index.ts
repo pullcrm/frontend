@@ -567,7 +567,7 @@ export const factory = (send: any) => ({
       return send(`specialists/${id}/timeWork/${params.id}`, null, 'DELETE')
     },
 
-    find(id: number): Promise<any> {
+    find(id: number): Promise<any[]> {
       return send(`specialists/${id}/timeWork`, null, 'GET')
     },
   },

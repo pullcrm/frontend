@@ -2,12 +2,8 @@
 import { formatDate } from '~/utils/date-time'
 import { pluralize } from '~/utils/pluralize'
 import { formatMoney } from '~/utils/money'
-
 import { COMPLETED } from '~/constants/appointment'
-
 import dayjs from '~/utils/dayjs'
-
-import DatePicker from '~/components/DatePicker/DatePicker.vue'
 
 const props = defineProps({
   appointments: {
@@ -23,11 +19,12 @@ const date = computed<Date>({
     return new Date(scheduleStore.date) as Date
   },
 
-  set(val) {
+  async set(val) {
     const date = dayjs(val).format('YYYY-MM-DD')
 
     scheduleStore.date = date
-    scheduleStore.fetch()
+
+    await scheduleStore.fetch()
   },
 })
 

@@ -42,7 +42,7 @@ const availableHours = ref<string[]>([])
 const form = ref<IAppointmentForm>({
   ...props.appointment,
   date: dayjs(props.appointment.date),
-  specialist: specialistsStore.specialists.find(({ id }) => id === props.appointment.specialist.id),
+  specialist: specialistsStore.specialists.find(({ id }) => id === props.appointment.specialist.id), // TODO: Use specialistsStore.byId
   hasRemindSMS: smsStore.isAuthorize ? Boolean(props.appointment.smsIdentifier) : null,
 })
 
