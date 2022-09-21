@@ -15,12 +15,16 @@
   }
 
   &__alert {
-    margin: 16px 0;
+    margin: 0 0 16px;
   }
 
   @include ui-mobile-only {
     &__date-picker {
       --calendar-cell-size: 50px;
+    }
+
+    &__button {
+      width: 100%;
     }
   }
 }

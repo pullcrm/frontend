@@ -19,7 +19,6 @@ defineEmits(['input'])
 <template>
   <Component
     :is="item.to ? 'RouterLink' : 'a'"
-    href="#"
     class="ui-navigation-item"
     :class="{
       'ui-navigation-item__active': isActive,

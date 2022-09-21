@@ -157,6 +157,7 @@ async function onUpdateMonthYear({ month, year }: any) {
       <!-- hide-offset-dates -->
       <DatePicker
         v-model="dates"
+        no-swipe
         multi-dates
         :markers="markers"
         :readonly="isCalendarLoading"
@@ -168,7 +169,7 @@ async function onUpdateMonthYear({ month, year }: any) {
       <UiButton
         class="specialist-timetable-page__button"
         type="submit"
-        size="m"
+        size="l"
         theme="blue"
         :disabled="isDisabled"
         @click="onSubmit"
