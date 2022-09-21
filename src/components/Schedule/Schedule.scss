@@ -12,6 +12,8 @@
   }
 
   &__columns {
+    @include hide-scrollbar;
+
     display: flex;
   }
 

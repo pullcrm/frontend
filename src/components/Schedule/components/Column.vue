@@ -188,17 +188,18 @@ function onMouseleave() {
         class="schedule-column__hour-tile"
       />
 
-      <TimetablePlaceholder
-        v-if="!timetableData.hasTimetable"
-        @add="addTimetable"
-      />
-
       <AvailableArea
+        v-if="timetableData.hasTimetable"
         :working-hours="timetableData.times"
         @click="openMenu"
         @dblclick="addAppointment"
         @mousemove="onMousemove"
         @mouseleave="onMouseleave"
+      />
+
+      <TimetablePlaceholder
+        v-else
+        @add="addTimetable"
       />
     </div>
   </div>

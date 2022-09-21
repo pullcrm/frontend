@@ -29,15 +29,33 @@ export const useTimetableStore = defineStore('timetable', {
 
     // New
     maxWorkingHours(state) {
+      const appointmentsStore = useAppointmentsStore()
+
+      const appointmentsHours = appointmentsStore.appointments
+        .reduce((acc, { startTime, endTime }) => [
+          ...acc,
+          startTime,
+          endTime,
+        ], [])
+
       const realHours = Object.values(state.timetableDict)
         .filter(Boolean)
         .reduce((acc, { start, end }) => [
           ...acc,
-          ...getWorkingHours(start, end),
+          start,
+          end,
         ], [])
+        .concat(appointmentsHours)
+        .sort()
 
-      // TODO: Add fallback if no one user has timetable
-      return uniq(realHours).sort() as string[]
+      if (realHours.length < 2)
+        return []
+
+      const from = realHours[0]
+      const to = realHours[realHours.length - 1]
+
+      // TODO: Add fallback if no one user has timetable ?
+      return getWorkingHours(from, to)
     },
 
     fromMaxWorkingHours(): string {

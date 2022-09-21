@@ -31,18 +31,18 @@ export function setTime(date: Date, time: string): dayjs.Dayjs {
   return dayjs(date).hour(Number(hour)).minute(Number(minute)).second(0)
 }
 
-export function getWorkingHours(open: string, close: string, options?: { step?: number }) {
+export function getWorkingHours(start: string, end: string, options?: { step?: number }) {
   const { step = 15 } = options || {}
 
   const hours = []
 
-  let from = setTime(new Date(), open)
+  let from = setTime(new Date(), start)
 
   do {
     hours.push(from.format('HH:mm'))
 
     from = from.add(step, 'm')
-  } while (from.format('HH:mm') !== close)
+  } while (from.format('HH:mm') !== end)
 
-  return [...hours, close]
+  return [...hours, end]
 }
