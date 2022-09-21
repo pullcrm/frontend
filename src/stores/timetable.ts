@@ -4,12 +4,10 @@ import { getWorkingHours } from '~/utils/time'
 
 import { normalizeTimetable } from '~/logics/company'
 import type { ITimetable } from '~/services/api'
-import { fetchTimetable } from '~/logics/timetable'
+import { formatDate } from '~/utils/date-time'
 
 interface ITimetableDict {
-  specialistId?: {
-    [date: string]: any
-  }
+  specialistId?: any | null
 }
 
 interface IState {
@@ -31,16 +29,12 @@ export const useTimetableStore = defineStore('timetable', {
 
     // New
     maxWorkingHours(state) {
-      const scheduleStore = useScheduleStore()
-
       const realHours = Object.values(state.timetableDict)
-        .map((item: any) => item[scheduleStore.date])
         .filter(Boolean)
-        .reduce((acc, item) => {
-          const { start, end } = item
-
-          return [...acc, ...getWorkingHours(start, end)]
-        }, [])
+        .reduce((acc, { start, end }) => [
+          ...acc,
+          ...getWorkingHours(start, end),
+        ], [])
 
       // TODO: Add fallback if no one user has timetable
       return uniq(realHours).sort() as string[]
@@ -65,7 +59,25 @@ export const useTimetableStore = defineStore('timetable', {
 
     // New
     async fetchAll() {
+      const scheduleStore = useScheduleStore()
       const specialistsStore = useSpecialistsStore()
+
+      const fetchTimetable = async (id: number) => {
+        const result = await this.$api.timetable.find(id, { startDate: scheduleStore.date }).then((res) => {
+          return res.map((item: any) => {
+            return {
+              date: formatDate(item.startDateTime, 'YYYY-MM-DD'),
+              start: formatDate(item.startDateTime, 'HH:mm'),
+              end: formatDate(item.endDateTime, 'HH:mm'),
+              ...item,
+            }
+          })
+        })
+
+        return {
+          [id]: result[0],
+        }
+      }
 
       const promises = specialistsStore.specialists.map(({ id }) => {
         return fetchTimetable(id)

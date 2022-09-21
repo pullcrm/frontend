@@ -28,15 +28,9 @@ const popupStore = usePopupStore()
 const scheduleStore = useScheduleStore()
 const timetableStore = useTimetableStore()
 
-const date = computed(() => {
-  return scheduleStore.date
-})
-
 const timetable = computed(() => {
   // @ts-expect-error
-  const timetables = timetableStore.timetableDict[props.specialist.id] || {}
-
-  return timetables[date.value]
+  return timetableStore.timetableDict[props.specialist.id]
 })
 
 const timetableData = computed(() => {
