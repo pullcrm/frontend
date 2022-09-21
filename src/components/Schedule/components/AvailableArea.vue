@@ -27,7 +27,7 @@ const gridArea = computed(() => {
 
 <style lang="scss">
 .schedule-column-available-area {
-  background-color: $ui-black-10;
+  background-color: var(--page-background-color, $ui-black-10);
   cursor: pointer;
   background-image: linear-gradient(
     $ui-black-40,
