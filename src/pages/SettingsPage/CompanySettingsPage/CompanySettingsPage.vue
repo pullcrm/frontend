@@ -64,7 +64,9 @@ async function onAvatar(file: any) {
   })
 
   // TODO: Replace to fetch company info
-  return await baseStore.fetchProfile()
+  await baseStore.fetchProfile()
+
+  company.value.logoId = result.id
 }
 
 async function submit() {
