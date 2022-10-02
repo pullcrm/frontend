@@ -67,6 +67,9 @@ const isDeletable = computed(() => {
 })
 
 const isRoleDisable = computed(() => {
+  if (specialist.value.role.name === ADMIN)
+    return true
+
   return role.value.name === SPECIALIST
 })
 
