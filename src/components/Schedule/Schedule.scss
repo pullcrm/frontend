@@ -7,7 +7,7 @@
   &__inner {
     position: relative;
     flex: 1;
-    overflow-x: auto;
+    width: calc(100% - var(--time-line-width));
     border: 1px solid $ui-black-40;
   }
 
@@ -15,6 +15,7 @@
     @include hide-scrollbar;
 
     display: flex;
+    overflow-x: scroll;
   }
 
   &__column {
@@ -62,5 +63,15 @@
 
   @media (min-width: $ui-laptop) {
     --time-line-width: 36px;
+  }
+
+  @supports (scroll-snap-type: x mandatory) {
+    &__columns {
+      scroll-snap-type: x mandatory;
+    }
+
+    &__column {
+      scroll-snap-align: start;
+    }
   }
 }

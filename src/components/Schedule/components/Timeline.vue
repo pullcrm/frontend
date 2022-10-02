@@ -24,7 +24,7 @@ const workingHours = computed(() => {
 
 <style lang="scss">
   .schedule-timeline {
-    flex-basis: var(--time-line-width);
+    width: var(--time-line-width);
 
     &__item {
       display: flex;
@@ -37,10 +37,6 @@ const workingHours = computed(() => {
       &:not(:last-child) {
         margin-bottom: $SCHEDULE_ROW_HEIGHT;
       }
-    }
-
-    @media (max-width: ($ui-laptop - 1px)) {
-      flex-basis: var(--time-line-width);
     }
   }
 </style>
