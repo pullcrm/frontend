@@ -91,8 +91,8 @@ async function close() {
 
 // Set selected date value
 form.value = {
-  startTime: props.timeWork[formatDates[0]][0]?.start,
-  endTime: props.timeWork[formatDates[0]][0]?.end,
+  startTime: props.timeWork[formatDates[0]]?.start,
+  endTime: props.timeWork[formatDates[0]]?.end,
 }
 </script>
 
