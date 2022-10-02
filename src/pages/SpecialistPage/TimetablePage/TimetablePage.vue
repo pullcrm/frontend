@@ -106,7 +106,7 @@ async function fetch(date: dayjs.Dayjs) {
 
 onBeforeMount(() => fetch(dayjs(new Date())))
 
-async function onReload() {
+async function onSubmitted() {
   dates.value = null
 
   await fetch(dayjs(new Date()))
@@ -119,7 +119,7 @@ async function onSubmit() {
       props: {
         dates: dates.value,
         timeWork: currentTimetable.value,
-        onReload,
+        onSubmitted,
       },
     })
 
@@ -131,7 +131,7 @@ async function onSubmit() {
     props: {
       dates: dates.value,
       specialistId: specialist.value.id,
-      onReload,
+      onSubmitted,
     },
   })
 }

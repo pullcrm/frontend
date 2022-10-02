@@ -14,6 +14,11 @@ const props = defineProps({
     type: Object,
     default: null,
   },
+
+  onSubmitted: {
+    type: Function,
+    default: () => {},
+  },
 })
 
 const emit = defineEmits(['close'])
@@ -33,7 +38,7 @@ async function submit() {
     isLoading.value = true
 
     const requests = formatDates.map((date: any) => {
-      const timeWork = props.timeWork[date][0]
+      const timeWork = props.timeWork[date]
 
       return api.timetable.put(timeWork.specialistId, {
         id: timeWork.id,
@@ -45,6 +50,8 @@ async function submit() {
     await Promise.all(requests)
 
     await timetableStore.fetchAll()
+
+    await props.onSubmitted()
 
     close()
   }
@@ -58,7 +65,7 @@ async function onDelete() {
     isLoading.value = true
 
     const requests = formatDates.map((date: any) => {
-      const timeWork = props.timeWork[date][0]
+      const timeWork = props.timeWork[date]
 
       return api.timetable.delete(timeWork.specialistId, {
         id: timeWork.id,
@@ -68,6 +75,8 @@ async function onDelete() {
     await Promise.all(requests)
 
     await timetableStore.fetchAll()
+
+    await props.onSubmitted()
 
     close()
   }

@@ -14,6 +14,11 @@ const props = defineProps({
     type: Array,
     default: null,
   },
+
+  onSubmitted: {
+    type: Function,
+    default: () => {},
+  },
 })
 
 const emit = defineEmits(['close'])
@@ -44,6 +49,8 @@ async function submit() {
     })
 
     await timetableStore.fetchAll()
+
+    await props.onSubmitted()
 
     close()
   }
