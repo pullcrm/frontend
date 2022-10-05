@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import { SOURCE_WIDGET, TIME_STEP } from '~/constants'
-
+import { SOURCE_WIDGET } from '~/constants'
 import { CANCELED, COMPLETED, IN_PROGRESS, IN_QUEUE } from '~/constants/appointment'
-
-import { shiftTimeUpBySteps, slugFromTime } from '~/utils/time'
+import { slugFromTime } from '~/utils/time'
 
 import { getAppointmentSubtitle, getProceduresDuration, sourcesDict, statusesDict } from '~/logics/appointment'
 
@@ -29,7 +27,6 @@ const getPopperMenu = inject<() => typeof PopperMenu>('getPopperMenu')
 const popupStore = usePopupStore()
 const toastsStore = useToastsStore()
 const scheduleStore = useScheduleStore()
-const timetableStore = useTimetableStore()
 
 const root = ref<HTMLElement | null>(null)
 const statusBadge = ref<typeof Badge | null>(null)
@@ -66,10 +63,6 @@ const totalTime = computed(() => {
   return getProceduresDuration(props.appointment)
 })
 
-const workingHours = computed(() => {
-  return timetableStore.workingHours
-})
-
 const sizeName = computed(() => {
   if (totalTime.value < 30)
     return 'xs'
@@ -83,14 +76,12 @@ const sizeName = computed(() => {
   return 'xl'
 })
 
-const fromTime = computed(() => {
+const startTime = computed(() => {
   return props.appointment.startTime
 })
 
-const toTime = computed(() => {
-  const steps = totalTime.value / TIME_STEP
-
-  return shiftTimeUpBySteps(workingHours.value, fromTime.value, steps)
+const endTime = computed(() => {
+  return props.appointment.endTime
 })
 
 const gridArea = computed(() => {
@@ -98,7 +89,7 @@ const gridArea = computed(() => {
     return
 
   return {
-    gridRow: `${slugFromTime(fromTime.value)}-start / ${slugFromTime(toTime.value)}-start`,
+    gridRow: `${slugFromTime(startTime.value)}-start / ${slugFromTime(endTime.value)}-start`,
     gridColumn: 'start / end',
   }
 })
@@ -165,8 +156,9 @@ onClickOutside(root, () => {
 </script>
 
 <template>
-  <div
+  <a
     ref="root"
+    href="#"
     class="appointment" :class="[
       `appointment_size_${sizeName}`,
       `appointment_status_${status}`,
@@ -174,8 +166,8 @@ onClickOutside(root, () => {
       { 'appointment_responsive': responsive },
     ]"
     :style="gridArea"
-    @dblclick="edit"
-    @click="isActive = true"
+    @dblclick.prevent="edit"
+    @click.prevent="isActive = true"
   >
     <div class="appointment__divider" />
 
@@ -215,12 +207,12 @@ onClickOutside(root, () => {
 
       <div class="appointment__footer">
         <UiText
-          v-if="appointment.startTime"
+          v-if="startTime"
           size="s"
           left-icon="outlined/clock"
           class="appointment__duration"
         >
-          {{ fromTime }} - {{ toTime }}
+          {{ startTime }} - {{ endTime }}
         </UiText>
 
         <div class="appointment__price">
@@ -228,7 +220,7 @@ onClickOutside(root, () => {
         </div>
       </div>
     </div>
-  </div>
+  </a>
 </template>
 
 <style lang="scss" src="./Appointment.scss"></style>

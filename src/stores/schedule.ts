@@ -23,6 +23,7 @@ export const useScheduleStore = defineStore('schedule', {
   },
   actions: {
     async fetch() {
+      const timetableStore = useTimetableStore()
       const appointmentsStore = useAppointmentsStore()
 
       this.isLoading = true
@@ -31,6 +32,7 @@ export const useScheduleStore = defineStore('schedule', {
 
       await Promise.all([
         this.fetchTimeOffs(),
+        timetableStore.fetchAll(),
         appointmentsStore.fetch(),
         appointmentsStore.fetchQueue(),
       ])
@@ -55,7 +57,3 @@ export const useScheduleStore = defineStore('schedule', {
     },
   },
 })
-
-//   SET_DATE(state, date) {
-//     state.date = date
-//   },

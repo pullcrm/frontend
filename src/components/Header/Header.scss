@@ -26,10 +26,6 @@
     align-items: center;
   }
 
-  &__mail {
-    display: none;
-  }
-
   &__balance {
     margin-right: 16px;
     color: $ui-green-brand;
@@ -44,12 +40,14 @@
   }
 
   @media (min-width: $ui-tablet) {
-    &__mail {
-      display: flex;
-    }
-
     &__balance {
       margin-right: 24px;
+    }
+  }
+
+  @include ui-mobile-only {
+    &__mail {
+      display: none;
     }
   }
 }

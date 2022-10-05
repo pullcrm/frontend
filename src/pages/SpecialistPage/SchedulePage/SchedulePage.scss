@@ -1,4 +1,6 @@
 .specialist-schedule-page {
+  --page-background-color: #{$ui-white};
+
   &__schedule {
     position: relative;
     display: flex;

@@ -14,10 +14,7 @@ const specialistStore = useSpecialistStore()
 const specialistsStore = useSpecialistsStore()
 
 const specialist = ref(specialistStore.specialist)
-
-const specialistRole = computed(() => {
-  return roles[specialist.value.role.name as keyof typeof roles]
-})
+const specialistRole = ref(roles[specialist.value.role.name as keyof typeof roles])
 
 const isLoading = ref(false)
 
@@ -70,6 +67,9 @@ const isDeletable = computed(() => {
 })
 
 const isRoleDisable = computed(() => {
+  if (specialist.value.role.name === ADMIN)
+    return true
+
   return role.value.name === SPECIALIST
 })
 

@@ -15,13 +15,15 @@ const props = defineProps({
     default: null,
   },
 
-  onReload: {
+  onSubmitted: {
     type: Function,
-    required: true,
+    default: () => {},
   },
 })
 
 const emit = defineEmits(['close'])
+
+const timetableStore = useTimetableStore()
 
 const isLoading = ref(false)
 const formatDates = getFormatDates(props.dates as Date[])
@@ -36,7 +38,7 @@ async function submit() {
     isLoading.value = true
 
     const requests = formatDates.map((date: any) => {
-      const timeWork = props.timeWork[date][0]
+      const timeWork = props.timeWork[date]
 
       return api.timetable.put(timeWork.specialistId, {
         id: timeWork.id,
@@ -47,7 +49,9 @@ async function submit() {
 
     await Promise.all(requests)
 
-    await props.onReload()
+    await timetableStore.fetchAll()
+
+    await props.onSubmitted()
 
     close()
   }
@@ -61,7 +65,7 @@ async function onDelete() {
     isLoading.value = true
 
     const requests = formatDates.map((date: any) => {
-      const timeWork = props.timeWork[date][0]
+      const timeWork = props.timeWork[date]
 
       return api.timetable.delete(timeWork.specialistId, {
         id: timeWork.id,
@@ -70,7 +74,9 @@ async function onDelete() {
 
     await Promise.all(requests)
 
-    await props.onReload()
+    await timetableStore.fetchAll()
+
+    await props.onSubmitted()
 
     close()
   }
@@ -85,8 +91,8 @@ async function close() {
 
 // Set selected date value
 form.value = {
-  startTime: props.timeWork[formatDates[0]][0]?.start,
-  endTime: props.timeWork[formatDates[0]][0]?.end,
+  startTime: props.timeWork[formatDates[0]]?.start,
+  endTime: props.timeWork[formatDates[0]]?.end,
 }
 </script>
 

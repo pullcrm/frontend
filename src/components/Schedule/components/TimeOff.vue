@@ -11,7 +11,7 @@ const props = defineProps({
 const popupStore = usePopupStore()
 
 const description = computed(() => {
-  return props.timeOff.description.slice(0, 15)
+  return props.timeOff.description.slice(0, 15) || 'Перерва'
 })
 
 const from = computed(() => {
@@ -45,6 +45,7 @@ function edit() {
     size="l"
     responsive
     :style="gridArea"
+    :data-text="description"
     @dblclick="edit"
   >
     {{ description }}
@@ -53,20 +54,24 @@ function edit() {
 
 <style lang="scss">
   .schedule-timeoff {
-    @include ui-text-border($ui-black-10, 2px);
+    @include background-image-disabled-placeholder;
 
     z-index: 7;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 1px;
+    position: relative;
     color: $ui-black-60;
     background-color: $ui-black-10;
-    background-image: url('~/assets/svg/disabled-time-pattern.svg');
-    background-position: bottom right;
-    background-size: $SCHEDULE_ROW_HEIGHT;
     box-shadow:
       0 1px 0 $ui-black-40,
       0 -1px 0 $ui-black-40;
+
+    &:after {
+      content: attr(data-text);
+      -webkit-text-stroke: 4px $ui-black-10;
+      position: absolute;
+      z-index: -1
+    }
   }
 </style>

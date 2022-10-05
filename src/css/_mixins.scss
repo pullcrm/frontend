@@ -65,18 +65,6 @@
   }
 }
 
-@mixin ui-text-border ($color, $width: 1px) {
-  text-shadow:
-    -$width  -$width 0 $color,
-    0        -$width 0 $color,
-    $width   -$width 0 $color,
-    $width   0       0 $color,
-    $width   $width  0 $color,
-    0        $width  0 $color,
-    -$width  $width  0 $color,
-    -$width  0       0 $color;
-}
-
 @mixin ui-extend-click-area($margin) {
   position: relative;
 
@@ -88,6 +76,17 @@
     left: -$margin;
     content: '';
   }
+}
+
+@mixin background-image-disabled-placeholder($deg: -45deg) {
+  background-image: linear-gradient($deg,
+    transparent,
+    transparent 49%,
+    $ui-black-80 50%,
+    transparent 51%,
+    transparent
+  );
+  background-size: 10px 10px;
 }
 
 @mixin ui-mobile-only {

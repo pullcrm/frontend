@@ -1,6 +1,8 @@
 .settings-page-layout {
   $sidebar-width: 236px;
 
+  flex: 1;
+
   &__container {
     display: flex;
     flex-direction: column;

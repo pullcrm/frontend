@@ -98,35 +98,39 @@ export default {
 
 <template>
   <div class="specialist-page-layout">
+    <div class="specialist-page-layout__header">
+      <UiContainer narrow>
+        <UiBack
+          v-if="hasBack"
+          class="specialist-page-layout__back"
+          @click="onBack"
+        />
+
+        <UiTitle
+          class="specialist-page-layout__title"
+          size="l"
+          responsive
+        >
+          {{ specialist.user.fullName }}
+        </UiTitle>
+
+        <PhoneConfirmation
+          :specialist="specialist"
+          class="specialist-page-layout__phone-confirmation"
+        />
+
+        <CompanyPicker
+          class="specialist-page-layout__company-picker"
+        />
+
+        <UiNavigation
+          class="specialist-page-layout__navigation"
+          :navigation="navigation"
+        />
+      </UiContainer>
+    </div>
+
     <UiContainer narrow>
-      <UiBack
-        v-if="hasBack"
-        class="specialist-page-layout__back"
-        @click="onBack"
-      />
-
-      <UiTitle
-        class="specialist-page-layout__title"
-        size="l"
-        responsive
-      >
-        {{ specialist.user.fullName }}
-      </UiTitle>
-
-      <PhoneConfirmation
-        :specialist="specialist"
-        class="specialist-page-layout__phone-confirmation"
-      />
-
-      <CompanyPicker
-        class="specialist-page-layout__company-picker"
-      />
-
-      <UiNavigation
-        class="specialist-page-layout__navigation"
-        :navigation="navigation"
-      />
-
       <RouterView />
     </UiContainer>
   </div>

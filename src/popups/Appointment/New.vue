@@ -49,7 +49,7 @@ const form = ref({
   status: IN_PROGRESS,
   fullName: '',
   startTime: props.time,
-  specialist: props.specialistId && specialistsStore.specialists.find(({ id }) => id === props.specialistId),
+  specialist: props.specialistId && specialistsStore.specialists.find(({ id }) => id === props.specialistId), // TODO: Use specialistsStore.byId
   procedures: [],
   description: '',
   hasRemindSMS: false,

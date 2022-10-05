@@ -1,14 +1,46 @@
 .specialist-page-layout {
-  padding: 24px 0 40px;
+  padding-bottom: 40px;
 
   &__back {
     margin-bottom: 16px;
   }
 
+  &__header {
+    margin-bottom: 24px;
+    padding: 24px 0;
+    background: linear-gradient(to right, $ui-black-10, $ui-black-20);
+  }
+
+  &__navigation {
+    margin: 0 calc((-1 * var(--ui-container-padding)) - 8px);
+    padding: 0 var(--ui-container-padding);
+
+    .ui-navigation-item {
+      background: none !important;
+      padding: 0;
+      margin: 0 8px;
+    }
+
+    .router-link-active {
+      font-weight: 500;
+    }
+  }
+
   &__title,
-  &__navigation,
   &__company-picker,
   &__phone-confirmation {
     margin-bottom: 24px;
+  }
+
+  @include ui-mobile-only {
+    &__header {
+      padding: 16px 0;
+    }
+
+    &__title,
+    &__company-picker,
+    &__phone-confirmation {
+      margin-bottom: 16px;
+    }
   }
 }

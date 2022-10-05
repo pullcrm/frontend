@@ -1,17 +1,18 @@
 <script lang="ts" setup>
-import Timeline from './components/Timeline.vue'
 import Specialist from './components/Specialist.vue'
 import ActiveTime from './components/ActiveTime.vue'
 import ScheduleColumn from './components/Column.vue'
+import ScheduleTimeline from './components/Timeline.vue'
 import ScheduleColumnPlaceholder from './components/ColumnPlaceholder.vue'
 import Loader from '~/components/Loader.vue'
 import dayjs from '~/utils/dayjs'
 
-defineProps({
-  loading: {
-    type: Boolean,
-    default: false,
-  },
+interface IProps {
+  loading: boolean
+}
+
+const props = withDefaults(defineProps<IProps>(), {
+  loading: false,
 })
 
 const inner = ref<HTMLElement | null>(null)
@@ -63,7 +64,7 @@ const columns = computed(() => {
 
 <template>
   <div class="schedule">
-    <Timeline
+    <ScheduleTimeline
       class="schedule__timeline"
     />
 

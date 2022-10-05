@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import TimeOff from './TimeOff.vue'
 import HourTile from './HourTile.vue'
+import AvailableArea from './AvailableArea.vue'
+import TimetablePlaceholder from './TimetablePlaceholder.vue'
+
 import { SCHEDULE_APPOINTMENT_HEIGHT } from '~/constants'
 
-import { slugFromTime } from '~/utils/time'
+import { getWorkingHours, slugFromTime } from '~/utils/time'
 
 import type PopperMenu from '~/components/PopperMenu/PopperMenu.vue'
 import Appointment from '~/components/Appointment/Appointment.vue'
@@ -16,21 +19,43 @@ interface IProps {
 
 const props = defineProps<IProps>()
 
+const hourTile = ref<typeof HourTile | null>(null)
 const hoveredTime = ref<string | null>(null)
 
 const getPopperMenu = inject<() => typeof PopperMenu>('getPopperMenu')
 
-const hourTile = ref<typeof HourTile | null>(null)
-
 const popupStore = usePopupStore()
+const scheduleStore = useScheduleStore()
 const timetableStore = useTimetableStore()
 
-const workingHours = computed(() => {
-  return timetableStore.workingHours
+const timetable = computed(() => {
+  // @ts-expect-error
+  return timetableStore.timetableDict[props.specialist.id]
 })
 
-const gridTemplateRows = computed(() => {
-  return workingHours.value.map((hour, index) => {
+const timetableData = computed(() => {
+  const result = {
+    hasTimetable: false,
+    // TODO: Change this code
+    times: getWorkingHours('09:00', '20:00'),
+  }
+
+  if (timetable.value) {
+    const { start, end } = timetable.value
+
+    result.hasTimetable = true
+    result.times = getWorkingHours(start, end)
+  }
+
+  return result
+})
+
+const workingHours = computed(() => {
+  return timetableStore.maxWorkingHours
+})
+
+const gridStyles = computed(() => {
+  const templateRows = workingHours.value.map((hour, index) => {
     hour = slugFromTime(hour)
 
     if (index === workingHours.value.length - 1)
@@ -38,12 +63,10 @@ const gridTemplateRows = computed(() => {
 
     return `[${hour}-start] ${SCHEDULE_APPOINTMENT_HEIGHT}px [${hour}-end] 0`
   }).join(' ')
-})
 
-const gridStyles = computed(() => {
   return {
     gridTemplateColumns: '[start] 100% [end] 0',
-    gridTemplateRows: gridTemplateRows.value,
+    gridTemplateRows: templateRows,
   }
 })
 
@@ -102,16 +125,26 @@ function addTimeOff() {
   })
 }
 
+function addTimetable() {
+  popupStore.show({
+    name: 'timetable-new',
+    props: {
+      dates: [new Date(scheduleStore.date)],
+      specialistId: props.specialist.id,
+    },
+  })
+}
+
 function onMousemove(event: any) {
   if (!getPopperMenu)
     return
 
   const index = Math.floor(event.offsetY / SCHEDULE_APPOINTMENT_HEIGHT)
 
-  if (event.offsetY > 0 && workingHours.value[index] !== hoveredTime.value) {
+  if (event.offsetY > 0 && timetableData.value.times[index] !== hoveredTime.value) {
     getPopperMenu().close()
 
-    hoveredTime.value = workingHours.value[index]
+    hoveredTime.value = timetableData.value.times[index]
   }
 }
 
@@ -155,12 +188,18 @@ function onMouseleave() {
         class="schedule-column__hour-tile"
       />
 
-      <div
-        class="schedule-column__cursor"
+      <AvailableArea
+        v-if="timetableData.hasTimetable"
+        :working-hours="timetableData.times"
         @click="openMenu"
         @dblclick="addAppointment"
         @mousemove="onMousemove"
         @mouseleave="onMouseleave"
+      />
+
+      <TimetablePlaceholder
+        v-else
+        @add="addTimetable"
       />
     </div>
   </div>

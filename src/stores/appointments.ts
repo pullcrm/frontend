@@ -3,6 +3,8 @@ import { defineStore } from 'pinia'
 import { CANCELED, COMPLETED, IN_PROGRESS, IN_QUEUE } from '~/constants/appointment'
 
 import { normalizeAppointmentParams } from '~/logics/appointment'
+import type dayjs from '~/utils/dayjs'
+import { setTime } from '~/utils/time'
 
 export interface IState {
   queue: any[]
@@ -40,10 +42,17 @@ export const useAppointmentsStore = defineStore('appointments', {
       })
 
       // TODO: Fix startTime on api
-      this.appointments = appointments.map((item: any) => ({
-        ...item,
-        startTime: item.startTime.slice(0, 5),
-      }))
+      this.appointments = appointments.map((item: any) => {
+        const startDate = setTime(new Date(), item.startTime.slice(0, 5))
+        const endDate = item.procedures
+          .reduce((acc: dayjs.Dayjs, { duration }: any) => acc.add(duration, 'minute'), startDate)
+
+        return {
+          ...item,
+          startTime: startDate.format('HH:mm'),
+          endTime: endDate.format('HH:mm'),
+        }
+      })
     },
 
     async fetchQueue() {

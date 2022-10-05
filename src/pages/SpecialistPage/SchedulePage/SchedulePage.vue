@@ -41,7 +41,7 @@ const filteredAppointments = computed(() => {
 })
 
 onMounted(async () => {
-  await scheduleStore.fetch
+  await scheduleStore.fetch()
 })
 </script>
 

@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ActiveTime: typeof import('./components/Schedule/components/ActiveTime.vue')['default']
     Appointment: typeof import('./components/Appointment/Appointment.vue')['default']
+    AvailableArea: typeof import('./components/Schedule/components/AvailableArea.vue')['default']
     Chart: typeof import('./components/Chart/Chart.vue')['default']
     Column: typeof import('./components/Schedule/components/Column.vue')['default']
     ColumnPlaceholder: typeof import('./components/Schedule/components/ColumnPlaceholder.vue')['default']
@@ -35,6 +36,7 @@ declare module '@vue/runtime-core' {
     Specialist: typeof import('./components/Schedule/components/Specialist.vue')['default']
     Timeline: typeof import('./components/Schedule/components/Timeline.vue')['default']
     TimeOff: typeof import('./components/Schedule/components/TimeOff.vue')['default']
+    TimetablePlaceholder: typeof import('./components/Schedule/components/TimetablePlaceholder.vue')['default']
     Toast: typeof import('./components/Toasts/Toast.vue')['default']
     Toasts: typeof import('./components/Toasts/Toasts.vue')['default']
   }

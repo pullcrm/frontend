@@ -1,4 +1,6 @@
 .schedule-page {
+  --page-background-color: #{$ui-black-10};
+
   padding-bottom: #{48 + 24px};
 
   &__header {

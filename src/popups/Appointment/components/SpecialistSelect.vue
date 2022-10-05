@@ -15,7 +15,7 @@ defineEmits(['update:specialist'])
 </script>
 
 <template>
-  <div class="appointment-popup-specialist-select">
+  <div v-show="options.length > 1" class="appointment-popup-specialist-select">
     <UiTitle
       class="appointment-popup-specialist-select__title"
       size="s"

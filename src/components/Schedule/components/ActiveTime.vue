@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import dayjs from '~/utils/dayjs'
 import { setTime } from '~/utils/time'
+import { debounce } from '~/utils/debounce'
 
 const TIME = 1000 * 60 /* 1 minute */
 
@@ -9,23 +10,24 @@ const time = ref<string | null>(null)
 
 const timetableStore = useTimetableStore()
 
-const timeWork = computed(() => {
-  return timetableStore.timeWork
+const fromMaxWorkingHours = computed(() => {
+  return timetableStore.fromMaxWorkingHours
 })
 
-onMounted(() => {
-  const { from, to } = timeWork.value
-
-  startTimer(from, to)
-
-  const interval = setInterval(() => startTimer(from, to), TIME)
-
-  onBeforeUnmount(() => {
-    clearInterval(interval)
-  })
+const toMaxWorkingHours = computed(() => {
+  return timetableStore.toMaxWorkingHours
 })
 
-function startTimer(startEt: string, endAt: string) {
+const updateTimer = debounce(() => {
+  const startEt = fromMaxWorkingHours.value
+  const endAt = toMaxWorkingHours.value
+
+  if (!startEt || !endAt) {
+    time.value = null
+
+    return
+  }
+
   const minutesOfDay = (setTime(new Date(), endAt).unix() - setTime(new Date(), startEt).unix()) / 60
   const minutesToNow = (dayjs(new Date()).unix() - setTime(new Date(), startEt).unix()) / 60
 
@@ -38,7 +40,20 @@ function startTimer(startEt: string, endAt: string) {
   }
 
   time.value = dayjs(new Date()).format('HH:mm')
-}
+}, 50)
+
+onMounted(() => {
+  updateTimer()
+
+  const interval = setInterval(() => updateTimer(), TIME)
+
+  onBeforeUnmount(() => {
+    clearInterval(interval)
+  })
+})
+
+watch(fromMaxWorkingHours, updateTimer)
+watch(toMaxWorkingHours, updateTimer)
 </script>
 
 <template>

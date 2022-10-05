@@ -2,18 +2,14 @@
 const timetableStore = useTimetableStore()
 
 const workingHours = computed(() => {
-  return timetableStore.workingHours
-})
-
-const timeHours = computed(() => {
-  return workingHours.value.filter((_, index) => index % 2 === 0)
+  return timetableStore.maxWorkingHours.filter((_, index) => index % 2 === 0)
 })
 </script>
 
 <template>
   <div class="schedule-timeline">
     <div
-      v-for="time in timeHours"
+      v-for="time in workingHours"
       :key="time"
       class="schedule-timeline__item"
     >
@@ -28,7 +24,7 @@ const timeHours = computed(() => {
 
 <style lang="scss">
   .schedule-timeline {
-    flex-basis: var(--time-line-width);
+    width: var(--time-line-width);
 
     &__item {
       display: flex;
@@ -41,10 +37,6 @@ const timeHours = computed(() => {
       &:not(:last-child) {
         margin-bottom: $SCHEDULE_ROW_HEIGHT;
       }
-    }
-
-    @media (max-width: ($ui-laptop - 1px)) {
-      flex-basis: var(--time-line-width);
     }
   }
 </style>
