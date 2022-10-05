@@ -569,7 +569,7 @@ export const factory = (send: any) => ({
     },
 
     delete(id: number, params: ISpecialistTimetableDeleteParams): Promise<any> {
-      return send(`specialists/${id}/timeWork/${params.id}`, null, 'DELETE')
+      return send(`specialists/${id}/timeWork/${params.id}`, {}, 'DELETE')
     },
 
     find(id: number, params?: ISpecialistTimetableFindParams): Promise<any[]> {
