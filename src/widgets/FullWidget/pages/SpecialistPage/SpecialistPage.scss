@@ -1,0 +1,33 @@
+.full-widget-specialist-page {
+  .ui-divider {
+    margin: 24px 0;
+  }
+
+  &__avatar {
+    margin: 24px auto 0;
+  }
+
+  &__name {
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  &__specialization {
+    margin-top: 4px;
+    color: $ui-black-60;
+    text-align: center;
+  }
+
+  &__procedure-panel + &__procedure-panel {
+    margin-top: 16px;
+  }
+
+  &__procedures-group + &__procedures-group {
+    margin-top: 24px;
+  }
+
+  &__button {
+    width: 100%;
+    margin-top: 24px;
+  }
+}

@@ -1,0 +1,34 @@
+.timetable-popup {
+  &__title {
+    margin-top: 8px;
+    margin-bottom: 24px;
+  }
+
+  &__actions {
+    margin-top: 24px;
+
+    .ui-button {
+      width: 100%;
+    }
+
+    .ui-button + .ui-button {
+      margin-top: 16px;
+    }
+  }
+
+  &__popover {
+    margin: 24px 0;
+  }
+
+  &__dates {
+    margin-bottom: 16px;
+
+    strong {
+      font-weight: bold;
+    }
+  }
+
+  .ui-field + .ui-field {
+    margin-top: 20px;
+  }
+}

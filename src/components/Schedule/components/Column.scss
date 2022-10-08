@@ -1,0 +1,13 @@
+.schedule-column {
+  --c-mono-500-rgb: 167, 167, 202;
+  --c-mono-50-rgb: 21, 21, 62;
+
+  &__grid {
+    @include background-image-disabled-placeholder(45deg);
+
+    position: relative;
+    display: grid;
+    margin-top: -1px;
+    user-select: none;
+  }
+}

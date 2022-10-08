@@ -1,0 +1,60 @@
+.settings-page-layout {
+  $sidebar-width: 236px;
+
+  flex: 1;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__inner,
+  &__sidebar {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  &__title,
+  &__navigation {
+    margin-bottom: 24px;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    color: $ui-black-80;
+
+    &:hover,
+    &.router-link-exact-active {
+      color: $ui-blue-brand;
+      background: $ui-blue-10;
+      border-radius: 8px;
+    }
+  }
+
+  &__link + &__link {
+    margin-top: 8px;
+  }
+
+  @media (min-width: $ui-laptop) {
+    &__container {
+      flex-direction: row;
+      margin: 0 -12px;
+
+      & > div {
+        margin: 0 12px;
+      }
+    }
+
+    &__sidebar {
+      width: $sidebar-width;
+    }
+
+    &__inner {
+      width: calc(100% - #{$sidebar-width * 2});
+      min-width: 600px;
+    }
+  }
+}

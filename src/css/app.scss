@@ -1,0 +1,40 @@
+@import './fonts';
+@import './reset';
+@import './grid';
+@import './transitions';
+@import './css-variables';
+
+html {
+  color: $ui-black-100;
+  font-weight: 400;
+  font-family: Inter, sans-serif;
+}
+
+// html._capacitor {
+//   overflow: hidden;
+
+//   body {
+//     height: 100vh;
+//     overflow-y: scroll;
+//   }
+// }
+
+body {
+  --safe-area-inset-top: env(safe-area-inset-top, 0);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0);
+
+  overflow-x: hidden;
+  background-color: $ui-white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nobr {
+  white-space: nowrap;
+}
+
+.q-loading-bar--top {
+  top: var(--safe-area-inset-top);
+}

@@ -1,0 +1,19 @@
+.specialist-schedule-page {
+  --page-background-color: #{$ui-white};
+
+  &__schedule {
+    position: relative;
+    display: flex;
+    margin-top: 24px;
+  }
+
+  &__column {
+    width: calc(100% - 36px/* timeline width */ - 8px/* margin-left */);
+    margin-left: 8px;
+    border: 1px solid $ui-black-40;
+  }
+
+  &__timeline {
+    margin-bottom: -30px;
+  }
+}

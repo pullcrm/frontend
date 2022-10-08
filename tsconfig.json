@@ -1,38 +1,53 @@
 {
+  "extends": "@quasar/app-vite/tsconfig-preset.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
     "baseUrl": ".",
-    "allowJs": true,
-    "sourceMap": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "noImplicitAny": false,
-    "lib": [
-      "esnext",
-      "esnext.asynciterable",
-      "dom",
-      "dom.iterable"
-    ],
     "paths": {
       "~/*": [
-        "client/*"
-      ]
-    },
-    "types": [
-      "@nuxt/types",
-      "@types/node",
-      "@types/requestidlecallback"
-    ]
+        "src/*"
+      ],
+      "src/*": [
+        "src/*"
+      ],
+      "app/*": [
+        "*"
+      ],
+      "ui/*": [
+        "src/ui/*"
+      ],
+      "utils/*": [
+        "src/utils/*"
+      ],
+      "constants/*": [
+        "src/constants/*"
+      ],
+      "composables/*": [
+        "src/composables/*"
+      ],
+      "validation/*": [
+        "src/validation/*"
+      ],
+      "components/*": [
+        "src/components/*"
+      ],
+      "layouts/*": [
+        "src/layouts/*"
+      ],
+      "pages/*": [
+        "src/pages/*"
+      ],
+      "assets/*": [
+        "src/assets/*"
+      ],
+      "boot/*": [
+        "src/boot/*"
+      ],
+    }
   },
   "include": [
-    "shims.d.ts",
-    "nuxt.config.ts",
-    "client/**/*.vue",
-    "client/**/*.ts"
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
   ]
 }

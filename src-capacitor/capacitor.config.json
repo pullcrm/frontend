@@ -1,0 +1,10 @@
+{
+  "appId": "com.pullcrm.capacitor.app",
+  "appName": "pullcrm",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www",
+  "server": {
+    "hostname": "dev.pullcrm.com"
+  }
+}

@@ -1,0 +1,30 @@
+.specialist-timetable-page {
+  &__date-picker {
+    --calendar-cell-size: 56px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__button {
+    margin: 16px 0;
+    width: 300px;
+  }
+
+  &__alert {
+    margin: 0 0 16px;
+  }
+
+  @include ui-mobile-only {
+    &__date-picker {
+      --calendar-cell-size: 50px;
+    }
+
+    &__button {
+      width: 100%;
+    }
+  }
+}
