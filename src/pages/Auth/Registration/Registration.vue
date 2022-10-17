@@ -16,7 +16,7 @@ useMeta({
   title: 'Реєстрація - pullcrm',
 })
 
-const BASE_HOST = process.env.BASE_HOST
+const SITE_HOST = process.env.SITE_HOST
 
 const route = useRoute()
 const router = useRouter()
@@ -54,7 +54,7 @@ const serverErrors = ref<any>({})
 const v$ = useValidate(validations, form, { serverErrors })
 
 const policyUrl = computed(() => {
-  return `https://${BASE_HOST}/documents/policy/`
+  return `https://${SITE_HOST}/documents/policy/`
 })
 
 onMounted(() => {

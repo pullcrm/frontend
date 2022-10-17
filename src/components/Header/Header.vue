@@ -5,7 +5,7 @@ import { SITE_EMAIL } from '~/constants'
 const smsStore = useSmsStore()
 const positionStore = usePositionStore()
 
-const BASE_HOST = process.env.BASE_HOST
+const WIDGET_HOST = process.env.WIDGET_HOST
 
 const router = useRouter()
 
@@ -33,7 +33,7 @@ const siteUrl = computed(() => {
     },
   })
 
-  return `https://${BASE_HOST}${href}`
+  return `https://${WIDGET_HOST}${href}`
 })
 </script>
 

@@ -93,9 +93,9 @@ async function copyPersonalLink() {
       specialistId: specialistId.value,
     },
   })
-  const BASE_HOST = process.env.BASE_HOST
+  const WIDGET_HOST = process.env.WIDGET_HOST
 
-  copyText(`https://${BASE_HOST}${href}`)
+  copyText(`https://${WIDGET_HOST}${href}`)
 
   await toastsStore.show({
     title: 'Посилання скопійовано',
