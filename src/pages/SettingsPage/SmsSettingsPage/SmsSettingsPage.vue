@@ -68,10 +68,8 @@ const durationList = computed(() => {
 })
 
 async function onReplenishBalance() {
-  const {
-    MINIMUM_DEPOSIT_AMOUNT,
-    MAXIMUM_DEPOSIT_AMOUNT,
-  } = process.env
+  const MINIMUM_DEPOSIT_AMOUNT = process.env.MINIMUM_DEPOSIT_AMOUNT
+  const MAXIMUM_DEPOSIT_AMOUNT = process.env.MAXIMUM_DEPOSIT_AMOUNT
 
   // TODO: Check type of result value
   const amount = await popupStore.askQuestion({

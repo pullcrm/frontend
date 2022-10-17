@@ -1,17 +1,22 @@
 export default async function ({ currentRoute, redirect }: any) {
-  const positionStore = usePositionStore()
+  try {
+    const positionStore = usePositionStore()
 
-  if (['companyCreate'].includes(currentRoute.name))
-    return
+    if (['companyCreate'].includes(currentRoute.name))
+      return
 
-  if (positionStore.current)
-    return
+    if (positionStore.current)
+      return
 
-  if (positionStore.hasPositions === false) {
-    redirect({ name: 'companyCreate' })
+    if (positionStore.hasPositions === false) {
+      redirect({ name: 'companyCreate' })
 
-    return
+      return
+    }
+
+    await positionStore.fetch()
   }
-
-  await positionStore.fetch()
+  catch {
+    redirect({ name: 'login' })
+  }
 }

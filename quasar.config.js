@@ -13,11 +13,6 @@ const path = require('path')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { configure } = require('quasar/wrappers')
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config({
-  path: path.resolve(__dirname, 'config', '.env'),
-})
-
 // const isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = configure((/* ctx */) => {
@@ -66,22 +61,10 @@ module.exports = configure((/* ctx */) => {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
-      env: {
-        RPC_URL: process.env.RPC_URL,
-        CALENDAR_TIME_STEP: process.env.CALENDAR_TIME_STEP,
-
-        SENTRY_ENV: process.env.SENTRY_ENV,
-        SENTRY_DSN: process.env.SENTRY_DSN,
-        // SENTRY_RELEASE: process.env.SENTRY_RELEASE,
-        BASE_HOST: process.env.BASE_HOST,
-        RPC_UPLOAD_URL: process.env.RPC_UPLOAD_URL,
-        RPC_USER: process.env.RPC_USER,
-        RPC_PASSWORD: process.env.RPC_PASSWORD,
-        // COOKIE_DOMAIN: process.env.COOKIE_DOMAIN
-
-        MINIMUM_DEPOSIT_AMOUNT: process.env.MINIMUM_DEPOSIT_AMOUNT,
-        MAXIMUM_DEPOSIT_AMOUNT: process.env.MAXIMUM_DEPOSIT_AMOUNT,
-      },
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      env: require('dotenv').config({
+        path: path.resolve(__dirname, 'config', '.env'),
+      }).parsed,
 
       target: {
         browser: ['es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1'],
@@ -97,7 +80,6 @@ module.exports = configure((/* ctx */) => {
 
       publicPath: '/',
       // analyze: true,
-      // env: {},
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,

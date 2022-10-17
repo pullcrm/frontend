@@ -93,8 +93,7 @@ async function copyPersonalLink() {
       specialistId: specialistId.value,
     },
   })
-
-  const { BASE_HOST } = process.env
+  const BASE_HOST = process.env.BASE_HOST
 
   copyText(`https://${BASE_HOST}${href}`)
 
