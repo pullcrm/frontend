@@ -12,11 +12,6 @@ import { minutesToTime } from '~/utils/time'
 import { normalizeSmsSettingsParams } from '~/logics/company'
 import { api, apiClient } from '~/boot/api'
 
-const {
-  MINIMUM_DEPOSIT_AMOUNT,
-  MAXIMUM_DEPOSIT_AMOUNT,
-} = process.env
-
 useMeta({
   title: 'Налаштування СМС - pullcrm',
 })
@@ -73,6 +68,9 @@ const durationList = computed(() => {
 })
 
 async function onReplenishBalance() {
+  const MINIMUM_DEPOSIT_AMOUNT = process.env.MINIMUM_DEPOSIT_AMOUNT
+  const MAXIMUM_DEPOSIT_AMOUNT = process.env.MAXIMUM_DEPOSIT_AMOUNT
+
   // TODO: Check type of result value
   const amount = await popupStore.askQuestion({
     title: 'Вкажіть суму для поповнення',

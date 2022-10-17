@@ -5,8 +5,6 @@ import { copyText } from '~/utils/clipboard'
 import { AVATAR } from '~/constants/files'
 import { api } from '~/boot/api'
 
-const { BASE_HOST } = process.env
-
 useMeta({
   title: 'Информація про спеціаліста - pullcrm',
 })
@@ -95,6 +93,7 @@ async function copyPersonalLink() {
       specialistId: specialistId.value,
     },
   })
+  const BASE_HOST = process.env.BASE_HOST
 
   copyText(`https://${BASE_HOST}${href}`)
 
