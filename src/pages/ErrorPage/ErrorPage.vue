@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { SITE_EMAIL } from '~/constants'
+
 const props = defineProps({
   error: {
     type: Object,
@@ -57,7 +59,7 @@ function onReload() {
           <UiLink
             tag="a"
             theme="action"
-            href="mailto:admin@pullcrm.com"
+            :href="`mailto:${SITE_EMAIL}`"
           >
             admin@pullcrm.com
           </UiLink>

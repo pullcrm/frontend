@@ -1,4 +1,4 @@
-export const SITE_EMAIL = 'pullrm.com@gmail.com'
+export const SITE_EMAIL = 'pullcrm.com@gmail.com'
 
 export const GA_ID = 'UA-202590817-1'
 
