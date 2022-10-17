@@ -54,7 +54,7 @@ export const usePositionStore = defineStore('position', {
       if (!position) {
         await authStore.reset()
 
-        window.location.reload()
+        throw new Error('Position not found')
       }
 
       this.current = position
