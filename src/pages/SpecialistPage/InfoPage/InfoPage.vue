@@ -86,13 +86,14 @@ async function refresh() {
 }
 
 async function copyPersonalLink() {
-  const { href } = router.resolve({
+  const href = router.prepareHref({
     name: 'fullWidgetSpecialistPage',
     query: {
       companyId: companyId.value,
       specialistId: specialistId.value,
     },
   })
+
   const WIDGET_HOST = process.env.WIDGET_HOST
 
   copyText(`https://${WIDGET_HOST}${href}`)

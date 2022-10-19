@@ -26,7 +26,7 @@ const companyId = computed(() => {
 })
 
 const siteUrl = computed(() => {
-  const { href } = router.resolve({
+  const href = router.prepareHref({
     name: 'fullWidgetSpecialistsPage',
     query: {
       companyId: companyId.value,
