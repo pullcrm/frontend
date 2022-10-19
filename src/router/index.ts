@@ -22,7 +22,7 @@ export default route((/* { store, ssrContext } */) => {
     ? createMemoryHistory
     : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory)
 
-  const Router = createRouter({
+  const router = createRouter({
     strict: true,
 
     scrollBehavior: () => ({ left: 0, top: 0 }),
@@ -34,5 +34,18 @@ export default route((/* { store, ssrContext } */) => {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   })
 
-  return Router
+  router.prepareHref = (params) => {
+    const { href } = router.resolve(params)
+
+    // Need for capacitor app
+    return href.replace('/#/', '/')
+  }
+
+  return router
 })
+
+declare module 'vue-router' {
+  interface Router {
+    prepareHref: (params: RouteLocationRaw) => string
+  }
+}
