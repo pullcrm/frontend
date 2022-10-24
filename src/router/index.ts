@@ -38,7 +38,7 @@ export default route((/* { store, ssrContext } */) => {
     const { href } = router.resolve(params)
 
     // Need for capacitor app
-    return href.replace('/#/', '/')
+    return href.replace('#/', '/')
   }
 
   return router

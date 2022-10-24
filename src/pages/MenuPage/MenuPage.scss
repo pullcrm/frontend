@@ -1,0 +1,54 @@
+.menu-page {
+  &__section {
+    padding: 8px 0;
+    background-color: $ui-white;
+    border-bottom: 1px solid $ui-black-20;
+  }
+
+  &__section + &__section {
+    margin-top: 16px;
+  }
+
+  &__link {
+    .ui-text__prepend {
+      color: $ui-black-60;
+    }
+  }
+
+  &__mail {
+    .ui-text__prepend {
+      color: $ui-blue-info;
+    }
+  }
+
+  &__mail,
+  &__link {
+    padding: 16px var(--ui-container-padding);
+    margin: 0 calc(-1 * var(--ui-container-padding));
+
+    &:active {
+      background-color: $ui-black-10;
+    }
+
+    .ui-text__append {
+      color: $ui-black-60;
+    }
+  }
+
+  &__logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 32px 0;
+    color: $ui-red-danger;
+
+    .ui-text {
+      padding: 8px;
+    }
+  }
+
+  &__balance {
+    border: none;
+    padding: 16px 0;
+  }
+}

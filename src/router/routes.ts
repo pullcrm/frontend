@@ -43,6 +43,8 @@ const routes: RouteRecordRaw[] = [
                   { path: 'finance/', name: 'analyticsFinance', component: () => import('pages/AnalyticsPage/FinancePage/FinancePage.vue') },
                 ],
               },
+
+              { path: 'menu/', name: 'menu', component: () => import('pages/MenuPage/MenuPage.vue') },
             ],
           },
 

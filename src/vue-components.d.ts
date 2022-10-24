@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     ActiveTime: typeof import('./components/Schedule/components/ActiveTime.vue')['default']
     Appointment: typeof import('./components/Appointment/Appointment.vue')['default']
     AvailableArea: typeof import('./components/Schedule/components/AvailableArea.vue')['default']
+    BalancePanel: typeof import('./components/BalancePanel/BalancePanel.vue')['default']
     Chart: typeof import('./components/Chart/Chart.vue')['default']
     Column: typeof import('./components/Schedule/components/Column.vue')['default']
     ColumnPlaceholder: typeof import('./components/Schedule/components/ColumnPlaceholder.vue')['default']
