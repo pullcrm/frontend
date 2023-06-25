@@ -5,7 +5,7 @@ import { SITE_EMAIL } from '~/constants'
 const smsStore = useSmsStore()
 const positionStore = usePositionStore()
 
-const BASE_HOST = process.env.BASE_HOST
+const WIDGET_HOST = process.env.WIDGET_HOST
 
 const router = useRouter()
 
@@ -26,14 +26,14 @@ const companyId = computed(() => {
 })
 
 const siteUrl = computed(() => {
-  const { href } = router.resolve({
+  const href = router.prepareHref({
     name: 'fullWidgetSpecialistsPage',
     query: {
       companyId: companyId.value,
     },
   })
 
-  return `https://${BASE_HOST}${href}`
+  return `https://${WIDGET_HOST}${href}`
 })
 </script>
 

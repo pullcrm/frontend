@@ -15,7 +15,7 @@ const { configure } = require('quasar/wrappers')
 
 // const isProduction = process.env.NODE_ENV === 'production'
 
-module.exports = configure((/* ctx */) => {
+module.exports = configure((ctx) => {
   return {
     supportTS: true,
 
@@ -63,7 +63,7 @@ module.exports = configure((/* ctx */) => {
     build: {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       env: require('dotenv').config({
-        path: path.resolve(__dirname, 'config', '.env'),
+        path: path.resolve(__dirname, 'config', ctx.mode.capacitor ? '.env.dev' : '.env'),
       }).parsed,
 
       target: {

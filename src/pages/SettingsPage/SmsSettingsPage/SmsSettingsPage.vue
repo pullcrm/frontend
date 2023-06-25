@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Section from '../components/Section.vue'
 import SmsTemplate from '../components/SmsTemplate.vue'
-import InfoPanel from '~/components/InfoPanel/InfoPanel.vue'
+import BalancePanel from '~/components/BalancePanel/BalancePanel.vue'
 import type { IHistoryItem } from '~/services/api'
 import { SITE_EMAIL, SMS_CREATION_TEMPLATE, SMS_REMIND_TEMPLATE } from '~/constants'
 import { SMS_REMIND_DURATIONS } from '~/constants/time'
@@ -10,14 +10,13 @@ import { formatDate } from '~/utils/date-time'
 import { debounce } from '~/utils/debounce'
 import { minutesToTime } from '~/utils/time'
 import { normalizeSmsSettingsParams } from '~/logics/company'
-import { api, apiClient } from '~/boot/api'
+import { api } from '~/boot/api'
 
 useMeta({
   title: 'Налаштування СМС - pullcrm',
 })
 
 const smsStore = useSmsStore()
-const popupStore = usePopupStore()
 const toastsStore = useToastsStore()
 
 let history = reactive<IHistoryItem[]>([])
@@ -35,10 +34,6 @@ onMounted(async () => {
 
 const settings = computed(() => {
   return smsStore.settings
-})
-
-const balance = computed(() => {
-  return smsStore.balance
 })
 
 const isAuthorize = computed(() => {
@@ -66,34 +61,6 @@ const durationList = computed(() => {
     value: minutes,
   }))
 })
-
-async function onReplenishBalance() {
-  const MINIMUM_DEPOSIT_AMOUNT = process.env.MINIMUM_DEPOSIT_AMOUNT
-  const MAXIMUM_DEPOSIT_AMOUNT = process.env.MAXIMUM_DEPOSIT_AMOUNT
-
-  // TODO: Check type of result value
-  const amount = await popupStore.askQuestion({
-    title: 'Вкажіть суму для поповнення',
-    input: {
-      type: 'number',
-      value: MINIMUM_DEPOSIT_AMOUNT,
-      min: MINIMUM_DEPOSIT_AMOUNT,
-      max: MAXIMUM_DEPOSIT_AMOUNT,
-    },
-    acceptButtonTitle: 'Поповнити',
-  })
-
-  if (amount) {
-    const result = await apiClient.balanceCheckout({
-      amount: Number(amount),
-    })
-
-    const newWindow: any = window.open()
-
-    newWindow.document.body.innerHTML = result
-    newWindow.document.body.querySelector('form').submit()
-  }
-}
 
 async function onActivate() {
   try {
@@ -148,36 +115,9 @@ const onSubmit = debounce(async () => {
         </UiLink>.
       </UiAlert>
 
-      <InfoPanel
+      <BalancePanel
         class="sms-settings-page__balance"
-        icon="outlined/wallet"
-        theme="green"
-      >
-        <UiText
-          size="m"
-          responsive
-        >
-          Баланс
-        </UiText>
-
-        <UiTitle
-          size="s"
-          responsive
-        >
-          {{ formatMoney(balance) }}
-        </UiTitle>
-
-        <template #append>
-          <UiButton
-            size="m"
-            theme="blue"
-            responsive
-            @click="onReplenishBalance"
-          >
-            Поповнити баланс
-          </UiButton>
-        </template>
-      </InfoPanel>
+      />
 
       <UiPanel
         size="m"
