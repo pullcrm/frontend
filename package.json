@@ -1,20 +1,36 @@
 {
   "name": "pullcrm",
   "version": "0.0.4",
-  "description": "Appointment Scheduling",
-  "productName": "pullcrm",
-  "author": "Bohdan Tsaryk <bogdan.tsarik@gmail.com>",
   "private": true,
+  "description": "Appointment Scheduling Software",
+  "keywords": [
+    "vue",
+    "vue3",
+    "quasar",
+    "capacitor",
+    "open-source"
+  ],
+  "homepage": "https://github.com/pullcrm/frontend#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pullcrm/frontend.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Bohdan Tsaryk",
+    "email": "bogdan.tsaryk@gmail.com",
+    "url": "https://twitter.com/bruce_developer"
+  },
   "scripts": {
-    "lint": "eslint --ext .js,.ts,.vue ./",
-    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "dev": "QENV=development quasar dev -m ssr",
-    "dev:ios": "QENV=development quasar dev -m capacitor -T ios",
     "build": "QENV=production quasar build -m ssr",
     "build:ios": "QENV=production quasar build -m capacitor -T ios -ide",
     "build:pwa": "QENV=production quasar build -m pwa",
-    "start": "node dist/ssr/index.js",
-    "build:widget": "tsc 'public/static/widgets/widget.esnext.js' --allowJs --target 'ES5' --outFile 'public/static/widgets/widget.compiled.js'"
+    "build:widget": "tsc 'public/static/widgets/widget.esnext.js' --allowJs --target 'ES5' --outFile 'public/static/widgets/widget.compiled.js'",
+    "dev": "QENV=development quasar dev -m ssr",
+    "dev:ios": "QENV=development quasar dev -m capacitor -T ios",
+    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "lint": "eslint --ext .js,.ts,.vue ./",
+    "start": "node dist/ssr/index.js"
   },
   "dependencies": {
     "@antfu/eslint-config": "^0.26.3",
@@ -70,5 +86,6 @@
     "node": "^18 || ^16 || ^14.19",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
-  }
+  },
+  "productName": "pullcrm"
 }
