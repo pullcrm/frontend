@@ -10,7 +10,7 @@
   </p>
 </p>
 
-# What's Sentry?
+# What's Pullcrm?
 
 With a straightforward and user-friendly interface, Pullcrm is a CRM for barbershops, grooming, and beauty salons. A tool that saves time and allows people to plan their company’s processes simply but effectively.
 
